@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-02-09T16:53:30.555Z</updated>
+  <updated>2018-02-10T17:47:09.298Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>新的开始</title>
+    <link href="https://chongtianhong.github.io/2018/02/10/start/"/>
+    <id>https://chongtianhong.github.io/2018/02/10/start/</id>
+    <published>2018-02-10T15:14:45.000Z</published>
+    <updated>2018-02-10T17:47:09.298Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/Nepal2.jpg" width="600" alt="Nepal"><br>终于迎来假期，于是有时间可以开始搭建一直以来都想做的博客，经过一段时间的折腾，终于用 Hexo + GitHub 搭建起了一个属于自己的博客站点，第一时间边学边写，弄出了这第一篇博客，心里甚是欢喜，那就写篇随笔纪念一下吧。<br><a id="more"></a></p><h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>一直以来都不是一个擅长记录的人，而这个博客，对我来说是一个新的开始，也是我前端道路上的一个重要的实践。<br><br>在偶然的机会下接触前端，发现自己对于这一块特别感兴趣，并决定继续深入学习前端，我开始意识到是时候开始经营一个属于自己的技术博客。<br><br>虽然现在博客的功能还不算特别完善，但我会通过不断积累，一步一步地把这个以 <strong><em>技术交流</em></strong> 为主的博客经营好，尝试将每天学习遇到的一些问题或者是一些学习的心得记录在这里，也希望能通过这种方式和各位技术大牛进行交流。</p><h2 id="Why-amp-How-学习前端"><a href="#Why-amp-How-学习前端" class="headerlink" title="Why &amp; How 学习前端"></a>Why &amp; How 学习前端</h2><p>从2017年6月份忙完了科研论文开始，就开始对自己的职业规划进行考虑。一直以来，都想找到自己的定位，学一门让自己感兴趣的技术。机缘巧合下，听了前端的公开课，觉得这个东西很有趣，做完马上就能看到效果，于是决定学习前端。<br><br>随着深入学习，听<strong>公开课、看教程、看博客</strong>等，发现前端并不仅仅是做特效，越来越觉得这项技术深深地把我吸引。然而，自学了4个月前端，感觉进展有点缓慢，身处学校科研圣地，身边也没有前端前辈可以请教，说实话，心里挺着急。接下来的学期就是实习招聘季，甚至自己的专业与前端并不对口，如果实践经历太少，很难有竞争优势。于是决心在秋季学期，要找到一份关于前端的实习，能够上手去做一些项目，将理论和实践结合起来。</p><h2 id="关于实习"><a href="#关于实习" class="headerlink" title="关于实习"></a>关于实习</h2><p>很多次告诉自己<strong>实习经历真的很重要</strong>，然而对于是否投简历，在什么时间投总是犹豫不决。一是怕自己学的时间太短，能力不够，企业不想要；二是怕不让去实习的导师“查岗”。<br><br>在犹豫中继续自学前端，到11月中旬，终于勇敢地投出了简历。很幸运，去了一家我想去的公司实习，实习的导师也很强。在公司学到了挺多，实习跟自学真的节奏很不一样。我会好好加油，在实习中快速成长，为项目组做出自己的贡献。</p><div class="note info">机会留给有准备的人，越努力，越幸运！</div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/Nepal2.jpg&quot; width=&quot;600&quot; alt=&quot;Nepal&quot;&gt;&lt;br&gt;终于迎来假期，于是有时间可以开始搭建一直以来都想做的博客，经过一段时间的折腾，终于用 Hexo + GitHub 搭建起了一个属于自己的博客站点，第一时间边学边写，弄出了这第一篇博客，心里甚是欢喜，那就写篇随笔纪念一下吧。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="随笔" scheme="https://chongtianhong.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="随笔" scheme="https://chongtianhong.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hello World</title>
     <link href="https://chongtianhong.github.io/2018/02/09/hello-world/"/>
     <id>https://chongtianhong.github.io/2018/02/09/hello-world/</id>
     <published>2018-02-09T01:58:27.385Z</published>
-    <updated>2018-02-09T16:53:30.555Z</updated>
+    <updated>2018-02-10T15:16:57.434Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
     
@@ -34,12 +56,6 @@
     
     </summary>
     
-      <category term="Testing" scheme="https://chongtianhong.github.io/categories/Testing/"/>
-    
-    
-      <category term="Testing" scheme="https://chongtianhong.github.io/tags/Testing/"/>
-    
-      <category term="Another Tag" scheme="https://chongtianhong.github.io/tags/Another-Tag/"/>
     
   </entry>
   
