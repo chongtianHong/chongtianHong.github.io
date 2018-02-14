@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,JavaScript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call和apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向函数执行时的当前对象。 this是保留关键字，不能修改this的值。">
+<meta name="keywords" content="开发,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中的this引用">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/02/14/this/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call和apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向函数执行时的当前对象。 this是保留关键字，不能修改this的值。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-14T15:37:13.528Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中的this引用">
+<meta name="twitter:description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call和apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向函数执行时的当前对象。 this是保留关键字，不能修改this的值。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/02/14/this/"/>
+
+
+
+
+
+  <title>JavaScript中的this引用 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/02/14/this/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript中的this引用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-14T19:48:39+08:00">
+                2018-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h3><ul>
+<li>JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call和apply调用模式。</li>
+<li>函数调用每种方式的不同在于this值的初始化。</li>
+<li>一般而言，在JavaScript中，this指向函数执行时的当前对象。</li>
+<li>this是保留关键字，不能修改this的值。<a id="more"></a>
+</li>
+</ul>
+<h4 id="this"><a href="#this" class="headerlink" title="this"></a>this</h4><ul>
+<li>this是函数内部的一个特殊对象（或this引用）–它引用的是函数据以执行的环境对象。</li>
+<li>this是JavaScript的一个关键字，随着函数使用场合不同，this的值会发生变化。但总有一个原则，即this指的是<strong>调用当前函数的对象</strong>。<ul>
+<li>JavaScript是动态语言，this关键字在执行的时候才能确定其值。</li>
+<li>this永远指向调用者，即对“调用对象”的引用。简单点说，this指向调用当前函数的所属对象。</li>
+<li>根据函数调用方式的不同，this可以指向全局对象，当前对象，或其他任意对象。</li>
+</ul>
+</li>
+<li>this对象（引用）的使用情况可总结为：<ul>
+<li>全局函数调用</li>
+<li>构造函数调用</li>
+<li>对象方法的调用</li>
+<li>通过apply或call方法调用</li>
+<li>原型链中的this</li>
+<li>闭包中的this</li>
+<li>内嵌在HTML元素中的脚本段</li>
+</ul>
+</li>
+</ul>
+<h5 id="全局函数调用"><a href="#全局函数调用" class="headerlink" title="全局函数调用"></a>全局函数调用</h5><ul>
+<li>全局函数中的this会指向全局对象window。（函数调用模式）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var message = <span class="string">"this in window"</span>; //这一句写在函数外面和里面是一样效果</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">func</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span>(this == window)&#123;</span><br><span class="line">        alert(<span class="string">"this == window"</span>); </span><br><span class="line">        alert(message);</span><br><span class="line">        this.methodA = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">            alert(<span class="string">"I'm a function"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">func(); //如果不调用func方法，则里面定义的属性或方法会取不到 </span><br><span class="line">methodA();</span><br></pre></td></tr></table></figure>
+<h5 id="构造函数调用"><a href="#构造函数调用" class="headerlink" title="构造函数调用"></a>构造函数调用</h5><ul>
+<li>使用new的方式实例化一个对象，this会指向通过构造函数生成的对象。（构造器调用模式）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Func</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> (this == window) &#123;</span><br><span class="line">        alert(<span class="string">"this == window"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        alert(<span class="string">"this != window"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    this.fieldA = <span class="string">"I'm a field"</span>;</span><br><span class="line">    alert(this);</span><br><span class="line">&#125;</span><br><span class="line">var obj = new Func();</span><br><span class="line">alert(obj.fieldA); //this指向的是对象obj</span><br></pre></td></tr></table></figure>
+<h5 id="对象方法的调用"><a href="#对象方法的调用" class="headerlink" title="对象方法的调用"></a>对象方法的调用</h5><ul>
+<li>对象方法的调用，this指向当前对象。任何函数，只要该函数被当做一个对象的方法使用或赋值时，该函数内部的this都是对该对象本身的引用。也可理解为this写在一个普通对象中，this指向的就是对象本身。（方法调用模式）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">    x: 3,</span><br><span class="line">    doit: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        <span class="keyword">if</span>(this == window)&#123;</span><br><span class="line">            alert(<span class="string">"this == window"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            alert(<span class="string">"method is called: "</span> + this.x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.doit(); //this指向的是对象obj</span><br></pre></td></tr></table></figure>
+<h5 id="对象方法的调用-1"><a href="#对象方法的调用-1" class="headerlink" title="对象方法的调用"></a>对象方法的调用</h5><ul>
+<li>通过apply或call方法改变this的指向，this指向传入的对象。</li>
+<li>apply或call方法可以用来代替另一个对象调用一个方法。</li>
+<li>apply或call方法可将一个函数的对象上下文从初始的上下文改变为由thisObj指定的新对象。</li>
+<li>如果没有提供thisObj参数，那么全局对象被用作 thisObj。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">    x: 3,</span><br><span class="line">    doit: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"method is called: "</span> + this.x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var obj2 = &#123;x: 4&#125;;</span><br><span class="line">obj.doit(); //3,this指向obj</span><br><span class="line">obj.doit.apply(obj2); //4,this指向obj2</span><br><span class="line">obj.doit.call(obj2); //4,this指向obj2</span><br></pre></td></tr></table></figure>
+<h5 id="原型链中的this"><a href="#原型链中的this" class="headerlink" title="原型链中的this"></a>原型链中的this</h5><ul>
+<li>原型对象及构造函数中的this指向新创建的实例对象。</li>
+<li>使用prototype扩展方法可以使用this获取到源对象的实例，<strong>私有字段</strong>无法通过原型链获取。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Func</span></span>() &#123;</span><br><span class="line">    this.fieldA = <span class="string">"I'm a field"</span>;</span><br><span class="line">    var privateFieldA = <span class="string">"I'm a var"</span>;//私有属性</span><br><span class="line">&#125;</span><br><span class="line">Func.prototype = &#123;//prototype扩展方法可以获取到Func对象的实例</span><br><span class="line">    ExtendMethod: <span class="keyword">function</span>(str) &#123;</span><br><span class="line">        alert(str + <span class="string">" :"</span> + this.fieldA);</span><br><span class="line">        alert(privateFieldA); //出错,私有字段无法通过原型链获取。</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var obj = new Func();</span><br><span class="line">obj.ExtendMethod(<span class="string">"From prototype"</span>); //此时构造函数及原型链中的this指向对象obj</span><br></pre></td></tr></table></figure>
+<h5 id="闭包中的this"><a href="#闭包中的this" class="headerlink" title="闭包中的this"></a>闭包中的this</h5><ul>
+<li>闭包：写在function中的function，this指向全局对象window。</li>
+</ul>
+<blockquote>对象中的闭包</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var name = <span class="string">"The window"</span>;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    name: <span class="string">"My Object"</span>,</span><br><span class="line">    getNameFunc: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            <span class="built_in">return</span> this.name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(obj.getNameFunc()()); //The window</span><br></pre></td></tr></table></figure>
+<p>可见，闭包中的this指向全局对象window，只能取到全局对象的属性。若要访问对象内部的属性（外部函数的变量），则要把外部函数的this对象保存为一个闭包能访问的变量(that)。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var name = <span class="string">"The window"</span>;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    name: <span class="string">"My Object"</span>,</span><br><span class="line">    getNameFunc: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        var that = this;</span><br><span class="line">        <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            <span class="built_in">return</span> that.name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(obj.getNameFunc()()); //My object</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>不管是直接引用function，还是实例化一个function，其返回的闭包函数里的this都是指向window。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">a</span></span>() &#123;</span><br><span class="line">    alert(this == window);</span><br><span class="line">    var that = this;</span><br><span class="line">    var func = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        alert(this == window);</span><br><span class="line">        alert(that);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">return</span> func;</span><br><span class="line">&#125;</span><br><span class="line">var b = a();</span><br><span class="line">b(); //<span class="literal">true</span>, <span class="literal">true</span>, [object Window]</span><br><span class="line">var c = new a();</span><br><span class="line">c(); //<span class="literal">false</span>, <span class="literal">true</span>, [object object]</span><br></pre></td></tr></table></figure>
+<h5 id="内嵌在HTML元素中的脚本段"><a href="#内嵌在HTML元素中的脚本段" class="headerlink" title="内嵌在HTML元素中的脚本段"></a>内嵌在HTML元素中的脚本段</h5><ul>
+<li>内嵌在HTML元素中的脚本段，this指向元素本身</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div onclick=<span class="string">"test(this)"</span> id=<span class="string">"div"</span>&gt;Click Me&lt;/div&gt;</span><br><span class="line">&lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"><span class="keyword">function</span> <span class="built_in">test</span>(obj) &#123;</span><br><span class="line">    alert(obj); //[object HTMLDivElement]</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="js函数的四种调用方式"><a href="#js函数的四种调用方式" class="headerlink" title="js函数的四种调用方式"></a>js函数的四种调用方式</h4><h5 id="函数直接执行模式"><a href="#函数直接执行模式" class="headerlink" title="函数直接执行模式"></a>函数直接执行模式</h5><ul>
+<li>此时this是全局的,即this指向window</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var c=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    alert(this==window)</span><br><span class="line">&#125;</span><br><span class="line">c()//<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h5 id="对象方法的调用模式"><a href="#对象方法的调用模式" class="headerlink" title="对象方法的调用模式"></a>对象方法的调用模式</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var myObj=&#123;</span><br><span class="line">    value:2,</span><br><span class="line">    inc:<span class="keyword">function</span>(num)&#123;</span><br><span class="line">        alert(this.value+num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">myobject.inc(1); //结果3，因为this指向myObj</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：内部匿名函数不属于当前对象的函数，因此this指向了全局对象window</li>
+</ul>
+<h5 id="构造函数调用模式"><a href="#构造函数调用模式" class="headerlink" title="构造函数调用模式"></a>构造函数调用模式</h5><ul>
+<li>用new关键字来新建一个函数对象的调用,this指向被绑定到构造函数的实例上</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ar fn = <span class="keyword">function</span> (status)&#123;</span><br><span class="line">    this.status = status;</span><br><span class="line">&#125;</span><br><span class="line">fn.prototype.get_status = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    <span class="built_in">return</span> this.status;</span><br><span class="line">&#125;</span><br><span class="line">var <span class="built_in">test</span> = new fn(<span class="string">'my status'</span>);</span><br><span class="line">alert(test.get_status);//my status,this指向<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h5 id="apply-call调用模式"><a href="#apply-call调用模式" class="headerlink" title="apply/call调用模式"></a>apply/call调用模式</h5><ul>
+<li>通过call和apply可以重新定义函数的执行环境，即this的指向</li>
+<li>apply和call一样的用法，只不过apply第二个参数用数组进行传递</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> MyObject(name)&#123;</span><br><span class="line">    this.name=name ||<span class="string">'MyObject'</span>;</span><br><span class="line">    this.value=0;</span><br><span class="line">    this.increment=<span class="keyword">function</span>(num)&#123;</span><br><span class="line">        this.value += typeof(num) === <span class="string">'number'</span> ? num : 0;</span><br><span class="line">    &#125;;</span><br><span class="line">    this.toString=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="string">'[Object:'</span>+this.name+<span class="string">' &#123;value:'</span>+this.value+<span class="string">'&#125;]'</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    this.target=this;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">getInfo</span></span>()&#123;</span><br><span class="line">    <span class="built_in">return</span> this.toString();</span><br><span class="line">&#125;</span><br><span class="line">var myObj=new MyObject();</span><br><span class="line">alert(getInfo.apply(myObj));//[Object:MyObject &#123;value:0&#125;],this指向myObj</span><br><span class="line">alert(getInfo.apply(window));//[object Window],this指向window</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/13/js3/" rel="next" title="JavaScript学习笔记（三）">
+                <i class="fa fa-chevron-left"></i> JavaScript学习笔记（三）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://chongtianhong.github.io/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#this"><span class="nav-number">1.1.</span> <span class="nav-text">this</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#全局函数调用"><span class="nav-number">1.1.1.</span> <span class="nav-text">全局函数调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造函数调用"><span class="nav-number">1.1.2.</span> <span class="nav-text">构造函数调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对象方法的调用"><span class="nav-number">1.1.3.</span> <span class="nav-text">对象方法的调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对象方法的调用-1"><span class="nav-number">1.1.4.</span> <span class="nav-text">对象方法的调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#原型链中的this"><span class="nav-number">1.1.5.</span> <span class="nav-text">原型链中的this</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#闭包中的this"><span class="nav-number">1.1.6.</span> <span class="nav-text">闭包中的this</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内嵌在HTML元素中的脚本段"><span class="nav-number">1.1.7.</span> <span class="nav-text">内嵌在HTML元素中的脚本段</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#js函数的四种调用方式"><span class="nav-number">1.2.</span> <span class="nav-text">js函数的四种调用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#函数直接执行模式"><span class="nav-number">1.2.1.</span> <span class="nav-text">函数直接执行模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对象方法的调用模式"><span class="nav-number">1.2.2.</span> <span class="nav-text">对象方法的调用模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造函数调用模式"><span class="nav-number">1.2.3.</span> <span class="nav-text">构造函数调用模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#apply-call调用模式"><span class="nav-number">1.2.4.</span> <span class="nav-text">apply/call调用模式</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
