@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本内容 前端性能优化是指从用户访问资源到资源完整的展现在用户面前的过程中，通过技术手段和优化策略，缩短每个步骤的处理时间从而提升整个资源的访问和呈现速度。 在构建web站点的过程中，任何一个细节都有可能影响网站的访问速度，如果不了解性能优化知识，很多不利网站访问速度的因素会形成累加，从而严重影响网站的性能，导致网站访问速度变慢，用户体验低下，最终导致用户流失。   性能黄金法则：只有10%~20">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-18T05:14:38.078Z">
+<meta property="og:updated_time" content="2018-02-18T05:40:27.061Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web前端性能优化">
 <meta name="twitter:description" content="基本内容 前端性能优化是指从用户访问资源到资源完整的展现在用户面前的过程中，通过技术手段和优化策略，缩短每个步骤的处理时间从而提升整个资源的访问和呈现速度。 在构建web站点的过程中，任何一个细节都有可能影响网站的访问速度，如果不了解性能优化知识，很多不利网站访问速度的因素会形成累加，从而严重影响网站的性能，导致网站访问速度变慢，用户体验低下，最终导致用户流失。   性能黄金法则：只有10%~20">
@@ -403,14 +403,14 @@
 <li>在构建web站点的过程中，任何一个细节都有可能影响网站的访问速度，如果不了解性能优化知识，很多不利网站访问速度的因素会形成累加，从而严重影响网站的性能，导致网站访问速度变慢，用户体验低下，最终导致用户流失。</li>
 </ul>
 </li>
-<li><strong>性能黄金法则</strong>：只有10%~20%的最终用户响应时间是用在从Web服务器获取HTML文档并传送到浏览器的，其余的80%~90%时间花在下载页面中的所有组件上。<a id="more"></a></li>
+<li><strong>性能黄金法则</strong>：只有10%~20%的最终用户响应时间是用在<strong>从Web服务器获取HTML文档并传送到浏览器的</strong>，其余的80%~90%时间花在<strong>下载页面中的所有组件</strong>上。<a id="more"></a></li>
 <li>网站一般可划分为前端和后台。我们可以理解成<strong>后台是用来实现网站的功能的</strong>，比如：实现用户注册，用户能够为文章发表评论等等，而<strong>前端属于功能的表现</strong>，并且影响用户访问体验的绝大部分来自前端页面。</li>
 <li>网站前端的用户体验决定了用户是否想要去使用网站的功能，而网站的功能决定了用户是否会一票否决前端体验。<ul>
 <li>网站的加载速度严重影响了用户体验，也决定了这个网站的生死存亡。</li>
 </ul>
 </li>
 </ul>
-<blockquote>从浏览器发起请求到页面能正常浏览经过以下9个阶段（process）：</blockquote>
+<blockquote>从<strong>浏览器发起请求到页面能正常浏览</strong>经过以下9个阶段（process）：</blockquote>
 
 <ol>
 <li>预处理</li>
@@ -426,7 +426,7 @@
 <blockquote>TCP的3次握手：</blockquote>
 
 <ul>
-<li>HTTP请应用层协议是建立在TCP传输层协议之上的。在浏览器发送HTTP请求之前，会先通过三次握手建立TCP连接，提供可靠传输。</li>
+<li>HTTP请求<strong>应用层协议</strong>是建立在TCP<strong>传输层协议</strong>之上的。在浏览器发送HTTP请求之前，会先通过三次握手建立TCP连接，提供可靠传输。</li>
 </ul>
 <h4 id="性能优化的具体方法"><a href="#性能优化的具体方法" class="headerlink" title="性能优化的具体方法"></a>性能优化的具体方法</h4><ul>
 <li>可从<strong>内容层面</strong>、<strong>网络传输阶段</strong>、<strong>渲染阶段</strong>、<strong>脚本执行阶段</strong>四个方面对前端性能进行优化。</li>
@@ -437,13 +437,13 @@
 <blockquote>1）减少DNS查询次数</blockquote>
 
 <ul>
-<li>DNS查询也消耗响应时间，如果我们的网页内容来自各个不同的domain (比如嵌入了开放广告，引用了外部图片或脚本)，那么客户端首次解析这些domain也需要消耗一定的时间。DNS查询结果缓存在本地系统和浏览器中一段时间，所以DNS查询一般是对首次访问响应速度有所影响。</li>
-<li>同一个页面的请求资源应尽量少的使用不同的主机名，这可以减少网站并行下载的数量，但很多网站为了加速下载资源其实是特意用了多个主机名，这里需要做一个权衡。</li>
+<li>DNS查询也消耗响应时间，如果我们的网页内容来自各个不同的domain (比如嵌入了开放广告，引用了外部图片或脚本)，那么客户端首次解析这些domain也需要消耗一定的时间。DNS查询结果缓存在本地系统和浏览器中一段时间，所以<strong>DNS查询</strong>一般是<strong>对首次访问响应速度有所影响</strong>。</li>
+<li>同一个页面的<strong>请求资源应尽量少的使用不同的主机名</strong>，这可以<strong>减少网站并行下载的数量</strong>，但很多网站为了加速下载资源其实是特意用了多个主机名，这里需要做一个权衡。</li>
 </ul>
 <blockquote>2）DNS缓存</blockquote>
 
 <ul>
-<li>为了增加访问效率，计算机有DNS缓存机制，当访问过某个网站并得到其IP后，会将其域名和IP缓存下来，下一次访问的时候，就不需要再请求域名服务器获取IP，直接使用缓存中的IP，提高了响应的速度。</li>
+<li>为了增加访问效率，<strong>计算机</strong>有<strong>DNS缓存机制</strong>，当访问过某个网站并得到其IP后，会将其域名和IP缓存下来，下一次访问的时候，就不需要再请求域名服务器获取IP，直接使用缓存中的IP，提高了响应的速度。</li>
 <li>缓存是有有效时间的，当过了有效时间后，再次请求网站时，还需要先请求域名解析。</li>
 </ul>
 <blockquote>3）HTTP keep-alive</blockquote>
@@ -451,21 +451,21 @@
 <ul>
 <li>HTTP协议采用“请求-应答”模式：当使用<strong>普通模式</strong>，即非KeepAlive模式时，每个请求/应答客户和服务器都要<strong>新建一个连接</strong>，<strong>完成之后立即断开连接</strong>（HTTP协议为<strong>无连接</strong>的协议）。</li>
 <li>使用<strong>keep-alive模式</strong>可以改善这种状态，即在一次TCP连接中可以持续发送多份数据而不会断开连接。通过使用keep-alive机制，可以减少TCP连接建立次数，也意味着可以减少TIME_WAIT状态连接，以此提高性能和提高httpd服务器的吞吐率(更少的tcp连接意味着更少的系统内核调用,socket的accept()和close()调用)。</li>
-<li>但是，长时间的TCP连接容易导致系统资源无效占用。配置不当的keep-alive，有时比重复利用连接带来的损失还更大。所以，正确地设置keep-alive timeout时间非常重要。</li>
+<li>但是，<strong>长时间的TCP连接容易导致系统资源无效占用</strong>。配置不当的keep-alive，有时比重复利用连接带来的损失还更大。所以，正确地设置keep-alive timeout时间非常重要。</li>
 </ul>
 <blockquote>4）适当的主机域名</blockquote>
 
 <ul>
-<li>当客户端DNS缓存（浏览器和操作系统）缓存为空时，DNS查找的数量与要加载的Web页面中唯一主机名的数量相同，包括页面URL、脚本、样式表、图片、Flash对象等的主机名。减少主机名的数量就可以减少DNS查找的数量。</li>
+<li>当客户端DNS缓存（浏览器和操作系统）缓存为空时，DNS查找的数量与要加载的Web页面中唯一主机名的数量相同，包括页面URL、脚本、样式表、图片、Flash对象等的主机名。<strong>减少主机名的数量</strong>就可以<strong>减少DNS查找的数量</strong>。</li>
 </ul>
 <ul>
 <li><strong>减少唯一主机名的数量</strong>会潜在<strong>减少页面中并行下载的数量</strong>，这样减少主机名和并行下载的方案会<strong>产生矛盾</strong>，这里需要做一个权衡。建议将组件放到至少两个但不多于4个主机名下，减少DNS查找的同时也允许高度并行下载。</li>
 </ul>
 <h6 id="2-避免重定向（-还是需要的）"><a href="#2-避免重定向（-还是需要的）" class="headerlink" title="2. 避免重定向（/还是需要的）"></a>2. 避免重定向（/还是需要的）</h6><ul>
-<li>重定向用于将用户从一个URL重新路由到另一个URL。</li>
-<li>当页面发生了重定向，就会延迟整个HTML文档的传输。在HTML文档到达之前，页面中不会呈现任何东西，也没有任何组件会被下载。</li>
-<li>一种最耗费资源、经常发生而很容易被忽视的重定向是URL的最后缺少<code>/</code>。</li>
-<li>在定义链接地址的href属性的时候，尽量使用最完整的、直接的地址：<ul>
+<li>重定向用于将用户从一个URL<strong>重新路由</strong>到另一个URL。</li>
+<li>当页面发生了<strong>重定向</strong>，就会<strong>延迟整个HTML文档的传输</strong>。在HTML文档到达之前，页面中不会呈现任何东西，也没有任何组件会被下载。</li>
+<li>一种<strong>最耗费资源、经常发生而很容易被忽视的重定向</strong>是URL的最后缺少<code>/</code>。</li>
+<li>在定义链接地址的href属性的时候，尽量使用<strong>最完整的、直接的地址</strong>：<ul>
 <li>使用www.cnblogs.com 而不是cnblogs.com</li>
 <li>使用cn.bing.com 而不是bing.com</li>
 <li>使用www.google.com.hk 而不是google.com</li>
@@ -473,14 +473,14 @@
 </ul>
 </li>
 <li>在使用Response.Redirect的时候，设置第二个参数为false。</li>
-<li>如果涉及到从测试环境到生产环境的迁移，建议通过DNS中的CNAME的机制来定义别名，而不是强制地重定向来实现。</li>
+<li>如果涉及到<strong>从测试环境到生产环境的迁移</strong>，建议<strong>通过DNS中的CNAME的机制来定义别名</strong>，而不是强制地重定向来实现。</li>
 </ul>
 <h6 id="3-拆分域名"><a href="#3-拆分域名" class="headerlink" title="3. 拆分域名"></a>3. 拆分域名</h6><ul>
-<li>可利用多个域名来存储网站资源。<ul>
+<li>可利用<strong>多个域名来存储网站资源</strong>。<ul>
 <li>同一时间针对同一域名下的请求有一定数量限制，超过限制数目的请求会被阻塞。大多数浏览器的并发数量都控制在6以内。有些资源的请求时间很长，因而会阻塞其他资源的请求。因此，对于一些静态资源，如果放到不同的域名下面就能实现与其他资源的并发请求。</li>
 </ul>
 </li>
-<li>过多的域名会使DNS解析负担加重，因此一般控制在2-4个。</li>
+<li><strong>过多的域名会使DNS解析负担加重</strong>，因此一般控制在2-4个。</li>
 </ul>
 <blockquote>放到同个域名下的内容分类：</blockquote>
 
@@ -496,41 +496,41 @@
 <h5 id="网络传输阶段"><a href="#网络传输阶段" class="headerlink" title="网络传输阶段"></a>网络传输阶段</h5><h6 id="1-减少传输过程中实体的大小"><a href="#1-减少传输过程中实体的大小" class="headerlink" title="1. 减少传输过程中实体的大小"></a>1. 减少传输过程中实体的大小</h6><blockquote>1）合理设置 HTTP缓存</blockquote>
 
 <ul>
-<li>页面的初次访问者会进行很多HTTP请求，但是通过使用一个长久的Expires头，可以使这些组件被缓存，下次访问的时候，就可以减少不必要的HTPP请求，从而提高加载速度。</li>
-<li>根据资源的变化频率为文件头指定Expires，使内容具有缓存性。</li>
-<li>原则：能缓存越多越好，能缓存越久越好。</li>
-<li>Web服务器通过Expires header告诉客户端可以使用一个组件的当前副本，直到指定的时间为止。</li>
+<li>页面的初次访问者会进行很多HTTP请求，但是<strong>通过使用一个长久的Expires头</strong>，可以使这些组件被缓存，下次访问的时候，就可以减少不必要的HTPP请求，从而<strong>提高加载速度</strong>。</li>
+<li>根据<strong>资源的变化频率</strong>为文件头指定Expires，使内容具有缓存性。</li>
+<li>原则：能<strong>缓存越多越好</strong>，能<strong>缓存越久越好</strong>。</li>
+<li><strong>Web服务器</strong>通过<strong>Expires header</strong>告诉<strong>客户端</strong>可以使用一个组件的当前副本，直到指定的时间为止。</li>
 </ul>
 <blockquote>2）cookie优化</blockquote>
 
 <ul>
 <li>减少Cookie大小<ul>
-<li>因为Cookie是本地的磁盘文件，Cookie包含在每次请求和响应中，每次浏览器都会去读取相应的Cookie，太大的cookie会严重影响数据传输，因此哪些数据需要写入cookie需要慎重考虑，尽量减少cookie中传输的数据量。</li>
+<li>因为Cookie是<strong>本地的磁盘文件</strong>，Cookie包含在每次请求和响应中，每次浏览器都会去读取相应的Cookie，<strong>太大的cookie会严重影响数据传输</strong>，因此哪些数据需要写入cookie需要慎重考虑，尽量减少cookie中传输的数据量。</li>
 </ul>
 </li>
 <li>页面内容使用无cookie域名<ul>
-<li>对于大多数网站的静态资源的访问，如CSS、script等，发送cookie没有意义，可以考虑采用不同的domain来单独存放这些静态文件，避免请求静态资源时发送cookie，减少cookie传输次数。</li>
-<li>这样做不仅可以减少cookie大小从而提高响应速度，而且另一个好处是有些proxy拒绝缓存带有cookie的内容，如果能将这些静态资源cookie去除，那就可以得到这些proxy的缓存支持。</li>
+<li>对于<strong>大多数网站的静态资源的访问</strong>，如CSS、script等，<strong>发送cookie没有意义</strong>，可以考虑<strong>采用不同的domain来单独存放这些静态文件</strong>，避免请求静态资源时发送cookie，<strong>减少cookie传输次数</strong>。</li>
+<li>这样做不仅可以减少cookie大小从而提高响应速度，而且另一个好处是<strong>有些proxy拒绝缓存带有cookie的内容</strong>，如果能将这些静态资源cookie去除，那就可以得到这些proxy的缓存支持。</li>
 </ul>
 </li>
 </ul>
 <blockquote>3）文件压缩（Accept-Encoding：g-zip）</blockquote>
 
 <ul>
-<li>在服务器端对文件进行压缩，在浏览器端对文件解压缩，可有效减少通信传输的数据量。</li>
-<li>如果可以的话，尽可能的将外部的脚本、样式进行合并，多个合为一个。</li>
-<li>文本文件的压缩效率可达到80%以上，因此HTML、CSS、javascript文件启用GZip压缩可达到较好的效果。</li>
-<li>但是压缩对服务器和浏览器产生一定的压力，在通信带宽良好，而服务器资源不足的情况下要权衡考虑。</li>
+<li>在<strong>服务器端</strong>对文件进行<strong>压缩</strong>，在<strong>浏览器端</strong>对文件<strong>解压缩</strong>，可有效减少通信传输的数据量。</li>
+<li>如果可以的话，尽可能的<strong>将外部的脚本、样式进行合并</strong>，多个合为一个。</li>
+<li><strong>文本文件的压缩效率可达到80%以上</strong>，因此HTML、CSS、javascript文件<strong>启用GZip压缩</strong>可达到较好的效果。</li>
+<li>但是<strong>压缩对服务器和浏览器产生一定的压力</strong>，在通信带宽良好，而服务器资源不足的情况下要权衡考虑。</li>
 </ul>
 <h6 id="2-减少HTTP请求的次数（改善响应时间最简单的途径）"><a href="#2-减少HTTP请求的次数（改善响应时间最简单的途径）" class="headerlink" title="2. 减少HTTP请求的次数（改善响应时间最简单的途径）"></a>2. 减少HTTP请求的次数（改善响应时间最简单的途径）</h6><blockquote>1）合并CSS和JS文件</blockquote>
 
 <ul>
-<li>将多个样式表或者脚本文件合并到一个文件中，可以减少HTTP请求的数量从而缩短效应时间。</li>
+<li>将多个样式表或者脚本文件合并到一个文件中，可以<strong>减少HTTP请求的数量</strong>从而缩短效应时间。</li>
 </ul>
 <blockquote>2）合并图片（css sprites）</blockquote>
 
 <ul>
-<li>合并后的图片会比分离的图片总和要小，因为它降低了图片自身的开销，譬如颜色表、格式信息等。</li>
+<li><strong>合并后的图片</strong>会比分离的图片总和要<strong>小</strong>，因为它降低了图片自身的开销，譬如颜色表、格式信息等。</li>
 </ul>
 <blockquote>3）图片较多的页面也可以使用 <strong>懒加载（lazyLoad）</strong>等技术进行优化。</blockquote>
 
@@ -539,46 +539,46 @@
 <li>对于图片而言，在页面刚加载的时候可以只加载第一屏，当用户继续往后滚屏的时候才加载后续的图片。这样一来，假如用户只对第一屏的内容感兴趣时，那剩余的图片请求就都节省了。</li>
 </ul>
 <h6 id="3-异步加载（并发-requirejs）"><a href="#3-异步加载（并发-requirejs）" class="headerlink" title="3. 异步加载（并发,requirejs）"></a>3. 异步加载（并发,requirejs）</h6><ul>
-<li>异步加载又叫非阻塞加载，浏览器在下载JS的同时，还会继续进行后续页面的处理。</li>
-<li>JS的加载分为两个部分：下载和执行。异步加载只是解决了下载的问题，但是代码在下载完成后就会立即执行，在执行过程中浏览器处于阻塞状态，响应不了任何需求。</li>
+<li>异步加载又叫<strong>非阻塞加载</strong>，浏览器在下载JS的同时，还会继续进行后续页面的处理。</li>
+<li>JS的加载分为两个部分：下载和执行。<strong>异步加载只是解决了下载的问题</strong>，但是代码在下载完成后就会立即执行，在<strong>执行过程中浏览器处于阻塞状态，响应不了任何需求</strong>。</li>
 </ul>
 <h6 id="4-预加载、JS延迟加载、按需加载"><a href="#4-预加载、JS延迟加载、按需加载" class="headerlink" title="4. 预加载、JS延迟加载、按需加载"></a>4. 预加载、JS延迟加载、按需加载</h6><blockquote> 预加载</blockquote>
 
 <ul>
-<li>预加载是一种浏览器机制，使用浏览器空闲时间来预先下载/加载用户接下来很可能会浏览的页面/资源，当用户访问某个预加载的链接时，如果从缓存命中,页面就得以快速呈现。</li>
+<li>预加载是一种<strong>浏览器机制</strong>，使用<strong>浏览器空闲时间</strong>来预先下载/加载用户接下来很可能会浏览的页面/资源，当用户访问某个预加载的链接时，如果从缓存命中,页面就得以快速呈现。</li>
 </ul>
 <blockquote>JS延迟加载</blockquote>
 
 <ul>
-<li>有些JS代码在某些情况在需要使用，并不是页面初始化的时候就要用到。延迟加载就是为了解决这个问题。将JS切分成许多模块，页面初始化时只加载需要立即执行的JS，然后其它JS的加载延迟到第一次需要用到的时候再加载。类似图片的延迟加载。<ul>
+<li>有些JS代码在某些情况在需要使用，并不是页面初始化的时候就要用到。延迟加载就是为了解决这个问题。将JS切分成许多模块，<strong>页面初始化时只加载需要立即执行的JS</strong>，然后其它JS的加载延迟到第一次需要用到的时候再加载。类似图片的延迟加载。<ul>
 <li>解决思路：可以利用异步加载将JS缓存起来，但不立即执行，需要的时候再执行。</li>
 </ul>
 </li>
-<li>JS延迟加载机制(LazyLoad)：简单来说，就是在浏览器滚动到某个位置在触发相关的函数，实现页面元素的加载或者某些动作的执行。</li>
+<li>JS延迟加载机制(LazyLoad)：简单来说，就是在<strong>浏览器滚动到某个位置时触发相关的函数</strong>，实现页面元素的加载或者某些动作的执行。</li>
 </ul>
 <blockquote>按需加载</blockquote>
 
 <ul>
-<li>按需加载是前端性能优化中的一项重要措施，按需加载指的是当用户触发了动作时才加载对应的功能。触发的动作，是要看具体的业务场景而言，包括但不限于以下几个情况：鼠标点击、输入文字、拉动滚动条，鼠标移动、窗口大小更改等。加载的文件，可以是JS、图片、CSS、HTML等。</li>
+<li>按需加载是前端性能优化中的一项重要措施，<strong>按需加载指的是当用户触发了动作时才加载对应的功能</strong>。触发的动作，是要看具体的业务场景而言，包括但不限于以下几个情况：鼠标点击、输入文字、拉动滚动条，鼠标移动、窗口大小更改等。加载的文件，可以是JS、图片、CSS、HTML等。</li>
 </ul>
 <h6 id="5-使用CDN-Content-Delivery-Network-内容分发网络"><a href="#5-使用CDN-Content-Delivery-Network-内容分发网络" class="headerlink" title="5. 使用CDN(Content Delivery Network, 内容分发网络)"></a>5. 使用CDN(Content Delivery Network, 内容分发网络)</h6><ul>
-<li>使用CDN加速，使用户从离自己最近的服务器下载文件。<ul>
-<li>如果应用程序web服务器离用户更近，那么一个HTTP请求的响应时间将缩短。另一方面，如果组件web服务器离用户更近，则多个HTTP请求的响应时间将缩短。</li>
+<li>使用CDN加速，使用户<strong>从离自己最近的服务器下载文件</strong>。<ul>
+<li>如果<strong>应用程序web服务器</strong>离用户更近，那么一个HTTP请求的响应时间将缩短。另一方面，如果<strong>组件web服务器</strong>离用户更近，则多个HTTP请求的响应时间将缩短。</li>
 </ul>
 </li>
-<li>CDN缓存的一般是静态资源，如图片、文件、CSS、script脚本、静态网页等，这些文件访问频度很高，将其缓存在CDN可极大改善网页的打开速度。</li>
+<li>CDN缓存的一般是<strong>静态资源</strong>，如图片、文件、CSS、script脚本、静态网页等，这些文件访问频度很高，将其缓存在CDN可<strong>极大改善网页的打开速度</strong>。</li>
 </ul>
 <h6 id="6-反向代理"><a href="#6-反向代理" class="headerlink" title="6. 反向代理"></a>6. 反向代理</h6><ul>
-<li>反向代理方式是指代理原始服务器来接受来自Internet的链接请求，然后将请求转发给内部网络上的原始服务器，并将从原始服务器上得到的结果转发给Internet上请求数据的客户端。</li>
-<li>反向代理就是位于Internet和原始服务器之间的服务器，对于客户端来说就表现为一台服务器，客户端所发送的请求都是直接发送给反向代理服务器，然后由反向代理服务器统一调配。</li>
-<li>和传统的代理服务器一样，反向代理服务器也有保护网站安全的作用，来自互联网的请求必须经过反向代理服务器，相当于在原始服务器之间增加一道屏障。</li>
-<li>除了安全功能，反向代理服务器也可以通过配置缓存功能加速web请求，当用户第一次访问静态内容的时候，静态内容就被缓存在反向代理服务器上，下一次用户请求静态资源时，直接从反向代理服务器返回静态内容，加速web请求访问速度，减轻原始服务器的压力。</li>
-<li>此外，反向代理也可以实现负载均衡的功能，而通过负载均衡构建的应用集群可以提高系统总体处理能力，进而改善网站高并发情况下的性能。</li>
+<li>反向代理方式是指<strong>代理原始服务器来接受来自Internet的链接请求</strong>，然后<strong>将请求转发给内部网络上的原始服务器</strong>，并<strong>将从原始服务器上得到的结果转发给Internet上请求数据的客户端</strong>。</li>
+<li>反向代理就是位于<strong>Internet</strong>和<strong>原始服务器</strong>之间的服务器，对于客户端来说就表现为一台服务器，<strong>客户端所发送的请求都是直接发送给反向代理服务器</strong>，然后<strong>由反向代理服务器统一调配</strong>。</li>
+<li>和传统的代理服务器一样，反向代理服务器也有<strong>保护网站安全</strong>的作用，来自互联网的请求必须经过反向代理服务器，相当于在原始服务器之间增加一道屏障。</li>
+<li>除了安全功能，反向代理服务器也可以<strong>通过配置缓存功能加速web请求</strong>，当用户第一次访问静态内容的时候，静态内容就被缓存在反向代理服务器上，下一次用户请求静态资源时，直接从反向代理服务器返回静态内容，加速web请求访问速度，减轻原始服务器的压力。</li>
+<li>此外，反向代理也可以<strong>实现负载均衡</strong>的功能，而通过负载均衡构建的应用集群可以提高系统总体处理能力，进而<strong>改善网站高并发情况下的性能</strong>。</li>
 </ul>
 <h6 id="7-AJax-优化"><a href="#7-AJax-优化" class="headerlink" title="7. AJax 优化"></a>7. AJax 优化</h6><ul>
 <li>缓存 Ajax<ul>
-<li>POST的请求，是不可以在客户端缓存的，每次请求都需要发送给服务器进行处理，每次都会返回状态码200（可以在服务器端对数据进行缓存，以便提高处理速度）。</li>
-<li>GET的请求，是可以（而且默认）在客户端进行缓存的，除非指定了不同的地址，否则同一个地址的AJAX请求，不会重复在服务器执行，而是返回304。</li>
+<li><strong>POS</strong>T的请求，是<strong>不可以在客户端缓存</strong>的，每次请求都需要发送给服务器进行处理，每次都会返回状态码200（可以在服务器端对数据进行缓存，以便提高处理速度）。</li>
+<li><strong>GET</strong>的请求，是<strong>可以（而且默认）在客户端进行缓存</strong>的，除非指定了不同的地址，否则<strong>同一个地址的AJAX请求，不会重复在服务器执行</strong>，而是返回304。</li>
 </ul>
 </li>
 <li>在进行Ajax请求的时候，可以选择<strong>尽量使用get方法</strong>，这样可以使用客户端的缓存，提高请求速度。<ul>
@@ -589,28 +589,28 @@
 <h5 id="渲染阶段"><a href="#渲染阶段" class="headerlink" title="渲染阶段"></a>渲染阶段</h5><h6 id="1-将CSS和JS放到外部文件中引用，CSS放在页面最上部，JavaScript放在页面最下面"><a href="#1-将CSS和JS放到外部文件中引用，CSS放在页面最上部，JavaScript放在页面最下面" class="headerlink" title="1.将CSS和JS放到外部文件中引用，CSS放在页面最上部，JavaScript放在页面最下面"></a>1.将CSS和JS放到外部文件中引用，CSS放在页面最上部，JavaScript放在页面最下面</h6><blockquote>CSS样式表放在页面最上部</blockquote>
 
 <ul>
-<li>浏览器会在下载完成全部CSS之后才对整个页面进行渲染，因此最好的做法是将CSS放在页面最上面，让浏览器尽快下载CSS。如果将CSS放在其他地方比如BODY中，则浏览器有可能还未下载和解析到CSS就已经开始渲染页面了，这就导致页面由无CSS状态跳转到CSS状态，用户体验比较糟糕，所以可以考虑将CSS放在HEAD中。</li>
-<li>将样式表放在头部对于实际页面加载的时间并不能造成太大影响，但是这会减少页面首屏出现的时间，使页面内容逐步呈现，改善用户体验，防止“白屏”。</li>
-<li>样式表中的内容是绘制网页的关键信息，如果将样式表放在底部，浏览器会拒绝渲染已经下载的网页，因为大多数浏览器在实现时都努力避免重绘。</li>
+<li>浏览器会在<strong>下载完成全部CSS之后</strong>才对整个页面进行渲染，因此最好的做法是<strong>将CSS放在页面最上面</strong>，让浏览器尽快下载CSS。如果将CSS放在其他地方比如BODY中，则浏览器有可能还未下载和解析到CSS就已经开始渲染页面了，这就导致页面由无CSS状态跳转到CSS状态，用户体验比较糟糕，所以可以考虑将CSS放在HEAD中。</li>
+<li><strong>将样式表放在头部</strong>对于实际页面加载的时间并不能造成太大影响，但是这<strong>会减少页面首屏出现的时间，使页面内容逐步呈现，改善用户体验，防止“白屏”</strong>。</li>
+<li>样式表中的内容是<strong>绘制网页的关键信息</strong>，如果将样式表放在底部，浏览器会拒绝渲染已经下载的网页，因为<strong>大多数浏览器在实现时都努力避免重绘</strong>。</li>
 </ul>
 <blockquote>JS脚本放在页面最底部</blockquote>
 
 <ul>
-<li>JS的下载和执行会阻塞DOM树的构建（中断了DOM树的更新），即每次出现都会让页面等待脚本的解析和执行（不论JavaScript是内嵌的还是外链的），JavaScript代码执行完成后，才继续渲染页面。</li>
-<li>浏览器在加载JavaScript后立即执行，有可能会阻塞整个页面，造成页面显示缓慢，因此JavaScript<strong>最好</strong>放在页面最下面。</li>
+<li><strong>JS的下载和执行会阻塞DOM树的构建（中断了DOM树的更新）</strong>，即每次出现都会让页面等待脚本的解析和执行（不论JavaScript是内嵌的还是外链的），<strong>JavaScript代码执行完成后，才继续渲染页面</strong>。</li>
+<li>浏览器在加载JavaScript后立即执行，有可能会阻塞整个页面，造成页面显示缓慢，因此<strong>JavaScript最好放在页面最下面</strong>。</li>
 <li>但如果页面解析时就需要用到JavaScript，这时不合适将脚本放到底部。</li>
 </ul>
-<blockquote>下载脚本时并行下载是被禁用的</blockquote>
+<blockquote>下载脚本时<strong>并行下载</strong>是<strong>被禁用</strong>的</blockquote>
 
 <ul>
-<li>即使使用了不同的主机名，也不会启用其他的下载。因为脚本可能修改页面内容，因此浏览器会等待脚本执行完成。</li>
-<li>另外，也是为了保证脚本能够按照正确的顺序执行，因为后面的脚本可能与前面的脚本存在依赖关系，不按照顺序执行可能会产生错误。</li>
+<li>即使使用了不同的主机名，也不会启用其他的下载。因为脚本可能修改页面内容，因此<strong>浏览器会等待脚本执行完成</strong>。</li>
+<li>另一方面是为了<strong>保证脚本能够按照正确的顺序执行</strong>，因为后面的脚本可能与前面的脚本存在依赖关系，不按照顺序执行可能会产生错误。</li>
 </ul>
 <h6 id="2-减少重绘（Repaint）和回流（Reflow）"><a href="#2-减少重绘（Repaint）和回流（Reflow）" class="headerlink" title="2. 减少重绘（Repaint）和回流（Reflow）"></a>2. 减少重绘（Repaint）和回流（Reflow）</h6><ul>
 <li>Repaint（重绘）就是在<strong>一个元素的外观被改变，但没有改变布局(宽高)</strong>的情况下发生，如改变visibility、outline、背景色等等。</li>
-<li>Reflow（回流）就是<strong>DOM的变化影响到了元素的几何属性（宽和高）</strong>，浏览器会重新计算元素的几何属性，会使渲染树中受到影响的部分失效，浏览器会验证DOM树上的所有其它结点的visibility属性，这也是Reflow低效的原因。如：改变窗囗大小、改变文字大小、内容的改变、浏览器窗口变化，style属性的改变等等。如果Reflow的过于频繁，CPU使用率就会大大增加。</li>
-<li>每次对DOM元素的样式操作都会引发重绘，如果涉及布局还会引发回流。</li>
-<li>回流必然会引起重绘，而重绘可以单独出现。</li>
+<li>Reflow（回流）就是<strong>DOM的变化影响到了元素的几何属性（宽和高）</strong>，浏览器会重新计算元素的几何属性，会使渲染树中受到影响的部分失效，浏览器会验证DOM树上的所有其它结点的visibility属性，这也是<strong>Reflow低效</strong>的原因。如：改变窗囗大小、改变文字大小、内容的改变、浏览器窗口变化，style属性的改变等等。如果Reflow的过于频繁，CPU使用率就会大大增加。</li>
+<li>每次对DOM元素的<strong>样式操作</strong>都会<strong>引发重绘</strong>，如果<strong>涉及布局</strong>还会<strong>引发回流</strong>。</li>
+<li><strong>回流</strong>必然会引起<strong>重绘</strong>，而<strong>重绘可以单独出现</strong>。</li>
 <li><strong>display：none</strong> 指的是元素完全不陈列出来，不占据空间，涉及到了DOM结构，故产生reflow与repaint。</li>
 <li><strong>visibility：hidden</strong> 指的是元素不可见但存在，保留空间，不影响结构，故只产生repaint。</li>
 </ul>
@@ -635,49 +635,49 @@
 <li>BigPipe目标：前后端分离，提高页面渲染速度。</li>
 </ul>
 <h6 id="6-CSS性能优化"><a href="#6-CSS性能优化" class="headerlink" title="6. CSS性能优化"></a>6. CSS性能优化</h6><ul>
-<li>慎重使用高性能属性：浮动、定位。</li>
-<li>避免使用CSS表达式。<ul>
+<li><strong>慎重使用高性能属性</strong>：浮动、定位。</li>
+<li><strong>避免使用CSS表达式</strong><ul>
 <li>CSS表达式是动态设置CSS属性的一种强大并且危险的方式，它受到了IE5以及之后版本、IE8之前版本的支持。应该避免使用CSS表达式。</li>
 </ul>
 </li>
-<li>CSS的精简。<ul>
+<li><strong>CSS的精简</strong><ul>
 <li>移除CSS中的空白和注释。</li>
 <li>移除空的css规则：｛｝；</li>
 </ul>
 </li>
-<li>合并相同的类；移除不使用的类。</li>
-<li>尽量减少页面重排、重绘。</li>
+<li><strong>合并相同的类；移除不使用的类</strong></li>
+<li><strong>尽量减少页面重排、重绘</strong></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*重排*/</span><br><span class="line">/*按照css的书写顺序：*/</span><br><span class="line">位置：position、top、left、z-index、<span class="built_in">float</span>、display   </span><br><span class="line">大小：width、height、margin、padding   </span><br><span class="line">文字系列： font、line-height、color、letter-spacing   </span><br><span class="line">背景边框：background、 border   </span><br><span class="line">其它：animation、transition   </span><br><span class="line">/*重绘:*/</span><br><span class="line">border、outline、background、box-shadow</span><br><span class="line">能使用background-color,尽量不要使用background;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>标准化各种浏览器前缀：带浏览器前缀的在前，标准属性在后。</li>
-<li>不使用@import前缀，它会影响css的加载速度。</li>
-<li>充分利用css继承属性，减少代码量。<ul>
+<li><strong>标准化各种浏览器前缀</strong>：带浏览器前缀的在前，标准属性在后。</li>
+<li><strong>不使用@import前缀</strong>，它会影响css的加载速度。</li>
+<li><strong>充分利用css继承属性，减少代码量</strong><ul>
 <li>常见的可以继承的属性比如： color，font-size，font-family等。</li>
 <li>不可继承的比如： position，display，float等。</li>
 </ul>
 </li>
-<li>使用CSS缩写，减少代码量。<ul>
+<li><strong>使用CSS缩写，减少代码量</strong><ul>
 <li>颜色#ffffff使用缩写#fff</li>
 <li>属性值为0时，不加单位（使用0代替0px等）。</li>
 </ul>
 </li>
-<li>避免使用 CSS Filter（CSS滤镜）。</li>
-<li>减少查询层级：如.header .logo 优于 .header .top .logo。</li>
-<li>减少查询范围：如.header&gt;li 优于 .header li。</li>
+<li><strong>避免使用 CSS Filter（CSS滤镜）</strong></li>
+<li><strong>减少查询层级</strong>：如.header .logo 优于 .header .top .logo。</li>
+<li><strong>减少查询范围</strong>：如.header&gt;li 优于 .header li。</li>
 </ul>
 <h5 id="脚本执行阶段"><a href="#脚本执行阶段" class="headerlink" title="脚本执行阶段"></a>脚本执行阶段</h5><h6 id="1-缓存节点，尽量减少节点的查找"><a href="#1-缓存节点，尽量减少节点的查找" class="headerlink" title="1. 缓存节点，尽量减少节点的查找"></a>1. 缓存节点，尽量减少节点的查找</h6><ul>
-<li>减少对DOM元素的查询和修改，查询时可将其赋值给局部变量。<ul>
-<li>如a.b.c.d这种查找方式非常耗性能，尽可能把它定义在变量里。</li>
+<li>减少对DOM元素的查询和修改，查询时可将其<strong>赋值给局部变量</strong>。<ul>
+<li>如a.b.c.d这种查找方式非常<strong>耗性能</strong>，尽可能把它定义在变量里。</li>
 </ul>
 </li>
 </ul>
 <h6 id="2-减少节点的操作（innerHTML）"><a href="#2-减少节点的操作（innerHTML）" class="headerlink" title="2. 减少节点的操作（innerHTML）"></a>2. 减少节点的操作（innerHTML）</h6><ul>
-<li>修改和访问DOM元素会造成页面的Repaint和Reflow，更不允许循环对DOM操作。所以应合理的使用JavaScript变量储存内容，考虑大量DOM元素中循环的性能开销，在循环结束时一次性写入。</li>
+<li><strong>修改和访问DOM元素</strong>会<strong>造成页面的Repaint和Reflow</strong>，更<strong>不允许循环对DOM操作</strong>。所以应合理的使用JavaScript变量储存内容，考虑大量DOM元素中循环的性能开销，在循环结束时一次性写入。</li>
 </ul>
 <h6 id="3-避免无谓的循环，break、continue、return的适当使用"><a href="#3-避免无谓的循环，break、continue、return的适当使用" class="headerlink" title="3. 避免无谓的循环，break、continue、return的适当使用"></a>3. 避免无谓的循环，break、continue、return的适当使用</h6><h6 id="4-事件委托（事件代理）"><a href="#4-事件委托（事件代理）" class="headerlink" title="4. 事件委托（事件代理）"></a>4. 事件委托（事件代理）</h6><ul>
-<li>在JavaScript中，添加到页面上的事件处理程序数量将直接关系到页面的整体运行性能，因为需要不断的与DOM节点进行交互，访问DOM的次数越多，引起浏览器重绘与重排的次数也就越多，就会延长整个页面的交互就绪时间，<strong>性能优化的主要思想之一就是减少DOM操作</strong>。</li>
-<li>如果使用<strong>事件委托</strong>，就会将所有的操作放到js程序里面，与DOM的操作就只需要交互一次，这样就能大大的减少与DOM的交互次数，提高性能。</li>
+<li>在JavaScript中，添加到页面上的<strong>事件处理程序数量</strong>将直接关系到<strong>页面的整体运行性能</strong>，因为需要不断的与DOM节点进行交互，<strong>访问DOM的次数越多，引起浏览器重绘与重排的次数也就越多</strong>，就会<strong>延长整个页面的交互就绪时间</strong>，<strong>性能优化的主要思想之一就是减少DOM操作</strong>。</li>
+<li>如果使用<strong>事件委托</strong>，就会将所有的操作放到js程序里面，与DOM的操作就只需要交互一次，这样就能<strong>大大的减少与DOM的交互次数，提高性能</strong>。</li>
 </ul>
 <h6 id="5-不使用EVAL"><a href="#5-不使用EVAL" class="headerlink" title="5. 不使用EVAL"></a>5. 不使用EVAL</h6><ul>
 <li>eval函数会运行编译器，影响性能。</li>
