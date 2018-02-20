@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,JavaScript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基本内容 JavaScript中创建数组有两种方式，第一种是使用Array构造函数，另一种是使用数组字面量表示法。 有三种方法可以用来判断变量是否为数组(Array)，分别是instance of、constructor和isArray。 数组的方法有数组原型方法，也有从object对象继承来的方法，常见的数组原型方法主要有： join() push()和pop() shift() 和 unshi">
+<meta name="keywords" content="开发,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript数组方法大全">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/02/19/array/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="基本内容 JavaScript中创建数组有两种方式，第一种是使用Array构造函数，另一种是使用数组字面量表示法。 有三种方法可以用来判断变量是否为数组(Array)，分别是instance of、constructor和isArray。 数组的方法有数组原型方法，也有从object对象继承来的方法，常见的数组原型方法主要有： join() push()和pop() shift() 和 unshi">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-20T05:36:09.417Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript数组方法大全">
+<meta name="twitter:description" content="基本内容 JavaScript中创建数组有两种方式，第一种是使用Array构造函数，另一种是使用数组字面量表示法。 有三种方法可以用来判断变量是否为数组(Array)，分别是instance of、constructor和isArray。 数组的方法有数组原型方法，也有从object对象继承来的方法，常见的数组原型方法主要有： join() push()和pop() shift() 和 unshi">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/02/19/array/"/>
+
+
+
+
+
+  <title>JavaScript数组方法大全 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/02/19/array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript数组方法大全</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-19T20:52:39+08:00">
+                2018-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="基本内容"><a href="#基本内容" class="headerlink" title="基本内容"></a>基本内容</h4><ul>
+<li>JavaScript中创建数组有两种方式，第一种是使用<strong>Array构造函数</strong>，另一种是使用<strong>数组字面量表示法</strong>。</li>
+<li>有三种方法可以用来判断变量是否为数组(Array)，分别是<code>instance of</code>、<code>constructor</code>和<code>isArray</code>。</li>
+<li>数组的方法有<strong>数组原型方法</strong>，也有从object对象继承来的方法，常见的数组原型方法主要有：<ul>
+<li>join()</li>
+<li>push()和pop()</li>
+<li>shift() 和 unshift()</li>
+<li>sort()</li>
+<li>reverse()</li>
+<li>concat()</li>
+<li>slice()</li>
+<li>splice()</li>
+<li>indexOf()和 lastIndexOf() （ES5新增）</li>
+<li>forEach() （ES5新增）<a id="more"></a>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="数组创建"><a href="#数组创建" class="headerlink" title="数组创建"></a>数组创建</h4><ul>
+<li><p>JavaScript中创建数组有两种方式，第一种是使用<strong>Array构造函数</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr1 = new Array(); //创建一个空数组</span><br><span class="line">var arr2 = new Array(20); // 创建一个长度为20的数组</span><br><span class="line">var arr3 = new Array(<span class="string">"lily"</span>,<span class="string">"lucy"</span>,<span class="string">"Tom"</span>); // 创建一个包含3个字符串的数组</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建数组的第二种基本方式是使用<strong>数组字面量表示法</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr4 = []; //创建一个空数组</span><br><span class="line">var arr5 = [20]; // 创建一个包含一个元素的数组</span><br><span class="line">var arr6 = [<span class="string">"lily"</span>,<span class="string">"lucy"</span>,<span class="string">"Tom"</span>]; // 创建一个包含3个字符串的数组</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="数组判断"><a href="#数组判断" class="headerlink" title="数组判断"></a>数组判断</h4><ul>
+<li>有三种方法可以用来判断变量是否为数组(Array)：</li>
+</ul>
+<blockquote>instance of</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a=new Array();</span><br><span class="line">a instanceof Array; //<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<blockquote>constructor</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a=new Array();</span><br><span class="line">a.constructor==Array; //<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<blockquote>isArray</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//对支持isArray的浏览器</span><br><span class="line">var a=new Array();</span><br><span class="line">Array.isArray(a); //<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h4 id="常见的数组方法"><a href="#常见的数组方法" class="headerlink" title="常见的数组方法"></a>常见的数组方法</h4><h5 id="数组元素的添加"><a href="#数组元素的添加" class="headerlink" title="数组元素的添加"></a>数组元素的添加</h5><blockquote>push 方法</blockquote>
+
+<ul>
+<li>将一个或多个新元素添加到原数组末尾，并返回数组的长度。</li>
+<li>该方法会<strong>改变原始数组</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,2,3];</span><br><span class="line">var b = arr.push([4,5]); //arr：[1,2,3,4,5]  b：5</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>unshift 方法</blockquote>
+
+<ul>
+<li>将一个或多个新元素添加到数组开头，并返回数组的长度。</li>
+<li>该方法会<strong>改变原始数组</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,2,3];</span><br><span class="line">var b = arr.unshift(-2,-1); //arr：[-2,-1,1,2,3]  b：5</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>splice 方法</blockquote>
+
+<ul>
+<li>将一个或多个新元素插入到数组的指定位置，插入位置的元素自动后移，返回””。</li>
+<li>该方法会<strong>改变原始数组</strong>。</li>
+<li>该方法能删除指定的元素，也可以用来插入指定的元素。</li>
+<li>函数原型: splice(insertIndex,0,element1,…..,elementX)。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var fruits = [<span class="string">"Banana"</span>, <span class="string">"Orange"</span>, <span class="string">"Apple"</span>, <span class="string">"Mango"</span>];</span><br><span class="line">var result = fruits.splice(2,0,<span class="string">"Lemon"</span>,<span class="string">"Kiwi"</span>);//在数组的第二个位置插入元素</span><br><span class="line">//result : <span class="string">""</span></span><br><span class="line">//fruits: [Banana, Orange, Lemon, Kiwi, Apple, Mango]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="数组元素的删除"><a href="#数组元素的删除" class="headerlink" title="数组元素的删除"></a>数组元素的删除</h5><blockquote>pop 方法</blockquote>
+
+<ul>
+<li>删除原数组最后一个元素，并返回删除元素的值；如果数组为空则返回undefined。</li>
+<li>该方法会<strong>改变原始数组</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,2,3];</span><br><span class="line">var b = arr.pop(); //arr：[1,2]  b：3</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>shift 方法</blockquote>
+
+<ul>
+<li>删除原数组第一项，并返回删除元素的值；如果数组为空则返回undefined。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,2,3];</span><br><span class="line">var b = arr.shift(); //arr：[2,3]  b：1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>splice 方法</blockquote>
+
+<ul>
+<li>splice 方法向/从数组中删除项目，然后返回被删除的项目。</li>
+<li>该方法会<strong>改变原始数组</strong>。</li>
+<li>该方法也可以用来插入指定的元素。</li>
+<li>函数原型: splice(insertIndex,deleteCount,element1,…..,elementX)。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//删除并插入</span><br><span class="line">var arr = [1,2,3,4,5];</span><br><span class="line">var b = arr.splice(2,2,7,8,9); //arr：[1,2,7,8,9,5]  b：[3,4]</span><br><span class="line">//同<span class="built_in">shift</span></span><br><span class="line">var b = arr.splice(0,1); </span><br><span class="line">//同unshift</span><br><span class="line">arr.splice(0,0,-2,-1); </span><br><span class="line">//同pop</span><br><span class="line">var b = arr.splice(a.length-1,1); </span><br><span class="line">//同push</span><br><span class="line">arr.splice(arr.length,0,6,7);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="数组元素的截取"><a href="#数组元素的截取" class="headerlink" title="数组元素的截取"></a>数组元素的截取</h5><blockquote>slice 方法</blockquote>
+
+<ul>
+<li>函数原型: slice(start,end)。</li>
+<li>返回从原数组中指定start下标到end下标（不包括）之间的项组成的<strong>新数组</strong>。</li>
+<li>该方法并<strong>不会修改原数组</strong>，而是返回一个子数组。</li>
+<li>在只有一个参数的情况下， slice()方法返回从该参数指定位置开始到当前数组末尾的所有项。</li>
+<li>如果有两个参数，该方法返回起始和结束位置之间的项——但不包括结束位置的项。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,2,3,4,5];</span><br><span class="line">var b = arr.slice(2,5); //arr：[1,2,3,4,5]  b：[3,4,5]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="数组元素的合并"><a href="#数组元素的合并" class="headerlink" title="数组元素的合并"></a>数组元素的合并</h5><blockquote>concat 方法</blockquote>
+
+<ul>
+<li>将多个数组（也可以是字符串，或者是数组和字符串的混合）连接为一个数组，返回连接好的<strong>新数组</strong>。</li>
+<li>在没有给 concat()方法传递参数的情况下，它只是复制当前数组并返回副本。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,3,5,7];</span><br><span class="line">var arrCopy = arr.concat(9,[11,13]);</span><br><span class="line">console.log(arrCopy); //[1, 3, 5, 7, 9, 11, 13]</span><br><span class="line">console.log(arr); // [1, 3, 5, 7](原数组未被修改)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="数组的拷贝"><a href="#数组的拷贝" class="headerlink" title="数组的拷贝"></a>数组的拷贝</h5><ul>
+<li>可以实现数组拷贝的方法有slice方法和concat方法。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//slice(start,end):start设置为0，省略end则表示从头截取到尾，即对数组进行了一份拷贝</span><br><span class="line">//返回数组的拷贝数组，注意是一个新的数组，不是指向</span><br><span class="line">arrayObj.slice(0);</span><br><span class="line">//在没有给 concat()方法传递参数的情况下，它只是复制当前数组并返回副本</span><br><span class="line">//返回数组的拷贝数组，注意是一个新的数组，不是指向</span><br><span class="line">arrayObj.concat();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="数组的排序"><a href="#数组的排序" class="headerlink" title="数组的排序"></a>数组的排序</h5><blockquote>reverse 方法</blockquote>
+
+<ul>
+<li>该方法用来反转数组中的元素（前后颠倒）。</li>
+<li>此方法会<strong>修改原数组</strong>，并不会创建新数组。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3].reverse();  </span><br><span class="line">//[3, 2, 1]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>sort 方法</blockquote>
+
+<ul>
+<li>该方法将数组中的元素排序并返回排序后的数组。</li>
+<li>此方法会<strong>修改原数组</strong>，并不会创建新数组。</li>
+<li>当sort()方法不带参数时，数组按照字母表顺序排序，如果数组包含undefined元素，会排到数组尾部。</li>
+<li>也可以给sort()方法传入一个比较函数作为参数，让数组以指定的比较函数进行排序。<ul>
+<li>比较函数返回值小于0，则第一个参数在前</li>
+<li>比较函数返回值大于0，则第二个参数在前</li>
+<li>两个参数值相等，则返回0<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[6, 2, 5, 1].sort(<span class="keyword">function</span>(a, b)&#123;  </span><br><span class="line">    <span class="built_in">return</span> a - b;  //数组从小到大排序</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h5><blockquote>join 方法</blockquote>
+
+<ul>
+<li>该方法用来拼接字符串。返回一个<strong>字符串</strong>。</li>
+<li>函数原型: join(separator)。</li>
+<li>将数组的元素组起一个字符串，以separator为分隔符，省略的话则用默认用逗号为分隔符，该方法只接收一个参数：即分隔符。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,2,3];</span><br><span class="line">console.log(arr.join()); // 1,2,3</span><br><span class="line">console.log(arr.join(<span class="string">"-"</span>)); // 1-2-3</span><br><span class="line">console.log(arr); // [1, 2, 3]（原数组不变）</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>indexOf方法</blockquote>
+
+<ul>
+<li>该方法用于判断数组中是否有相匹配的值，第二个参数（可选的）表示从数组的某个开始位置<strong>往后检索</strong>。 </li>
+<li>若第二个参数缺省，则从数组的开头（位置 0）开始向后查找。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 4, 2].indexOf(2);         //1  </span><br><span class="line">[1, 2, 3, 4, 2].indexOf(2, 2);      //4</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>lastIndexOf 方法</blockquote>
+
+<ul>
+<li>该方法用于判断数组中是否有相匹配的值，第二个参数（可选的）表示从数组的某个开始位置<strong>往前检索</strong>。</li>
+<li>若第二个参数缺省，从数组的末尾开始向前查找。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,3,5,7,7,5,3,1];</span><br><span class="line">console.log(arr.lastIndexOf(5)); //5</span><br><span class="line">console.log(arr.lastIndexOf(5,4)); //2</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>forEach 方法</blockquote>
+
+<ul>
+<li>该方法用于对数组进行遍历循环，对数组中的每一项运行给定函数。</li>
+<li>这个方法没有返回值。</li>
+<li>参数是function类型，默认有传参，参数分别为：遍历的数组内容val；第对应的数组索引index，数组本身arr。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3].forEach(<span class="keyword">function</span>(val, index, arr)&#123;  </span><br><span class="line">    console.log(val);  </span><br><span class="line">&#125;);</span><br><span class="line">//1 2 3</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>toString 方法</blockquote>
+
+<ul>
+<li>该方法用于将每个元素转化为字符串并且输出用逗号隔开。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 4].toString();  </span><br><span class="line">//1,2,3,4  </span><br><span class="line">//等价于[1, 2, 3, 4].join();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="知识拓展"><a href="#知识拓展" class="headerlink" title="知识拓展"></a>知识拓展</h4><blockquote>arguments类数组对象调用数组方法</blockquote>
+
+<ul>
+<li>因为arguments是一个类数组对象，虽然它也有下标，但它并非真正的数组，所以不能和数组一样进行排序添加之类的操作。</li>
+<li>这种情况下，借用array.prototype对象上的方法，可以对arguments完成push，shift等操作。</li>
+<li><code>[].slice.call(arguments)</code>就可以把arguments转换成真正的数组。<ul>
+<li>通过call显式绑定来实现arguments对象变相有slice这个方法。</li>
+</ul>
+</li>
+<li>等价于<code>Array.slice.call(arguments)</code>。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/18/cookie/" rel="next" title="Cookie与Session的区别与应用">
+                <i class="fa fa-chevron-left"></i> Cookie与Session的区别与应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://chongtianhong.github.io/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本内容"><span class="nav-number">1.</span> <span class="nav-text">基本内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组创建"><span class="nav-number">2.</span> <span class="nav-text">数组创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组判断"><span class="nav-number">3.</span> <span class="nav-text">数组判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的数组方法"><span class="nav-number">4.</span> <span class="nav-text">常见的数组方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数组元素的添加"><span class="nav-number">4.1.</span> <span class="nav-text">数组元素的添加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组元素的删除"><span class="nav-number">4.2.</span> <span class="nav-text">数组元素的删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组元素的截取"><span class="nav-number">4.3.</span> <span class="nav-text">数组元素的截取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组元素的合并"><span class="nav-number">4.4.</span> <span class="nav-text">数组元素的合并</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组的拷贝"><span class="nav-number">4.5.</span> <span class="nav-text">数组的拷贝</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组的排序"><span class="nav-number">4.6.</span> <span class="nav-text">数组的排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他方法"><span class="nav-number">4.7.</span> <span class="nav-text">其他方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#知识拓展"><span class="nav-number">5.</span> <span class="nav-text">知识拓展</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
