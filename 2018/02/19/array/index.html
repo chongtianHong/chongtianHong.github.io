@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本内容 JavaScript中创建数组有两种方式，第一种是使用Array构造函数，另一种是使用数组字面量表示法。 有三种方法可以用来判断变量是否为数组(Array)，分别是instance of、constructor和isArray。 数组的方法有数组原型方法，也有从object对象继承来的方法，常见的数组原型方法主要有： join() push()和pop() shift() 和 unshi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-20T05:36:09.417Z">
+<meta property="og:updated_time" content="2018-02-21T13:40:08.231Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript数组方法大全">
 <meta name="twitter:description" content="基本内容 JavaScript中创建数组有两种方式，第一种是使用Array构造函数，另一种是使用数组字面量表示法。 有三种方法可以用来判断变量是否为数组(Array)，分别是instance of、constructor和isArray。 数组的方法有数组原型方法，也有从object对象继承来的方法，常见的数组原型方法主要有： join() push()和pop() shift() 和 unshi">
@@ -570,6 +570,44 @@
 </li>
 <li>等价于<code>Array.slice.call(arguments)</code>。</li>
 </ul>
+<blockquote>基本类型和引用类型的区别</blockquote>
+
+<ul>
+<li>JS变量中包含两种不同数据类型的值：<strong>基本（原始）类型值</strong>和<strong>引用（对象）类型值</strong>。</li>
+<li><p><strong>基本的数据类型</strong>有：undefined，boolean，number，string，null。基本类型的访问是<strong>按值访问</strong>的，其值保存在栈内存中，就是说我们可以操作保存在变量中的实际的值。基本类型有以下几个特点：</p>
+<ul>
+<li><p>基本类型的值是不可变的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//任何方法都无法改变一个基本类型的值</span><br><span class="line">//比如一个字符串：</span><br><span class="line">var name = <span class="string">'jozo'</span>;</span><br><span class="line">name.toUpperCase(); // 输出 <span class="string">'JOZO'</span></span><br><span class="line">console.log(name); // 输出  <span class="string">'jozo'</span></span><br><span class="line">//可以发现原始的name并未发生改变，调用了toUpperCase()方法后返回的是一个新的字符串。</span><br><span class="line"></span><br><span class="line">//不能给基本类型添加属性和方法</span><br><span class="line">var person = <span class="string">'jozo'</span>;</span><br><span class="line">person.age = 22;</span><br><span class="line">person.method = <span class="function"><span class="title">function</span></span>()&#123;//...&#125;;</span><br><span class="line">console.log(person.age); // undefined</span><br><span class="line">console.log(person.method); // undefined</span><br><span class="line">//该例子说明基本类型是不可变的；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基本类型的比较是<strong>值的比较</strong>。只有在它们的值相等的时候它们才相等。</p>
+</li>
+<li>基本类型的变量是存放在栈区的（栈区指内存里的栈内存）。</li>
+</ul>
+</li>
+<li><p><strong>引用类型</strong>又称为对象类型，如对象、数组等。引用类型有以下几个特点：</p>
+<ul>
+<li><p>引用类型的值是可变的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//可以为引用类型添加属性和方法，也可以删除其属性和方法，如：</span><br><span class="line">var person = &#123;&#125;;//创建个空对象 --引用类型</span><br><span class="line">person.name = <span class="string">'jozo'</span>;</span><br><span class="line">person.age = 22;</span><br><span class="line">person.sayName = <span class="function"><span class="title">function</span></span>()&#123;console.log(person.name);&#125; </span><br><span class="line">person.sayName();// <span class="string">'jozo'</span></span><br><span class="line">delete person.name; //删除person对象的name属性</span><br><span class="line">person.sayName(); // undefined</span><br><span class="line">//说明引用类型可以拥有属性和方法，并且是可以动态改变的。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>引用类型的值是同时保存在栈内存和堆内存中的对象。JS中引用类型的值是<strong>按引用访问</strong>的。</p>
+</li>
+<li>引用类型的比较是<strong>引用的比较</strong>，即<strong>比较</strong>两个对象的堆内存中的<strong>地址</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var person1 = &#123;&#125;;</span><br><span class="line">var person2 = &#123;&#125;;</span><br><span class="line">console.log(person1 == person2); // <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>基本类型</strong>在赋值操作后，两个变量是<strong>相互不受影响</strong>的。在从一个变量向另一个变量赋值基本类型时，会在该变量上创建一个新值，然后再把该值复制到为新变量分配的位置上。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">var b = a;</span><br><span class="line">a ++ ;</span><br><span class="line">console.log(a); // 11</span><br><span class="line">console.log(b); // 10 , b值只是a值的一个副本，与a完全独立</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>引用类型</strong>的赋值其实是对象保存在栈区地址指针的赋值，因此两个变量指向同一个对象，任何的操作都会<strong>相互影响</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;&#125;; // a保存了一个空对象的实例</span><br><span class="line">var b = a;  // a和b都指向了这个空对象</span><br><span class="line">a.name = <span class="string">'jozo'</span>;</span><br><span class="line">console.log(a.name); // <span class="string">'jozo'</span></span><br><span class="line">console.log(b.name); // <span class="string">'jozo'</span></span><br><span class="line">b.age = 22;</span><br><span class="line">console.log(b.age);// 22</span><br><span class="line">console.log(a.age);// 22</span><br><span class="line">console.log(a == b);// <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>数组的引用与值传递</blockquote>
+
+<ul>
+<li>数组属于<strong>引用类型</strong>。<strong>数组的赋值（引用）</strong>其实是对象保存在栈区地址指针的赋值，因此两个数组指向同一个对象，任何的操作都会相互影响。</li>
+<li>在<strong>不影响原值</strong>的前提下<strong>复制一个数组</strong>的过程称为<strong>数组值传递</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/*数组的引用与值传递*/</span><br><span class="line">var a=[1,2,3];</span><br><span class="line">var b=[];</span><br><span class="line">//数组引用</span><br><span class="line">b=a;</span><br><span class="line">//数组值传递</span><br><span class="line">b=a.concat();//方式一</span><br><span class="line">b=a.slice(0);//方式二</span><br><span class="line">//方式三，采用遍历。</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -621,6 +659,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/20/regExp/" rel="prev" title="RegExp 笔记">
+                RegExp 笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -701,7 +743,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
