@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,jQuery," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="this相关问题及jQuery选择器this的相关问题this指代   this指代当前操作的DOM对象。 在jQuery中，this可以用于单个对象，也可以用于多个对象。">
+<meta name="keywords" content="开发,jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery学习笔记（二）">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/02/23/jquery2/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="this相关问题及jQuery选择器this的相关问题this指代   this指代当前操作的DOM对象。 在jQuery中，this可以用于单个对象，也可以用于多个对象。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-22T17:36:05.029Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery学习笔记（二）">
+<meta name="twitter:description" content="this相关问题及jQuery选择器this的相关问题this指代   this指代当前操作的DOM对象。 在jQuery中，this可以用于单个对象，也可以用于多个对象。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/02/23/jquery2/"/>
+
+
+
+
+
+  <title>jQuery学习笔记（二） | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/02/23/jquery2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">jQuery学习笔记（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-23T00:11:16+08:00">
+                2018-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="this相关问题及jQuery选择器"><a href="#this相关问题及jQuery选择器" class="headerlink" title="this相关问题及jQuery选择器"></a>this相关问题及jQuery选择器</h3><h4 id="this的相关问题"><a href="#this的相关问题" class="headerlink" title="this的相关问题"></a>this的相关问题</h4><blockquote>this指代</blockquote>
+
+<ul>
+<li>this指代<strong>当前操作的DOM对象</strong>。</li>
+<li>在jQuery中，this可以用于单个对象，也可以用于多个对象。<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#btn'</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    alert(this.innerHTML);  // 单个对象，this指代当前id为btn的DOM对象</span><br><span class="line">&#125;);</span><br><span class="line">$(<span class="string">'div'</span>).each(<span class="keyword">function</span>(index)&#123;</span><br><span class="line">    alert(this.innerHTML);  // 多个对象，this指代当前循环中索引为index的DOM对象 </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>jQuery中的this和$(this)的区别</blockquote>
+
+<ul>
+<li>jQuery中的this指代的是<strong>DOM对象</strong>，$(this)指代的是<strong>包装当前DOM对象的jQuery对象</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"div"</span>).each(<span class="keyword">function</span>(index)&#123;</span><br><span class="line">     alert($(this));  // [object Object] jQuery对象</span><br><span class="line">     alert(this);    // [object HTMLDivElement] DOM对象</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="jQuery选择器"><a href="#jQuery选择器" class="headerlink" title="jQuery选择器"></a>jQuery选择器</h4><ul>
+<li>jQuery的最大贡献之一就是<strong>方便的获取DOM元素</strong>，并对DOM元素进行操作。</li>
+</ul>
+<blockquote>获取指定id的元素，对其进行操作：</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#info'</span>);  // 获取id为info的元素</span><br></pre></td></tr></table></figure>
+<blockquote>获取指定class的元素，对其进行操作：</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.info'</span>);  // 获取class为info的元素</span><br></pre></td></tr></table></figure>
+<blockquote>现有一系列具有相同className的元素，而这些元素之间没有办法互相区分彼此：</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;Test&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">    　　&lt;div class=<span class="string">'info'</span>&gt;0&lt;/div&gt;</span><br><span class="line">    　　&lt;div class=<span class="string">'info'</span>&gt;1&lt;/div&gt;</span><br><span class="line">    　　&lt;div class=<span class="string">'info'</span>&gt;2&lt;/div&gt;</span><br><span class="line">    　　&lt;div class=<span class="string">'info'</span>&gt;3&lt;/div&gt;</span><br><span class="line">    　　&lt;div class=<span class="string">'info'</span>&gt;4&lt;/div&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>获取这一系列元素中的第一个元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.info:first'</span>).val();  // 获取class为info的一系列元素中的第一个元素的值，即0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取这一系列元素中的最后一个元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.info:last'</span>).val();  // 获取class为info的一系列元素中的最后一个元素的值，即4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取这一系列元素中的任意一个元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.info:eq(2)'</span>).val();  // 获取class为info的一系列元素中索引为2的元素的值，即2（索引从0开始）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择符合某些条件的复数个元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.info:gt(1)'</span>);  // 获取class为info的一系列元素中索引大于1的对象，即2,3,4</span><br><span class="line">$(<span class="string">'.info:lt(2)'</span>);  // 获取class为info的一系列元素中索引小于2的对象，即0,1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择系列元素中索引为奇数的元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.info:odd'</span>);  // 获取class为info的一系列元素中索引为奇数（1,3）的对象，即1,3</span><br><span class="line">$(<span class="string">'.info:even'</span>);  // 获取class为info的一系列元素中索引为偶数（0,2,4）的对象，即0、2、4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取这一系列元素中的第一个：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.info:first'</span>).val();  // 获取class为info的一系列元素中的第一个元素的值，即0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取这一系列元素中的第一个：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.info:first'</span>).val();  // 获取class为info的一系列元素中的第一个元素的值，即0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>现有一系列链接元素，但是它们并没有唯一id标识，也没有className区分，各个元素之间仅有href是不一致的：</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;Test&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">        　　&lt;a&gt;0&lt;/a&gt;</span><br><span class="line">        　　&lt;a href=<span class="string">'/info'</span>&gt;1&lt;/a&gt;</span><br><span class="line">        　　&lt;a href=<span class="string">'/information'</span>&gt;2&lt;/a&gt;</span><br><span class="line">        　　&lt;a href=<span class="string">'/test'</span>&gt;3&lt;/a&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>选择带有href属性的a标签元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'a[href]'</span>);  // 选择带有href属性的a标签，即1,2,3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择href属性值为info的a标签元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'a[href="info"]'</span>);  // 选择href属性为info的a标签，即1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择href属性值以info开头的a标签元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'a[href^="info"]'</span>);  // 选择带有href属性值已info开头的a标签，即1,2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择href属性值已tion结尾的a标签元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'a[href$="tion"]'</span>);  // 选择带有href属性值已tion结尾的a标签，即2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择href属性值中有fo字段的a标签元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'a[href*="fo"]'</span>);  // 选择带有href属性值中包含fo的a标签，即1,2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>也可以进行反选，选择href属性值中不包含info的a标签元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'a[href!="info"]'</span>);  // 选择带有href属性值中不包含info的a标签，即3</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>根据DOM元素的内容来选择合适的元素：</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div:contains("info")'</span>); // 选择div标签中内容包含info字段的元素</span><br></pre></td></tr></table></figure>
+<blockquote>根据DOM元素之间的关系来确定元素：</blockquote>
+
+<ul>
+<li>同级元素：即当前元素处于同一层级。</li>
+<li>父级元素：即当前元素的直属上层元素。</li>
+<li>祖先元素：即当前元素的所有上层元素。</li>
+<li>子级元素：即当前元素的直属子层元素。</li>
+<li><p>后代元素：即当前元素的所有子层元素。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;p&gt;0&lt;/p&gt;  // 当前两个标签为p的元素处于同一层级，属于同级元素</span><br><span class="line">    &lt;p&gt;1&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">'ancestor'</span>&gt;</span><br><span class="line">    &lt;div id=<span class="string">'father'</span>&gt;  // 标签为p的元素的父级元素是id为father的元素，祖先元素为id为father和ancestor的元素</span><br><span class="line">          &lt;p&gt;&lt;span&gt;0&lt;/span&gt;&lt;/p&gt;  // id为father的元素的子级元素是标签为p的元素，后代元素为标签为p与标签为span的元素  </span><br><span class="line">          &lt;p&gt;1&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>现在有如下代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;form&gt;</span><br><span class="line">    &lt;label&gt;Name:&lt;/label&gt;</span><br><span class="line">    &lt;input name=<span class="string">"name"</span> /&gt;</span><br><span class="line">    &lt;fieldset&gt;</span><br><span class="line">        &lt;label&gt;Newsletter:&lt;/label&gt;</span><br><span class="line">        &lt;input name=<span class="string">"firstletter"</span> /&gt;</span><br><span class="line">　　　　 &lt;input name=<span class="string">"secondletter"</span> /&gt;</span><br><span class="line">    &lt;/fieldset&gt;</span><br><span class="line">    &lt;input name=<span class="string">"none"</span> /&gt; </span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择标签为form的所有子级input元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'form&gt;input'</span>); // 选择标签为from的元素下的所有标签为input的子级元素，即name=“name”，name=“none”的元素</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择标签为form的所有的后代input元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'form input'</span>); // 选择标签为from的元素下的所有标签为input的后代元素，即name=“name”，name=“none”，name=“firstletter”，name=“secondletter”的元素</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择符合条件的同级元素（同级元素中的第一个）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'label+input'</span>); // 选择标签为label的同级元素中，标签为input的元素中的第一个，即name=“name”，name=“firstletter”的元素</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择所有符合条件的同级元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'label~input'</span>); // 选择标签为label的同级元素中，所有标签为input的元素，即name=“name”，name=“firstletter”，name=“secondletter”，name=“none”的元素</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择后代元素中包含选定元素的元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div:has(span)'</span>) // 选择所有后代元素中包含span元素的div元素</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="选择器总结"><a href="#选择器总结" class="headerlink" title="选择器总结"></a>选择器总结</h4><h5 id="基础选择器"><a href="#基础选择器" class="headerlink" title="基础选择器"></a>基础选择器</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#info'</span>);  　　　　　 // 选择id为info的元素，id为document中是唯一的，因此可以通过该选择器获取唯一的指定元素</span><br><span class="line">$(<span class="string">'.infoClass'</span>);  　　 // 选择class为infoClass的所有元素</span><br><span class="line">$(<span class="string">'div'</span>);  　　　　  // 选择标签名为div的所有的元素</span><br><span class="line">$(<span class="string">'*'</span>);   　　　　　　// 选择所有标签元素</span><br></pre></td></tr></table></figure>
+<h5 id="基本过滤器"><a href="#基本过滤器" class="headerlink" title="基本过滤器"></a>基本过滤器</h5><ul>
+<li>基本选择器获取的元素集合，通过过滤器的筛选，使选择更加精确。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.infoClass:first'</span>);    // 选择class为infoClass的所有元素集合，并筛选集合中的第一个元素</span><br><span class="line">$(<span class="string">'.infoClass:last'</span>);     // 选择class为infoClass的所有元素集合，并筛选集合中的最后一个元素</span><br><span class="line">$(<span class="string">'.infoClass:odd'</span>);      // 选择class为infoClass的所有元素集合，并筛选集合中索引为奇数的元素，如1,3,5</span><br><span class="line">$(<span class="string">'.infoClass:even'</span>);     // 选择class为infoClass的所有元素集合，并筛选集合中索引为偶数的元素，如0,2,4</span><br><span class="line">$(<span class="string">'.infoClass:eq(2)'</span>);    // 选择class为infoClass的所有元素集合，并筛选集合中索引为2的元素</span><br><span class="line">$(<span class="string">'.infoClass.lt(2)'</span>);    // 选择class为infoClass的所有元素集合，并筛选集合中索引小于2的元素集合</span><br><span class="line">$(<span class="string">'.infoClass.gt(2)'</span>);    // 选择class为infoClass的所有元素集合，并筛选集合中索引大于2的元素集合</span><br></pre></td></tr></table></figure>
+<h5 id="内容过滤器"><a href="#内容过滤器" class="headerlink" title="内容过滤器"></a>内容过滤器</h5><ul>
+<li>jQery准备了内容过滤器用于对选择的元素集合内容进行过滤。</li>
+<li>统一名称：<ul>
+<li>空元素：不包含任何后代元素或文本内容的元素，如<div></div></li>
+<li>非空元素：包含后代元素或者包含文本内容的元素</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div:contains("info")'</span>);     // 选择标签为div的所有元素集合，并筛选集合中文本内容包含info字段的元素</span><br><span class="line">$(<span class="string">'div:empty'</span>);                // 选择标签为div的所有元素集合，并筛选集合中所有空元素</span><br><span class="line">$(<span class="string">'div:parent'</span>);              // 选择标签为div的所有元素集合，并筛选集合中所有非空元素</span><br><span class="line">$(<span class="string">'div:has(p)'</span>);               // 选择标签为div的所有元素集合，并筛选集合中后代元素含有p标签的元素</span><br></pre></td></tr></table></figure>
+<h5 id="可视化过滤器"><a href="#可视化过滤器" class="headerlink" title="可视化过滤器"></a>可视化过滤器</h5><ul>
+<li>对于元素是否可见，jQuery也进行了处理。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div:visible'</span>);            // 选择标签为div的所有元素集合，并筛选集合中可见的元素</span><br><span class="line">$(<span class="string">'div:hidden'</span>);             // 选择标签为div的所有元素集合，并筛选集合中不可见的元素</span><br></pre></td></tr></table></figure>
+<h5 id="属性过滤器"><a href="#属性过滤器" class="headerlink" title="属性过滤器"></a>属性过滤器</h5><ul>
+<li>不同元素之间，拥有不同的属性参数，jQuery允许通过参数进行过滤。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'input[placeholder]'</span>);               // 选择所有标签为input的元素集合，并筛选包含placeholder属性的元素</span><br><span class="line">$(<span class="string">'input[placeholder="info"]'</span>);        // 选择所有标签为input的元素集合，并筛选placeholder属性值为info的元素</span><br><span class="line">$(<span class="string">'input[placeholder^="info"]'</span>);       // 选择所有标签为input的元素集合，并筛选placeholder属性值以info开头的元素</span><br><span class="line">$(<span class="string">'input[placeholder$="tion"]'</span>);       // 选择所有标签为input的元素集合，并筛选placeholder属性值以tion结尾的元素</span><br><span class="line">$(<span class="string">'input[placeholder*="mat"]'</span>);        // 选择所有标签为input的元素集合，并筛选placeholder属性值中包含字段mat的元素</span><br><span class="line">$(<span class="string">'input[id][placeholder*="mat"]'</span>);    // 选择所有标签为input的元素集合，并筛选包含id属性并且placeholder属性值中包含字段mat的元素</span><br></pre></td></tr></table></figure>
+<h5 id="子元素过滤器"><a href="#子元素过滤器" class="headerlink" title="子元素过滤器"></a>子元素过滤器</h5><ul>
+<li>这个比较容易混淆，进行对比总结。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;li&gt;John&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;Karl&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;Brandon&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;li&gt;Glen&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;Tane&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;Ralph&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'ul li:first-child'</span>).css(<span class="string">'background-color'</span>, <span class="string">'red'</span>);   // 选择每一个ul标签下的li元素集合中的第一个</span><br><span class="line"></span><br><span class="line">$(<span class="string">'ul li:first'</span>).css(<span class="string">'background-color'</span>, <span class="string">'red'</span>);   // 选择所有ul标签下的li元素集合中的第一个</span><br><span class="line"></span><br><span class="line">$(<span class="string">'ul li:last-child'</span>);   // 选择每一个ul标签下的li元素集合中的最后一个</span><br></pre></td></tr></table></figure>
+<h5 id="关系选择器"><a href="#关系选择器" class="headerlink" title="关系选择器"></a>关系选择器</h5><ul>
+<li>同级元素：即当前元素处于同一层级。</li>
+<li>父级元素：即当前元素的直属上层元素。</li>
+<li>祖先元素：即当前元素的所有上层元素。</li>
+<li>子级元素：即当前元素的直属子层元素。</li>
+<li>后代元素：即当前元素的所有子层元素。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'form input'</span>);           // 选择所有标签为form的元素中，后代元素标签为input的元素</span><br><span class="line">$(<span class="string">'form&gt;input'</span>);           // 选择所有标签为form的元素中，子级元素标签为input的元素</span><br><span class="line">$(<span class="string">'label+input'</span>);          // 选择所有标签为label的同级元素中，标签为input的元素集合中的第一个</span><br><span class="line">$(<span class="string">'label~input'</span>);          // 选择所有标签为label的同级元素中，标签为input的元素集合</span><br></pre></td></tr></table></figure>
+<h5 id="表单选择器"><a href="#表单选择器" class="headerlink" title="表单选择器"></a>表单选择器</h5><ul>
+<li>方便表单元素的选择。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">':input'</span>);                // 选择所有表单输入元素，包括input，textarea，select</span><br><span class="line">$(<span class="string">':text'</span>);                 // 选择所有的<span class="built_in">type</span>为text的input元素</span><br><span class="line">$(<span class="string">':password'</span>);             // 选择所有的<span class="built_in">type</span>为password的input元素</span><br><span class="line">$(<span class="string">':radio'</span>);                // 选择所有的<span class="built_in">type</span>为radio的input元素 </span><br><span class="line">$(<span class="string">':checkbox'</span>);             // 选择所有的<span class="built_in">type</span>为checkbox的input元素 </span><br><span class="line">$(<span class="string">':submit'</span>);               // 选择所有的<span class="built_in">type</span>为submit的input元素 </span><br><span class="line">$(<span class="string">':image'</span>);                // 选择所有的<span class="built_in">type</span>为image的input元素 </span><br><span class="line">$(<span class="string">':reset'</span>);                // 选择所有的<span class="built_in">type</span>为reset的input元素 </span><br><span class="line">$(<span class="string">':button'</span>);               // 选择所有的<span class="built_in">type</span>为button的input元素 </span><br><span class="line">$(<span class="string">':file'</span>);                 // 选择所有的<span class="built_in">type</span>为file的input元素 </span><br><span class="line">$(<span class="string">':hidden'</span>);               // 选择所有类型为hidden的input元素或表单的隐藏域</span><br></pre></td></tr></table></figure>
+<ul>
+<li>表单元素过滤器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">':enabled'</span>);                  // 选择所有的可操作的表单元素 </span><br><span class="line">$(<span class="string">':disabled'</span>);                 // 选择所有的不可操作的表单元素 </span><br><span class="line">$(<span class="string">':checked'</span>);                  // 选择所有的被checked的表单元素 </span><br><span class="line">$(<span class="string">'select option:selected'</span>);    // 选择所有的select 的子元素中被selected的元素</span><br></pre></td></tr></table></figure>
+<h5 id="对比总结"><a href="#对比总结" class="headerlink" title="对比总结"></a>对比总结</h5><ul>
+<li>为了方便记忆，将功能相关的选择器进行总结：</li>
+</ul>
+<ol>
+<li><p>$(‘#id’)与$(‘.calss’)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#id'</span>);  　　　　　 // 根据id选择元素</span><br><span class="line">$(<span class="string">'.class'</span>);  　　   // 根据class选择元素</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>$(‘div:first’)与$(‘div:last’)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div:first'</span>);     // 选择div元素集合中的第一个  </span><br><span class="line">$(<span class="string">'div:last'</span>);      // 选择div元素集合中的最后一个</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>$(‘div:odd’)与$(‘div:even’)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div:odd'</span>);       // 选择div元素集合中的奇数个元素  </span><br><span class="line">$(<span class="string">'div:even'</span>);      // 选择div元素集合中的偶数个元素</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>$(‘div:gt(i)’)与$(‘div:lt(i)’)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div:gt(i)'</span>);       // 选择div元素集合中索引大于i的元素  </span><br><span class="line">$(<span class="string">'div:lt(i)'</span>);       // 选择div元素集合中索引小于i的元素</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>$(‘div:empty’)与$(‘div:parent’)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div:empty'</span>);        // 选择div元素集合中空元素</span><br><span class="line">$(<span class="string">'div:parent'</span>);       // 选择div元素集合中非空元素</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>$(‘div:visible’)与$(‘div:hidden’)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div:visible'</span>);      // 选择div元素集合中可见元素</span><br><span class="line">$(<span class="string">'div:hidden'</span>);       // 选择div元素集合中隐藏元素</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>$(‘ul li:first’)与$(‘ul li:first-child’)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'ul li:first'</span>);             // 选择所有ul后代元素li元素集合中的第一个</span><br><span class="line">$(<span class="string">'ul li:first-child'</span>);       // 选择每个ul后代元素li元素集合中的第一个</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>$(‘:disable’)与$(‘:enable’)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">':disable'</span>);             // 选择所有可以操作的表单元素</span><br><span class="line">$(<span class="string">':enable'</span>);              // 选择所有不可以操作的表单元素</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/jQuery/" rel="tag"><i class="fa fa-tag"></i> jQuery</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/22/jquery/" rel="next" title="jQuery学习笔记（一）">
+                <i class="fa fa-chevron-left"></i> jQuery学习笔记（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://chongtianhong.github.io/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#this相关问题及jQuery选择器"><span class="nav-number">1.</span> <span class="nav-text">this相关问题及jQuery选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#this的相关问题"><span class="nav-number">1.1.</span> <span class="nav-text">this的相关问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jQuery选择器"><span class="nav-number">1.2.</span> <span class="nav-text">jQuery选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择器总结"><span class="nav-number">1.3.</span> <span class="nav-text">选择器总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基础选择器"><span class="nav-number">1.3.1.</span> <span class="nav-text">基础选择器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基本过滤器"><span class="nav-number">1.3.2.</span> <span class="nav-text">基本过滤器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内容过滤器"><span class="nav-number">1.3.3.</span> <span class="nav-text">内容过滤器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可视化过滤器"><span class="nav-number">1.3.4.</span> <span class="nav-text">可视化过滤器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性过滤器"><span class="nav-number">1.3.5.</span> <span class="nav-text">属性过滤器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#子元素过滤器"><span class="nav-number">1.3.6.</span> <span class="nav-text">子元素过滤器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关系选择器"><span class="nav-number">1.3.7.</span> <span class="nav-text">关系选择器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#表单选择器"><span class="nav-number">1.3.8.</span> <span class="nav-text">表单选择器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对比总结"><span class="nav-number">1.3.9.</span> <span class="nav-text">对比总结</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
