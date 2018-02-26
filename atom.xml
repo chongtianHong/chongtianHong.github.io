@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-02-22T17:36:05.029Z</updated>
+  <updated>2018-02-26T13:56:38.633Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,67 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo博客搭建</title>
+    <link href="https://chongtianhong.github.io/2018/02/26/hexo/"/>
+    <id>https://chongtianhong.github.io/2018/02/26/hexo/</id>
+    <published>2018-02-26T00:13:04.000Z</published>
+    <updated>2018-02-26T13:56:38.633Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Hexo简介"><a href="#Hexo简介" class="headerlink" title="Hexo简介"></a>Hexo简介</h3><ul><li>Hexo 是一个简单的、轻量的、基于Node.js的一个静态博客框架。</li><li>通过Hexo我们可以快速创建自己的博客，仅需要几条命令就可以完成。 </li><li>Hexo特性： <ul><li>Hexo基于Node.js，支持多进程，几百篇文章也可以秒生成。 </li><li>支持GitHub Flavored Markdown和所有Octopress的插件。 </li><li>Hexo支持EJS、Swig和Stylus。通过插件支持Haml、Jade和Less.</li></ul></li></ul><h3 id="Hexo：安装和配置"><a href="#Hexo：安装和配置" class="headerlink" title="Hexo：安装和配置"></a>Hexo：安装和配置</h3><ul><li>在安装Hexo之前需要先安装一些它所依赖的环境配置，本文主要介绍Hexo如何安装、使用，以及配置文件。</li></ul><h4 id="运行环境准备"><a href="#运行环境准备" class="headerlink" title="运行环境准备"></a>运行环境准备</h4><ul><li>本文以Hexo 3.0.0为例，操作系统为Windows 7 x64。</li><li>首先需要安装以下程序：<ul><li><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a><br>下载最新版的 Node.js，一路next安装到C盘。</li><li><a href="https://git-scm.com/downloads/" target="_blank" rel="noopener">Git</a><br>根据不同的平台相应选择下载版本，安装建议勾选Git Bash Here，方便以后的操作，然后一路next即可。</li><li><a href="https://notepad-plus-plus.org/" target="_blank" rel="noopener">Notepad++</a>（可选）<br>文本编辑器，用于修改配置文件及写文章。</li></ul></li></ul><h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><ol><li>新建一个文件夹，例如blog。</li><li>进入blog文件夹，右键点击<code>Git Bash Here</code>。</li><li><p>安装Hexo。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure><ul><li>输入hexo -v，检查hexo是否安装成功。</li></ul></li><li><p>初始化blog文件夹。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure><ul><li>看到”Start blogging with Hexo！”，则表示初始化完成。</li></ul></li><li><p>安装依赖和插件。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure></li><li><p>在<code>_config.yml</code>，进行基础配置。</p></li><li><p>新建一篇博客。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post “博客名”</span><br></pre></td></tr></table></figure><ul><li>这时候在文件夹_posts目录下将会看到已经创建的文件。</li></ul></li><li><p>启动服务器进行本地预览。</p><ul><li>clean 清除缓存文件 (db.json) 和已生成的静态文件 (public)。</li><li>generate 生成静态文件。</li><li>server 启动本地服务器。</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure><ul><li>终端结果显示： <code>INFO Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>. Press Ctrl+C to stop.</code>时就说明已经搭建起本地的hexo博客了。</li><li>在浏览器中打开 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> ， 成功的话即可看到博客页面，至此安装就完成了。</li></ul></li><li><p>安装插件。</p><ul><li>在生成以及部署文章之前，需要安装一个扩展：</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><ul><li>使用编辑器编好文章，就可以使用命令：<code>hexo d -g</code>，进行生成以及部署文章（下面会具体讲解如何将文章部署到github）。</li></ul></li><li><p>安装主题(以next主题为例)。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></li><li><p>若要回到命令窗口，则输入命令: <code>Ctrl+C</code> 停止服务器。</p></li></ol><h4 id="将文章部署到Github"><a href="#将文章部署到Github" class="headerlink" title="将文章部署到Github"></a>将文章部署到Github</h4><ol><li>申请Github账号。</li><li>创建Github仓库。<ul><li>new repository：Repository name 必须为<code>Github用户名+Github.io</code>这种格式，它将是我们个人博客的域名，即别人可以输入这个网址来访问我们的博客。</li></ul></li><li><p>配置本地文件。</p><ul><li>在<code>hexo init</code>的文件夹里（即blog）找到<code>_config.yml</code>全局配置文件，通过配置里面的参数，来与我们的Github上的仓库进行关联。 </li><li><p>打开这个文件，找到最下面：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line"><span class="built_in">type</span>:</span><br></pre></td></tr></table></figure></li><li><p>修改为:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git <span class="comment">#部署类型，使用Github(key-value空格隔开)</span></span><br><span class="line">   repository: git@github.com:chongtianHong/chongtianHong.github.io.git <span class="comment">#部署的仓库的SSH(key-value空格隔开)</span></span><br><span class="line">   branch: master <span class="comment">#部署分支， 一般使用master主分支(key-value空格隔开)</span></span><br><span class="line">   message: update <span class="comment">#默认类型(key-value空格隔开)</span></span><br></pre></td></tr></table></figure></li></ul></li><li><p>安装<code>hexo-deployer-git</code>自动部署发布工具。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li><li><p>将Hexo与Github page联系起来，设置Git的user name和email（如果是第一次的话）。</p><ul><li><p>在<code>hexo init</code>的文件夹（即blog）里面鼠标右键，点击<code>Git Base Here</code>，输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"chongtianhong"</span>  //github用户名</span><br><span class="line">git config --global user.email <span class="string">"450707109@qq.com"</span>  //github用户名</span><br></pre></td></tr></table></figure></li><li><p>输入cd ~/.ssh，检查是否有.ssh的文件夹(若存在则直接跳过第6步)。</p></li></ul></li><li><p>生成新的SSH Key。</p><ul><li><p>输入以下代码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"450707109@qq.com"</span></span><br></pre></td></tr></table></figure></li><li><p>连续三个回车，SSH key就生成成功了。这时候可打开用户目录（默认存储路径是：<code>C:\Users\Administrator.ssh</code>），里面有一个“.ssh”文件夹，里面有“id_rsa” “id_rsa.pub” 这两个文件。其中“<code>id_rsa</code>”是私钥文件，“<code>id_rsa.pub</code>”是公钥文件。</p></li><li><p>添加密钥到ssh-agent，输入</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span></span></span><br></pre></td></tr></table></figure></li><li><p>再输入以下命令，添加生成的SSH key到ssh-agent。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure></li></ul></li><li><p>添加SSH Key到Github。</p><ul><li>登录Github，点击头像下的settings，添加ssh。</li><li>新建一个new ssh key，将<code>id_rsa.pub</code>文件里的内容复制上去。</li><li>输入<code>ssh -T git@github.com</code>，测试添加ssh是否成功。如果看到Hi后面是Github用户名，就说明成功了。</li></ul></li><li>发布到Github。<ul><li>输入如下命令，则可以完成hexo项目在Github上的生成及部署。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></li></ul></li></ol><h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ul><li>hexo配置文件_config.yml 里面的每个冒号后面都要有个空格，否则会报错。</li><li>所有标点符号都是英文的，所以输入时要切换到英文状态。</li><li>在 Hexo 中有两份主要的配置文件，其名称都是 _config.yml。其中：<ul><li>一份位于站点根目录下，主要包含 Hexo 本身的配置，称为站点配置文件；</li><li>另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项，称为主题配置文件。</li></ul></li><li>在切换主题之后、验证之前，最好使用 hexo clean 来清除 Hexo 的缓存。</li><li>在next/source/css/_custom目录下面专门提供了custom.styl供我们自定义样式，因此也可以在custom.styl里面添加样式代码。</li><li>博客内容按照<code>markdown</code>的语法进行编写。</li><li>所有文件（不管是以md为后缀的，还是以yml结尾的），都必须转换成UTF-8格式，可以在notepad++的格式里转换下，否则在本地查看（localhost:4000）中会出现乱码。</li><li><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo官方的安装教程</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;Hexo简介&quot;&gt;&lt;a href=&quot;#Hexo简介&quot; class=&quot;headerlink&quot; title=&quot;Hexo简介&quot;&gt;&lt;/a&gt;Hexo简介&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Hexo 是一个简单的、轻量的、基于Node.js的一个静态博客框架。&lt;/li&gt;
+&lt;li&gt;通过H
+      
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Hexo" scheme="https://chongtianhong.github.io/tags/Hexo/"/>
+    
+      <category term="Node.js" scheme="https://chongtianhong.github.io/tags/Node-js/"/>
+    
+      <category term="Github" scheme="https://chongtianhong.github.io/tags/Github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>jquery4</title>
+    <link href="https://chongtianhong.github.io/2018/02/25/jquery4/"/>
+    <id>https://chongtianhong.github.io/2018/02/25/jquery4/</id>
+    <published>2018-02-25T13:52:19.000Z</published>
+    <updated>2018-02-25T13:52:19.320Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>jquery3</title>
+    <link href="https://chongtianhong.github.io/2018/02/24/jquery3/"/>
+    <id>https://chongtianhong.github.io/2018/02/24/jquery3/</id>
+    <published>2018-02-24T03:55:00.000Z</published>
+    <updated>2018-02-24T03:55:00.482Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>jQuery学习笔记（二）</title>
