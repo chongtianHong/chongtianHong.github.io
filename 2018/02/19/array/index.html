@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本内容 JavaScript中创建数组有两种方式，第一种是使用Array构造函数，另一种是使用数组字面量表示法。 有三种方法可以用来判断变量是否为数组(Array)，分别是instance of、constructor和isArray。 数组的方法有数组原型方法，也有从object对象继承来的方法，常见的数组原型方法主要有： join() push()和pop() shift() 和 unshi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-21T13:40:08.231Z">
+<meta property="og:updated_time" content="2018-02-27T14:14:00.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript数组方法大全">
 <meta name="twitter:description" content="基本内容 JavaScript中创建数组有两种方式，第一种是使用Array构造函数，另一种是使用数组字面量表示法。 有三种方法可以用来判断变量是否为数组(Array)，分别是instance of、constructor和isArray。 数组的方法有数组原型方法，也有从object对象继承来的方法，常见的数组原型方法主要有： join() push()和pop() shift() 和 unshi">
@@ -596,7 +596,7 @@
 </ul>
 </li>
 <li><p><strong>基本类型</strong>在赋值操作后，两个变量是<strong>相互不受影响</strong>的。在从一个变量向另一个变量赋值基本类型时，会在该变量上创建一个新值，然后再把该值复制到为新变量分配的位置上。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">var b = a;</span><br><span class="line">a ++ ;</span><br><span class="line">console.log(a); // 11</span><br><span class="line">console.log(b); // 10 , b值只是a值的一个副本，与a完全独立</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">var b = a;</span><br><span class="line">a++ ;</span><br><span class="line">console.log(a); // 11</span><br><span class="line">console.log(b); // 10 , b值只是a值的一个副本，与a完全独立</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>引用类型</strong>的赋值其实是对象保存在栈区地址指针的赋值，因此两个变量指向同一个对象，任何的操作都会<strong>相互影响</strong>。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;&#125;; // a保存了一个空对象的实例</span><br><span class="line">var b = a;  // a和b都指向了这个空对象</span><br><span class="line">a.name = <span class="string">'jozo'</span>;</span><br><span class="line">console.log(a.name); // <span class="string">'jozo'</span></span><br><span class="line">console.log(b.name); // <span class="string">'jozo'</span></span><br><span class="line">b.age = 22;</span><br><span class="line">console.log(b.age);// 22</span><br><span class="line">console.log(a.age);// 22</span><br><span class="line">console.log(a == b);// <span class="literal">true</span></span><br></pre></td></tr></table></figure>
@@ -743,7 +743,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -765,7 +765,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -779,7 +779,7 @@
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://chongtianhong.github.io/" target="_blank" title="GitHub">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
                       
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
                   </span>

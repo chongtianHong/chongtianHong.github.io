@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,Web,交互," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言 前端工程师除了UI重构外，还有一个非常重要的职责就是在正确的区域渲染出服务端的数据。要构建一个大的web应用，不只是普普通通的由静态页面构成。  前后端如何实现交互前端请求数据URL由后台来写 在开发中，URL主要是由后台来写好给前端。  若后台在查询数据，需要借助查询条件才能查询到前端需要的数据时，这时后台会要求前端提供相关的查询参数（即URL请求的参数）。">
+<meta name="keywords" content="开发,Web,交互">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前后端交互指南">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/02/28/ajax/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="前言 前端工程师除了UI重构外，还有一个非常重要的职责就是在正确的区域渲染出服务端的数据。要构建一个大的web应用，不只是普普通通的由静态页面构成。  前后端如何实现交互前端请求数据URL由后台来写 在开发中，URL主要是由后台来写好给前端。  若后台在查询数据，需要借助查询条件才能查询到前端需要的数据时，这时后台会要求前端提供相关的查询参数（即URL请求的参数）。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-01T14:33:32.275Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前后端交互指南">
+<meta name="twitter:description" content="前言 前端工程师除了UI重构外，还有一个非常重要的职责就是在正确的区域渲染出服务端的数据。要构建一个大的web应用，不只是普普通通的由静态页面构成。  前后端如何实现交互前端请求数据URL由后台来写 在开发中，URL主要是由后台来写好给前端。  若后台在查询数据，需要借助查询条件才能查询到前端需要的数据时，这时后台会要求前端提供相关的查询参数（即URL请求的参数）。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/02/28/ajax/"/>
+
+
+
+
+
+  <title>前后端交互指南 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/02/28/ajax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前后端交互指南</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T00:45:47+08:00">
+                2018-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><ul>
+<li>前端工程师除了UI重构外，还有一个非常重要的职责就是<strong>在正确的区域渲染出服务端的数据</strong>。要构建一个大的web应用，不只是普普通通的由静态页面构成。</li>
+</ul>
+<h3 id="前后端如何实现交互"><a href="#前后端如何实现交互" class="headerlink" title="前后端如何实现交互"></a>前后端如何实现交互</h3><h4 id="前端请求数据URL由后台来写"><a href="#前端请求数据URL由后台来写" class="headerlink" title="前端请求数据URL由后台来写"></a>前端请求数据URL由后台来写</h4><ul>
+<li>在开发中，URL主要是由<strong>后台</strong>来写好给前端。 </li>
+<li>若后台在<strong>查询数据</strong>，需要<strong>借助查询条件</strong>才能查询到前端需要的数据时，这时后台会要求<strong>前端提供相关的查询参数</strong>（即URL请求的参数）。<a id="more"></a>
+</li>
+</ul>
+<h4 id="接口文档主要由后台设计和修改"><a href="#接口文档主要由后台设计和修改" class="headerlink" title="接口文档主要由后台设计和修改"></a>接口文档主要由后台设计和修改</h4><ul>
+<li><strong>接口文档</strong>主要由<strong>后台设计和修改</strong>，前端开发者起到了辅助的作用。</li>
+<li>后台直接跟数据打交道，最清楚数据库里有什么数据，能返回什么数据。 </li>
+<li>前端只是数据的被动接受者，只是接口文档的使用者。 </li>
+<li>使用过程中，发现返回的数据不对，则需要跟后台商量，由后台修改。 </li>
+<li>切记：前端不能随意更改接口文档，除非取得后台开发人员同意。</li>
+</ul>
+<h4 id="前端与后台交互的数据格式"><a href="#前端与后台交互的数据格式" class="headerlink" title="前端与后台交互的数据格式"></a>前端与后台交互的数据格式</h4><ul>
+<li><strong>前端与后台交互的数据格式</strong>主要是<strong>JSON</strong>，XML现在用的不多。</li>
+<li>JSON 通常用于与服务端交换数据。</li>
+<li>在接收服务器数据时一般是得到字符串，我们可以使用 JSON.parse() 方法将数据转换为 JavaScript 对象。</li>
+</ul>
+<blockquote>JSON.parse()方法用于从一个字符串中解析出json对象。</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JSON.parse(<span class="string">'&#123;"name":"tom"&#125;'</span>);  // &#123;name: <span class="string">"tom"</span>&#125;</span><br><span class="line">JSON.parse(<span class="string">'&#123;"age":10&#125;'</span>);      // &#123;age: 10&#125;</span><br><span class="line">JSON.parse(<span class="string">'&#123;"age":null&#125;'</span>);     // &#123;age: null&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>JSON.stringify()方法用于将一个对象解析成一个JSON字符串</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;a:1,b:2&#125;;</span><br><span class="line">JSON.stringify(a);  // <span class="string">"&#123;"</span>a<span class="string">":1,"</span>b<span class="string">":2&#125;"</span></span><br></pre></td></tr></table></figure>
+<h4 id="前端与后台的交互原理"><a href="#前端与后台的交互原理" class="headerlink" title="前端与后台的交互原理"></a>前端与后台的交互原理</h4><ul>
+<li>前后端开发关注点：<strong>接口地址</strong>、<strong>前端请求的参数</strong>、<strong>后端返回的参数</strong>。 </li>
+<li>完成接口开发后，调一下接口，看一下返回的数据是否符合要求。</li>
+</ul>
+<h4 id="前端请求参数的形式"><a href="#前端请求参数的形式" class="headerlink" title="前端请求参数的形式"></a>前端请求参数的形式</h4><ul>
+<li>前端请求参数的形式：<strong>GET</strong>和<strong>POST</strong>两种方式。。</li>
+<li>GET：从指定的服务器中<strong>获取</strong>数据（方便，较不安全）。</li>
+<li>POST：<strong>提交</strong>数据给指定的服务器处理（不方便，比较安全）。</li>
+</ul>
+<blockquote>GET 和 POST的对比</blockquote>
+
+<ul>
+<li>与 POST 相比，GET 更简单也更快，并且在大部分情况下都能用。</li>
+<li>然而，在以下情况中，请使用 POST 请求：<ul>
+<li>无法使用缓存文件（更新服务器上的文件或数据库）</li>
+<li>向服务器发送大量数据（POST 没有数据量限制）</li>
+<li>发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠</li>
+</ul>
+</li>
+</ul>
+<h4 id="前端应该告知后台哪些有效信息，后台才能返回前端想要的数据"><a href="#前端应该告知后台哪些有效信息，后台才能返回前端想要的数据" class="headerlink" title="前端应该告知后台哪些有效信息，后台才能返回前端想要的数据"></a>前端应该告知后台哪些有效信息，后台才能返回前端想要的数据</h4><ul>
+<li>先将要展示的页面内容进行模块划分，将模块的内容提取出来，以及方便前端的一些标志值等，将所有想要的内容和逻辑告知后端。</li>
+<li>后端从数据库里面去查询相应的数据表以获得相应的内容或者图片地址信息。</li>
+<li><strong>URL中的参数</strong>主要是<strong>根据后台需要</strong>，若后台需要一个参数作为查询的辅助条件，前端在URL数据请求时就传递参数。</li>
+<li>请求格式：URL?参数（如果有几个参数则用&amp;连接参数。</li>
+</ul>
+<h4 id="前端如何把页面信息有效传达给后台，以及后台如何获取到这些数据"><a href="#前端如何把页面信息有效传达给后台，以及后台如何获取到这些数据" class="headerlink" title="前端如何把页面信息有效传达给后台，以及后台如何获取到这些数据"></a>前端如何把页面信息有效传达给后台，以及后台如何获取到这些数据</h4><ul>
+<li>所有前端请求的URL后面的参数都是辅助后台数据查询的 ，若不需要参数，那后台就会直接给个URL给前端。</li>
+</ul>
+<h4 id="前端应该如何回拒一些本不属于自己做的一些功能需求或任务"><a href="#前端应该如何回拒一些本不属于自己做的一些功能需求或任务" class="headerlink" title="前端应该如何回拒一些本不属于自己做的一些功能需求或任务"></a>前端应该如何回拒一些本不属于自己做的一些功能需求或任务</h4><ul>
+<li><strong>前端负责把数据展示在页面上</strong>（清晰的认识自己需要做的需求和任务）。</li>
+</ul>
+<h4 id="当前端在调用数据接口时，发现有些数据不是我们想要的，那么前端应该怎么办"><a href="#当前端在调用数据接口时，发现有些数据不是我们想要的，那么前端应该怎么办" class="headerlink" title="当前端在调用数据接口时，发现有些数据不是我们想要的，那么前端应该怎么办"></a>当前端在调用数据接口时，发现有些数据不是我们想要的，那么前端应该怎么办</h4><ul>
+<li>把请求的URL和返回的数据以及在页面的展示的情况给后台看。</li>
+<li>考虑后端开发的难处（后台查询数据、取数据、封装数据方面等蛮难处理的），耐心进行沟通。</li>
+</ul>
+<h4 id="前端有时候需要在请求的时候传入参数"><a href="#前端有时候需要在请求的时候传入参数" class="headerlink" title="前端有时候需要在请求的时候传入参数"></a>前端有时候需要在请求的时候传入参数</h4><ul>
+<li>后台在查询数据库的时候需要<strong>条件查询</strong>。</li>
+</ul>
+<h3 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h3><ul>
+<li>AJAX = 异步 JavaScript 和 XML。</li>
+<li>通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</li>
+<li>XMLHttpRequest 是 AJAX 的基础。<ul>
+<li>所有现代浏览器均支持 XMLHttpRequest 对象。</li>
+<li>XMLHttpRequest 用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</li>
+</ul>
+</li>
+<li>通过 AJAX，JavaScript 无需等待服务器的响应，而是：<ul>
+<li>在等待服务器响应时执行其他脚本</li>
+<li>当响应就绪后对响应进行处理</li>
+</ul>
+</li>
+</ul>
+<blockquote>例子：通过 AJAX 加载一段文本</blockquote>
+
+<ul>
+<li><p>jQuery 代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"#b01"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        htmlobj=$.ajax(&#123;url:<span class="string">"/jquery/test1.txt"</span>,async:<span class="literal">false</span>&#125;);</span><br><span class="line">        $(<span class="string">"#myDiv"</span>).html(htmlobj.responseText);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTML 代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"myDiv"</span>&gt;&lt;h2&gt;Let AJAX change this text&lt;/h2&gt;&lt;/div&gt;</span><br><span class="line">&lt;button id=<span class="string">"b01"</span> <span class="built_in">type</span>=<span class="string">"button"</span>&gt;Change Content&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="AJAX-load-方法"><a href="#AJAX-load-方法" class="headerlink" title="AJAX load() 方法"></a>AJAX load() 方法</h4><ul>
+<li>jQuery load() 方法是简单但强大的 AJAX 方法。</li>
+<li>load() 方法从服务器加载数据，并把返回的数据放入被选元素中。</li>
+<li>语法：<code>$(selector).load(URL,data,callback);</code><ul>
+<li>必需的 URL 参数规定希望加载数据的URL。</li>
+<li>可选的 data 参数规定与请求一同发送的查询字符串键/值对集合。</li>
+<li>可选的 callback 参数是 load() 方法完成后所执行的函数名称。</li>
+</ul>
+</li>
+</ul>
+<blockquote>例子：把文件 “demo_test.txt” 的内容加载到指定的 &lt;div&gt; 元素中</blockquote>
+
+<ul>
+<li><p>jQuery 代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"#btn1"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        $(<span class="string">'#test'</span>).load(<span class="string">'/example/jquery/demo_test.txt'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTML 代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3 id=<span class="string">"test"</span>&gt;请点击下面的按钮，通过 jQuery AJAX 改变这段文本。&lt;/h3&gt;</span><br><span class="line">&lt;button id=<span class="string">"btn1"</span> <span class="built_in">type</span>=<span class="string">"button"</span>&gt;获得外部的内容&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>也可以把 jQuery 选择器添加到 URL 参数。</li>
+</ul>
+<blockquote>例子：把 “demo_test.txt” 文件中 id=”p1” 的元素的内容，加载到指定的 &lt;div&gt; 元素中</blockquote>
+
+<ul>
+<li><p>jQuery 代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"#btn1"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        $(<span class="string">"#div1"</span>).load(<span class="string">"demo_test.txt #p1"</span>); // demo_test.txt</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>“demo_test.txt” 文件中的内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;jQuery and AJAX is FUN!!!&lt;/h2&gt;</span><br><span class="line">&lt;p id=<span class="string">"p1"</span>&gt;This is some text <span class="keyword">in</span> a paragraph.&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<div class="note danger">可选的 callback 参数规定当 load() 方法完成后所要允许的回调函数。<br>回调函数可以设置不同的参数：<br>- responseTxt : 包含调用成功时的结果内容<br>- statusTXT : 包含调用的状态<br>- xhr : 包含 XMLHttpRequest 对象</div>
+
+<blockquote>例子：在 load() 方法完成后显示一个提示框。如果 load() 方法已成功，则显示“外部内容加载成功！”，而如果失败，则显示错误消息：</blockquote>
+
+<ul>
+<li><p>jQuery 代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"button"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"#div1"</span>).load(<span class="string">"demo_test.txt"</span>,<span class="keyword">function</span>(responseTxt,statusTxt,xhr)&#123;</span><br><span class="line">        <span class="keyword">if</span>(statusTxt==<span class="string">"success"</span>)</span><br><span class="line">        alert(<span class="string">"外部内容加载成功！"</span>);</span><br><span class="line">        <span class="keyword">if</span>(statusTxt==<span class="string">"error"</span>)</span><br><span class="line">        alert(<span class="string">"Error: "</span>+xhr.status+<span class="string">": "</span>+xhr.statusText);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="AJAX-get-和-post-方法"><a href="#AJAX-get-和-post-方法" class="headerlink" title="AJAX get() 和 post() 方法"></a>AJAX get() 和 post() 方法</h4><ul>
+<li>jQuery get() 和 post() 方法用于通过 HTTP GET 或 POST 请求从服务器请求数据。</li>
+<li>两种在客户端和服务器端进行请求-响应的常用方法是：GET 和 POST。<ul>
+<li>GET - 从指定的资源请求数据</li>
+<li>POST - 向指定的资源提交要处理的数据</li>
+</ul>
+</li>
+<li>GET 基本上用于从服务器获得（取回）数据。注释：GET 方法可能返回缓存数据。</li>
+<li>POST 也可用于从服务器获取数据。不过，POST 方法不会缓存数据，并且常用于连同请求一起发送数据。</li>
+</ul>
+<h5 id="jQuery-get-方法"><a href="#jQuery-get-方法" class="headerlink" title="jQuery $.get() 方法"></a>jQuery $.get() 方法</h5><ul>
+<li>$.get() 方法通过 HTTP GET 请求从服务器上请求数据。</li>
+<li>语法：<code>$.get(url,[data],[callback],[type]);</code><ul>
+<li>必需的 URL 参数规定希望请求的 URL。</li>
+<li>可选的 data 参数是请求时所传递的参数，可以json对象也可以是字符串拼接形式。</li>
+<li>可选的 callback 参数是请求成功后所执行的函数名。</li>
+<li>可选的 type 参数是期待的返回值类型，可以是text/xml/json。</li>
+</ul>
+</li>
+</ul>
+<blockquote>例子：使用 $.get() 方法从服务器上的一个文件中取回数据：</blockquote>
+
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">$.get() 的第一个参数是我们希望请求的 URL（<span class="string">"demo_test.asp"</span>）。</span><br><span class="line">第二个参数是回调函数。第一个回调参数存有被请求页面的内容data，第二个回调参数存有请求的状态status。</span><br><span class="line">*/</span><br><span class="line">$(document).ready(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"button"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        $.get(<span class="string">"/example/jquery/demo_test.asp"</span>,<span class="keyword">function</span>(data,status)&#123;</span><br><span class="line">            alert(<span class="string">"数据："</span> + data + <span class="string">"\n状态："</span> + status);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="jQuery-post-方法"><a href="#jQuery-post-方法" class="headerlink" title="jQuery $.post() 方法"></a>jQuery $.post() 方法</h5><ul>
+<li>$.post() 方法通过 HTTP POST 请求从服务器上请求数据。</li>
+<li>语法：<code>$.post(url,[data],[callback],[type]);</code><ul>
+<li>必需的 URL 参数规定您希望请求的 URL。</li>
+<li>可选的 data 参数规定连同请求发送的数据。</li>
+<li>可选的 callback 参数是请求成功后所执行的函数名。</li>
+<li>可选的 type 参数是期待的返回值类型，可以是text/xml/json。</li>
+</ul>
+</li>
+</ul>
+<blockquote>例子：使用 $.post() 连同请求一起发送数据：</blockquote>
+
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">$.post() 的第一个参数是我们希望请求的 URL (<span class="string">"demo_test_post.asp"</span>)。</span><br><span class="line">然后我们连同请求（name 和 city）一起发送数据。</span><br><span class="line"><span class="string">"demo_test_post.asp"</span> 中的 ASP 脚本读取这些参数，对它们进行处理，然后返回结果。</span><br><span class="line">第三个参数是回调函数。第一个回调参数存有被请求页面的内容，而第二个参数存有请求的状态。</span><br><span class="line">*/</span><br><span class="line">$(<span class="string">"button"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $.post(<span class="string">"demo_test_post.asp"</span>,</span><br><span class="line">    &#123;</span><br><span class="line">        name:<span class="string">"Donald Duck"</span>,</span><br><span class="line">        city:<span class="string">"Duckburg"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">function</span>(data,status)&#123;</span><br><span class="line">        alert(<span class="string">"Data: "</span> + data + <span class="string">"\nStatus: "</span> + status);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="post-和-get-的完整形式"><a href="#post-和-get-的完整形式" class="headerlink" title="$.post() 和 $.get() 的完整形式"></a>$.post() 和 $.get() 的完整形式</h5><ul>
+<li><p>$.post() 和 $.get() 是简写的 Ajax 函数，等价于：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    url: url,</span><br><span class="line">    <span class="built_in">type</span>: <span class="string">"get"</span>/<span class="string">"post"</span>,</span><br><span class="line">    data: data,</span><br><span class="line">    dataType: callback</span><br><span class="line">    success: success,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据响应的不同的 MIME 类型，传递给 success 回调函数的返回数据也有所不同，这些数据可以是 XML root 元素、文本字符串、JavaScript 文件或者 JSON 对象,也可向 success 回调函数传递响应的文本状态，取决于<code>dataType</code>的类型。</p>
+</li>
+</ul>
+<blockquote>实现get方式跨域请求数据：</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url: <span class="string">"http://www.xxx.cn/index.php"</span>,</span><br><span class="line">        <span class="built_in">type</span>: <span class="string">"get"</span>,</span><br><span class="line">        dataType: <span class="string">"jsonp"</span>, //指定服务器返回的数据类型</span><br><span class="line">        success: <span class="keyword">function</span> (data) &#123;</span><br><span class="line">            console.log(data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>实现post方式跨域请求：</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url: <span class="string">"http://www.xxx.cn/index.php"</span>,</span><br><span class="line">        <span class="built_in">type</span>: <span class="string">"post"</span>,</span><br><span class="line">        dataType: <span class="string">"json"</span>, //指定服务器返回的数据类型</span><br><span class="line">        success: <span class="keyword">function</span> (data) &#123;</span><br><span class="line">            console.log(data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>服务器端：</blockquote>
+
+<ul>
+<li>Access-Control-Allow-Origin:* 表示允许任何域名跨域访问。</li>
+<li>如果需要指定某域名才允许跨域访问，只需把<ul>
+<li><code>Access-Control-Allow-Origin:*</code> 改为 <code>Access-Control-Allow-Origin:允许的域名</code>。</li>
+</ul>
+</li>
+<li>某些header请求头<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 指定允许其他域名访问</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Origin:*'</span>);</span><br><span class="line">// 响应类型</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Methods:POST'</span>);</span><br><span class="line">// 响应头设置</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Headers:x-requested-with,content-type'</span>);</span><br><span class="line"></span><br><span class="line">//设置内容类型为json</span><br><span class="line"></span><br><span class="line">header(<span class="string">'content-type:application:json;charset=utf8'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+          
+            <a href="/tags/交互/" rel="tag"><i class="fa fa-tag"></i> 交互</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/27/domainname/" rel="next" title="GitHub Pages绑定顶级域名的方法">
+                <i class="fa fa-chevron-left"></i> GitHub Pages绑定顶级域名的方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前后端如何实现交互"><span class="nav-number">2.</span> <span class="nav-text">前后端如何实现交互</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前端请求数据URL由后台来写"><span class="nav-number">2.1.</span> <span class="nav-text">前端请求数据URL由后台来写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接口文档主要由后台设计和修改"><span class="nav-number">2.2.</span> <span class="nav-text">接口文档主要由后台设计和修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端与后台交互的数据格式"><span class="nav-number">2.3.</span> <span class="nav-text">前端与后台交互的数据格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端与后台的交互原理"><span class="nav-number">2.4.</span> <span class="nav-text">前端与后台的交互原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端请求参数的形式"><span class="nav-number">2.5.</span> <span class="nav-text">前端请求参数的形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端应该告知后台哪些有效信息，后台才能返回前端想要的数据"><span class="nav-number">2.6.</span> <span class="nav-text">前端应该告知后台哪些有效信息，后台才能返回前端想要的数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端如何把页面信息有效传达给后台，以及后台如何获取到这些数据"><span class="nav-number">2.7.</span> <span class="nav-text">前端如何把页面信息有效传达给后台，以及后台如何获取到这些数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端应该如何回拒一些本不属于自己做的一些功能需求或任务"><span class="nav-number">2.8.</span> <span class="nav-text">前端应该如何回拒一些本不属于自己做的一些功能需求或任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#当前端在调用数据接口时，发现有些数据不是我们想要的，那么前端应该怎么办"><span class="nav-number">2.9.</span> <span class="nav-text">当前端在调用数据接口时，发现有些数据不是我们想要的，那么前端应该怎么办</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端有时候需要在请求的时候传入参数"><span class="nav-number">2.10.</span> <span class="nav-text">前端有时候需要在请求的时候传入参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ajax"><span class="nav-number">3.</span> <span class="nav-text">Ajax</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AJAX-load-方法"><span class="nav-number">3.1.</span> <span class="nav-text">AJAX load() 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AJAX-get-和-post-方法"><span class="nav-number">3.2.</span> <span class="nav-text">AJAX get() 和 post() 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#jQuery-get-方法"><span class="nav-number">3.2.1.</span> <span class="nav-text">jQuery $.get() 方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jQuery-post-方法"><span class="nav-number">3.2.2.</span> <span class="nav-text">jQuery $.post() 方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#post-和-get-的完整形式"><span class="nav-number">3.2.3.</span> <span class="nav-text">$.post() 和 $.get() 的完整形式</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

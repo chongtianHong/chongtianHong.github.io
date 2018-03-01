@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="this相关问题及jQuery选择器this的相关问题this指代   this指代当前操作的DOM对象。 在jQuery中，this可以用于单个对象，也可以用于多个对象。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-22T17:36:05.029Z">
+<meta property="og:updated_time" content="2018-02-27T03:09:32.026Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery学习笔记（二）">
 <meta name="twitter:description" content="this相关问题及jQuery选择器this的相关问题this指代   this指代当前操作的DOM对象。 在jQuery中，this可以用于单个对象，也可以用于多个对象。">
@@ -530,6 +530,7 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;li&gt;John&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;Karl&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;Brandon&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;li&gt;Glen&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;Tane&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;Ralph&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'ul li:first-child'</span>).css(<span class="string">'background-color'</span>, <span class="string">'red'</span>);   // 选择每一个ul标签下的li元素集合中的第一个</span><br><span class="line"></span><br><span class="line">$(<span class="string">'ul li:first'</span>).css(<span class="string">'background-color'</span>, <span class="string">'red'</span>);   // 选择所有ul标签下的li元素集合中的第一个</span><br><span class="line"></span><br><span class="line">$(<span class="string">'ul li:last-child'</span>);   // 选择每一个ul标签下的li元素集合中的最后一个</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"p:nth-child(3)"</span>); //选取属于其父元素的第三个子元素的每个&lt;p&gt; 元素</span><br></pre></td></tr></table></figure>
 <h5 id="关系选择器"><a href="#关系选择器" class="headerlink" title="关系选择器"></a>关系选择器</h5><ul>
 <li>同级元素：即当前元素处于同一层级。</li>
 <li>父级元素：即当前元素的直属上层元素。</li>
@@ -626,8 +627,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/24/jquery3/" rel="prev" title="jquery3">
-                jquery3 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/24/jquery3/" rel="prev" title="jQuery学习笔记（三）">
+                jQuery学习笔记（三） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -709,7 +710,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -731,7 +732,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -745,7 +746,7 @@
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://chongtianhong.github.io/" target="_blank" title="GitHub">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
                       
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
                   </span>

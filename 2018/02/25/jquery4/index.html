@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Ice, Ice's blog, Ice Hong" />
+  <meta name="keywords" content="开发,jQuery," />
 
 
 
@@ -123,14 +123,18 @@
 
 
 
+<meta name="description" content="jQuery动画及jQuery事件jQuery动画隐藏和显示 show()：显示动画 原理：show()从上到下增加元素的高度，从左到右增加元素宽度，从0到1增加透明度，直至内容完全可见。 语法：$(selector).show(speed,callback); 可选的 speed 参数规定隐藏/显示的速度，可以取以下值：”slow”、”fast” 或毫秒。 可选的 callback 参数是显示完">
+<meta name="keywords" content="开发,jQuery">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jquery4">
+<meta property="og:title" content="jQuery学习笔记（四）">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/02/25/jquery4/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="jQuery动画及jQuery事件jQuery动画隐藏和显示 show()：显示动画 原理：show()从上到下增加元素的高度，从左到右增加元素宽度，从0到1增加透明度，直至内容完全可见。 语法：$(selector).show(speed,callback); 可选的 speed 参数规定隐藏/显示的速度，可以取以下值：”slow”、”fast” 或毫秒。 可选的 callback 参数是显示完">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-25T13:52:19.320Z">
+<meta property="og:updated_time" content="2018-02-27T11:47:49.265Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jquery4">
+<meta name="twitter:title" content="jQuery学习笔记（四）">
+<meta name="twitter:description" content="jQuery动画及jQuery事件jQuery动画隐藏和显示 show()：显示动画 原理：show()从上到下增加元素的高度，从左到右增加元素宽度，从0到1增加透明度，直至内容完全可见。 语法：$(selector).show(speed,callback); 可选的 speed 参数规定隐藏/显示的速度，可以取以下值：”slow”、”fast” 或毫秒。 可选的 callback 参数是显示完">
 
 
 
@@ -166,7 +170,7 @@
 
 
 
-  <title>jquery4 | Ice's Blog</title>
+  <title>jQuery学习笔记（四） | Ice's Blog</title>
   
 
 
@@ -322,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">jquery4</h1>
+          <h1 class="post-title" itemprop="name headline">jQuery学习笔记（四）</h1>
         
 
         <div class="post-meta">
@@ -344,6 +348,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -372,7 +398,371 @@
       
 
       
-        
+        <h3 id="jQuery动画及jQuery事件"><a href="#jQuery动画及jQuery事件" class="headerlink" title="jQuery动画及jQuery事件"></a>jQuery动画及jQuery事件</h3><h4 id="jQuery动画"><a href="#jQuery动画" class="headerlink" title="jQuery动画"></a>jQuery动画</h4><h5 id="隐藏和显示"><a href="#隐藏和显示" class="headerlink" title="隐藏和显示"></a>隐藏和显示</h5><ul>
+<li><code>show()</code>：显示动画<ul>
+<li>原理：<code>show()</code>从上到下增加元素的高度，从左到右增加元素宽度，从0到1增加透明度，直至内容完全可见。</li>
+<li>语法：<code>$(selector).show(speed,callback);</code></li>
+<li>可选的 speed 参数规定隐藏/显示的速度，可以取以下值：”slow”、”fast” 或毫秒。</li>
+<li>可选的 callback 参数是显示完成后所执行的函数名称。</li>
+</ul>
+</li>
+<li><code>hide()</code>：隐藏动画<ul>
+<li>原理：<code>hide()</code>通过改变元素的高度宽度和不透明度，直到这三个属性值到0。隐藏动画后将display设置为none。</li>
+<li>语法：<code>$(selector).hide(speed,callback);</code></li>
+</ul>
+</li>
+<li>显示和隐藏是一对密不可分的动画形式。<a id="more"></a>
+</li>
+</ul>
+<h5 id="显隐切换"><a href="#显隐切换" class="headerlink" title="显隐切换"></a>显隐切换</h5><ul>
+<li><code>toggle()</code>：切换元素的可见状态：显示被隐藏的元素，并隐藏已显示的元素。<ul>
+<li>原理：匹配元素的宽度、高度以及不透明度，同时进行动画，隐藏动画后将display设置为none。</li>
+<li>语法：<code>$(selector).toggle(speed,callback);</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="滑动"><a href="#滑动" class="headerlink" title="滑动"></a>滑动</h5><ul>
+<li><code>slideDown()</code>：滑动显示<ul>
+<li>通过使用滑动效果，显示已隐藏的被选元素。</li>
+<li>语法：<code>$(selector).slideDown(speed,callback);</code></li>
+</ul>
+</li>
+<li><code>slidUp()</code>：滑动隐藏<ul>
+<li>通过使用滑动效果，隐藏被选元素，如果元素已显示出来的话。</li>
+<li>语法：<code>$(selector).slideUp(speed,callback);</code></li>
+</ul>
+</li>
+<li><code>slideToggle()</code>:显隐滑动切换<ul>
+<li>通过使用滑动效果（高度变化）来切换元素的可见状态。</li>
+<li>如果被选元素是可见的，则隐藏这些元素，如果被选元素是隐藏的，则显示这些元素。</li>
+<li>语法：<code>$(selector).slideToggle(speed,callback);</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="渐变：通过改变不透明度"><a href="#渐变：通过改变不透明度" class="headerlink" title="渐变：通过改变不透明度"></a>渐变：通过改变不透明度</h5><ul>
+<li><code>fadeIn()</code>：淡入<ul>
+<li>使用淡入效果来显示被选元素，假如该元素是隐藏的。</li>
+<li>语法：<code>$(selector).fadeIn(speed,callback);</code></li>
+</ul>
+</li>
+<li><code>fadeOut()</code>：淡出<ul>
+<li>使用淡出效果来隐藏被选元素，假如该元素是显示的。</li>
+<li>语法：<code>$(selector).fadeOut(speed,callback);</code></li>
+</ul>
+</li>
+<li><code>fadeTo()</code>：设置淡出透明效果<ul>
+<li>以渐进的方式调整到指定透明度</li>
+<li>语法：<code>$(selector).fadeTo(speed,opacity,callback);</code></li>
+</ul>
+</li>
+<li><code>fadeToggle()</code>：结合fadeIn和fadeOut，实现渐变切换<ul>
+<li>如果元素已淡出，则 <code>fadeToggle()</code> 会向元素添加淡入效果。</li>
+<li>如果元素已淡入，则 <code>fadeToggle()</code> 会向元素添加淡出效果。</li>
+<li>语法：<code>$(selector).fadeToggle(speed,callback);</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="自定义动画"><a href="#自定义动画" class="headerlink" title="自定义动画"></a>自定义动画</h5><ul>
+<li><p><code>animate()</code></p>
+<div class="note danger">注意：<br>在使用animate方法之前，为了影响该元素的top  left bottom  right样式属性，必须先把元素的position样式设置为relative或者absolute。</div>
+
+<ul>
+<li>该方法执行 CSS 属性集的自定义动画。</li>
+<li>语法：<code>$(selector).animate(styles,speed,easing,callback);</code></li>
+<li>该方法通过CSS样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。</li>
+<li>只有数字值可创建动画（比如 “margin:30px”）。字符串值无法创建动画（比如 “background-color:red”）。</li>
+<li>注释：使用 “+=” 或 “-=” 来创建相对动画（relative animations）。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".btn1"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"#box"</span>).animate(&#123;height:<span class="string">"300px"</span>&#125;); //改变 <span class="string">"div"</span> 元素的高度</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>stop()</code>：停止元素的动画</p>
+<ul>
+<li>很多时候需要停止匹配正在进行的动画，需要使用<code>stop()</code>。</li>
+<li>jQuery <code>stop()</code> 方法用于在动画或效果完成前对它们进行停止。</li>
+<li>语法：<code>$(selector).stop([stopAll],[goToEnd]);</code></li>
+<li>stopAll，goToEnd都是可选参数，为布尔值；如果直接使用<code>stop()</code>方法，会立即停止当前正在进行的动画。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#stop"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"#panel"</span>).stop(); //停止滑动面板动画</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断元素是否处于动画状态</p>
+<ul>
+<li><p>如果不处于动画状态，则为元素添加新的动画，否则不添加。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!$(element).is(<span class="string">":animated"</span>))&#123; //判断元素是否处于动画状态&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这个方法在animate动画中经常被用到，需要注意。</p>
+</li>
+</ul>
+</li>
+<li>延迟动画<ul>
+<li>在动画执行过程中，如果想对动画进行延迟操作，则使用<code>delay()</code></li>
+</ul>
+</li>
+<li><p>用animate模拟<code>show()</code>、<code>toggle()</code>、<code>hide()</code>:</p>
+<ul>
+<li>show: 表示由透明到不透明</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"button"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"div"</span>).animate(&#123;</span><br><span class="line">        height:<span class="string">'show'</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>toggle: 切换</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"button"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"div"</span>).animate(&#123;</span><br><span class="line">        height:<span class="string">'toggle'</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>hide:表示由显示到隐藏</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"button"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"div"</span>).animate(&#123;</span><br><span class="line">        height:<span class="string">'hide'</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="动画方法总结"><a href="#动画方法总结" class="headerlink" title="动画方法总结"></a>动画方法总结</h5><table>
+<thead>
+<tr>
+<th style="text-align:center">方法名</th>
+<th style="text-align:center">说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">hide()和show()</td>
+<td style="text-align:center">同时修改多个样式属性，即高度、宽度和不透明度</td>
+</tr>
+<tr>
+<td style="text-align:center">fadeIn()和fadeOut()</td>
+<td style="text-align:center">只改变不透明度</td>
+</tr>
+<tr>
+<td style="text-align:center">slideUp()和slideDown()</td>
+<td style="text-align:center">只改变高度</td>
+</tr>
+<tr>
+<td style="text-align:center">fadeTo()</td>
+<td style="text-align:center">只改变不透明度</td>
+</tr>
+<tr>
+<td style="text-align:center">toggle()</td>
+<td style="text-align:center">用来代替show()和hide()方法，所以会同时修改多个属性，即高度、宽度和不透明度</td>
+</tr>
+<tr>
+<td style="text-align:center">slideToggle()</td>
+<td style="text-align:center">用来代替slideUp和slideDown()方法，所以只能改变高度</td>
+</tr>
+<tr>
+<td style="text-align:center">fadeToggle()</td>
+<td style="text-align:center">用来代替fadeIn()和fadeOut方法，只能改变不透明度</td>
+</tr>
+<tr>
+<td style="text-align:center">animate()</td>
+<td style="text-align:center">属于自定义动画，以上各种动画方法都是调用了animate方法。此外，用animate方法还能自定义其他的样式属性，例如：left、marginLeft、scrollTop等</td>
+</tr>
+</tbody>
+</table>
+<h4 id="jQuery事件"><a href="#jQuery事件" class="headerlink" title="jQuery事件"></a>jQuery事件</h4><h5 id="事件对象的属性"><a href="#事件对象的属性" class="headerlink" title="事件对象的属性"></a>事件对象的属性</h5><ul>
+<li><p><code>event.type</code>：描述触发事件的类型</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"p"</span>).<span class="built_in">bind</span>(<span class="string">'click dblclick mouseover mouseout'</span>,<span class="keyword">function</span>(event)&#123;</span><br><span class="line">    $(<span class="string">"div"</span>).html(<span class="string">"Event: "</span> + event.type); //显示触发了哪种类型的事件</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>event.target</code>：获取到触发事件的 DOM 元素</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"p, button, h1, h2"</span>).click(<span class="keyword">function</span>(event)&#123;</span><br><span class="line">    $(<span class="string">"div"</span>).html(<span class="string">"Triggered by a "</span> + event.target.nodeName + <span class="string">" element."</span>); //显示哪个 DOM 元素触发了事件</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>event.preventDefault</code>：阻止元素发生默认的行为（例如，当点击提交按钮时阻止对表单的提交）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"a"</span>).click(<span class="keyword">function</span>(event)&#123;</span><br><span class="line">    event.preventDefault(); //防止链接打开 URL</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>event.stopPropagation()</code>：阻止事件的冒泡</p>
+</li>
+<li><code>keyCode</code>：只针对于keypress事件，获取键盘键数字(按下回车-&gt;13)</li>
+<li><p><code>event.pageX</code> / <code>event.pageY</code>：获取到光标相对于页面的x坐标和y坐标</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(document).mousemove(<span class="keyword">function</span>(e)&#123;</span><br><span class="line">    $(<span class="string">"span"</span>).text(<span class="string">"X: "</span> + e.pageX + <span class="string">", Y: "</span> + e.pageY); //显示鼠标指针的位置</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果没有jQuery，在IE浏览器中用event.x / event.y；在Firefox浏览器中用event.pageX / event.pageY。如果页面上有滚动条还要加上滚动条的宽度和高度</li>
+</ul>
+</li>
+<li><code>event.clientX</code>：光标对于<strong>浏览器窗口</strong>的水平坐标</li>
+<li><code>event.clientY</code>：光标对于<strong>浏览器窗口</strong>的垂直坐标</li>
+<li><code>event.screenX</code>：光标对于<strong>电脑屏幕</strong>的水平坐标</li>
+<li><code>event.screenY</code>：光标对于<strong>电脑屏幕</strong>的水平坐标</li>
+<li><code>event.which</code>：which 属性指示按了键盘/鼠标的哪个键<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"input"</span>).keydown(<span class="keyword">function</span>(event)&#123;</span><br><span class="line">    $(<span class="string">"div"</span>).html(<span class="string">"Key: "</span> + event.which); //显示按了哪个键</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a>事件冒泡</h5><ul>
+<li>什么是冒泡<ul>
+<li>在页面上可以有多个事件，也可以多个元素影响同一个元素。</li>
+<li>从里到外、嵌套关系、相同事件。</li>
+<li>其中的某一父类没有相同事件时,继续向上查找。</li>
+</ul>
+</li>
+<li>停止事件冒泡<ul>
+<li>停止事件冒泡可以阻止事件中其他对象的事件处理函数被执行。</li>
+<li>在jQuery中提供了<code>stopPropagation()</code>方法。</li>
+</ul>
+</li>
+<li>阻止默认行为<ul>
+<li>网页中元素有自己的默认行为，例如：单击超链接后会跳转、单击提交后表单会提交，有时需要阻止元素的默认行为。</li>
+<li>在jQuery中提供了<code>preventDefault()</code>方法来阻止元素的默认行为。</li>
+</ul>
+</li>
+<li>事件捕获<ul>
+<li>事件捕获和冒泡是相反的过程，事件捕获是从最顶端往下开始触发。</li>
+<li>并非所有的浏览器都支持事件捕获，并且这个缺陷无法通过JavaScript来修复。</li>
+<li>jQuery不支持事件捕获，如需要用事件捕获，要用原生的JavaScript。</li>
+</ul>
+</li>
+</ul>
+<h5 id="绑定"><a href="#绑定" class="headerlink" title="绑定"></a>绑定</h5><ul>
+<li><p><code>bind()</code></p>
+<ul>
+<li>为被选元素添加一个或多个事件处理程序，并规定事件发生时运行的函数。</li>
+<li>语法：<code>$(selector).bind(event,data,function)</code></li>
+<li>替代语法：<code>$(selector).bind({event:function, event:function, …});</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"p"</span>).<span class="built_in">bind</span>(<span class="string">'click dblclick mouseover mouseout'</span>,<span class="keyword">function</span>(event)&#123;</span><br><span class="line">    $(<span class="string">"div"</span>).html(<span class="string">"Event: "</span> + event.type); //显示触发了哪种类型的事件</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>one()</code></p>
+<ul>
+<li>为被选元素附加一个或多个事件处理程序，并规定当事件发生时运行的函数。</li>
+<li>当使用 one() 方法时，每个元素只能运行一次事件处理器函数。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"p"</span>).one(<span class="string">"click"</span>,<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(this).animate(&#123;fontSize:<span class="string">"+=6px"</span>&#125;); //当点击 p 元素时，增加该元素的文本大小</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="绑定特定事件类型方法："><a href="#绑定特定事件类型方法：" class="headerlink" title="绑定特定事件类型方法："></a>绑定特定事件类型方法：</h5><table>
+<thead>
+<tr>
+<th style="text-align:center">分类</th>
+<th style="text-align:center">方法名称</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">页面载入</td>
+<td style="text-align:center">ready(fn)</td>
+<td style="text-align:center">当DOM载入就绪可以绑定一个要执行的函数</td>
+</tr>
+<tr>
+<td style="text-align:center">事件绑定</td>
+<td style="text-align:center">bind(type,[data],fn)</td>
+<td style="text-align:center">为每个匹配元素的特定事件绑定一个事件处理函数</td>
+</tr>
+<tr>
+<td style="text-align:center">事件绑定</td>
+<td style="text-align:center">unbind()</td>
+<td style="text-align:center">解除绑定</td>
+</tr>
+<tr>
+<td style="text-align:center">事件绑定</td>
+<td style="text-align:center">on(events,[,selector[,]data],handler)</td>
+<td style="text-align:center">在选择元素上绑定一个或者多个事件处理函数</td>
+</tr>
+<tr>
+<td style="text-align:center">事件绑定</td>
+<td style="text-align:center">off()</td>
+<td style="text-align:center">移除on绑定的事件</td>
+</tr>
+<tr>
+<td style="text-align:center">事件绑定</td>
+<td style="text-align:center">delegate(selector,eventType,handler)</td>
+<td style="text-align:center">为所有选择匹配元素附加一个或多个事件处理函数</td>
+</tr>
+<tr>
+<td style="text-align:center">事件绑定</td>
+<td style="text-align:center">undelegate()</td>
+<td style="text-align:center">移除绑定</td>
+</tr>
+<tr>
+<td style="text-align:center">事件动态</td>
+<td style="text-align:center">live(type,fn)</td>
+<td style="text-align:center">对动态生成的元素进行事件绑定</td>
+</tr>
+<tr>
+<td style="text-align:center">事件动态</td>
+<td style="text-align:center">die(type,fn)</td>
+<td style="text-align:center">移除live()绑定的事件</td>
+</tr>
+<tr>
+<td style="text-align:center">交互事件</td>
+<td style="text-align:center">hover()</td>
+<td style="text-align:center">鼠标移入移出</td>
+</tr>
+<tr>
+<td style="text-align:center">交互事件</td>
+<td style="text-align:center">toggle(fn1,fn2,[fn3],[fn4])</td>
+<td style="text-align:center">每单击后依次调用函数</td>
+</tr>
+<tr>
+<td style="text-align:center">交互事件</td>
+<td style="text-align:center">blur(fn)</td>
+<td style="text-align:center">触发每一个匹配元素的blur事件</td>
+</tr>
+<tr>
+<td style="text-align:center">交互事件</td>
+<td style="text-align:center">change()</td>
+<td style="text-align:center">触发每一个匹配元素的change事件</td>
+</tr>
+<tr>
+<td style="text-align:center">交互事件</td>
+<td style="text-align:center">click()</td>
+<td style="text-align:center">触发每一个匹配元素的click事件</td>
+</tr>
+<tr>
+<td style="text-align:center">交互事件</td>
+<td style="text-align:center">focus()</td>
+<td style="text-align:center">触发每一个匹配元素的focus事件</td>
+</tr>
+<tr>
+<td style="text-align:center">交互事件</td>
+<td style="text-align:center">submit()</td>
+<td style="text-align:center">触发每一个匹配元素的submit事件</td>
+</tr>
+<tr>
+<td style="text-align:center">键盘事件</td>
+<td style="text-align:center">keydown()</td>
+<td style="text-align:center">触发每一个匹配元素的keydown事件</td>
+</tr>
+<tr>
+<td style="text-align:center">键盘事件</td>
+<td style="text-align:center">keypress()</td>
+<td style="text-align:center">触发每一个匹配元素的keypress事件</td>
+</tr>
+<tr>
+<td style="text-align:center">键盘事件</td>
+<td style="text-align:center">keyup()</td>
+<td style="text-align:center">触发每一个匹配元素的keyup事件</td>
+</tr>
+<tr>
+<td style="text-align:center">鼠标事件</td>
+<td style="text-align:center">mousedown(fn)</td>
+<td style="text-align:center">绑定一个处理函数</td>
+</tr>
+<tr>
+<td style="text-align:center">鼠标事件</td>
+<td style="text-align:center">mouseenter(fn)</td>
+<td style="text-align:center">绑定一个处理函数</td>
+</tr>
+<tr>
+<td style="text-align:center">键盘事件</td>
+<td style="text-align:center">mouseleave(fn)</td>
+<td style="text-align:center">绑定一个处理函数</td>
+</tr>
+<tr>
+<td style="text-align:center">键盘事件</td>
+<td style="text-align:center">mouseout(fn)</td>
+<td style="text-align:center">绑定一个处理函数</td>
+</tr>
+<tr>
+<td style="text-align:center">键盘事件</td>
+<td style="text-align:center">mouseover(fn)</td>
+<td style="text-align:center">绑定一个处理函数</td>
+</tr>
+<tr>
+<td style="text-align:center">窗口操作</td>
+<td style="text-align:center">resize(fn)</td>
+<td style="text-align:center">绑定一个处理函数</td>
+</tr>
+<tr>
+<td style="text-align:center">窗口操作</td>
+<td style="text-align:center">scroll(fn)</td>
+<td style="text-align:center">绑定一个处理函数</td>
+</tr>
+</tbody>
+</table>
+
       
     </div>
     
@@ -397,6 +787,14 @@
   </div>
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/jQuery/" rel="tag"><i class="fa fa-tag"></i> jQuery</a>
+          
+        </div>
+      
 
       
       
@@ -406,8 +804,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/24/jquery3/" rel="next" title="jquery3">
-                <i class="fa fa-chevron-left"></i> jquery3
+              <a href="/2018/02/24/jquery3/" rel="next" title="jQuery学习笔记（三）">
+                <i class="fa fa-chevron-left"></i> jQuery学习笔记（三）
               </a>
             
           </div>
@@ -470,8 +868,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -490,7 +897,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -512,7 +919,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -526,7 +933,7 @@
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://chongtianhong.github.io/" target="_blank" title="GitHub">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
                       
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
                   </span>
@@ -551,6 +958,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#jQuery动画及jQuery事件"><span class="nav-number">1.</span> <span class="nav-text">jQuery动画及jQuery事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jQuery动画"><span class="nav-number">1.1.</span> <span class="nav-text">jQuery动画</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#隐藏和显示"><span class="nav-number">1.1.1.</span> <span class="nav-text">隐藏和显示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#显隐切换"><span class="nav-number">1.1.2.</span> <span class="nav-text">显隐切换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#滑动"><span class="nav-number">1.1.3.</span> <span class="nav-text">滑动</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#渐变：通过改变不透明度"><span class="nav-number">1.1.4.</span> <span class="nav-text">渐变：通过改变不透明度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义动画"><span class="nav-number">1.1.5.</span> <span class="nav-text">自定义动画</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动画方法总结"><span class="nav-number">1.1.6.</span> <span class="nav-text">动画方法总结</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jQuery事件"><span class="nav-number">1.2.</span> <span class="nav-text">jQuery事件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#事件对象的属性"><span class="nav-number">1.2.1.</span> <span class="nav-text">事件对象的属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#事件冒泡"><span class="nav-number">1.2.2.</span> <span class="nav-text">事件冒泡</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绑定"><span class="nav-number">1.2.3.</span> <span class="nav-text">绑定</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绑定特定事件类型方法："><span class="nav-number">1.2.4.</span> <span class="nav-text">绑定特定事件类型方法：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
