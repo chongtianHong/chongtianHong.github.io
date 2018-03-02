@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,Hexo,Github,Node.js," />
+  <meta name="keywords" content="开发,Hexo,Node.js,Github," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="Hexo简介 Hexo 是一个简单的、轻量的、基于Node.js的一个静态博客框架。 通过Hexo我们可以快速创建自己的博客，仅需要几条命令就可以完成。  Hexo特性：  Hexo基于Node.js，支持多进程，几百篇文章也可以秒生成。  支持GitHub Flavored Markdown和所有Octopress的插件。  Hexo支持EJS、Swig和Stylus。通过插件支持Haml、Ja">
-<meta name="keywords" content="开发,Hexo,Github,Node.js">
+<meta name="keywords" content="开发,Hexo,Node.js,Github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo博客搭建">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/02/26/hexo/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="Hexo简介 Hexo 是一个简单的、轻量的、基于Node.js的一个静态博客框架。 通过Hexo我们可以快速创建自己的博客，仅需要几条命令就可以完成。  Hexo特性：  Hexo基于Node.js，支持多进程，几百篇文章也可以秒生成。  支持GitHub Flavored Markdown和所有Octopress的插件。  Hexo支持EJS、Swig和Stylus。通过插件支持Haml、Ja">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-26T15:46:18.671Z">
+<meta property="og:updated_time" content="2018-03-02T11:10:08.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo博客搭建">
 <meta name="twitter:description" content="Hexo简介 Hexo 是一个简单的、轻量的、基于Node.js的一个静态博客框架。 通过Hexo我们可以快速创建自己的博客，仅需要几条命令就可以完成。  Hexo特性：  Hexo基于Node.js，支持多进程，几百篇文章也可以秒生成。  支持GitHub Flavored Markdown和所有Octopress的插件。  Hexo支持EJS、Swig和Stylus。通过插件支持Haml、Ja">
@@ -497,7 +497,7 @@
 <li><p>将Hexo与Github page联系起来，设置Git的user name和email（如果是第一次的话）。</p>
 <ul>
 <li><p>在<code>hexo init</code>的文件夹（即blog）里面鼠标右键，点击<code>Git Base Here</code>，输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"chongtianhong"</span>  //github用户名</span><br><span class="line">git config --global user.email <span class="string">"450707109@qq.com"</span>  //github用户名</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"yourname"</span>  //github用户名</span><br><span class="line">git config --global user.email <span class="string">"your_email@example.com"</span>  //github 注册邮箱</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>输入cd ~/.ssh，检查是否有.ssh的文件夹(若存在则直接跳过第6步)。</p>
 </li>
@@ -511,7 +511,7 @@
 <li><p>连续三个回车，SSH key就生成成功了。这时候可打开用户目录（默认存储路径是：<code>C:\Users\Administrator.ssh</code>），里面有一个“.ssh”文件夹，里面有“id_rsa” “id_rsa.pub” 这两个文件。其中“<code>id_rsa</code>”是私钥文件，“<code>id_rsa.pub</code>”是公钥文件。</p>
 </li>
 <li><p>添加密钥到ssh-agent，输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">"<span class="variable">$(ssh-agent -s)</span>"</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>再输入以下命令，添加生成的SSH key到ssh-agent。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
@@ -576,9 +576,9 @@
           
             <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
           
-            <a href="/tags/Github/" rel="tag"><i class="fa fa-tag"></i> Github</a>
-          
             <a href="/tags/Node-js/" rel="tag"><i class="fa fa-tag"></i> Node.js</a>
+          
+            <a href="/tags/Github/" rel="tag"><i class="fa fa-tag"></i> Github</a>
           
         </div>
       
@@ -684,7 +684,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -706,7 +706,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
