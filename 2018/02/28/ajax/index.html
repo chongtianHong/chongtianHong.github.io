@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 前端工程师除了UI重构外，还有一个非常重要的职责就是在正确的区域渲染出服务端的数据。要构建一个大的web应用，不只是普普通通的由静态页面构成。  前后端如何实现交互前端请求数据URL由后台来写 在开发中，URL主要是由后台来写好给前端。  若后台在查询数据，需要借助查询条件才能查询到前端需要的数据时，这时后台会要求前端提供相关的查询参数（即URL请求的参数）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-01T14:36:10.097Z">
+<meta property="og:updated_time" content="2018-03-03T01:18:19.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前后端交互指南">
 <meta name="twitter:description" content="前言 前端工程师除了UI重构外，还有一个非常重要的职责就是在正确的区域渲染出服务端的数据。要构建一个大的web应用，不只是普普通通的由静态页面构成。  前后端如何实现交互前端请求数据URL由后台来写 在开发中，URL主要是由后台来写好给前端。  若后台在查询数据，需要借助查询条件才能查询到前端需要的数据时，这时后台会要求前端提供相关的查询参数（即URL请求的参数）。">
@@ -429,7 +429,7 @@
 <li>完成接口开发后，调一下接口，看一下返回的数据是否符合要求。</li>
 </ul>
 <h4 id="前端请求参数的形式"><a href="#前端请求参数的形式" class="headerlink" title="前端请求参数的形式"></a>前端请求参数的形式</h4><ul>
-<li>前端请求参数的形式：<strong>GET</strong>和<strong>POST</strong>两种方式。。</li>
+<li>前端请求参数的形式：<strong>GET</strong>和<strong>POST</strong>两种方式。</li>
 <li>GET：从指定的服务器中<strong>获取</strong>数据（方便，较不安全）。</li>
 <li>POST：<strong>提交</strong>数据给指定的服务器处理（不方便，比较安全）。</li>
 </ul>
@@ -474,6 +474,10 @@
 <li>通过 AJAX，JavaScript 无需等待服务器的响应，而是：<ul>
 <li>在等待服务器响应时执行其他脚本</li>
 <li>当响应就绪后对响应进行处理</li>
+</ul>
+</li>
+<li>Web的运作原理：一次HTTP请求对应一个页面。<ul>
+<li>如果要让用户留在当前页面中，同时发出新的HTTP请求，就必须用JavaScript发送这个新请求，接收到数据后，再用JavaScript更新页面，这样一来，用户就感觉自己仍然停留在当前页面，但是数据却可以不断地更新。</li>
 </ul>
 </li>
 </ul>
@@ -581,12 +585,12 @@
 <blockquote>服务器端：</blockquote>
 
 <ul>
-<li>Access-Control-Allow-Origin:* 表示允许任何域名跨域访问。</li>
+<li><code>Access-Control-Allow-Origin:*</code> 表示允许任何域名跨域访问。</li>
 <li>如果需要指定某域名才允许跨域访问，只需把<ul>
 <li><code>Access-Control-Allow-Origin:*</code> 改为 <code>Access-Control-Allow-Origin:允许的域名</code>。</li>
 </ul>
 </li>
-<li>某些header请求头<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 指定允许其他域名访问</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Origin:*'</span>);</span><br><span class="line">// 响应类型</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Methods:POST'</span>);</span><br><span class="line">// 响应头设置</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Headers:x-requested-with,content-type'</span>);</span><br><span class="line"></span><br><span class="line">//设置内容类型为json</span><br><span class="line"></span><br><span class="line">header(<span class="string">'content-type:application:json;charset=utf8'</span>);</span><br></pre></td></tr></table></figure>
+<li>某些header请求头：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 指定允许其他域名访问</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Origin:*'</span>);</span><br><span class="line">// 响应类型</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Methods:POST'</span>);</span><br><span class="line">// 响应头设置</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Headers:x-requested-with,content-type'</span>);</span><br><span class="line"></span><br><span class="line">//设置内容类型为json</span><br><span class="line"></span><br><span class="line">header(<span class="string">'content-type:application:json;charset=utf8'</span>);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 
@@ -645,8 +649,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/01/promise/" rel="prev" title="promise">
-                promise <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/01/promise/" rel="prev" title="Promise对象">
+                Promise对象 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -728,7 +732,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -750,7 +754,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
