@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,Web,交互,AJAX," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基本介绍 AJAX = 异步 JavaScript 和 XML。 XMLHttpRequest 是 AJAX 的基础。XMLHttpRequest 用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。 XML 指可扩展标记语言。XML 被设计用来传输和存储数据。 HTML 被设计用来显示数据。">
+<meta name="keywords" content="开发,Web,交互,AJAX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax学习笔记">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/03/06/xml/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="基本介绍 AJAX = 异步 JavaScript 和 XML。 XMLHttpRequest 是 AJAX 的基础。XMLHttpRequest 用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。 XML 指可扩展标记语言。XML 被设计用来传输和存储数据。 HTML 被设计用来显示数据。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-06T13:44:30.116Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ajax学习笔记">
+<meta name="twitter:description" content="基本介绍 AJAX = 异步 JavaScript 和 XML。 XMLHttpRequest 是 AJAX 的基础。XMLHttpRequest 用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。 XML 指可扩展标记语言。XML 被设计用来传输和存储数据。 HTML 被设计用来显示数据。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/03/06/xml/"/>
+
+
+
+
+
+  <title>Ajax学习笔记 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/03/06/xml/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ajax学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T16:24:50+08:00">
+                2018-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h3><ul>
+<li>AJAX = 异步 JavaScript 和 XML。</li>
+<li><strong>XMLHttpRequest</strong> 是 AJAX 的<strong>基础</strong>。XMLHttpRequest 用于在后台与服务器交换数据。这意味着可以在<strong>不重新加载整个网页</strong>的情况下，对网页的<strong>某部分</strong>进行<strong>更新</strong>。</li>
+<li>XML 指<strong>可扩展标记语言</strong>。XML 被设计用来<strong>传输</strong>和<strong>存储</strong>数据。</li>
+<li>HTML 被设计用来<strong>显示</strong>数据。<a id="more"></a>
+</li>
+</ul>
+<h3 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h3><h4 id="XML-与-HTML-的主要差异"><a href="#XML-与-HTML-的主要差异" class="headerlink" title="XML 与 HTML 的主要差异"></a>XML 与 HTML 的主要差异</h4><ul>
+<li>XML 不是 HTML 的替代。</li>
+<li>XML 和 HTML 为<strong>不同的目的</strong>而设计：<ul>
+<li>XML 被设计为传输和存储数据，其焦点是数据的内容。</li>
+<li>HTML 被设计用来显示数据，其焦点是数据的外观。</li>
+</ul>
+</li>
+<li>HTML 旨在<strong>显示信息</strong>，而 XML 旨在<strong>传输信息</strong>。</li>
+</ul>
+<h4 id="XML-是不作为的"><a href="#XML-是不作为的" class="headerlink" title="XML 是不作为的"></a>XML 是不作为的</h4><ul>
+<li>XML 被设计用来结构化、存储以及传输信息。</li>
+<li><p>下面是 John 写给 George 的便签，存储为 XML：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;note&gt;</span><br><span class="line">&lt;to&gt;George&lt;/to&gt;</span><br><span class="line">&lt;from&gt;John&lt;/from&gt;</span><br><span class="line">&lt;heading&gt;Reminder&lt;/heading&gt;</span><br><span class="line">&lt;body&gt;Don<span class="string">'t forget the meeting!&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/note&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面的这条便签具有自我描述性。它拥有标题以及留言，同时包含了发送者和接受者的信息。</p>
+</li>
+<li>但是，这个 XML 文档仍然没有做任何事情。它仅仅是包装在 XML 标签中的纯粹的信息。我们<strong>需要编写软件或者程序，才能传送、接收和显示出这个文档</strong>。</li>
+</ul>
+<h4 id="XML-不是对-HTML-的替代"><a href="#XML-不是对-HTML-的替代" class="headerlink" title="XML 不是对 HTML 的替代"></a>XML 不是对 HTML 的替代</h4><ul>
+<li>XML 是对 HTML 的<strong>补充</strong>。</li>
+<li>XML 不会替代 HTML，理解这一点很重要。在大多数 web 应用程序中，XML 用于<strong>传输数据</strong>，而 HTML 用于<strong>格式化并显示数据</strong>。</li>
+<li>对 XML 最好的描述是：<ul>
+<li>XML 是<strong>独立于软件和硬件</strong>的<strong>信息传输工具</strong>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="XML-语法规则"><a href="#XML-语法规则" class="headerlink" title="XML 语法规则"></a>XML 语法规则</h4><blockquote>所有 XML 元素都须有<strong>关闭标签</strong></blockquote>
+
+<ul>
+<li>在 HTML，经常会看到没有关闭标签的元素.</li>
+<li>而在 XML 中，省略关闭标签是非法的。所有元素都必须有关闭标签：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;This is a paragraph&lt;/p&gt;</span><br><span class="line">&lt;p&gt;This is another paragraph&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>XML 标签<strong>对大小写敏感</strong></blockquote>
+
+<ul>
+<li>XML 标签对大小写敏感。在 XML 中，标签 <code>&lt;Letter&gt;</code> 与标签 <code>&lt;letter&gt;</code> 是不同的。</li>
+<li>必须使用相同的大小写来编写打开标签和关闭标签：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Message&gt;这是错误的。&lt;/message&gt;</span><br><span class="line"></span><br><span class="line">&lt;message&gt;这是正确的。&lt;/message&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>XML 必须正确地嵌套</blockquote>
+
+<ul>
+<li><p>在 HTML 中，常会看到没有正确嵌套的元素:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;b&gt;&lt;i&gt;This text is bold and italic&lt;/b&gt;&lt;/i&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 XML 中，所有元素都必须彼此正确地嵌套：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;b&gt;&lt;i&gt;This text is bold and italic&lt;/i&gt;&lt;/b&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>XML 文档必须有根元素</blockquote>
+
+<ul>
+<li>XML 文档必须有一个元素是所有其他元素的父元素。该元素称为根元素:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;root&gt;</span><br><span class="line">  &lt;child&gt;</span><br><span class="line">    &lt;subchild&gt;.....&lt;/subchild&gt;</span><br><span class="line">  &lt;/child&gt;</span><br><span class="line">&lt;/root&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>XML 的<strong>属性值须加引号</strong></blockquote>
+
+<ul>
+<li>与 HTML 类似，XML 也可拥有属性（名称/值的对）。</li>
+<li>在 XML 中，XML 的属性值须加引号:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;note date=<span class="string">"08/08/2008"</span>&gt;</span><br><span class="line">&lt;to&gt;George&lt;/to&gt;</span><br><span class="line">&lt;from&gt;John&lt;/from&gt;</span><br><span class="line">&lt;/note&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>实体引用</blockquote>
+
+<ul>
+<li>在 XML 中，一些字符拥有特殊的意义。</li>
+<li><p>如果把字符 “&lt;” 放在 XML 元素中，会发生错误，这是因为解析器会把它当作新元素的开始，这样会产生 XML 错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;message&gt;<span class="keyword">if</span> salary &lt; 1000 <span class="keyword">then</span>&lt;/message&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为了避免这个错误，应该用实体引用来代替 “&lt;” 字符。</p>
+</li>
+</ul>
+<blockquote>XML 中的注释</blockquote>
+
+<ul>
+<li>在 XML 中编写注释的语法与 HTML 的语法很相似。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- This is a comment --&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>在 XML 中，<strong>空格会被保留</strong></blockquote>
+
+<ul>
+<li><p>HTML 会把多个连续的空格字符裁减（合并）为一个：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HTML:	Hello           my name is David.</span><br><span class="line">输出:	Hello my name is David.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 XML 中，文档中的空格不会被删节。</p>
+</li>
+</ul>
+<h4 id="XML-元素"><a href="#XML-元素" class="headerlink" title="XML 元素"></a>XML 元素</h4><ul>
+<li>XML 文档包含 XML 元素。</li>
+<li>XML 元素指的是从（且包括）开始标签直到（且包括）结束标签的部分。</li>
+</ul>
+<blockquote>XML 元素是可扩展的</blockquote>
+
+<ul>
+<li>XML 元素是可扩展的，以携带更多的信息。</li>
+<li><p>例如，下面一个XML例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;note&gt;</span><br><span class="line">&lt;to&gt;George&lt;/to&gt;</span><br><span class="line">&lt;from&gt;John&lt;/from&gt;</span><br><span class="line">&lt;body&gt;Don<span class="string">'t forget the meeting!&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/note&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果我们创建了一个应用程序，可将 <code>&lt;to&gt;</code>、<code>&lt;from&gt;</code> 以及 <code>&lt;body&gt;</code> 元素提取出来，并产生以下的输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MESSAGE</span><br><span class="line">To: George</span><br><span class="line">From: John</span><br><span class="line"></span><br><span class="line">Don<span class="string">'t forget the meeting!</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>之后这个 XML 文档作者又向这个文档添加了一些额外的信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;note&gt;</span><br><span class="line">&lt;date&gt;2008-08-08&lt;/date&gt;</span><br><span class="line">&lt;to&gt;George&lt;/to&gt;</span><br><span class="line">&lt;from&gt;John&lt;/from&gt;</span><br><span class="line">&lt;heading&gt;Reminder&lt;/heading&gt;</span><br><span class="line">&lt;body&gt;Don<span class="string">'t forget the meeting!&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/note&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这个应用程序不会中断或崩溃，仍然可以找到 XML 文档中的 <code>&lt;to&gt;</code>、<code>&lt;from&gt;</code> 以及 <code>&lt;body&gt;</code> 元素，并产生同样的输出。</p>
+</li>
+<li>XML 的优势之一，就是可以经常在不中断应用程序的情况进行扩展。</li>
+</ul>
+<h3 id="XML-JavaScript"><a href="#XML-JavaScript" class="headerlink" title="XML JavaScript"></a>XML JavaScript</h3><h4 id="XML-HTTP-Request"><a href="#XML-HTTP-Request" class="headerlink" title="XML HTTP Request"></a>XML HTTP Request</h4><ul>
+<li>XMLHttpRequest 对象用于在后台<strong>与服务器交换数据</strong>。通过XMLHttpRequest 对象，能够实现：<ul>
+<li>在<strong>不重新加载页面的情况下</strong>更新网页</li>
+<li>在<strong>页面已加载后</strong>从服务器请求数据</li>
+<li>在<strong>页面已加载后</strong>从服务器接收数据</li>
+<li>在<strong>后台向服务器发送数据</strong></li>
+</ul>
+</li>
+</ul>
+<h5 id="创建XHR对象"><a href="#创建XHR对象" class="headerlink" title="创建XHR对象"></a>创建XHR对象</h5><blockquote>创建 XMLHttpRequest 对象</blockquote>
+
+<ul>
+<li>所有现代浏览器 (IE7+、Firefox、Chrome、Safari 以及 Opera) 都内建了 XMLHttpRequest 对象。</li>
+<li><p>通过一行简单的 JavaScript 代码，就可以创建 XMLHttpRequest 对象：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp=new XMLHttpRequest();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>老版本的 Internet Explorer （IE5 和 IE6）使用 ActiveX 对象：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp=new ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为了应对所有的现代浏览器，包括 IE5 和 IE6，请检查浏览器是否支持 XMLHttpRequest 对象。如果支持，则创建 XMLHttpRequest 对象。如果不支持，则创建 ActiveXObject ：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var xmlhttp;</span><br><span class="line"><span class="keyword">if</span> (window.XMLHttpRequest)</span><br><span class="line">&#123;</span><br><span class="line">    //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码</span><br><span class="line">    xmlhttp=new XMLHttpRequest();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    // IE6, IE5 浏览器执行代码</span><br><span class="line">    xmlhttp=new ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="向服务器发送请求"><a href="#向服务器发送请求" class="headerlink" title="向服务器发送请求"></a>向服务器发送请求</h5><ul>
+<li>XMLHttpRequest 对象用于和服务器交换数据。</li>
+</ul>
+<blockquote>向服务器发送请求</blockquote>
+
+<ul>
+<li>如需将请求发送到服务器，使用 XMLHttpRequest 对象的 open() 和 send() 方法：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">"GET"</span>,<span class="string">"ajax_info.txt"</span>,<span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:left">描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">open(method,url,async)</td>
+<td style="text-align:left">method:请求的类型(GET 或 POST)<br>URL:文件在服务器上的位置<br>async:是否异步处理请求(true异步或false同步)。</td>
+</tr>
+<tr>
+<td style="text-align:center">send(string)</td>
+<td style="text-align:left">将请求发送到服务器。<br>string：仅用于 POST 请求</td>
+</tr>
+</tbody>
+</table>
+<blockquote>GET 还是 POST？</blockquote>
+
+<ul>
+<li>与 POST 相比，<strong>GET 更简单也更快</strong>，并且在大部分情况下都能用。</li>
+<li>然而，在以下情况中，请使用 <strong>POST 请求</strong>：<ul>
+<li>无法使用缓存文件（<strong>更新</strong>服务器上的文件或数据库）</li>
+<li>向服务器发送大量数据（<strong>POST 没有数据量限制</strong>）</li>
+<li>发送包含未知字符的用户输入时，<strong>POST</strong> 比 GET <strong>更稳定也更可靠</strong></li>
+</ul>
+</li>
+</ul>
+<blockquote>GET 请求</blockquote>
+
+<ul>
+<li><p>一个简单的 GET 请求：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">"GET"</span>,<span class="string">"/try/ajax/demo_get.php"</span>,<span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在上面的例子中，可能得到的是缓存的结果。</p>
+</li>
+<li><p>为了避免这种情况，请向 URL 添加一个唯一的 ID：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">"GET"</span>,<span class="string">"/try/ajax/demo_get.php?t="</span> + Math.random(),<span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果希望通过 GET 方法发送信息，请向 URL 添加信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">"GET"</span>,<span class="string">"/try/ajax/demo_get2.php?fname=Henry&amp;lname=Ford"</span>,<span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>POST 请求</blockquote>
+
+<ul>
+<li><p>一个简单 POST 请求：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">"POST"</span>,<span class="string">"/try/ajax/demo_post.php"</span>,<span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果需要像 HTML 表单那样 POST 数据，请使用 setRequestHeader() 来添加 HTTP 头。然后在 send() 方法中规定我们希望发送的数据：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">"POST"</span>,<span class="string">"/try/ajax/demo_post2.php"</span>,<span class="literal">true</span>);</span><br><span class="line">xmlhttp.setRequestHeader(<span class="string">"Content-type"</span>,<span class="string">"application/x-www-form-urlencoded"</span>);</span><br><span class="line">xmlhttp.send(<span class="string">"fname=Henry&amp;lname=Ford"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:left">描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">setRequestHeader(header,value)</td>
+<td style="text-align:left">向请求添加 HTTP 头。<br>header: 规定头的名称<br>value: 规定头的值</td>
+</tr>
+</tbody>
+</table>
+<blockquote>url - 服务器上的文件</blockquote>
+
+<ul>
+<li><p>open() 方法的 url 参数是服务器上文件的地址：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">"GET"</span>,<span class="string">"ajax_test.html"</span>,<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>该文件可以是任何类型的文件，比如 .txt 和 .xml，或者<strong>服务器脚本文件</strong>，比如 .asp 和 .php （<strong>在传回响应之前，能够在服务器上执行任务</strong>）。</p>
+</li>
+</ul>
+<blockquote>异步 - True 或 False？</blockquote>
+
+<ul>
+<li>AJAX 指的是异步 JavaScript 和 XML（Asynchronous JavaScript and XML）。</li>
+<li><p>XMLHttpRequest 对象如果要<strong>用于 AJAX</strong> 的话，其 <strong>open() 方法的 async 参数</strong>必须<strong>设置为 true</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">"GET"</span>,<span class="string">"ajax_test.html"</span>,<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对于 web 开发人员来说，发送异步请求是一个巨大的进步。很多在服务器执行的任务都相当费时。AJAX 出现之前，这可能会引起应用程序挂起或停止。</p>
+</li>
+<li>通过 AJAX，JavaScript 无需等待服务器的响应，而是：<ul>
+<li>在等待服务器响应时执行其他脚本</li>
+<li>当响应就绪后对响应进行处理(所有同步任务完成后执行异步响应)</li>
+</ul>
+</li>
+</ul>
+<blockquote>Async=true</blockquote>
+
+<ul>
+<li><strong>注意</strong>：需在调用open之前指定onreadystatechange事件绑定的函数才能确保跨浏览器兼容性。</li>
+<li>当使用 async=true 时，必须规定在响应处于 onreadystatechange 事件中的就绪状态时执行的函数：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.onreadystatechange=<span class="keyword">function</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200)</span><br><span class="line">    &#123;</span><br><span class="line">        document.getElementById(<span class="string">"myDiv"</span>).innerHTML=xmlhttp.responseText;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xmlhttp.open(<span class="string">"GET"</span>,<span class="string">"/try/ajax/ajax_info.txt"</span>,<span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>Async = false</blockquote>
+
+<ul>
+<li>如需使用 async=false，请将 open() 方法中的第三个参数改为 false。</li>
+<li><p>通过把该参数设置为 “false”，可以省去额外的 onreadystatechange 代码。如果在请求失败时是否执行其余的代码无关紧要，那么可以使用这个参数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">"GET"</span>,<span class="string">"/try/ajax/ajax_info.txt"</span>,<span class="literal">false</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不推荐使用 async=false，但是对于一些小型的请求，也是可以的。</p>
+</li>
+<li>请记住，JavaScript 会等到服务器响应就绪才继续执行。如果服务器繁忙或缓慢，应用程序会挂起或停止。</li>
+</ul>
+<h5 id="服务器响应"><a href="#服务器响应" class="headerlink" title="服务器响应"></a>服务器响应</h5><ul>
+<li>如需获得来自服务器的响应，请使用 XMLHttpRequest 对象的 <code>responseText</code> 或 <code>responseXML</code> 属性。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:left">描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">responseText</td>
+<td style="text-align:left">获得字符串形式的响应数据(文本节点内容)</td>
+</tr>
+<tr>
+<td style="text-align:center">responseText</td>
+<td style="text-align:left">获得 XML 形式的响应数据</td>
+</tr>
+</tbody>
+</table>
+<blockquote>responseText 属性</blockquote>
+
+<ul>
+<li>如果来自服务器的响应并非 XML，请使用 <code>responseText</code> 属性。</li>
+<li><code>responseText</code> 属性返回字符串形式的响应，因此我们可以这样使用：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(<span class="string">"myDiv"</span>).innerHTML=xmlhttp.responseText;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>responseXML 属性</blockquote>
+
+<ul>
+<li>如果来自服务器的响应是 XML，而且需要作为 XML 对象进行解析，请使用 <code>responseXML</code> 属性：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xmlDoc=xmlhttp.responseXML;</span><br><span class="line">txt=<span class="string">""</span>;</span><br><span class="line">x=xmlDoc.getElementsByTagName(<span class="string">"ARTIST"</span>);</span><br><span class="line"><span class="keyword">for</span> (i=0;i&lt;x.length;i++)</span><br><span class="line">&#123;</span><br><span class="line">    txt=txt + x[i].childNodes[0].nodeValue + <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line">document.getElementById(<span class="string">"myDiv"</span>).innerHTML=txt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="onreadystatechange-事件"><a href="#onreadystatechange-事件" class="headerlink" title="onreadystatechange 事件"></a>onreadystatechange 事件</h5><ul>
+<li>当请求被发送到服务器时，我们需要执行一些基于响应的任务。</li>
+<li>每当 readyState 改变时，就会触发 <code>onreadystatechange</code> 事件。</li>
+<li><code>readyState</code> 属性存有 XMLHttpRequest 的状态信息。</li>
+<li>下面是 XMLHttpRequest 对象的三个重要的属性：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:left">描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">onreadystatechange</td>
+<td style="text-align:left">存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。</td>
+</tr>
+<tr>
+<td style="text-align:center">readyState</td>
+<td style="text-align:left">存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。<br>0: 请求未初始化，未调用open() <br>1: 服务器连接已建立，已调用open，未调用send <br>2: 请求已接收，即服务器已收到请求头信息。 已调用send，尚未收到响应 <br>3: 请求处理中，已收到部分响应数据 <br>4: 请求已完成，已收到全部响应数据，可在客户端使用 </td>
+</tr>
+<tr>
+<td style="text-align:center">status</td>
+<td style="text-align:left">200: “OK”<br>404: 未找到页面</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>在 <code>onreadystatechange</code> 事件中，我们规定当服务器响应已做好被处理的准备时所执行的任务。</li>
+<li><p>当 readyState 等于 4 且状态为 200 时，表示响应已就绪：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.onreadystatechange=<span class="keyword">function</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200)</span><br><span class="line">    &#123;</span><br><span class="line">        document.getElementById(<span class="string">"myDiv"</span>).innerHTML=xmlhttp.responseText;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意： <code>onreadystatechange</code> 事件被触发 5 次（0 - 4），对应着 readyState 的每个变化。</p>
+</li>
+</ul>
+<blockquote>使用回调函数</blockquote>
+
+<ul>
+<li>回调函数是一种以参数形式传递给另一个函数的函数。</li>
+<li>如果网站上存在多个 AJAX 任务，那么我们应该为创建 XMLHttpRequest 对象编写一个标准的函数，并为每个 AJAX 任务调用该函数。</li>
+<li>该函数调用应该包含 URL 以及发生 <code>onreadystatechange</code> 事件时执行的任务（每次调用可能不尽相同）：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var xmlhttp;</span><br><span class="line"><span class="keyword">function</span> loadXMLDoc(url,cfunc)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">if</span> (window.XMLHttpRequest)</span><br><span class="line">  &#123;// IE7+, Firefox, Chrome, Opera, Safari 代码</span><br><span class="line">  xmlhttp=new XMLHttpRequest();</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  &#123;// IE6, IE5 代码</span><br><span class="line">  xmlhttp=new ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">xmlhttp.onreadystatechange=cfunc;</span><br><span class="line">xmlhttp.open(<span class="string">"GET"</span>,url,<span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> myFunction()</span><br><span class="line">&#123;</span><br><span class="line">	loadXMLDoc(<span class="string">"/try/ajax/ajax_info.txt"</span>,<span class="keyword">function</span>()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200)</span><br><span class="line">		&#123;</span><br><span class="line">			document.getElementById(<span class="string">"myDiv"</span>).innerHTML=xmlhttp.responseText;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="XML-DOM"><a href="#XML-DOM" class="headerlink" title="XML DOM"></a>XML DOM</h4><ul>
+<li>DOM （Document Object Model，文档对象模型）定义了<strong>访问</strong>和<strong>操作文档</strong>的标准方法。</li>
+</ul>
+<blockquote>XML DOM</blockquote>
+
+<ul>
+<li>XML DOM (XML Document Object Model) 定义了访问和操作 XML 文档的标准方法。</li>
+<li>DOM 把 XML 文档作为树结构来查看。能够通过 DOM 树来访问所有元素。可以修改或删除它们的内容，并创建新的元素。元素，它们的文本，以及它们的属性，都被认为是节点。</li>
+<li><p>使用 DOM 引用从 <to> 元素中获取文本：</to></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlDoc.getElementsByTagName(<span class="string">"to"</span>)[0].childNodes[0].nodeValue</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>xmlDoc</strong> -由解析器创建的 XML 文档</li>
+<li><strong>getElementsByTagName(“to”)[0]</strong> - 第一个 <code>&lt;to&gt;</code> 元素</li>
+<li><strong>childNodes[0]</strong> - <code>&lt;to&gt;</code> 元素的第一个子元素（文本节点）</li>
+<li><strong>nodeValue</strong> - 节点的值（文本本身）</li>
+</ul>
+</li>
+</ul>
+<blockquote>解析 XML 文件 - 跨浏览器实例</blockquote>
+
+<ul>
+<li><p>下列代码把一个 XML 文档 (“note.xml”) 载入 XML 解析器中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;W3School.com.cn Internal Note&lt;/h1&gt;</span><br><span class="line">&lt;p&gt;&lt;b&gt;To:&lt;/b&gt; &lt;span id=<span class="string">"to"</span>&gt;&lt;/span&gt;&lt;br /&gt;</span><br><span class="line">&lt;b&gt;From:&lt;/b&gt; &lt;span id=<span class="string">"from"</span>&gt;&lt;/span&gt;&lt;br /&gt;</span><br><span class="line">&lt;b&gt;Message:&lt;/b&gt; &lt;span id=<span class="string">"message"</span>&gt;&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">&lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line"><span class="keyword">if</span> (window.XMLHttpRequest)&#123;</span><br><span class="line">    // code <span class="keyword">for</span> IE7+, Firefox, Chrome, Opera, Safari</span><br><span class="line">    xmlhttp=new XMLHttpRequest();</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    // code <span class="keyword">for</span> IE6, IE5</span><br><span class="line">    xmlhttp=new ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br><span class="line">&#125;</span><br><span class="line">xmlhttp.open(<span class="string">"GET"</span>,<span class="string">"note.xml"</span>,<span class="literal">false</span>);</span><br><span class="line">xmlhttp.send();</span><br><span class="line">xmlDoc=xmlhttp.responseXML; //获得 XML 形式的响应数据。</span><br><span class="line"></span><br><span class="line">document.getElementById(<span class="string">"to"</span>).innerHTML=</span><br><span class="line">xmlDoc.getElementsByTagName(<span class="string">"to"</span>)[0].childNodes[0].nodeValue;</span><br><span class="line"></span><br><span class="line">document.getElementById(<span class="string">"from"</span>).innerHTML=</span><br><span class="line">xmlDoc.getElementsByTagName(<span class="string">"from"</span>)[0].childNodes[0].nodeValue;</span><br><span class="line"></span><br><span class="line">document.getElementById(<span class="string">"message"</span>).innerHTML=</span><br><span class="line">xmlDoc.getElementsByTagName(<span class="string">"body"</span>)[0].childNodes[0].nodeValue;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">W3School.com.cn Internal Note</span><br><span class="line"></span><br><span class="line">To: George</span><br><span class="line">From: John</span><br><span class="line">Message: Don<span class="string">'t forget the meeting!</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>解析 XML 字符串 - 跨浏览器实例</blockquote>
+
+<ul>
+<li><p>下面的代码加载并解析一个 XML 字符串：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;W3School.com.cn Internal Note&lt;/h1&gt;</span><br><span class="line">&lt;p&gt;&lt;b&gt;To:&lt;/b&gt; &lt;span id=<span class="string">"to"</span>&gt;&lt;/span&gt;&lt;br /&gt;</span><br><span class="line">&lt;b&gt;From:&lt;/b&gt; &lt;span id=<span class="string">"from"</span>&gt;&lt;/span&gt;&lt;br /&gt;</span><br><span class="line">&lt;b&gt;Message:&lt;/b&gt; &lt;span id=<span class="string">"message"</span>&gt;&lt;/span&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">var txt = <span class="string">"&lt;note&gt;&lt;to&gt;George&lt;/to&gt;&lt;from&gt;John&lt;/from&gt;&lt;heading&gt;Reminder&lt;/heading&gt;&lt;body&gt;Don't forget the meeting!&lt;/body&gt;&lt;/note&gt;"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (window.DOMParser)&#123;</span><br><span class="line">    parser=new DOMParser();</span><br><span class="line">    xmlDoc=parser.parseFromString(txt,<span class="string">"text/xml"</span>); //解析XML字符串</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    // Internet Explorer</span><br><span class="line">    xmlDoc=new ActiveXObject(<span class="string">"Microsoft.XMLDOM"</span>);</span><br><span class="line">    xmlDoc.async=<span class="string">"false"</span>;</span><br><span class="line">    xmlDoc.loadXML(txt);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">document.getElementById(<span class="string">"to"</span>).innerHTML=</span><br><span class="line">xmlDoc.getElementsByTagName(<span class="string">"to"</span>)[0].childNodes[0].nodeValue;</span><br><span class="line"></span><br><span class="line">document.getElementById(<span class="string">"from"</span>).innerHTML=</span><br><span class="line">xmlDoc.getElementsByTagName(<span class="string">"from"</span>)[0].childNodes[0].nodeValue;</span><br><span class="line"></span><br><span class="line">document.getElementById(<span class="string">"message"</span>).innerHTML=</span><br><span class="line">xmlDoc.getElementsByTagName(<span class="string">"body"</span>)[0].childNodes[0].nodeValue;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">W3School.com.cn Internal Note</span><br><span class="line"></span><br><span class="line">To: George</span><br><span class="line">From: John</span><br><span class="line">Message: Don<span class="string">'t forget the meeting!</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="AJAX-XML-实例"><a href="#AJAX-XML-实例" class="headerlink" title="AJAX XML 实例"></a>AJAX XML 实例</h4><ul>
+<li>AJAX 可用来与 XML 文件进行<strong>交互式通信</strong>。</li>
+<li><p>实例解析 - loadXMLDoc() 函数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">loadXMLDoc</span></span>() &#123;</span><br><span class="line">    var xhttp = new XMLHttpRequest();</span><br><span class="line">    xhttp.onreadystatechange = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        <span class="keyword">if</span> (this.readyState == 4 &amp;&amp; this.status == 200) &#123;</span><br><span class="line">            myFunction(this);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    xhttp.open(<span class="string">"GET"</span>, <span class="string">"cd_catalog.xml"</span>, <span class="literal">true</span>);</span><br><span class="line">    xhttp.send();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> myFunction(xml) &#123;</span><br><span class="line">    var i;</span><br><span class="line">    var xmlDoc = xml.responseXML;</span><br><span class="line">    var table=<span class="string">"&lt;tr&gt;&lt;th&gt;Artist&lt;/th&gt;&lt;th&gt;Title&lt;/th&gt;&lt;/tr&gt;"</span>;</span><br><span class="line">    var x = xmlDoc.getElementsByTagName(<span class="string">"CD"</span>);</span><br><span class="line">    <span class="keyword">for</span> (i = 0; i &lt;x.length; i++) &#123;</span><br><span class="line">        table += <span class="string">"&lt;tr&gt;&lt;td&gt;"</span> +</span><br><span class="line">        x[i].getElementsByTagName(<span class="string">"ARTIST"</span>)[0].childNodes[0].nodeValue +</span><br><span class="line">        <span class="string">"&lt;/td&gt;&lt;td&gt;"</span> +</span><br><span class="line">        x[i].getElementsByTagName(<span class="string">"TITLE"</span>)[0].childNodes[0].nodeValue +</span><br><span class="line">        <span class="string">"&lt;/td&gt;&lt;/tr&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    document.getElementById(<span class="string">"demo"</span>).innerHTML = table;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>loadXMLDoc() 函数创建 XMLHttpRequest 对象，添加当服务器响应就绪时执行的函数，并将请求发送到服务器。</p>
+</li>
+</ul>
+<h4 id="XML-CDATA"><a href="#XML-CDATA" class="headerlink" title="XML CDATA"></a>XML CDATA</h4><ul>
+<li>术语 CDATA 指的是不应由 XML 解析器进行解析的文本数据（Unparsed Character Data）。</li>
+<li><p>所有 XML 文档中的文本均会被解析器解析。XML 解析器通常会解析 XML 文档中所有的文本。当某个 XML 元素被解析时，其标签之间的文本也会被解析：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;message&gt;此文本也会被解析&lt;/message&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>非法的 XML 字符必须被替换为实体引用：假如我们在 XML 文档中放置了一个类似 “&lt;” 字符，那么这个文档会产生一个错误，这是因为解析器会把它解释为新元素的开始。</p>
+<ul>
+<li>在 XML 元素中，”&lt;” 和 “&amp;” 是非法的。</li>
+<li>“&lt;” 会产生错误，因为解析器会把该字符解释为新元素的开始。</li>
+<li>“&amp;” 也会产生错误，因为解析器会把该字符解释为字符实体的开始。</li>
+</ul>
+</li>
+<li>某些文本，比如 JavaScript 代码，包含大量 “&lt;” 或 “&amp;” 字符。为了避免错误，可以将脚本代码定义为 CDATA。<br>CDATA 部分中的所有内容都会被解析器忽略。</li>
+<li>只有 CDATA 区段（CDATA section）中的文本会被解析器忽略。</li>
+<li>CDATA 部分由 “<code>&lt;![CDATA[</code>“ 开始，由 “<code>]]&gt;</code>“ 结束。</li>
+</ul>
+<h3 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><ul>
+<li>AJAX = 异步 JavaScript 和 XML。</li>
+<li>AJAX 是一种用于创建快速动态网页的技术。</li>
+<li>通过在后台与服务器进行少量数据交换，AJAX 可以<strong>使网页实现异步更新</strong>。这意味着可以<strong>在不重新加载整个网页的情况下</strong>，可以<strong>与服务器交换数据</strong>并<strong>对网页的某部分进行更新</strong>（最大优点）。</li>
+<li>传统的网页（不使用 AJAX）如果需要更新内容，必须重载整个网页面。</li>
+<li>AJAX 不需要任何浏览器插件，但需要用户允许JavaScript在浏览器上执行。</li>
+<li><strong>XMLHttpRequest</strong> 是 AJAX 的<strong>基础</strong>。<ul>
+<li>XMLHttpRequest 用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</li>
+</ul>
+</li>
+<li>向服务器发送请求<ul>
+<li>使用 XMLHttpRequest 对象的 open() 和 send() 方法。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Ajax三步骤"><a href="#Ajax三步骤" class="headerlink" title="Ajax三步骤"></a>Ajax三步骤</h4><ol>
+<li>运用HTML和CSS实现页面，表达信息；</li>
+<li>运用XMLHttpRequest和web服务器进行数据的<strong>异步交换</strong>；</li>
+<li>运用JavaScript操作DOM，实现动态局部刷新。</li>
+</ol>
+<h4 id="同步和异步"><a href="#同步和异步" class="headerlink" title="同步和异步"></a>同步和异步</h4><ul>
+<li>同步：用户填写所有信息后，提交给服务器，等待服务器的回应（检验数据），是一次性的。信息错误又要重新填写！</li>
+<li>异步：当用户填写完一条信息后，该信息会自动向服务器提交，然后服务器响应客户端，在此过程中，用户依然在填写表格的信息，即向服务器请求多次，节省了用户的时间，提高了用户的体验。</li>
+<li>XMLhttpRequest对象来实现这一功能，也需要javascript来操作DOM实现局部的信息更新。不需要重新加载整个页面。</li>
+</ul>
+<h4 id="http请求"><a href="#http请求" class="headerlink" title="http请求"></a>http请求</h4><ul>
+<li>HTTP是计算机通过网络进行通信的规则，使浏览器请求信息和服务</li>
+<li>HTTP是一种无状态的协议(不建立持久的连接，服务端不保留连接的相关信息,浏览器发出请求和服务器返回响应是一个没有记忆的过程)</li>
+<li>一个完整的【HTTP请求】过程有7个步骤：<ol>
+<li>建立TCP连接;</li>
+<li>Web浏览器向Web服务器发送请求命令;</li>
+<li>Web浏览器发送请求头信息;</li>
+<li>Web服务器应答;</li>
+<li>Web服务器发送应答头信息;</li>
+<li>Web服务器向浏览器发送数据;</li>
+<li>Web服务器关闭TCP连接。</li>
+</ol>
+</li>
+</ul>
+<h4 id="建立异步请求的过程4个步骤"><a href="#建立异步请求的过程4个步骤" class="headerlink" title="建立异步请求的过程4个步骤"></a>建立异步请求的过程4个步骤</h4><ol>
+<li>new一个XHR对象;</li>
+<li>调用open方法;</li>
+<li>send一些数据;</li>
+<li>对过程进行监听，来知道服务器是不是正确地做出了响应，接着可以做一些事情:<ul>
+<li>监听readyState,响应成功可以做一些事情，比如获取服务器响应的内容在页面上做一些呈现。</li>
+</ul>
+</li>
+</ol>
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><ul>
+<li>responseText：获得字符串形式的响应数据。</li>
+<li>responseXML：获得XML形式的响应数据。</li>
+<li>status和statusText：以数字和文本形式返回HTTP代码。</li>
+<li>getAllResponseHeader()：获取所有响应表头。</li>
+<li>getResponseHeader()：获取响应中的某个字段的值。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+          
+            <a href="/tags/交互/" rel="tag"><i class="fa fa-tag"></i> 交互</a>
+          
+            <a href="/tags/AJAX/" rel="tag"><i class="fa fa-tag"></i> AJAX</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/03/session/" rel="next" title="Cookie、Session和WebStorage的区别总结">
+                <i class="fa fa-chevron-left"></i> Cookie、Session和WebStorage的区别总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML"><span class="nav-number">2.</span> <span class="nav-text">XML</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-与-HTML-的主要差异"><span class="nav-number">2.1.</span> <span class="nav-text">XML 与 HTML 的主要差异</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-是不作为的"><span class="nav-number">2.2.</span> <span class="nav-text">XML 是不作为的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-不是对-HTML-的替代"><span class="nav-number">2.3.</span> <span class="nav-text">XML 不是对 HTML 的替代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-语法规则"><span class="nav-number">2.4.</span> <span class="nav-text">XML 语法规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-元素"><span class="nav-number">2.5.</span> <span class="nav-text">XML 元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML-JavaScript"><span class="nav-number">3.</span> <span class="nav-text">XML JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-HTTP-Request"><span class="nav-number">3.1.</span> <span class="nav-text">XML HTTP Request</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建XHR对象"><span class="nav-number">3.1.1.</span> <span class="nav-text">创建XHR对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#向服务器发送请求"><span class="nav-number">3.1.2.</span> <span class="nav-text">向服务器发送请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器响应"><span class="nav-number">3.1.3.</span> <span class="nav-text">服务器响应</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#onreadystatechange-事件"><span class="nav-number">3.1.4.</span> <span class="nav-text">onreadystatechange 事件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-DOM"><span class="nav-number">3.2.</span> <span class="nav-text">XML DOM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AJAX-XML-实例"><span class="nav-number">3.3.</span> <span class="nav-text">AJAX XML 实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-CDATA"><span class="nav-number">3.4.</span> <span class="nav-text">XML CDATA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AJAX"><span class="nav-number">4.</span> <span class="nav-text">AJAX</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">4.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax三步骤"><span class="nav-number">4.2.</span> <span class="nav-text">Ajax三步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步和异步"><span class="nav-number">4.3.</span> <span class="nav-text">同步和异步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求"><span class="nav-number">4.4.</span> <span class="nav-text">http请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立异步请求的过程4个步骤"><span class="nav-number">4.5.</span> <span class="nav-text">建立异步请求的过程4个步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用方法"><span class="nav-number">4.6.</span> <span class="nav-text">常用方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
