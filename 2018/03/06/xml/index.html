@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 AJAX = 异步 JavaScript 和 XML。 XMLHttpRequest 是 AJAX 的基础。XMLHttpRequest 用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。 XML 指可扩展标记语言。XML 被设计用来传输和存储数据。 HTML 被设计用来显示数据。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-06T13:44:30.116Z">
+<meta property="og:updated_time" content="2018-03-07T13:49:29.069Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ajax学习笔记">
 <meta name="twitter:description" content="基本介绍 AJAX = 异步 JavaScript 和 XML。 XMLHttpRequest 是 AJAX 的基础。XMLHttpRequest 用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。 XML 指可扩展标记语言。XML 被设计用来传输和存储数据。 HTML 被设计用来显示数据。">
@@ -672,7 +672,7 @@
 <td style="text-align:left">获得字符串形式的响应数据(文本节点内容)</td>
 </tr>
 <tr>
-<td style="text-align:center">responseText</td>
+<td style="text-align:center">responseXML</td>
 <td style="text-align:left">获得 XML 形式的响应数据</td>
 </tr>
 </tbody>
@@ -811,6 +811,9 @@
 </ul>
 </li>
 </ul>
+<h4 id="Ajax用在哪里"><a href="#Ajax用在哪里" class="headerlink" title="Ajax用在哪里"></a>Ajax用在哪里</h4><ul>
+<li>简单说是<strong>需要连接数据库的地方</strong>，但是连接数据库传输的信息量很少，用不着刷新整个页面，这种类型的适合用ajax，避免了刷新整个页面带来的资源浪费。</li>
+</ul>
 <h4 id="Ajax三步骤"><a href="#Ajax三步骤" class="headerlink" title="Ajax三步骤"></a>Ajax三步骤</h4><ol>
 <li>运用HTML和CSS实现页面，表达信息；</li>
 <li>运用XMLHttpRequest和web服务器进行数据的<strong>异步交换</strong>；</li>
@@ -837,8 +840,8 @@
 </ul>
 <h4 id="建立异步请求的过程4个步骤"><a href="#建立异步请求的过程4个步骤" class="headerlink" title="建立异步请求的过程4个步骤"></a>建立异步请求的过程4个步骤</h4><ol>
 <li>new一个XHR对象;</li>
-<li>调用open方法;</li>
-<li>send一些数据;</li>
+<li>调用open方法，打开与服务器的连接;</li>
+<li>发送请求，send一些数据;</li>
 <li>对过程进行监听，来知道服务器是不是正确地做出了响应，接着可以做一些事情:<ul>
 <li>监听readyState,响应成功可以做一些事情，比如获取服务器响应的内容在页面上做一些呈现。</li>
 </ul>
@@ -897,8 +900,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/03/session/" rel="next" title="Cookie、Session和WebStorage的区别总结">
-                <i class="fa fa-chevron-left"></i> Cookie、Session和WebStorage的区别总结
+              <a href="/2018/03/05/thinkjs2/" rel="next" title="ThinkJS学习笔记(二)">
+                <i class="fa fa-chevron-left"></i> ThinkJS学习笔记(二)
               </a>
             
           </div>
@@ -906,6 +909,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/07/thinkjs3/" rel="prev" title="ThinkJS学习笔记(三)">
+                ThinkJS学习笔记(三) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -986,7 +993,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1057,7 +1064,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML"><span class="nav-number">2.</span> <span class="nav-text">XML</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-与-HTML-的主要差异"><span class="nav-number">2.1.</span> <span class="nav-text">XML 与 HTML 的主要差异</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-是不作为的"><span class="nav-number">2.2.</span> <span class="nav-text">XML 是不作为的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-不是对-HTML-的替代"><span class="nav-number">2.3.</span> <span class="nav-text">XML 不是对 HTML 的替代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-语法规则"><span class="nav-number">2.4.</span> <span class="nav-text">XML 语法规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-元素"><span class="nav-number">2.5.</span> <span class="nav-text">XML 元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML-JavaScript"><span class="nav-number">3.</span> <span class="nav-text">XML JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-HTTP-Request"><span class="nav-number">3.1.</span> <span class="nav-text">XML HTTP Request</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建XHR对象"><span class="nav-number">3.1.1.</span> <span class="nav-text">创建XHR对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#向服务器发送请求"><span class="nav-number">3.1.2.</span> <span class="nav-text">向服务器发送请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器响应"><span class="nav-number">3.1.3.</span> <span class="nav-text">服务器响应</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#onreadystatechange-事件"><span class="nav-number">3.1.4.</span> <span class="nav-text">onreadystatechange 事件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-DOM"><span class="nav-number">3.2.</span> <span class="nav-text">XML DOM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AJAX-XML-实例"><span class="nav-number">3.3.</span> <span class="nav-text">AJAX XML 实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-CDATA"><span class="nav-number">3.4.</span> <span class="nav-text">XML CDATA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AJAX"><span class="nav-number">4.</span> <span class="nav-text">AJAX</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">4.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax三步骤"><span class="nav-number">4.2.</span> <span class="nav-text">Ajax三步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步和异步"><span class="nav-number">4.3.</span> <span class="nav-text">同步和异步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求"><span class="nav-number">4.4.</span> <span class="nav-text">http请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立异步请求的过程4个步骤"><span class="nav-number">4.5.</span> <span class="nav-text">建立异步请求的过程4个步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用方法"><span class="nav-number">4.6.</span> <span class="nav-text">常用方法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML"><span class="nav-number">2.</span> <span class="nav-text">XML</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-与-HTML-的主要差异"><span class="nav-number">2.1.</span> <span class="nav-text">XML 与 HTML 的主要差异</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-是不作为的"><span class="nav-number">2.2.</span> <span class="nav-text">XML 是不作为的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-不是对-HTML-的替代"><span class="nav-number">2.3.</span> <span class="nav-text">XML 不是对 HTML 的替代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-语法规则"><span class="nav-number">2.4.</span> <span class="nav-text">XML 语法规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-元素"><span class="nav-number">2.5.</span> <span class="nav-text">XML 元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XML-JavaScript"><span class="nav-number">3.</span> <span class="nav-text">XML JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-HTTP-Request"><span class="nav-number">3.1.</span> <span class="nav-text">XML HTTP Request</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建XHR对象"><span class="nav-number">3.1.1.</span> <span class="nav-text">创建XHR对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#向服务器发送请求"><span class="nav-number">3.1.2.</span> <span class="nav-text">向服务器发送请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器响应"><span class="nav-number">3.1.3.</span> <span class="nav-text">服务器响应</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#onreadystatechange-事件"><span class="nav-number">3.1.4.</span> <span class="nav-text">onreadystatechange 事件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-DOM"><span class="nav-number">3.2.</span> <span class="nav-text">XML DOM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AJAX-XML-实例"><span class="nav-number">3.3.</span> <span class="nav-text">AJAX XML 实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML-CDATA"><span class="nav-number">3.4.</span> <span class="nav-text">XML CDATA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AJAX"><span class="nav-number">4.</span> <span class="nav-text">AJAX</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">4.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax用在哪里"><span class="nav-number">4.2.</span> <span class="nav-text">Ajax用在哪里</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax三步骤"><span class="nav-number">4.3.</span> <span class="nav-text">Ajax三步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步和异步"><span class="nav-number">4.4.</span> <span class="nav-text">同步和异步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http请求"><span class="nav-number">4.5.</span> <span class="nav-text">http请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立异步请求的过程4个步骤"><span class="nav-number">4.6.</span> <span class="nav-text">建立异步请求的过程4个步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用方法"><span class="nav-number">4.7.</span> <span class="nav-text">常用方法</span></a></li></ol></li></ol></div>
             
 
           </div>
