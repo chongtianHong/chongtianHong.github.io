@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://chongtianhong.github.io/images/csModel.jpg">
 <meta property="og:image" content="https://chongtianhong.github.io/images/request.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/respond.jpg">
-<meta property="og:updated_time" content="2018-03-09T04:12:03.062Z">
+<meta property="og:updated_time" content="2018-03-09T04:28:58.061Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP知识点总结">
 <meta name="twitter:description" content="HTTP简介 超文本传输协议（Hyper Text Transfer Protocol, HTTP）是用于从万维网（WWW:World Wide Web）服务器传输超文本到本地浏览器的应用层传送协议。它被设计用于Web浏览器和Web服务器之间的通信，但它也可以用于其他目的。  HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件, 查询结果等）。一个完整的web文档是由不同">
@@ -523,7 +523,7 @@
 <h3 id="HTTP请求方法"><a href="#HTTP请求方法" class="headerlink" title="HTTP请求方法"></a>HTTP请求方法</h3><ul>
 <li>根据HTTP标准，HTTP请求可以使用多种请求方法。</li>
 <li>HTTP1.0定义了三种请求方法： GET, POST 和 HEAD方法。</li>
-<li>HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方法。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET       //请求指定的页面信息，并返回实体主体。</span><br><span class="line">HEAD      //类似于get请求，只不过返回的响应中没有具体的内容，用于获取报头</span><br><span class="line">POST      //向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的建立和/或已有资源的修改。</span><br><span class="line">PUT       //从客户端向服务器传送的数据取代指定的文档的内容。</span><br><span class="line">DELETE    //请求服务器删除指定的页面。</span><br><span class="line">CONNECT   //HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。</span><br><span class="line">OPTIONS   //允许客户端查看服务器的性能。</span><br><span class="line">TRACE     //回显服务器收到的请求，主要用于测试或诊断。</span><br></pre></td></tr></table></figure>
+<li>HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方法。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET       //请求指定的页面信息，并返回实体主体。</span><br><span class="line">HEAD      //类似于get请求，只不过返回的响应中没有具体的内容，用于获取报头</span><br><span class="line">POST      //向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的建立或已有资源的修改。</span><br><span class="line">PUT       //从客户端向服务器传送的数据取代指定的文档的内容。</span><br><span class="line">DELETE    //请求服务器删除指定的页面。</span><br><span class="line">CONNECT   //HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。</span><br><span class="line">OPTIONS   //允许客户端查看服务器的性能。</span><br><span class="line">TRACE     //回显服务器收到的请求，主要用于测试或诊断。</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="HTTP工作原理"><a href="#HTTP工作原理" class="headerlink" title="HTTP工作原理"></a>HTTP工作原理</h3><ul>
@@ -557,14 +557,14 @@
 <li>客户端浏览器首先解析状态行，查看表明请求是否成功的状态代码。然后解析每一个响应头，响应头告知以下为若干字节的HTML文档和文档的字符集。客户端浏览器读取响应数据HTML，根据HTML的语法对其进行格式化，并在浏览器窗口中显示。</li>
 </ul>
 </li>
-<li>例如：在浏览器地址栏键入URL，按下回车之后会经历以下流程：<br>1、浏览器向 DNS 服务器请求解析该 URL 中的域名所对应的 IP 地址;<br>2、解析出 IP 地址后，根据该 IP 地址和默认端口 80，和服务器建立TCP连接;<br>3、浏览器发出读取文件(URL 中域名后面部分对应的文件)的HTTP 请求，该请求报文作为 TCP 三次握手的第三个报文的数据发送给服务器;<br>4、服务器对浏览器请求作出响应，并把对应的 html 文本发送给浏览器;<br>5、释放 TCP连接;<br>6、浏览器将该 html 文本并显示内容。</li>
+<li>例如：在浏览器地址栏键入URL，按下回车之后会经历以下流程：<br>1、浏览器向 DNS 服务器请求解析该 URL 中的域名所对应的 IP 地址;<br>2、解析出 IP 地址后，根据该 IP 地址和默认端口 80，和服务器建立TCP连接;<br>3、浏览器发出读取文件(URL 中域名后面部分对应的文件)的HTTP 请求，该请求报文作为 TCP 三次握手的第三个报文的数据发送给服务器;<br>4、服务器对浏览器请求作出响应，并把对应的 html 文本发送给浏览器;<br>5、释放 TCP连接;<br>6、浏览器对该 html 文本进行解析，根据文档中的资源信息请求资源，完成资源整合后显示页面内容。</li>
 </ul>
 <h3 id="GET和POST请求的区别"><a href="#GET和POST请求的区别" class="headerlink" title="GET和POST请求的区别"></a>GET和POST请求的区别</h3><ul>
 <li>Http协议定义了很多与服务器交互的方法，最基本的有4种，分别是GET，POST，PUT，DELETE。一个URL地址用于描述一个网络上的资源，而HTTP中的GET，POST，PUT，DELETE就对应着对这个资源的查，改，增，删4个操作。最常见的就是GET和POST了。GET一般用于获取/查询资源信息，而POST一般用于更新资源信息。</li>
 </ul>
 <blockquote>GET请求</blockquote>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET /books/?sex=man&amp;name=Professional HTTP/1.1</span><br><span class="line">Host: www.wrox.com</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.6)</span><br><span class="line">Gecko/20050225 Firefox/1.0.1</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">//最后一行是空行</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET /books/?sex=man&amp;name=Professional HTTP/1.1</span><br><span class="line">Host: www.wrox.com</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.6)</span><br><span class="line">Gecko/20050225 Firefox/1.0.1</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">//请求数据为空，最后一行为空行</span><br></pre></td></tr></table></figure>
 <blockquote>POST请求</blockquote>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: www.wrox.com</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.6)</span><br><span class="line">Gecko/20050225 Firefox/1.0.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 40</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line"></span><br><span class="line">name=Professional%20Ajax&amp;publisher=Wiley</span><br></pre></td></tr></table></figure>
@@ -580,7 +580,7 @@
 </ul>
 </li>
 <li>安全性：<strong>POST的安全性</strong>要比GET的安全性<strong>高</strong>。<ul>
-<li>比如一个登录页面，通过GET提交数据时，用户名和密码将明文出现在URL上，因为(1)登录页面有可能被浏览器缓存；(2)如果可以访问这台机器的其他人查看浏览器的历史纪录，别人就可以拿到账号和密码。除此之外，使用GET提交数据还可能会造成Cross-site request forgery攻击。</li>
+<li>GET方式提交数据，会带来安全问题，比如一个登录页面，通过GET方式提交数据时，用户名和密码将出现在URL上，如果页面可以被缓存或者其他人可以访问这台机器，就可以从历史记录获得该用户的账号和密码。除此之外，使用GET提交数据还可能会造成Cross-site request forgery攻击。</li>
 </ul>
 </li>
 <li>GET方式需要使用Request.QueryString来取得变量的值，而POST方式通过Request.Form来获取变量的值。</li>
