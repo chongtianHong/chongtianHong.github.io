@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,Web," />
+  <meta name="keywords" content="开发,Web,DNS," />
 
 
 
@@ -123,18 +123,20 @@
 
 
 
-<meta name="description" content="基本介绍 浏览器从服务器得到的超文本标记文档的后缀通常分为两大类： 静态页面：htm、html、shtml、xml 动态页面：asp、jsp、php、perl、cgi   静态网页和动态网页有着相同的使命，二者的共同之处在于： 首先，它们的目标都是呈现内容给用户 其次，内容都是用超文本标记语言（HTML）表示的">
-<meta name="keywords" content="开发,Web">
+<meta name="description" content="参考链接：http://www.ruanyifeng.com/blog/2016/06/dns.html DNS的定义 域名系统（Domain Name System）是一种带层级的分布式系统，能进行域名到IP地址转换的目录服务，DNS协议运行在UDP之上，使用端口53。 域名系统的组成： 域名服务器（服务端），提供域名解析服务的软件，一般监听UDP，TCP的53端口。 域名解析器（客户端），访问">
+<meta name="keywords" content="开发,Web,DNS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="静态网页与动态网页的理解">
-<meta property="og:url" content="https://chongtianhong.github.io/2018/02/15/static/index.html">
+<meta property="og:title" content="DNS学习笔记">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/03/09/dns/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="基本介绍 浏览器从服务器得到的超文本标记文档的后缀通常分为两大类： 静态页面：htm、html、shtml、xml 动态页面：asp、jsp、php、perl、cgi   静态网页和动态网页有着相同的使命，二者的共同之处在于： 首先，它们的目标都是呈现内容给用户 其次，内容都是用超文本标记语言（HTML）表示的">
+<meta property="og:description" content="参考链接：http://www.ruanyifeng.com/blog/2016/06/dns.html DNS的定义 域名系统（Domain Name System）是一种带层级的分布式系统，能进行域名到IP地址转换的目录服务，DNS协议运行在UDP之上，使用端口53。 域名系统的组成： 域名服务器（服务端），提供域名解析服务的软件，一般监听UDP，TCP的53端口。 域名解析器（客户端），访问">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-18T13:49:55.948Z">
+<meta property="og:image" content="https://chongtianhong.github.io/images/dns.jpg">
+<meta property="og:updated_time" content="2018-03-09T07:22:04.965Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="静态网页与动态网页的理解">
-<meta name="twitter:description" content="基本介绍 浏览器从服务器得到的超文本标记文档的后缀通常分为两大类： 静态页面：htm、html、shtml、xml 动态页面：asp、jsp、php、perl、cgi   静态网页和动态网页有着相同的使命，二者的共同之处在于： 首先，它们的目标都是呈现内容给用户 其次，内容都是用超文本标记语言（HTML）表示的">
+<meta name="twitter:title" content="DNS学习笔记">
+<meta name="twitter:description" content="参考链接：http://www.ruanyifeng.com/blog/2016/06/dns.html DNS的定义 域名系统（Domain Name System）是一种带层级的分布式系统，能进行域名到IP地址转换的目录服务，DNS协议运行在UDP之上，使用端口53。 域名系统的组成： 域名服务器（服务端），提供域名解析服务的软件，一般监听UDP，TCP的53端口。 域名解析器（客户端），访问">
+<meta name="twitter:image" content="https://chongtianhong.github.io/images/dns.jpg">
 
 
 
@@ -164,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="https://chongtianhong.github.io/2018/02/15/static/"/>
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/03/09/dns/"/>
 
 
 
 
 
-  <title>静态网页与动态网页的理解 | Ice's Blog</title>
+  <title>DNS学习笔记 | Ice's Blog</title>
   
 
 
@@ -309,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/02/15/static/">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/03/09/dns/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaobing Hong">
@@ -326,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">静态网页与动态网页的理解</h1>
+          <h1 class="post-title" itemprop="name headline">DNS学习笔记</h1>
         
 
         <div class="post-meta">
@@ -338,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-15T00:04:29+08:00">
-                2018-02-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-09T00:23:15+08:00">
+                2018-03-09
               </time>
             
 
@@ -398,71 +400,73 @@
       
 
       
-        <h3 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h3><ul>
-<li>浏览器从服务器得到的超文本标记文档的后缀通常分为两大类：<ul>
-<li>静态页面：htm、html、shtml、xml</li>
-<li>动态页面：asp、jsp、php、perl、cgi</li>
+        <p>参考链接：<a href="http://www.ruanyifeng.com/blog/2016/06/dns.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2016/06/dns.html</a></p>
+<h3 id="DNS的定义"><a href="#DNS的定义" class="headerlink" title="DNS的定义"></a>DNS的定义</h3><ul>
+<li>域名系统（Domain Name System）是一种带层级的分布式系统，能进行域名到IP地址转换的目录服务，DNS协议运行在UDP之上，使用端口53。</li>
+<li>域名系统的组成：<ol>
+<li><strong>域名服务器</strong>（服务端），提供域名解析服务的软件，一般监听UDP，TCP的53端口。</li>
+<li><strong>域名解析器</strong>（客户端），访问域名服务器的客户端。负责解析从域名服务器获取的响应，向调用它的应用响应返回IP地址或者别名等信息。<a id="more"></a></li>
+</ol>
+</li>
+<li>域名是由圆点分开一串单词或缩写组成的，每一个域名都对应一个惟一的IP地址，在Internet上域名与IP地址之间是一一对应的，域名虽然便于人们记忆，但<strong>机器之间只能互相认识IP地址</strong>，它们之间的<strong>转换工作称为域名解析</strong>，域名解析<strong>需要由专门的域名解析服务器</strong>来完成，<strong>DNS就是进行域名解析的服务器</strong>。<ul>
+<li>举例来说，如果我们要访问域名<code>math.stackexchange.com</code>，首先要通过DNS查出它的IP地址是<code>151.101.129.69</code>。</li>
 </ul>
 </li>
-<li>静态网页和动态网页有着相同的使命，二者的共同之处在于：<ul>
-<li>首先，它们的目标都是呈现内容给用户</li>
-<li>其次，内容都是用超文本标记语言（HTML）表示的<a id="more"></a></li>
-</ul>
-</li>
-<li>静态网页中的内容是固定写在html文件中的，只需要使用单纯的html语言就可写出一个静态页面。它基本不需要与数据库和后端语言（如java,python,ruby等）的支持；</li>
-<li>动态网页则不同，它的完整页面大体上可以认为是分为两个部分，即<strong>视图模板</strong>和<strong>数据</strong>，<strong>数据</strong>是从后端获得（如从数据库中），然后插入到<strong>视图模板</strong>中。</li>
-</ul>
-<h3 id="静态网页"><a href="#静态网页" class="headerlink" title="静态网页"></a>静态网页</h3><ul>
-<li>静态网页是指存放在服务器文件系统中实实在在的HTML文件。当用户在浏览器中输入页面的URL，然后回车，浏览器就会将对应的html文件下载、渲染并呈现在窗口中。早期的网站通常都是由静态页面制作的。</li>
-<li>通常，使用HTML或XML即可完成静态页面的制作。</li>
-<li>静态网页<strong>一经制成，内容就不会变化</strong>，不管何人何时访问，显示的内容都是一样的。</li>
-<li>如果要修改网页的内容，就必须修改其源代码，然后重新上传到服务器上。</li>
-</ul>
-<h4 id="静态网页的工作原理"><a href="#静态网页的工作原理" class="headerlink" title="静态网页的工作原理"></a>静态网页的工作原理</h4><ul>
-<li>静态网页的工作流程可以分为以下4个步骤：<br>  ① 编写一个静态文件，并在web服务器上发布；<br>  ② 用户在浏览器的地址栏中输入该静态网页的URL并按回车键，浏览器发送访问请求到web服务器；<br>  ③ web服务器找到此静态文件的位置，并将它转换为<strong>HTML流</strong>传到用户的浏览器；<br>  ④ 浏览器收到<strong>HTML流</strong>后，显示此网页的内容。</li>
-<li>在步骤② - ④中，静态网页的内容不会发生任何变化。</li>
-</ul>
-<h3 id="动态网页"><a href="#动态网页" class="headerlink" title="动态网页"></a>动态网页</h3><ul>
-<li>动态网页是指在网页文件中除了HTML标记以外，还包括一些实现特定功能的程序代码，这些程序代码使得浏览器与服务器之间可以进行交互，即<strong>服务端可以根据客户端的不同请求动态产生网页内容</strong>。</li>
-<li>动态网页是相对于静态网页而言的。当浏览器请求服务器的某个页面时，服务器根据当前时间、环境参数、数据库操作等动态的生成HTML页面，然后再发送给浏览器（后面的处理跟静态网页一样）。</li>
-<li>动态网页中的“动态”是指服务器端页面的动态生成，相反，“静态”则指页面是实实在在的、独立的文件。</li>
-<li>动态网页的后缀名通常取决于所用的程序设计语言，一般为.asp、.aspx、.cgi、.psp、.perl、.jsp等。</li>
-<li>动态网页可以<strong>根据</strong> <em>不同的时间</em>、<em>不同的浏览器</em> 显示 <em>不同的信息</em>，比如常见的留言板、论坛、聊天室都是用动态网页实现的。</li>
-<li>动态网页相对复杂，不能直接双击打开。</li>
-</ul>
-<h4 id="动态网页的工作原理"><a href="#动态网页的工作原理" class="headerlink" title="动态网页的工作原理"></a>动态网页的工作原理</h4><ul>
-<li>动态网页的工作流程分为以下4个步骤：<br>  ① 编写动态网页文件，其中包括程序代码，并在web服务器上发布；<br>  ② 用户在浏览器的地址栏中输入该动态网页的URL并按回车键，浏览器发送访问请求到web服务器；<br>  ③ web服务器找到此动态网页的位置，并根据其中的程序代码<strong>动态建立HTML流</strong>传到用户的浏览器；<br>  ④ 浏览器收到<strong>HTML流</strong>后，显示此网页的内容。</li>
-<li>从整个工作流程可以看出，用户浏览动态页面时，需要在服务器上<strong>动态执行</strong>该网页文件，将含有程序代码的<strong>动态网页转化为标准的静态页面</strong>，最后把静态页面发送给用户。</li>
-</ul>
-<h4 id="动态网页的开发技术"><a href="#动态网页的开发技术" class="headerlink" title="动态网页的开发技术"></a>动态网页的开发技术</h4><ul>
-<li>动态网页的生成技术有多中，常见的有：<ul>
-<li>HTML+JavaScript(Node.js)</li>
-<li>HTML+PHP</li>
-<li>HTML+ASP.NET(或ASP)</li>
-<li>HTML+JSP</li>
-<li>HTML+CGI(早期的动态网页技术)</li>
+<li>DNS命名用于Internet等TCP/IP网络中，通过用户友好的名称查找计算机和服务。DNS是因特网的一项核心服务,它作为可以<strong>将域名和IP地址相互映射</strong>的一个<strong>分布式数据库</strong>。</li>
+<li>域名的最终指向是IP地址。简单的说DNS的作用就是，将<strong>域名翻译为IP地址</strong>的过程，就是DNS解析。<ul>
+<li>当用户在应用程序中输入 DNS 名称时，DNS 服务可以将此名称解析为与之相关的其他信息，如 IP 地址。因为，我们在上网时输入的网址，是通过<strong>域名解析系统</strong>解析找到了相对应的<strong>IP地址</strong>，这样才能上网。</li>
 </ul>
 </li>
 </ul>
-<h4 id="动态网页的特征"><a href="#动态网页的特征" class="headerlink" title="动态网页的特征"></a>动态网页的特征</h4><ul>
-<li>动态网页一般以<strong>数据库</strong>技术为基础，可以大大降低网站维护的工作量；</li>
-<li>采用动态网页技术的网站可以实现更多的功能，如用户注册、用户登录、在线调查、用户管理、订单管理等等；</li>
-<li>动态网页实际上并不是独立存在于服务器上的网页文件，只有当用户请求时服务器才返回一个完整的网页；</li>
-<li>动态网页地址中的“?”对<strong>搜索引擎检索</strong>存在一定的问题，搜索引擎一般不可能从一个网站的数据库中访问全部网页，或者出于技术方面的考虑，搜索爬虫不去抓取网址中“?”后面的内容，因此采用动态网页的网站在进行搜索引擎推广时<strong>需要做一定的技术处理</strong>才能适应搜索引擎的要求。</li>
+<h3 id="DNS服务器的分类"><a href="#DNS服务器的分类" class="headerlink" title="DNS服务器的分类"></a>DNS服务器的分类</h3><ul>
+<li>DNS采用分布式设计方案，DNS服务器分为四类：<br>• <strong>根域名</strong>DNS服务器：最上层权威域名服务器，负责对<code>.com</code>,<code>.cn</code>,<code>.org</code> 等顶级域名的向下授权。<br>• <strong>顶级域名</strong>DNS服务器。这些服务器负责<strong>通用顶级域名</strong>，如<code>.com</code>，<code>.org</code>，<code>.net</code>，<code>.edu</code>和<code>.gov</code>以及<strong>国家的顶级域名</strong>，如<code>.uk</code>，<code>.fr</code>，<code>.ca</code>，<code>jp</code>。<br>• <strong>权威</strong>DNS服务器。这些服务器记录了主机名到IP地址的映射关系。<br>• <strong>本地</strong>DNS服务器（local DNS server）。</li>
 </ul>
-<h4 id="动态网页的好处"><a href="#动态网页的好处" class="headerlink" title="动态网页的好处"></a>动态网页的好处</h4><ul>
-<li>维护方便，能实现人们需要的各种需求。</li>
-<li>查询信息方便，能存储大量数据，需要时能立即查询。</li>
+<h3 id="DNS查询方式"><a href="#DNS查询方式" class="headerlink" title="DNS查询方式"></a>DNS查询方式</h3><ul>
+<li>DNS查询有两种方式：<br>• 递归查询：依次向根域名服务器，顶级域名服务器，二级域名服务器，获取DNS的解析条目。<br>• 迭代查询：域名服务器并不直接代替解析器进行依次查询，而是返回一个参考列表，这个列表指出了解析DNS请求的服务器，由解析器向该列表的服务器进行DNS查询。</li>
+<li>从<strong>请求主机到本地DNS服务器的查询</strong>是<strong>递归</strong>的，其余的查询是迭代的。</li>
+<li><strong>迭代查询方式</strong>与递归查询方式相比<strong>响应速度快</strong>。</li>
+<li>DNS广泛的使用了DNS缓存，类似于HTTP缓存服务器。使用本地存储器作为DNS缓存服务器，每当本地服务器从某个DNS服务器接收到一个回答，它能够缓存包含在该回答中的任何信息。</li>
 </ul>
-<h4 id="动态网页的不足"><a href="#动态网页的不足" class="headerlink" title="动态网页的不足"></a>动态网页的不足</h4><ul>
-<li>动态网站用到数据库，所以对数据库的安全和保密性要求较高，要专业技术人员提供维护才能保证网站的安全。</li>
-<li>动态网站不利于搜索引擎收录。</li>
-<li>动态网站制作成本较高。</li>
+<h3 id="DNS查询过程"><a href="#DNS查询过程" class="headerlink" title="DNS查询过程"></a>DNS查询过程</h3><ul>
+<li>虽然只需要返回一个IP地址，但是DNS的查询过程非常复杂，分成多个步骤。</li>
+<li>首先，本机一定要知道DNS服务器的IP地址，否则上不了网。通过DNS服务器，才能知道某个域名的IP地址到底是什么。<br><img src="/images/dns.jpg" width="400" alt="dns" style="border:none"></li>
+<li>DNS服务器的IP地址，有可能是动态的，每次上网时由网关分配，这叫做DHCP机制；也有可能是事先指定的固定地址。</li>
 </ul>
-<h3 id="和谐统一"><a href="#和谐统一" class="headerlink" title="和谐统一"></a>和谐统一</h3><ul>
-<li>静态网页和动态网页各有特点，网站采用动态网页还是静态网页主要取决于网站的功能需求和网站内容的多少，如果网站功能比较简单，内容更新量不是很大，采用纯静态网页的方式会更简单，反之一般要采用动态网页技术来实现。</li>
-<li>静态网页是网站建设的基础，静态网页和动态网页之间也并不矛盾，为了网站适应搜索引擎检索的需要，即使采用动态网站技术，也可以将网页内容转化为静态网页发布。</li>
-<li>动态网站也可以采用静动结合的原则，适合采用动态网页的地方用动态网页，如果必要使用静态网页，则可以考虑用静态网页的方法来实现，在同一个网站上，动态网页内容和静态网页内容同时存在也是很常见的事情。</li>
+<h4 id="域名的层级"><a href="#域名的层级" class="headerlink" title="域名的层级"></a>域名的层级</h4><ul>
+<li><p>域名的层级结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">主机名.次级域名.顶级域名.根域名</span><br><span class="line"><span class="comment"># 即</span></span><br><span class="line">host.sld.tld.root</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例如：<code>www.example.com</code>真正的域名是<code>www.example.com.root</code>，简写为<code>www.example.com.</code>。因为，根域名.root对于所有域名都是一样的，所以<strong>平时是省略的</strong>。</p>
+</li>
+<li>根域名的下一级，叫做”顶级域名”（<code>top-level domain</code>，缩写为TLD），比如<code>.com</code>、<code>.net</code>；</li>
+<li>“顶级域名”的下一级叫做”次级域名”（<code>second-level domain</code>，缩写为SLD），比如<code>www.example.com</code>里面的.example，这一级域名是用户可以注册的；</li>
+<li>“次级域名”的下一级是主机名（host），比如<code>www.example.com</code>里面的<code>www</code>，又称为”三级域名”，这是用户在自己的域里面为服务器分配的名称，是用户可以任意分配的。</li>
+</ul>
+<h4 id="分级查询"><a href="#分级查询" class="headerlink" title="分级查询"></a>分级查询</h4><ul>
+<li>DNS服务器根据域名的层级，进行分级查询，最终查询到域名的IP地址。</li>
+<li>需要明确的是，每一级域名都有自己的<strong>NS（域名服务器）记录</strong>，NS记录<strong>指向该级域名的域名服务器</strong>。这些服务器<strong>知道下一级域名的各种记录</strong>。该记录只能设置为域名，不能设置为IP地址。</li>
+<li>所谓”分级查询”，就是从根域名开始，依次查询每一级域名的NS记录，直到查到最终的IP地址，过程大致如下： </li>
+</ul>
+<ol>
+<li>“根域名服务器”的NS记录和IP地址一般是不会变化的，所以内置在DNS服务器里面。</li>
+<li>从”根域名服务器”查到”顶级域名服务器”的NS记录和A记录（IP地址）。</li>
+<li>从”顶级域名服务器”查到”次级域名服务器”的NS记录和A记录（IP地址）。</li>
+<li>从”次级域名服务器”查出”主机名”的IP地址。</li>
+</ol>
+<h4 id="分级查询的实例"><a href="#分级查询的实例" class="headerlink" title="分级查询的实例"></a>分级查询的实例</h4><ul>
+<li>本次实例以<code>math.stackexchange.com</code>为例。</li>
+</ul>
+<h5 id="第一阶段"><a href="#第一阶段" class="headerlink" title="第一阶段"></a>第一阶段</h5><ul>
+<li>根据内置的根域名服务器IP地址，DNS服务器向所有这些IP地址发出查询请求，询问<code>math.stackexchange.com</code>的顶级域名服务器<code>com.</code>的NS记录。最先回复的根域名服务器将被缓存，以后只向这台服务器发请求。</li>
+<li>得到<code>.com</code>顶级域名的13条NS记录，同时返回的还有每一条记录对应的IP地址。</li>
+</ul>
+<h5 id="第二阶段"><a href="#第二阶段" class="headerlink" title="第二阶段"></a>第二阶段</h5><ul>
+<li>DNS服务器向第一阶段得到的顶级域名服务器发出查询请求，询问<code>math.stackexchange.com</code>的次级域名<code>stackexchange.com</code>的NS记录。</li>
+<li>结果显示<code>stackexchange.com</code>有四条NS记录，同时返回的还有每一条NS记录对应的IP地址。</li>
+</ul>
+<h5 id="第三阶段"><a href="#第三阶段" class="headerlink" title="第三阶段"></a>第三阶段</h5><ul>
+<li>DNS服务器向第二阶段得到的四台NS服务器查询<code>math.stackexchange.com</code>的主机名。</li>
+<li>结果显示，<code>math.stackexchange.com</code>有4条A记录，即<strong>这四个IP地址都可以访问到网站</strong>。并且还能显示，最先返回结果的NS服务器是<code>ns-463.awsdns-57.com</code>，IP地址为<code>205.251.193.207</code>。</li>
 </ul>
 
       
@@ -495,6 +499,8 @@
           
             <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
           
+            <a href="/tags/DNS/" rel="tag"><i class="fa fa-tag"></i> DNS</a>
+          
         </div>
       
 
@@ -506,8 +512,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/14/this/" rel="next" title="JavaScript中的this引用">
-                <i class="fa fa-chevron-left"></i> JavaScript中的this引用
+              <a href="/2018/03/08/es6/" rel="next" title="ES6常用新特性总结">
+                <i class="fa fa-chevron-left"></i> ES6常用新特性总结
               </a>
             
           </div>
@@ -515,10 +521,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/16/seo/" rel="prev" title="前端工程与搜索引擎优化（SEO）">
-                前端工程与搜索引擎优化（SEO） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -670,7 +672,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态网页"><span class="nav-number">2.</span> <span class="nav-text">静态网页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态网页的工作原理"><span class="nav-number">2.1.</span> <span class="nav-text">静态网页的工作原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态网页"><span class="nav-number">3.</span> <span class="nav-text">动态网页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#动态网页的工作原理"><span class="nav-number">3.1.</span> <span class="nav-text">动态网页的工作原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态网页的开发技术"><span class="nav-number">3.2.</span> <span class="nav-text">动态网页的开发技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态网页的特征"><span class="nav-number">3.3.</span> <span class="nav-text">动态网页的特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态网页的好处"><span class="nav-number">3.4.</span> <span class="nav-text">动态网页的好处</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态网页的不足"><span class="nav-number">3.5.</span> <span class="nav-text">动态网页的不足</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#和谐统一"><span class="nav-number">4.</span> <span class="nav-text">和谐统一</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS的定义"><span class="nav-number">1.</span> <span class="nav-text">DNS的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS服务器的分类"><span class="nav-number">2.</span> <span class="nav-text">DNS服务器的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS查询方式"><span class="nav-number">3.</span> <span class="nav-text">DNS查询方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS查询过程"><span class="nav-number">4.</span> <span class="nav-text">DNS查询过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#域名的层级"><span class="nav-number">4.1.</span> <span class="nav-text">域名的层级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分级查询"><span class="nav-number">4.2.</span> <span class="nav-text">分级查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分级查询的实例"><span class="nav-number">4.3.</span> <span class="nav-text">分级查询的实例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一阶段"><span class="nav-number">4.3.1.</span> <span class="nav-text">第一阶段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二阶段"><span class="nav-number">4.3.2.</span> <span class="nav-text">第二阶段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三阶段"><span class="nav-number">4.3.3.</span> <span class="nav-text">第三阶段</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
