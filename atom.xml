@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-03-09T07:22:04.965Z</updated>
+  <updated>2018-07-15T11:48:07.292Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Cookies的封装</title>
+    <link href="https://chongtianhong.github.io/2018/03/10/Cookies/"/>
+    <id>https://chongtianhong.github.io/2018/03/10/Cookies/</id>
+    <published>2018-03-10T11:36:02.000Z</published>
+    <updated>2018-07-15T11:48:07.292Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>Cookie是一小段文本信息，用户请求页面的时候，在浏览器和服务器之间传递。用户每次访问的时候都会记录cookie，cookie里可以包含用户信息，浏览的历史记录等等；</li><li>Cookie是由服务器端生成，但是它是属于客户端的，发送给User-Agent（一般是浏览器），浏览器会将Cookie的key/value保存到某个目录下的文本文件内，下次请求同一网站时就发送该Cookie给服务器（前提是浏览器设置为启用cookie）。<a id="more"></a></li></ul><h4 id="Cookie的组成"><a href="#Cookie的组成" class="headerlink" title="Cookie的组成"></a>Cookie的组成</h4><ul><li><p>基本组成</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">“key=value; expires=date; [path=path; domain=domain; secure]”</span><br><span class="line">  键=值；过期时间； 【可访问路径； 域名； 是否使用安全连接】【可选项】</span><br></pre></td></tr></table></figure></li><li><p>设置Cookie的封装方法</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> setCookies(key,value,expires,path,domain,secure) &#123;</span><br><span class="line">    var cookies=<span class="string">''</span>;</span><br><span class="line">    cookies = encodeURI(key)+<span class="string">'='</span>+encodeURI(value);</span><br><span class="line">    <span class="keyword">if</span>(expires instanceof Date)&#123;</span><br><span class="line">        cookies+=<span class="string">"; expires="</span>+expires;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(path)&#123;</span><br><span class="line">        cookies+=<span class="string">"; path="</span>+path;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(domain)&#123;</span><br><span class="line">        cookies+=<span class="string">"; domain"</span>+domain;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(secure)&#123;</span><br><span class="line">        cookies+=<span class="string">"; secure"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    document.cookie=cookies;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>日期函数</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> setCookieDate(day) &#123;</span><br><span class="line">    <span class="keyword">if</span> (typeof day === <span class="string">"number"</span>)&#123;</span><br><span class="line">    var date = new Date();</span><br><span class="line">    date.setDate(date.getDate()+day);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> date;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>调用实例</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//这个cookie会在当前日期的七天之后过期</span><br><span class="line">//设置的cookie: Kinds : animals</span><br><span class="line">setCookies(<span class="string">'Kinds'</span>,<span class="string">'animals'</span>,setCookieDate(7));</span><br></pre></td></tr></table></figure></li><li><p>删除实例：将当前Cookie的过期日期参数设置为负值就可以删除这个Cookie </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setCookies(‘Kinds’,’animals’,setCookieDate(-1));</span><br></pre></td></tr></table></figure></li><li><p>获取某个值的封装方法（value）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> getCookies(value) &#123;</span><br><span class="line">    var cookie = document.cookie;</span><br><span class="line">    var start = cookie.indexOf(<span class="string">'='</span>,cookie.indexOf(value));</span><br><span class="line">    var end = cookie.indexOf(<span class="string">';'</span>,cookie.indexOf(value));</span><br><span class="line">    <span class="keyword">if</span>(end === -1)&#123;</span><br><span class="line">        <span class="built_in">return</span> decodeURI(cookie.substring(start+1,cookie.length));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">return</span> decodeURI(cookie.substring(start+1,end));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;Cookie是一小段文本信息，用户请求页面的时候，在浏览器和服务器之间传递。用户每次访问的时候都会记录cookie，cookie里可以包含用户信息，浏览的历史记录等等；&lt;/li&gt;
+&lt;li&gt;Cookie是由服务器端生成，但是它是属于客户端的，发送给User-Agent（一般是浏览器），浏览器会将Cookie的key/value保存到某个目录下的文本文件内，下次请求同一网站时就发送该Cookie给服务器（前提是浏览器设置为启用cookie）。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
+    
+      <category term="Cookie" scheme="https://chongtianhong.github.io/tags/Cookie/"/>
+    
+  </entry>
   
   <entry>
     <title>DNS学习笔记</title>
@@ -387,9 +415,9 @@
     
       <category term="Hexo" scheme="https://chongtianhong.github.io/tags/Hexo/"/>
     
-      <category term="Github" scheme="https://chongtianhong.github.io/tags/Github/"/>
-    
       <category term="Node.js" scheme="https://chongtianhong.github.io/tags/Node-js/"/>
+    
+      <category term="Github" scheme="https://chongtianhong.github.io/tags/Github/"/>
     
   </entry>
   
@@ -613,36 +641,6 @@
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Cookie与Session的区别与应用</title>
-    <link href="https://chongtianhong.github.io/2018/02/18/cookie/"/>
-    <id>https://chongtianhong.github.io/2018/02/18/cookie/</id>
-    <published>2018-02-18T05:44:34.000Z</published>
-    <updated>2018-02-18T15:49:40.243Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>浏览器的缓存机制提供了可以<strong>将用户数据存储在客户端上</strong>的方式，可以利用<strong>cookie,session等</strong>与<strong>服务端</strong>进行<strong>数据交互</strong>。</li><li>Cookie和Session都是<strong>用来跟踪浏览器用户身份</strong>的<strong>会话方式</strong>。<a id="more"></a></li></ul><h4 id="Cookie的概念"><a href="#Cookie的概念" class="headerlink" title="Cookie的概念"></a>Cookie的概念</h4><ul><li>Cookie是浏览器（User Agent）访问一些网站后，这些<strong>网站存放在客户端的一组数据</strong>，用于<strong>使网站等跟踪用户</strong>，<strong>实现用户自定义功能</strong>。</li><li>Cookie的<strong>Domain和Path属性</strong>标识了这个Cookie是<strong>哪一个网站发送给浏览器</strong>的。</li><li>Cookie的<strong>Expires属性</strong>标识了Cookie的<strong>有效时间</strong>，当Cookie的<strong>有效时间过了</strong>之后，这些<strong>数据就被自动删除</strong>了。<ul><li>如果<strong>不设置过期时间</strong>，则表示这个<strong>Cookie生命周期为浏览器会话期间</strong>，只要<strong>关闭浏览器窗口，Cookie就消失</strong>了。这种Cookie被称为<strong>会话Cookie</strong>。<strong>会话Cookie</strong>一般不保存在硬盘上而是<strong>保存在内存里</strong>。</li><li>如果<strong>设置了过期时间</strong>，浏览器就会把<strong>Cookie保存到硬盘</strong>上，<strong>关闭后再次打开浏览器</strong>，这些<strong>Cookie依然有效直到超过设定的过期时间</strong>。</li></ul></li><li><strong>存储在硬盘上的Cookie</strong>可以<strong>在不同的浏览器进程间共享</strong>，比如两个IE窗口。</li><li>对于<strong>保存在内存的Cookie</strong>，不同的浏览器有不同的处理方式。</li></ul><h4 id="Session的概念"><a href="#Session的概念" class="headerlink" title="Session的概念"></a>Session的概念</h4><ul><li><strong>Session</strong>是<strong>存放在服务器端</strong>、用来存放用户数据的（类似于HashTable结构）。</li><li>当浏览器<strong>第一次发送请求</strong>时，服务器<strong>自动生成</strong>了一个<strong>HashTable</strong>和一个<strong>Session ID</strong>用来唯一标识这个HashTable，并将其<strong>通过响应发送到浏览器</strong>。</li><li>当浏览器<strong>第二次发送请求</strong>，会<strong>将前一次服务器响应中的Session ID放在请求中</strong>一并<strong>发送到服务器</strong>上，服务器<strong>从请求中提取出Session ID</strong>，并和保存的所有Session ID进行对比，<strong>找到这个用户对应的HashTable</strong>。</li><li>一般情况下，服务器会在一定时间内（默认20分钟）保存这个HashTable，<strong>过了时间限制，就会销毁这个HashTable</strong>。<ul><li>在销毁之前，程序员可以将用户的一些数据以Key和Value的形式暂时存放在这个HashTable中。</li><li>也有使用数据库将这个HashTable序列化后保存起来的，这样的好处是没了时间的限制，坏处是随着时间的增加，这个数据库会急速膨胀，特别是访问量增加的时候。</li><li>一般还是采取前一种方式，以减轻服务器压力。</li></ul></li></ul><h4 id="Cookie和Session的区别"><a href="#Cookie和Session的区别" class="headerlink" title="Cookie和Session的区别"></a>Cookie和Session的区别</h4><ol><li><strong>保持状态</strong>：<ul><li><strong>Cookie</strong>保存在<strong>浏览器端</strong>，服务端可以知道其中的信息。</li><li><strong>Session</strong>保存在<strong>服务器端</strong>，客户端不知道其中的信息。</li></ul></li><li><strong>使用方式</strong>：<ul><li><strong>Cookie机制</strong>：<ul><li>如果不在浏览器中设置过期时间，<strong>Cookie被保存在内存中，生命周期随浏览器的关闭而结束</strong>，这种Cookie简称<strong>会话Cookie</strong>。</li><li>如果在浏览器中设置了Cookie的过期时间，<strong>Cookie被保存在硬盘中，关闭浏览器后，Cookie数据仍然存在，直到过期时间结束才消失</strong>。</li><li>Cookie是<strong>服务器发给客户端的特殊信息</strong>，Cookie是<strong>以文本的方式保存在客户端</strong>，每次请求时都带上它。</li></ul></li><li><strong>Session机制</strong>：<ul><li>当服务器收到请求<strong>需要创建Session对象</strong>时，首先会<strong>检查客户端请求中是否包含sessionid</strong>。<ul><li>如果<strong>有sessionid</strong>，服务器将<strong>根据该id返回对应Session对象</strong>。</li><li>如果客户端请求中<strong>没有sessionid</strong>，服务器会<strong>创建新的Session对象</strong>，并<strong>把sessionid</strong>在本次响应中<strong>返回给客户端</strong>。</li></ul></li><li>通常<strong>使用Cookie方式存储sessionid</strong>到<strong>客户端</strong>，在交互中浏览器按照规则将sessionid发送给服务器。</li><li>如果<strong>用户禁用Cookie</strong>，则要<strong>使用URL重写</strong>，可以通过response.encodeURL(url) 进行实现。API对encodeURL的解释为：<ul><li>当浏览器支持Cookie时，url不做任何处理。</li><li>当浏览器不支持Cookie的时候，将会重写url将SessionID拼接到访问地址后。</li></ul></li></ul></li></ul></li><li><strong>存储内容</strong>：<ul><li><strong>Cookie</strong>只能保存<strong>字符串类型</strong>，以文本的方式。</li><li><strong>Session</strong>中保存的是<strong>对象</strong>（通过与Hashtable类似的数据结构来保存），能支持任何类型的<strong>对象</strong>(Session中可含有多个对象)。</li></ul></li><li><strong>存储的大小</strong>：<ul><li>Cookie：单个Cookie保存的数据不能超过4kb.</li><li>Session大小没有限制。</li></ul></li><li><strong>安全性</strong>：<ul><li>针对Cookie所存在的攻击：Cookie欺骗，Cookie截获。</li><li><strong>Session的安全性大于Cookie</strong>。原因如下：<br>（1）sessionID<strong>存储在Cookie中</strong>，若要攻破Session首先要攻破Cookie；<br>（2）sessionID是要有人登录，或者启动session_start才会有，所以<strong>攻破Cookie也不一定能得到sessionID</strong>；<br>（3）第二次启动session_start后，前一次的sessionID就失效了，Session过期后，sessionID也随之失效。<br>（4）sessionID是<strong>加密</strong>的。<br>（5）综上所述，攻击者必须在<strong>短时间内</strong>攻破<strong>加密的</strong>sessionID，这很难。</li></ul></li><li><strong>路径区分</strong>：<ul><li>Session不能区分路径，同一个用户在访问一个网站期间，所有的Session在任何一个地方都可以访问到。</li><li>Cookie中如果设置了路径参数，那么同一个网站中不同路径下的Cookie互相是访问不到的。</li></ul></li><li><strong>应用场景</strong>：<ul><li><strong>Cookie</strong>：<br>（1）判断用户是否登陆过网站，以便下次登录时能够实现自动登录（或者记住密码）。如果我们删除Cookie，则每次登录必须重新填写登录的相关信息。<br>（2）保存上次登录的时间等信息。<br>（3）保存上次查看的页面。<br>（4）浏览计数。</li><li><strong>Session</strong>：Session用于保存每个用户的专用信息，变量的值保存在服务器端，通过SessionID来区分不同的客户。<br>（1）网上商城中的购物车。<br>（2）保存用户登录信息。<br>（3）将某些数据放入session中，供同一用户的不同页面使用。<br>（4）防止用户非法登录。</li></ul></li><li><strong>缺点</strong>：<ul><li><strong>Cookie</strong>：<br>（1）大小受限。<br>（2）用户可以操作（禁用）Cookie，使功能受限。<br>（3）安全性较低。<br>（4）有些状态不可能保存在客户端。<br>（5）每次访问都要传送Cookie给服务器，浪费带宽。<br>（6）Cookie数据有路径（path）的概念，可以限制Cookie只属于某个路径下。</li><li><strong>Session</strong>：<br>（1）Session保存的东西越多，就越占用服务器内存，对于用户在线人数较多的网站，服务器的内存压力会比较大。<br>（2）依赖于Cookie（sessionID保存在Cookie），如果禁用Cookie，则要使用URL重写，不安全。<br>（3）创建Session变量有很大的随意性，可随时调用，不需要开发者做精确地处理，所以，过度使用Session变量将会导致代码不可读而且不好维护。</li></ul></li></ol><h4 id="Session和Cookie的应用"><a href="#Session和Cookie的应用" class="headerlink" title="Session和Cookie的应用"></a>Session和Cookie的应用</h4><blockquote>利用Cookie实现自动登录</blockquote><ul><li>当用户在某个网站注册后，就会收到一个惟一用户ID的Cookie。</li><li>客户后来重新连接时，这个用户ID会自动返回，服务器对它进行检查，确定它是否为注册用户且选择了自动登录，从而使用户无需给出明确的用户名和密码，就可以访问服务器上的资源。</li></ul><blockquote>实现跨窗口的会话跟踪</blockquote><ul><li>通常session、cookie是<strong>不能跨窗口使用</strong>的，当我们新开了一个浏览器窗口进入相同页面时，系统会赋予我们一个新的sessionid，这样我们就<strong>达不到信息共享的目的</strong>。</li><li><strong>解决方案</strong>：我们可以先把sessionid保存在persistent cookie中，然后在新窗口中读出来，就可以得到上一个窗口SessionID，这样通过session cookie和persistent cookie的结合就能实现跨窗口的会话跟踪（session tracking）。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;浏览器的缓存机制提供了可以&lt;strong&gt;将用户数据存储在客户端上&lt;/strong&gt;的方式，可以利用&lt;strong&gt;cookie,session等&lt;/strong&gt;与&lt;strong&gt;服务端&lt;/strong&gt;进行&lt;strong&gt;数据交互&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;Cookie和Session都是&lt;strong&gt;用来跟踪浏览器用户身份&lt;/strong&gt;的&lt;strong&gt;会话方式&lt;/strong&gt;。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
-    
-      <category term="Cookie" scheme="https://chongtianhong.github.io/tags/Cookie/"/>
-    
-      <category term="Session" scheme="https://chongtianhong.github.io/tags/Session/"/>
     
   </entry>
   
