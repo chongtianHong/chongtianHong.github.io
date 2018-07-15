@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="摘自阮一峰ES6在 ES6 之前，社区制定了一些模块加载方案，最主要的有 CommonJS 和 AMD 两种。前者用于服务器，后者用于浏览器。ES6 在语言标准的层面上，实现了模块功能，而且实现得相当简单，完全可以取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的模块解决方案。ES6 模块的设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。Commo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-15T12:51:43.452Z">
+<meta property="og:updated_time" content="2018-07-15T13:27:10.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CommonJS 与 ES6 Modules的区别">
 <meta name="twitter:description" content="摘自阮一峰ES6在 ES6 之前，社区制定了一些模块加载方案，最主要的有 CommonJS 和 AMD 两种。前者用于服务器，后者用于浏览器。ES6 在语言标准的层面上，实现了模块功能，而且实现得相当简单，完全可以取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的模块解决方案。ES6 模块的设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。Commo">
@@ -420,6 +420,13 @@
 <li>将来浏览器的新 API 就能用模块格式提供，不再必须做成全局变量或者navigator对象的属性。<br>不再需要对象作为命名空间（比如Math对象），未来这些功能可以通过模块提供。</li>
 </ul>
 </li>
+<li><p>ES6 模块的特点：</p>
+<ul>
+<li>静态化，必须在顶部，不能使用条件语句，自动采用严格模式</li>
+<li>treeshaking和编译优化，以及webpack3中的作用域提升</li>
+<li>外部可以拿到实时值，而非缓存值(是引用而不是copy)</li>
+</ul>
+</li>
 <li><p>简单来说</p>
 <ul>
 <li>CommonJS是在内存中的对象，运行时才加载。</li>
@@ -443,18 +450,18 @@
 <p><blockquote>m3.mjs</blockquote></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> <span class="built_in">let</span> a3 = 3;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>1.基本使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//index.mjs</span><br><span class="line"></span><br><span class="line">import &#123;a1&#125; from <span class="string">'./m1'</span>;</span><br><span class="line">import &#123;a2&#125; from <span class="string">'./m2'</span>;</span><br><span class="line">import &#123;a3&#125; from <span class="string">'./m3'</span>;</span><br><span class="line"></span><br><span class="line">console.log(a1, a2, a3);</span><br></pre></td></tr></table></figure>
+<li><p>1、基本使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//index.mjs</span><br><span class="line"></span><br><span class="line">import &#123; a1 &#125; from <span class="string">'./m1'</span>;</span><br><span class="line">import &#123; a2 &#125; from <span class="string">'./m2'</span>;</span><br><span class="line">import &#123; a3 &#125; from <span class="string">'./m3'</span>;</span><br><span class="line"></span><br><span class="line">console.log(a1, a2, a3);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>结果:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(node:18435) ExperimentalWarning: The ESM module loader is experimental.</span><br><span class="line">1 2 3</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>2.验证es6 module的静态特性和接口特性:</p>
+<li><p>2、验证ES6 module的静态特性和接口特性：</p>
 <ul>
 <li>将m1改成</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> <span class="built_in">let</span> a1= 1;</span><br><span class="line">setTimeout(()=&gt;a1=2,500);</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//index.mjd</span><br><span class="line">import &#123; a1 &#125; from <span class="string">'./m1'</span>;</span><br><span class="line">import &#123; a2 &#125; from <span class="string">'./m2'</span>;</span><br><span class="line">import &#123; a3 &#125; from <span class="string">'./m3'</span>;</span><br><span class="line"></span><br><span class="line">console.log(a1, a2, a3);</span><br><span class="line"></span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">    console.log(a1, a2, a3);</span><br><span class="line">&#125;,1000)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//index.mjs</span><br><span class="line">import &#123; a1 &#125; from <span class="string">'./m1'</span>;</span><br><span class="line">import &#123; a2 &#125; from <span class="string">'./m2'</span>;</span><br><span class="line">import &#123; a3 &#125; from <span class="string">'./m3'</span>;</span><br><span class="line"></span><br><span class="line">console.log(a1, a2, a3);</span><br><span class="line"></span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">    console.log(a1, a2, a3);</span><br><span class="line">&#125;,1000)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>结果：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(node:18994) ExperimentalWarning: The ESM module loader is experimental.</span><br><span class="line">1 2 3</span><br><span class="line">2 2 3</span><br></pre></td></tr></table></figure>
@@ -462,11 +469,17 @@
 <li><p>体现了接口性。</p>
 </li>
 </ul>
-<h4 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h4><ul>
-<li>import的接口是read-only。</li>
-<li>可以对commonJS对重新赋值，但是对ES6 Module赋值会编译报错。</li>
-<li>CommonJS和ES6 Module都可以对引入的对象进行赋值。</li>
-<li>CommonJS是对值的拷贝，ES6是对值的引用。</li>
+<h4 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h4><h5 id="ES6-Module和CommonJS模块的区别："><a href="#ES6-Module和CommonJS模块的区别：" class="headerlink" title="ES6 Module和CommonJS模块的区别："></a>ES6 Module和CommonJS模块的区别：</h5><ul>
+<li>CommonJS是对模块的浅拷贝，ES6 Module是对模块的引用。<ul>
+<li>即ES6 Module只存只读，不能改变其值，具体点就是指针指向不能变，类似const</li>
+</ul>
+</li>
+<li>import的接口是read-only（只读状态），不能修改其变量值。<ul>
+<li>即不能修改其变量的指针指向，但可以改变变量内部指针指向。</li>
+</ul>
+</li>
+<li>可以对commonJS对重新赋值（改变指针指向），但是对ES6 Module赋值会编译报错。<h5 id="ES6-Module和CommonJS模块的共同点："><a href="#ES6-Module和CommonJS模块的共同点：" class="headerlink" title="ES6 Module和CommonJS模块的共同点："></a>ES6 Module和CommonJS模块的共同点：</h5></li>
+<li>CommonJS和ES6 Module都可以对引入的对象进行赋值，即对对象内部属性的值进行改变。</li>
 </ul>
 
       
@@ -674,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6模块化"><span class="nav-number">1.</span> <span class="nav-text">ES6模块化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6-模块与-CommonJS-模块的差异"><span class="nav-number">2.</span> <span class="nav-text">ES6 模块与 CommonJS 模块的差异</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码举例"><span class="nav-number">3.</span> <span class="nav-text">代码举例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重点"><span class="nav-number">4.</span> <span class="nav-text">重点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6模块化"><span class="nav-number">1.</span> <span class="nav-text">ES6模块化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6-模块与-CommonJS-模块的差异"><span class="nav-number">2.</span> <span class="nav-text">ES6 模块与 CommonJS 模块的差异</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码举例"><span class="nav-number">3.</span> <span class="nav-text">代码举例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重点"><span class="nav-number">4.</span> <span class="nav-text">重点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ES6-Module和CommonJS模块的区别："><span class="nav-number">4.1.</span> <span class="nav-text">ES6 Module和CommonJS模块的区别：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ES6-Module和CommonJS模块的共同点："><span class="nav-number">4.2.</span> <span class="nav-text">ES6 Module和CommonJS模块的共同点：</span></a></li></ol></li></ol></div>
             
 
           </div>
