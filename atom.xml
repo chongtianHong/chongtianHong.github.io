@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-07-15T15:48:14.121Z</updated>
+  <updated>2018-07-16T14:38:09.488Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,20 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue</title>
+    <link href="https://chongtianhong.github.io/2018/07/16/vue/"/>
+    <id>https://chongtianhong.github.io/2018/07/16/vue/</id>
+    <published>2018-07-16T14:38:09.000Z</published>
+    <updated>2018-07-16T14:38:09.488Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>JavaScript 中的循环数组遍历</title>
@@ -68,9 +82,9 @@
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
-      <category term="CommonJS" scheme="https://chongtianhong.github.io/tags/CommonJS/"/>
-    
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
+    
+      <category term="CommonJS" scheme="https://chongtianhong.github.io/tags/CommonJS/"/>
     
   </entry>
   
@@ -500,9 +514,9 @@
     
       <category term="Hexo" scheme="https://chongtianhong.github.io/tags/Hexo/"/>
     
-      <category term="Github" scheme="https://chongtianhong.github.io/tags/Github/"/>
-    
       <category term="Node.js" scheme="https://chongtianhong.github.io/tags/Node-js/"/>
+    
+      <category term="Github" scheme="https://chongtianhong.github.io/tags/Github/"/>
     
   </entry>
   
@@ -601,31 +615,6 @@
 &lt;ul&gt;
 &lt;li&gt;this指代&lt;strong&gt;当前操作的DOM对象&lt;/strong&gt;。&lt;/li&gt;
 &lt;li&gt;在jQuery中，this可以用于单个对象，也可以用于多个对象。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="jQuery" scheme="https://chongtianhong.github.io/tags/jQuery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>jQuery学习笔记（一）</title>
-    <link href="https://chongtianhong.github.io/2018/02/22/jquery/"/>
-    <id>https://chongtianhong.github.io/2018/02/22/jquery/</id>
-    <published>2018-02-21T16:05:22.000Z</published>
-    <updated>2018-02-22T16:14:53.923Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="jQuery概述"><a href="#jQuery概述" class="headerlink" title="jQuery概述"></a>jQuery概述</h3><h4 id="jQuery概念"><a href="#jQuery概念" class="headerlink" title="jQuery概念"></a>jQuery概念</h4><ul><li><p>JavaScript：基于JS语言的API和语法组织逻辑，通过内置window和document对象，来<strong>操作内存中的DOM元素</strong>，同时能用来<strong>动态操作样式css</strong>、<strong>数据访问</strong>、<strong>控制响应事件</strong>等。</p><a id="more"></a><ul><li>不使用JQuery（使用JavaScript）时获取DOM文本的操作如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(<span class="string">'info'</span>).value = <span class="string">'Hello World!'</span>;</span><br></pre></td></tr></table></figure></li></ul></li><li><p>JQuery是基于JavaScript的，与JS作用一样，在<strong>使代码更加简练</strong>的同时<strong>提高了代码的效率</strong>。</p><ul><li>使用JQuery时获取DOM文本操作如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#info'</span>).val(<span class="string">'Hello World!'</span>);</span><br></pre></td></tr></table></figure></li></ul></li><li><p>可以看出，使用JQuery的优势之一是可以使代码更加简练，使开发人员更加专注于逻辑本身。</p></li></ul><h4 id="jQuery是什么"><a href="#jQuery是什么" class="headerlink" title="jQuery是什么"></a>jQuery是什么</h4><ul><li><strong>jQuery</strong>是一个快速简洁的JavaScript代码仓库，称为<strong>JavaScript框架</strong>。</li><li>jQuery可以<strong>简化查询DOM对象</strong>、<strong>处理事件</strong>、<strong>制作动画</strong>、<strong>处理Ajax交互过程</strong>。</li><li>jQuery的优势：<ul><li>轻量级、体积小，使用灵巧(只需引入一个js文件)</li><li>强大的选择器</li><li>出色的DOM操作的封装</li><li>出色的浏览器兼容性</li><li>可靠的事件处理机制</li><li>完善的Ajax</li><li>链式操作、隐式迭代</li><li>方便的选择页面元素(模仿CSS选择器更精确、灵活)</li><li>动态更改页面样式/页面内容(操作DOM，动态添加、移除样式)</li><li>控制响应事件(动态添加响应事件)</li><li>提供基本网页特效(提供已封装的网页特效方法)</li><li>快速实现通信(ajax)</li><li>易扩展、插件丰富</li></ul></li></ul><h4 id="jQuery包的引入"><a href="#jQuery包的引入" class="headerlink" title="jQuery包的引入"></a>jQuery包的引入</h4><ul><li>jQuery可以使用 HTML 的<code>&lt;script&gt;</code>标签引入。<ul><li>引入本地的JQuery</li><li>引入Google在线提供的库文件（稳定可靠高速）</li><li>使用Google提供的API导入</li></ul></li></ul><h4 id="讲解-function"><a href="#讲解-function" class="headerlink" title="讲解$(function(){})"></a>讲解$(function(){})</h4><ul><li>在JQuery库中，<strong>$是JQuery的别名</strong>，$()等效于就jQuery()。</li><li>$(function(){});相当于页面初始化函数，当页面加载完毕，会执行jQuery()。</li><li>希望在做所有事情之前，<strong>jQuery操作DOM文档</strong>。<strong>必须确保在DOM载入完毕后开始执行</strong>，应该用ready事件做处理HTML文档的开始。</li><li><code>$(document).ready(function(){});</code><ul><li>类似于js的window.onload事件函数，但是ready事件要先于onload事件执行</li><li>window.onload = function(){};</li></ul></li><li>jQuery的ready事件不等于JS的onload事件：<ul><li>执行时机不同：load需要等外部图片和视频等全部加载才执行。ready是DOM绘制完毕后执行，先与外部文件。</li><li>用法不同：load只可写一次，ready可以多次。</li></ul></li></ul><h4 id="window-onload与-document-ready-对比"><a href="#window-onload与-document-ready-对比" class="headerlink" title="window.onload与$(document).ready()对比"></a>window.onload与$(document).ready()对比</h4><table><thead><tr><th style="text-align:center"></th><th style="text-align:center">window.onload</th><th style="text-align:center">$(document).ready()</th></tr></thead><tbody><tr><td style="text-align:center">执行时机</td><td style="text-align:center">必须等网页中所有内容加载完后(包括图片)才执行</td><td style="text-align:center">网页中的DOM结构绘制完后就执行,可能DOM元素相关的东西并没有加载完</td></tr><tr><td style="text-align:center">编写个数</td><td style="text-align:center">不能同时执行多个</td><td style="text-align:center">能同时执行多个</td></tr><tr><td style="text-align:center">简化写法</td><td style="text-align:center">无</td><td style="text-align:center">$(function(){ });</td></tr></tbody></table><h4 id="jQuery有哪些功能-API"><a href="#jQuery有哪些功能-API" class="headerlink" title="jQuery有哪些功能(API)"></a>jQuery有哪些功能(API)</h4><ul><li>选择器</li><li>过滤器</li><li>事件</li><li>效果</li><li>ajax</li></ul><h4 id="jQuery基本选择器"><a href="#jQuery基本选择器" class="headerlink" title="jQuery基本选择器"></a>jQuery基本选择器</h4><ul><li>jQuery基本选择器可分为<strong>ID选择器</strong>，<strong>标签选择器</strong>，<strong>类选择器</strong>，<strong>通配选择器</strong>和<strong>组选择器</strong>5种。<ul><li><code>ID选择器</code>：document.getElementById(id)与$(“#id”)对比<br>id唯一，返回单个元素。</li><li><code>标签选择器</code>：document.getElementsByTagName(tagName)与$(“tagname”)对比<br>多个标签，返回数组。</li><li><code>类选择器</code>:$(“.className”)<br>多个classname（改变背景图片）。</li><li><code>通配选择器</code>：document.getElementsByTagName(“*“)与$(“*“)对比<br>指范围内的所有标签元素。</li><li><code>组选择器</code>：$(“seletor1,seletor2,seletor3”)<br>无数量限制，用逗号分割。</li></ul></li></ul><h3 id="初步了解jQuery"><a href="#初步了解jQuery" class="headerlink" title="初步了解jQuery"></a>初步了解jQuery</h3><h4 id="jQuery的优势"><a href="#jQuery的优势" class="headerlink" title="jQuery的优势"></a>jQuery的优势</h4><ul><li>使用jQuery可以<strong>方便DOM的选取和操作</strong>、<strong>响应用户操作</strong>、<strong>简化AJax操作</strong>。<ul><li>方便的选取DOM元素，操作DOM元素。（HTML元素选取、HTML元素操作、获取DOM元素、动态修改页面样式、动态改变DOM内容）</li><li>响应用户操作。（HTML事件函数、JavaScript特效和动画、响应用户的交互操作、为页面添加动态效果）</li><li>简化AJAX操作。（方便地为网站提供AJAX交互、统一Ajax操作）</li></ul></li></ul><h4 id="jQuery与DOM之间的关系"><a href="#jQuery与DOM之间的关系" class="headerlink" title="jQuery与DOM之间的关系"></a>jQuery与DOM之间的关系</h4><ul><li><p><strong>jQuery对象</strong>就是用jQuery包装DOM之后产生的对象。jQuery对象是<strong>jQuery独有</strong>的，可以<strong>使用jQuery的各种方法</strong>。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#test"</span>).html();</span><br><span class="line">//获取ID为<span class="built_in">test</span>的元素内的html代码。</span><br><span class="line">//其中html()是jQuery里的方法 。</span><br></pre></td></tr></table></figure></li><li><p>以上代码的作用等同于用DOM实现代码：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(<span class="string">"id"</span>).innerHTML;</span><br></pre></td></tr></table></figure></li><li><p>虽然<strong>jQuery对象是包装DOM对象后产生的</strong>，但是<strong>jQuery无法使用DOM对象的任何方法</strong>，同理<strong>DOM对象也不能使用jQuery里的方法</strong>。</p></li><li>用#id作为选择器获取得的是<strong>jQuery对象</strong>，document.getElementById(“id”)得到的<strong>DOM对象</strong>，这两者并<strong>不等价</strong>。</li></ul><h4 id="jQuery与DOM之间的相互转换"><a href="#jQuery与DOM之间的相互转换" class="headerlink" title="jQuery与DOM之间的相互转换"></a>jQuery与DOM之间的相互转换</h4><ul><li><p>DOM对象才能使用DOM中的方法，<strong>jQuery对象</strong>是<strong>不可以用DOM中的方法</strong>。</p><blockquote>JQuery对象 -&gt; DOM对象</blockquote></li><li><p>将一个JQuery对象转换成DOM对象有<strong>两种转换方法</strong>：[index]和.get(index);</p><ol><li><p>jQuery对象是一个数据对象，可以通过[index]的方法，来得到相应的DOM对象。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var v1 = $(<span class="string">"#test"</span>) ; //jQuery对象</span><br><span class="line">var v2 = <span class="variable">$v1</span>[0]; //DOM对象</span><br></pre></td></tr></table></figure></li><li><p>通过.get(index)方法，得到相应的DOM对象。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var v1 = $(<span class="string">"#test"</span>); //jQuery对象</span><br><span class="line">var v2 = v1.get(0); //DOM对象</span><br></pre></td></tr></table></figure></li></ol></li></ul><blockquote>DOM对象 -&gt; JQuery对象</blockquote><ul><li>对于已经是一个DOM对象，只需要用$()把DOM对象包装起来，就可以获得一个jQuery对象。<ul><li>如$(document.getElementById(“test”))。</li></ul></li><li>DOM对象转换为JQuery对象之后就可以使用JQuery的方法了。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var v1=document.getElementById(<span class="string">"test"</span>); //DOM对象</span><br><span class="line">var v2=$(v1); //jQuery对象</span><br></pre></td></tr></table></figure></li></ul><h4 id="jQuery中“-”的作用"><a href="#jQuery中“-”的作用" class="headerlink" title="jQuery中“$”的作用"></a>jQuery中“$”的作用</h4><ul><li><p>$其实就是jQuery的别称。是jQuery提供的一个函数，用来将DOM元素、选择器包装成jQuery对象。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var v1 = $(<span class="string">'#id'</span>);</span><br><span class="line">var v2 = jQuery(<span class="string">'#id'</span>);//两者是等同的</span><br></pre></td></tr></table></figure></li><li><p>“$”其实是一个符号，$()代替了jQuery(),也可以使用其他的字符来代替”$”。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var jq = jQuery.noConflict();//使用jq来代替<span class="string">"$"</span>。</span><br><span class="line">var v1 = jq(<span class="string">'#id'</span>); // 等同于var v1 = $(<span class="string">'#id'</span>);</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;jQuery概述&quot;&gt;&lt;a href=&quot;#jQuery概述&quot; class=&quot;headerlink&quot; title=&quot;jQuery概述&quot;&gt;&lt;/a&gt;jQuery概述&lt;/h3&gt;&lt;h4 id=&quot;jQuery概念&quot;&gt;&lt;a href=&quot;#jQuery概念&quot; class=&quot;headerlink&quot; title=&quot;jQuery概念&quot;&gt;&lt;/a&gt;jQuery概念&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;JavaScript：基于JS语言的API和语法组织逻辑，通过内置window和document对象，来&lt;strong&gt;操作内存中的DOM元素&lt;/strong&gt;，同时能用来&lt;strong&gt;动态操作样式css&lt;/strong&gt;、&lt;strong&gt;数据访问&lt;/strong&gt;、&lt;strong&gt;控制响应事件&lt;/strong&gt;等。&lt;/p&gt;
     
     </summary>
     
