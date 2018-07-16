@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,Web,Cookie,Session," />
+  <meta name="keywords" content="JavaScript,Vue.js," />
 
 
 
@@ -123,18 +123,20 @@
 
 
 
-<meta name="description" content="浏览器的缓存机制提供了可以将用户数据存储在客户端上的方式，可以利用cookie,session等与服务端进行数据交互。 Cookie和Session都是用来跟踪浏览器用户身份的会话方式。">
-<meta name="keywords" content="开发,Web,Cookie,Session">
+<meta name="description" content="每个Vue实例在被创建之前都要经过一系列的初始化过程,这个过程就是vue的生命周期。 Vue的生命周期中有多个事件钩子，让我们在控制整个Vue实例的过程时更容易形成好的逻辑，它总共可以分为8个阶段：beforeCreate（创建前）,created（创建后）,beforeMount(载入前),mounted（载入后）,beforeUpdate（更新前）,updated（更新后）,beforeDe">
+<meta name="keywords" content="JavaScript,Vue.js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cookie与Session的区别与应用">
-<meta property="og:url" content="https://chongtianhong.github.io/2018/02/18/cookie/index.html">
+<meta property="og:title" content="对Vue生命周期的理解">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/03/14/vue/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="浏览器的缓存机制提供了可以将用户数据存储在客户端上的方式，可以利用cookie,session等与服务端进行数据交互。 Cookie和Session都是用来跟踪浏览器用户身份的会话方式。">
+<meta property="og:description" content="每个Vue实例在被创建之前都要经过一系列的初始化过程,这个过程就是vue的生命周期。 Vue的生命周期中有多个事件钩子，让我们在控制整个Vue实例的过程时更容易形成好的逻辑，它总共可以分为8个阶段：beforeCreate（创建前）,created（创建后）,beforeMount(载入前),mounted（载入后）,beforeUpdate（更新前）,updated（更新后）,beforeDe">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-18T15:49:40.243Z">
+<meta property="og:image" content="https://chongtianhong.github.io/images/vue.png">
+<meta property="og:updated_time" content="2018-07-16T15:04:22.325Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cookie与Session的区别与应用">
-<meta name="twitter:description" content="浏览器的缓存机制提供了可以将用户数据存储在客户端上的方式，可以利用cookie,session等与服务端进行数据交互。 Cookie和Session都是用来跟踪浏览器用户身份的会话方式。">
+<meta name="twitter:title" content="对Vue生命周期的理解">
+<meta name="twitter:description" content="每个Vue实例在被创建之前都要经过一系列的初始化过程,这个过程就是vue的生命周期。 Vue的生命周期中有多个事件钩子，让我们在控制整个Vue实例的过程时更容易形成好的逻辑，它总共可以分为8个阶段：beforeCreate（创建前）,created（创建后）,beforeMount(载入前),mounted（载入后）,beforeUpdate（更新前）,updated（更新后）,beforeDe">
+<meta name="twitter:image" content="https://chongtianhong.github.io/images/vue.png">
 
 
 
@@ -164,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="https://chongtianhong.github.io/2018/02/18/cookie/"/>
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/03/14/vue/"/>
 
 
 
 
 
-  <title>Cookie与Session的区别与应用 | Ice's Blog</title>
+  <title>对Vue生命周期的理解 | Ice's Blog</title>
   
 
 
@@ -309,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/02/18/cookie/">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/03/14/vue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaobing Hong">
@@ -326,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Cookie与Session的区别与应用</h1>
+          <h1 class="post-title" itemprop="name headline">对Vue生命周期的理解</h1>
         
 
         <div class="post-meta">
@@ -338,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T13:44:34+08:00">
-                2018-02-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T22:38:09+08:00">
+                2018-03-14
               </time>
             
 
@@ -399,103 +401,36 @@
 
       
         <ul>
-<li>浏览器的缓存机制提供了可以<strong>将用户数据存储在客户端上</strong>的方式，可以利用<strong>cookie,session等</strong>与<strong>服务端</strong>进行<strong>数据交互</strong>。</li>
-<li>Cookie和Session都是<strong>用来跟踪浏览器用户身份</strong>的<strong>会话方式</strong>。<a id="more"></a>
+<li>每个Vue实例在被创建之前都要经过一系列的初始化过程,这个过程就是vue的生命周期。</li>
+<li><p>Vue的生命周期中有多个事件钩子，让我们在控制整个Vue实例的过程时更容易形成好的逻辑，它总共可以分为8个阶段：beforeCreate（创建前）,created（创建后）,beforeMount(载入前),mounted（载入后）,beforeUpdate（更新前）,updated（更新后）,beforeDestroy（销毁前）,destroyed（销毁后）。</p>
+<a id="more"></a>
+</li>
+<li><p>Vue官网提供的图片：<br><img src="/images/vue.png" width="316" alt="vue的生命周期" style="border:none"></p>
 </li>
 </ul>
-<h4 id="Cookie的概念"><a href="#Cookie的概念" class="headerlink" title="Cookie的概念"></a>Cookie的概念</h4><ul>
-<li>Cookie是浏览器（User Agent）访问一些网站后，这些<strong>网站存放在客户端的一组数据</strong>，用于<strong>使网站等跟踪用户</strong>，<strong>实现用户自定义功能</strong>。</li>
-<li>Cookie的<strong>Domain和Path属性</strong>标识了这个Cookie是<strong>哪一个网站发送给浏览器</strong>的。</li>
-<li>Cookie的<strong>Expires属性</strong>标识了Cookie的<strong>有效时间</strong>，当Cookie的<strong>有效时间过了</strong>之后，这些<strong>数据就被自动删除</strong>了。<ul>
-<li>如果<strong>不设置过期时间</strong>，则表示这个<strong>Cookie生命周期为浏览器会话期间</strong>，只要<strong>关闭浏览器窗口，Cookie就消失</strong>了。这种Cookie被称为<strong>会话Cookie</strong>。<strong>会话Cookie</strong>一般不保存在硬盘上而是<strong>保存在内存里</strong>。</li>
-<li>如果<strong>设置了过期时间</strong>，浏览器就会把<strong>Cookie保存到硬盘</strong>上，<strong>关闭后再次打开浏览器</strong>，这些<strong>Cookie依然有效直到超过设定的过期时间</strong>。</li>
+<h4 id="在beforeCreate和created钩子函数之间的生命周期"><a href="#在beforeCreate和created钩子函数之间的生命周期" class="headerlink" title="在beforeCreate和created钩子函数之间的生命周期"></a>在beforeCreate和created钩子函数之间的生命周期</h4><ul>
+<li>在这个生命周期之间，进行<strong>初始化事件</strong>，进行<strong>数据</strong>的<strong>观测</strong>，可以看到在created的时候数据已经和data属性进行绑定（放在data中的属性当值发生改变的同时，视图也会改变）。<br>注意看下：此时还是没有el选项。</li>
 </ul>
+<h4 id="created钩子函数和beforeMount间的生命周期"><a href="#created钩子函数和beforeMount间的生命周期" class="headerlink" title="created钩子函数和beforeMount间的生命周期"></a>created钩子函数和beforeMount间的生命周期</h4><ul>
+<li><p>首先会判断对象是否有el选项。如果有的话就继续向下编译，如果没有el选项，则停止编译，也就意味着停止了生命周期，直到在该vue实例上调用vm.$mount(el)。</p>
 </li>
-<li><strong>存储在硬盘上的Cookie</strong>可以<strong>在不同的浏览器进程间共享</strong>，比如两个IE窗口。</li>
-<li>对于<strong>保存在内存的Cookie</strong>，不同的浏览器有不同的处理方式。</li>
-</ul>
-<h4 id="Session的概念"><a href="#Session的概念" class="headerlink" title="Session的概念"></a>Session的概念</h4><ul>
-<li><strong>Session</strong>是<strong>存放在服务器端</strong>、用来存放用户数据的（类似于HashTable结构）。</li>
-<li>当浏览器<strong>第一次发送请求</strong>时，服务器<strong>自动生成</strong>了一个<strong>HashTable</strong>和一个<strong>Session ID</strong>用来唯一标识这个HashTable，并将其<strong>通过响应发送到浏览器</strong>。</li>
-<li>当浏览器<strong>第二次发送请求</strong>，会<strong>将前一次服务器响应中的Session ID放在请求中</strong>一并<strong>发送到服务器</strong>上，服务器<strong>从请求中提取出Session ID</strong>，并和保存的所有Session ID进行对比，<strong>找到这个用户对应的HashTable</strong>。</li>
-<li>一般情况下，服务器会在一定时间内（默认20分钟）保存这个HashTable，<strong>过了时间限制，就会销毁这个HashTable</strong>。<ul>
-<li>在销毁之前，程序员可以将用户的一些数据以Key和Value的形式暂时存放在这个HashTable中。</li>
-<li>也有使用数据库将这个HashTable序列化后保存起来的，这样的好处是没了时间的限制，坏处是随着时间的增加，这个数据库会急速膨胀，特别是访问量增加的时候。</li>
-<li>一般还是采取前一种方式，以减轻服务器压力。</li>
-</ul>
+<li><p>如果我们在后面继续调用vm.$mount(el),可以发现代码继续向下执行了</p>
 </li>
-</ul>
-<h4 id="Cookie和Session的区别"><a href="#Cookie和Session的区别" class="headerlink" title="Cookie和Session的区别"></a>Cookie和Session的区别</h4><ol>
-<li><strong>保持状态</strong>：<ul>
-<li><strong>Cookie</strong>保存在<strong>浏览器端</strong>，服务端可以知道其中的信息。</li>
-<li><strong>Session</strong>保存在<strong>服务器端</strong>，客户端不知道其中的信息。</li>
-</ul>
+<li><p>然后，我们往下看，template参数选项的有无对生命周期的影响。<br>（1）.如果vue实例对象中有template参数选项，则将其作为模板编译成render函数。<br>（2）.如果没有template选项，则将外部HTML作为模板编译。<br>（3）.可以看到template中的模板优先级要高于outer HTML的优先级。</p>
 </li>
-<li><strong>使用方式</strong>：<ul>
-<li><strong>Cookie机制</strong>：<ul>
-<li>如果不在浏览器中设置过期时间，<strong>Cookie被保存在内存中，生命周期随浏览器的关闭而结束</strong>，这种Cookie简称<strong>会话Cookie</strong>。</li>
-<li>如果在浏览器中设置了Cookie的过期时间，<strong>Cookie被保存在硬盘中，关闭浏览器后，Cookie数据仍然存在，直到过期时间结束才消失</strong>。</li>
-<li>Cookie是<strong>服务器发给客户端的特殊信息</strong>，Cookie是<strong>以文本的方式保存在客户端</strong>，每次请求时都带上它。</li>
+<li>所以综合排名优先级：render函数选项 &gt; template选项 &gt; outer HTML。</li>
 </ul>
-</li>
-<li><strong>Session机制</strong>：<ul>
-<li>当服务器收到请求<strong>需要创建Session对象</strong>时，首先会<strong>检查客户端请求中是否包含sessionid</strong>。<ul>
-<li>如果<strong>有sessionid</strong>，服务器将<strong>根据该id返回对应Session对象</strong>。</li>
-<li>如果客户端请求中<strong>没有sessionid</strong>，服务器会<strong>创建新的Session对象</strong>，并<strong>把sessionid</strong>在本次响应中<strong>返回给客户端</strong>。</li>
+<h4 id="beforeMount和mounted-钩子函数间的生命周期"><a href="#beforeMount和mounted-钩子函数间的生命周期" class="headerlink" title="beforeMount和mounted 钩子函数间的生命周期"></a>beforeMount和mounted 钩子函数间的生命周期</h4><ul>
+<li>可以看到此时是给vue实例对象添加$el成员，并且替换掉挂在的DOM元素。因为在之前console中打印的结果可以看到beforeMount之前el上还是undefined。</li>
 </ul>
-</li>
-<li>通常<strong>使用Cookie方式存储sessionid</strong>到<strong>客户端</strong>，在交互中浏览器按照规则将sessionid发送给服务器。</li>
-<li>如果<strong>用户禁用Cookie</strong>，则要<strong>使用URL重写</strong>，可以通过response.encodeURL(url) 进行实现。API对encodeURL的解释为：<ul>
-<li>当浏览器支持Cookie时，url不做任何处理。</li>
-<li>当浏览器不支持Cookie的时候，将会重写url将SessionID拼接到访问地址后。</li>
+<h4 id="mounted"><a href="#mounted" class="headerlink" title="mounted"></a>mounted</h4><ul>
+<li>在mounted之前h1中还是通过进行占位的，因为此时还有挂在到页面上，还是JavaScript中的虚拟DOM形式存在的。在mounted之后可以看到h1中的内容发生了变化。</li>
 </ul>
-</li>
+<h4 id="beforeUpdate钩子函数和updated钩子函数间的生命周期"><a href="#beforeUpdate钩子函数和updated钩子函数间的生命周期" class="headerlink" title="beforeUpdate钩子函数和updated钩子函数间的生命周期"></a>beforeUpdate钩子函数和updated钩子函数间的生命周期</h4><ul>
+<li>当vue发现data中的数据发生了改变，会触发对应组件的重新渲染，先后调用beforeUpdate和updated钩子函数。</li>
 </ul>
-</li>
-</ul>
-</li>
-<li><strong>存储内容</strong>：<ul>
-<li><strong>Cookie</strong>只能保存<strong>字符串类型</strong>，以文本的方式。</li>
-<li><strong>Session</strong>中保存的是<strong>对象</strong>（通过与Hashtable类似的数据结构来保存），能支持任何类型的<strong>对象</strong>(Session中可含有多个对象)。</li>
-</ul>
-</li>
-<li><strong>存储的大小</strong>：<ul>
-<li>Cookie：单个Cookie保存的数据不能超过4kb.</li>
-<li>Session大小没有限制。</li>
-</ul>
-</li>
-<li><strong>安全性</strong>：<ul>
-<li>针对Cookie所存在的攻击：Cookie欺骗，Cookie截获。</li>
-<li><strong>Session的安全性大于Cookie</strong>。原因如下：<br>（1）sessionID<strong>存储在Cookie中</strong>，若要攻破Session首先要攻破Cookie；<br>（2）sessionID是要有人登录，或者启动session_start才会有，所以<strong>攻破Cookie也不一定能得到sessionID</strong>；<br>（3）第二次启动session_start后，前一次的sessionID就失效了，Session过期后，sessionID也随之失效。<br>（4）sessionID是<strong>加密</strong>的。<br>（5）综上所述，攻击者必须在<strong>短时间内</strong>攻破<strong>加密的</strong>sessionID，这很难。</li>
-</ul>
-</li>
-<li><strong>路径区分</strong>：<ul>
-<li>Session不能区分路径，同一个用户在访问一个网站期间，所有的Session在任何一个地方都可以访问到。</li>
-<li>Cookie中如果设置了路径参数，那么同一个网站中不同路径下的Cookie互相是访问不到的。</li>
-</ul>
-</li>
-<li><strong>应用场景</strong>：<ul>
-<li><strong>Cookie</strong>：<br>（1）判断用户是否登陆过网站，以便下次登录时能够实现自动登录（或者记住密码）。如果我们删除Cookie，则每次登录必须重新填写登录的相关信息。<br>（2）保存上次登录的时间等信息。<br>（3）保存上次查看的页面。<br>（4）浏览计数。</li>
-<li><strong>Session</strong>：Session用于保存每个用户的专用信息，变量的值保存在服务器端，通过SessionID来区分不同的客户。<br>（1）网上商城中的购物车。<br>（2）保存用户登录信息。<br>（3）将某些数据放入session中，供同一用户的不同页面使用。<br>（4）防止用户非法登录。</li>
-</ul>
-</li>
-<li><strong>缺点</strong>：<ul>
-<li><strong>Cookie</strong>：<br>（1）大小受限。<br>（2）用户可以操作（禁用）Cookie，使功能受限。<br>（3）安全性较低。<br>（4）有些状态不可能保存在客户端。<br>（5）每次访问都要传送Cookie给服务器，浪费带宽。<br>（6）Cookie数据有路径（path）的概念，可以限制Cookie只属于某个路径下。</li>
-<li><strong>Session</strong>：<br>（1）Session保存的东西越多，就越占用服务器内存，对于用户在线人数较多的网站，服务器的内存压力会比较大。<br>（2）依赖于Cookie（sessionID保存在Cookie），如果禁用Cookie，则要使用URL重写，不安全。<br>（3）创建Session变量有很大的随意性，可随时调用，不需要开发者做精确地处理，所以，过度使用Session变量将会导致代码不可读而且不好维护。</li>
-</ul>
-</li>
-</ol>
-<h4 id="Session和Cookie的应用"><a href="#Session和Cookie的应用" class="headerlink" title="Session和Cookie的应用"></a>Session和Cookie的应用</h4><blockquote>利用Cookie实现自动登录</blockquote>
-
-<ul>
-<li>当用户在某个网站注册后，就会收到一个惟一用户ID的Cookie。</li>
-<li>客户后来重新连接时，这个用户ID会自动返回，服务器对它进行检查，确定它是否为注册用户且选择了自动登录，从而使用户无需给出明确的用户名和密码，就可以访问服务器上的资源。</li>
-</ul>
-<blockquote>实现跨窗口的会话跟踪</blockquote>
-
-<ul>
-<li>通常session、cookie是<strong>不能跨窗口使用</strong>的，当我们新开了一个浏览器窗口进入相同页面时，系统会赋予我们一个新的sessionid，这样我们就<strong>达不到信息共享的目的</strong>。</li>
-<li><strong>解决方案</strong>：我们可以先把sessionid保存在persistent cookie中，然后在新窗口中读出来，就可以得到上一个窗口SessionID，这样通过session cookie和persistent cookie的结合就能实现跨窗口的会话跟踪（session tracking）。</li>
+<h4 id="beforeDestroy和destroyed钩子函数间的生命周期"><a href="#beforeDestroy和destroyed钩子函数间的生命周期" class="headerlink" title="beforeDestroy和destroyed钩子函数间的生命周期"></a>beforeDestroy和destroyed钩子函数间的生命周期</h4><ul>
+<li>beforeDestroy钩子函数在实例销毁之前调用。在这一步，实例仍然完全可用。<br>destroyed钩子函数在Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。</li>
 </ul>
 
       
@@ -524,13 +459,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
-          
-            <a href="/tags/Cookie/" rel="tag"><i class="fa fa-tag"></i> Cookie</a>
-          
-            <a href="/tags/Session/" rel="tag"><i class="fa fa-tag"></i> Session</a>
+            <a href="/tags/Vue-js/" rel="tag"><i class="fa fa-tag"></i> Vue.js</a>
           
         </div>
       
@@ -543,8 +474,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/17/web/" rel="next" title="web前端性能优化">
-                <i class="fa fa-chevron-left"></i> web前端性能优化
+              <a href="/2018/03/13/array1/" rel="next" title="JavaScript 中的循环数组遍历">
+                <i class="fa fa-chevron-left"></i> JavaScript 中的循环数组遍历
               </a>
             
           </div>
@@ -552,10 +483,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/19/array/" rel="prev" title="JavaScript数组方法大全">
-                JavaScript数组方法大全 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -707,7 +634,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie的概念"><span class="nav-number">1.</span> <span class="nav-text">Cookie的概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Session的概念"><span class="nav-number">2.</span> <span class="nav-text">Session的概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie和Session的区别"><span class="nav-number">3.</span> <span class="nav-text">Cookie和Session的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Session和Cookie的应用"><span class="nav-number">4.</span> <span class="nav-text">Session和Cookie的应用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#在beforeCreate和created钩子函数之间的生命周期"><span class="nav-number">1.</span> <span class="nav-text">在beforeCreate和created钩子函数之间的生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#created钩子函数和beforeMount间的生命周期"><span class="nav-number">2.</span> <span class="nav-text">created钩子函数和beforeMount间的生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeMount和mounted-钩子函数间的生命周期"><span class="nav-number">3.</span> <span class="nav-text">beforeMount和mounted 钩子函数间的生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mounted"><span class="nav-number">4.</span> <span class="nav-text">mounted</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeUpdate钩子函数和updated钩子函数间的生命周期"><span class="nav-number">5.</span> <span class="nav-text">beforeUpdate钩子函数和updated钩子函数间的生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeDestroy和destroyed钩子函数间的生命周期"><span class="nav-number">6.</span> <span class="nav-text">beforeDestroy和destroyed钩子函数间的生命周期</span></a></li></ol></div>
             
 
           </div>
