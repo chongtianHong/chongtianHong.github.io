@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 在vue组件通信中最常见通信方式就是父子组件之中的通信，而父子组件的设定方式在不同情况下又各有不同。 最常见的就是父组件为控制组件，子组件为视图组件。 父组件传递数据给子组件使用，遇到业务逻辑操作时子组件触发父组件的自定义事件。 在通信中，无论是子组件向父组件传值还是父组件向子组件传值，他们都有一个共同点就是有中间介质，子向父的介质是自定义事件，父向子的介质是props中的属性。 非父子">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-18T15:06:12.790Z">
+<meta property="og:updated_time" content="2018-07-18T15:08:01.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue2.0父子组件以及非父子组件如何通信">
 <meta name="twitter:description" content="基本介绍 在vue组件通信中最常见通信方式就是父子组件之中的通信，而父子组件的设定方式在不同情况下又各有不同。 最常见的就是父组件为控制组件，子组件为视图组件。 父组件传递数据给子组件使用，遇到业务逻辑操作时子组件触发父组件的自定义事件。 在通信中，无论是子组件向父组件传值还是父组件向子组件传值，他们都有一个共同点就是有中间介质，子向父的介质是自定义事件，父向子的介质是props中的属性。 非父子">
@@ -403,7 +403,7 @@
 <li>最常见的就是父组件为<strong>控制组件</strong>，子组件为<strong>视图组件</strong>。</li>
 <li>父组件传递数据给子组件使用，遇到业务逻辑操作时子组件触发父组件的自定义事件。</li>
 <li>在通信中，无论是<strong>子组件向父组件传值</strong>还是<strong>父组件向子组件传值</strong>，他们都有一个共同点就是有<strong>中间介质</strong>，<strong>子向父的介质是自定义事件</strong>，<strong>父向子的介质是props中的属性</strong>。</li>
-<li><strong>非父子组件</strong>可以通过<strong>eventHub</strong>来实现通信。eventHub就是创建一个事件中心，相当于中转站，可以用它来传递事件和接收事件。<!-- what's more --></li>
+<li><strong>非父子组件</strong>可以通过<strong>eventHub</strong>来实现通信。eventHub就是创建一个事件中心，相当于中转站，可以用它来传递事件和接收事件。<a id="more"></a></li>
 <li>vue提倡单项数据流，因此在通常情况下都是<strong>父组件传递数据给子组件</strong>使用，<strong>子组件触发父组件的事件</strong>，并<strong>传递给父组件所需要的参数</strong>。</li>
 </ul>
 <h4 id="父组件到子组件的通信"><a href="#父组件到子组件的通信" class="headerlink" title="父组件到子组件的通信"></a>父组件到子组件的通信</h4><ul>
