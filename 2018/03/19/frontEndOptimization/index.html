@@ -127,11 +127,11 @@
 <meta name="keywords" content="开发,Web">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端优化方法（全）">
-<meta property="og:url" content="https://chongtianhong.github.io/2018/07/19/frontEndOptimization/index.html">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/03/19/frontEndOptimization/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="1.Minimize HTTP Requests 减少HTTP请求   图片、css、script、flash等资源的获取都会增加http请求数，减少这些元素的数量就能减少响应时间。 把多个JS、CSS在可能的情况下写进一个文件（使用打包工具进行合并）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-19T15:47:51.271Z">
+<meta property="og:updated_time" content="2018-07-19T15:57:24.409Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端优化方法（全）">
 <meta name="twitter:description" content="1.Minimize HTTP Requests 减少HTTP请求   图片、css、script、flash等资源的获取都会增加http请求数，减少这些元素的数量就能减少响应时间。 把多个JS、CSS在可能的情况下写进一个文件（使用打包工具进行合并）。">
@@ -164,7 +164,7 @@
 
 
 
-  <link rel="canonical" href="https://chongtianhong.github.io/2018/07/19/frontEndOptimization/"/>
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/03/19/frontEndOptimization/"/>
 
 
 
@@ -309,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/07/19/frontEndOptimization/">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/03/19/frontEndOptimization/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaobing Hong">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T23:08:51+08:00">
-                2018-07-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-19T23:08:51+08:00">
+                2018-03-19
               </time>
             
 
@@ -517,9 +517,57 @@
 <ul>
 <li>将GIF转为PNG8会是个减小体积的好办法，另外有很多方法处理的JPG及PNG图片以达到优化效果。</li>
 </ul>
-<blockquote></blockquote><br><blockquote></blockquote><br><blockquote></blockquote><br><blockquote></blockquote>
+<blockquote>25. Optimize CSS Sprites 优化CSS Sprites</blockquote>
 
-<blockquote></blockquote><br><blockquote></blockquote><br><blockquote></blockquote><br><blockquote></blockquote><br><blockquote></blockquote><br><blockquote></blockquote><br><blockquote></blockquote><br><blockquote></blockquote>
+<ul>
+<li>在CSS Sprites中竖直并尽量紧凑的排列图片，尽量将颜色相似的图片排在一起，会减小图片本身的大小及提高页面图片显示速度。</li>
+</ul>
+<blockquote>26. Don’t Scale Images in HTML 不要在HTML中缩放图片</blockquote>
+
+<ul>
+<li>图片要用多大的就用多大的，1000X1000的图片被设置样式为<code>width=”100” height=”100”</code>以后，本身的KB数是不会减少的。</li>
+</ul>
+<blockquote>27. 使用base64编码代替图片</blockquote>
+
+<ul>
+<li>适用于图片小于2KB，页面引用图片不多的情况。将图片转换为base64编码字符串嵌入到CSS或页面中，<strong>减少http的请求次数</strong>。</li>
+</ul>
+<blockquote>28. 合并图片sprite（雪碧图）</blockquote>
+
+<ul>
+<li>任何用到页面图片的场景。将多个页面用到的背景图片合并成一个大的图片在页面中引用，可以有效地减少请求个数。</li>
+</ul>
+<blockquote>29. 使用canvas代替图片</blockquote>
+
+<ul>
+<li>需要高性能的图片或动画，使用HTML5的canvas元素绘制图片，页面渲染性能较高。</li>
+</ul>
+<blockquote>30. 图片压缩</blockquote>
+
+<ul>
+<li>在不得不加载图片的前提下，进一步提高优化效果，通过有损或无损压缩所见图片的大小。减少图片加载流量，效果明显。</li>
+</ul>
+<blockquote>31. 更好的图片格式</blockquote>
+
+<ul>
+<li>webp、bpg、sharpP等新图片格式具有更好的压缩比。webp能让图片平均大小减小70%。</li>
+</ul>
+<blockquote>32. 使用矢量图代替位图</blockquote>
+
+<ul>
+<li>对于绝大多数图案、图标等，<strong>矢量图更小</strong>，且<strong>可缩放</strong>而<strong>无需生成多套图</strong>。现在主流浏览器都支持SVG了，所以可放心使用。</li>
+</ul>
+<blockquote>33. 按需加载</blockquote>
+
+<ul>
+<li>用户看不到的可以先不用加载，在需要用到的时候再加载。可以按需加载的有图片、CSS、JS。</li>
+</ul>
+<blockquote>34. 预加载</blockquote>
+
+<ul>
+<li>提前加载图片，当用户需要查看时可直接从本地缓存中渲染。预加载是<strong>牺牲服务器性能</strong>来<strong>换取用户更好的用户体验</strong>。</li>
+<li>不过需要注意的是和懒加载的区别，两者的行为是相反的，一个是提前加载，一个是迟缓甚至不加载。<strong>懒加载对服务器前端有一定的缓解压力作用</strong>，<strong>预加载则会增加服务器前端压力</strong>。</li>
+</ul>
 
       
     </div>
