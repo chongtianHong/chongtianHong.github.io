@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Ice, Ice's blog, Ice Hong" />
+  <meta name="keywords" content="Array,JavaScript,开发," />
 
 
 
@@ -123,13 +123,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ice&#39;s Blog">
-<meta property="og:url" content="https://chongtianhong.github.io/archives/page/2/index.html">
+<meta name="description" content="JavaScript中的 forEach() 和 map() 方法都是 ES5 为处理数组而新增的迭代方法，最主要的区别在于 map 方法返回一个新数组，而 forEach 方法没有返回值。">
+<meta name="keywords" content="Array,JavaScript,开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组遍历方法forEach 和 map 的区别">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/03/20/arrayMethods/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="JavaScript中的 forEach() 和 map() 方法都是 ES5 为处理数组而新增的迭代方法，最主要的区别在于 map 方法返回一个新数组，而 forEach 方法没有返回值。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-20T14:09:15.312Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ice&#39;s Blog">
+<meta name="twitter:title" content="数组遍历方法forEach 和 map 的区别">
+<meta name="twitter:description" content="JavaScript中的 forEach() 和 map() 方法都是 ES5 为处理数组而新增的迭代方法，最主要的区别在于 map 方法返回一个新数组，而 forEach 方法没有返回值。">
 
 
 
@@ -159,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="https://chongtianhong.github.io/archives/page/2/"/>
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/03/20/arrayMethods/"/>
 
 
 
 
 
-  <title>归档 | Ice's Blog</title>
+  <title>数组遍历方法forEach 和 map 的区别 | Ice's Blog</title>
   
 
 
@@ -184,7 +189,7 @@
     
   
 
-  <div class="container sidebar-position-right page-archive">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/chongtianHong">
       <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
@@ -290,410 +295,203 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 39 篇日志。 继续努力。
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/03/20/arrayMethods/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">数组遍历方法forEach 和 map 的区别</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-20T09:57:19+08:00">
+                2018-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/10/Cookies/" itemprop="url">
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="name">Cookies的封装</span>
+                <span class="post-meta-item-text">分类于</span>
               
-            </a>
-        
-      </h2>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-10T19:36:02+08:00"
-              content="2018-03-10" >
-          03-10
-        </time>
-      </div>
+                
+                
+              
+            </span>
+          
 
-    </header>
-  </article>
+          
+            
+          
 
+          
+          
 
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/09/dns/" itemprop="url">
-              
-                <span itemprop="name">DNS学习笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-09T00:23:15+08:00"
-              content="2018-03-09" >
-          03-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/08/es6/" itemprop="url">
-              
-                <span itemprop="name">ES6常用新特性总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-08T13:40:32+08:00"
-              content="2018-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <ul>
+<li>JavaScript中的 forEach() 和 map() 方法都是 ES5 为处理数组而新增的迭代方法，最主要的区别在于 <strong>map 方法返回一个新数组</strong>，而 <strong>forEach 方法没有返回值</strong>。</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>forEach()和map()都是遍历数组的方法，用法类似，但是还是有很大区别。</li>
+</ul>
+<h4 id="相同点："><a href="#相同点：" class="headerlink" title="相同点："></a>相同点：</h4><ol>
+<li>都是<strong>按照顺序</strong>循环遍历数组中的每一项；</li>
+<li>在遍历中执行匿名函数都可以接收三个参数，分别为：<strong>item</strong>（当前每一项）、<strong>index</strong>（索引值）、<strong>arr</strong>（原数组）；</li>
+<li>执行的<strong>匿名函数中的this都指向Window对象</strong>。</li>
+<li>只能遍历数组</li>
+</ol>
+<h4 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h4><ol>
+<li><p>map()是根据遍历执行的匿名函数，对于原数组中的每个值产生一个对应的值，并<strong>返回一个新的数组</strong>，数组中的元素为原始数组调用函数处理后的值，存在一个映射关系，并且<strong>不会改变原数组</strong>，<strong>不会对空数组进行检测</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var arr = [0,1,2,3,4];</span><br><span class="line">var str = arr.map(<span class="keyword">function</span>(i,index,arr)&#123;</span><br><span class="line">    console.log(this); // Window</span><br><span class="line">    <span class="built_in">return</span> ++i;</span><br><span class="line">&#125;,this);</span><br><span class="line">console.log(str);  //结果为 [1,2,3,4,5]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>forEach()只是<strong>按照顺序</strong>把数组中的元素传递给forEach中的匿名函数使用，<strong>对于空数组则不会调用到匿名函数</strong>（对空数组进行检测）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var arr = [0,1,2,3,4];</span><br><span class="line">var sum = 0;</span><br><span class="line">var str = arr.forEach(<span class="keyword">function</span>(i,index,arr)&#123;</span><br><span class="line">    sum += i;</span><br><span class="line">    console.log(<span class="string">"sum的值为："</span>,sum); </span><br><span class="line">&#125;)   //执行5次，最终结果 10</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/07/thinkjs3/" itemprop="url">
-              
-                <span itemprop="name">ThinkJS学习笔记(三)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-07T19:02:24+08:00"
-              content="2018-03-07" >
-          03-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/06/xml/" itemprop="url">
-              
-                <span itemprop="name">Ajax学习笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-06T16:24:50+08:00"
-              content="2018-03-06" >
-          03-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/05/thinkjs2/" itemprop="url">
-              
-                <span itemprop="name">ThinkJS学习笔记(二)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-05T11:17:02+08:00"
-              content="2018-03-05" >
-          03-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/04/axios/" itemprop="url">
-              
-                <span itemprop="name">axios 学习笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-04T10:36:21+08:00"
-              content="2018-03-04" >
-          03-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/03/session/" itemprop="url">
-              
-                <span itemprop="name">Cookie、Session和WebStorage的区别总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-03T10:36:21+08:00"
-              content="2018-03-03" >
-          03-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/02/thinkjs/" itemprop="url">
-              
-                <span itemprop="name">ThinkJS学习笔记(一)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-02T11:09:44+08:00"
-              content="2018-03-02" >
-          03-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/01/promise/" itemprop="url">
-              
-                <span itemprop="name">Promise对象</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-01T22:38:04+08:00"
-              content="2018-03-01" >
-          03-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Array/" rel="tag"><i class="fa fa-tag"></i> Array</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/19/frontEndOptimization/" rel="next" title="前端优化方法（全）">
+                <i class="fa fa-chevron-left"></i> 前端优化方法（全）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/3/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -701,6 +499,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -721,8 +523,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -802,6 +613,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#相同点："><span class="nav-number">1.</span> <span class="nav-text">相同点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不同点："><span class="nav-number">2.</span> <span class="nav-text">不同点：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -947,6 +774,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
