@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-07-20T14:09:15.312Z</updated>
+  <updated>2018-07-20T14:14:53.141Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://chongtianhong.github.io/2018/03/20/arrayMethods/"/>
     <id>https://chongtianhong.github.io/2018/03/20/arrayMethods/</id>
     <published>2018-03-20T01:57:19.000Z</published>
-    <updated>2018-07-20T14:09:15.312Z</updated>
+    <updated>2018-07-20T14:14:53.141Z</updated>
     
-    <content type="html"><![CDATA[<ul><li>JavaScript中的 forEach() 和 map() 方法都是 ES5 为处理数组而新增的迭代方法，最主要的区别在于 <strong>map 方法返回一个新数组</strong>，而 <strong>forEach 方法没有返回值</strong>。</li></ul><a id="more"></a><ul><li>forEach()和map()都是遍历数组的方法，用法类似，但是还是有很大区别。</li></ul><h4 id="相同点："><a href="#相同点：" class="headerlink" title="相同点："></a>相同点：</h4><ol><li>都是<strong>按照顺序</strong>循环遍历数组中的每一项；</li><li>在遍历中执行匿名函数都可以接收三个参数，分别为：<strong>item</strong>（当前每一项）、<strong>index</strong>（索引值）、<strong>arr</strong>（原数组）；</li><li>执行的<strong>匿名函数中的this都指向Window对象</strong>。</li><li>只能遍历数组</li></ol><h4 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h4><ol><li><p>map()是根据遍历执行的匿名函数，对于原数组中的每个值产生一个对应的值，并<strong>返回一个新的数组</strong>，数组中的元素为原始数组调用函数处理后的值，存在一个映射关系，并且<strong>不会改变原数组</strong>，<strong>不会对空数组进行检测</strong>。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var arr = [0,1,2,3,4];</span><br><span class="line">var str = arr.map(<span class="keyword">function</span>(i,index,arr)&#123;</span><br><span class="line">    console.log(this); // Window</span><br><span class="line">    <span class="built_in">return</span> ++i;</span><br><span class="line">&#125;,this);</span><br><span class="line">console.log(str);  //结果为 [1,2,3,4,5]</span><br></pre></td></tr></table></figure></li><li><p>forEach()只是<strong>按照顺序</strong>把数组中的元素传递给forEach中的匿名函数使用，<strong>对于空数组则不会调用到匿名函数</strong>（对空数组进行检测）。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var arr = [0,1,2,3,4];</span><br><span class="line">var sum = 0;</span><br><span class="line">var str = arr.forEach(<span class="keyword">function</span>(i,index,arr)&#123;</span><br><span class="line">    sum += i;</span><br><span class="line">    console.log(<span class="string">"sum的值为："</span>,sum); </span><br><span class="line">&#125;)   //执行5次，最终结果 10</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    <content type="html"><![CDATA[<ul><li>JavaScript中的 forEach() 和 map() 方法都是 ES5 为处理数组而新增的迭代方法，最主要的区别在于 <strong>map 方法返回一个新数组</strong>，而 <strong>forEach 方法没有返回值</strong>。</li></ul><a id="more"></a><ul><li>forEach()和map()都是遍历数组的方法，用法类似，但是还是有很大区别。</li></ul><h4 id="相同点："><a href="#相同点：" class="headerlink" title="相同点："></a>相同点：</h4><ol><li>都是<strong>按照顺序</strong>循环遍历数组中的每一项；</li><li>在遍历中执行匿名函数都可以接收三个参数，分别为：<strong>item</strong>（当前每一项）、<strong>index</strong>（索引值）、<strong>arr</strong>（原数组）；</li><li>执行的<strong>匿名函数中的this都指向Window对象</strong>；</li><li>只能遍历数组。</li></ol><h4 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h4><ol><li><p>map()是根据遍历执行的匿名函数，对于原数组中的每个值产生一个对应的值，并<strong>返回一个新的数组</strong>，数组中的元素为原始数组调用函数处理后的值，存在一个映射关系，并且<strong>不会改变原数组</strong>，<strong>不会对空数组进行检测</strong>。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var arr = [0,1,2,3,4];</span><br><span class="line">var str = arr.map(<span class="keyword">function</span>(i,index,arr)&#123;</span><br><span class="line">    console.log(this); // Window</span><br><span class="line">    <span class="built_in">return</span> ++i;</span><br><span class="line">&#125;,this);</span><br><span class="line">console.log(str);  //结果为 [1,2,3,4,5]</span><br></pre></td></tr></table></figure></li><li><p>forEach()只是<strong>按照顺序</strong>把数组中的元素传递给forEach中的匿名函数使用，<strong>对于空数组则不会调用到匿名函数</strong>（对空数组进行检测）。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var arr = [0,1,2,3,4];</span><br><span class="line">var sum = 0;</span><br><span class="line">var str = arr.forEach(<span class="keyword">function</span>(i,index,arr)&#123;</span><br><span class="line">    sum += i;</span><br><span class="line">    console.log(<span class="string">"sum的值为："</span>,sum); </span><br><span class="line">&#125;)   //执行5次，最终结果 10</span><br></pre></td></tr></table></figure></li></ol>]]></content>
     
     <summary type="html">
     
@@ -36,11 +36,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
       <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -178,9 +178,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Promise" scheme="https://chongtianhong.github.io/tags/Promise/"/>
-    
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
+    
+      <category term="Promise" scheme="https://chongtianhong.github.io/tags/Promise/"/>
     
       <category term="Genorator" scheme="https://chongtianhong.github.io/tags/Genorator/"/>
     
@@ -237,9 +237,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
@@ -293,9 +293,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
@@ -377,9 +377,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
@@ -509,11 +509,11 @@
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
+      <category term="Promise" scheme="https://chongtianhong.github.io/tags/Promise/"/>
+    
       <category term="交互" scheme="https://chongtianhong.github.io/tags/%E4%BA%A4%E4%BA%92/"/>
     
       <category term="AJAX" scheme="https://chongtianhong.github.io/tags/AJAX/"/>
-    
-      <category term="Promise" scheme="https://chongtianhong.github.io/tags/Promise/"/>
     
   </entry>
   
@@ -599,9 +599,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Promise" scheme="https://chongtianhong.github.io/tags/Promise/"/>
     
