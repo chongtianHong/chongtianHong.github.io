@@ -123,19 +123,19 @@
 
 
 
-<meta name="description" content="单点登录（Single Sign On），简称为 SSO，用以解决同一公司不同子产品之间身份认证问题，也就是说，a.baidu.com与b.baidu.com两个站点之间只需要登录一次即可。 例子：上豆瓣，要登录豆瓣FM、豆瓣读书、豆瓣电影、豆瓣日记，如果我们访问豆瓣读书、豆瓣电影、豆瓣日记都需要进行一次登录认证，那么用户体验是非常不好的，所以使用了单点登录，在多个应用系统中，用户只要一次登录就">
+<meta name="description" content="单点登录的概念 单点登录（Single Sign On），简称为 SSO，用以解决同一公司不同子产品之间身份认证问题，也就是说，a.baidu.com与b.baidu.com两个站点之间只需要登录一次即可。 例子：上豆瓣，要登录豆瓣FM、豆瓣读书、豆瓣电影、豆瓣日记，如果我们访问豆瓣读书、豆瓣电影、豆瓣日记都需要进行一次登录认证，那么用户体验是非常不好的，所以使用了单点登录，在多个应用系统中，用户">
 <meta name="keywords" content="开发,Web,Cookie,Session">
 <meta property="og:type" content="article">
-<meta property="og:title" content="什么是单点登录">
+<meta property="og:title" content="认识单点登录">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/03/23/singleSighOn/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="单点登录（Single Sign On），简称为 SSO，用以解决同一公司不同子产品之间身份认证问题，也就是说，a.baidu.com与b.baidu.com两个站点之间只需要登录一次即可。 例子：上豆瓣，要登录豆瓣FM、豆瓣读书、豆瓣电影、豆瓣日记，如果我们访问豆瓣读书、豆瓣电影、豆瓣日记都需要进行一次登录认证，那么用户体验是非常不好的，所以使用了单点登录，在多个应用系统中，用户只要一次登录就">
+<meta property="og:description" content="单点登录的概念 单点登录（Single Sign On），简称为 SSO，用以解决同一公司不同子产品之间身份认证问题，也就是说，a.baidu.com与b.baidu.com两个站点之间只需要登录一次即可。 例子：上豆瓣，要登录豆瓣FM、豆瓣读书、豆瓣电影、豆瓣日记，如果我们访问豆瓣读书、豆瓣电影、豆瓣日记都需要进行一次登录认证，那么用户体验是非常不好的，所以使用了单点登录，在多个应用系统中，用户">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/singlesignon.png">
-<meta property="og:updated_time" content="2018-07-21T02:08:31.258Z">
+<meta property="og:updated_time" content="2018-07-21T02:25:24.936Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="什么是单点登录">
-<meta name="twitter:description" content="单点登录（Single Sign On），简称为 SSO，用以解决同一公司不同子产品之间身份认证问题，也就是说，a.baidu.com与b.baidu.com两个站点之间只需要登录一次即可。 例子：上豆瓣，要登录豆瓣FM、豆瓣读书、豆瓣电影、豆瓣日记，如果我们访问豆瓣读书、豆瓣电影、豆瓣日记都需要进行一次登录认证，那么用户体验是非常不好的，所以使用了单点登录，在多个应用系统中，用户只要一次登录就">
+<meta name="twitter:title" content="认识单点登录">
+<meta name="twitter:description" content="单点登录的概念 单点登录（Single Sign On），简称为 SSO，用以解决同一公司不同子产品之间身份认证问题，也就是说，a.baidu.com与b.baidu.com两个站点之间只需要登录一次即可。 例子：上豆瓣，要登录豆瓣FM、豆瓣读书、豆瓣电影、豆瓣日记，如果我们访问豆瓣读书、豆瓣电影、豆瓣日记都需要进行一次登录认证，那么用户体验是非常不好的，所以使用了单点登录，在多个应用系统中，用户">
 <meta name="twitter:image" content="https://chongtianhong.github.io/images/singlesignon.png">
 
 
@@ -172,7 +172,7 @@
 
 
 
-  <title>什么是单点登录 | Ice's Blog</title>
+  <title>认识单点登录 | Ice's Blog</title>
   
 
 
@@ -328,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">什么是单点登录</h1>
+          <h1 class="post-title" itemprop="name headline">认识单点登录</h1>
         
 
         <div class="post-meta">
@@ -400,13 +400,26 @@
       
 
       
-        <ul>
+        <h4 id="单点登录的概念"><a href="#单点登录的概念" class="headerlink" title="单点登录的概念"></a>单点登录的概念</h4><ul>
 <li>单点登录（Single Sign On），简称为 SSO，用以解决<strong>同一公司不同子产品之间身份认证问题</strong>，也就是说，a.baidu.com与b.baidu.com两个站点之间<strong>只需要登录一次</strong>即可。</li>
 <li>例子：上豆瓣，要登录豆瓣FM、豆瓣读书、豆瓣电影、豆瓣日记，如果我们访问豆瓣读书、豆瓣电影、豆瓣日记都需要进行一次登录认证，那么用户体验是非常不好的，所以使用了单点登录，<strong>在多个应用系统中，用户只要一次登录就可以访问所有相互信任的应用系统</strong>。<a id="more"></a></li>
 <li>一般来说<strong>单点登录</strong>实现原理为，<strong>首次访问</strong>一个站点时会<strong>被引导至登录页</strong>，用户登录验证通过，<strong>浏览器</strong>会<strong>存储一个关键key（一般采用cookie）</strong>，用户访问其他系统时会带着这个key，<strong>服务器系统发现具有key标志后</strong>，会<strong>对其进行验证</strong>，如果<strong>通过便不需要再次登录了</strong>。</li>
 <li>这里的关键为二，第一是<strong>key</strong>，其二为<strong>系统统一的认证机制</strong>，这当中<strong>key会有一系列规则保证登录的安全性</strong>，而<strong>统一的认证机制是单点登录的前提</strong>，key是由统一的验证平台提供出去，每次用户又以这个给出的key来这里验证，判断其有效性，这里的<strong>统一的验证平台</strong>便是<strong>passport</strong>，它负责着<strong>制作通行令牌，并且对其进行验证</strong>。</li>
 </ul>
-<p><img src="/images/singlesignon.png" width="600" alt="单点登录" style="border:none"></p>
+<h4 id="单点登录的实现方式"><a href="#单点登录的实现方式" class="headerlink" title="单点登录的实现方式"></a>单点登录的实现方式</h4><ul>
+<li>使用cookie进行单点登录的实现如下图所示：<br><img src="/images/singlesignon.png" width="600" alt="单点登录" style="border:none"></li>
+<li><strong>客户端持有ID，服务端持有session，两者一起用来保持登录状态</strong>。<strong>客户端</strong>需要<strong>用ID来作为凭证</strong>，而<strong>服务端</strong>需要<strong>用session来验证ID的有效性</strong>。</li>
+<li>但<strong>session</strong>这东西<strong>一开始是每个server自己独有的</strong>，豆瓣FM有自己的session、豆瓣读书有自己的session，而<strong>记录ID的cookie又是不能跨域的</strong>。</li>
+<li>所以，要实现一次登录一次退出，只需要想办法<strong>让各个server共用一个session的信息</strong>，<strong>让客户端在各个域名下都能持有这个ID</strong>就好了。</li>
+<li>再进一步讲，<strong>只要各个server拿到同一个ID</strong>，都能有办法<strong>检验出ID的有效性</strong>、并且能<strong>得到ID对应的用户信息</strong>就行了，也就是<strong>能检验ID</strong>。</li>
+</ul>
+<h4 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h4><h5 id="server端"><a href="#server端" class="headerlink" title="server端"></a>server端</h5><ul>
+<li>以server群如何<strong>生成、验证ID</strong>的方式大致分为两种：<ul>
+<li><strong>“共享Cookie”方式</strong>。这个就是上面提到的共享session的方式，本质上<strong>cookie只是存储session-id的介质</strong>，<strong>session-id也可以放在每一次请求的url里（不一定要存在cookid中）</strong>。session这项机制一开始就是<strong>一个server独有一个session</strong>的，<strong>把session拿出来让所有server共享</strong>有点奇怪且<strong>不安全</strong>。</li>
+<li><strong>SSO-Token方式</strong>。因为<strong>共享session的方式不安全</strong>，所以我们<strong>不再以session-id作为身份的标识</strong>。我们<strong>另外生成一种标识</strong>，把它取名<strong>SSO-Token(或Ticket)</strong>，这种标识是<strong>整个server群唯一的</strong>，并且<strong>所有server群都能验证这个token</strong>，同时<strong>能拿到token背后代表的用户的信息</strong>。</li>
+</ul>
+</li>
+</ul>
 <p>这里举个例子来说（有误请您指出）：</p>
 <p>子系统A统一到passport服务器鉴权，并且在passport处获取cookie，并将token加入url，跳转回子系统A<br>跳回子系统A后，使用token再次去passport验证（这里直接走webservice服务验证，不再跳转），验证通过便在A系统服务器生成session，以后访问子系统A，在有效时间内不到passport验证<br>进入子系统B，跳到passport鉴权，发现passport cookie已经存在（token），便直接跳回子系统B，url带有token值，使用token去验证流程与A一致</p>
 
@@ -515,8 +528,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -596,6 +618,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#单点登录的概念"><span class="nav-number">1.</span> <span class="nav-text">单点登录的概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单点登录的实现方式"><span class="nav-number">2.</span> <span class="nav-text">单点登录的实现方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现方法"><span class="nav-number">3.</span> <span class="nav-text">实现方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#server端"><span class="nav-number">3.1.</span> <span class="nav-text">server端</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
