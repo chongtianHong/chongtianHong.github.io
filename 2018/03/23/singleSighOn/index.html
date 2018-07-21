@@ -133,7 +133,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/singlesignon.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/singlesignon1.png">
-<meta property="og:updated_time" content="2018-07-21T03:05:11.745Z">
+<meta property="og:updated_time" content="2018-07-21T08:12:47.740Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="认识单点登录">
 <meta name="twitter:description" content="单点登录的概念 单点登录（Single Sign On），简称为 SSO，用以解决同一公司不同子产品之间身份认证问题，也就是说，a.baidu.com与b.baidu.com两个站点之间只需要登录一次即可。 例子：上豆瓣，要登录豆瓣FM、豆瓣读书、豆瓣电影、豆瓣日记，如果我们访问豆瓣读书、豆瓣电影、豆瓣日记都需要进行一次登录认证，那么用户体验是非常不好的，所以使用了单点登录，在多个应用系统中，用户">
@@ -422,7 +422,7 @@
 </li>
 </ul>
 <h5 id="浏览器端"><a href="#浏览器端" class="headerlink" title="浏览器端"></a>浏览器端</h5><ul>
-<li>浏览器端采用<strong>共享cookie的方式</strong>。无论server端采用的是“共享session”的方式还是现在的“token”方式，身份标识到了浏览器端都要面临这样的一个问题：用户登录成功拿到token(或者是session-id)后应该如何让浏览器存储和分享到其它域名下。同域名很简单，我们可以<strong>把token存在cookie里，把cookie的路径设置成顶级域名</strong>，这样<strong>所有子域都能读取cookie中的token</strong>。</li>
+<li>浏览器端采用<strong>共享cookie的方式</strong>。无论server端采用的是“共享session”的方式还是现在的“token”方式，身份标识到了浏览器端都要面临这样的一个问题：用户登录成功拿到token(或者是session-id)后应该如何让浏览器存储和分享到其它域名下。同域名很简单，我们可以<strong>把token存在cookie里，把cookie的路径设置成顶级域名</strong>，这样<strong>所有子域都能读取cookie中的token</strong>。前提是<strong>web应用群中所有子系统的域名统一在一个顶级域名下</strong>。</li>
 </ul>
 <h5 id="技术实现机制"><a href="#技术实现机制" class="headerlink" title="技术实现机制"></a>技术实现机制</h5><ul>
 <li>当用户<strong>第一次访问应用系统</strong>的时候，因为<strong>还没有登录</strong>，会<strong>被引导到认证系统中进行登录</strong>；<strong>根据用户提供的登录信息</strong>，<strong>认证系统进行身份校验</strong>；</li>
