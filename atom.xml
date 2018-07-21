@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-07-21T02:25:24.936Z</updated>
+  <updated>2018-07-21T03:05:11.745Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://chongtianhong.github.io/2018/03/23/singleSighOn/"/>
     <id>https://chongtianhong.github.io/2018/03/23/singleSighOn/</id>
     <published>2018-03-23T01:41:16.000Z</published>
-    <updated>2018-07-21T02:25:24.936Z</updated>
+    <updated>2018-07-21T03:05:11.745Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="单点登录的概念"><a href="#单点登录的概念" class="headerlink" title="单点登录的概念"></a>单点登录的概念</h4><ul><li>单点登录（Single Sign On），简称为 SSO，用以解决<strong>同一公司不同子产品之间身份认证问题</strong>，也就是说，a.baidu.com与b.baidu.com两个站点之间<strong>只需要登录一次</strong>即可。</li><li>例子：上豆瓣，要登录豆瓣FM、豆瓣读书、豆瓣电影、豆瓣日记，如果我们访问豆瓣读书、豆瓣电影、豆瓣日记都需要进行一次登录认证，那么用户体验是非常不好的，所以使用了单点登录，<strong>在多个应用系统中，用户只要一次登录就可以访问所有相互信任的应用系统</strong>。<a id="more"></a></li><li>一般来说<strong>单点登录</strong>实现原理为，<strong>首次访问</strong>一个站点时会<strong>被引导至登录页</strong>，用户登录验证通过，<strong>浏览器</strong>会<strong>存储一个关键key（一般采用cookie）</strong>，用户访问其他系统时会带着这个key，<strong>服务器系统发现具有key标志后</strong>，会<strong>对其进行验证</strong>，如果<strong>通过便不需要再次登录了</strong>。</li><li>这里的关键为二，第一是<strong>key</strong>，其二为<strong>系统统一的认证机制</strong>，这当中<strong>key会有一系列规则保证登录的安全性</strong>，而<strong>统一的认证机制是单点登录的前提</strong>，key是由统一的验证平台提供出去，每次用户又以这个给出的key来这里验证，判断其有效性，这里的<strong>统一的验证平台</strong>便是<strong>passport</strong>，它负责着<strong>制作通行令牌，并且对其进行验证</strong>。</li></ul><h4 id="单点登录的实现方式"><a href="#单点登录的实现方式" class="headerlink" title="单点登录的实现方式"></a>单点登录的实现方式</h4><ul><li>使用cookie进行单点登录的实现如下图所示：<br><img src="/images/singlesignon.png" width="600" alt="单点登录" style="border:none"></li><li><strong>客户端持有ID，服务端持有session，两者一起用来保持登录状态</strong>。<strong>客户端</strong>需要<strong>用ID来作为凭证</strong>，而<strong>服务端</strong>需要<strong>用session来验证ID的有效性</strong>。</li><li>但<strong>session</strong>这东西<strong>一开始是每个server自己独有的</strong>，豆瓣FM有自己的session、豆瓣读书有自己的session，而<strong>记录ID的cookie又是不能跨域的</strong>。</li><li>所以，要实现一次登录一次退出，只需要想办法<strong>让各个server共用一个session的信息</strong>，<strong>让客户端在各个域名下都能持有这个ID</strong>就好了。</li><li>再进一步讲，<strong>只要各个server拿到同一个ID</strong>，都能有办法<strong>检验出ID的有效性</strong>、并且能<strong>得到ID对应的用户信息</strong>就行了，也就是<strong>能检验ID</strong>。</li></ul><h4 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h4><h5 id="server端"><a href="#server端" class="headerlink" title="server端"></a>server端</h5><ul><li>以server群如何<strong>生成、验证ID</strong>的方式大致分为两种：<ul><li><strong>“共享Cookie”方式</strong>。这个就是上面提到的共享session的方式，本质上<strong>cookie只是存储session-id的介质</strong>，<strong>session-id也可以放在每一次请求的url里（不一定要存在cookid中）</strong>。session这项机制一开始就是<strong>一个server独有一个session</strong>的，<strong>把session拿出来让所有server共享</strong>有点奇怪且<strong>不安全</strong>。</li><li><strong>SSO-Token方式</strong>。因为<strong>共享session的方式不安全</strong>，所以我们<strong>不再以session-id作为身份的标识</strong>。我们<strong>另外生成一种标识</strong>，把它取名<strong>SSO-Token(或Ticket)</strong>，这种标识是<strong>整个server群唯一的</strong>，并且<strong>所有server群都能验证这个token</strong>，同时<strong>能拿到token背后代表的用户的信息</strong>。</li></ul></li></ul><p>这里举个例子来说（有误请您指出）：</p><p>子系统A统一到passport服务器鉴权，并且在passport处获取cookie，并将token加入url，跳转回子系统A<br>跳回子系统A后，使用token再次去passport验证（这里直接走webservice服务验证，不再跳转），验证通过便在A系统服务器生成session，以后访问子系统A，在有效时间内不到passport验证<br>进入子系统B，跳到passport鉴权，发现passport cookie已经存在（token），便直接跳回子系统B，url带有token值，使用token去验证流程与A一致</p>]]></content>
+    <content type="html"><![CDATA[<h4 id="单点登录的概念"><a href="#单点登录的概念" class="headerlink" title="单点登录的概念"></a>单点登录的概念</h4><ul><li>单点登录（Single Sign On），简称为 SSO，用以解决<strong>同一公司不同子产品之间身份认证问题</strong>，也就是说，a.baidu.com与b.baidu.com两个站点之间<strong>只需要登录一次</strong>即可。</li><li>例子：上豆瓣，要登录豆瓣FM、豆瓣读书、豆瓣电影、豆瓣日记，如果我们访问豆瓣读书、豆瓣电影、豆瓣日记都需要进行一次登录认证，那么用户体验是非常不好的，所以使用了单点登录，<strong>在多个应用系统中，用户只要一次登录就可以访问所有相互信任的应用系统</strong>。<a id="more"></a></li><li>一般来说<strong>单点登录</strong>实现原理为，<strong>首次访问</strong>一个站点时会<strong>被引导至登录页</strong>，用户登录验证通过，<strong>浏览器</strong>会<strong>存储一个关键key（一般采用cookie）</strong>，用户访问其他系统时会带着这个key，<strong>服务器系统发现具有key标志后</strong>，会<strong>对其进行验证</strong>，如果<strong>通过便不需要再次登录了</strong>。</li><li>这里的关键为二，第一是<strong>key</strong>，其二为<strong>系统统一的认证机制</strong>，这当中<strong>key会有一系列规则保证登录的安全性</strong>，而<strong>统一的认证机制是单点登录的前提</strong>，key是由统一的验证平台提供出去，每次用户又以这个给出的key来这里验证，判断其有效性，这里的<strong>统一的验证平台</strong>便是<strong>passport</strong>，它负责着<strong>制作通行令牌，并且对其进行验证</strong>。</li></ul><h4 id="单点登录的实现方式"><a href="#单点登录的实现方式" class="headerlink" title="单点登录的实现方式"></a>单点登录的实现方式</h4><ul><li>使用cookie进行单点登录的实现如下图所示：<br><img src="/images/singlesignon.png" width="600" alt="单点登录" style="border:none"></li><li><strong>客户端持有ID，服务端持有session，两者一起用来保持登录状态</strong>。<strong>客户端</strong>需要<strong>用ID来作为凭证</strong>，而<strong>服务端</strong>需要<strong>用session来验证ID的有效性</strong>。</li><li>但<strong>session</strong>这东西<strong>一开始是每个server自己独有的</strong>，豆瓣FM有自己的session、豆瓣读书有自己的session，而<strong>记录ID的cookie又是不能跨域的</strong>。</li><li>所以，要实现一次登录一次退出，只需要想办法<strong>让各个server共用一个session的信息</strong>，<strong>让客户端在各个域名下都能持有这个ID</strong>就好了。</li><li>再进一步讲，<strong>只要各个server拿到同一个ID</strong>，都能有办法<strong>检验出ID的有效性</strong>、并且能<strong>得到ID对应的用户信息</strong>就行了，也就是<strong>能检验ID</strong>。</li></ul><h4 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h4><h5 id="server端"><a href="#server端" class="headerlink" title="server端"></a>server端</h5><ul><li>以server群如何<strong>生成、验证ID</strong>的方式大致分为两种：<ul><li><strong>“共享Cookie”方式</strong>。这个就是上面提到的共享session的方式，本质上<strong>cookie只是存储session-id的介质</strong>，<strong>session-id也可以放在每一次请求的url里（不一定要存在cookid中）</strong>。session这项机制一开始就是<strong>一个server独有一个session</strong>的，<strong>把session拿出来让所有server共享</strong>有点奇怪且<strong>不安全</strong>。</li><li><strong>SSO-Token方式</strong>。因为<strong>共享session的方式不安全</strong>，所以我们<strong>不再以session-id作为身份的标识</strong>。我们<strong>另外生成一种标识</strong>，把它取名<strong>SSO-Token(或Ticket)</strong>，这种标识是<strong>整个server群唯一的</strong>，并且<strong>所有server群都能验证这个token</strong>，同时<strong>能拿到token背后代表的用户的信息</strong>。</li></ul></li></ul><h5 id="浏览器端"><a href="#浏览器端" class="headerlink" title="浏览器端"></a>浏览器端</h5><ul><li>浏览器端采用<strong>共享cookie的方式</strong>。无论server端采用的是“共享session”的方式还是现在的“token”方式，身份标识到了浏览器端都要面临这样的一个问题：用户登录成功拿到token(或者是session-id)后应该如何让浏览器存储和分享到其它域名下。同域名很简单，我们可以<strong>把token存在cookie里，把cookie的路径设置成顶级域名</strong>，这样<strong>所有子域都能读取cookie中的token</strong>。</li></ul><h5 id="技术实现机制"><a href="#技术实现机制" class="headerlink" title="技术实现机制"></a>技术实现机制</h5><ul><li>当用户<strong>第一次访问应用系统</strong>的时候，因为<strong>还没有登录</strong>，会<strong>被引导到认证系统中进行登录</strong>；<strong>根据用户提供的登录信息</strong>，<strong>认证系统进行身份校验</strong>；</li><li>如果<strong>通过校验</strong>，<strong>认证系统</strong>应该<strong>返回给用户一个认证的凭据－－ticket（SSO-Token）</strong>；</li><li><strong>用户再访问别的应用的时候</strong>，就会<strong>将</strong>这个<strong>ticket（SSO-Token）带上，作为自己认证的凭据</strong>，<strong>应用系统接受到请求之后</strong>会<strong>把ticket送到认证系统进行校验，检查ticket的合法性</strong>。</li><li>如果通过校验，用户就可以<strong>在不用再次登录的情况下访问应用系统2和应用系统3</strong>了。<br><img src="/images/singlesignon1.png" width="600" alt="单点登录技术实现机制" style="border:none"></li><li>要实现SSO，需要以下主要的功能：<br>1.<strong>所有应用系统共享一个身份认证系统</strong>。统一的认证系统是SSO的前提之一，认证系统的主要功能是<strong>将用户的登录信息和用户信息库相比较，对用户进行登录认证</strong>；<strong>认证成功后</strong>，认证系统应该<strong>生成统一的认证标志（ticket），返还给用户</strong>。另外，认证系统还应该<strong>对ticket进行效验，判断其有效性</strong>。<br>2.<strong>所有应用系统能够识别和提取ticket（SSO-Token）信息</strong>。要实现SSO的功能，<strong>让用户只登录一次</strong>，就必须<strong>让应用系统能够识别已经登录过的用户</strong>。应用系统应该能<strong>对ticket（SSO-Token）进行识别和提取</strong>，通过<strong>与认证系统的通讯</strong>，能<strong>自动判断当前用户是否登录过</strong>，从而完成单点登录的功能。</li></ul><h4 id="单点登录的优缺点"><a href="#单点登录的优缺点" class="headerlink" title="单点登录的优缺点"></a>单点登录的优缺点</h4><blockquote>优点</blockquote><ul><li><strong>提高用户的效率</strong>。用户不再被多次登录困扰，也不需要记住多个 ID 和密码。另外，用户忘记密码并求助于支持人员的情况也会减少。</li><li><strong>提高开发人员的效率</strong>。SSO 为开发人员提供了一个通用的身份验证框架。实际上，如果 SSO 机制是独立的，那么<strong>开发人员就完全不需要为身份验证操心</strong>。他们可以假设，只要对应用程序的请求附带一个用户名，身份验证就已经完成了。</li><li><strong>简化管理</strong>。如果应用程序加入了单点登录协议，管理用户帐号的负担就会减轻。简化的程度取决于应用程序，因为 <strong>SSO 只处理身份验证</strong>，所以应用程序可能仍然需要设置用户的属性（比如访问特权）。</li></ul><blockquote>缺点</blockquote><ul><li><strong>不利于重构</strong>。因为涉及到的系统很多，要重构必须要兼容所有的系统，可能很耗时。</li><li><strong>无人看守桌面</strong>。因为只需要登录一次，所有的授权的应用系统都可以访问，可能导致一些很重要的信息泄露。</li></ul>]]></content>
     
     <summary type="html">
     
@@ -121,11 +121,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
       <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -322,9 +322,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
@@ -349,11 +349,11 @@
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
-      <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
-    
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
       <category term="CommonJS" scheme="https://chongtianhong.github.io/tags/CommonJS/"/>
+    
+      <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
   </entry>
   
@@ -378,9 +378,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
@@ -462,9 +462,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
@@ -592,13 +592,13 @@
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
-      <category term="Promise" scheme="https://chongtianhong.github.io/tags/Promise/"/>
-    
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
       <category term="交互" scheme="https://chongtianhong.github.io/tags/%E4%BA%A4%E4%BA%92/"/>
     
       <category term="AJAX" scheme="https://chongtianhong.github.io/tags/AJAX/"/>
+    
+      <category term="Promise" scheme="https://chongtianhong.github.io/tags/Promise/"/>
     
   </entry>
   
