@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="Node.js 是以单进程单线程的模式运行的，并且使用驱动模式来处理并发，对于多核CPU，如果仅仅使用单进程，其实是很浪费资源的，因此Node.js提供了cluster模块和child_process模块来创建多个子进程，从而提高cpu的利用率。">
+<meta name="description" content="Node.js 是以单进程单线程的模式运行的，并且使用驱动模式来处理并发，对于多核CPU，如果仅仅使用单进程，其实是很浪费资源的，因此Node.js提供了cluster模块和child_process模块来创建多个子进程，从而提高cpu的利用率。注意：Node.js 是一门单线程、异步、非阻塞语言!">
 <meta name="keywords" content="开发,Node.js,多进程,多核,并发,cpu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Node.js中的多进程">
-<meta property="og:url" content="https://chongtianhong.github.io/2018/03/25/multiprocessing/index.html">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/03/14/multiprocessing/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="Node.js 是以单进程单线程的模式运行的，并且使用驱动模式来处理并发，对于多核CPU，如果仅仅使用单进程，其实是很浪费资源的，因此Node.js提供了cluster模块和child_process模块来创建多个子进程，从而提高cpu的利用率。">
+<meta property="og:description" content="Node.js 是以单进程单线程的模式运行的，并且使用驱动模式来处理并发，对于多核CPU，如果仅仅使用单进程，其实是很浪费资源的，因此Node.js提供了cluster模块和child_process模块来创建多个子进程，从而提高cpu的利用率。注意：Node.js 是一门单线程、异步、非阻塞语言!">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-22T03:03:26.680Z">
+<meta property="og:updated_time" content="2018-07-22T03:12:32.378Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node.js中的多进程">
-<meta name="twitter:description" content="Node.js 是以单进程单线程的模式运行的，并且使用驱动模式来处理并发，对于多核CPU，如果仅仅使用单进程，其实是很浪费资源的，因此Node.js提供了cluster模块和child_process模块来创建多个子进程，从而提高cpu的利用率。">
+<meta name="twitter:description" content="Node.js 是以单进程单线程的模式运行的，并且使用驱动模式来处理并发，对于多核CPU，如果仅仅使用单进程，其实是很浪费资源的，因此Node.js提供了cluster模块和child_process模块来创建多个子进程，从而提高cpu的利用率。注意：Node.js 是一门单线程、异步、非阻塞语言!">
 
 
 
@@ -164,7 +164,7 @@
 
 
 
-  <link rel="canonical" href="https://chongtianhong.github.io/2018/03/25/multiprocessing/"/>
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/03/14/multiprocessing/"/>
 
 
 
@@ -309,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/03/25/multiprocessing/">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/03/14/multiprocessing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaobing Hong">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-25T10:32:22+08:00">
-                2018-03-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T10:32:22+08:00">
+                2018-03-14
               </time>
             
 
@@ -399,10 +399,11 @@
 
       
         <ul>
-<li>Node.js 是以<strong>单进程单线程</strong>的模式运行的，并且使用<strong>驱动模式</strong>来<strong>处理并发</strong>，对于多核CPU，如果仅仅使用单进程，其实是很浪费资源的，因此Node.js提供了<strong>cluster模块</strong>和<strong>child_process模块</strong>来创建多个子进程，从而<strong>提高cpu的利用率</strong>。<a id="more"></a>
+<li>Node.js 是以<strong>单进程单线程</strong>的模式运行的，并且使用<strong>驱动模式</strong>来<strong>处理并发</strong>，对于多核CPU，如果仅仅使用单进程，其实是很浪费资源的，因此Node.js提供了<strong>cluster模块</strong>和<strong>child_process模块</strong>来创建多个子进程，从而<strong>提高cpu的利用率</strong>。<br>注意：Node.js 是一门单线程、异步、非阻塞语言!<a id="more"></a>
 </li>
 </ul>
 <h4 id="使用cluster模块创建多个子进程"><a href="#使用cluster模块创建多个子进程" class="headerlink" title="使用cluster模块创建多个子进程"></a>使用cluster模块创建多个子进程</h4><ul>
+<li>nodejs提供了cluster集群（支持端口共享的多进程），cluster基于child_process，process二次封装，方便我们使用该功能实现单机nodejs的web集群。</li>
 <li>通过cluster启动工作进程，可以直接实现<strong>端口复用</strong>，因此所有工作进程只需要监听同一个端口，当主进程终止还需要关闭所有的工作进程。</li>
 <li><p>先看以下的代码：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">var cluster = require(<span class="string">'cluster'</span>);</span><br><span class="line">var os = require(<span class="string">'os'</span>);</span><br><span class="line">// 获取CPU 的数量</span><br><span class="line">var numCPUs = os.cpus().length;</span><br><span class="line">var workers = &#123;&#125;;</span><br><span class="line"><span class="keyword">if</span> (cluster.isMaster) &#123;</span><br><span class="line">    // 主进程分支</span><br><span class="line">    cluster.on(<span class="string">'death'</span>, <span class="keyword">function</span> (worker) &#123;</span><br><span class="line">    // 当一个工作进程结束时，重启工作进程</span><br><span class="line">        delete workers[worker.pid];</span><br><span class="line">        worker = cluster.fork();</span><br><span class="line">        workers[worker.pid] = worker;</span><br><span class="line">    &#125;);</span><br><span class="line">    // 初始开启与CPU 数量相同的工作进程</span><br><span class="line">    <span class="keyword">for</span> (var i = 0; i &lt; numCPUs; i++) &#123;</span><br><span class="line">        var worker = cluster.fork();</span><br><span class="line">        workers[worker.pid] = worker;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    // 工作进程分支，启动服务器</span><br><span class="line">    var app = require(<span class="string">'./app'</span>);</span><br><span class="line">    app.listen(3000);</span><br><span class="line">&#125;</span><br><span class="line">// 当主进程被终止时，关闭所有工作进程</span><br><span class="line">process.on(<span class="string">'SIGTERM'</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    <span class="keyword">for</span> (var pid <span class="keyword">in</span> workers) &#123;</span><br><span class="line">        process.kill(pid);</span><br><span class="line">    &#125;</span><br><span class="line">    process.exit(0);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -479,8 +480,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/24/require/" rel="next" title="Nodejs的模块系统以及require的机制">
-                <i class="fa fa-chevron-left"></i> Nodejs的模块系统以及require的机制
+              <a href="/2018/03/13/array1/" rel="next" title="JavaScript 中的循环数组遍历">
+                <i class="fa fa-chevron-left"></i> JavaScript 中的循环数组遍历
               </a>
             
           </div>
@@ -488,6 +489,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/15/asyncProgram/" rel="prev" title="Promise、Generator及async的笔记整理">
+                Promise、Generator及async的笔记整理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
