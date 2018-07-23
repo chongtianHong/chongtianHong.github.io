@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-07-23T14:08:19.504Z</updated>
+  <updated>2018-07-23T14:13:12.355Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -21,34 +21,31 @@
     <link href="https://chongtianhong.github.io/2018/07/22/distinctArray/"/>
     <id>https://chongtianhong.github.io/2018/07/22/distinctArray/</id>
     <published>2018-07-22T03:15:15.000Z</published>
-    <updated>2018-07-23T14:08:19.504Z</updated>
+    <updated>2018-07-23T14:13:12.355Z</updated>
     
-    <content type="html"><![CDATA[<ul><li>数组去重有多重方法，分别是：<ul><li>利用splice直接在原数组进行操作</li><li>利用对象的属性不能相同的特点进行去重</li><li>利用数组的indexOf下标属性来查询</li><li>利用数组原型对象上的 lastIndexOf 方法</li><li>利用 ES6的set 方法</li><li>利用数组原型对象上的includes方法</li></ul></li><li>接下来将用代码的方式对这几种方法进行具体介绍。<a id="more"></a></li></ul><blockquote>方法一：利用splice直接在原数组进行操作</blockquote><ul><li>思路：双层循环，外层循环元素，内层循环时比较值。值相同时，则删去这个值。</li><li>注意点:删除元素之后，需要将数组的长度也减1。</li><li>优点：简单易懂。</li><li>缺点：占用内存高，速度慢。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.distinct = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  <span class="built_in">let</span> arr = this,;</span><br><span class="line">  <span class="built_in">let</span> len = arr.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> j = i + 1; j &lt; len; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[i] == arr[j]) &#123;</span><br><span class="line">        arr.splice(j, 1);</span><br><span class="line">        len--;</span><br><span class="line">        j--;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> arr;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">let</span> a = [1, 2, 3, 4, 5, 6, 5, 3, 2, 4, 56, 4, 1, 2, 1, 1, 1, 1, 1, 1, ];</span><br><span class="line"><span class="built_in">let</span> b = a.distinct();</span><br><span class="line">console.log(b.toString()); //1,2,3,4,5,6,56</span><br></pre></td></tr></table></figure></li></ul><blockquote>方法二：利用对象的属性不能相同的特点进行去重</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.distinct = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  <span class="built_in">let</span> arr = this;</span><br><span class="line">  <span class="built_in">let</span> obj = &#123;&#125;;</span><br><span class="line">  <span class="built_in">let</span> result = [];</span><br><span class="line">  <span class="built_in">let</span> len = arr.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!obj[arr[i]]) &#123; //如果能查找到，证明数组元素重复了</span><br><span class="line">      obj[arr[i]] = 1;</span><br><span class="line">      result.push(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> result;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">let</span> a = [1, 2, 3, 4, 5, 6, 5, 3, 2, 4, 56, 4, 1, 2, 1, 1, 1, 1, 1, 1, ];</span><br><span class="line"><span class="built_in">let</span> b = a.distinct();</span><br><span class="line">console.log(b.toString()); //1,2,3,4,5,6,56</span><br></pre></td></tr></table></figure><blockquote>方法三: 利用数组的indexOf下标属性来查询</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr)&#123;</span><br><span class="line">  var res = [];</span><br><span class="line">  <span class="keyword">for</span>(var i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(res.indexOf(arr[i]) == -1)&#123;</span><br><span class="line">      res.push(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote>方法四: 利用数组原型对象上的 lastIndexOf 方法</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr) &#123;</span><br><span class="line">  var res = [];</span><br><span class="line">  <span class="keyword">for</span> (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    res.lastIndexOf(arr[i]) !== -1 ? <span class="string">''</span> : res.push(arr[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote>方法五: 利用 ES6的set 方法</blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr) &#123;</span><br><span class="line">  //Set数据结构，它类似于数组，其成员的值都是唯一的</span><br><span class="line">  <span class="built_in">return</span> Array.from(new Set(arr)); // 利用Array.from将Set结构转换成数组</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote>方法六: 利用数组原型对象上的includes方法</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr) &#123;</span><br><span class="line">  var res = [];</span><br><span class="line">  <span class="keyword">for</span> (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!res.includes(arr[i])) &#123; // 如果res新数组包含当前循环item</span><br><span class="line">      res.push(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<ul><li>数组去重有多种方法，分别是：<ul><li>利用数组的<strong>splice方法</strong>直接在原数组进行操作</li><li>利用<strong>对象的属性不能相同</strong>的特点进行去重</li><li>利用数组的<strong>indexOf下标属性</strong>来查询</li><li>利用数组原型对象上的 <strong>lastIndexOf 方法</strong></li><li>利用 ES6的<strong>set 方法</strong></li><li>利用数组原型对象上的<strong>includes方法</strong><a id="more"></a></li></ul></li><li>接下来将对这几种方法进行具体介绍。</li></ul><blockquote>方法一：利用splice直接在原数组进行操作</blockquote><ul><li>思路：双层循环，外层循环元素，内层循环时比较值。值相同时，则删去这个值。</li><li>注意点:删除元素之后，需要将数组的长度也减1。</li><li>优点：简单易懂。</li><li>缺点：占用内存高，速度慢。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.distinct = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  <span class="built_in">let</span> arr = this,;</span><br><span class="line">  <span class="built_in">let</span> len = arr.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> j = i + 1; j &lt; len; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[i] == arr[j]) &#123;</span><br><span class="line">        arr.splice(j, 1);</span><br><span class="line">        len--;</span><br><span class="line">        j--;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> arr;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">let</span> a = [1, 2, 3, 4, 5, 6, 5, 3, 2, 4, 56, 4, 1, 2, 1, 1, 1, 1, 1, 1, ];</span><br><span class="line"><span class="built_in">let</span> b = a.distinct();</span><br><span class="line">console.log(b.toString()); //1,2,3,4,5,6,56</span><br></pre></td></tr></table></figure></li></ul><blockquote>方法二：利用对象的属性不能相同的特点进行去重</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.distinct = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  <span class="built_in">let</span> arr = this;</span><br><span class="line">  <span class="built_in">let</span> obj = &#123;&#125;;</span><br><span class="line">  <span class="built_in">let</span> result = [];</span><br><span class="line">  <span class="built_in">let</span> len = arr.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!obj[arr[i]]) &#123; //如果能查找到，证明数组元素重复了</span><br><span class="line">      obj[arr[i]] = 1;</span><br><span class="line">      result.push(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> result;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">let</span> a = [1, 2, 3, 4, 5, 6, 5, 3, 2, 4, 56, 4, 1, 2, 1, 1, 1, 1, 1, 1, ];</span><br><span class="line"><span class="built_in">let</span> b = a.distinct();</span><br><span class="line">console.log(b.toString()); //1,2,3,4,5,6,56</span><br></pre></td></tr></table></figure><blockquote>方法三: 利用数组的indexOf下标属性来查询</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr)&#123;</span><br><span class="line">  var res = [];</span><br><span class="line">  <span class="keyword">for</span>(var i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(res.indexOf(arr[i]) == -1)&#123;</span><br><span class="line">      res.push(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote>方法四: 利用数组原型对象上的 lastIndexOf 方法</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr) &#123;</span><br><span class="line">  var res = [];</span><br><span class="line">  <span class="keyword">for</span> (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    res.lastIndexOf(arr[i]) !== -1 ? <span class="string">''</span> : res.push(arr[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote>方法五: 利用 ES6的set 方法</blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr) &#123;</span><br><span class="line">  //Set数据结构，它类似于数组，其成员的值都是唯一的</span><br><span class="line">  <span class="built_in">return</span> Array.from(new Set(arr)); // 利用Array.from将Set结构转换成数组</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote>方法六: 利用数组原型对象上的includes方法</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr) &#123;</span><br><span class="line">  var res = [];</span><br><span class="line">  <span class="keyword">for</span> (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!res.includes(arr[i])) &#123; // 如果res新数组包含当前循环item</span><br><span class="line">      res.push(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
       &lt;ul&gt;
-&lt;li&gt;数组去重有多重方法，分别是：&lt;ul&gt;
-&lt;li&gt;利用splice直接在原数组进行操作&lt;/li&gt;
-&lt;li&gt;利用对象的属性不能相同的特点进行去重&lt;/li&gt;
-&lt;li&gt;利用数组的indexOf下标属性来查询&lt;/li&gt;
-&lt;li&gt;利用数组原型对象上的 lastIndexOf 方法&lt;/li&gt;
-&lt;li&gt;利用 ES6的set 方法&lt;/li&gt;
-&lt;li&gt;利用数组原型对象上的includes方法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;接下来将用代码的方式对这几种方法进行具体介绍。
+&lt;li&gt;数组去重有多种方法，分别是：&lt;ul&gt;
+&lt;li&gt;利用数组的&lt;strong&gt;splice方法&lt;/strong&gt;直接在原数组进行操作&lt;/li&gt;
+&lt;li&gt;利用&lt;strong&gt;对象的属性不能相同&lt;/strong&gt;的特点进行去重&lt;/li&gt;
+&lt;li&gt;利用数组的&lt;strong&gt;indexOf下标属性&lt;/strong&gt;来查询&lt;/li&gt;
+&lt;li&gt;利用数组原型对象上的 &lt;strong&gt;lastIndexOf 方法&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;利用 ES6的&lt;strong&gt;set 方法&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;利用数组原型对象上的&lt;strong&gt;includes方法&lt;/strong&gt;
     
     </summary>
     
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
       <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -210,11 +207,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
       <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -352,9 +349,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Promise" scheme="https://chongtianhong.github.io/tags/Promise/"/>
-    
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
+    
+      <category term="Promise" scheme="https://chongtianhong.github.io/tags/Promise/"/>
     
       <category term="Genorator" scheme="https://chongtianhong.github.io/tags/Genorator/"/>
     
@@ -418,9 +415,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
@@ -447,9 +444,9 @@
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
-      <category term="CommonJS" scheme="https://chongtianhong.github.io/tags/CommonJS/"/>
-    
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
+    
+      <category term="CommonJS" scheme="https://chongtianhong.github.io/tags/CommonJS/"/>
     
   </entry>
   
@@ -474,9 +471,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
@@ -558,9 +555,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
