@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-07-24T14:43:17.647Z</updated>
+  <updated>2018-07-24T14:44:37.364Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://chongtianhong.github.io/2018/03/30/inlineBlock/"/>
     <id>https://chongtianhong.github.io/2018/03/30/inlineBlock/</id>
     <published>2018-03-30T10:00:29.000Z</published>
-    <updated>2018-07-24T14:43:17.647Z</updated>
+    <updated>2018-07-24T14:44:37.364Z</updated>
     
-    <content type="html"><![CDATA[<ul><li><code>inline</code>和<code>inline-block</code>的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。</li><li>给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。<a id="more"></a></li></ul><blockquote>解决行内块元素之间存在间隙</blockquote><ul><li>产生原因：浏览器在解析HTML代码时，将上一行的结束标签和下一行的开始标签，解析为空格。</li><li><p>解决方法：<br>1.将父元素字体大小设置为0，行内块元素内的字体单独设置<br>2.取消换行符，如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;aaaa&lt;/span&gt;&lt;span&gt;aaaa&lt;/span&gt;&lt;span&gt;aaaa&lt;/span&gt;</span><br></pre></td></tr></table></figure><p>3.使用margin负值<br>4.使用浮动。（块元素同行显示：①display：inline-block②float：left）<br>5.使用letter-spacing、word-spacing等方法。</p></li><li>图片的间隙问题也是因为行内元素有一个字符的间隙，解决方法:给放置图片的div设置<code>font-size:0;</code>。</li></ul><blockquote>解决行内块元素之间的上下错位问题</blockquote><ul><li>解决方法：给行内块元素设置vertical-align属性</li></ul>]]></content>
+    <content type="html"><![CDATA[<ul><li><code>inline</code>和<code>inline-block</code>的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。</li><li>给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。<a id="more"></a></li></ul><blockquote>解决行内块元素之间存在间隙</blockquote><ul><li>产生原因：浏览器在解析HTML代码时，将上一行的结束标签和下一行的开始标签，解析为空格。</li><li><p>解决方法：<br>1.将父元素字体大小设置为0，行内块元素内的字体单独设置<br>2.取消换行符，如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;aaaa&lt;/span&gt;&lt;span&gt;aaaa&lt;/span&gt;&lt;span&gt;aaaa&lt;/span&gt;</span><br></pre></td></tr></table></figure><p>3.使用margin负值<br>4.使用浮动。（块元素同行显示：①display：inline-block②float：left）<br>5.使用letter-spacing、word-spacing等方法。</p></li><li>图片的间隙问题也是因为行内元素有一个字符的间隙，解决方法:给放置图片的div设置<code>font-size:0;</code>。</li></ul><blockquote>解决行内块元素之间的上下错位问题</blockquote><ul><li>产生原因：行内块元素是基于baseline对齐的，大小不一会导致上下不齐。</li><li>解决方法：给行内块元素设置vertical-align属性</li></ul>]]></content>
     
     <summary type="html">
     

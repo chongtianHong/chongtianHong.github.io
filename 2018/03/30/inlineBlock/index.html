@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="inline和inline-block的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。 给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-24T14:43:17.647Z">
+<meta property="og:updated_time" content="2018-07-24T14:44:37.364Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行内块元素存在的问题及解决方案">
 <meta name="twitter:description" content="inline和inline-block的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。 给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。">
@@ -416,6 +416,7 @@
 <blockquote>解决行内块元素之间的上下错位问题</blockquote>
 
 <ul>
+<li>产生原因：行内块元素是基于baseline对齐的，大小不一会导致上下不齐。</li>
 <li>解决方法：给行内块元素设置vertical-align属性</li>
 </ul>
 
