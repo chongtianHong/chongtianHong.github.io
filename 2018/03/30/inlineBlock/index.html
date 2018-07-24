@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Ice, Ice's blog, Ice Hong" />
+  <meta name="keywords" content="开发,CSS,inline-block," />
 
 
 
@@ -123,13 +123,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ice&#39;s Blog">
-<meta property="og:url" content="https://chongtianhong.github.io/tags/Github/index.html">
+<meta name="description" content="inline和inline-block的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。 给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。">
+<meta name="keywords" content="开发,CSS,inline-block">
+<meta property="og:type" content="article">
+<meta property="og:title" content="行内块元素存在的问题及解决方案">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/03/30/inlineBlock/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="inline和inline-block的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。 给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-24T14:43:17.647Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ice&#39;s Blog">
+<meta name="twitter:title" content="行内块元素存在的问题及解决方案">
+<meta name="twitter:description" content="inline和inline-block的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。 给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。">
 
 
 
@@ -159,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="https://chongtianhong.github.io/tags/Github/"/>
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/03/30/inlineBlock/"/>
 
 
 
 
 
-  <title>标签: Github | Ice's Blog</title>
+  <title>行内块元素存在的问题及解决方案 | Ice's Blog</title>
   
 
 
@@ -184,7 +189,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/chongtianHong">
       <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
@@ -290,110 +295,202 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Github<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/03/30/inlineBlock/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/03/29/git/" itemprop="url">
-              
-                <span itemprop="name">Git远程操作详解</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">行内块元素存在的问题及解决方案</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-29T15:32:52+08:00"
-              content="2018-03-29" >
-          03-29
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-30T18:00:29+08:00">
+                2018-03-30
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/27/domainname/" itemprop="url">
-              
-                <span itemprop="name">GitHub Pages绑定顶级域名的方法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-27T10:16:46+08:00"
-              content="2018-02-27" >
-          02-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
+        <ul>
+<li><code>inline</code>和<code>inline-block</code>的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。</li>
+<li>给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。<a id="more"></a>
+</li>
+</ul>
+<blockquote>解决行内块元素之间存在间隙</blockquote>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<ul>
+<li>产生原因：浏览器在解析HTML代码时，将上一行的结束标签和下一行的开始标签，解析为空格。</li>
+<li><p>解决方法：<br>1.将父元素字体大小设置为0，行内块元素内的字体单独设置<br>2.取消换行符，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;aaaa&lt;/span&gt;&lt;span&gt;aaaa&lt;/span&gt;&lt;span&gt;aaaa&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+<p>3.使用margin负值<br>4.使用浮动。（块元素同行显示：①display：inline-block②float：left）<br>5.使用letter-spacing、word-spacing等方法。</p>
+</li>
+<li>图片的间隙问题也是因为行内元素有一个字符的间隙，解决方法:给放置图片的div设置<code>font-size:0;</code>。</li>
+</ul>
+<blockquote>解决行内块元素之间的上下错位问题</blockquote>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/26/hexo/" itemprop="url">
-              
-                <span itemprop="name">Hexo博客搭建</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-26T08:13:04+08:00"
-              content="2018-02-26" >
-          02-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+<ul>
+<li>解决方法：给行内块元素设置vertical-align属性</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+          
+            <a href="/tags/inline-block/" rel="tag"><i class="fa fa-tag"></i> inline-block</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/29/git/" rel="next" title="Git远程操作详解">
+                <i class="fa fa-chevron-left"></i> Git远程操作详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -401,6 +498,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -647,6 +748,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

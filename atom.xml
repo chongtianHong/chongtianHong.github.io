@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-07-24T14:28:57.541Z</updated>
+  <updated>2018-07-24T14:43:17.647Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>行内块元素存在的问题及解决方案</title>
+    <link href="https://chongtianhong.github.io/2018/03/30/inlineBlock/"/>
+    <id>https://chongtianhong.github.io/2018/03/30/inlineBlock/</id>
+    <published>2018-03-30T10:00:29.000Z</published>
+    <updated>2018-07-24T14:43:17.647Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><code>inline</code>和<code>inline-block</code>的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。</li><li>给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。<a id="more"></a></li></ul><blockquote>解决行内块元素之间存在间隙</blockquote><ul><li>产生原因：浏览器在解析HTML代码时，将上一行的结束标签和下一行的开始标签，解析为空格。</li><li><p>解决方法：<br>1.将父元素字体大小设置为0，行内块元素内的字体单独设置<br>2.取消换行符，如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;aaaa&lt;/span&gt;&lt;span&gt;aaaa&lt;/span&gt;&lt;span&gt;aaaa&lt;/span&gt;</span><br></pre></td></tr></table></figure><p>3.使用margin负值<br>4.使用浮动。（块元素同行显示：①display：inline-block②float：left）<br>5.使用letter-spacing、word-spacing等方法。</p></li><li>图片的间隙问题也是因为行内元素有一个字符的间隙，解决方法:给放置图片的div设置<code>font-size:0;</code>。</li></ul><blockquote>解决行内块元素之间的上下错位问题</blockquote><ul><li>解决方法：给行内块元素设置vertical-align属性</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;code&gt;inline&lt;/code&gt;和&lt;code&gt;inline-block&lt;/code&gt;的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。&lt;/li&gt;
+&lt;li&gt;给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
+    
+      <category term="inline-block" scheme="https://chongtianhong.github.io/tags/inline-block/"/>
+    
+  </entry>
   
   <entry>
     <title>Git远程操作详解</title>
@@ -567,34 +595,6 @@
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Cookies的封装</title>
-    <link href="https://chongtianhong.github.io/2018/03/10/Cookies/"/>
-    <id>https://chongtianhong.github.io/2018/03/10/Cookies/</id>
-    <published>2018-03-10T11:36:02.000Z</published>
-    <updated>2018-07-15T11:48:07.292Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>Cookie是一小段文本信息，用户请求页面的时候，在浏览器和服务器之间传递。用户每次访问的时候都会记录cookie，cookie里可以包含用户信息，浏览的历史记录等等；</li><li>Cookie是由服务器端生成，但是它是属于客户端的，发送给User-Agent（一般是浏览器），浏览器会将Cookie的key/value保存到某个目录下的文本文件内，下次请求同一网站时就发送该Cookie给服务器（前提是浏览器设置为启用cookie）。<a id="more"></a></li></ul><h4 id="Cookie的组成"><a href="#Cookie的组成" class="headerlink" title="Cookie的组成"></a>Cookie的组成</h4><ul><li><p>基本组成</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">“key=value; expires=date; [path=path; domain=domain; secure]”</span><br><span class="line">  键=值；过期时间； 【可访问路径； 域名； 是否使用安全连接】【可选项】</span><br></pre></td></tr></table></figure></li><li><p>设置Cookie的封装方法</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> setCookies(key,value,expires,path,domain,secure) &#123;</span><br><span class="line">    var cookies=<span class="string">''</span>;</span><br><span class="line">    cookies = encodeURI(key)+<span class="string">'='</span>+encodeURI(value);</span><br><span class="line">    <span class="keyword">if</span>(expires instanceof Date)&#123;</span><br><span class="line">        cookies+=<span class="string">"; expires="</span>+expires;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(path)&#123;</span><br><span class="line">        cookies+=<span class="string">"; path="</span>+path;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(domain)&#123;</span><br><span class="line">        cookies+=<span class="string">"; domain"</span>+domain;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(secure)&#123;</span><br><span class="line">        cookies+=<span class="string">"; secure"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    document.cookie=cookies;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>日期函数</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> setCookieDate(day) &#123;</span><br><span class="line">    <span class="keyword">if</span> (typeof day === <span class="string">"number"</span>)&#123;</span><br><span class="line">    var date = new Date();</span><br><span class="line">    date.setDate(date.getDate()+day);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> date;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>调用实例</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//这个cookie会在当前日期的七天之后过期</span><br><span class="line">//设置的cookie: Kinds : animals</span><br><span class="line">setCookies(<span class="string">'Kinds'</span>,<span class="string">'animals'</span>,setCookieDate(7));</span><br></pre></td></tr></table></figure></li><li><p>删除实例：将当前Cookie的过期日期参数设置为负值就可以删除这个Cookie </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setCookies(‘Kinds’,’animals’,setCookieDate(-1));</span><br></pre></td></tr></table></figure></li><li><p>获取某个值的封装方法（value）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> getCookies(value) &#123;</span><br><span class="line">    var cookie = document.cookie;</span><br><span class="line">    var start = cookie.indexOf(<span class="string">'='</span>,cookie.indexOf(value));</span><br><span class="line">    var end = cookie.indexOf(<span class="string">';'</span>,cookie.indexOf(value));</span><br><span class="line">    <span class="keyword">if</span>(end === -1)&#123;</span><br><span class="line">        <span class="built_in">return</span> decodeURI(cookie.substring(start+1,cookie.length));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">return</span> decodeURI(cookie.substring(start+1,end));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;Cookie是一小段文本信息，用户请求页面的时候，在浏览器和服务器之间传递。用户每次访问的时候都会记录cookie，cookie里可以包含用户信息，浏览的历史记录等等；&lt;/li&gt;
-&lt;li&gt;Cookie是由服务器端生成，但是它是属于客户端的，发送给User-Agent（一般是浏览器），浏览器会将Cookie的key/value保存到某个目录下的文本文件内，下次请求同一网站时就发送该Cookie给服务器（前提是浏览器设置为启用cookie）。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
-    
-      <category term="Cookie" scheme="https://chongtianhong.github.io/tags/Cookie/"/>
     
   </entry>
   
