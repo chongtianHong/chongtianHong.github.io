@@ -132,7 +132,7 @@
 <meta property="og:description" content="Git是目前最流行的版本管理系统，学会Git几乎成了开发者的必备技能。 Git有很多优势，其中之一就是远程操作非常简便。 本文将详细介绍5个Git命令的概念和用法，理解了这些内容，就能完全掌握Git远程操作： git clone git remote git fetch git pull git push">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/git.jpg">
-<meta property="og:updated_time" content="2018-07-24T14:19:26.949Z">
+<meta property="og:updated_time" content="2018-07-24T14:28:57.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git远程操作详解">
 <meta name="twitter:description" content="Git是目前最流行的版本管理系统，学会Git几乎成了开发者的必备技能。 Git有很多优势，其中之一就是远程操作非常简便。 本文将详细介绍5个Git命令的概念和用法，理解了这些内容，就能完全掌握Git远程操作： git clone git remote git fetch git pull git push">
@@ -409,10 +409,11 @@
 <li>git fetch</li>
 <li>git pull</li>
 <li>git push<a id="more"></a>
-<img src="/images/git.jpg" width="600" alt="Git的基本用法" style="border:none"></li>
+</li>
 </ul>
 </li>
 </ul>
+<p><img src="/images/git.jpg" width="600" alt="Git的基本用法" style="border:none"></p>
 <h4 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h4><ul>
 <li><p>远程操作的第一步，通常是<strong>从远程主机克隆一个版本库</strong>，这时就要用到<code>git clone</code>命令:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;版本库的网址&gt;</span><br></pre></td></tr></table></figure>
@@ -420,24 +421,24 @@
 <li><p>比如，克隆jQuery的版本库：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/jquery/jquery.git</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>该命令会在本地主机生成一个目录，与远程主机的版本库同名。如果要<strong>指定不同的目录名</strong>，可以将目录名作为<code>git clone</code>命令的第二个参数:</p>
+<li><p>该命令会在本地主机生成一个目录，与远程主机的版本库同名。如果要<strong>指定不同的目录名</strong>，可以将目录名作为<code>git clone</code>命令的第二个参数：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;版本库的网址&gt; &lt;本地目录名&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><code>git clone</code>支持多种协议，除了HTTP(s)以外，还支持SSH、Git、本地文件协议等，下面是一些例子：</p>
+<li><p><code>git clone</code>支持多种协议，除了<strong>HTTP(s)</strong>以外，还支持<strong>SSH、Git、本地文件协议</strong>等，下面是一些例子：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> http[s]://example.com/path/to/repo.git/</span><br><span class="line">git <span class="built_in">clone</span> ssh://example.com/path/to/repo.git/</span><br><span class="line">git <span class="built_in">clone</span> git://example.com/path/to/repo.git/</span><br><span class="line">git <span class="built_in">clone</span> /opt/git/project.git </span><br><span class="line">git <span class="built_in">clone</span> file:///opt/git/project.git</span><br><span class="line">git <span class="built_in">clone</span> ftp[s]://example.com/path/to/repo.git/</span><br><span class="line">git <span class="built_in">clone</span> rsync://example.com/path/to/repo.git/</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>SSH协议</strong>还有另一种写法:</p>
+<li><p><strong>SSH协议</strong>还有另一种写法：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> [user@]example.com:path/to/repo.git/</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>通常来说，<strong>Git协议下载速度最快</strong>，SSH协议用于<strong>需要用户认证</strong>的场合。</p>
+<li><p>通常来说，<strong>Git协议下载速度最快</strong>，<strong>SSH协议</strong>用于<strong>需要用户认证</strong>的场合。</p>
 </li>
 </ul>
 <h4 id="git-remote"><a href="#git-remote" class="headerlink" title="git remote"></a>git remote</h4><ul>
 <li>为了便于管理，Git要求每个远程主机都必须指定一个主机名。<code>git remote</code>命令就用于管理主机名。</li>
-<li><p>不带选项的时候，<code>git remote</code>命令<strong>列出所有远程主机</strong>:</p>
+<li><p>不带选项的时候，<code>git remote</code>命令<strong>列出所有远程主机</strong>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git remote</span><br><span class="line">origin</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>使用<code>-v</code>选项，可以参看远程主机的网址:</p>
+<li><p>使用<code>-v</code>选项，可以参看远程主机的网址：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin  git@github.com:jquery/jquery.git (fetch)</span><br><span class="line">origin  git@github.com:jquery/jquery.git (push)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令表示，当前只有一台远程主机，叫做origin，以及它的网址。</p>
@@ -447,27 +448,27 @@
 </li>
 <li><p>上面命令表示，克隆的时候，指定远程主机叫做jQuery。</p>
 </li>
-<li><p><code>git remote show</code>命令加上主机名，可以查看该主机的详细信息:</p>
+<li><p><code>git remote show</code>命令加上主机名，可以查看该主机的详细信息：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote show &lt;主机名&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><code>git remote add</code>命令用于添加远程主机:</p>
+<li><p><code>git remote add</code>命令用于添加远程主机：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add &lt;主机名&gt; &lt;网址&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><code>git remote rm</code>命令用于删除远程主机:</p>
+<li><p><code>git remote rm</code>命令用于删除远程主机：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote rm &lt;主机名&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><code>git remote rename</code>命令用于远程主机的改名:</p>
+<li><p><code>git remote rename</code>命令用于远程主机的改名：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote rename &lt;原主机名&gt; &lt;新主机名&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h4><ul>
-<li><p>一旦远程主机的版本库有了更新（Git术语叫做commit），需要将这些更新取回本地，这时就要用到<code>git fetch</code>命令:</p>
+<li><p>一旦远程主机的版本库有了更新（Git术语叫做commit），需要将这些更新取回本地，这时就要用到<code>git fetch</code>命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch &lt;远程主机名&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令将某个远程主机的更新，全部取回本地。</p>
 </li>
 <li><code>git fetch</code>命令通常用来查看其他人的进程，因为它取回的代码对你本地的开发代码没有影响。</li>
-<li><p>默认情况下，<code>git fetch</code>取回所有分支（branch）的更新。如果只想取回特定分支的更新，可以指定分支名:</p>
+<li><p>默认情况下，<code>git fetch</code>取回所有分支（branch）的更新。如果只想取回特定分支的更新，可以指定分支名：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch &lt;远程主机名&gt; &lt;分支名&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>比如，取回<code>origin</code>主机的<code>master</code>分支：</p>
@@ -475,30 +476,30 @@
 </li>
 <li><p>所取回的更新，在本地主机上要用”远程主机名/分支名”的形式读取。比如<code>origin</code>主机的<code>master</code>，就要用<code>origin/master</code>读取。</p>
 </li>
-<li><p><code>git branch</code>命令的<code>-r</code>选项，可以用来查看远程分支，<code>-a</code>选项查看所有分支:</p>
+<li><p><code>git branch</code>命令的<code>-r</code>选项，可以用来查看远程分支，<code>-a</code>选项查看所有分支：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -r</span><br><span class="line">origin/master</span><br><span class="line"></span><br><span class="line">$ git branch -a</span><br><span class="line">* master</span><br><span class="line">  remotes/origin/master</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令表示，本地主机的当前分支是<code>master</code>，远程分支是<code>origin/master</code>。</p>
 </li>
-<li><p>取回远程主机的更新以后，可以在它的基础上，使用<code>git checkoutr</code>命令创建一个新的分支:</p>
+<li><p>取回远程主机的更新以后，可以在它的基础上，使用<code>git checkoutr</code>命令创建一个新的分支：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b newBrach origin/master</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令表示，在<code>origin/master</code>的基础上，创建一个新分支。</p>
 </li>
-<li><p>此外，也可以使用<code>git merge</code>命令或者<code>git rebase</code>命令，在本地分支上合并远程分支:</p>
+<li><p>此外，也可以使用<code>git merge</code>命令或者<code>git rebase</code>命令，在本地分支上合并远程分支：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git merge origin/master</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ git rebase origin/master</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令表示在当前分支上，合并<code>origin/master</code>。</p>
 </li>
 </ul>
 <h4 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h4><ul>
-<li><p><code>git pull</code>命令的作用是，<strong>取回远程主机某个分支的更新</strong>，<strong>再与本地的指定分支合并</strong>。它的完整格式稍稍有点复杂:</p>
+<li><p><code>git pull</code>命令的作用是，<strong>取回远程主机某个分支的更新</strong>，<strong>再与本地的指定分支合并</strong>。它的完整格式稍稍有点复杂：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>比如，取回<code>origin</code>主机的<code>next</code>分支，与本地的<code>master</code>分支合并，需要写成下面这样:</p>
+<li><p>比如，取回<code>origin</code>主机的<code>next</code>分支，与本地的<code>master</code>分支合并，需要写成下面这样：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull origin next:master</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>如果远程分支是与当前分支合并，则冒号后面的部分可以省略:</p>
+<li><p>如果远程分支是与当前分支合并，则冒号后面的部分可以省略：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull origin next</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令表示，取回<code>origin/next</code>分支，再与当前分支合并。实质上，这<strong>等同于先做<code>git fetch</code>，再做<code>git merge</code></strong>：</p>
@@ -506,17 +507,17 @@
 </li>
 <li><p>在某些场合，Git会自动在本地分支与远程分支之间，建立一种追踪关系（tracking）。比如，在<code>git clone</code>的时候，所有本地分支默认与远程主机的同名分支，建立追踪关系，也就是说，本地的<code>master</code>分支自动”追踪”<code>origin/master</code>分支。</p>
 </li>
-<li><p>Git也允许手动建立追踪关系:</p>
+<li><p>Git也允许手动建立追踪关系：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch --<span class="built_in">set</span>-upstream master origin/next</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令指定<code>master</code>分支追踪<code>origin/next</code>分支。</p>
 </li>
-<li><p>如果当前分支与远程分支存在追踪关系，<code>git pull</code>就可以省略远程分支名:</p>
+<li><p>如果当前分支与远程分支存在追踪关系，<code>git pull</code>就可以省略远程分支名：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull origin</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令表示，本地的当前分支自动与对应的<code>origin</code>主机”追踪分支”（remote-tracking branch）进行合并。</p>
 </li>
-<li><p>如果当前分支只有一个追踪分支，连远程主机名都可以省略:</p>
+<li><p>如果当前分支只有一个追踪分支，连远程主机名都可以省略：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令表示，当前分支自动与唯一一个追踪分支进行合并。</p>
@@ -526,7 +527,7 @@
 </li>
 <li><p>如果远程主机删除了某个分支，默认情况下，<code>git pull</code> 不会在拉取远程分支的时候，删除对应的本地分支。这是为了防止，由于其他人操作了远程主机，导致<code>git pull</code>不知不觉删除了本地分支。</p>
 </li>
-<li>但是，你可以改变这个行为，加上参数 <code>-p</code> 就会在本地删除远程已经删除的分支:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git pull -p</span><br><span class="line"><span class="comment"># 等同于下面的命令</span></span><br><span class="line">$ git fetch --prune origin </span><br><span class="line">$ git fetch -p</span><br></pre></td></tr></table></figure>
+<li>但是，你可以改变这个行为，加上参数 <code>-p</code> 就会在本地删除远程已经删除的分支：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git pull -p</span><br><span class="line"><span class="comment"># 等同于下面的命令</span></span><br><span class="line">$ git fetch --prune origin </span><br><span class="line">$ git fetch -p</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="git-push"><a href="#git-push" class="headerlink" title="git push"></a>git push</h4><ul>
@@ -540,12 +541,12 @@
 </li>
 <li><p>上面命令表示，将本地的<code>master</code>分支推送到<code>origin</code>主机的<code>master</code>分支。如果后者不存在，则会被新建。</p>
 </li>
-<li><p>如果<strong>省略本地分支名</strong>，则表示<strong>删除指定的远程分支</strong>，因为这等同于推送一个空的本地分支到远程分支:</p>
+<li><p>如果<strong>省略本地分支名</strong>，则表示<strong>删除指定的远程分支</strong>，因为这等同于推送一个空的本地分支到远程分支：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin :master</span><br><span class="line"><span class="comment"># 等同于</span></span><br><span class="line">$ git push origin --delete master</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令表示删除<code>origin</code>主机的<code>master</code>分支。</p>
 </li>
-<li><p>如果当前分支与远程分支之间存在追踪关系，则本地分支和远程分支都可以省略:</p>
+<li><p>如果当前分支与远程分支之间存在追踪关系，则本地分支和远程分支都可以省略：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令表示，将当前分支推送到<code>origin</code>主机的对应分支。</p>
@@ -553,7 +554,7 @@
 <li><p>如果当前分支只有一个追踪分支，那么主机名都可以省略:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>如果当前分支与多个主机存在追踪关系，则可以使用<code>-u</code>选项指定一个默认主机，这样后面就可以不加任何参数使用<code>git push</code>。</p>
+<li><p>如果当前分支与多个主机存在追踪关系，则可以使用<code>-u</code>选项指定一个默认主机，这样后面就可以不加任何参数使用<code>git push</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令将本地的<code>master</code>分支推送到<code>origin</code>主机，同时指定<code>origin</code>为默认主机，后面就可以不加任何参数使用<code>git push</code>了。</p>
@@ -566,12 +567,12 @@
 </li>
 <li><p>上面命令表示，将所有本地分支都推送到<code>origin</code>主机。</p>
 </li>
-<li><p>如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做<code>git pull</code>合并差异，然后再推送到远程主机。这时，如果你一定要推送，可以使用<code>–force</code>选项。</p>
+<li><p>如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做<code>git pull</code>合并差异，然后再推送到远程主机。这时，如果你一定要推送，可以使用<code>–force</code>选项：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push --force origin</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>上面命令使用<code>–force</code>选项，结果导致<strong>远程主机上更新的版本被覆盖</strong>。除非你很确定要这样做，否则应该<strong>尽量避免</strong>使用<code>–force</code>选项。</p>
 </li>
-<li>最后，<code>git push</code>不会推送标签（tag），除非使用<code>–tags</code>选项:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin --tags</span><br></pre></td></tr></table></figure></li>
+<li>最后，<code>git push</code>不会推送标签（tag），除非使用<code>–tags</code>选项：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin --tags</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
