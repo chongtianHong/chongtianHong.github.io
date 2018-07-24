@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="inline和inline-block的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。 给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-24T14:44:37.364Z">
+<meta property="og:updated_time" content="2018-07-24T14:55:59.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行内块元素存在的问题及解决方案">
 <meta name="twitter:description" content="inline和inline-block的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。 给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。">
@@ -419,6 +419,63 @@
 <li>产生原因：行内块元素是基于baseline对齐的，大小不一会导致上下不齐。</li>
 <li>解决方法：给行内块元素设置vertical-align属性</li>
 </ul>
+<blockquote>vertical-align属性</blockquote>
+
+<ul>
+<li>vertical-align 属性设置元素的垂直对齐方式。</li>
+<li>该属性定义行内元素的基线相对于该元素所在行的基线的垂直对齐。允许指定负长度值和百分比值。这会使元素降低而不是升高。在表单元格中，这个属性会设置单元格框中的单元格内容的对齐方式。</li>
+<li>可能的值：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">值</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">baseline</td>
+<td style="text-align:center">默认。元素放置在父元素的基线上</td>
+</tr>
+<tr>
+<td style="text-align:center">sub</td>
+<td style="text-align:center">垂直对齐文本的下标</td>
+</tr>
+<tr>
+<td style="text-align:center">super</td>
+<td style="text-align:center">垂直对齐文本的上标</td>
+</tr>
+<tr>
+<td style="text-align:center">top</td>
+<td style="text-align:center">把元素的顶端与行中最高元素的顶端对齐</td>
+</tr>
+<tr>
+<td style="text-align:center">text-top</td>
+<td style="text-align:center">把元素的顶端与父元素字体的顶端对齐</td>
+</tr>
+<tr>
+<td style="text-align:center">middle</td>
+<td style="text-align:center">把此元素放置在父元素的中部</td>
+</tr>
+<tr>
+<td style="text-align:center">bottom</td>
+<td style="text-align:center">把元素的顶端与行中最低的元素的顶端对齐</td>
+</tr>
+<tr>
+<td style="text-align:center">text-bottom</td>
+<td style="text-align:center">把元素的底端与父元素字体的底端对齐</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">使用 “line-height” 属性的百分比值来排列此元素。允许使用负值。</td>
+</tr>
+<tr>
+<td style="text-align:center">inherit</td>
+<td style="text-align:center">规定应该从父元素继承 vertical-align 属性的值</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
