@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-07-25T05:55:44.536Z</updated>
+  <updated>2018-07-25T08:10:28.791Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>八种方式实现跨域请求</title>
+    <link href="https://chongtianhong.github.io/2018/04/02/crossDomain/"/>
+    <id>https://chongtianhong.github.io/2018/04/02/crossDomain/</id>
+    <published>2018-04-02T06:47:49.000Z</published>
+    <updated>2018-07-25T08:10:28.791Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>这里说的JS跨域是指<strong>通过JS在<code>不同的域</code>之间进行数据传输或通信</strong>，比如：<ul><li>用ajax向一个不同的域请求数据</li><li>通过JS获取页面中不同域的框架中(iframe)的数据</li></ul></li><li>只要协议、域名、端口有任何一个不同，都被当作是不同的域。<a id="more"></a></li></ul><h4 id="浏览器的同源策略"><a href="#浏览器的同源策略" class="headerlink" title="浏览器的同源策略"></a>浏览器的同源策略</h4><ul><li>只有当<strong>协议</strong>、<strong>端口</strong>、和<strong>域名</strong>都相同的页面，则两个页面具有相同的源。</li><li>同源策略是指一段脚本只能读取来自同一来源的窗口和文档的属性，这里的同一来源指的是主机名、协议和端口号的组合。只要这三个中的<strong>任意一个不同</strong>，网站间的数据请求与传输便构成了<strong>跨域调用</strong>，则受到<strong>同源策略</strong>的限制。 </li><li>同源策略限制从<strong>一个源加载的文档或脚本</strong>如何<strong>与来自另一个源的资源进行交互*</strong>。这是一个用于隔离潜在恶意文件的关键的安全机制。浏览器的同源策略，出于防范跨站脚本的攻击，禁止客户端脚本（如 JavaScript）对不同域的服务进行跨站调用（通常指使用XMLHttpRequest请求）。</li><li>默认情况下，<strong>XHR对象</strong>只能访问<strong>与包含它的页面位于同一个域中的资源</strong>。<strong>请求源</strong>和<strong>请求对象</strong>必须在一个域内。</li></ul><h4 id="跨域请求方式"><a href="#跨域请求方式" class="headerlink" title="跨域请求方式"></a>跨域请求方式</h4><ul><li>解决跨域问题，最简单的莫过于通过<code>nginx反向代理</code>进行实现，但是其需要在<strong>运维层面</strong>修改，且有可能请求的资源并不在我们控制范围内（第三方），所以该方式不能作为通用的解决方案，下面阐述了经常用到几种跨域方式：</li></ul><h5 id="图片ping或script标签跨域"><a href="#图片ping或script标签跨域" class="headerlink" title="图片ping或script标签跨域"></a>图片ping或script标签跨域</h5><ul><li>&lt;script&gt;&lt;img&gt;&lt;link&gt;标签不会遇到跨域问题。严格意义上讲，这不是跨域，这只是<strong>跨站资源请求</strong>。</li><li>跨域是指<strong>在脚本代码中</strong>向<strong>非同源域</strong>发送<strong>HTTP请求</strong>。</li><li><strong>图片ping</strong>常用于跟踪用户点击页面或动态广告曝光次数。 <ul><li>使用&lt;img&gt;标签，因为网页可以从任何网页中加载图片，而不用担心跨域。</li><li>请求数据通过字符串形式发送，而响应可以是任何内容。</li><li>这种方法，1）只能发送get请求。2）浏览器无法获取响应数据。3）只适用于浏览器与服务器之间的单向通信。</li></ul></li><li><strong>script标签</strong>可以得到从其他来源数据，这也是<strong>JSONP依赖的根据</strong>。 </li><li><strong>缺点</strong>：只能发送Get请求 ，无法访问服务器的响应文本（单向请求）。</li></ul><h5 id="JSONP跨域"><a href="#JSONP跨域" class="headerlink" title="JSONP跨域"></a>JSONP跨域</h5><ul><li>JSONP（JSON with Padding）是数据格式JSON的一种“使用模式”，可以让网页从别的网域要数据。</li><li>通过动态&lt;script&gt;元素使用，使用时为src指定一个跨域url。有两部分：1）<strong>回调函数</strong>：响应到来时在页面中使用；2）<strong>数据</strong>：传入回调函数中的JSON数据。</li><li>JSONP将访问跨域请求变成了<strong>执行远程JS代码</strong>，服务端不再返回JSON格式的数据，而是<strong>返回了一段将JSON数据作为传入参数的函数执行代码</strong>。</li><li>所有<strong>JSONP发送的Get请求</strong>都是<strong>js类型</strong>，而非XHR。 </li><li>缺点：<ul><li>只能使用Get请求</li><li>不能注册success、error等事件监听函数，不能很容易的确定JSONP请求是否失败</li><li>JSONP是从其他域中加载代码执行，容易受到跨站请求伪造的攻击，其安全性无法确保。</li></ul></li></ul><h5 id="服务器设置响应头-允许跨域（一般不建议）"><a href="#服务器设置响应头-允许跨域（一般不建议）" class="headerlink" title="服务器设置响应头, 允许跨域（一般不建议）"></a>服务器设置响应头, 允许跨域（一般不建议）</h5><ul><li>W3C推荐了一种新的跨域访问机制，即<strong>跨源资源共享(CORS)</strong>。可以让AJAX实现跨域访问。它允许一个域上的脚本向另一个域提交跨域 AJAX 请求。</li><li><p>与 JSONP 不同，CORS 除了 GET 请求方法以外也<strong>支持其他的 HTTP 请求方法</strong>。服务器一般需要增加如下响应头的一种或几种：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: *</span><br><span class="line">Access-Control-Allow-Methods: POST, GET, OPTIONS</span><br><span class="line">Access-Control-Allow-Headers: X-PINGOTHER, Content-Type</span><br><span class="line">Access-Control-Max-Age: 86400</span><br></pre></td></tr></table></figure></li><li><p>跨域请求默认不会携带Cookie信息，如果需要携带，请配置下述参数：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 服务端</span><br><span class="line"><span class="string">"Access-Control-Allow-Credentials"</span>: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">// 客户端需要设置withCredentials</span><br><span class="line">// Ajax设置</span><br><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure></li><li><p>跨源资源共享(CORS)是通过客户端 + 服务端<strong>协作声明</strong>的方式来确保请求安全的。</p><ul><li>服务端会在HTTP请求头中增加一系列HTTP请求参数(例如Access-Control-Allow-Origin等)，来限制哪些域的请求和哪些请求类型可以接受。</li><li>客户端<strong>在发起请求时</strong>必须<strong>声明自己的源(Orgin)</strong>，否则服务器将不予处理，如果客户端不作声明，请求甚至会被浏览器直接拦截都到不了服务端。(<strong>对于支持CORS的浏览器，请求头会自动添加Origin，值为当前host</strong>)</li><li>服务端收到HTTP请求后会<strong>进行域的比较</strong>，只有<strong>同域的请求</strong>才会处理。</li></ul></li></ul><h5 id="修改document-domain跨子域"><a href="#修改document-domain跨子域" class="headerlink" title="修改document.domain跨子域"></a>修改document.domain跨子域</h5><ul><li>前提条件：这两个域名<strong>必须属于同一个基础域名</strong>，而且<strong>所用的协议，端口都要一致</strong>，否则无法利用<code>document.domain</code>进行跨域，所以只能跨子域。</li><li>在根域范围内，允许把<code>domain</code>属性的值设置为它的上一级域。例如，在<code>aaa.xxx.com</code>域内，可以把<code>domain设置为 <code>xxx.com</code>但不能设置为 <code>xxx.org</code>或者<code>com</code>。<blockquote>现在存在两个域名aaa.xxx.com和bbb.xxx.com。在aaa下嵌入bbb的页面，由于其document.domain不一致，无法在aaa下操作bbb的js。可以在aaa和bbb下通过js将document.domain = ‘xxx.com’;设置一致，来达到互相访问的作用。</blockquote></code></li></ul><h5 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h5><ul><li>WebSocket protocol 是HTML5一种新的协议。它实现了浏览器与服务器全双工通信，同时<strong>允许跨域通讯</strong>，是server push技术的一种很棒的实现。</li><li><strong>需要注意</strong>：WebSocket对象不支持DOM 2级事件侦听器，必须使用DOM 0级语法分别定义各个事件。</li></ul><h5 id="后台代理"><a href="#后台代理" class="headerlink" title="后台代理"></a>后台代理</h5><ul><li>同源策略是针对浏览器端进行的限制，可以<strong>通过服务器端</strong>来解决该问题。</li><li><strong>将后台作为代理</strong>，每次对其它域的请求转交给本域的后台，本域的后台通过模拟http请求去访问其它域，再将返回的结果返回给前台，但是不会携带cookie。</li><li>即，<strong>DomainA客户端（浏览器）</strong>将对域B的请求转发给<strong>DomainA服务器</strong>，<strong>DomainA服务器</strong>通过模拟http请求去访问<strong>DomainB服务器</strong>，然后将结果返回给<strong>DomainA客户端（浏览器）</strong>。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;这里说的JS跨域是指&lt;strong&gt;通过JS在&lt;code&gt;不同的域&lt;/code&gt;之间进行数据传输或通信&lt;/strong&gt;，比如：&lt;ul&gt;
+&lt;li&gt;用ajax向一个不同的域请求数据&lt;/li&gt;
+&lt;li&gt;通过JS获取页面中不同域的框架中(iframe)的数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;只要协议、域名、端口有任何一个不同，都被当作是不同的域。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="交互" scheme="https://chongtianhong.github.io/tags/%E4%BA%A4%E4%BA%92/"/>
+    
+      <category term="AJAX" scheme="https://chongtianhong.github.io/tags/AJAX/"/>
+    
+      <category term="跨域" scheme="https://chongtianhong.github.io/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>CSS居中的方式</title>
@@ -570,37 +608,6 @@
       <category term="并发" scheme="https://chongtianhong.github.io/tags/%E5%B9%B6%E5%8F%91/"/>
     
       <category term="cpu" scheme="https://chongtianhong.github.io/tags/cpu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript 中的循环数组遍历</title>
-    <link href="https://chongtianhong.github.io/2018/03/13/array1/"/>
-    <id>https://chongtianhong.github.io/2018/03/13/array1/</id>
-    <published>2018-03-13T15:25:36.000Z</published>
-    <updated>2018-07-23T14:42:38.022Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>在 JavaScript 中提供了如下四种循环遍历数组元素的方式：<ul><li><code>for</code>：循环遍历数组元素最简单的方式。</li><li><code>for-in</code>：循环遍历对象的<strong>属性</strong>。</li><li><code>forEach</code>：调用数组的每个元素，并将元素传递给回调函数。</li><li><code>for-of</code>：循环遍历集合对象的<strong>属性值</strong>。<a id="more"></a></li></ul></li></ul><blockquote>for</blockquote><ul><li>这是循环遍历数组元素最简单的方式。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    console.log(arr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><blockquote>for-in</blockquote><ul><li><p>for-in 语句以任意顺序（即显示顺序不是可控的）<strong>遍历一个对象的</strong>可枚举<strong>属性</strong>:</p><ul><li>对于<strong>数组</strong>即是<strong>数组下标</strong>，对于<strong>对象</strong>即是<strong>对象的 key 值</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var index <span class="keyword">in</span> myArray) &#123;</span><br><span class="line">    console.log(myArray[index]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul></li><li><p><strong>不推荐</strong>使用 for-in 语句。</p></li><li><p>注意：for-in 遍历返回的对象属性都是<strong>字符串类型</strong>，即使是数组下标，也是字符串 “0”, “1”, “2” 等等。如果使用字符串的 index 去参与某些运算（”2” + 1 == “21”），运算结果可能会不符合预期。例如以下代码：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var myArray=[1,2,3,4,5];</span><br><span class="line"><span class="keyword">for</span> (var index <span class="keyword">in</span> myArray) &#123; </span><br><span class="line">    console.log(index+1); // 01 11 21 31 41</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>还有一个缺点是不仅数组本身的元素将被遍历到，用户自己为数组添加的一些属性也会被遍历到，甚至数组原型链上的属性也可能被遍历到。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var myArray=new Array(1,2,3,4,5);</span><br><span class="line">myArray.name=<span class="string">"hello"</span>;</span><br><span class="line">Array.prototype.method=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    console.log(<span class="string">"world"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (var index <span class="keyword">in</span> myArray) &#123;</span><br><span class="line">    console.log(index); // 0 1 2 3 4 name method</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>for-in 设计的目的是用于<strong>遍历包含键值对的对象</strong>，对数组并不是那么友好。 </p></li><li>遍历数组的话还是用es6的for-of循环遍历比较好。</li></ul><blockquote>for-of</blockquote><ul><li><p>for-of 语句为各种 collection 集合对象专门定制的，遍历集合对象的<strong>属性值</strong>，注意和 for-in 的区别。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var value of myArray) &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>for-of和for-in的区别：</p><ul><li>推荐在循环<strong>对象属性</strong>的时候，使用<code>for…in</code>，在<strong>遍历数组</strong>的时候的时候使用<code>for…of</code>。</li><li><code>for…in</code>循环出的是<code>key</code>，<code>for…of</code>循环出的是<code>value</code>。</li><li>注意，<code>for…of</code>是ES6新引入的特性。修复了ES5引入的<code>for…in</code>的不足。</li><li><code>for…of</code>不能循环普通的对象，需要通过和<code>Object.keys()</code>搭配使用。</li></ul></li></ul><blockquote>forEach</blockquote><ul><li>forEach 方法用于<strong>调用数组的每个元素</strong>，并<strong>将元素传递给回调函数</strong>；</li><li>注意：在回调函数中<strong>无法使用 break 跳出当前循环</strong>，也<strong>无法使用 return 返回值</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myArray.forEach(<span class="keyword">function</span> (value) &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;在 JavaScript 中提供了如下四种循环遍历数组元素的方式：&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;for&lt;/code&gt;：循环遍历数组元素最简单的方式。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;for-in&lt;/code&gt;：循环遍历对象的&lt;strong&gt;属性&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;forEach&lt;/code&gt;：调用数组的每个元素，并将元素传递给回调函数。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;for-of&lt;/code&gt;：循环遍历集合对象的&lt;strong&gt;属性值&lt;/strong&gt;。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
