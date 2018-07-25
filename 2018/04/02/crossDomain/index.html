@@ -126,14 +126,14 @@
 <meta name="description" content="这里说的JS跨域是指通过JS在不同的域之间进行数据传输或通信，比如： 用ajax向一个不同的域请求数据 通过JS获取页面中不同域的框架中(iframe)的数据   只要协议、域名、端口有任何一个不同，都被当作是不同的域。">
 <meta name="keywords" content="开发,Web,JavaScript,交互,AJAX,跨域">
 <meta property="og:type" content="article">
-<meta property="og:title" content="八种方式实现跨域请求">
+<meta property="og:title" content="实现跨域请求的方式">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/04/02/crossDomain/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="这里说的JS跨域是指通过JS在不同的域之间进行数据传输或通信，比如： 用ajax向一个不同的域请求数据 通过JS获取页面中不同域的框架中(iframe)的数据   只要协议、域名、端口有任何一个不同，都被当作是不同的域。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-25T08:10:28.791Z">
+<meta property="og:updated_time" content="2018-07-25T08:20:56.989Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="八种方式实现跨域请求">
+<meta name="twitter:title" content="实现跨域请求的方式">
 <meta name="twitter:description" content="这里说的JS跨域是指通过JS在不同的域之间进行数据传输或通信，比如： 用ajax向一个不同的域请求数据 通过JS获取页面中不同域的框架中(iframe)的数据   只要协议、域名、端口有任何一个不同，都被当作是不同的域。">
 
 
@@ -170,7 +170,7 @@
 
 
 
-  <title>八种方式实现跨域请求 | Ice's Blog</title>
+  <title>实现跨域请求的方式 | Ice's Blog</title>
   
 
 
@@ -326,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">八种方式实现跨域请求</h1>
+          <h1 class="post-title" itemprop="name headline">实现跨域请求的方式</h1>
         
 
         <div class="post-meta">
@@ -470,6 +470,17 @@
 <li>同源策略是针对浏览器端进行的限制，可以<strong>通过服务器端</strong>来解决该问题。</li>
 <li><strong>将后台作为代理</strong>，每次对其它域的请求转交给本域的后台，本域的后台通过模拟http请求去访问其它域，再将返回的结果返回给前台，但是不会携带cookie。</li>
 <li>即，<strong>DomainA客户端（浏览器）</strong>将对域B的请求转发给<strong>DomainA服务器</strong>，<strong>DomainA服务器</strong>通过模拟http请求去访问<strong>DomainB服务器</strong>，然后将结果返回给<strong>DomainA客户端（浏览器）</strong>。</li>
+</ul>
+<h4 id="JSONP的优缺点"><a href="#JSONP的优缺点" class="headerlink" title="JSONP的优缺点"></a>JSONP的优缺点</h4><h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>不像XMLHttpRequest对象实现的Ajax请求那样受到同源策略的限制，JSONP<strong>可以跨越同源策略</strong>；</li>
+<li><strong>兼容性更好</strong>，在更加古老的浏览器中都可以运行，不需要XMLHttpRequest或ActiveX的支持。</li>
+<li>在请求完毕后可以<strong>通过调用callback的方式回传结果</strong>。将回调方法的权限给了调用方。这个就相当于将controller层和view层终于分开了。提供的jsonp服务只提供纯服务的数据，至于提供服务以后的页面渲染和后续view操作都由调用者自己定义。如果有两个页面需要渲染同一份数据，你们只需要有不同的渲染逻辑即可，逻辑都可以使用同一个jsonp服务。</li>
+</ul>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>它<strong>只支持GET请求</strong>，而不支持POST等其它类型的HTTP请求。</li>
+<li>它<strong>只支持跨域HTTP请求</strong>这种情况，不能解决不同域的两个页面之间如何进行JavaScript调用的问题。</li>
+<li>jsonp在<strong>调用失败时</strong>不会返回各种HTTP状态码。</li>
+<li><strong>缺乏安全性</strong>。万一假如提供jsonp的服务存在页面注入漏洞，即它返回的javascript的内容被人控制的。结果是所有调用这个jsonp的网站都会存在漏洞。于是无法把危险控制在一个域名下，所以<strong>在使用jsonp的时候必须要保证使用的jsonp服务必须是安全可信的</strong>。</li>
 </ul>
 
       
@@ -681,7 +692,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器的同源策略"><span class="nav-number">1.</span> <span class="nav-text">浏览器的同源策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨域请求方式"><span class="nav-number">2.</span> <span class="nav-text">跨域请求方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#图片ping或script标签跨域"><span class="nav-number">2.1.</span> <span class="nav-text">图片ping或script标签跨域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JSONP跨域"><span class="nav-number">2.2.</span> <span class="nav-text">JSONP跨域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器设置响应头-允许跨域（一般不建议）"><span class="nav-number">2.3.</span> <span class="nav-text">服务器设置响应头, 允许跨域（一般不建议）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改document-domain跨子域"><span class="nav-number">2.4.</span> <span class="nav-text">修改document.domain跨子域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WebSocket"><span class="nav-number">2.5.</span> <span class="nav-text">WebSocket</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#后台代理"><span class="nav-number">2.6.</span> <span class="nav-text">后台代理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器的同源策略"><span class="nav-number">1.</span> <span class="nav-text">浏览器的同源策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨域请求方式"><span class="nav-number">2.</span> <span class="nav-text">跨域请求方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#图片ping或script标签跨域"><span class="nav-number">2.1.</span> <span class="nav-text">图片ping或script标签跨域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JSONP跨域"><span class="nav-number">2.2.</span> <span class="nav-text">JSONP跨域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器设置响应头-允许跨域（一般不建议）"><span class="nav-number">2.3.</span> <span class="nav-text">服务器设置响应头, 允许跨域（一般不建议）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改document-domain跨子域"><span class="nav-number">2.4.</span> <span class="nav-text">修改document.domain跨子域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WebSocket"><span class="nav-number">2.5.</span> <span class="nav-text">WebSocket</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#后台代理"><span class="nav-number">2.6.</span> <span class="nav-text">后台代理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSONP的优缺点"><span class="nav-number">3.</span> <span class="nav-text">JSONP的优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优点"><span class="nav-number">3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点"><span class="nav-number">3.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></div>
             
 
           </div>
