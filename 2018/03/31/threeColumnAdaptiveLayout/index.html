@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="三栏自适应布局指的是两边栏定宽，中间栏宽度自适应。 实现方法主要可以分为两大类： 一类是基于传统的position和margin等属性实现 一类是基于css3新特性弹性盒模型（flex）布局实现">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-25T02:46:54.190Z">
+<meta property="og:updated_time" content="2018-07-25T03:05:41.948Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用CSS实现三栏自适应布局">
 <meta name="twitter:description" content="三栏自适应布局指的是两边栏定宽，中间栏宽度自适应。 实现方法主要可以分为两大类： 一类是基于传统的position和margin等属性实现 一类是基于css3新特性弹性盒模型（flex）布局实现">
@@ -423,6 +423,7 @@
 </li>
 <li>该法布局的<strong>好处</strong>，三个div顺序可以任意改变。</li>
 <li><strong>不足</strong>是因为绝对定位，所以如果页面上还有其他内容，top的值需要小心处理。另外，随着浏览器窗口缩小，小于200px的时候，会发生压缩。</li>
+<li>所以，为了安全起见，最好还是给body加一个最小宽度。</li>
 </ul>
 <blockquote>2) 使用自身浮动法</blockquote>
 
@@ -435,11 +436,15 @@
 <li><p>该布局法的好处是<strong>受外界影响小</strong>。</p>
 </li>
 <li>不足是规定了三个元素的放置顺序，<strong>center一定要放在最后</strong>，这是和绝对定位不一样的地方，center占据文档流位置，所以一定要放在最后，左右两个元素位置没有关系。当浏览器窗口很小的时候，右边元素会被击到下一行。</li>
+<li>所以，为了安全起见，最好还是给body加一个最小宽度。</li>
 </ul>
 <blockquote>3) 圣杯布局</blockquote>
 
 <ul>
-<li>圣杯布局的原理是使用<strong>margin负值</strong>。使用圣杯布局首先需要在center元素外部包含一个div，外层div需要设置float属性使其形成一个BFC，并设置宽度，并且这个宽度要和left块的margin负值进行配合。</li>
+<li>圣杯布局的原理是使用<strong>margin负值</strong>。</li>
+<li>使用圣杯布局首先需要在center元素外部包含一个div，外层div需要设置float属性使其形成一个BFC，并设置宽度为100%（自适应），并且这个宽度要和left块的margin负值进行配合。</li>
+<li>需要设置其左边距为<strong>负的中间盒子的宽度</strong>（即margin-left:-100%;），这样左盒子才可以往最左边移动。</li>
+<li>需要设置其左边距为<strong>负的自己的宽度</strong>（即margin-left：-200px;），这样右盒子才可以在一行的最右边显示出自己。</li>
 <li><p>实现代码：<br>HTML代码：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;使用margin负值法进行布局&lt;/h3&gt;</span><br><span class="line">&lt;div id = <span class="string">"wrap"</span>&gt;</span><br><span class="line">	&lt;div id = <span class="string">"center"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div id = <span class="string">"left_margin"</span>&gt;&lt;/div&gt;</span><br><span class="line">&lt;div id = <span class="string">"right_margin"</span>&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <p>CSS代码：</p>
