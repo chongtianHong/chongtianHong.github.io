@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,JavaScript,基本类型,引用类型,深克隆,浅克隆," />
+  <meta name="keywords" content="开发,Web,JavaScript,性能优化,函数去抖," />
 
 
 
@@ -123,18 +123,22 @@
 
 
 
-<meta name="description" content="基本介绍 JavaScript中数据类型分为基本数据类型(number, string, boolean, null, undefined)和引用类型(对象, 数组, 函数)，这两类对象在复制克隆的时候是有很大区别的。">
-<meta name="keywords" content="开发,JavaScript,基本类型,引用类型,深克隆,浅克隆">
+<meta name="description" content="基本介绍 概念：函数去抖是通过一个定时器，阻断连续重复的函数调用，从而一定程度上优化性能。 用途：主要用于用户界面调用的函数，如：resize事件、mousemove事件、keyup事件的监听函数。  这类监听函数的主要特征：1、短时间内连续多次重复触发；2、大量的DOM操作。 意义：在用户察觉范围外，降低函数调用的频率，从而提升性能。">
+<meta name="keywords" content="开发,Web,JavaScript,性能优化,函数去抖">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS实现对象的深克隆">
-<meta property="og:url" content="https://chongtianhong.github.io/2018/04/03/deepCopy/index.html">
+<meta property="og:title" content="JS性能优化之函数去抖">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/04/05/debounce/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="基本介绍 JavaScript中数据类型分为基本数据类型(number, string, boolean, null, undefined)和引用类型(对象, 数组, 函数)，这两类对象在复制克隆的时候是有很大区别的。">
+<meta property="og:description" content="基本介绍 概念：函数去抖是通过一个定时器，阻断连续重复的函数调用，从而一定程度上优化性能。 用途：主要用于用户界面调用的函数，如：resize事件、mousemove事件、keyup事件的监听函数。  这类监听函数的主要特征：1、短时间内连续多次重复触发；2、大量的DOM操作。 意义：在用户察觉范围外，降低函数调用的频率，从而提升性能。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-25T14:07:25.772Z">
+<meta property="og:image" content="https://chongtianhong.github.io/images/search1.png">
+<meta property="og:image" content="https://chongtianhong.github.io/images/search2.png">
+<meta property="og:image" content="https://chongtianhong.github.io/images/search3.png">
+<meta property="og:updated_time" content="2018-07-26T14:04:44.432Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS实现对象的深克隆">
-<meta name="twitter:description" content="基本介绍 JavaScript中数据类型分为基本数据类型(number, string, boolean, null, undefined)和引用类型(对象, 数组, 函数)，这两类对象在复制克隆的时候是有很大区别的。">
+<meta name="twitter:title" content="JS性能优化之函数去抖">
+<meta name="twitter:description" content="基本介绍 概念：函数去抖是通过一个定时器，阻断连续重复的函数调用，从而一定程度上优化性能。 用途：主要用于用户界面调用的函数，如：resize事件、mousemove事件、keyup事件的监听函数。  这类监听函数的主要特征：1、短时间内连续多次重复触发；2、大量的DOM操作。 意义：在用户察觉范围外，降低函数调用的频率，从而提升性能。">
+<meta name="twitter:image" content="https://chongtianhong.github.io/images/search1.png">
 
 
 
@@ -164,13 +168,13 @@
 
 
 
-  <link rel="canonical" href="https://chongtianhong.github.io/2018/04/03/deepCopy/"/>
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/04/05/debounce/"/>
 
 
 
 
 
-  <title>JS实现对象的深克隆 | Ice's Blog</title>
+  <title>JS性能优化之函数去抖 | Ice's Blog</title>
   
 
 
@@ -309,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/04/03/deepCopy/">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/04/05/debounce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaobing Hong">
@@ -326,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JS实现对象的深克隆</h1>
+          <h1 class="post-title" itemprop="name headline">JS性能优化之函数去抖</h1>
         
 
         <div class="post-meta">
@@ -338,8 +342,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T20:02:44+08:00">
-                2018-04-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T14:59:50+08:00">
+                2018-04-05
               </time>
             
 
@@ -399,42 +403,53 @@
 
       
         <h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul>
-<li>JavaScript中数据类型分为<strong>基本数据类型</strong>(number, string, boolean, null, undefined)和<strong>引用类型</strong>(对象, 数组, 函数)，这两类对象在<strong>复制克隆</strong>的时候是有很大区别的。 <a id="more"></a>
+<li><strong>概念</strong>：函数去抖是<strong>通过一个定时器</strong>，<strong>阻断连续重复的函数调用</strong>，从而一定程度上<strong>优化性能</strong>。</li>
+<li><strong>用途</strong>：主要用于<strong>用户界面</strong>调用的函数，如：<strong>resize事件</strong>、<strong>mousemove事件</strong>、<strong>keyup事件</strong>的<strong>监听函数</strong>。 </li>
+<li>这类监听函数的主要特征：<br>1、短时间内连续多次重复触发；<br>2、大量的DOM操作。</li>
+<li><strong>意义</strong>：在用户察觉范围外，<strong>降低函数调用的频率</strong>，从而提升性能。<a id="more"></a>
 </li>
 </ul>
-<blockquote>基本数据类型</blockquote>
+<h4 id="函数去抖的原理"><a href="#函数去抖的原理" class="headerlink" title="函数去抖的原理"></a>函数去抖的原理</h4><ul>
+<li>某些代码不可以在没有间断的情况<strong>连续重复执行</strong>。</li>
+<li>第一次调用函数，创建一个定时器，在指定的时间间隔之后运行代码。当第二次调用该函数时，它会清除前一次的定时器并设置另一个。</li>
+<li>如果前一个定时器已经执行过了，这个操作就没有任何意义。</li>
+<li>然而，如果前一个定时器尚未执行，其实就是将其替换为一个新的定时器。目的是只有<strong>在执行函数的请求停止了一段时间之后才执行</strong>。</li>
+</ul>
+<h4 id="具体用法"><a href="#具体用法" class="headerlink" title="具体用法"></a>具体用法</h4><ul>
+<li>例如： <ul>
+<li>使用onresize事件处理程序的时候容易发生，当调整浏览器大小的时候，该事件会连续触发。<strong>在onresize 事件处理程序内部</strong>如果<strong>尝试进行DOM操作</strong>，其<strong>高频率的更改</strong>可能会<strong>让浏览器崩溃</strong>。 </li>
+<li>另一个常见的是搜索功能，我们一般是绑定keyup事件，每按下一次键盘就搜索一次。但是我们的目的主要是<strong>每输入一些内容搜索一次</strong>而已。</li>
+</ul>
+</li>
+<li>为了解决这些问题，就可以<strong>使用定时器对函数进行去抖</strong>。</li>
+<li>下面以keyup为例，对<strong>函数去抖</strong>的具体用法进行介绍。</li>
+</ul>
+<blockquote>1、不使用函数去抖的情况</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"search"</span> <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"search"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> queryData(text)&#123;</span><br><span class="line">    console.log(<span class="string">"搜索："</span> + text);</span><br><span class="line">&#125;</span><br><span class="line">var input = document.getElementById(<span class="string">"search"</span>);</span><br><span class="line">input.addEventListener(<span class="string">"keyup"</span>, <span class="keyword">function</span>(event)&#123; </span><br><span class="line">    queryData(this.value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>结果如图：<br><img src="/images/search1.png" alt="不使用函数防抖的情况"></li>
+</ul>
+<blockquote>2、使用基本函数防抖的情况</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"search1"</span> <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"search"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> queryData(text)&#123;</span><br><span class="line">    console.log(<span class="string">"搜索："</span> + text);</span><br><span class="line">&#125;</span><br><span class="line">var input = document.getElementById(<span class="string">"search"</span>);</span><br><span class="line">input.addEventListener(<span class="string">"keyup"</span>, <span class="keyword">function</span>(event)&#123;</span><br><span class="line">    debounce(queryData, null, 500, this.value);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">function</span> debounce(fn, context, delay, text)&#123;</span><br><span class="line">    clearTimeout(fn.timeoutId);</span><br><span class="line">    fn.timeoutId = setTimeout(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        fn.call(context, text);</span><br><span class="line">    &#125;, delay);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>结果如图：<br><img src="/images/search2.png" alt="使用函数防抖的情况"></li>
+<li>实际上，我们更希望的是，<strong>当达到某个时间值时，一定要执行一次这个搜索函数</strong>。所以，就有了函数防抖的<strong>改进模式</strong>。</li>
+</ul>
+<blockquote>3、函数防抖增强版</blockquote>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"search"</span> <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"search"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> queryData(text)&#123;</span><br><span class="line">    console.log(<span class="string">"搜索："</span> + text);</span><br><span class="line">&#125;</span><br><span class="line">var input = document.getElementById(<span class="string">"search"</span>);</span><br><span class="line">input.addEventListener(<span class="string">"keyup"</span>, <span class="keyword">function</span>(event)&#123;</span><br><span class="line">    debounce(queryData, null, 500, this.value, 1000);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> debounce(fn, context, delay, text, mustApplyTime)&#123;</span><br><span class="line">    clearTimeout(fn.timer);</span><br><span class="line">    fn._cur = Date.now(); //记录当前时间</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!fn._start)&#123; //若该函数是第一次调用，则直接设置_start,即开始时间，为_cur，即此刻的时间</span><br><span class="line">        fn._start = fn._cur;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(fn._cur-fn._start &gt; mustApplyTime)&#123; </span><br><span class="line">    //当前时间与上一次函数被执行的时间作差，与mustApplyTime比较，若大于，则必须执行一次函数，若小于，则重新设置计时器</span><br><span class="line">        fn.call(context, text);</span><br><span class="line">        fn._start = fn._cur;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        fn.timer = setTimeout(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            fn.call(context, text);</span><br><span class="line">        &#125;, delay);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>结果如图：<br><img src="/images/search3.png" alt="函数防抖增强版"></li>
+<li>显然，连续的输入，到一定时间间隔之后，queryData函数必然会被调用，但是又不是频繁的调用。这既达到了防抖的目的，又不会影响用户体验。</li>
+</ul>
+<blockquote>4、进一步的优化</blockquote>
 
 <ul>
-<li>基本数据类型存储的是对象的实际数据，其值存放在<strong>栈内存</strong>中。</li>
+<li>进一步的话，就是可以在调用debounce函数之前，先对输入的内容进行判断，若其值为空、值不变时都不用再调用。</li>
 </ul>
-<blockquote>引用数据类型</blockquote>
 
-<ul>
-<li>引用数据类型值指保存在<strong>堆内存</strong>中的对象。也就是，变量中保存在栈内存的实际上的只是一个指针，这个指针指向内存中的另一个位置（堆内存），该位置保存着对象。访问方式是<strong>按引用访问</strong>。</li>
-<li><p>于是克隆也会分为两类:</p>
-<blockquote>浅度克隆</blockquote>
-</li>
-<li><p><strong>基本数据类型</strong>为<strong>值传递</strong>, <strong>引用类型</strong>仍为<strong>引用传递</strong>。</p>
-</li>
-<li>对于<strong>基本类型</strong>，浅复制是对<strong>值的复制</strong>，对于<strong>引用类型</strong>来说，浅复制是<strong>对对象地址的复制</strong>，并没有开辟新的栈，也就是复制的结果是<strong>两个对象指向同一个地址</strong>，修改其中一个对象的属性，则另一个对象的属性也会改变。</li>
-</ul>
-<blockquote>深度克隆</blockquote>
-
-<ul>
-<li><strong>所有元素或属性均完全复制, 与原对象完全脱离</strong>, 也就是说<strong>所有对于新对象的修改都不会反映到原对象中</strong>。</li>
-<li>深复制则是开辟新的栈，两个对象对应两个不同的地址，修改一个对象的属性，不会改变另一个对象的属性。<ul>
-<li><strong>函数的克隆通过浅克隆即可实现</strong>。原因就是函数的克隆会在内存单独开辟一块空间，互不影响。</li>
-<li><strong>数组和对象需要深克隆</strong>。</li>
-</ul>
-</li>
-</ul>
-<h4 id="深克隆的实现"><a href="#深克隆的实现" class="headerlink" title="深克隆的实现"></a>深克隆的实现</h4><h5 id="通过递归解析解决"><a href="#通过递归解析解决" class="headerlink" title="通过递归解析解决"></a>通过递归解析解决</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">var china = &#123;</span><br><span class="line">    nation : <span class="string">'中国'</span>,</span><br><span class="line">    birthplaces:[<span class="string">'北京'</span>,<span class="string">'上海'</span>,<span class="string">'广州'</span>],</span><br><span class="line">    skincolor :<span class="string">'yellow'</span>,</span><br><span class="line">    friends:[<span class="string">'sk'</span>,<span class="string">'ls'</span>]</span><br><span class="line">&#125;</span><br><span class="line">//深复制，要想达到深复制就需要用递归</span><br><span class="line"><span class="keyword">function</span> deepCopy(o, c)&#123;</span><br><span class="line">    var c = c || &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(var i <span class="keyword">in</span> o)&#123;</span><br><span class="line">        <span class="keyword">if</span>(typeof o[i] === <span class="string">'object'</span>)&#123;</span><br><span class="line">        //要考虑深复制问题了</span><br><span class="line">            <span class="keyword">if</span>(o[i].constructor === Array)&#123;</span><br><span class="line">                //这是数组</span><br><span class="line">                c[i] =[];</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                //这是对象</span><br><span class="line">                c[i] = &#123;&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            deepCopy(o[i],c[i]); // 递归调用</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            c[i] = o[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line">var result = &#123; name:<span class="string">'result'</span> &#125;;</span><br><span class="line">result = deepCopy(china, result);</span><br><span class="line">console.dir(result);</span><br></pre></td></tr></table></figure>
-<h5 id="通过JSON解析解决"><a href="#通过JSON解析解决" class="headerlink" title="通过JSON解析解决"></a>通过JSON解析解决</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">test</span> =&#123;</span><br><span class="line">    name:&#123;</span><br><span class="line">        xing:&#123; </span><br><span class="line">            first:<span class="string">'张'</span>,</span><br><span class="line">            second:<span class="string">'李'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        ming:<span class="string">'老头'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    age :40,</span><br><span class="line">    friend :[<span class="string">'隔壁老王'</span>,<span class="string">'宋经纪'</span>,<span class="string">'同事'</span>]</span><br><span class="line">&#125;</span><br><span class="line">var result = JSON.parse(JSON.stringify(<span class="built_in">test</span>));</span><br><span class="line">result.age = 30;</span><br><span class="line">result.name.xing.first = <span class="string">'往'</span>;</span><br><span class="line">result.friend.push(<span class="string">'fdagldf;ghad'</span>);</span><br><span class="line">console.dir(<span class="built_in">test</span>);</span><br><span class="line">console.dir(result);</span><br></pre></td></tr></table></figure>
-<h5 id="es6之展开Object-assign"><a href="#es6之展开Object-assign" class="headerlink" title="es6之展开Object.assign"></a>es6之展开Object.assign</h5><ul>
-<li>拷贝对象的内容到一个新的堆内存，copyObj存储新内存的引用。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> obj = &#123;name:<span class="string">'fiona-SUN'</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">let</span> copyObj = Object.assign(&#123;&#125;, obj);</span><br><span class="line"></span><br><span class="line">copyObj.name = <span class="string">'fiona'</span>;</span><br><span class="line">console.log(copyObj.name);  // <span class="string">'fiona'</span></span><br><span class="line">console.log(obj.name);     // <span class="string">'fiona-SUN'</span></span><br></pre></td></tr></table></figure>
-<h5 id="es6之展开运算符"><a href="#es6之展开运算符" class="headerlink" title="es6之展开运算符"></a>es6之展开运算符</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> arr = [1,2,3];</span><br><span class="line"><span class="built_in">let</span> copyArr = [...obj];</span><br><span class="line">copyArr[2] = 0;</span><br><span class="line">console.log(copyArr[2]);  // 0</span><br><span class="line">console.log(arr[2]);     // 2</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -463,15 +478,13 @@
           
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
+            <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+          
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/基本类型/" rel="tag"><i class="fa fa-tag"></i> 基本类型</a>
+            <a href="/tags/性能优化/" rel="tag"><i class="fa fa-tag"></i> 性能优化</a>
           
-            <a href="/tags/引用类型/" rel="tag"><i class="fa fa-tag"></i> 引用类型</a>
-          
-            <a href="/tags/深克隆/" rel="tag"><i class="fa fa-tag"></i> 深克隆</a>
-          
-            <a href="/tags/浅克隆/" rel="tag"><i class="fa fa-tag"></i> 浅克隆</a>
+            <a href="/tags/函数去抖/" rel="tag"><i class="fa fa-tag"></i> 函数去抖</a>
           
         </div>
       
@@ -484,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/02/crossDomain/" rel="next" title="实现跨域请求的方法整理">
-                <i class="fa fa-chevron-left"></i> 实现跨域请求的方法整理
+              <a href="/2018/04/03/deepCopy/" rel="next" title="JS实现对象的深克隆">
+                <i class="fa fa-chevron-left"></i> JS实现对象的深克隆
               </a>
             
           </div>
@@ -493,10 +506,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/05/debounce/" rel="prev" title="JS性能优化之函数去抖">
-                JS性能优化之函数去抖 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -648,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深克隆的实现"><span class="nav-number">2.</span> <span class="nav-text">深克隆的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通过递归解析解决"><span class="nav-number">2.1.</span> <span class="nav-text">通过递归解析解决</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过JSON解析解决"><span class="nav-number">2.2.</span> <span class="nav-text">通过JSON解析解决</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#es6之展开Object-assign"><span class="nav-number">2.3.</span> <span class="nav-text">es6之展开Object.assign</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#es6之展开运算符"><span class="nav-number">2.4.</span> <span class="nav-text">es6之展开运算符</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数去抖的原理"><span class="nav-number">2.</span> <span class="nav-text">函数去抖的原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体用法"><span class="nav-number">3.</span> <span class="nav-text">具体用法</span></a></li></ol></div>
             
 
           </div>
