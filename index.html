@@ -305,6 +305,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/04/06/vueWatch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/06/vueWatch/" itemprop="url">vue之观察者watch</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T10:56:27+08:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="前言：computed和watch区别"><a href="#前言：computed和watch区别" class="headerlink" title="前言：computed和watch区别"></a>前言：computed和watch区别</h4><ul>
+<li>computed：监听<strong>多个</strong>数据或者<strong>一个</strong>数据来维护返回一个状态值，<strong>只要其中一个或多个数据发生了变化</strong>，则会<strong>重新计算整个函数体</strong>，<strong>重新返回状态值</strong>。(computed中监听的值可以不在data中设置，而watch中监听的值则需要在data中定义)</li>
+<li>watch：只能<strong>监听单个数据</strong>，只要这个<strong>数据发生变化</strong>，就会<strong>返回两个参数</strong>，第一个是<strong>当前的值</strong>，第二个是<strong>变化前的值</strong>。每当变化的时候，则会触发函数体的逻辑行为，根据逻辑行为做后续的操作。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/06/vueWatch/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+  </div>
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/04/05/debounce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -457,7 +607,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/04/04/throttle-debounce/">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/04/04/throttleAndDebounce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaobing Hong">
@@ -476,7 +626,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/04/throttle-debounce/" itemprop="url">函数节流和函数防抖之间的区别</a></h1>
+                <a class="post-title-link" href="/2018/04/04/throttleAndDebounce/" itemprop="url">函数节流和函数防抖之间的区别</a></h1>
         
 
         <div class="post-meta">
@@ -555,7 +705,7 @@
 <li>常见场景有：<strong>输入监听</strong>，<strong>滚动监听</strong>，<strong>鼠标移入/移出/移动</strong>。这个时候就需要我们去优化，从而提高Javascript性能。
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/04/throttle-debounce/#more" rel="contents">
+            <a class="btn" href="/2018/04/04/throttleAndDebounce/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1658,157 +1808,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/03/27/http/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xiaobing Hong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ice's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/27/http/" itemprop="url">HTTP知识点总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T23:45:24+08:00">
-                2018-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发/" itemprop="url" rel="index">
-                    <span itemprop="name">开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="HTTP简介"><a href="#HTTP简介" class="headerlink" title="HTTP简介"></a>HTTP简介</h3><ul>
-<li>超文本传输协议（Hyper Text Transfer Protocol, HTTP）是用于从万维网（WWW:World Wide Web）<strong>服务器传输超文本到本地浏览器</strong>的<strong>应用层传送协议</strong>。它被设计用于<strong>Web浏览器</strong>和<strong>Web服务器</strong>之间的<strong>通信</strong>，但它也可以用于其他目的。 </li>
-<li>HTTP是一个<strong>基于TCP/IP通信协议</strong>来传递数据（HTML 文件, 图片文件, 查询结果等）。一个完整的web文档是由不同的子文档重新组建而成的，例如文本、布局描述、图片、视频、脚本等。</li>
-<li>HTTP是一个属于<strong>应用层的面向对象的协议</strong>，由于其简捷、快速的方式，适用于分布式超媒体信息系统。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/27/http/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-  <div>
-    
-  </div>
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1863,7 +1862,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

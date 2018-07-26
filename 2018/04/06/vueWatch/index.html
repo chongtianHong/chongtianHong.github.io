@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,JavaScript,Vue.js," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言：computed和watch区别 computed：监听多个数据或者一个数据来维护返回一个状态值，只要其中一个或多个数据发生了变化，则会重新计算整个函数体，重新返回状态值。(computed中监听的值可以不在data中设置，而watch中监听的值则需要在data中定义) watch：只能监听单个数据，只要这个数据发生变化，就会返回两个参数，第一个是当前的值，第二个是变化前的值。每当变化的时候">
+<meta name="keywords" content="开发,JavaScript,Vue.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue之观察者watch">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/04/06/vueWatch/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="前言：computed和watch区别 computed：监听多个数据或者一个数据来维护返回一个状态值，只要其中一个或多个数据发生了变化，则会重新计算整个函数体，重新返回状态值。(computed中监听的值可以不在data中设置，而watch中监听的值则需要在data中定义) watch：只能监听单个数据，只要这个数据发生变化，就会返回两个参数，第一个是当前的值，第二个是变化前的值。每当变化的时候">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-26T14:17:32.063Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue之观察者watch">
+<meta name="twitter:description" content="前言：computed和watch区别 computed：监听多个数据或者一个数据来维护返回一个状态值，只要其中一个或多个数据发生了变化，则会重新计算整个函数体，重新返回状态值。(computed中监听的值可以不在data中设置，而watch中监听的值则需要在data中定义) watch：只能监听单个数据，只要这个数据发生变化，就会返回两个参数，第一个是当前的值，第二个是变化前的值。每当变化的时候">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/04/06/vueWatch/"/>
+
+
+
+
+
+  <title>vue之观察者watch | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/04/06/vueWatch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue之观察者watch</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T10:56:27+08:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="前言：computed和watch区别"><a href="#前言：computed和watch区别" class="headerlink" title="前言：computed和watch区别"></a>前言：computed和watch区别</h4><ul>
+<li>computed：监听<strong>多个</strong>数据或者<strong>一个</strong>数据来维护返回一个状态值，<strong>只要其中一个或多个数据发生了变化</strong>，则会<strong>重新计算整个函数体</strong>，<strong>重新返回状态值</strong>。(computed中监听的值可以不在data中设置，而watch中监听的值则需要在data中定义)</li>
+<li>watch：只能<strong>监听单个数据</strong>，只要这个<strong>数据发生变化</strong>，就会<strong>返回两个参数</strong>，第一个是<strong>当前的值</strong>，第二个是<strong>变化前的值</strong>。每当变化的时候，则会触发函数体的逻辑行为，根据逻辑行为做后续的操作。<a id="more"></a>
+</li>
+</ul>
+<h4 id="Watch用法"><a href="#Watch用法" class="headerlink" title="Watch用法"></a>Watch用法</h4><ul>
+<li>Watch：它用于<strong>观察Vue实例上的数据变动</strong>。对应一个对象，<strong>键</strong>是<strong>观察表达式</strong>，<strong>值</strong>是<strong>对应回调</strong>。值也可以是方法名，或者是对象，包含选项。具体的用法可以直接看下面的示例，简单直接。</li>
+</ul>
+<blockquote>用法一：数组与对象都用handler</blockquote>
+
+<ul>
+<li><p>数组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        winChips: new Array(11).fill(0)   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">watch: &#123;</span><br><span class="line">    winChips: &#123;</span><br><span class="line">        handler(newValue, oldValue) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; newValue.length; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (oldValue[i] != newValue[i]) &#123;</span><br><span class="line">                    console.log(newValue)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        deep: <span class="literal">true</span>  // 开启深入监听，一般用于监听数组中的值；如果不开启，将只监听数组整体，而不会监听数组中的值</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对象：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        bet: &#123;</span><br><span class="line">            pokerState: 53,</span><br><span class="line">            pokerHistory: <span class="string">'local'</span></span><br><span class="line">        &#125;   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">watch: &#123;</span><br><span class="line">    bet: &#123;</span><br><span class="line">        handler(newValue, oldValue) &#123;</span><br><span class="line">            console.log(newValue)</span><br><span class="line">        &#125;,</span><br><span class="line">        deep: <span class="literal">true</span>   // 开启深入监听，一般用于监听对象中的键对值</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其中如果要对对象中的键值进行监听，需要加引号:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        bet: &#123;</span><br><span class="line">            pokerState: 53,</span><br><span class="line">            pokerHistory: <span class="string">'local'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">watch: &#123;</span><br><span class="line">    <span class="string">'bet.pokerHistory'</span>:<span class="keyword">function</span>(val,oldval)&#123; //键路径必须加上引号</span><br><span class="line">        console.log(val+<span class="string">"aaa"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line">    // 通过这个办法可以直接监听对象中的某个键对值而不用deep。</span><br><span class="line">    // 弊端是这里只能监听固定的键对值</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>用法二：正常的值</blockquote>
+
+<ul>
+<li>当所要监听的值为基本类型时：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">data</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        frontPoints: 0    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">watch: &#123;</span><br><span class="line">    frontPoints(newValue, oldValue) &#123;</span><br><span class="line">        console.log(newValue)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="对handler方法和、immediate属性和deep属性的解析"><a href="#对handler方法和、immediate属性和deep属性的解析" class="headerlink" title="对handler方法和、immediate属性和deep属性的解析"></a>对handler方法和、immediate属性和deep属性的解析</h4><ul>
+<li><code>handler</code>方法：其实<strong>watch方法里面</strong>，都是<strong>默认用handler方法</strong>，不管你是否写了handler方法，因为Vue.js会处理这个逻辑，然后<strong>最终编译为handler</strong>。</li>
+<li><p><code>immediate</code>属性：watch 的一个特点是，最初绑定的时候是不会执行的，要等到 监听值改变时才执行监听计算。immediate属性一般和handler联用，当这个属性是true时，表示声明了handler所监听的元素在watch<strong>声明完了后就立即执行</strong>。如下面的例子中，当设置了immediate属性后，当该watch声明完firstName后，会立即执行，fullName被初始化为<code>“Dawei Lou”</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// html</span><br><span class="line">&lt;div id=<span class="string">"root"</span>&gt;</span><br><span class="line">    &lt;p&gt;FullName: &#123;&#123;fullName&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;FirstName:</span><br><span class="line">        &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> v-model=<span class="string">"firstName"</span>&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// JS</span><br><span class="line">new Vue(&#123;</span><br><span class="line">    el: <span class="string">'#root'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        firstName: <span class="string">'Dawei'</span>,</span><br><span class="line">        lastName: <span class="string">'Lou'</span>,</span><br><span class="line">        fullName: <span class="string">''</span></span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">        firstName: &#123;</span><br><span class="line">            handler(newName, oldName) &#123;</span><br><span class="line">                this.fullName = newName + <span class="string">' '</span> + this.lastName;</span><br><span class="line">            &#125;,</span><br><span class="line">            immediate: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>deep</code>属性：当属性值为true时，为<strong>深入解析</strong>，<strong>一般用于数组与对象</strong>中。如果我们<strong>不用它</strong>，那么在一般情况下，我们<strong>只能监听到该对象的变化</strong>以及<strong>数组整体的变化</strong>，而<strong>不能深入监听对象里的键对值变化</strong>以及<strong>数组里的值的变化</strong>。</p>
+</li>
+</ul>
+<h4 id="watch-API"><a href="#watch-API" class="headerlink" title="$watch API"></a>$watch API</h4><ul>
+<li>该API可实现<strong>动态添加观察者watch</strong>以及<strong>动态删除</strong>。</li>
+</ul>
+<blockquote>动态添加</blockquote>
+
+<ul>
+<li><p>$watch的语法很简单：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.<span class="variable">$watch</span>(expOrFn(要监听的属性), callback, [options])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其中vm指的是Vue中的一个实例，就是我们的app。如:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> watch = app.<span class="variable">$watch</span>(<span class="string">'count'</span>, <span class="keyword">function</span>(newValue, oldValue)&#123; </span><br><span class="line">    alert(<span class="string">'Count changed from '</span> + oldValue + <span class="string">' to '</span> + newValue + <span class="string">'!'</span>) </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当我们要对data的对象中的键值进行监听时，有两种方法：</p>
+</li>
+<li><p>方法一：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="variable">$watch</span>(<span class="string">'person.name.firstName'</span>, <span class="keyword">function</span>(newValue, oldValue)&#123; </span><br><span class="line">    alert(<span class="string">'firstName 从 '</span> + oldValue + <span class="string">' 变成 '</span> + newValue + <span class="string">'!'</span>) </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法二：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="variable">$watch</span>(<span class="string">'person.name'</span>, <span class="keyword">function</span>(newValue, oldValue)&#123; alert(<span class="string">'firstName从 '</span> + oldValue.firstName + <span class="string">' 变成 '</span> + <span class="string">'newValue.firstName'</span> + <span class="string">'!'</span>)&#125;, &#123;deep: <span class="literal">true</span>&#125;)</span><br><span class="line">    //这里我们只监听到对象中的name。</span><br><span class="line">    //但是如果我们想要监听到name中的firstname时，需要加个参数 deep: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>动态删除</blockquote>
+
+<ul>
+<li>为什么要注销 watch？因为我们的组件是经常要被销毁的，比如我们跳一个路由，从一个页面跳到另外一个页面，那么原来的页面的 watch 其实就没用了，这时候我们应该注销掉原来页面的 watch 的，不然的话可能会<strong>导致内置溢出</strong>。如果平时 watch 是写在组件的选项中的，它会随着组件的销毁而销毁。</li>
+<li><p>而对于动态添加的watch，则需要手动注销：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const unWatch = app.<span class="variable">$watch</span>(<span class="string">'text'</span>, (newVal, oldVal) =&gt; &#123;</span><br><span class="line">  console.log(`<span class="variable">$&#123;newVal&#125;</span> : <span class="variable">$&#123;oldVal&#125;</span>`);</span><br><span class="line">&#125;)</span><br><span class="line">// app.<span class="variable">$watch</span>调用后会返回一个值，就是unWatch方法</span><br><span class="line">// 注销 watch 只要调用unWatch方法就可以了。</span><br><span class="line">unWatch(); // 手动注销watch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>也可以把watch当做函数运行一遍就相当于删除观察者：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//watch运作5秒后删除</span><br><span class="line">setTimeout(<span class="function"><span class="title">function</span></span>() &#123; </span><br><span class="line">    watch();  // 当成函数运行一遍</span><br><span class="line">&#125;, 5000);</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/Vue-js/" rel="tag"><i class="fa fa-tag"></i> Vue.js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/05/debounce/" rel="next" title="JS性能优化之函数去抖">
+                <i class="fa fa-chevron-left"></i> JS性能优化之函数去抖
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言：computed和watch区别"><span class="nav-number">1.</span> <span class="nav-text">前言：computed和watch区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Watch用法"><span class="nav-number">2.</span> <span class="nav-text">Watch用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对handler方法和、immediate属性和deep属性的解析"><span class="nav-number">3.</span> <span class="nav-text">对handler方法和、immediate属性和deep属性的解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#watch-API"><span class="nav-number">4.</span> <span class="nav-text">$watch API</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
