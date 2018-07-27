@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="在JavaScript中声明变量不需指定类型，对变量赋值也没有类型检查，同时JavaScript允许隐式类型转换。这些特征说明JavaScript属于弱类型的语言。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-27T14:43:51.941Z">
+<meta property="og:updated_time" content="2018-07-27T14:59:32.744Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript强制类型转换与隐式类型转换">
 <meta name="twitter:description" content="在JavaScript中声明变量不需指定类型，对变量赋值也没有类型检查，同时JavaScript允许隐式类型转换。这些特征说明JavaScript属于弱类型的语言。">
@@ -409,14 +409,17 @@
 <li>转换为<strong>布尔</strong>类型：<code>Boolean(mix)</code></li>
 </ul>
 </li>
+<li>注意：<strong>NaN</strong>是JavaScript中唯一一个<strong>不等于自己</strong>的值。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(NaN == NaN) === <span class="literal">false</span></span><br><span class="line">Boolean(0)                // =&gt; <span class="literal">false</span> - 零</span><br><span class="line">Boolean(new object())     // =&gt; <span class="literal">true</span> - 对象</span><br><span class="line">Number(undefined)         // =&gt;   NaN</span><br><span class="line">Number(null)              // =&gt; 0</span><br><span class="line">String(null)              // =&gt; <span class="string">"null"</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <blockquote>1、Number(mix)函数</blockquote>
 
 <ul>
-<li><p><code>Number(mix)</code>函数可以将任意类型的参数mix转换为数值类型。其规则为：<br>（1）如果是<strong>布尔值</strong>，true和false分别被转换为1和0。<br>（2）如果是<strong>数字值</strong>，返回本身。<br>（3）如果是<strong>null</strong>，返回0.<br>（4）如果是<strong>undefined</strong>，返回NaN。<br>（5）如果是<strong>字符串</strong>，遵循以下规则：<br>  1、如果字符串中只包含数字，则将其转换为十进制（忽略前导0）。<br>  2、如果字符串中包含有效的浮点格式，将其转换为浮点数值（忽略前导0）。<br>  3、如果是空字符串，将其转换为0。<br>  4、如果字符串中包含非以上格式，则将其转换为NaN。<br>（6）如果是对象，则调用对象的valueOf()方法，然后依据前面的规则转换返回的值。如果转换的结果是NaN，则调用对象的toString()方法，再次依照前面的规则转换返回的字符串值。</p>
+<li><p><code>Number(mix)</code>函数可以将任意类型的参数mix转换为数值类型。其规则为：<br>（1）如果是<strong>布尔值</strong>，true和false分别被转换为1和0。<br>（2）如果是<strong>数字值</strong>，返回本身。<br>（3）如果是<strong>null</strong>，返回0.<br>（4）如果是<strong>undefined</strong>，返回NaN。<br>（5）如果是<strong>字符串</strong>，遵循以下规则：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">· 如果字符串中只包含数字，则将其转换为十进制（忽略前导0）。</span><br><span class="line">· 如果字符串中包含有效的浮点格式，将其转换为浮点数值（忽略前导0）。</span><br><span class="line">· 如果是空字符串，将其转换为0。</span><br><span class="line">· 如果字符串中包含非以上格式，则将其转换为NaN。</span><br></pre></td></tr></table></figure>
+<p>（6）如果是<strong>对象</strong>，则调用对象的valueOf()方法，然后依据前面的规则转换返回的值。如果转换的结果是NaN，则调用对象的toString()方法，再次依照前面的规则转换返回的字符串值。</p>
 </li>
-<li><p>下表列出了对象的valueOf()的返回值：</p>
-</li>
+<li>下表列出了对象的valueOf()的返回值：</li>
 </ul>
 <table>
 <thead>
@@ -540,7 +543,7 @@
 <li>isNaN()函数，经测试发现，该函数会尝试将参数值用Number()进行转换，如果结果为”非数值”则返回true，否则返回false。</li>
 </ul>
 <h5 id="加法运算操作符"><a href="#加法运算操作符" class="headerlink" title="加法运算操作符"></a>加法运算操作符</h5><ul>
-<li>加号运算操作符在Javascript也用于字符串连接符，所以加号操作符的规则分两种情况：<br>如果两个操作值都是数值，其规则为：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(1)如果一个操作数为NaN，则结果为NaN</span><br><span class="line">(2)如果是Infinity+Infinity，结果是Infinity</span><br><span class="line">(3)如果是-Infinity+(-Infinity)，结果是-Infinity</span><br><span class="line">(4)如果是Infinity+(-Infinity)，结果是NaN</span><br><span class="line">(5)如果是+0+(+0)，结果为+0</span><br><span class="line">(6)如果是(-0)+(-0)，结果为-0</span><br><span class="line">(7)如果是(+0)+(-0)，结果为+0</span><br><span class="line">如果有一个操作值为字符串，则：</span><br><span class="line">a.如果两个操作值都是字符串，则将它们拼接起来</span><br><span class="line">b.如果只有一个操作值为字符串，则将另外操作值转换为字符串，然后拼接起来</span><br><span class="line">c.如果一个操作数是对象、数值或者布尔值，则调用toString()方法取得字符串值，然后再应用前面的字符串规则。对于undefined和null，分别调用String()显式转换为字符串。</span><br></pre></td></tr></table></figure>
+<li>加号运算操作符在Javascript也用于字符串连接符，所以加号操作符的规则分两种情况：<br>如果两个操作值都是数值，其规则为：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(1)如果一个操作数为NaN，则结果为NaN</span><br><span class="line">(2)如果是Infinity+Infinity，结果是Infinity</span><br><span class="line">(3)如果是-Infinity+(-Infinity)，结果是-Infinity</span><br><span class="line">(4)如果是Infinity+(-Infinity)，结果是NaN</span><br><span class="line">(5)如果是+0+(+0)，结果为+0</span><br><span class="line">(6)如果是(-0)+(-0)，结果为-0</span><br><span class="line">(7)如果是(+0)+(-0)，结果为+0</span><br><span class="line">如果有一个操作值为字符串，表达式的值便是一个String，且：</span><br><span class="line">a.如果两个操作值都是字符串，则将它们拼接起来</span><br><span class="line">b.如果只有一个操作值为字符串，则将另外操作值转换为字符串，然后拼接起来</span><br><span class="line">c.如果一个操作数是对象、数值或者布尔值，则调用toString()方法取得字符串值，然后再应用前面的字符串规则。对于undefined和null，分别调用String()显式转换为字符串。</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="乘除、减号运算符、取模运算符"><a href="#乘除、减号运算符、取模运算符" class="headerlink" title="乘除、减号运算符、取模运算符"></a>乘除、减号运算符、取模运算符</h5><ul>
