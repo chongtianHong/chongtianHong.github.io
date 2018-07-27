@@ -132,7 +132,7 @@
 <meta property="og:description" content="在JavaScript中声明变量不需指定类型，对变量赋值也没有类型检查，同时JavaScript允许隐式类型转换。这些特征说明JavaScript属于弱类型的语言。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/valueOf.png">
-<meta property="og:updated_time" content="2018-07-27T14:23:54.948Z">
+<meta property="og:updated_time" content="2018-07-27T14:36:55.406Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript强制类型转换与隐式类型转换">
 <meta name="twitter:description" content="在JavaScript中声明变量不需指定类型，对变量赋值也没有类型检查，同时JavaScript允许隐式类型转换。这些特征说明JavaScript属于弱类型的语言。">
@@ -454,15 +454,40 @@
 <li>以下值会被转换为false：false、””、0、NaN、null、undefined，其余任何值都会被转换为true。</li>
 </ul>
 <h4 id="隐式转换"><a href="#隐式转换" class="headerlink" title="隐式转换"></a>隐式转换</h4><ul>
-<li>在某些情况下，即使我们不提供显示转换，Javascript也会进行自动类型转换，主要情况有：<ul>
-<li>用于检测是否为非数值的函数：isNaN(mix)</li>
-<li>加法运算操作符</li>
-<li>乘除、减号运算符、取模运算符</li>
-<li>逻辑操作符（!、&amp;&amp;、||）</li>
-<li>关系操作符（&lt;, &gt;, &lt;=, &gt;=）</li>
-<li>相等操作符（==）</li>
+<li>在某些情况下，即使我们不提供显示转换， JavaScript会自动转换表达式中对象的类型以完成表达式求值，主要情况有以下几种：</li>
 </ul>
+<h5 id="用于检测是否为非数值的函数：isNaN-mix"><a href="#用于检测是否为非数值的函数：isNaN-mix" class="headerlink" title="用于检测是否为非数值的函数：isNaN(mix)"></a>用于检测是否为非数值的函数：isNaN(mix)</h5><ul>
+<li>isNaN()函数，经测试发现，该函数会尝试将参数值用Number()进行转换，如果结果为”非数值”则返回true，否则返回false。</li>
+</ul>
+<h5 id="加法运算操作符"><a href="#加法运算操作符" class="headerlink" title="加法运算操作符"></a>加法运算操作符</h5><ul>
+<li>加号运算操作符在Javascript也用于字符串连接符，所以加号操作符的规则分两种情况：<br>如果两个操作值都是数值，其规则为：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(1)如果一个操作数为NaN，则结果为NaN</span><br><span class="line">(2)如果是Infinity+Infinity，结果是Infinity</span><br><span class="line">(3)如果是-Infinity+(-Infinity)，结果是-Infinity</span><br><span class="line">(4)如果是Infinity+(-Infinity)，结果是NaN</span><br><span class="line">(5)如果是+0+(+0)，结果为+0</span><br><span class="line">(6)如果是(-0)+(-0)，结果为-0</span><br><span class="line">(7)如果是(+0)+(-0)，结果为+0</span><br><span class="line">如果有一个操作值为字符串，则：</span><br><span class="line">a.如果两个操作值都是字符串，则将它们拼接起来</span><br><span class="line">b.如果只有一个操作值为字符串，则将另外操作值转换为字符串，然后拼接起来</span><br><span class="line">c.如果一个操作数是对象、数值或者布尔值，则调用toString()方法取得字符串值，然后再应用前面的字符串规则。对于undefined和null，分别调用String()显式转换为字符串。</span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+<h5 id="乘除、减号运算符、取模运算符"><a href="#乘除、减号运算符、取模运算符" class="headerlink" title="乘除、减号运算符、取模运算符"></a>乘除、减号运算符、取模运算符</h5><ul>
+<li>这些操作符针对的是运算，所以他们具有共同性：如果操作值之一不是数值，则被隐式调用Number()函数进行转换。</li>
+</ul>
+<h5 id="逻辑操作符（-、-amp-amp-、-）"><a href="#逻辑操作符（-、-amp-amp-、-）" class="headerlink" title="逻辑操作符（!、&amp;&amp;、||）"></a>逻辑操作符（!、&amp;&amp;、||）</h5><ul>
+<li>逻辑非（！）操作符首先通过Boolean()函数将它的操作值转换为布尔值，然后求反。</li>
+<li><p>逻辑与（&amp;&amp;）操作符，如果一个操作值不是布尔值时，遵循以下规则进行转换：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">（1）如果第一个操作数经Boolean()转换后为<span class="literal">true</span>，则返回第二个操作值，否则返回第一个值（不是Boolean()转换后的值）</span><br><span class="line">（2）如果有一个操作值为null，返回null</span><br><span class="line">（3）如果有一个操作值为NaN，返回NaN</span><br><span class="line">（4）如果有一个操作值为undefined，返回undefined</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>逻辑或（||）操作符，如果一个操作值不是布尔值，遵循以下规则：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（1）如果第一个操作值经Boolean()转换后为<span class="literal">false</span>，则返回第二个操作值，否则返回第一个操作值（不是Boolean()转换后的值）</span><br><span class="line">（2）对于undefined、null和NaN的处理规则与逻辑与（&amp;&amp;）相同</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="关系操作符（-lt-gt-lt-gt-）"><a href="#关系操作符（-lt-gt-lt-gt-）" class="headerlink" title="关系操作符（&lt;, &gt;, &lt;=, &gt;=）"></a>关系操作符（&lt;, &gt;, &lt;=, &gt;=）</h5><ul>
+<li><p>与上述操作符一样，关系操作符的操作值也可以是任意类型的，所以使用非数值类型参与比较时也需要系统进行隐式类型转换：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">（1）如果两个操作值都是数值，则进行数值比较</span><br><span class="line">（2）如果两个操作值都是字符串，则比较字符串对应的字符编码值</span><br><span class="line">（3）如果只有一个操作值是数值，则将另一个操作值转换为数值，进行数值比较</span><br><span class="line">（4）如果一个操作数是对象，则调用valueOf()方法（如果对象没有valueOf()方法则调用toString()方法），得到的结果按照前面的规则执行比较</span><br><span class="line">（5）如果一个操作值是布尔值，则将其转换为数值，再进行比较</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注：<strong>NaN</strong>是非常特殊的值，它<strong>不和任何类型的值相等</strong>，<strong>包括它自己</strong>，同时它<strong>与任何类型的值比较大小时都返回false</strong>。</p>
+</li>
+</ul>
+<h5 id="相等操作符（-）"><a href="#相等操作符（-）" class="headerlink" title="相等操作符（==）"></a>相等操作符（==）</h5><ul>
+<li>相等操作符会对操作值进行隐式转换后进行比较：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">（1）如果一个操作值为布尔值，则在比较之前先将其转换为数值</span><br><span class="line">（2）如果一个操作值为字符串，另一个操作值为数值，则通过Number()函数将字符串转换为数值</span><br><span class="line">（3）如果一个操作值是对象，另一个不是，则调用对象的valueOf()方法，得到的结果按照前面的规则进行比较</span><br><span class="line">（4）null与undefined是相等的</span><br><span class="line">（5）如果一个操作值为NaN，则相等比较返回<span class="literal">false</span></span><br><span class="line">（6）如果两个操作值都是对象，则比较它们是不是指向同一个对象</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="判断语句"><a href="#判断语句" class="headerlink" title="判断语句"></a>判断语句</h5><ul>
+<li>判断语句中的判断条件需要是Boolean类型，所以条件表达式会被隐式转换为Boolean。 其转换规则同Boolean的构造函数。 </li>
 </ul>
 
       
@@ -668,7 +693,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#强制类型转换"><span class="nav-number">1.</span> <span class="nav-text">强制类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐式转换"><span class="nav-number">2.</span> <span class="nav-text">隐式转换</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#强制类型转换"><span class="nav-number">1.</span> <span class="nav-text">强制类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐式转换"><span class="nav-number">2.</span> <span class="nav-text">隐式转换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#用于检测是否为非数值的函数：isNaN-mix"><span class="nav-number">2.1.</span> <span class="nav-text">用于检测是否为非数值的函数：isNaN(mix)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加法运算操作符"><span class="nav-number">2.2.</span> <span class="nav-text">加法运算操作符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#乘除、减号运算符、取模运算符"><span class="nav-number">2.3.</span> <span class="nav-text">乘除、减号运算符、取模运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#逻辑操作符（-、-amp-amp-、-）"><span class="nav-number">2.4.</span> <span class="nav-text">逻辑操作符（!、&amp;&amp;、||）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关系操作符（-lt-gt-lt-gt-）"><span class="nav-number">2.5.</span> <span class="nav-text">关系操作符（&lt;, &gt;, &lt;=, &gt;=）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#相等操作符（-）"><span class="nav-number">2.6.</span> <span class="nav-text">相等操作符（==）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#判断语句"><span class="nav-number">2.7.</span> <span class="nav-text">判断语句</span></a></li></ol></li></ol></div>
             
 
           </div>
