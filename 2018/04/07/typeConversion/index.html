@@ -131,12 +131,10 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="在JavaScript中声明变量不需指定类型，对变量赋值也没有类型检查，同时JavaScript允许隐式类型转换。这些特征说明JavaScript属于弱类型的语言。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://chongtianhong.github.io/images/valueOf.png">
-<meta property="og:updated_time" content="2018-07-27T14:36:55.406Z">
+<meta property="og:updated_time" content="2018-07-27T14:43:51.941Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript强制类型转换与隐式类型转换">
 <meta name="twitter:description" content="在JavaScript中声明变量不需指定类型，对变量赋值也没有类型检查，同时JavaScript允许隐式类型转换。这些特征说明JavaScript属于弱类型的语言。">
-<meta name="twitter:image" content="https://chongtianhong.github.io/images/valueOf.png">
 
 
 
@@ -417,8 +415,48 @@
 <ul>
 <li><p><code>Number(mix)</code>函数可以将任意类型的参数mix转换为数值类型。其规则为：<br>（1）如果是<strong>布尔值</strong>，true和false分别被转换为1和0。<br>（2）如果是<strong>数字值</strong>，返回本身。<br>（3）如果是<strong>null</strong>，返回0.<br>（4）如果是<strong>undefined</strong>，返回NaN。<br>（5）如果是<strong>字符串</strong>，遵循以下规则：<br>  1、如果字符串中只包含数字，则将其转换为十进制（忽略前导0）。<br>  2、如果字符串中包含有效的浮点格式，将其转换为浮点数值（忽略前导0）。<br>  3、如果是空字符串，将其转换为0。<br>  4、如果字符串中包含非以上格式，则将其转换为NaN。<br>（6）如果是对象，则调用对象的valueOf()方法，然后依据前面的规则转换返回的值。如果转换的结果是NaN，则调用对象的toString()方法，再次依照前面的规则转换返回的字符串值。</p>
 </li>
-<li><p>下表列出了对象的valueOf()的返回值：<br><img src="/images/valueOf.png" alt="对象的valueOf()的返回值" style="border:none"></p>
+<li><p>下表列出了对象的valueOf()的返回值：</p>
 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">对象</th>
+<th style="text-align:center">返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Array</td>
+<td style="text-align:center">数组的元素被转换为字符串，这些字符串由逗号分隔，连接在一起。其操作与 Array.toString 和 Array.join 方法相同。</td>
+</tr>
+<tr>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">Boolean 值。</td>
+</tr>
+<tr>
+<td style="text-align:center">Date</td>
+<td style="text-align:center">存储的时间是从 1970 年 1 月 1 日午夜开始计的毫秒数 UTC。</td>
+</tr>
+<tr>
+<td style="text-align:center">Function</td>
+<td style="text-align:center">函数本身。</td>
+</tr>
+<tr>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">数字值。</td>
+</tr>
+<tr>
+<td style="text-align:center">Object</td>
+<td style="text-align:center">对象本身。这是默认情况。</td>
+</tr>
+<tr>
+<td style="text-align:center">String</td>
+<td style="text-align:center">字符串值。</td>
+</tr>
+</tbody>
+</table>
+<ul>
 <li>示例：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Number(<span class="string">"hello CSSer!"</span>); // NaN</span><br><span class="line">Number(<span class="string">"0×8"</span>); // NaN</span><br><span class="line">Number(<span class="string">""</span>); // 0</span><br><span class="line">Number(<span class="string">"020dd"</span>); NaN</span><br><span class="line">Number(<span class="string">"070"</span>); // 70</span><br><span class="line">Number(<span class="literal">true</span>); // 1</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -440,8 +478,50 @@
 <blockquote>4、toString(radix)函数</blockquote>
 
 <ul>
-<li><strong>除undefined和null之外</strong>的所有类型的值<strong>都具有toString()方法</strong>，其作用是<strong>返回对象的字符串表示</strong>。<br><img></li>
+<li><strong>除undefined和null之外</strong>的所有类型的值<strong>都具有toString()方法</strong>，其作用是<strong>返回对象的字符串表示</strong>。</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">对象</th>
+<th style="text-align:center">返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Array</td>
+<td style="text-align:center">将 Array 的元素转换为字符串。结果字符串由逗号分隔，且连接起来。</td>
+</tr>
+<tr>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">如果 Boolean 值是 true，则返回 “true”。否则，返回 “false”。</td>
+</tr>
+<tr>
+<td style="text-align:center">Date</td>
+<td style="text-align:center">返回日期的文字表示法。</td>
+</tr>
+<tr>
+<td style="text-align:center">Error</td>
+<td style="text-align:center">返回一个包含相关错误信息的字符串。</td>
+</tr>
+<tr>
+<td style="text-align:center">Function</td>
+<td style="text-align:center">返回如下格式的字符串，其中 functionname 是被调用 toString 方法函数的名称：function functionname( ) { [native code] }</td>
+</tr>
+<tr>
+<td style="text-align:center">Object</td>
+<td style="text-align:center">对象本身。这是默认情况。</td>
+</tr>
+<tr>
+<td style="text-align:center">String</td>
+<td style="text-align:center">返回 String 对象的值。</td>
+</tr>
+<tr>
+<td style="text-align:center">默认</td>
+<td style="text-align:center">返回 “[object objectname]”，其中 objectname 是对象类型的名称。</td>
+</tr>
+</tbody>
+</table>
 <blockquote>5、String(mix)函数</blockquote>
 
 <ul>
