@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-07-28T11:51:03.539Z</updated>
+  <updated>2018-07-28T11:51:39.828Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://chongtianhong.github.io/2018/04/09/prototype/"/>
     <id>https://chongtianhong.github.io/2018/04/09/prototype/</id>
     <published>2018-04-09T11:07:52.000Z</published>
-    <updated>2018-07-28T11:51:03.539Z</updated>
+    <updated>2018-07-28T11:51:39.828Z</updated>
     
     <content type="html"><![CDATA[<ul><li>JavaScript可以通过<strong>构造函数</strong>和<strong>原型链</strong>实现继承。</li><li><strong>所有的实例对象</strong>都可以<strong>继承构造函数中的属性和方法</strong>，但是，<strong>同一个构造函数</strong>的<strong>实例对象之间无法共享属性或方法</strong>。</li><li>为了解决构造函数的这个缺点，JavaScript提供了<strong>prototype属性</strong>。<a id="more"></a></li></ul><h4 id="prototype属性"><a href="#prototype属性" class="headerlink" title="prototype属性"></a>prototype属性</h4><ul><li>JavaScript中每个数据类型都是对象（除了null和undefined），而每个对象都继承自另外一个对象（原型对象），只有<strong>null</strong>除外，它<strong>没有自己的原型对象</strong>。</li><li><strong>原型对象上的所有属性和方法，都会被对象实例所共享</strong>。原型对象的作用，就是定义所有对象实例所<strong>共享</strong>的属性和方法。</li><li><strong>通过构造函数生成对象实例</strong>时，会<strong>将对象实例的原型（_proto_属性）指向构造函数的prototype属性</strong>。<strong>每一个构造函数都有一个prototype属性</strong>，这个属性就是<strong>对象实例的原型对象</strong>。prototype既是属性，又是对象：<ul><li>对于<strong>构造函数</strong>来说，<strong>prototype是作为构造函数的属性</strong>；</li><li>对于<strong>对象实例</strong>来说，<strong>prototype是对象实例的原型对象</strong>。</li></ul></li><li>对象的属性和方法，有可能是定义在自身，也有可能是定义在它的原型对象上。如果<strong>实例对象自身有某个属性或方法</strong>，就<strong>不会去原型对象上查找</strong>。当某个<strong>对象实例没有该属性和方法时</strong>，就会<strong>到原型对象上去查找</strong>。</li></ul><h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><ul><li>由于<strong>原型对象本身对于对象实例来说也是对象</strong>，它<strong>也有自己的原型</strong>，所以形成了一条<strong>原型链（prototype chain）</strong>。</li><li>即每个对象和原型都有原型，对象的原型指向原型对象，而父的原型又指向父的父，这种原型层层连接起来的就构成了原型链。</li><li>所有一切的对象的<strong>原型顶端</strong>，都是<strong>Object.prototype</strong>，即Object构造函数的prototype属性指向的那个对象。</li><li><strong>Object.prototype对象</strong>也有自己的<strong>原型对象</strong>，即<strong>null对象</strong>（没有任何属性和方法），而null对象<strong>没有自己的原型</strong>。</li></ul><h4 id="原型链（prototype-chain）的特点"><a href="#原型链（prototype-chain）的特点" class="headerlink" title="原型链（prototype chain）的特点"></a>原型链（prototype chain）的特点</h4><ul><li>读取对象的某个属性时，JavaScript引擎先寻找<strong>对象本身</strong>的属性，如果找不到，就到它的<strong>原型</strong>去找，如果还是找不到，就到<strong>原型的原型</strong>去找。如果直到<strong>最顶层的Object.prototype</strong>还是找不到，则<strong>返回undefined</strong>。</li><li>如果<strong>对象自身</strong>和它的<strong>原型</strong>，都定义了一个<strong>同名属性</strong>，那么<strong>优先读取对象自身的属性</strong>，这叫做“覆盖”（overiding）。</li><li>一级级向上<strong>在原型链寻找某个属性，对性能是有影响的</strong>。所寻找的属性在越上层的原型对象，对性能的影响越大。如果寻找某个不存在的属性，将会遍历整个原型链。</li></ul><h4 id="constructor属性"><a href="#constructor属性" class="headerlink" title="constructor属性"></a>constructor属性</h4><ul><li>prototype对象有一个constructor属性，默认指向<strong>prototype对象所在的构造函数</strong>。</li><li><p>prototype是构造函数的属性，而constructor则是原型对象的属性。关系：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">构造函数.prototype.constructor===构造函数</span><br><span class="line">console.log(A.hasOwnProperty(<span class="string">'prototype'</span>)); //<span class="literal">true</span></span><br><span class="line">console.log(A.prototype.hasOwnProperty(<span class="string">'constructor'</span>)); //<span class="literal">true</span></span><br></pre></td></tr></table></figure></li><li><p>另外，实例的构造函数属性（constructor）指向构造函数。</p></li></ul><h4 id="hasOwnProperty-函数"><a href="#hasOwnProperty-函数" class="headerlink" title="hasOwnProperty()函数"></a>hasOwnProperty()函数</h4><ul><li><code>hasOwnProperty()</code>函数用于指示一个<strong>对象自身(不包括原型链)是否具有指定名称的属性</strong>。如果有，返回true，否则返回false。</li><li>该方法属于Object对象，由于所有的对象都”继承”了Object的对象实例，因此几乎所有的实例对象都可以使用该方法。</li><li>语法:<code>object.hasOwnProperty(propertyName)</code></li><li>此方法<strong>不会检查对象的原型链</strong>中是否存在该属性，该属性只有是<strong>对象本身的一个成员才会返回true</strong>。</li></ul>]]></content>
     
@@ -41,7 +41,7 @@
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
-      <category term="进制转换" scheme="https://chongtianhong.github.io/tags/%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2/"/>
+      <category term="原型链" scheme="https://chongtianhong.github.io/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
     
   </entry>
   
@@ -259,11 +259,11 @@
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="交互" scheme="https://chongtianhong.github.io/tags/%E4%BA%A4%E4%BA%92/"/>
     
       <category term="AJAX" scheme="https://chongtianhong.github.io/tags/AJAX/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="跨域" scheme="https://chongtianhong.github.io/tags/%E8%B7%A8%E5%9F%9F/"/>
     
