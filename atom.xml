@@ -50,6 +50,39 @@
   </entry>
   
   <entry>
+    <title>深入理解ES6箭头函数中的this</title>
+    <link href="https://chongtianhong.github.io/2018/04/10/arrowFunction/"/>
+    <id>https://chongtianhong.github.io/2018/04/10/arrowFunction/</id>
+    <published>2018-04-10T13:34:05.000Z</published>
+    <updated>2018-07-28T14:14:53.021Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>箭头函数看上去是匿名函数的一种简写，但实际上，箭头函数和匿名函数有个明显的<strong>区别</strong>：<ul><li>箭头函数内部的this是<strong>词法作用域，由上下文确定</strong>。</li><li>箭头函数中的this是在<strong>定义函数的时候绑定</strong>，而不是在执行函数的时候绑定。<a id="more"></a></li></ul></li><li>由于this在箭头函数中已经按照词法作用域绑定了，所以，用<code>call()</code>或者<code>apply()</code>、<code>bind()</code>调用箭头函数时，无法对this进行绑定（无法使用<code>call()</code>或者<code>apply()</code>、<code>bind()</code>改变this的指向），即传入的第一个参数被忽略。内部的this指向<strong>父执行上下文</strong>里面的this。</li><li>箭头函数中，this指向的固定化，并不是因为箭头函数内部有绑定this的机制，实际原因是<strong>箭头函数根本没有自己的this</strong>，导致内部的this就是<strong>外层代码块</strong>的this。正是因为它没有this，所以也就<strong>不能用作构造函数</strong>。</li><li><p>箭头函数中的this是在<strong>定义函数的时候绑定</strong>，看一个例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var x = 11;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    x: 22,</span><br><span class="line">    say: ()=&gt;&#123;</span><br><span class="line">        console.log(this.x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.say();  //输出的值为11</span><br></pre></td></tr></table></figure></li><li><p>所谓的<strong>定义时候绑定</strong>，就是this是继承自<strong>父执行上下文中的this</strong>，比如这里的箭头函数中的this.x，箭头函数本身与say平级以key:value的形式，也就是箭头函数本身所在的对象为obj，而<strong>obj的父执行上下文就是window</strong>，因此这里的this.x实际上表示的是window.x，因此输出的是11。</p></li><li><p>而对于下面的例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">    birth: 1990,</span><br><span class="line">    getAge: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        var b = this.birth; // 1990</span><br><span class="line">        var fn = () =&gt; new Date().getFullYear() - this.birth; // this指向obj对象</span><br><span class="line">        <span class="built_in">return</span> fn();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.getAge(); // 25</span><br></pre></td></tr></table></figure></li><li><p>例子中箭头函数本身是在getAge方法中定义的，因此，getAge方法的<strong>父执行上下文</strong>是obj，因此这里的this指向则为obj对象。</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;箭头函数看上去是匿名函数的一种简写，但实际上，箭头函数和匿名函数有个明显的&lt;strong&gt;区别&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;箭头函数内部的this是&lt;strong&gt;词法作用域，由上下文确定&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;箭头函数中的this是在&lt;strong&gt;定义函数的时候绑定&lt;/strong&gt;，而不是在执行函数的时候绑定。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
+    
+      <category term="箭头函数" scheme="https://chongtianhong.github.io/tags/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="this" scheme="https://chongtianhong.github.io/tags/this/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JS原型链</title>
     <link href="https://chongtianhong.github.io/2018/04/09/prototype/"/>
     <id>https://chongtianhong.github.io/2018/04/09/prototype/</id>
@@ -292,11 +325,11 @@
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
       <category term="交互" scheme="https://chongtianhong.github.io/tags/%E4%BA%A4%E4%BA%92/"/>
     
       <category term="AJAX" scheme="https://chongtianhong.github.io/tags/AJAX/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="跨域" scheme="https://chongtianhong.github.io/tags/%E8%B7%A8%E5%9F%9F/"/>
     
@@ -596,33 +629,6 @@
       <category term="Cookie" scheme="https://chongtianhong.github.io/tags/Cookie/"/>
     
       <category term="Session" scheme="https://chongtianhong.github.io/tags/Session/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>npm知识点整理</title>
-    <link href="https://chongtianhong.github.io/2018/03/22/npm/"/>
-    <id>https://chongtianhong.github.io/2018/03/22/npm/</id>
-    <published>2018-03-22T06:36:43.000Z</published>
-    <updated>2018-07-20T14:36:11.289Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>Node 开发离不开 <code>npm</code>，而脚本功能是 <code>npm</code> 最强大、最常用的功能之一。<a id="more"></a></li></ul><h4 id="基本内容"><a href="#基本内容" class="headerlink" title="基本内容"></a>基本内容</h4><blockquote>命令的别名</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm i // npm install</span><br><span class="line">npm i -D // npm install --save-dev</span><br><span class="line">npm t // npm <span class="built_in">test</span></span><br><span class="line">npm it // npm install &amp;&amp; npm <span class="built_in">test</span></span><br><span class="line">npm r // npm uninstall</span><br></pre></td></tr></table></figure><blockquote>运行脚本</blockquote><ul><li><code>npm</code> 允许在<code>package.json</code>文件里面，使用<code>scripts</code>字段定义脚本命令，然后使用<code>npm run &lt;script-name&gt;</code>来运行脚本。</li></ul><blockquote>变量</blockquote><ul><li><p><code>npm</code> 脚本有一个非常强大的功能，就是可以使用 <code>npm</code> 的内部变量。首先，通过<code>npm_package_前缀</code>，<code>npm</code> 脚本可以拿到<code>package.json</code>里面的字段（所有<code>PACKAG.JSON</code>属性都作为环境变量公开）。比如，下面是一个<code>package.json</code>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"foo"</span>, </span><br><span class="line">  <span class="string">"version"</span>: <span class="string">"1.2.5"</span>,</span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"view"</span>: <span class="string">"node view.js"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>那么，变量<code>npm_package_name</code>返回foo，变量<code>npm_package_version</code>返回1.2.5。</p></li><li><p>可以通过环境变量<code>process.env</code>对象，拿到<code>package.json</code>的字段值：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(process.env.npm_package_name); // foo</span><br><span class="line">console.log(process.env.npm_package_version); // 1.2.5</span><br></pre></td></tr></table></figure></li><li><p><code>npm_package_前缀</code>也支持嵌套的<code>package.json</code>字段：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"repository"</span>: &#123;</span><br><span class="line">    <span class="string">"type"</span>: <span class="string">"git"</span>,</span><br><span class="line">    <span class="string">"url"</span>: <span class="string">"xxx"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  scripts: &#123;</span><br><span class="line">    <span class="string">"view"</span>: <span class="string">"echo <span class="variable">$npm_package_repository_type</span>"</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li><li><p>上面代码中，<code>repository</code>字段的<code>type</code>属性，可以通过<code>npm_package_repository_type</code>取到。</p></li></ul><blockquote>发布代码</blockquote><ul><li>在<code>package.json</code>文件中需要定义发布包名称（name），当前版本号、第三方依赖、入口模块位置、命令行程序名和主模块位置等字段。然后使用<code>npm publish</code>进行发布，当然，之前还需要有<code>npm</code>帐号，即用<code>npm adduser</code>进行登录。</li></ul><blockquote>执行顺序</blockquote><ul><li><p>如果 <code>npm</code> 脚本里面需要执行多个任务，那么需要明确它们的执行顺序。</p><ul><li><p>如果是并行执行（即同时的平行执行），可以使用&amp;符号。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run script1.js &amp; npm run script2.js</span><br></pre></td></tr></table></figure></li><li><p>如果是继发执行（即只有前一个任务成功，才执行下一个任务），可以使用&amp;&amp;符号。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run script1.js &amp;&amp; npm run script2.js</span><br></pre></td></tr></table></figure></li></ul></li></ul><blockquote>简写形式</blockquote><ul><li>四个常用的 <code>npm</code> 脚本的简写形式：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm start // npm run start的简写</span><br><span class="line">npm stop // npm run stop的简写</span><br><span class="line">npm <span class="built_in">test</span> // npm run <span class="built_in">test</span>的简写</span><br><span class="line">npm restart //npm run stop &amp;&amp; npm run restart &amp;&amp; npm run start的简写</span><br></pre></td></tr></table></figure></li></ul><h4 id="npm-install、npm-install-–save与npm-install-–save-dev区别"><a href="#npm-install、npm-install-–save与npm-install-–save-dev区别" class="headerlink" title="npm install、npm install –save与npm install –save-dev区别"></a>npm install、npm install –save与npm install –save-dev区别</h4><h5 id="npm-install-X"><a href="#npm-install-X" class="headerlink" title="npm install X"></a>npm install X</h5><ul><li>会把X包安装到<code>node_modules</code>目录中。</li><li>不会修改<code>package.json</code>。</li><li>之后运行<code>npm install</code>命令时，不会自动安装X。</li></ul><h5 id="npm-install-X-–save"><a href="#npm-install-X-–save" class="headerlink" title="npm install X –save"></a>npm install X –save</h5><ul><li>会把X包安装到<code>node_modules</code>目录中。</li><li>会在<code>package.json的<code>dependencies</code>属性下添加X。</code></li><li>之后运行<code>npm install</code>命令时，会自动安装X到<code>node_modules</code>目录中。</li><li>之后运行<code>npm install –production</code>或者注明<code>NODE_ENV</code>变量值为<code>production</code>时，会自动安装msbuild到<code>node_modules</code>目录中。</li></ul><h5 id="npm-install-X-–save-dev"><a href="#npm-install-X-–save-dev" class="headerlink" title="npm install X –save-dev"></a>npm install X –save-dev</h5><ul><li>会把X包安装到<code>node_modules</code>目录中。</li><li>会在<code>package.json</code>的<code>devDependencies</code>属性下添加X。</li><li>之后运行<code>npm install</code>命令时，会自动安装X到<code>node_modules</code>目录中。</li><li>之后运行<code>npm install –production</code>或者注明<code>NODE_ENV</code>变量值为<code>production</code>时，不会自动安装X到<code>node_modules</code>目录中。</li></ul><h5 id="使用原则"><a href="#使用原则" class="headerlink" title="使用原则"></a>使用原则</h5><ul><li>运行时需要用到的包使用<code>–save</code>，否则使用<code>–save-dev</code>。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;Node 开发离不开 &lt;code&gt;npm&lt;/code&gt;，而脚本功能是 &lt;code&gt;npm&lt;/code&gt; 最强大、最常用的功能之一。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Node.js" scheme="https://chongtianhong.github.io/tags/Node-js/"/>
-    
-      <category term="npm" scheme="https://chongtianhong.github.io/tags/npm/"/>
     
   </entry>
   
