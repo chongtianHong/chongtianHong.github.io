@@ -133,7 +133,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/firstRequest.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/afterRequest.png">
-<meta property="og:updated_time" content="2018-07-29T08:09:24.849Z">
+<meta property="og:image" content="https://chongtianhong.github.io/2018/04/15/browserCache/images/fromCache.jpg">
+<meta property="og:updated_time" content="2018-07-29T08:37:59.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器强缓存和协商缓存">
 <meta name="twitter:description" content="基本介绍 浏览器缓存是浏览器在本地磁盘对用户最近请求过的文档进行存储，当访问者再次访问同一页面时，浏览器就可以直接从本地磁盘加载文档。 浏览器缓存有下面的优点： 减少冗余的数据传输； 减少服务器负担； 加快客户端加载网页的速度。">
@@ -482,6 +483,9 @@
 </li>
 <li><code>Cache-Control</code>描述的是一个<strong>相对时间</strong>，在进行缓存命中的时候，都是利用客户端时间进行判断，所以相比较<strong><code>Expires</code>，Cache-Control的缓存管理更有效，安全一些</strong>。</li>
 <li>这两个header可以只启用一个，也可以同时启用，当response header中的<code>Expires</code>和<code>Cache-Control</code>同时存在时，<code>Cache-Control</code>优先级高于<code>Expires</code>。</li>
+<li>注：在<strong>无法确定客户端的时间是否与服务端的时间同步</strong>的情况下，Cache-Control相比于expires是更好的选择，所以<strong>同时存在时，只有Cache-Control生效</strong>。</li>
+<li>以博客的请求为例，<strong>状态码为灰色的请求</strong>则代表使用了<strong>强制缓存</strong>，请求对应的Size值则代表该缓存存放的位置，分别为<strong>from memory cache</strong> 和 <strong>from disk cache</strong>。<br><img src="images/fromCache.jpg" stype="border:none" alt="博客的请求例子"></li>
+<li><strong>from memory cache</strong>代表使用<strong>内存中</strong>的缓存，<strong>from disk cache</strong>则代表使用的是<strong>硬盘</strong>中的缓存，浏览器读取缓存的顺序为先从内存（memory）中读，再从硬盘（disk）中读。</li>
 </ul>
 <h4 id="协商缓存相关的header字段"><a href="#协商缓存相关的header字段" class="headerlink" title="协商缓存相关的header字段"></a>协商缓存相关的header字段</h4><ul>
 <li><strong>协商缓存</strong>都是由服务器来确定缓存资源是否可用的，所以客户端与服务器端要通过某种标识来进行通信，从而<strong>让服务器判断请求资源是否可以使用缓存访问</strong>。</li>
@@ -586,6 +590,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/04/16/fromCacheType/" rel="prev" title="内存缓存(from memory cache)和硬盘缓存(from disk cache)的区别">
+                内存缓存(from memory cache)和硬盘缓存(from disk cache)的区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -665,7 +673,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -687,7 +695,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
