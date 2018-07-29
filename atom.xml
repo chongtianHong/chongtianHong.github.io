@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-07-29T03:57:02.657Z</updated>
+  <updated>2018-07-29T06:34:19.710Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浏览器强缓存和协商缓存</title>
+    <link href="https://chongtianhong.github.io/2018/04/15/browserCache/"/>
+    <id>https://chongtianhong.github.io/2018/04/15/browserCache/</id>
+    <published>2018-04-15T05:36:26.000Z</published>
+    <updated>2018-07-29T06:34:19.710Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul><li><strong>浏览器缓存是浏览器在本地磁盘对用户最近请求过的文档进行存储</strong>，当访问者再次访问同一页面时，浏览器就可以直接从本地磁盘加载文档。</li><li>浏览器缓存有下面的优点：<ul><li>减少冗余的数据传输</li><li>减少服务器负担</li><li>加快客户端加载网页的速度<a id="more"></a></li></ul></li></ul><h4 id="浏览器缓存分类"><a href="#浏览器缓存分类" class="headerlink" title="浏览器缓存分类"></a>浏览器缓存分类</h4><ul><li>根据<strong>是否需要重新向服务器发起请求</strong>来分类，浏览器缓存可以分为<strong>强缓存</strong>和<strong>协商缓存</strong>两大类。强缓存不发请求到服务器，协商缓存会发请求到服务器。</li><li>两类缓存规则<strong>可以同时存在</strong>，<strong>强缓存优先级高于协商缓存</strong>，也就是说，当执行强缓存的规则时，<strong>如果强缓存生效，直接使用强缓存</strong>，不再执行协商缓存规则。</li><li>对于强缓存，服务器通知浏览器一个缓存时间，在缓存时间内，下次请求，直接用缓存，不在时间内，执行协商缓存策略。</li><li>对于协商缓存，将缓存信息中的Etag和Last-Modified通过请求发送给服务器，由服务器校验，返回304状态码时，浏览器直接使用缓存。</li><li>浏览器第一次请求时：<br><img src="/images/firstRequest.png" alt="浏览器第一次请求" style="border:none"></li><li>由上图可以看到，在<strong>客户端第一次请求数据</strong>时，此时缓存数据库中没有对应的缓存数据，<strong>需要请求服务器</strong>，<strong>服务器返回后，将数据存储至缓存数据库中</strong>。</li><li>浏览器后续在进行请求时：<br><img src="/images/afterRequest.png" alt="浏览器后续请求" style="border:none"></li><li><p>可以看到，浏览器后续在进行请求时，<strong>如果资源已经被浏览器缓存下来</strong>，在缓存失效之前，再次请求时，默认的处理方式为：</p><ul><li>默认会<strong>先检查是否命中强缓存（cache-control和expires信息）</strong>，如果强缓存命中则直接读取缓存，包括缓存header信息；</li><li><strong>如果强缓存没有命中</strong>，则发请求到服务器，<strong>请求会携带第一次请求返回的有关缓存的header字段信息（Last-Modified/If-Modified-Since和Etag/If-None-Match）</strong>，由<strong>服务器</strong>根据请求中的相关header信息来<strong>检查是否命中协商缓存</strong>，若协商缓存命中，则服务器返回新的响应header信息更新缓存中的对应header信息，但是并<strong>不返回资源内容</strong>，它会告知浏览器可以直接从缓存获取（返回304状态码）；</li><li>如果强缓存和协商缓存都没有命中，服务器则返回最新的资源。</li></ul></li><li><p>强缓存与协商缓存的共同点是：如果命中，都是从客户端缓存中加载资源，而不是从服务器加载资源数据。</p></li><li><p>强缓存与协商缓存的区别，可以用下表来进行描述：</p></li></ul><table><thead><tr><th style="text-align:center">&nbsp;</th><th style="text-align:center">获取资源形式</th><th style="text-align:center">状态码</th><th style="text-align:center">是否发请求到服务器</th></tr></thead><tbody><tr><td style="text-align:center">强缓存</td><td style="text-align:center">从缓存取</td><td style="text-align:center">200(from cache)</td><td style="text-align:center">否，直接从缓存取</td></tr><tr><td style="text-align:center">协商缓存</td><td style="text-align:center">从缓存取</td><td style="text-align:center">304(not modified)</td><td style="text-align:center">是，通过服务器来告知缓存是否可用</td></tr></tbody></table><h4 id="强缓存相关的header字段"><a href="#强缓存相关的header字段" class="headerlink" title="强缓存相关的header字段"></a>强缓存相关的header字段</h4><ul><li>当浏览器对某个资源的请求命中了强缓存时，返回的http状态为200，在chrome的开发者工具的network里面size会显示为from cache。</li><li>强缓存<strong>直接从缓存中获取资源</strong>而不经过服务器。</li><li>与强缓存相关的header字段有两个：分别是<code>Expires</code>和<code>Cache-Control</code>，它们都用来表示<strong>资源在客户端缓存的有效期</strong>。</li></ul><blockquote>Expires</blockquote><ul><li><p><code>Expires</code>是http1.0提出的一个表示资源过期时间的header，它描述的是一个<strong>绝对时间</strong>，由服务器返回，用GMT格式的字符串表示，如：Expires:Thu, 31 Dec 2037 23:55:55 GMT，它的缓存原理是：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.浏览器第一次跟服务器请求一个资源，服务器在返回这个资源的同时，在respone的header加上Expires的header；</span><br><span class="line">2.浏览器在接收到这个资源后，会把这个资源连同所有response header一起缓存下来（所以缓存命中的请求返回的header并不是来自服务器，而是来自之前缓存的header）；</span><br><span class="line">3.浏览器再请求这个资源时，先从缓存中寻找，找到这个资源后，拿出它的Expires跟当前的请求时间比较，如果请求时间在Expires指定的时间之前，就能命中缓存，否则就不行；</span><br><span class="line">4.如果缓存没有命中，浏览器直接从服务器加载资源时，Expires Header在重新加载的时候会被更新。</span><br></pre></td></tr></table></figure></li><li><p><code>Expires</code>是较老的强缓存管理header，由于它是<strong>服务器返回的一个绝对时间</strong>，在<strong>服务器时间与客户端时间相差较大</strong>时，<strong>缓存管理容易出现问题</strong>，比如随意修改下客户端时间，就能影响缓存命中的结果。</p></li></ul><blockquote>Cache-Control</blockquote><ul><li><p>由于<code>Expires</code>存在着缺陷，在http1.1的时候，提出了一个新的header，就是<code>Cache-Control</code>，主要是利用该字段的max-age值来进行判断，是一个<strong>相对时间</strong>，在配置缓存的时候，以秒为单位，用数值表示，如：Cache-Control:max-age=315360000，它的缓存原理是：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.浏览器第一次跟服务器请求一个资源，服务器在返回这个资源的同时，在respone的header加上Cache-Control的header；</span><br><span class="line">2.浏览器在接收到这个资源后，会把这个资源连同所有response header一起缓存下来；</span><br><span class="line">3.浏览器再请求这个资源时，先从缓存中寻找，找到这个资源后，根据它第一次的请求时间和Cache-Control设定的有效期，计算出一个资源过期时间，再拿这个过期时间跟当前的请求时间比较，如果请求时间在过期时间之前，就能命中缓存，否则就不行；</span><br><span class="line">4.如果缓存没有命中，浏览器直接从服务器加载资源时，Cache-Control Header在重新加载的时候会被更新。</span><br></pre></td></tr></table></figure></li><li><p><code>Cache-Control</code>除了设置max-age值外，还有下面几个比较常用的设置值：</p><ul><li>no-cache：不使用本地缓存。需要使用缓存协商，先与服务器确认返回的响应是否被更改，如果之前的响应中存在ETag，那么请求的时候会与服务端验证，如果资源未被更改，则可以避免重新下载。</li><li>no-store：直接禁止游览器缓存数据，每次用户请求该资源，都会向服务器发送一个请求，每次都会下载完整的资源。</li><li>public：可以被所有的用户缓存，包括终端用户和CDN等中间代理服务器。</li><li>private：只能被终端用户的浏览器缓存，不允许CDN等中继缓存服务器对其缓存。</li></ul></li><li><code>Cache-Control</code>描述的是一个相对时间，在进行缓存命中的时候，都是利用客户端时间进行判断，所以相比较<code>Expires</code>，Cache-Control的缓存管理更有效，安全一些。</li><li>这两个header可以只启用一个，也可以同时启用，当response header中的<code>Expires</code>和<code>Cache-Control</code>同时存在时，<code>Cache-Control</code>优先级高于<code>Expires</code>。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;基本介绍&quot;&gt;&lt;a href=&quot;#基本介绍&quot; class=&quot;headerlink&quot; title=&quot;基本介绍&quot;&gt;&lt;/a&gt;基本介绍&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;浏览器缓存是浏览器在本地磁盘对用户最近请求过的文档进行存储&lt;/strong&gt;，当访问者再次访问同一页面时，浏览器就可以直接从本地磁盘加载文档。&lt;/li&gt;
+&lt;li&gt;浏览器缓存有下面的优点：&lt;ul&gt;
+&lt;li&gt;减少冗余的数据传输&lt;/li&gt;
+&lt;li&gt;减少服务器负担&lt;/li&gt;
+&lt;li&gt;加快客户端加载网页的速度
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
+    
+      <category term="强缓存" scheme="https://chongtianhong.github.io/tags/%E5%BC%BA%E7%BC%93%E5%AD%98/"/>
+    
+      <category term="协商缓存" scheme="https://chongtianhong.github.io/tags/%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98/"/>
+    
+      <category term="HTTP" scheme="https://chongtianhong.github.io/tags/HTTP/"/>
+    
+  </entry>
   
   <entry>
     <title>什么是无样式内容闪烁?如何避免?</title>
@@ -602,39 +637,6 @@
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数组去重的多重方法</title>
-    <link href="https://chongtianhong.github.io/2018/03/26/distinctArray/"/>
-    <id>https://chongtianhong.github.io/2018/03/26/distinctArray/</id>
-    <published>2018-03-26T03:15:15.000Z</published>
-    <updated>2018-07-23T14:26:57.177Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>数组去重有多种方法，分别是：<ul><li>利用数组的<strong>splice方法</strong>直接在原数组进行操作</li><li>利用<strong>对象的属性不能相同</strong>的特点进行去重</li><li>利用数组的<strong>indexOf下标属性</strong>来查询</li><li>利用数组原型对象上的 <strong>lastIndexOf 方法</strong></li><li>利用 ES6的<strong>set 方法</strong></li><li>利用数组原型对象上的<strong>includes方法</strong><a id="more"></a></li></ul></li><li>接下来将对这几种方法进行具体介绍。</li></ul><blockquote>方法一：利用splice直接在原数组进行操作</blockquote><ul><li><strong>思路</strong>：双层循环，外层循环元素，内层循环时<strong>比较相邻元素值</strong>。值相同时，则删去这个值。</li><li><strong>注意</strong>:删除元素之后，需要将数组的长度也减1。</li><li><strong>优点</strong>：简单易懂。</li><li><strong>缺点</strong>：占用内存高，速度慢。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr) &#123;</span><br><span class="line">  <span class="built_in">let</span> len = arr.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; len - 1; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> j = i + 1; j &lt; len; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[i] == arr[j]) &#123;</span><br><span class="line">        arr.splice(j, 1);</span><br><span class="line">        len--;</span><br><span class="line">        j--;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> arr;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">let</span> arr = [1, 2, 3, 4, 5, 6, 5, 3, 2, 4, 56, 4, 1, 2, 1, 1, 1, 1, 1, 1, ];</span><br><span class="line"><span class="built_in">let</span> b = distinct(arr); //1,2,3,4,5,6,56</span><br></pre></td></tr></table></figure></li></ul><blockquote>方法二：利用对象的属性不能相同的特点进行去重</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">distinct</span></span>() &#123;</span><br><span class="line">  <span class="built_in">let</span> obj = &#123;&#125;;</span><br><span class="line">  <span class="built_in">let</span> result = [];</span><br><span class="line">  <span class="built_in">let</span> len = arr.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!obj[arr[i]]) &#123; //如果能查找到，证明数组元素重复了</span><br><span class="line">      obj[arr[i]] = 1;</span><br><span class="line">      result.push(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> result;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">let</span> arr = [1, 2, 3, 4, 5, 6, 5, 3, 2, 4, 56, 4, 1, 2, 1, 1, 1, 1, 1, 1, ];</span><br><span class="line"><span class="built_in">let</span> b = distinct(arr); //1,2,3,4,5,6,56</span><br></pre></td></tr></table></figure><blockquote>方法三: 利用数组的indexOf下标属性来查询</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr)&#123;</span><br><span class="line">  var res = [];</span><br><span class="line">  <span class="keyword">for</span>(var i = 0; i &lt; arr.length; i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(res.indexOf(arr[i]) == -1)&#123; // 如果res新数组不包含当前循环item</span><br><span class="line">      res.push(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote>方法四: 利用数组原型对象上的 lastIndexOf 方法</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr) &#123;</span><br><span class="line">  var res = [];</span><br><span class="line">  <span class="keyword">for</span> (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    res.lastIndexOf(arr[i]) !== -1 ? <span class="string">''</span> : res.push(arr[i]); // 如果res新数组不包含当前循环item</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote>方法五: 利用 ES6的set 方法</blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr) &#123;</span><br><span class="line">  //Set数据结构，它类似于数组，其成员的值都是唯一的</span><br><span class="line">  <span class="built_in">return</span> Array.from(new Set(arr)); // 利用Array.from将Set结构转换成数组</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote>方法六: 利用数组原型对象上的includes方法</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr) &#123;</span><br><span class="line">  var res = [];</span><br><span class="line">  <span class="keyword">for</span> (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!res.includes(arr[i])) &#123; // 如果res新数组不包含当前循环item</span><br><span class="line">      res.push(arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;数组去重有多种方法，分别是：&lt;ul&gt;
-&lt;li&gt;利用数组的&lt;strong&gt;splice方法&lt;/strong&gt;直接在原数组进行操作&lt;/li&gt;
-&lt;li&gt;利用&lt;strong&gt;对象的属性不能相同&lt;/strong&gt;的特点进行去重&lt;/li&gt;
-&lt;li&gt;利用数组的&lt;strong&gt;indexOf下标属性&lt;/strong&gt;来查询&lt;/li&gt;
-&lt;li&gt;利用数组原型对象上的 &lt;strong&gt;lastIndexOf 方法&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;利用 ES6的&lt;strong&gt;set 方法&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;利用数组原型对象上的&lt;strong&gt;includes方法&lt;/strong&gt;
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
