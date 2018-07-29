@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-07-29T03:16:14.956Z</updated>
+  <updated>2018-07-29T03:20:25.771Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://chongtianhong.github.io/2018/04/13/hrefAndSrc/"/>
     <id>https://chongtianhong.github.io/2018/04/13/hrefAndSrc/</id>
     <published>2018-04-13T02:48:03.000Z</published>
-    <updated>2018-07-29T03:16:14.956Z</updated>
+    <updated>2018-07-29T03:20:25.771Z</updated>
     
-    <content type="html"><![CDATA[<ul><li>src和href之间存在区别：<ul><li><code>src</code>是引入，用于替换当前元素；</li><li><code>href</code>是引用，用于在当前文档和引用资源之间确立联系。 </li></ul></li><li><strong>注意</strong>：JS、CSS中如有重定义，后定义函数将覆盖前定义函数。<a id="more"></a></li></ul><blockquote>href</blockquote><ul><li><code>href</code>表示<strong>超文本引用</strong>（hypertext reference），用在link和a等元素上，<code>href</code>引用的内容与该页面有关联，是<strong>在当前元素和引用资源之间建立联系</strong>。</li><li><code>href</code>引用的内是外部资源而非网页不可或缺的一部分，因此在遇到<code>href</code>时浏览器会在下载CSS文件的<strong>同时去处理网页的其他部分</strong>。</li><li>注意：建议<strong>使用link方式来加载css</strong>而不是使用@import。</li></ul><blockquote>link和@import的区别</blockquote><ul><li>两者都是外部引用CSS的方式，但是存在一定的区别：<ul><li>区别1：<strong>link是XHTML标签</strong>，除了加载CSS外，还可以定义RSS、定义rel连接属性等其他事务；<strong>@import属于CSS范畴，只能加载CSS</strong>。</li><li>区别2：<strong>link</strong>引用CSS时，在<strong>页面载入时同时加载</strong>；<strong>@import</strong>需要<strong>页面网页完全载入以后加载</strong>。</li><li>区别3：<strong>link是XHTML标签，无兼容问题</strong>；<strong>@import</strong>是在CSS2.1提出的，<strong>低版本的浏览器不支持</strong>。</li><li>区别4：link支持使用Javascript控制DOM去改变样式；而@import不支持。</li></ul></li></ul><blockquote>src</blockquote><ul><li><code>src</code>表示<strong>外部资源引入</strong>，用于<strong>替换当前元素</strong>，用在img，script，iframe等元素上，<code>src</code>是<strong>页面内容不可缺少的一部分</strong>。</li><li>在遇到<code>src</code>时浏览器会<strong>等待这一部分下载运行结束</strong>才会继续处理下面的网页，这也是为什么&lt;script&gt;标签最好放在网页底部。（在加载js文件时，浏览器会阻止页面的渲染）</li></ul>]]></content>
+    <content type="html"><![CDATA[<ul><li>src和href之间存在区别：<ul><li><code>src</code>是引入，用于替换当前元素；</li><li><code>href</code>是引用，用于在当前文档和引用资源之间确立联系。 </li></ul></li><li><strong>注意</strong>：JS、CSS中如有重定义，后定义函数将覆盖前定义函数。<a id="more"></a></li></ul><blockquote>href</blockquote><ul><li><code>href</code>表示<strong>超文本引用</strong>（hypertext reference），用在link和a等元素上，<code>href</code>引用的内容与该页面有关联，是<strong>在当前元素和引用资源之间建立联系</strong>。</li><li><code>href</code>引用的内是外部资源而非网页不可或缺的一部分，因此在遇到<code>href</code>时浏览器会在下载CSS文件的<strong>同时去处理网页的其他部分</strong>。</li><li>注意：建议<strong>使用link方式来加载css</strong>而不是使用@import。</li></ul><blockquote>补充：link和@import的区别</blockquote><ul><li>两者都是外部引用CSS的方式，但是存在一定的区别：<ul><li>区别1：<strong>link是XHTML标签</strong>，除了加载CSS外，还可以定义RSS、定义rel连接属性等其他事务；<strong>@import属于CSS范畴，只能加载CSS</strong>。</li><li>区别2：<strong>link</strong>引用CSS时，在<strong>页面载入时同时加载</strong>；<strong>@import</strong>需要<strong>页面网页完全载入以后加载</strong>。</li><li>区别3：<strong>link是XHTML标签，无兼容问题</strong>；<strong>@import</strong>是在CSS2.1提出的，<strong>低版本的浏览器不支持</strong>。</li><li>区别4：link支持使用Javascript控制DOM去改变样式；而@import不支持。</li></ul></li></ul><blockquote>src</blockquote><ul><li><code>src</code>表示<strong>外部资源引入</strong>，用于<strong>替换当前元素</strong>，用在img，script，iframe等元素上，<code>src</code>是<strong>页面内容不可缺少的一部分</strong>。</li><li>在遇到<code>src</code>时浏览器会<strong>等待这一部分下载运行结束</strong>才会继续处理下面的网页，这也是为什么&lt;script&gt;标签最好放在网页底部。（在加载js文件时，浏览器会阻止页面的渲染）</li></ul>]]></content>
     
     <summary type="html">
     
@@ -383,11 +383,11 @@
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
       <category term="交互" scheme="https://chongtianhong.github.io/tags/%E4%BA%A4%E4%BA%92/"/>
     
       <category term="AJAX" scheme="https://chongtianhong.github.io/tags/AJAX/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="跨域" scheme="https://chongtianhong.github.io/tags/%E8%B7%A8%E5%9F%9F/"/>
     
