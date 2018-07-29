@@ -133,7 +133,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/firstRequest.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/afterRequest.png">
-<meta property="og:updated_time" content="2018-07-29T07:51:57.178Z">
+<meta property="og:updated_time" content="2018-07-29T08:09:24.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器强缓存和协商缓存">
 <meta name="twitter:description" content="基本介绍 浏览器缓存是浏览器在本地磁盘对用户最近请求过的文档进行存储，当访问者再次访问同一页面时，浏览器就可以直接从本地磁盘加载文档。 浏览器缓存有下面的优点： 减少冗余的数据传输； 减少服务器负担； 加快客户端加载网页的速度。">
@@ -477,7 +477,7 @@
 <li><code>no-cache</code>：<strong>不使用本地缓存</strong>。需要使用缓存协商，先与服务器确认返回的响应是否被更改，如果之前的响应中存在ETag，那么请求的时候会与服务端验证，如果资源未被更改，则可以避免重新下载。</li>
 <li><code>no-store</code>：<strong>直接禁止浏览器缓存数据</strong>，每次用户请求该资源，都会向服务器发送一个请求，每次都会下载完整的资源。</li>
 <li><code>public</code>：可以被<strong>所有的用户的浏览器缓存</strong>，包括终端用户和CDN等中间代理服务器。</li>
-<li><code>private</code>：只能被<strong>终端用户的浏览器缓存</strong>，不允许CDN等中继缓存服务器对其缓存。</li>
+<li><code>private</code>：只能被<strong>终端用户的浏览器缓存</strong>，不允许CDN等中继缓存服务器对其缓存。<strong>如果<code>Cache-Control</code>仅指定了max-age，则默认为private</strong>。</li>
 </ul>
 </li>
 <li><code>Cache-Control</code>描述的是一个<strong>相对时间</strong>，在进行缓存命中的时候，都是利用客户端时间进行判断，所以相比较<strong><code>Expires</code>，Cache-Control的缓存管理更有效，安全一些</strong>。</li>
@@ -514,6 +514,7 @@
 </li>
 <li>这时，<strong>利用Etag能够更加准确的控制缓存</strong>，因为Etag是服务器自动生成或者由开发者生成的<strong>对应资源在服务器端的唯一标识符</strong>。</li>
 <li>Last-Modified与ETag是可以一起使用的，服务器会<strong>优先验证ETag</strong>，一致的情况下，才会<strong>继续比对Last-Modified</strong>，最后才决定是否返回304。</li>
+<li>然而，在<strong>性能</strong>上，<strong>Etag要逊于Last-Modified</strong>，毕竟Last-Modified只需要记录时间，而<strong>Etag需要服务器通过算法来计算出一个hash值</strong>。</li>
 </ul>
 <h4 id="用户的行为对缓存的影响"><a href="#用户的行为对缓存的影响" class="headerlink" title="用户的行为对缓存的影响"></a>用户的行为对缓存的影响</h4><ul>
 <li>当使用<code>Ctrl + F5</code><strong>强制刷新网页</strong>时，直接从服务器加载，跳过强缓存和协商缓存。</li>
