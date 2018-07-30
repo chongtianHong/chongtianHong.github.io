@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,JavaScript,Web," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言 在开发的过程中，会遇到很多常见的实例操作。比如数组去重，关键词高亮，打乱数组等。 这些操作，代码一般不会很多，实现的逻辑也不会很难，如果重复写的话，会造成代码冗余，开发效率也不用。 为了实现复用，可以把一些常见的操作封装成函数存放在工具类集合utils.js中，需要调用的时候，引入工具包调用对应的方法即可。">
+<meta name="keywords" content="开发,JavaScript,Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript常用实例的实现与封装">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/04/17/commonInstancesOfJS/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="前言 在开发的过程中，会遇到很多常见的实例操作。比如数组去重，关键词高亮，打乱数组等。 这些操作，代码一般不会很多，实现的逻辑也不会很难，如果重复写的话，会造成代码冗余，开发效率也不用。 为了实现复用，可以把一些常见的操作封装成函数存放在工具类集合utils.js中，需要调用的时候，引入工具包调用对应的方法即可。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-30T14:28:09.152Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript常用实例的实现与封装">
+<meta name="twitter:description" content="前言 在开发的过程中，会遇到很多常见的实例操作。比如数组去重，关键词高亮，打乱数组等。 这些操作，代码一般不会很多，实现的逻辑也不会很难，如果重复写的话，会造成代码冗余，开发效率也不用。 为了实现复用，可以把一些常见的操作封装成函数存放在工具类集合utils.js中，需要调用的时候，引入工具包调用对应的方法即可。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/04/17/commonInstancesOfJS/"/>
+
+
+
+
+
+  <title>JavaScript常用实例的实现与封装 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/04/17/commonInstancesOfJS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript常用实例的实现与封装</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T10:24:47+08:00">
+                2018-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li>在开发的过程中，会遇到很多常见的实例操作。比如<strong>数组去重</strong>，<strong>关键词高亮</strong>，<strong>打乱数组</strong>等。</li>
+<li>这些操作，代码一般不会很多，实现的逻辑也不会很难，如果重复写的话，会造成代码冗余，开发效率也不用。</li>
+<li>为了实现复用，可以<strong>把一些常见的操作封装成函数</strong>存放在工具类集合utils.js中，需要调用的时候，引入工具包调用对应的方法即可。<a id="more"></a>
+</li>
+</ul>
+<blockquote><br>1. 下面代码，均使用es5版本实现。<br>2. 下面的代码，都是存放在工具类集合utils.js中，在对应的js文件中使用require引入模块，然后使用utils.[方法名]调用方法。<br></blockquote>
+
+<h4 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h4><h5 id="去除字符串空格"><a href="#去除字符串空格" class="headerlink" title="去除字符串空格"></a>去除字符串空格</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/* 去除空格  <span class="built_in">type</span> 1-所有空格  2-前后空格  3-前空格 4-后空格</span><br><span class="line">*  utils.trim(<span class="string">'  1235asd'</span>,1)</span><br><span class="line">*  result：<span class="string">'1235asd'</span></span><br><span class="line">*/ 这个方法有原生的方案代替，但是考虑到有时候开发PC站需要兼容IE8，所以就还是继续保留</span><br><span class="line"><span class="keyword">function</span> trim(str, <span class="built_in">type</span>) &#123;</span><br><span class="line">    switch (<span class="built_in">type</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> 1:</span><br><span class="line">            <span class="built_in">return</span> str.replace(/\s+/g, <span class="string">""</span>); // 所有空格</span><br><span class="line">        <span class="keyword">case</span> 2:</span><br><span class="line">            <span class="built_in">return</span> str.replace(/(^\s*)|(\s*$)/g, <span class="string">""</span>); // 前后空格</span><br><span class="line">        <span class="keyword">case</span> 3:</span><br><span class="line">            <span class="built_in">return</span> str.replace(/(^\s*)/g, <span class="string">""</span>); // 前空格</span><br><span class="line">        <span class="keyword">case</span> 4:</span><br><span class="line">            <span class="built_in">return</span> str.replace(/(\s*$)/g, <span class="string">""</span>); // 后空格</span><br><span class="line">        default:</span><br><span class="line">            <span class="built_in">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="字母大小写切换"><a href="#字母大小写切换" class="headerlink" title="字母大小写切换"></a>字母大小写切换</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">/* <span class="built_in">type</span></span><br><span class="line">* 1: 首字母大写</span><br><span class="line">* 2：首页母小写</span><br><span class="line">* 3：大小写转换</span><br><span class="line">* 4：全部大写</span><br><span class="line">* 5：全部小写</span><br><span class="line">*/</span><br><span class="line">// utils.changeCase(<span class="string">'asdasd'</span>,1)</span><br><span class="line">// result：<span class="string">'Asdasd'</span></span><br><span class="line"><span class="keyword">function</span> changeCase(str, <span class="built_in">type</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> ToggleCase(str) &#123; // 大小写转换</span><br><span class="line">        var itemText = <span class="string">""</span></span><br><span class="line">        str.split(<span class="string">""</span>).forEach(</span><br><span class="line">            <span class="keyword">function</span> (item) &#123;</span><br><span class="line">                <span class="keyword">if</span> (/^([a-z]+)/.<span class="built_in">test</span>(item)) &#123;</span><br><span class="line">                    itemText += item.toUpperCase();</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (/^([A-Z]+)/.<span class="built_in">test</span>(item)) &#123;</span><br><span class="line">                    itemText += item.toLowerCase();</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    itemText += item;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="built_in">return</span> itemText;</span><br><span class="line">    &#125;</span><br><span class="line">    switch (<span class="built_in">type</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> 1: // 首字母大写</span><br><span class="line">            <span class="built_in">return</span> str.replace(/\b\w+\b/g, <span class="keyword">function</span> (word) &#123; // \b匹配的是字之间的看不见的边界,每个单词前后都有 \b</span><br><span class="line">                <span class="built_in">return</span> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();</span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="keyword">case</span> 2: // 首页母小写</span><br><span class="line">            <span class="built_in">return</span> str.replace(/\b\w+\b/g, <span class="keyword">function</span> (word) &#123;</span><br><span class="line">                <span class="built_in">return</span> word.substring(0, 1).toLowerCase() + word.substring(1).toUpperCase();</span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="keyword">case</span> 3: // 大小写转换</span><br><span class="line">            <span class="built_in">return</span> ToggleCase(str);</span><br><span class="line">        <span class="keyword">case</span> 4: // 全部大写</span><br><span class="line">            <span class="built_in">return</span> str.toUpperCase();</span><br><span class="line">        <span class="keyword">case</span> 5: // 全部小写</span><br><span class="line">            <span class="built_in">return</span> str.toLowerCase();</span><br><span class="line">        default:</span><br><span class="line">            <span class="built_in">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="字符串循环复制"><a href="#字符串循环复制" class="headerlink" title="字符串循环复制"></a>字符串循环复制</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/* repeatStr(str-&gt;字符串, count-&gt;次数)</span><br><span class="line">*  utils.repeatStr(<span class="string">'123'</span>,3)</span><br><span class="line">*/ result：<span class="string">'123123123'</span></span><br><span class="line"><span class="keyword">function</span> repeatStr(str, count) &#123;</span><br><span class="line">    var text = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span> (var i = 0; i &lt; count; i++) &#123;</span><br><span class="line">        text += str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> text;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="字符串替换"><a href="#字符串替换" class="headerlink" title="字符串替换"></a>字符串替换</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//utils.replaceAll(<span class="string">'这里是上海，中国第三大城市，广东省省会，简称穗，'</span>,<span class="string">'上海'</span>,<span class="string">'广州'</span>)</span><br><span class="line">//result：<span class="string">'这里是广州，中国第三大城市，广东省省会，简称穗，'</span></span><br><span class="line"><span class="keyword">function</span> replaceAll(str, AFindText, ARepText) &#123;</span><br><span class="line">    raRegExp = new RegExp(AFindText, <span class="string">"g"</span>);</span><br><span class="line">    <span class="built_in">return</span> str.replace(raRegExp, ARepText);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="检测字符串"><a href="#检测字符串" class="headerlink" title="检测字符串"></a>检测字符串</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/* 检测字符串</span><br><span class="line">*  utils.checkType(<span class="string">'165226226326'</span>,<span class="string">'Phone'</span>)</span><br><span class="line">*/ result：<span class="literal">false</span></span><br><span class="line"><span class="keyword">function</span> checkType(str, <span class="built_in">type</span>) &#123;</span><br><span class="line">    switch (<span class="built_in">type</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'Email'</span>:</span><br><span class="line">            <span class="built_in">return</span> /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.<span class="built_in">test</span>(str);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'Phone'</span>:</span><br><span class="line">            <span class="built_in">return</span> /^1[3|4|5|7|8][0-9]&#123;9&#125;$/.<span class="built_in">test</span>(str);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'tel'</span>:</span><br><span class="line">            <span class="built_in">return</span> /^(0\d&#123;2,3&#125;-\d&#123;7,8&#125;)(-\d&#123;1,4&#125;)?$/.<span class="built_in">test</span>(str);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'Number'</span>:</span><br><span class="line">            <span class="built_in">return</span> /^[0-9]$/.<span class="built_in">test</span>(str);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'English'</span>:</span><br><span class="line">            <span class="built_in">return</span> /^[a-zA-Z]+$/.<span class="built_in">test</span>(str);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'Text'</span>:</span><br><span class="line">            <span class="built_in">return</span> /^\w+$/.<span class="built_in">test</span>(str);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'Chinese'</span>:</span><br><span class="line">            <span class="built_in">return</span> /^[\u4E00-\u9FA5]+$/.<span class="built_in">test</span>(str);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'Lower'</span>:</span><br><span class="line">            <span class="built_in">return</span> /^[a-z]+$/.<span class="built_in">test</span>(str);</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'Upper'</span>:</span><br><span class="line">            <span class="built_in">return</span> /^[A-Z]+$/.<span class="built_in">test</span>(str);</span><br><span class="line">        default:</span><br><span class="line">            <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="检测密码强度"><a href="#检测密码强度" class="headerlink" title="检测密码强度"></a>检测密码强度</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// utils.checkPwd(<span class="string">'12asdASAD'</span>)</span><br><span class="line">// result：3(强度等级为3)</span><br><span class="line"><span class="keyword">function</span> checkPwd(str) &#123;</span><br><span class="line">    var nowLv = 0;</span><br><span class="line">    <span class="keyword">if</span> (str.length &lt; 6) &#123;</span><br><span class="line">        <span class="built_in">return</span> nowLv</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (/[0-9]/.<span class="built_in">test</span>(str)) &#123;</span><br><span class="line">        nowLv++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (/[a-z]/.<span class="built_in">test</span>(str)) &#123;</span><br><span class="line">        nowLv++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (/[A-Z]/.<span class="built_in">test</span>(str)) &#123;</span><br><span class="line">        nowLv++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (/[\.|-|_]/.<span class="built_in">test</span>(str)) &#123;</span><br><span class="line">        nowLv++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> nowLv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="生成随机码"><a href="#生成随机码" class="headerlink" title="生成随机码"></a>生成随机码</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/* count取值范围0-36</span><br><span class="line">*  utils.randomWord(10)</span><br><span class="line">*  result：<span class="string">"2584316588472575"</span></span><br><span class="line">*  utils.randomWord(14)</span><br><span class="line">*  result：<span class="string">"9b405070dd00122640c192caab84537"</span></span><br><span class="line">*  utils.randomWord(36)</span><br><span class="line">*/ result：<span class="string">"83vhdx10rmjkyb9"</span></span><br><span class="line"><span class="keyword">function</span> randomWord(count) &#123;</span><br><span class="line">    <span class="built_in">return</span> Math.random().toString(count).substring(2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="计算特定字符串在长字符串中的出现次数"><a href="#计算特定字符串在长字符串中的出现次数" class="headerlink" title="计算特定字符串在长字符串中的出现次数"></a>计算特定字符串在长字符串中的出现次数</h5><ul>
+<li>例如：需要在字符串’sad44654blog5a1sd67as9dablog4s5d16zxc4sdweasjkblogwqepaskdkblogahseiuadbhjcibloguyeajzxkcabloguyiwezxc967’中找出’blog’的出现次数。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* var strTest=<span class="string">'sad44654blog5a1sd67as9dablog4s5d16zxc4sdweasjkblogwqepaskdkblogahseiuadbhjcibloguyeajzxkcabloguyiwezxc967'</span></span><br><span class="line">*  utils.countStr(strTest,<span class="string">'blog'</span>)</span><br><span class="line">*/ result：6</span><br><span class="line"><span class="keyword">function</span> countStr(str, strSplit) &#123;</span><br><span class="line">    <span class="built_in">return</span> str.split(strSplit).length - 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="格式化处理字符串"><a href="#格式化处理字符串" class="headerlink" title="格式化处理字符串"></a>格式化处理字符串</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/* utils.formatText(<span class="string">'1234asda567asd890'</span>)</span><br><span class="line">*  result：<span class="string">"12,34a,sda,567,asd,890"</span></span><br><span class="line">*  utils.formatText(<span class="string">'1234asda567asd890'</span>, 4, <span class="string">' '</span>)</span><br><span class="line">*  result：<span class="string">"1 234a sda5 67as d890"</span></span><br><span class="line">*  utils.formatText(<span class="string">'1234asda567asd890'</span>, 4, <span class="string">'-'</span>)</span><br><span class="line">*/ result：<span class="string">"1-234a-sda5-67as-d890"</span></span><br><span class="line"><span class="keyword">function</span> formatText(str, size, delimiter) &#123;</span><br><span class="line">    var _size = size || 3;</span><br><span class="line">    var _delimiter = delimiter || <span class="string">','</span>;</span><br><span class="line">    var regText = <span class="string">'\\B(?=(\\w&#123;'</span> + _size + <span class="string">'&#125;)+(?!\\w))'</span>;</span><br><span class="line">    var reg = new RegExp(regText, <span class="string">'g'</span>);</span><br><span class="line">    <span class="built_in">return</span> str.replace(reg, _delimiter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="找出最长单词"><a href="#找出最长单词" class="headerlink" title="找出最长单词"></a>找出最长单词</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/* utils.longestWord(<span class="string">'Find the Longest word in a String'</span>)</span><br><span class="line">*  result：&#123;el:<span class="string">'Longest'</span>, max:7&#125;;</span><br><span class="line">*  utils.longestWord(<span class="string">'Find|the|Longest|word|in|a|String'</span>,<span class="string">'|'</span>)</span><br><span class="line">*/ result：&#123;el:<span class="string">'Longest'</span>, max:7&#125;;</span><br><span class="line"><span class="keyword">function</span> longestWord(str, splitType) &#123;</span><br><span class="line">    var _splitType = splitType || /\s+/g,</span><br><span class="line">        _max = 0, _item=<span class="string">''</span>;</span><br><span class="line">    var strArr = str.split(_splitType);</span><br><span class="line">    strArr.forEach(<span class="keyword">function</span> (item) &#123;</span><br><span class="line">        <span class="keyword">if</span> (_max &lt; item.length) &#123;</span><br><span class="line">            _max = item.length</span><br><span class="line">            _item=item;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">return</span> &#123;el: _item, max:_max&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="句中每个单词首字母大写"><a href="#句中每个单词首字母大写" class="headerlink" title="句中每个单词首字母大写"></a>句中每个单词首字母大写</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* utils.titleCaseUp(<span class="string">'this is a title'</span>)</span><br><span class="line">*/ result: <span class="string">"This Is A Title"</span></span><br><span class="line"><span class="keyword">function</span> titleCaseUp(str, splitType) &#123;</span><br><span class="line">    var _splitType = splitType || /\s+/g;</span><br><span class="line">    var strArr = str.split(_splitType),</span><br><span class="line">        result = <span class="string">""</span>, _this = this</span><br><span class="line">    strArr.forEach(<span class="keyword">function</span> (item) &#123;</span><br><span class="line">        result += _this.changeCase(item, 1) + <span class="string">' '</span>; // 首字母大写</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">return</span> this.trim(result, 4) // 去除字符串后空格 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="数组操作"><a href="#数组操作" class="headerlink" title="数组操作"></a>数组操作</h4><h5 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> removeRepeatArray(arr) &#123;</span><br><span class="line">    <span class="built_in">return</span> arr.filter(<span class="keyword">function</span> (item, index, self) &#123;</span><br><span class="line">        <span class="built_in">return</span> self.indexOf(item) === index;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="数组顺序打乱"><a href="#数组顺序打乱" class="headerlink" title="数组顺序打乱"></a>数组顺序打乱</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> upsetArr(arr) &#123;</span><br><span class="line">    <span class="built_in">return</span> arr.sort(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> Math.random() - 0.5; // 负：位置不变，正：交换顺序</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="数组最大值最小值"><a href="#数组最大值最小值" class="headerlink" title="数组最大值最小值"></a>数组最大值最小值</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//数组最大值</span><br><span class="line"><span class="keyword">function</span> maxArr(arr) &#123;</span><br><span class="line">    <span class="built_in">return</span> Math.max.apply(null, arr);</span><br><span class="line">&#125;,</span><br><span class="line">//数组最小值</span><br><span class="line"><span class="keyword">function</span> minArr(arr) &#123;</span><br><span class="line">    <span class="built_in">return</span> Math.min.apply(null, arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="数组求和，平均值"><a href="#数组求和，平均值" class="headerlink" title="数组求和，平均值"></a>数组求和，平均值</h5><ul>
+<li>这一块的封装，主要是针对数字类型的数组:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 求和</span><br><span class="line"><span class="keyword">function</span> sumArr(arr) &#123;</span><br><span class="line">    <span class="built_in">return</span> arr.reduce(<span class="keyword">function</span>(pre, cur) &#123;</span><br><span class="line">        <span class="built_in">return</span> pre + cur</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 求数组平均值</span><br><span class="line"><span class="keyword">function</span> covArr(arr) &#123;</span><br><span class="line">    <span class="built_in">return</span> this.sumArr(arr) / arr.length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="从数组中随机获取元素"><a href="#从数组中随机获取元素" class="headerlink" title="从数组中随机获取元素"></a>从数组中随机获取元素</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* utils.randomOne([1,2,3,6,8,5,4,2,6])</span><br><span class="line">*  result: 2</span><br><span class="line">*  utils.randomOne([1,2,3,6,8,5,4,2,6])</span><br><span class="line">*  result: 8</span><br><span class="line">*  utils.randomOne([1,2,3,6,8,5,4,2,6])</span><br><span class="line">*  result: 8</span><br><span class="line">*  utils.randomOne([1,2,3,6,8,5,4,2,6])</span><br><span class="line">*/ result: 1</span><br><span class="line"><span class="keyword">function</span> randomOne(arr) &#123;</span><br><span class="line">    <span class="built_in">return</span> arr[Math.floor(Math.random() * arr.length)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="返回数组（字符串）一个元素出现的次数"><a href="#返回数组（字符串）一个元素出现的次数" class="headerlink" title="返回数组（字符串）一个元素出现的次数"></a>返回数组（字符串）一个元素出现的次数</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/* utils.getEleCount(<span class="string">'asd56+asdasdwqe'</span>, <span class="string">'a'</span>)</span><br><span class="line">*  result：3</span><br><span class="line">*  utils.getEleCount([1, 2, 3, 4, 5, 66, 77, 22, 55, 22], 22)</span><br><span class="line">*/ result：2</span><br><span class="line"><span class="keyword">function</span> getEleCount(obj, ele) &#123;</span><br><span class="line">    var num = 0;</span><br><span class="line">    var len = obj.length;</span><br><span class="line">    <span class="keyword">for</span> (var i = 0; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (ele === obj[i]) &#123;</span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="得到n1-n2下标的数组"><a href="#得到n1-n2下标的数组" class="headerlink" title="得到n1-n2下标的数组"></a>得到n1-n2下标的数组</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/* utils.getArrayNum([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 5, 9)</span><br><span class="line">*  result：[5, 6, 7, 8, 9]</span><br><span class="line">*  getArrayNum([0,1,2,3,4,5,6,7,8,9],2) //不传第二个参数, 默认返回从n1到数组结束的元素</span><br><span class="line">*/ result：[2, 3, 4, 5, 6, 7, 8, 9]</span><br><span class="line"><span class="keyword">function</span> getArrayNum(arr, n1, n2) &#123;</span><br><span class="line">    <span class="built_in">return</span> arr.slice(n1, n2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="删除值为val的数组元素"><a href="#删除值为val的数组元素" class="headerlink" title="删除值为val的数组元素"></a>删除值为val的数组元素</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* 数组元素的值含有<span class="string">'test'</span>的都删除</span><br><span class="line">*  utils.removeArrayForValue([<span class="string">'test'</span>,<span class="string">'test1'</span>,<span class="string">'test2'</span>,<span class="string">'test'</span>,<span class="string">'aaa'</span>],<span class="string">'test'</span>, <span class="string">'1'</span>)</span><br><span class="line">*  result：[<span class="string">"aaa"</span>]   </span><br><span class="line">*  数组元素的值全等于<span class="string">'test'</span>才被删除</span><br><span class="line">*  utils.removeArrayForValue([<span class="string">'test'</span>,<span class="string">'test1'</span>,<span class="string">'test2'</span>,<span class="string">'test'</span>,<span class="string">'aaa'</span>],<span class="string">'test'</span>)</span><br><span class="line">*/ result：[<span class="string">"test1"</span>, <span class="string">"test2"</span>, <span class="string">"aaa"</span>]</span><br><span class="line"><span class="keyword">function</span> removeArrayForValue(arr, val, <span class="built_in">type</span>) &#123;</span><br><span class="line">    <span class="built_in">return</span> arr.filter(<span class="keyword">function</span> (item) &#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="built_in">type</span> ? item.indexOf(val) === -1 : item !== val</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="数组扁平化"><a href="#数组扁平化" class="headerlink" title="数组扁平化"></a>数组扁平化</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/* utils.steamroller([1,2,[4,5,[1,23]]])</span><br><span class="line">*/ result: [1, 2, 4, 5, 1, 23]</span><br><span class="line"><span class="keyword">function</span> steamroller(arr) &#123;</span><br><span class="line">    var newArr = [],  _this = this;</span><br><span class="line">    <span class="keyword">for</span> (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (Array.isArray(arr[i])) &#123;</span><br><span class="line">            // 如果是数组，调用(递归)steamroller 将其扁平化</span><br><span class="line">            // 然后再 push 到 newArr 中</span><br><span class="line">            newArr.push.apply(newArr, _this.steamroller(arr[i]));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            // 不是数组直接 push 到 newArr 中</span><br><span class="line">            newArr.push(arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> newArr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h4><h5 id="cookie的设置、获取和删除"><a href="#cookie的设置、获取和删除" class="headerlink" title="cookie的设置、获取和删除"></a>cookie的设置、获取和删除</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// 设置cookie</span><br><span class="line"><span class="keyword">function</span> setCookie(name, value, iDay) &#123;</span><br><span class="line">    var oDate = new Date();</span><br><span class="line">    oDate.setDate(oDate.getDate() + iDay);</span><br><span class="line">    document.cookie = name + <span class="string">'='</span> + value + <span class="string">';expires='</span> + oDate;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 获取cookie</span><br><span class="line"><span class="keyword">function</span> getCookie(name) &#123;</span><br><span class="line">    var arr = document.cookie.split(<span class="string">';'</span>);</span><br><span class="line">    <span class="keyword">for</span> (var i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">        var arr2 = arr[i].split(<span class="string">'='</span>);</span><br><span class="line">        <span class="keyword">if</span> (arr2[0] == name) &#123;</span><br><span class="line">            <span class="built_in">return</span> arr2[1];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> <span class="string">''</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 删除cookie</span><br><span class="line"><span class="keyword">function</span> removeCookie(name) &#123;</span><br><span class="line">    this.setCookie(name, 1, -1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="清除对象中值为空的属性"><a href="#清除对象中值为空的属性" class="headerlink" title="清除对象中值为空的属性"></a>清除对象中值为空的属性</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* utils.filterParams(&#123;a: <span class="string">""</span>, b: null, c: <span class="string">"010"</span>, d: 123&#125;)</span><br><span class="line">*/ Object &#123;c: <span class="string">"010"</span>, d: 123&#125;</span><br><span class="line"><span class="keyword">function</span> filterParams(obj) &#123;</span><br><span class="line">    var _newPar = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (var key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((obj[key] === 0 || obj[key] === <span class="literal">false</span> || obj[key]) &amp;&amp; obj[key].toString().replace(/(^\s*)|(\s*$)/g, <span class="string">''</span>) !== <span class="string">''</span>) &#123;</span><br><span class="line">            _newPar[key] = obj[key];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> _newPar;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="随机返回一个范围的数字"><a href="#随机返回一个范围的数字" class="headerlink" title="随机返回一个范围的数字"></a>随机返回一个范围的数字</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/* utils.randomNumber(5, 10)</span><br><span class="line">*  返回5-10的随机整数，包括5，10</span><br><span class="line">*  utils.randomNumber(10)</span><br><span class="line">*  返回0-10的随机整数，包括0，10</span><br><span class="line">*  utils.randomNumber()</span><br><span class="line">*/ 返回0-255的随机整数，包括0，255</span><br><span class="line">randomNumber: <span class="keyword">function</span> (n1, n2) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arguments.length === 2) &#123;</span><br><span class="line">        <span class="built_in">return</span> Math.round(n1 + Math.random() * (n2 - n1));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (arguments.length === 1) &#123;</span><br><span class="line">        <span class="built_in">return</span> Math.round(Math.random() * n1)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">return</span> Math.round(Math.random() * 255)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Date日期时间部分"><a href="#Date日期时间部分" class="headerlink" title="Date日期时间部分"></a>Date日期时间部分</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/* 到某一个时间的倒计时</span><br><span class="line">*  utils.getEndTime(<span class="string">'2018/7/22 16:0:0'</span>)</span><br><span class="line">*/ result：<span class="string">"剩余时间6天 2小时 28 分钟20 秒"</span></span><br><span class="line"><span class="keyword">function</span> getEndTime(endTime) &#123;</span><br><span class="line">    var startDate = new Date(); // 开始时间，当前时间</span><br><span class="line">    var endDate = new Date(endTime); // 结束时间，需传入时间参数</span><br><span class="line">    var t = endDate.getTime() - startDate.getTime(); // 时间差的毫秒数</span><br><span class="line">    var d = 0,</span><br><span class="line">        h = 0,</span><br><span class="line">        m = 0,</span><br><span class="line">        s = 0;</span><br><span class="line">    <span class="keyword">if</span> (t &gt;= 0) &#123;</span><br><span class="line">        d = Math.floor(t / 1000 / 3600 / 24);</span><br><span class="line">        h = Math.floor(t / 1000 / 60 / 60 % 24);</span><br><span class="line">        m = Math.floor(t / 1000 / 60 % 60);</span><br><span class="line">        s = Math.floor(t / 1000 % 60);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> <span class="string">"剩余时间"</span> + d + <span class="string">"天 "</span> + h + <span class="string">"小时 "</span> + m + <span class="string">" 分钟"</span> + s + <span class="string">" 秒"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="手机类型判断"><a href="#手机类型判断" class="headerlink" title="手机类型判断"></a>手机类型判断</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> browserInfo(<span class="built_in">type</span>) &#123;</span><br><span class="line">    switch (<span class="built_in">type</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'android'</span>:</span><br><span class="line">            <span class="built_in">return</span> navigator.userAgent.toLowerCase().indexOf(<span class="string">'android'</span>) !== -1</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'iphone'</span>:</span><br><span class="line">            <span class="built_in">return</span> navigator.userAgent.toLowerCase().indexOf(<span class="string">'iphone'</span>) !== -1</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'ipad'</span>:</span><br><span class="line">            <span class="built_in">return</span> navigator.userAgent.toLowerCase().indexOf(<span class="string">'ipad'</span>) !== -1</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'weixin'</span>:</span><br><span class="line">            <span class="built_in">return</span> navigator.userAgent.toLowerCase().indexOf(<span class="string">'micromessenger'</span>) !== -1</span><br><span class="line">        default:</span><br><span class="line">            <span class="built_in">return</span> navigator.userAgent.toLowerCase()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/16/fromCacheType/" rel="next" title="内存缓存和硬盘缓存的区别">
+                <i class="fa fa-chevron-left"></i> 内存缓存和硬盘缓存的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串操作"><span class="nav-number">2.</span> <span class="nav-text">字符串操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#去除字符串空格"><span class="nav-number">2.1.</span> <span class="nav-text">去除字符串空格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#字母大小写切换"><span class="nav-number">2.2.</span> <span class="nav-text">字母大小写切换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#字符串循环复制"><span class="nav-number">2.3.</span> <span class="nav-text">字符串循环复制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#字符串替换"><span class="nav-number">2.4.</span> <span class="nav-text">字符串替换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#检测字符串"><span class="nav-number">2.5.</span> <span class="nav-text">检测字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#检测密码强度"><span class="nav-number">2.6.</span> <span class="nav-text">检测密码强度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#生成随机码"><span class="nav-number">2.7.</span> <span class="nav-text">生成随机码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#计算特定字符串在长字符串中的出现次数"><span class="nav-number">2.8.</span> <span class="nav-text">计算特定字符串在长字符串中的出现次数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#格式化处理字符串"><span class="nav-number">2.9.</span> <span class="nav-text">格式化处理字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#找出最长单词"><span class="nav-number">2.10.</span> <span class="nav-text">找出最长单词</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#句中每个单词首字母大写"><span class="nav-number">2.11.</span> <span class="nav-text">句中每个单词首字母大写</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组操作"><span class="nav-number">3.</span> <span class="nav-text">数组操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数组去重"><span class="nav-number">3.1.</span> <span class="nav-text">数组去重</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组顺序打乱"><span class="nav-number">3.2.</span> <span class="nav-text">数组顺序打乱</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组最大值最小值"><span class="nav-number">3.3.</span> <span class="nav-text">数组最大值最小值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组求和，平均值"><span class="nav-number">3.4.</span> <span class="nav-text">数组求和，平均值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从数组中随机获取元素"><span class="nav-number">3.5.</span> <span class="nav-text">从数组中随机获取元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回数组（字符串）一个元素出现的次数"><span class="nav-number">3.6.</span> <span class="nav-text">返回数组（字符串）一个元素出现的次数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#得到n1-n2下标的数组"><span class="nav-number">3.7.</span> <span class="nav-text">得到n1-n2下标的数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除值为val的数组元素"><span class="nav-number">3.8.</span> <span class="nav-text">删除值为val的数组元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组扁平化"><span class="nav-number">3.9.</span> <span class="nav-text">数组扁平化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他操作"><span class="nav-number">4.</span> <span class="nav-text">其他操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cookie的设置、获取和删除"><span class="nav-number">4.1.</span> <span class="nav-text">cookie的设置、获取和删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#清除对象中值为空的属性"><span class="nav-number">4.2.</span> <span class="nav-text">清除对象中值为空的属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#随机返回一个范围的数字"><span class="nav-number">4.3.</span> <span class="nav-text">随机返回一个范围的数字</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Date日期时间部分"><span class="nav-number">4.4.</span> <span class="nav-text">Date日期时间部分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#手机类型判断"><span class="nav-number">4.5.</span> <span class="nav-text">手机类型判断</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
