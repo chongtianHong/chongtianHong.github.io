@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-07-30T14:28:09.202Z</updated>
+  <updated>2018-07-30T14:28:09.297Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript中获取时间new Date()方法小结</title>
+    <link href="https://chongtianhong.github.io/2018/04/19/newDate/"/>
+    <id>https://chongtianhong.github.io/2018/04/19/newDate/</id>
+    <published>2018-04-19T08:07:41.000Z</published>
+    <updated>2018-07-30T14:28:09.297Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul><li>Date 对象用于处理日期和时间。</li><li>创建 Date 对象的语法：<code>new Date()</code><a id="more"></a></li><li><p>以下四种方法同样可以创建 Date 对象：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var d = new Date(); // Date 对象会自动把当前日期和时间保存为其初始值</span><br><span class="line">var d = new Date(milliseconds); // 1524126419000</span><br><span class="line">var d = new Date(dateString); // <span class="string">"2018-04-19"</span></span><br><span class="line">var d = new Date(year, month, day, hours, minutes, seconds, milliseconds);</span><br></pre></td></tr></table></figure></li><li><p>自动获取今天星期几：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var dayMap = <span class="string">'日一二三四五六'</span>.split(<span class="string">""</span>);</span><br><span class="line">dayMap[new Date().getDay()] // <span class="string">"四"</span></span><br></pre></td></tr></table></figure></li><li><p>获取今天日期格式（—-年–月–日）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var myDate = new Date();</span><br><span class="line">myDate.getFullYear() + <span class="string">'年'</span>+ (myDate.getMonth() + 1) + <span class="string">'月'</span> + myDate.getDate() + <span class="string">'日'</span>   </span><br><span class="line">// <span class="string">"2018年4月19日"</span></span><br></pre></td></tr></table></figure></li><li><p>详解 Date 对象包含的方法：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var myDate = new Date();</span><br><span class="line">myDate.getFullYear();    // 从 Date 对象以四位数字返回年份。</span><br><span class="line">myDate.getMonth();       // 从 Date 对象返回月份 (0 ~ 11)。</span><br><span class="line">myDate.getDate();        // 从 Date 对象返回一个月中的某一天 (1 ~ 31)。</span><br><span class="line">myDate.getFullYear()+<span class="string">'年'</span>+(myDate.getMonth()+1)+<span class="string">'月'</span>+myDate.getDate()+<span class="string">'日'</span>;     // <span class="string">"2018年4月19日"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">myDate.getDay();                        // 从 Date 对象返回一周中的某一天 (0 ~ 6)。</span><br><span class="line">myDate.getTime();                       // 返回 1970 年 1 月 1 日至今的毫秒数(时间戳)</span><br><span class="line">myDate.getHours();                      // 返回 Date 对象的小时 (0 ~ 23)。</span><br><span class="line">myDate.getMinutes();                    // 返回 Date 对象的分钟 (0 ~ 59)。</span><br><span class="line">myDate.getSeconds();                    // 返回 Date 对象的秒数 (0 ~ 59)。</span><br><span class="line">myDate.getMilliseconds();               // 返回 Date 对象的毫秒(0 ~ 999)。</span><br><span class="line">myDate.toLocaleDateString();            // 根据本地时间格式，把 Date 对象的日期部分转换为字符，如： <span class="string">"2018/4/19"</span></span><br><span class="line">var mytime=myDate.toLocaleTimeString(); // 根据本地时间格式，把 Date 对象的时间部分转换为字符串，如：<span class="string">"下午4:15:47"</span></span><br><span class="line">myDate.toLocaleString( );               // 根据本地时间格式，把 Date 对象转换为字符串，如：<span class="string">"2018/4/19 下午4:15:47"</span></span><br></pre></td></tr></table></figure></li></ul><h4 id="JS获取当前时间戳的方法"><a href="#JS获取当前时间戳的方法" class="headerlink" title="JS获取当前时间戳的方法"></a>JS获取当前时间戳的方法</h4><ul><li><p>第一种方法：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var timestamp = Date.parse(new Date()); // 1524126419000</span><br></pre></td></tr></table></figure></li><li><p>第二种方法：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var timestamp = (new Date()).valueOf(); // 1524126419696</span><br></pre></td></tr></table></figure></li><li><p>第三种方法：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var timestamp = new Date().getTime(); // 1524126419696</span><br></pre></td></tr></table></figure></li><li><p>区别：</p><ul><li>第一种：获取的时间戳是把毫秒改成000显示，即<strong>精确到秒</strong>。</li><li>第二种和第三种是获取了<strong>当前毫秒</strong>的时间戳。</li></ul></li><li>可以用第二种或第三种方法<strong>计算时间差</strong>。</li><li>在JavaScript中单独调用new Date()，例如<code>document.write(new Date());</code>，显示的结果是：<code>Thu Apr 19 2018 16:32:10 GMT+0800 (中国标准时间)</code> 这种格式的时间，但是<strong>用new Date() 参与计算时</strong>，会<strong>自动转换为</strong>从1970.1.1开始的<strong>毫秒数</strong>。</li><li>再看以下例子，用于将字符串形式的日期转换成日期对象：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var strTime = <span class="string">"2018-04-19"</span>;  //字符串日期格式           </span><br><span class="line">var date = new Date(Date.parse(strTime.replace(/-/g, <span class="string">"/"</span>))); // 转换成Data();</span><br><span class="line">var month = date.getMonth() + 1; //获取当前月份</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;基本介绍&quot;&gt;&lt;a href=&quot;#基本介绍&quot; class=&quot;headerlink&quot; title=&quot;基本介绍&quot;&gt;&lt;/a&gt;基本介绍&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;Date 对象用于处理日期和时间。&lt;/li&gt;
+&lt;li&gt;创建 Date 对象的语法：&lt;code&gt;new Date()&lt;/code&gt;
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="Date" scheme="https://chongtianhong.github.io/tags/Date/"/>
+    
+  </entry>
   
   <entry>
     <title>JavaScript中filter的用法</title>
@@ -159,6 +187,8 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
       <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
       <category term="浏览器渲染机制" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/"/>
@@ -166,8 +196,6 @@
       <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
       <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -195,9 +223,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
     
   </entry>
   
@@ -430,13 +458,13 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
       <category term="函数去抖" scheme="https://chongtianhong.github.io/tags/%E5%87%BD%E6%95%B0%E5%8E%BB%E6%8A%96/"/>
     
@@ -463,13 +491,13 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
       <category term="函数去抖" scheme="https://chongtianhong.github.io/tags/%E5%87%BD%E6%95%B0%E5%8E%BB%E6%8A%96/"/>
     
@@ -570,9 +598,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
       <category term="布局" scheme="https://chongtianhong.github.io/tags/%E5%B8%83%E5%B1%80/"/>
     
@@ -600,41 +628,13 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
       <category term="布局" scheme="https://chongtianhong.github.io/tags/%E5%B8%83%E5%B1%80/"/>
     
       <category term="自适应" scheme="https://chongtianhong.github.io/tags/%E8%87%AA%E9%80%82%E5%BA%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>行内块元素存在的问题及解决方案</title>
-    <link href="https://chongtianhong.github.io/2018/03/30/inlineBlock/"/>
-    <id>https://chongtianhong.github.io/2018/03/30/inlineBlock/</id>
-    <published>2018-03-30T10:00:29.000Z</published>
-    <updated>2018-07-24T14:55:59.710Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li><code>inline</code>和<code>inline-block</code>的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。</li><li>给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。<a id="more"></a></li></ul><blockquote>解决行内块元素之间存在间隙</blockquote><ul><li>产生原因：浏览器在解析HTML代码时，将上一行的结束标签和下一行的开始标签，解析为空格。</li><li><p>解决方法：<br>1.将父元素字体大小设置为0，行内块元素内的字体单独设置<br>2.取消换行符，如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;aaaa&lt;/span&gt;&lt;span&gt;aaaa&lt;/span&gt;&lt;span&gt;aaaa&lt;/span&gt;</span><br></pre></td></tr></table></figure><p>3.使用margin负值<br>4.使用浮动。（块元素同行显示：①display：inline-block②float：left）<br>5.使用letter-spacing、word-spacing等方法。</p></li><li>图片的间隙问题也是因为行内元素有一个字符的间隙，解决方法:给放置图片的div设置<code>font-size:0;</code>。</li></ul><blockquote>解决行内块元素之间的上下错位问题</blockquote><ul><li>产生原因：行内块元素是基于baseline对齐的，大小不一会导致上下不齐。</li><li>解决方法：给行内块元素设置vertical-align属性</li></ul><blockquote>vertical-align属性</blockquote><ul><li>vertical-align 属性设置元素的垂直对齐方式。</li><li>该属性定义行内元素的基线相对于该元素所在行的基线的垂直对齐。允许指定负长度值和百分比值。这会使元素降低而不是升高。在表单元格中，这个属性会设置单元格框中的单元格内容的对齐方式。</li><li>可能的值：</li></ul><table><thead><tr><th style="text-align:center">值</th><th style="text-align:center">描述</th></tr></thead><tbody><tr><td style="text-align:center">baseline</td><td style="text-align:center">默认。元素放置在父元素的基线上</td></tr><tr><td style="text-align:center">sub</td><td style="text-align:center">垂直对齐文本的下标</td></tr><tr><td style="text-align:center">super</td><td style="text-align:center">垂直对齐文本的上标</td></tr><tr><td style="text-align:center">top</td><td style="text-align:center">把元素的顶端与行中最高元素的顶端对齐</td></tr><tr><td style="text-align:center">text-top</td><td style="text-align:center">把元素的顶端与父元素字体的顶端对齐</td></tr><tr><td style="text-align:center">middle</td><td style="text-align:center">把此元素放置在父元素的中部</td></tr><tr><td style="text-align:center">bottom</td><td style="text-align:center">把元素的顶端与行中最低的元素的顶端对齐</td></tr><tr><td style="text-align:center">text-bottom</td><td style="text-align:center">把元素的底端与父元素字体的底端对齐</td></tr><tr><td style="text-align:center">%</td><td style="text-align:center">使用 “line-height” 属性的百分比值来排列此元素。允许使用负值。</td></tr><tr><td style="text-align:center">inherit</td><td style="text-align:center">规定应该从父元素继承 vertical-align 属性的值</td></tr></tbody></table>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;inline&lt;/code&gt;和&lt;code&gt;inline-block&lt;/code&gt;的元素之间会有一个字符的间隙（元素节点有文本节点，在缩进代码时会占据宽度），这个间隙导致了（按照百分比分配宽度之后）最后一个元素会掉下来。&lt;/li&gt;
-&lt;li&gt;给元素设置display：inline-block，是基于baseline对齐的，当元素大小不一会导致上下不齐，所以设置的时候最好设置vertical-align属性。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="inline-block" scheme="https://chongtianhong.github.io/tags/inline-block/"/>
     
   </entry>
   
