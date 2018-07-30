@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="基本介绍 在Chrome浏览器中的控制台Network中size栏通常会有三种状态:  from memory cache from disk cache 资源本身的大小(如：1.5k)   from memory cache代表使用内存中的缓存，from disk cache则代表使用的是硬盘中的缓存，浏览器读取命中强缓存资源的顺序为memory –&amp;gt; disk。">
+<meta name="description" content="基本介绍 在Chrome浏览器中的控制台Network中size栏通常会有三种状态:  from memory cache from disk cache 资源本身的大小(如：1.5k)">
 <meta name="keywords" content="开发,强缓存,浏览器缓存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="内存缓存(from memory cache)和硬盘缓存(from disk cache)的区别">
+<meta property="og:title" content="内存缓存和硬盘缓存的区别">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/04/16/fromCacheType/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="基本介绍 在Chrome浏览器中的控制台Network中size栏通常会有三种状态:  from memory cache from disk cache 资源本身的大小(如：1.5k)   from memory cache代表使用内存中的缓存，from disk cache则代表使用的是硬盘中的缓存，浏览器读取命中强缓存资源的顺序为memory –&amp;gt; disk。">
+<meta property="og:description" content="基本介绍 在Chrome浏览器中的控制台Network中size栏通常会有三种状态:  from memory cache from disk cache 资源本身的大小(如：1.5k)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-29T08:54:26.434Z">
+<meta property="og:updated_time" content="2018-07-29T09:10:46.667Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="内存缓存(from memory cache)和硬盘缓存(from disk cache)的区别">
-<meta name="twitter:description" content="基本介绍 在Chrome浏览器中的控制台Network中size栏通常会有三种状态:  from memory cache from disk cache 资源本身的大小(如：1.5k)   from memory cache代表使用内存中的缓存，from disk cache则代表使用的是硬盘中的缓存，浏览器读取命中强缓存资源的顺序为memory –&amp;gt; disk。">
+<meta name="twitter:title" content="内存缓存和硬盘缓存的区别">
+<meta name="twitter:description" content="基本介绍 在Chrome浏览器中的控制台Network中size栏通常会有三种状态:  from memory cache from disk cache 资源本身的大小(如：1.5k)">
 
 
 
@@ -170,7 +170,7 @@
 
 
 
-  <title>内存缓存(from memory cache)和硬盘缓存(from disk cache)的区别 | Ice's Blog</title>
+  <title>内存缓存和硬盘缓存的区别 | Ice's Blog</title>
   
 
 
@@ -326,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">内存缓存(from memory cache)和硬盘缓存(from disk cache)的区别</h1>
+          <h1 class="post-title" itemprop="name headline">内存缓存和硬盘缓存的区别</h1>
         
 
         <div class="post-meta">
@@ -399,13 +399,18 @@
 
       
         <h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul>
-<li>在Chrome浏览器中的控制台Network中size栏通常会有三种状态: <ul>
-<li>from memory cache</li>
-<li>from disk cache</li>
-<li>资源本身的大小(如：1.5k)</li>
+<li>在Chrome浏览器中的控制台Network中size栏通常会有<strong>三种状态</strong>: <ul>
+<li><strong>from memory cache</strong></li>
+<li><strong>from disk cache</strong></li>
+<li><strong>资源本身的大小</strong>(如：1.5k)<a id="more"></a></li>
 </ul>
 </li>
-<li>from memory cache代表使用内存中的缓存，from disk cache则代表使用的是硬盘中的缓存，浏览器读取<strong>命中强缓存资源</strong>的顺序为<strong>memory –&gt; disk</strong>。<a id="more"></a>
+<li><strong>from memory cache</strong>代表使用内存中的缓存，<strong>from disk cache</strong>则代表使用的是硬盘中的缓存，浏览器读取<strong>命中强缓存资源</strong>的顺序为<strong>memory –&gt; disk</strong>：<ul>
+<li>先去内存看，如果有，直接加载；</li>
+<li>如果内存没有，则取硬盘获取，如果有直接加载；</li>
+<li>如果硬盘也没有，那么就进行网络请求；</li>
+<li>加载到的资源缓存到硬盘和内存。</li>
+</ul>
 </li>
 </ul>
 <h4 id="三者的区别"><a href="#三者的区别" class="headerlink" title="三者的区别"></a>三者的区别</h4><blockquote>from memory cache</blockquote>
@@ -413,11 +418,17 @@
 <ul>
 <li>from memory cache代表<strong>使用内存中的缓存</strong>，即请求的资源是直接从内存中拿到的，不会请求服务器。</li>
 <li>一般已经加载过该资源且资源已经缓存在了内存当中，<strong>当关闭该页面时，此资源就被内存释放掉了</strong>，<strong>再次重新打开相同页面时不会出现from memory cache的情况</strong>。</li>
+<li><strong>内存缓存(from memory cache)</strong>：内存缓存具有两个特点，分别是<strong>快速读取</strong>和<strong>时效性</strong>：<ul>
+<li><strong>快速读取</strong>：内存缓存会将编译解析后的文件，直接存入该进程的内存中，占据该进程一定的内存资源，以方便下次运行使用时的快速读取。</li>
+<li><strong>时效性</strong>：一旦该进程关闭，则该进程的内存则会清空。</li>
+</ul>
+</li>
 </ul>
 <blockquote>from disk cache</blockquote>
 
 <ul>
 <li>from disk cache表示此资源是从<strong>磁盘</strong>当中取出的，也是在已经在之前的某个时间加载过该资源，不会请求服务器。但<strong>此资源不会随着该页面的关闭而释放掉</strong>，因为是存在硬盘当中的，下次打开仍会出现from disk cache的情况。</li>
+<li><strong>硬盘缓存(from disk cache</strong>)：硬盘缓存则是直接将缓存写入硬盘文件中，读取缓存需要对该缓存存放的硬盘文件进行I/O操作，然后重新解析该缓存内容，读取复杂，<strong>速度比内存缓存慢</strong>。</li>
 </ul>
 <blockquote>资源本身大小数值</blockquote>
 
@@ -440,12 +451,12 @@
 <tr>
 <td style="text-align:center">200</td>
 <td style="text-align:center">from memory cache</td>
-<td style="text-align:center">不请求网络资源，资源在内存当中，一般<red>脚本、字体、图片</red>会存在内存当中</td>
+<td style="text-align:center">不请求网络资源，资源在内存当中，一般<code>脚本</code>、<code>字体</code>、<code>图片</code>会存在内存当中</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
 <td style="text-align:center">from disk cache</td>
-<td style="text-align:center">不请求网络资源，在磁盘当中，一般非脚本会存在内存当中，如<red>css</red>等</td>
+<td style="text-align:center">不请求网络资源，在磁盘当中，一般非脚本会存在内存当中，如<code>CSS</code>等</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
@@ -460,12 +471,9 @@
 </tbody>
 </table>
 <ul>
-<li><strong>内存缓存(from memory cache)</strong>：内存缓存具有两个特点，分别是<strong>快速读取</strong>和<strong>时效性</strong>：<ul>
-<li><strong>快速读取</strong>：内存缓存会将编译解析后的文件，直接存入该进程的内存中，占据该进程一定的内存资源，以方便下次运行使用时的快速读取。</li>
-<li><strong>时效性</strong>：一旦该进程关闭，则该进程的内存则会清空。</li>
-</ul>
-</li>
-<li><strong>硬盘缓存(from disk cache</strong>)：硬盘缓存则是直接将缓存写入硬盘文件中，读取缓存需要对该缓存存放的硬盘文件进行I/O操作，然后重新解析该缓存内容，读取复杂，<strong>速度比内存缓存慢</strong>。</li>
+<li>可以看到，<strong>200和304</strong>是Chrome在<strong>请求资源时最常见的两种HTTP状态码</strong>。</li>
+<li>由此可见<strong>样式表一般在磁盘中</strong>，不会缓存到内存中去，因为CSS样式加载一次即可渲染出网页。</li>
+<li>但是，<strong>脚本</strong>却<strong>可能随时会执行</strong>，如果脚本在磁盘当中，在执行该脚本需要从磁盘中取到内存当中来。这样的IO开销是比较大的，有可能会导致浏览器失去响应。因此，<strong>脚本一般在内存中</strong>。</li>
 </ul>
 
       
