@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 Nodejs 有一个简单的模块加载系统。在 Nodejs 中，文件和模块是一一对应的（每个文件被视为一个独立的模块），这个文件可能是 JavaScript 代码，JSON 或编译过的C/C++ 扩展。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-21T09:15:42.676Z">
+<meta property="og:updated_time" content="2018-07-31T00:37:06.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nodejs的模块系统以及require的机制">
 <meta name="twitter:description" content="基本介绍 Nodejs 有一个简单的模块加载系统。在 Nodejs 中，文件和模块是一一对应的（每个文件被视为一个独立的模块），这个文件可能是 JavaScript 代码，JSON 或编译过的C/C++ 扩展。">
@@ -414,12 +414,12 @@
 </ul>
 <blockquote>foo.js</blockquote>
 
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exports.a = <span class="string">'a'</span></span><br><span class="line"></span><br><span class="line">exports.a = 1</span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exports.a = <span class="string">'a'</span> // module.exports的引用</span><br><span class="line"></span><br><span class="line">exports.a = 1 // exports对象本身</span><br></pre></td></tr></table></figure>
 <blockquote>test.js</blockquote>
 
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = require(<span class="string">'./foo'</span>);</span><br><span class="line"></span><br><span class="line">console.log(x.a) // a</span><br></pre></td></tr></table></figure>
 <ul>
-<li>可以看到，<strong>exports是引用 module.exports的值</strong>。module.exports 被改变的时候，exports不会被改变，而<strong>模块导出的时候，真正导出的执行是module.exports</strong>，而不是exports。</li>
+<li>可以看到，<strong>exports是引用 module.exports的值</strong>。<strong>模块导出的时候，真正导出的执行是module.exports</strong>，而不是exports。</li>
 <li>再看看下面例子：</li>
 </ul>
 <blockquote>foo.js</blockquote>
@@ -429,7 +429,7 @@
 
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = require(<span class="string">'./foo'</span>);</span><br><span class="line"></span><br><span class="line">console.log(x.a) // 2</span><br></pre></td></tr></table></figure>
 <ul>
-<li>可见，exports在module.exports 被改变后，失效。</li>
+<li>可见，<strong>exports在module.exports 被改变后失效</strong>。</li>
 <li>因此，我们可以将某个类的实例赋值给 module.exports，从而导出这个类的实例。在模块被执行前，Nodejs 会将 module.exports 的值赋于全局变量 exports ，以便 module.exports.f = …  可以更简洁的写成 exports.f = …  。</li>
 <li>注意：就像所有变量一样，如果重新给 exports 赋值，它就不再绑定到 module.exports 了，也不会导出指定模块。</li>
 <li>exports失效以后，可通过exports = module.exports的方法，让其恢复exports 与 module.exports 的引用关系。</li>
