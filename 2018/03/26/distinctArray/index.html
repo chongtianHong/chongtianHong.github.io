@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="数组去重有多种方法，分别是： 利用数组的splice方法直接在原数组进行操作 利用对象的属性不能相同的特点进行去重 利用数组的indexOf下标属性来查询 利用数组原型对象上的 lastIndexOf 方法 利用 ES6的set 方法 利用数组原型对象上的includes方法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-23T14:26:57.177Z">
+<meta property="og:updated_time" content="2018-07-31T00:32:01.230Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数组去重的多重方法">
 <meta name="twitter:description" content="数组去重有多种方法，分别是： 利用数组的splice方法直接在原数组进行操作 利用对象的属性不能相同的特点进行去重 利用数组的indexOf下标属性来查询 利用数组原型对象上的 lastIndexOf 方法 利用 ES6的set 方法 利用数组原型对象上的includes方法">
@@ -413,7 +413,7 @@
 <blockquote>方法一：利用splice直接在原数组进行操作</blockquote>
 
 <ul>
-<li><strong>思路</strong>：双层循环，外层循环元素，内层循环时<strong>比较相邻元素值</strong>。值相同时，则删去这个值。</li>
+<li><strong>思路</strong>：双层循环，外层循环元素，内层循环时<strong>比较后面的元素值</strong>。值相同时，则删去这个值。</li>
 <li><strong>注意</strong>:删除元素之后，需要将数组的长度也减1。</li>
 <li><strong>优点</strong>：简单易懂。</li>
 <li><strong>缺点</strong>：占用内存高，速度慢。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> distinct(arr) &#123;</span><br><span class="line">  <span class="built_in">let</span> len = arr.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">let</span> i = 0; i &lt; len - 1; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> j = i + 1; j &lt; len; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[i] == arr[j]) &#123;</span><br><span class="line">        arr.splice(j, 1);</span><br><span class="line">        len--;</span><br><span class="line">        j--;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">return</span> arr;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">let</span> arr = [1, 2, 3, 4, 5, 6, 5, 3, 2, 4, 56, 4, 1, 2, 1, 1, 1, 1, 1, 1, ];</span><br><span class="line"><span class="built_in">let</span> b = distinct(arr); //1,2,3,4,5,6,56</span><br></pre></td></tr></table></figure>
