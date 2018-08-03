@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 计算属性是需要复杂的逻辑和很多组件基础状态最后才能得到其正确值的属性。 模板内的表达式非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-03T15:27:35.520Z">
+<meta property="og:updated_time" content="2018-08-03T15:35:27.780Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue的计算属性和侦听器">
 <meta name="twitter:description" content="基本介绍 计算属性是需要复杂的逻辑和很多组件基础状态最后才能得到其正确值的属性。 模板内的表达式非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。">
@@ -441,6 +441,15 @@
 <ul>
 <li>性能开销比较大假设我们有一个的计算属性 A，它需要遍历一个巨大的数组并做大量的计算。然后我们可能有其他的计算属性依赖于 A 。如果没有缓存，我们将不可避免的多次执行 A 的 getter！如果你不希望有缓存，请用方法来替代。</li>
 </ul>
+<h4 id="计算属性-vs-侦听属性"><a href="#计算属性-vs-侦听属性" class="headerlink" title="计算属性 vs 侦听属性"></a>计算属性 vs 侦听属性</h4><ul>
+<li>Vue 提供了一种更通用的方式来观察和响应 Vue 实例上的数据变动：侦听（watch）属性。</li>
+<li>当我们有一些数据需要随着其它数据变动而变动时，也可以使用侦听（watch）属性。</li>
+<li><p>然而，通常更好的做法是使用计算属性而不是命令式的 watch 回调。如下面的例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"demo"</span>&gt;&#123;&#123; fullName &#125;&#125;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: <span class="string">'#demo'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    firstName: <span class="string">'Foo'</span>,</span><br><span class="line">    lastName: <span class="string">'Bar'</span>,</span><br><span class="line">    fullName: <span class="string">'Foo Bar'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    firstName: <span class="keyword">function</span> (val) &#123;</span><br><span class="line">      this.fullName = val + <span class="string">' '</span> + this.lastName</span><br><span class="line">    &#125;,</span><br><span class="line">    lastName: <span class="keyword">function</span> (val) &#123;</span><br><span class="line">      this.fullName = this.firstName + <span class="string">' '</span> + val</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面代码是命令式且重复的。将它与计算属性的版本进行比较：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: <span class="string">'#demo'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    firstName: <span class="string">'Foo'</span>,</span><br><span class="line">    lastName: <span class="string">'Bar'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    fullName: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      <span class="built_in">return</span> this.firstName + <span class="string">' '</span> + this.lastName</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -643,7 +652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性的使用方法"><span class="nav-number">2.</span> <span class="nav-text">计算属性的使用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性缓存-vs-方法"><span class="nav-number">3.</span> <span class="nav-text">计算属性缓存 vs 方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性的使用方法"><span class="nav-number">2.</span> <span class="nav-text">计算属性的使用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性缓存-vs-方法"><span class="nav-number">3.</span> <span class="nav-text">计算属性缓存 vs 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性-vs-侦听属性"><span class="nav-number">4.</span> <span class="nav-text">计算属性 vs 侦听属性</span></a></li></ol></div>
             
 
           </div>
