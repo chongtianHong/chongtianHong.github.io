@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-03T14:51:42.435Z</updated>
+  <updated>2018-08-03T15:08:32.189Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -17,16 +17,28 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>vueDiretive</title>
-    <link href="https://chongtianhong.github.io/2018/08/03/vueDiretive/"/>
-    <id>https://chongtianhong.github.io/2018/08/03/vueDiretive/</id>
-    <published>2018-08-03T14:51:42.000Z</published>
-    <updated>2018-08-03T14:51:42.435Z</updated>
+    <title>Vue的计算属性和侦听器</title>
+    <link href="https://chongtianhong.github.io/2018/04/23/vueComputed/"/>
+    <id>https://chongtianhong.github.io/2018/04/23/vueComputed/</id>
+    <published>2018-04-23T14:51:42.000Z</published>
+    <updated>2018-08-03T15:08:32.189Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul><li>计算属性是需要<strong>复杂的逻辑</strong>和很多<strong>组件基础状态</strong>最后才能得到其<strong>正确值</strong>的属性。</li><li><strong>模板内的表达式</strong>非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。<a id="more"></a></li><li><p>如下面的代码所示，模板不再是简单的声明式逻辑，这里是想要显示变量 message 的翻转字符串：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"example"</span>&gt;</span><br><span class="line">  &#123;&#123; message.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>) &#125;&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></li><li><p>当我们想要<strong>在模板中多次引用此处的翻转字符串</strong>时，就会更加难以处理。</p></li><li>所以，对于任何<strong>复杂逻辑</strong>，我们都应当<strong>使用计算属性</strong>。</li></ul><h4 id="计算属性的使用方法"><a href="#计算属性的使用方法" class="headerlink" title="计算属性的使用方法"></a>计算属性的使用方法</h4><ul><li><p>在Vue里面，所有的计算属性都写在 vue 实例的 <code>computed</code> 属性中，这个<strong>计算属性就是一个函数</strong>，<strong>返回值</strong>为最后<strong>属性的值</strong>。如下面的例子所示，totalPrice 就是一个计算属性：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed:&#123;</span><br><span class="line">  <span class="function"><span class="title">totalPrice</span></span>()&#123;</span><br><span class="line">    <span class="built_in">return</span> (this.good.price*this.good.count)*this.discount+this.deliver;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>定义完成之后，我们就可以像用普通属性一样去用计算属性：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;h2&gt;本店起送金额￥20&lt;/h2&gt;</span><br><span class="line">    &lt;h3&gt;配送费￥5&lt;/h3&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      您购买了&#123;&#123;good.name&#125;&#125;共&#123;&#123;good.count&#125;&#125;份===￥&#123;&#123;good.price&#125;&#125;/份</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div&gt;总价：&#123;&#123;totalPrice&#125;&#125;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data:&#123;</span><br><span class="line">    good:&#123;id:1,price:10,name:<span class="string">'红烧牛肉盖饭'</span>,count:1&#125;,</span><br><span class="line">    discount:0.8,</span><br><span class="line">    deliver:5</span><br><span class="line">  &#125;,</span><br><span class="line">  computed:&#123;</span><br><span class="line">    <span class="function"><span class="title">totalPrice</span></span>()&#123;</span><br><span class="line">      <span class="built_in">return</span> (this.good.price*this.good.count)*this.discount+this.deliver;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li><li><p>计算属性的方法可以包含很多繁重的逻辑，最终返回我们需要的值。</p></li><li>通过计算属性的使用，View层的代码会变的非常精简，且容易维护。</li></ul><h4 id="不适用计算属性时，可使用method代替"><a href="#不适用计算属性时，可使用method代替" class="headerlink" title="不适用计算属性时，可使用method代替"></a>不适用计算属性时，可使用method代替</h4>]]></content>
     
     <summary type="html">
     
+      &lt;h4 id=&quot;基本介绍&quot;&gt;&lt;a href=&quot;#基本介绍&quot; class=&quot;headerlink&quot; title=&quot;基本介绍&quot;&gt;&lt;/a&gt;基本介绍&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;计算属性是需要&lt;strong&gt;复杂的逻辑&lt;/strong&gt;和很多&lt;strong&gt;组件基础状态&lt;/strong&gt;最后才能得到其&lt;strong&gt;正确值&lt;/strong&gt;的属性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模板内的表达式&lt;/strong&gt;非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。
+    
     </summary>
     
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="Vue.js" scheme="https://chongtianhong.github.io/tags/Vue-js/"/>
     
   </entry>
   
@@ -172,9 +184,9 @@
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
-      <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
     
   </entry>
   
@@ -293,8 +305,6 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
       <category term="浏览器渲染机制" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/"/>
@@ -302,6 +312,8 @@
       <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
       <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -329,9 +341,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -423,9 +435,9 @@
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
-      <category term="箭头函数" scheme="https://chongtianhong.github.io/tags/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"/>
-    
       <category term="this" scheme="https://chongtianhong.github.io/tags/this/"/>
+    
+      <category term="箭头函数" scheme="https://chongtianhong.github.io/tags/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
@@ -564,11 +576,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
-    
-      <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
@@ -597,11 +609,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
-    
-      <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
