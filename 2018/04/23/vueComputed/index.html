@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 计算属性是需要复杂的逻辑和很多组件基础状态最后才能得到其正确值的属性。 模板内的表达式非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-03T15:08:32.189Z">
+<meta property="og:updated_time" content="2018-08-03T15:14:51.945Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue的计算属性和侦听器">
 <meta name="twitter:description" content="基本介绍 计算属性是需要复杂的逻辑和很多组件基础状态最后才能得到其正确值的属性。 模板内的表达式非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。">
@@ -419,7 +419,15 @@
 </li>
 <li>通过计算属性的使用，View层的代码会变的非常精简，且容易维护。</li>
 </ul>
-<h4 id="不适用计算属性时，可使用method代替"><a href="#不适用计算属性时，可使用method代替" class="headerlink" title="不适用计算属性时，可使用method代替"></a>不适用计算属性时，可使用method代替</h4>
+<h4 id="计算属性缓存-vs-方法"><a href="#计算属性缓存-vs-方法" class="headerlink" title="计算属性缓存 vs 方法"></a>计算属性缓存 vs 方法</h4><ul>
+<li><p>我们可以通过在表达式中调用方法来达到同样的效果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;总价：&#123;&#123;totalPrice()&#125;&#125;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同时，将computed属性换成methods属性：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 在组件中</span><br><span class="line">methods: &#123;</span><br><span class="line">  <span class="function"><span class="title">totalPrice</span></span>()&#123;</span><br><span class="line">    <span class="built_in">return</span> (this.good.price*this.good.count)*this.discount+this.deliver;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
       
     </div>
     
@@ -621,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性的使用方法"><span class="nav-number">2.</span> <span class="nav-text">计算属性的使用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不适用计算属性时，可使用method代替"><span class="nav-number">3.</span> <span class="nav-text">不适用计算属性时，可使用method代替</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性的使用方法"><span class="nav-number">2.</span> <span class="nav-text">计算属性的使用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性缓存-vs-方法"><span class="nav-number">3.</span> <span class="nav-text">计算属性缓存 vs 方法</span></a></li></ol></div>
             
 
           </div>
