@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 计算属性是需要复杂的逻辑和很多组件基础状态最后才能得到其正确值的属性。 模板内的表达式非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-03T15:38:07.074Z">
+<meta property="og:updated_time" content="2018-08-03T15:42:56.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue的计算属性和侦听器">
 <meta name="twitter:description" content="基本介绍 计算属性是需要复杂的逻辑和很多组件基础状态最后才能得到其正确值的属性。 模板内的表达式非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。">
@@ -436,10 +436,11 @@
 <li><p>相比之下，每当<strong>触发重新渲染</strong>时，<strong>调用方法将总会再次执行函数</strong>。</p>
 </li>
 </ul>
-<blockquote>如何选择这两个属性</blockquote>
+<blockquote>两者的区别</blockquote>
 
 <ul>
-<li>性能开销比较大假设我们有一个的计算属性 A，它需要遍历一个巨大的数组并做大量的计算。然后我们可能有其他的计算属性依赖于 A 。如果没有缓存，我们将不可避免的多次执行 A 的 getter！如果你不希望有缓存，请用方法来替代。</li>
+<li>对于计算属性而言，它<strong>返回的是运算的结果</strong>，它是<strong>基于依赖进行缓存</strong>的（某些属性是非依赖的），只有调用的返回的结果发生改变的时候们才会导致computed属性重新计算调用。</li>
+<li>对于<strong>方法</strong>来说，<strong>需要触发源</strong>。与computed不同的是，它<strong>可以有返回值或者可以没有返回值</strong>（即可以只有逻辑代码）。但是<strong>方法的每次调用都会重新计算</strong>，所以相较于计算属性来说，<strong>在性能消耗上，是会有相较高的性能消耗</strong>。</li>
 </ul>
 <h4 id="计算属性-vs-侦听属性"><a href="#计算属性-vs-侦听属性" class="headerlink" title="计算属性 vs 侦听属性"></a>计算属性 vs 侦听属性</h4><ul>
 <li>Vue 提供了一种更通用的方式来观察和响应 Vue 实例上的数据变动：侦听（watch）属性。</li>
@@ -455,7 +456,7 @@
 <li><p>计算属性默认只有 getter ，不过在需要时也可以提供一个 setter ：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// ...</span><br><span class="line">computed: &#123;</span><br><span class="line">  fullName: &#123;</span><br><span class="line">    // getter</span><br><span class="line">    get: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      <span class="built_in">return</span> this.firstName + <span class="string">' '</span> + this.lastName</span><br><span class="line">    &#125;,</span><br><span class="line">    // setter</span><br><span class="line">    <span class="built_in">set</span>: <span class="keyword">function</span> (newValue) &#123;</span><br><span class="line">      var names = newValue.split(<span class="string">' '</span>)</span><br><span class="line">      this.firstName = names[0]</span><br><span class="line">      this.lastName = names[names.length - 1]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>现在再运行 vm.fullName = ‘John Doe’ 时，setter 会被调用，vm.firstName 和 vm.lastName 也会相应地被更新。</p>
+<li><p>现在再运行 <code>vm.fullName = ‘John Doe’</code> 时，setter 会被调用，<code>vm.firstName</code> 和 <code>vm.lastName</code> 也会相应地被更新。</p>
 </li>
 </ul>
 
