@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-05T14:39:06.117Z</updated>
+  <updated>2018-08-05T15:15:54.270Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://chongtianhong.github.io/2018/04/27/generator-next/"/>
     <id>https://chongtianhong.github.io/2018/04/27/generator-next/</id>
     <published>2018-04-27T14:01:36.000Z</published>
-    <updated>2018-08-05T14:39:06.117Z</updated>
+    <updated>2018-08-05T15:15:54.270Z</updated>
     
-    <content type="html"><![CDATA[<ul><li><strong><code>yield</code>表达式本身没有返回值</strong>，或者说<strong>总是返回<code>undefined</code></strong>。</li><li><strong><code>next()</code>方法可以带一个参数</strong>，该参数就会被当作<strong>上一个<code>yield</code>表达式的返回值</strong>。<a id="more"></a></li><li><p>先看一个例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">f</span></span>() &#123;</span><br><span class="line">    <span class="keyword">for</span>(var i = 0; <span class="literal">true</span>; i++) &#123;</span><br><span class="line">        var reset = yield i;</span><br><span class="line">        <span class="keyword">if</span>(reset) &#123; </span><br><span class="line">            i = -1; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var g = f();</span><br><span class="line">g.next() // &#123; value: 0, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br><span class="line">g.next() // &#123; value: 1, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br><span class="line">g.next(<span class="literal">true</span>) // &#123; value: 0, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br></pre></td></tr></table></figure></li><li><p>上面代码先定义了一个<strong>可以无限运行的Generator函数<code>f</code></strong>，如果<code>next()</code>方法没有参数，每次运行到<code>yield</code>表达式，变量<code>reset</code>的值总是<code>undefined</code>。当<code>next()</code>方法带一个参数<code>true</code>时，变量<code>reset</code>就被重置为这个参数（即<code>true</code>），因此<code>i</code>会等于<code>-1</code>，下一轮循环就会从<code>-1</code>开始递增。</p></li><li>注：<strong>每次调用遍历器对象的next方法</strong>，就会<strong>返回一个有着value和done两个属性的对象</strong>。其中，<strong>value属性表示当前的内部状态的值</strong>，是<strong>本次<code>yield</code>表达式</strong>后面的值。</li><li>这个功能有很重要的语法意义。<strong>Generator函数从暂停状态到恢复运行，它的上下文状态（context）是不变的</strong>。通过<code>next()</code>方法的参数，就有办法在 Generator函数开始运行之后，继续向函数体内部注入值。也就是说，<strong>可以在Generator函数运行的不同阶段，从外部向内部注入不同的值</strong>，从而<strong>调整函数行为</strong>。</li><li><p>再看一个例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* foo(x) &#123;</span><br><span class="line">    var y = 2 * (yield (x + 1));</span><br><span class="line">    var z = yield (y / 3);</span><br><span class="line">    <span class="built_in">return</span> (x + y + z);</span><br><span class="line">&#125;</span><br><span class="line">var a = foo(5);</span><br><span class="line">a.next() // Object&#123;value:6, <span class="keyword">done</span>:<span class="literal">false</span>&#125;</span><br><span class="line">a.next() // Object&#123;value:NaN, <span class="keyword">done</span>:<span class="literal">false</span>&#125;</span><br><span class="line">a.next() // Object&#123;value:NaN, <span class="keyword">done</span>:<span class="literal">true</span>&#125;</span><br><span class="line">var b = foo(5);</span><br><span class="line">b.next() // &#123; value:6, <span class="keyword">done</span>:<span class="literal">false</span> &#125;</span><br><span class="line">b.next(12) // &#123; value:8, <span class="keyword">done</span>:<span class="literal">false</span> &#125;</span><br><span class="line">b.next(13) // &#123; value:42, <span class="keyword">done</span>:<span class="literal">true</span> &#125;</span><br></pre></td></tr></table></figure></li><li><p>上面代码中，第二次运行<code>next()</code>方法的时候不带参数，导致 y 的值等于<code>2 * undefined</code>（即<code>NaN</code>），除以 3 以后还是<code>NaN</code>，因此返回对象的<code>value</code>属性也等于<code>NaN</code>。第三次运行<code>next()</code>方法的时候不带参数，所以<code>z</code>等于<code>undefined</code>，返回对象的<code>value</code>属性等于<code>5 + NaN + undefined</code>，即<code>NaN</code>。</p></li><li>如果向<code>next()</code>方法提供参数，返回结果就完全不一样了。上面代码第一次调用<code>b</code>的<code>next()</code>方法时，返回<code>x+1</code>的值<code>6</code>；第二次调用<code>next()</code>方法，将上一次<code>yield</code>表达式的值设为<code>12</code>，因此<code>y</code>等于<code>24</code>，返回<code>y / 3</code>的值<code>8</code>；第三次调用<code>next()</code>方法，将上一次<code>yield</code>表达式的值设为<code>13</code>，因此<code>z</code>等于<code>13</code>，这时<code>x</code>等于<code>5</code>，<code>y</code>等于<code>24</code>，所以<code>return</code>语句的值等于<code>42</code>。</li><li>注意：由于<strong>next()方法的参数表示上一个yield表达式的返回值</strong>，所以<strong>在第一次使用next()方法时，传递参数是无效的</strong>。</li><li>V8 引擎直接忽略第一次使用next()方法时的参数，<strong>只有从第二次使用next()方法开始，参数才是有效的</strong>。从语义上讲，第一个next()方法用来启动遍历器对象，所以不用带有参数。</li><li><p>再看一个通过<code>next()</code>方法的参数，向Generator函数内部输入值的例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">dataConsumer</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">'Started'</span>);</span><br><span class="line">    console.log(`1. <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    console.log(`2. <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'result'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> genObj = dataConsumer();</span><br><span class="line">genObj.next();</span><br><span class="line">// Started</span><br><span class="line">genObj.next(<span class="string">'a'</span>)</span><br><span class="line">// 1. a</span><br><span class="line">genObj.next(<span class="string">'b'</span>)</span><br><span class="line">// 2. b</span><br></pre></td></tr></table></figure></li><li><p>上面代码是一个很直观的例子，每次通过<code>next()</code>方法向Generator函数输入值，然后打印出来。</p></li><li></li></ul>]]></content>
+    <content type="html"><![CDATA[<ul><li><strong><code>yield</code>表达式本身没有返回值</strong>，或者说<strong>总是返回<code>undefined</code></strong>。</li><li><strong><code>next()</code>方法可以带一个参数</strong>，该参数就会被当作<strong>上一个<code>yield</code>表达式的返回值</strong>。<a id="more"></a></li><li><p>先看一个例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">f</span></span>() &#123;</span><br><span class="line">    <span class="keyword">for</span>(var i = 0; <span class="literal">true</span>; i++) &#123;</span><br><span class="line">        var reset = yield i;</span><br><span class="line">        <span class="keyword">if</span>(reset) &#123; </span><br><span class="line">            i = -1; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var g = f();</span><br><span class="line">g.next() // &#123; value: 0, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br><span class="line">g.next() // &#123; value: 1, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br><span class="line">g.next(<span class="literal">true</span>) // &#123; value: 0, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br></pre></td></tr></table></figure></li><li><p>上面代码先定义了一个<strong>可以无限运行的Generator函数<code>f</code></strong>，如果<code>next()</code>方法没有参数，每次运行到<code>yield</code>表达式，变量<code>reset</code>的值总是<code>undefined</code>。当<code>next()</code>方法带一个参数<code>true</code>时，变量<code>reset</code>就被重置为这个参数（即<code>true</code>），因此<code>i</code>会等于<code>-1</code>，下一轮循环就会从<code>-1</code>开始递增。</p></li><li>注：<strong>每次调用遍历器对象的next方法</strong>，就会<strong>返回一个有着value和done两个属性的对象</strong>。其中，<strong>value属性表示当前的内部状态的值</strong>，是<strong>本次<code>yield</code>表达式</strong>后面的值。</li><li>这个功能有很重要的语法意义。<strong>Generator函数从暂停状态到恢复运行，它的上下文状态（context）是不变的</strong>。通过<code>next()</code>方法的参数，就有办法在 Generator函数开始运行之后，继续向函数体内部注入值。也就是说，<strong>可以在Generator函数运行的不同阶段，从外部向内部注入不同的值</strong>，从而<strong>调整函数行为</strong>。</li><li><p>再看一个例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* foo(x) &#123;</span><br><span class="line">    var y = 2 * (yield (x + 1));</span><br><span class="line">    var z = yield (y / 3);</span><br><span class="line">    <span class="built_in">return</span> (x + y + z);</span><br><span class="line">&#125;</span><br><span class="line">var a = foo(5);</span><br><span class="line">a.next() // Object&#123;value:6, <span class="keyword">done</span>:<span class="literal">false</span>&#125;</span><br><span class="line">a.next() // Object&#123;value:NaN, <span class="keyword">done</span>:<span class="literal">false</span>&#125;</span><br><span class="line">a.next() // Object&#123;value:NaN, <span class="keyword">done</span>:<span class="literal">true</span>&#125;</span><br><span class="line">var b = foo(5);</span><br><span class="line">b.next() // &#123; value:6, <span class="keyword">done</span>:<span class="literal">false</span> &#125;</span><br><span class="line">b.next(12) // &#123; value:8, <span class="keyword">done</span>:<span class="literal">false</span> &#125;</span><br><span class="line">b.next(13) // &#123; value:42, <span class="keyword">done</span>:<span class="literal">true</span> &#125;</span><br></pre></td></tr></table></figure></li><li><p>上面代码中，第二次运行<code>next()</code>方法的时候不带参数，导致 y 的值等于<code>2 * undefined</code>（即<code>NaN</code>），除以 3 以后还是<code>NaN</code>，因此返回对象的<code>value</code>属性也等于<code>NaN</code>。第三次运行<code>next()</code>方法的时候不带参数，所以<code>z</code>等于<code>undefined</code>，返回对象的<code>value</code>属性等于<code>5 + NaN + undefined</code>，即<code>NaN</code>。</p></li><li>如果向<code>next()</code>方法提供参数，返回结果就完全不一样了。上面代码第一次调用<code>b</code>的<code>next()</code>方法时，返回<code>x+1</code>的值<code>6</code>；第二次调用<code>next()</code>方法，将上一次<code>yield</code>表达式的值设为<code>12</code>，因此<code>y</code>等于<code>24</code>，返回<code>y / 3</code>的值<code>8</code>；第三次调用<code>next()</code>方法，将上一次<code>yield</code>表达式的值设为<code>13</code>，因此<code>z</code>等于<code>13</code>，这时<code>x</code>等于<code>5</code>，<code>y</code>等于<code>24</code>，所以<code>return</code>语句的值等于<code>42</code>。</li><li>注意：由于<strong>next()方法的参数表示上一个yield表达式的返回值</strong>，所以<strong>在第一次使用next()方法时，传递参数是无效的</strong>。</li><li>V8 引擎直接忽略第一次使用next()方法时的参数，<strong>只有从第二次使用next()方法开始，参数才是有效的</strong>。从语义上讲，第一个next()方法用来启动遍历器对象，所以不用带有参数。</li><li><p>再看一个通过<code>next()</code>方法的参数，向<strong>Generator函数</strong>内部输入值的例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">dataConsumer</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">'Started'</span>);</span><br><span class="line">    console.log(`1. <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    console.log(`2. <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'result'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> genObj = dataConsumer();</span><br><span class="line">genObj.next();</span><br><span class="line">// Started</span><br><span class="line">// &#123;value: undefined, <span class="keyword">done</span>: <span class="literal">false</span>&#125;</span><br><span class="line">genObj.next(<span class="string">'a'</span>)</span><br><span class="line">// 1. a</span><br><span class="line">// &#123;value: undefined, <span class="keyword">done</span>: <span class="literal">false</span>&#125;</span><br><span class="line">genObj.next(<span class="string">'b'</span>)</span><br><span class="line">// 2. b</span><br><span class="line">// &#123;value: <span class="string">"result"</span>, <span class="keyword">done</span>: <span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure></li><li><p>上面代码是一个很直观的例子，每次通过<code>next()</code>方法向<strong>Generator函数</strong>输入值，然后打印出来。</p></li><li><p>如果想要第一次调用<code>next()</code>方法时，就能够输入值，可以<strong><strong>在Generator函数外面再包一层</strong></strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> wrapper(generatorFunction) &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="keyword">function</span> (...args) &#123;</span><br><span class="line">        <span class="built_in">let</span> generatorObject = generatorFunction(...args);</span><br><span class="line">        generatorObject.next();</span><br><span class="line">        <span class="built_in">return</span> generatorObject;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">const wrapped = wrapper(<span class="keyword">function</span>* () &#123;</span><br><span class="line">    console.log(`First input: <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'DONE'</span>;</span><br><span class="line">&#125;);</span><br><span class="line">wrapped().next(<span class="string">'hello!'</span>)</span><br><span class="line">// First input: hello!</span><br></pre></td></tr></table></figure></li><li><p>上面代码中，Generator函数如果不用<code>wrapper</code>先包一层，是无法第一次调用<code>next()</code>方法就输入参数的。</p></li></ul>]]></content>
     
     <summary type="html">
     
@@ -36,9 +36,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -64,9 +64,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -92,9 +92,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -119,9 +119,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="闭包" scheme="https://chongtianhong.github.io/tags/%E9%97%AD%E5%8C%85/"/>
     
@@ -173,9 +173,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Vue" scheme="https://chongtianhong.github.io/tags/Vue/"/>
     
@@ -205,9 +205,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Vue" scheme="https://chongtianhong.github.io/tags/Vue/"/>
     
@@ -233,13 +233,13 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Object" scheme="https://chongtianhong.github.io/tags/Object/"/>
     
       <category term="defineProperty" scheme="https://chongtianhong.github.io/tags/defineProperty/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -263,9 +263,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Date" scheme="https://chongtianhong.github.io/tags/Date/"/>
     
@@ -293,9 +293,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
     
@@ -322,11 +322,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="封装" scheme="https://chongtianhong.github.io/tags/%E5%B0%81%E8%A3%85/"/>
     
@@ -418,13 +418,13 @@
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
-      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
-    
       <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
-      <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
-    
       <category term="浏览器渲染机制" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
+    
+      <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
     
   </entry>
   
@@ -478,9 +478,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="CSS选择器" scheme="https://chongtianhong.github.io/tags/CSS%E9%80%89%E6%8B%A9%E5%99%A8/"/>
     
@@ -505,9 +505,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="this" scheme="https://chongtianhong.github.io/tags/this/"/>
     
@@ -540,9 +540,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
@@ -573,9 +573,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="原型链" scheme="https://chongtianhong.github.io/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
     
@@ -602,9 +602,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="进制转换" scheme="https://chongtianhong.github.io/tags/%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2/"/>
     

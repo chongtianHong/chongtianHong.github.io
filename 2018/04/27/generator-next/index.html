@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,开发,异步编程," />
+  <meta name="keywords" content="开发,JavaScript,异步编程," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="yield表达式本身没有返回值，或者说总是返回undefined。 next()方法可以带一个参数，该参数就会被当作上一个yield表达式的返回值。">
-<meta name="keywords" content="JavaScript,开发,异步编程">
+<meta name="keywords" content="开发,JavaScript,异步编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="generator函数返回的遍历器对象中的next方法">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/04/27/generator-next/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="yield表达式本身没有返回值，或者说总是返回undefined。 next()方法可以带一个参数，该参数就会被当作上一个yield表达式的返回值。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-05T14:39:06.117Z">
+<meta property="og:updated_time" content="2018-08-05T15:15:54.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="generator函数返回的遍历器对象中的next方法">
 <meta name="twitter:description" content="yield表达式本身没有返回值，或者说总是返回undefined。 next()方法可以带一个参数，该参数就会被当作上一个yield表达式的返回值。">
@@ -416,12 +416,16 @@
 <li>如果向<code>next()</code>方法提供参数，返回结果就完全不一样了。上面代码第一次调用<code>b</code>的<code>next()</code>方法时，返回<code>x+1</code>的值<code>6</code>；第二次调用<code>next()</code>方法，将上一次<code>yield</code>表达式的值设为<code>12</code>，因此<code>y</code>等于<code>24</code>，返回<code>y / 3</code>的值<code>8</code>；第三次调用<code>next()</code>方法，将上一次<code>yield</code>表达式的值设为<code>13</code>，因此<code>z</code>等于<code>13</code>，这时<code>x</code>等于<code>5</code>，<code>y</code>等于<code>24</code>，所以<code>return</code>语句的值等于<code>42</code>。</li>
 <li>注意：由于<strong>next()方法的参数表示上一个yield表达式的返回值</strong>，所以<strong>在第一次使用next()方法时，传递参数是无效的</strong>。</li>
 <li>V8 引擎直接忽略第一次使用next()方法时的参数，<strong>只有从第二次使用next()方法开始，参数才是有效的</strong>。从语义上讲，第一个next()方法用来启动遍历器对象，所以不用带有参数。</li>
-<li><p>再看一个通过<code>next()</code>方法的参数，向Generator函数内部输入值的例子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">dataConsumer</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">'Started'</span>);</span><br><span class="line">    console.log(`1. <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    console.log(`2. <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'result'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> genObj = dataConsumer();</span><br><span class="line">genObj.next();</span><br><span class="line">// Started</span><br><span class="line">genObj.next(<span class="string">'a'</span>)</span><br><span class="line">// 1. a</span><br><span class="line">genObj.next(<span class="string">'b'</span>)</span><br><span class="line">// 2. b</span><br></pre></td></tr></table></figure>
+<li><p>再看一个通过<code>next()</code>方法的参数，向<strong>Generator函数</strong>内部输入值的例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">dataConsumer</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">'Started'</span>);</span><br><span class="line">    console.log(`1. <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    console.log(`2. <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'result'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> genObj = dataConsumer();</span><br><span class="line">genObj.next();</span><br><span class="line">// Started</span><br><span class="line">// &#123;value: undefined, <span class="keyword">done</span>: <span class="literal">false</span>&#125;</span><br><span class="line">genObj.next(<span class="string">'a'</span>)</span><br><span class="line">// 1. a</span><br><span class="line">// &#123;value: undefined, <span class="keyword">done</span>: <span class="literal">false</span>&#125;</span><br><span class="line">genObj.next(<span class="string">'b'</span>)</span><br><span class="line">// 2. b</span><br><span class="line">// &#123;value: <span class="string">"result"</span>, <span class="keyword">done</span>: <span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>上面代码是一个很直观的例子，每次通过<code>next()</code>方法向Generator函数输入值，然后打印出来。</p>
+<li><p>上面代码是一个很直观的例子，每次通过<code>next()</code>方法向<strong>Generator函数</strong>输入值，然后打印出来。</p>
 </li>
-<li></li>
+<li><p>如果想要第一次调用<code>next()</code>方法时，就能够输入值，可以<strong><strong>在Generator函数外面再包一层</strong></strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> wrapper(generatorFunction) &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="keyword">function</span> (...args) &#123;</span><br><span class="line">        <span class="built_in">let</span> generatorObject = generatorFunction(...args);</span><br><span class="line">        generatorObject.next();</span><br><span class="line">        <span class="built_in">return</span> generatorObject;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">const wrapped = wrapper(<span class="keyword">function</span>* () &#123;</span><br><span class="line">    console.log(`First input: <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'DONE'</span>;</span><br><span class="line">&#125;);</span><br><span class="line">wrapped().next(<span class="string">'hello!'</span>)</span><br><span class="line">// First input: hello!</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面代码中，Generator函数如果不用<code>wrapper</code>先包一层，是无法第一次调用<code>next()</code>方法就输入参数的。</p>
+</li>
 </ul>
 
       
@@ -450,9 +454,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
             <a href="/tags/异步编程/" rel="tag"><i class="fa fa-tag"></i> 异步编程</a>
           
