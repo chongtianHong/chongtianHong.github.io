@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-03T15:44:38.896Z</updated>
+  <updated>2018-08-05T11:17:06.081Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>generator</title>
+    <link href="https://chongtianhong.github.io/2018/08/05/generator/"/>
+    <id>https://chongtianhong.github.io/2018/08/05/generator/</id>
+    <published>2018-08-05T11:17:06.000Z</published>
+    <updated>2018-08-05T11:17:06.081Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>闭包及闭包的作用</title>
+    <link href="https://chongtianhong.github.io/2018/04/24/closure/"/>
+    <id>https://chongtianhong.github.io/2018/04/24/closure/</id>
+    <published>2018-04-24T11:14:57.000Z</published>
+    <updated>2018-08-05T11:31:52.584Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul><li><strong>有权访问另一个函数作用域内变量的函数</strong>都是闭包。一般是<strong>定义在外层函数</strong>中的<strong>内层函数</strong>。</li><li>创建闭包的最常见的方式就是<strong>在一个函数内创建另一个函数</strong>，<strong>通过内部函数访问外部函数的局部变量</strong>。</li><li>利用闭包可以<strong>突破作用链域</strong>，将函数内部的<strong>变量</strong>和<strong>方法</strong>传递到外部。<a id="more"></a></li><li>使用闭包的原因：<strong>局部变量无法共享和长久的保存</strong>，而<strong>全局变量可能造成变量污染</strong>，所以我们希望有一种机制<strong>既可以长久的保存变量又不会造成全局污染</strong>。</li></ul><h4 id="闭包的特性"><a href="#闭包的特性" class="headerlink" title="闭包的特性"></a>闭包的特性</h4><ul><li>函数内再嵌套函数，通过函数隔离出作用域，实现封装。</li><li>可以读取函数内部的变量，内部函数可以引用外层的参数和变量。</li><li>参数和变量不会被垃圾回收机制回收，这些变量的值始终保持在内存中（缓存）。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;基本介绍&quot;&gt;&lt;a href=&quot;#基本介绍&quot; class=&quot;headerlink&quot; title=&quot;基本介绍&quot;&gt;&lt;/a&gt;基本介绍&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;有权访问另一个函数作用域内变量的函数&lt;/strong&gt;都是闭包。一般是&lt;strong&gt;定义在外层函数&lt;/strong&gt;中的&lt;strong&gt;内层函数&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;创建闭包的最常见的方式就是&lt;strong&gt;在一个函数内创建另一个函数&lt;/strong&gt;，&lt;strong&gt;通过内部函数访问外部函数的局部变量&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;利用闭包可以&lt;strong&gt;突破作用链域&lt;/strong&gt;，将函数内部的&lt;strong&gt;变量&lt;/strong&gt;和&lt;strong&gt;方法&lt;/strong&gt;传递到外部。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="闭包" scheme="https://chongtianhong.github.io/tags/%E9%97%AD%E5%8C%85/"/>
+    
+  </entry>
   
   <entry>
     <title>Vue的计算属性</title>
@@ -305,15 +348,15 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    
-      <category term="浏览器渲染机制" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/"/>
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
+      <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
       <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+      <category term="浏览器渲染机制" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/"/>
     
   </entry>
   
@@ -341,9 +384,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
     
   </entry>
   
@@ -551,75 +594,6 @@
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Vue.js" scheme="https://chongtianhong.github.io/tags/Vue-js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS性能优化之函数去抖</title>
-    <link href="https://chongtianhong.github.io/2018/04/05/debounce/"/>
-    <id>https://chongtianhong.github.io/2018/04/05/debounce/</id>
-    <published>2018-04-05T06:59:50.000Z</published>
-    <updated>2018-07-26T14:04:44.432Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul><li><strong>概念</strong>：函数去抖是<strong>通过一个定时器</strong>，<strong>阻断连续重复的函数调用</strong>，从而一定程度上<strong>优化性能</strong>。</li><li><strong>用途</strong>：主要用于<strong>用户界面</strong>调用的函数，如：<strong>resize事件</strong>、<strong>mousemove事件</strong>、<strong>keyup事件</strong>的<strong>监听函数</strong>。 </li><li>这类监听函数的主要特征：<br>1、短时间内连续多次重复触发；<br>2、大量的DOM操作。</li><li><strong>意义</strong>：在用户察觉范围外，<strong>降低函数调用的频率</strong>，从而提升性能。<a id="more"></a></li></ul><h4 id="函数去抖的原理"><a href="#函数去抖的原理" class="headerlink" title="函数去抖的原理"></a>函数去抖的原理</h4><ul><li>某些代码不可以在没有间断的情况<strong>连续重复执行</strong>。</li><li>第一次调用函数，创建一个定时器，在指定的时间间隔之后运行代码。当第二次调用该函数时，它会清除前一次的定时器并设置另一个。</li><li>如果前一个定时器已经执行过了，这个操作就没有任何意义。</li><li>然而，如果前一个定时器尚未执行，其实就是将其替换为一个新的定时器。目的是只有<strong>在执行函数的请求停止了一段时间之后才执行</strong>。</li></ul><h4 id="具体用法"><a href="#具体用法" class="headerlink" title="具体用法"></a>具体用法</h4><ul><li>例如： <ul><li>使用onresize事件处理程序的时候容易发生，当调整浏览器大小的时候，该事件会连续触发。<strong>在onresize 事件处理程序内部</strong>如果<strong>尝试进行DOM操作</strong>，其<strong>高频率的更改</strong>可能会<strong>让浏览器崩溃</strong>。 </li><li>另一个常见的是搜索功能，我们一般是绑定keyup事件，每按下一次键盘就搜索一次。但是我们的目的主要是<strong>每输入一些内容搜索一次</strong>而已。</li></ul></li><li>为了解决这些问题，就可以<strong>使用定时器对函数进行去抖</strong>。</li><li>下面以keyup为例，对<strong>函数去抖</strong>的具体用法进行介绍。</li></ul><blockquote>1、不使用函数去抖的情况</blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"search"</span> <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"search"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> queryData(text)&#123;</span><br><span class="line">    console.log(<span class="string">"搜索："</span> + text);</span><br><span class="line">&#125;</span><br><span class="line">var input = document.getElementById(<span class="string">"search"</span>);</span><br><span class="line">input.addEventListener(<span class="string">"keyup"</span>, <span class="keyword">function</span>(event)&#123; </span><br><span class="line">    queryData(this.value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><ul><li>结果如图：<br><img src="/images/search1.png" alt="不使用函数防抖的情况"></li></ul><blockquote>2、使用基本函数防抖的情况</blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"search1"</span> <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"search"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> queryData(text)&#123;</span><br><span class="line">    console.log(<span class="string">"搜索："</span> + text);</span><br><span class="line">&#125;</span><br><span class="line">var input = document.getElementById(<span class="string">"search"</span>);</span><br><span class="line">input.addEventListener(<span class="string">"keyup"</span>, <span class="keyword">function</span>(event)&#123;</span><br><span class="line">    debounce(queryData, null, 500, this.value);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">function</span> debounce(fn, context, delay, text)&#123;</span><br><span class="line">    clearTimeout(fn.timeoutId);</span><br><span class="line">    fn.timeoutId = setTimeout(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        fn.call(context, text);</span><br><span class="line">    &#125;, delay);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>结果如图：<br><img src="/images/search2.png" alt="使用函数防抖的情况"></li><li>实际上，我们更希望的是，<strong>当达到某个时间值时，一定要执行一次这个搜索函数</strong>。所以，就有了函数防抖的<strong>改进模式</strong>。</li></ul><blockquote>3、函数防抖增强版</blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"search"</span> <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"search"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> queryData(text)&#123;</span><br><span class="line">    console.log(<span class="string">"搜索："</span> + text);</span><br><span class="line">&#125;</span><br><span class="line">var input = document.getElementById(<span class="string">"search"</span>);</span><br><span class="line">input.addEventListener(<span class="string">"keyup"</span>, <span class="keyword">function</span>(event)&#123;</span><br><span class="line">    debounce(queryData, null, 500, this.value, 1000);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> debounce(fn, context, delay, text, mustApplyTime)&#123;</span><br><span class="line">    clearTimeout(fn.timer);</span><br><span class="line">    fn._cur = Date.now(); //记录当前时间</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!fn._start)&#123; //若该函数是第一次调用，则直接设置_start,即开始时间，为_cur，即此刻的时间</span><br><span class="line">        fn._start = fn._cur;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(fn._cur-fn._start &gt; mustApplyTime)&#123; </span><br><span class="line">    //当前时间与上一次函数被执行的时间作差，与mustApplyTime比较，若大于，则必须执行一次函数，若小于，则重新设置计时器</span><br><span class="line">        fn.call(context, text);</span><br><span class="line">        fn._start = fn._cur;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        fn.timer = setTimeout(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            fn.call(context, text);</span><br><span class="line">        &#125;, delay);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>结果如图：<br><img src="/images/search3.png" alt="函数防抖增强版"></li><li>显然，连续的输入，到一定时间间隔之后，queryData函数必然会被调用，但是又不是频繁的调用。这既达到了防抖的目的，又不会影响用户体验。</li></ul><blockquote>4、进一步的优化</blockquote><ul><li>进一步的话，就是可以在调用debounce函数之前，先对输入的内容进行判断，若其值为空、值不变时都不用再调用。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;基本介绍&quot;&gt;&lt;a href=&quot;#基本介绍&quot; class=&quot;headerlink&quot; title=&quot;基本介绍&quot;&gt;&lt;/a&gt;基本介绍&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;概念&lt;/strong&gt;：函数去抖是&lt;strong&gt;通过一个定时器&lt;/strong&gt;，&lt;strong&gt;阻断连续重复的函数调用&lt;/strong&gt;，从而一定程度上&lt;strong&gt;优化性能&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;用途&lt;/strong&gt;：主要用于&lt;strong&gt;用户界面&lt;/strong&gt;调用的函数，如：&lt;strong&gt;resize事件&lt;/strong&gt;、&lt;strong&gt;mousemove事件&lt;/strong&gt;、&lt;strong&gt;keyup事件&lt;/strong&gt;的&lt;strong&gt;监听函数&lt;/strong&gt;。 &lt;/li&gt;
-&lt;li&gt;这类监听函数的主要特征：&lt;br&gt;1、短时间内连续多次重复触发；&lt;br&gt;2、大量的DOM操作。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;意义&lt;/strong&gt;：在用户察觉范围外，&lt;strong&gt;降低函数调用的频率&lt;/strong&gt;，从而提升性能。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="函数去抖" scheme="https://chongtianhong.github.io/tags/%E5%87%BD%E6%95%B0%E5%8E%BB%E6%8A%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>函数节流和函数防抖之间的区别</title>
-    <link href="https://chongtianhong.github.io/2018/04/04/throttleAndDebounce/"/>
-    <id>https://chongtianhong.github.io/2018/04/04/throttleAndDebounce/</id>
-    <published>2018-04-04T08:49:11.000Z</published>
-    <updated>2018-08-02T11:43:32.873Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul><li>函数节流和函数防抖，两者都是<strong>优化高频率执行js代码</strong>的一种手段。</li><li>在一些场景中，函数会因为一些用户操作被频繁触发，例如<strong>频繁操作DOM</strong>，<strong>重绘Layout</strong>，<strong>加载资源</strong>，<strong>请求数据</strong>，而导致浏览器<strong>卡顿</strong>或者<strong>崩溃</strong>。</li><li>常见场景有：<strong>输入监听</strong>，<strong>滚动监听</strong>，<strong>鼠标移入/移出/移动</strong>。这个时候就需要我们去优化，从而提高Javascript性能。<a id="more"></a></li></ul><h4 id="throttle"><a href="#throttle" class="headerlink" title="throttle"></a>throttle</h4><ul><li><strong>throttle</strong>：<strong>一定的时间间隔内执行</strong>，即设定一个时间间隔，当大于或等于时间间隔时，立即执行一次方法。</li><li>简而言之，指定时间间隔内<strong>只会执行一次任务</strong>。</li><li><p>比如人的眨眼睛，就是一定时间内眨一次。这是函数节流最形象的解释。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> canRun = <span class="literal">true</span>;</span><br><span class="line">window.addEventListener(<span class="string">'resize'</span>, () =&gt; &#123;</span><br><span class="line">    // 判断是否已空闲，如果在执行中，则直接<span class="built_in">return</span></span><br><span class="line">    <span class="keyword">if</span>(canRun)&#123;</span><br><span class="line">        <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    canRun = <span class="literal">false</span>;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">        console.log(<span class="string">'执行'</span>);</span><br><span class="line">        canRun = <span class="literal">true</span>;</span><br><span class="line">    &#125;, 500);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li><li><p>如上例子所示, 只要resize事件触发一次, 500ms之后立即触发函数一次, 在这其中不管resize方法再被触发了多少次都不理会, 反正500ms执行一次方法。</p></li><li><p>重新封装一下throttle方法，便于调用：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> throttle(fn, interval = 500) &#123;</span><br><span class="line">    <span class="built_in">let</span> canRun = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">return</span> <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        // 判断是否已空闲，如果在执行中，则直接<span class="built_in">return</span></span><br><span class="line">        <span class="keyword">if</span>(!canRun)&#123;</span><br><span class="line">            <span class="built_in">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        canRun = <span class="literal">false</span>;</span><br><span class="line">        setTimeout(() =&gt; &#123;</span><br><span class="line">            fn.apply(this, arguments);</span><br><span class="line">            canRun = <span class="literal">true</span>;</span><br><span class="line">        &#125;, interval);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">window.addEventListener(<span class="string">'resize'</span>, throttle(()=&gt;&#123;</span><br><span class="line">    console.log(<span class="string">'执行'</span>)</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure></li><li><p><strong>函数节流</strong>的要点是，<strong>声明一个变量当标志位</strong>，<strong>记录当前代码是否在执行</strong>。</p><ul><li>如果空闲，则可以正常触发方法执行。</li><li>如果代码正在执行，则取消这次方法执行，直接return。</li></ul></li></ul><h4 id="debounce"><a href="#debounce" class="headerlink" title="debounce"></a>debounce</h4><ul><li><strong>debounce</strong>：<strong>固定的时间间隔内</strong>，如果<strong>事件再次被触发</strong>，则<strong>重置时间</strong>，<strong>直到大于等于时间间隔</strong>才执行方法。</li><li>任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行。</li><li><p>比如生活中的坐公交，就是一定时间内，如果有人陆续刷卡上车，司机就不会开车。只有别人没刷卡了，司机才开车。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> timer = null;</span><br><span class="line">window.addEventListener(<span class="string">'resize'</span>, () =&gt; &#123;</span><br><span class="line">    clearTimeout(timer);</span><br><span class="line"></span><br><span class="line">    timer = setTimeout(() =&gt; &#123;</span><br><span class="line">        console.log(<span class="string">'执行'</span>);</span><br><span class="line">    &#125;, 500);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li><li><p>如上例子所示，只要resize事件被触发一次就重置一次timeout，直到500ms后事件都没有被触发，才执行方法。</p></li><li><p>重新封装一下debounce方法，便于调用：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> debounce(fn, interval=500)&#123;</span><br><span class="line">    <span class="built_in">let</span> timer = null;</span><br><span class="line">    <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        clearTimeout(timer);</span><br><span class="line">        timer = setTimeout(() =&gt; &#123;</span><br><span class="line">            fn.apply(this, arguments);</span><br><span class="line">        &#125;, interval);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">window.addEventListener(<span class="string">'resize'</span>, debounce(()=&gt;&#123;</span><br><span class="line">    console.log(<span class="string">'执行'</span>)</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure></li><li><p><strong>函数防抖</strong>的要点，也是需要一个setTimeout来辅助实现。延迟执行需要跑的代码。</p><ul><li>如果方法多次触发，则把上次记录的延迟执行代码用clearTimeout清掉，重新开始计时。</li><li>如果计时完毕，没有方法进来访问触发，则执行代码。</li></ul></li></ul><h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><ul><li><strong>throttle</strong>：一辆定时的地铁，每五分钟出发一辆，不管你有没有上到车，只要执行命令下来过五分钟之后就出发。</li><li><strong>debounce</strong>：就跟电梯的原理一样，只要10s之内有人来就重置时间，直到等待时间大于等于10s之后没人进来才出发。</li></ul><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul><li>两个方法，两种原理，适用的范围和场景也不一样，看实际的看法需求和业务。在不影响用户体验的前提下，<strong>优化Javascript性能</strong>。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;基本介绍&quot;&gt;&lt;a href=&quot;#基本介绍&quot; class=&quot;headerlink&quot; title=&quot;基本介绍&quot;&gt;&lt;/a&gt;基本介绍&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;函数节流和函数防抖，两者都是&lt;strong&gt;优化高频率执行js代码&lt;/strong&gt;的一种手段。&lt;/li&gt;
-&lt;li&gt;在一些场景中，函数会因为一些用户操作被频繁触发，例如&lt;strong&gt;频繁操作DOM&lt;/strong&gt;，&lt;strong&gt;重绘Layout&lt;/strong&gt;，&lt;strong&gt;加载资源&lt;/strong&gt;，&lt;strong&gt;请求数据&lt;/strong&gt;，而导致浏览器&lt;strong&gt;卡顿&lt;/strong&gt;或者&lt;strong&gt;崩溃&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;常见场景有：&lt;strong&gt;输入监听&lt;/strong&gt;，&lt;strong&gt;滚动监听&lt;/strong&gt;，&lt;strong&gt;鼠标移入/移出/移动&lt;/strong&gt;。这个时候就需要我们去优化，从而提高Javascript性能。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="函数去抖" scheme="https://chongtianhong.github.io/tags/%E5%87%BD%E6%95%B0%E5%8E%BB%E6%8A%96/"/>
-    
-      <category term="函数节流" scheme="https://chongtianhong.github.io/tags/%E5%87%BD%E6%95%B0%E8%8A%82%E6%B5%81/"/>
     
   </entry>
   
