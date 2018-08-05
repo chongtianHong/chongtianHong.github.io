@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为与传统函数完全不同。 Generator 函数有多种理解角度。可以从语法和形式上进行理解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-05T13:01:46.271Z">
+<meta property="og:updated_time" content="2018-08-05T13:50:11.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Generator 函数的语法">
 <meta name="twitter:description" content="Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为与传统函数完全不同。 Generator 函数有多种理解角度。可以从语法和形式上进行理解。">
@@ -429,6 +429,9 @@
 </li>
 <li>换言之，<strong>Generator 函数是分段执行的，<code>yield</code>表达式是暂停执行的标记，而<code>next</code>方法可以恢复执行</strong>。</li>
 </ul>
+<blockquote>判断是否为generator</blockquote>
+
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> isGen(fn) &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'function'</span> === typeof fn &amp;&amp; fn.constructor.name === <span class="string">'GeneratorFunction'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>总结</blockquote>
 
 <ul>
