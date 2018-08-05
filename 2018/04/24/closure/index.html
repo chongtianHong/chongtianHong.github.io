@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="基本介绍 有权访问另一个函数作用域内变量的函数都是闭包。一般是定义在外层函数中的内层函数。 创建闭包的最常见的方式就是在一个函数内创建另一个函数，通过内部函数访问外部函数的局部变量。 利用闭包可以突破作用链域，将函数内部的变量和方法传递到外部。">
+<meta name="description" content="闭包（closure）是Javascript语言的一个难点，也是它的特色，很多高级应用都要依靠闭包实现。">
 <meta name="keywords" content="开发,JavaScript,闭包">
 <meta property="og:type" content="article">
-<meta property="og:title" content="闭包及闭包的作用">
+<meta property="og:title" content="JavaScript深入理解JS闭包">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/04/24/closure/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="基本介绍 有权访问另一个函数作用域内变量的函数都是闭包。一般是定义在外层函数中的内层函数。 创建闭包的最常见的方式就是在一个函数内创建另一个函数，通过内部函数访问外部函数的局部变量。 利用闭包可以突破作用链域，将函数内部的变量和方法传递到外部。">
+<meta property="og:description" content="闭包（closure）是Javascript语言的一个难点，也是它的特色，很多高级应用都要依靠闭包实现。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-05T11:31:52.584Z">
+<meta property="og:updated_time" content="2018-08-05T11:58:12.312Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="闭包及闭包的作用">
-<meta name="twitter:description" content="基本介绍 有权访问另一个函数作用域内变量的函数都是闭包。一般是定义在外层函数中的内层函数。 创建闭包的最常见的方式就是在一个函数内创建另一个函数，通过内部函数访问外部函数的局部变量。 利用闭包可以突破作用链域，将函数内部的变量和方法传递到外部。">
+<meta name="twitter:title" content="JavaScript深入理解JS闭包">
+<meta name="twitter:description" content="闭包（closure）是Javascript语言的一个难点，也是它的特色，很多高级应用都要依靠闭包实现。">
 
 
 
@@ -170,7 +170,7 @@
 
 
 
-  <title>闭包及闭包的作用 | Ice's Blog</title>
+  <title>JavaScript深入理解JS闭包 | Ice's Blog</title>
   
 
 
@@ -326,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">闭包及闭包的作用</h1>
+          <h1 class="post-title" itemprop="name headline">JavaScript深入理解JS闭包</h1>
         
 
         <div class="post-meta">
@@ -398,16 +398,54 @@
       
 
       
-        <h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul>
-<li><strong>有权访问另一个函数作用域内变量的函数</strong>都是闭包。一般是<strong>定义在外层函数</strong>中的<strong>内层函数</strong>。</li>
-<li>创建闭包的最常见的方式就是<strong>在一个函数内创建另一个函数</strong>，<strong>通过内部函数访问外部函数的局部变量</strong>。</li>
-<li>利用闭包可以<strong>突破作用链域</strong>，将函数内部的<strong>变量</strong>和<strong>方法</strong>传递到外部。<a id="more"></a></li>
-<li>使用闭包的原因：<strong>局部变量无法共享和长久的保存</strong>，而<strong>全局变量可能造成变量污染</strong>，所以我们希望有一种机制<strong>既可以长久的保存变量又不会造成全局污染</strong>。</li>
+        <ul>
+<li>闭包（closure）是Javascript语言的一个难点，也是它的特色，很多高级应用都要依靠闭包实现。<a id="more"></a>
+</li>
 </ul>
-<h4 id="闭包的特性"><a href="#闭包的特性" class="headerlink" title="闭包的特性"></a>闭包的特性</h4><ul>
-<li>函数内再嵌套函数，通过函数隔离出作用域，实现封装。</li>
-<li>可以读取函数内部的变量，内部函数可以引用外层的参数和变量。</li>
-<li>参数和变量不会被垃圾回收机制回收，这些变量的值始终保持在内存中（缓存）。</li>
+<h4 id="变量的作用域"><a href="#变量的作用域" class="headerlink" title="变量的作用域"></a>变量的作用域</h4><ul>
+<li>要理解闭包，首先必须理解Javascript特殊的<strong>变量作用域</strong>。</li>
+<li>变量的作用域无非就是两种：<strong>全局变量</strong>和<strong>局部变量</strong>。</li>
+<li><p>Javascript语言的特殊之处，就在于<strong>函数内部可以直接读取全局变量</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var n = 999;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>()&#123;</span><br><span class="line">    alert(n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f1(); // 999</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>另一方面，在<strong>函数外部无法读取函数内的局部变量</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>()&#123;</span><br><span class="line">    var n = 999;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(n); // Uncaught ReferenceError: n is not defined</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这里有一个地方需要注意，函数内部声明变量的时候，一定要使用<code>var</code>命令。如果不用的话，实际上相当于声明了一个全局变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>()&#123;</span><br><span class="line">    n = 999;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f1();</span><br><span class="line"></span><br><span class="line">alert(n); // 999</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="如何从函数外部读取局部变量？"><a href="#如何从函数外部读取局部变量？" class="headerlink" title="如何从函数外部读取局部变量？"></a>如何从函数外部读取局部变量？</h4><ul>
+<li><p>出于种种原因，我们有时候<strong>需要得到函数内的局部变量</strong>。但是，前面已经说过了，正常情况下，这是办不到的，只有通过变通方法才能实现。那就是<strong>在函数的内部，再定义一个函数</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>()&#123;</span><br><span class="line">    n = 999;</span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">f2</span></span>()&#123;</span><br><span class="line">        alert(n); // 999</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在上面的代码中，函数f2就被包括在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。但是反过来就不行，f2内部的局部变量，对f1 就是不可见的。这就是Javascript语言特有的<strong>“链式作用域（chain scope）”</strong>结构，子对象会一级一级地向上寻找所有父对象的变量。所以，<strong>父对象的所有变量，对子对象都是可见的，反之则不成立</strong>。</p>
+</li>
+<li>因为f2可以读取f1中的局部变量，所以只要把f2作为返回值，就可以在f1外部读取它的内部变量了：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>()&#123;</span><br><span class="line">    n = 999;</span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">f2</span></span>()&#123;</span><br><span class="line">        alert(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> f2;</span><br><span class="line">&#125;</span><br><span class="line">var result = f1();</span><br><span class="line"></span><br><span class="line">result(); // 999</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h4><ul>
+<li>上面代码中的提到的f2函数，就是闭包。</li>
+<li>使用闭包的原因：<strong>局部变量无法共享和长久的保存</strong>，而<strong>全局变量可能造成变量污染</strong>，所以我们希望有一种机制<strong>既可以长久的保存变量又不会造成全局污染</strong>。</li>
+<li><strong>有权访问另一个函数作用域内变量的函数</strong>都是闭包。</li>
+<li>由于在Javascript语言中，<strong>只有函数内部的子函数才能读取局部变量</strong>，因此可以把闭包简单理解成“<strong>定义在一个函数内部的函数</strong>”。</li>
+<li>利用闭包可以<strong>突破作用链域</strong>，将函数内部的<strong>变量</strong>和<strong>方法</strong>传递到外部。所以，在本质上，<strong>闭包</strong>就是将<strong>函数内部</strong>和<strong>函数外部</strong>连接起来的一座<strong>桥梁</strong>。</li>
+</ul>
+<h4 id="闭包的用途"><a href="#闭包的用途" class="headerlink" title="闭包的用途"></a>闭包的用途</h4><ul>
+<li>闭包可以用在许多地方。它的最大用处有两个，一个是前面提到的<strong>可以读取函数内部的变量</strong>；另一个就是<strong>让这些变量的值始终保持在内存中</strong>，这些变量不会被垃圾回收机制回收。</li>
+<li><p>如下面的例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>()&#123;</span><br><span class="line">    var n = 999;</span><br><span class="line">    nAdd = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        n += 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">f2</span></span>()&#123;</span><br><span class="line">        alert(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> f2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var result = f1();</span><br><span class="line">result(); // 999</span><br><span class="line">nAdd();</span><br><span class="line">result(); // 1000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在这段代码中，<strong>result实际上就是闭包f2函数</strong>。它一共运行了两次，第一次的值是999，第二次的值是1000。这证明了，<strong>函数f1中的局部变量n一直保存在内存中</strong>，并没有在f1调用后被自动清除。</p>
+</li>
+<li>原因：<strong>f1是f2的父函数</strong>，而<strong>f2被赋给了一个全局变量</strong>，这导致<strong>f2始终在内存中</strong>，而<strong>f2的存在依赖于f1</strong>，因此<strong>f1也始终在内存中</strong>，不会在调用结束后，被垃圾回收机制（garbage collection）回收。</li>
+<li>这段代码中另一个值得注意的地方，就是<code>nAdd=function(){n+=1}</code>这一部分的代码，首先在<strong>nAdd前面没有使用var关键字</strong>，因此，<strong>nAdd是一个全局变量</strong>，而不是局部变量。其次，nAdd的值是一个匿名函数（anonymous function），而这个匿名函数本身也是一个闭包，所以<strong>nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作</strong>。</li>
+<li>再看一个例子：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var name = <span class="string">"The Window"</span>;   </span><br><span class="line">var object = &#123;   </span><br><span class="line">    name : <span class="string">"My Object"</span>,   </span><br><span class="line">    getNameFunc : <span class="function"><span class="title">function</span></span>()&#123;   </span><br><span class="line">        <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>()&#123;   </span><br><span class="line">            <span class="built_in">return</span> this.name;   </span><br><span class="line">        &#125;;   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;;   </span><br><span class="line">alert(object.getNameFunc()());  //The Window</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="使用闭包的注意点"><a href="#使用闭包的注意点" class="headerlink" title="使用闭包的注意点"></a>使用闭包的注意点</h4><ul>
+<li>由于<strong>闭包会使得函数中的变量都被保存在内存中</strong>，<strong>内存消耗很大</strong>，所以<strong>不能滥用闭包</strong>，否则会造成网页的性能问题，在IE中可能导致<strong>内存泄露</strong>。<strong>解决方法</strong>：在<strong>退出函数之前，将不使用的局部变量全部删除</strong>。</li>
+<li><strong>闭包会在父函数外部，改变父函数内部变量的值</strong>。所以，如果我们把<strong>父函数</strong>当作<strong>对象（object）</strong>使用，把<strong>闭包</strong>当作它的<strong>公用方法（Public Method）</strong>，把<strong>内部变量</strong>当作它的<strong>私有属性（private value）</strong>，这时一定要小心，<strong>不要随便改变父函数内部变量的值</strong>。</li>
 </ul>
 
       
@@ -617,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包的特性"><span class="nav-number">2.</span> <span class="nav-text">闭包的特性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量的作用域"><span class="nav-number">1.</span> <span class="nav-text">变量的作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何从函数外部读取局部变量？"><span class="nav-number">2.</span> <span class="nav-text">如何从函数外部读取局部变量？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包的概念"><span class="nav-number">3.</span> <span class="nav-text">闭包的概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包的用途"><span class="nav-number">4.</span> <span class="nav-text">闭包的用途</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用闭包的注意点"><span class="nav-number">5.</span> <span class="nav-text">使用闭包的注意点</span></a></li></ol></div>
             
 
           </div>
