@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="由于执行Generator函数返回的遍历器对象，只有调用next方法才会遍历下一个内部状态，所以其实提供了一种可以暂停执行的函数。 yield表达式就是暂停标志。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-05T13:28:44.406Z">
+<meta property="og:updated_time" content="2018-08-05T13:43:06.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yield 表达式">
 <meta name="twitter:description" content="由于执行Generator函数返回的遍历器对象，只有调用next方法才会遍历下一个内部状态，所以其实提供了一种可以暂停执行的函数。 yield表达式就是暂停标志。">
@@ -405,7 +405,7 @@
 <li>需要注意的是，<strong><code>yield</code>表达式后面的表达式，只有当调用<code>next</code>方法、内部指针指向该语句时才会执行</strong>，因此等于为 JavaScript 提供了手动的“惰性求值”（Lazy Evaluation）的语法功能。</li>
 <li><code>yield</code>表达式与<code>return</code>语句既有相似之处，也有区别：<ul>
 <li>相似之处：都能返回紧跟在语句后面的那个表达式的值。</li>
-<li>区别：<br>1.每次遇到<code>yield</code>，函数暂停执行，下一次再从该位置继续向后执行，而<strong><code>return</code>语句不具备位置记忆的功能</strong>。<br>2.一个函数里面，只能执行一次（或者说一个）<code>return</code>语句，但是可以执行多次（或者说多个）<code>yield</code>表达式。</li>
+<li>区别：①每次遇到<code>yield</code>，函数暂停执行，下一次再从该位置继续向后执行，而<strong><code>return</code>语句不具备位置记忆的功能</strong>。②一个函数里面，只能执行一次（或者说一个）<code>return</code>语句，但是可以执行多次（或者说多个）<code>yield</code>表达式。</li>
 </ul>
 </li>
 <li>正常函数只能返回一个值，因为只能执行一次<code>return</code>；<strong>Generator函数</strong>可以返回一系列的值，因为可以有任意多个<code>yield</code>。</li>
