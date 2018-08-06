@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-06T14:25:07.553Z</updated>
+  <updated>2018-08-06T14:47:07.915Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -17,16 +17,29 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>block</title>
-    <link href="https://chongtianhong.github.io/2018/08/06/block/"/>
-    <id>https://chongtianhong.github.io/2018/08/06/block/</id>
-    <published>2018-08-06T14:25:07.000Z</published>
-    <updated>2018-08-06T14:25:07.553Z</updated>
+    <title>block，inline和inline-block的区别</title>
+    <link href="https://chongtianhong.github.io/2018/04/28/block/"/>
+    <id>https://chongtianhong.github.io/2018/04/28/block/</id>
+    <published>2018-04-28T14:25:07.000Z</published>
+    <updated>2018-08-06T14:47:07.915Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul><li>display 属性规定元素应该生成的框的类型，这个属性用于定义建立布局时元素生成的显示框类型。</li><li>设置了<code>display：block</code>的元素将显示为<strong>块级元素</strong>，此元素前后会<strong>带有换行符</strong>。</li><li>设置了<code>display：inline</code>的元素会被显示为<strong>内联元素</strong>，元素前后<strong>没有换行符</strong>。<a id="more"></a></li><li>设置了<code>display：inline-block</code>的元素会显示为<strong>行内块元素</strong>（CSS2.1 新增的值），意思就是说，让这个元素<strong>显示在同一行不换行</strong>，但是又<strong>可以控制高度和宽度</strong>，这相当于内联元素的增强。</li><li><strong>注意</strong>：IE6 不支持inline-block。</li></ul><h4 id="内联元素和块级元素的定义"><a href="#内联元素和块级元素的定义" class="headerlink" title="内联元素和块级元素的定义"></a>内联元素和块级元素的定义</h4><ul><li>内联元素（行内元素）是<strong>不可以控制宽和高</strong>、<strong>竖直margin等盒模型属性</strong>；并且<strong>在同一行显示，不换行</strong>，比如<code>span</code>, <code>a</code>, <code>strong</code>, <code>em</code>, <code>label</code>, <code>input</code>, <code>select</code>, <code>textarea</code>, <code>img</code>, <code>br</code>等元素。</li><li>块级元素时<strong>可以控制宽和高、margin等盒模型属性</strong>，并且<strong>会换行</strong>，比如<code>div</code>、<code>p</code>、<code>ul</code>、<code>li</code>、<code>p</code>和所有的<code>h</code>类标签。</li></ul><h4 id="内联元素和块级元素的区别"><a href="#内联元素和块级元素的区别" class="headerlink" title="内联元素和块级元素的区别"></a>内联元素和块级元素的区别</h4><h5 id="起新行"><a href="#起新行" class="headerlink" title="起新行"></a>起新行</h5><ul><li><strong>块级(block)元素会独占一行</strong>，多个block元素会各自新起一行。<strong>默认情况下，block元素宽度自动填满其父元素宽度</strong>。</li><li><strong>内联(inline)元素不会独占一行</strong>，多个相邻的行内元素会排列在同一行里，直到一行排列不下，才会新换一行，其<strong>宽度随元素的内容而变化</strong>。</li></ul><h5 id="设置宽高"><a href="#设置宽高" class="headerlink" title="设置宽高"></a>设置宽高</h5><ul><li><strong>块级(block)元素</strong>可以设置width，height属性。块级元素即使设置了宽度，仍然独占一行。</li><li><strong>内联(inline)元素</strong>设置width，height无效。</li></ul><h5 id="内外边距"><a href="#内外边距" class="headerlink" title="内外边距"></a>内外边距</h5><ul><li><strong>块级(block)元素</strong>可以设置margin和padding属性。</li><li><strong>内联(inline)元素</strong>的margin和padding属性，水平方向的padding-left，padding-right，margin-left，margin-right都<strong>会产生边距效果</strong>，但<strong>竖直方向</strong>的 margin/padding-top/bottom<strong>不会产生边距效果</strong>。</li></ul><h5 id="包含"><a href="#包含" class="headerlink" title="包含"></a>包含</h5><ul><li><strong>块级(block)元素</strong>可以包含<strong>内联(inline)元素</strong>和<strong>块级(block)元素</strong>，而<strong>内联(inline)元素</strong>只能包含<strong>内联(inline)元素</strong>。</li></ul><blockquote>display: inline-block</blockquote><ul><li><strong>行内块级(inline-block)元素</strong>将对象呈现为inline对象，但是对象的内容作为block对象呈现，之后的内联对象会被排列到一行内。比如我们可以给一个link(a元素)inline-block的属性, 使其<strong>既有块级(block)元素的高宽特性又有内联(inline)元素的同行特性</strong>。</li><li><strong>注意</strong>：IE6 不支持inline-block。在实际运用过程中，要注意浏览器的兼容问题。</li></ul>]]></content>
     
     <summary type="html">
     
+      &lt;h4 id=&quot;基本介绍&quot;&gt;&lt;a href=&quot;#基本介绍&quot; class=&quot;headerlink&quot; title=&quot;基本介绍&quot;&gt;&lt;/a&gt;基本介绍&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;display 属性规定元素应该生成的框的类型，这个属性用于定义建立布局时元素生成的显示框类型。&lt;/li&gt;
+&lt;li&gt;设置了&lt;code&gt;display：block&lt;/code&gt;的元素将显示为&lt;strong&gt;块级元素&lt;/strong&gt;，此元素前后会&lt;strong&gt;带有换行符&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;设置了&lt;code&gt;display：inline&lt;/code&gt;的元素会被显示为&lt;strong&gt;内联元素&lt;/strong&gt;，元素前后&lt;strong&gt;没有换行符&lt;/strong&gt;。
+    
     </summary>
     
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
   </entry>
   
@@ -50,9 +63,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -78,9 +91,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -106,9 +119,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -133,9 +146,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="闭包" scheme="https://chongtianhong.github.io/tags/%E9%97%AD%E5%8C%85/"/>
     
@@ -187,9 +200,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Vue" scheme="https://chongtianhong.github.io/tags/Vue/"/>
     
@@ -219,9 +232,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Vue" scheme="https://chongtianhong.github.io/tags/Vue/"/>
     
@@ -247,13 +260,13 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Object" scheme="https://chongtianhong.github.io/tags/Object/"/>
     
       <category term="defineProperty" scheme="https://chongtianhong.github.io/tags/defineProperty/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -277,9 +290,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Date" scheme="https://chongtianhong.github.io/tags/Date/"/>
     
@@ -307,11 +320,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
@@ -336,9 +349,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
@@ -430,15 +443,15 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
+    
       <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
       <category term="浏览器渲染机制" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/"/>
     
-      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
-    
       <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -466,9 +479,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
     
   </entry>
   
@@ -492,9 +505,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="CSS选择器" scheme="https://chongtianhong.github.io/tags/CSS%E9%80%89%E6%8B%A9%E5%99%A8/"/>
     
@@ -519,9 +532,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="this" scheme="https://chongtianhong.github.io/tags/this/"/>
     
@@ -554,9 +567,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
@@ -587,9 +600,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="原型链" scheme="https://chongtianhong.github.io/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
     
