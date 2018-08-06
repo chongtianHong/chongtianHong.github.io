@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-05T15:15:54.270Z</updated>
+  <updated>2018-08-06T14:25:07.553Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,20 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>block</title>
+    <link href="https://chongtianhong.github.io/2018/08/06/block/"/>
+    <id>https://chongtianhong.github.io/2018/08/06/block/</id>
+    <published>2018-08-06T14:25:07.000Z</published>
+    <updated>2018-08-06T14:25:07.553Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>generator函数返回的遍历器对象中的next方法</title>
@@ -295,9 +309,9 @@
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
@@ -324,9 +338,9 @@
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
-      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
       <category term="封装" scheme="https://chongtianhong.github.io/tags/%E5%B0%81%E8%A3%85/"/>
     
@@ -416,8 +430,6 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
       <category term="浏览器渲染机制" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/"/>
@@ -425,6 +437,8 @@
       <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
       <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -452,9 +466,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -578,35 +592,6 @@
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="原型链" scheme="https://chongtianhong.github.io/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS中的进制转换</title>
-    <link href="https://chongtianhong.github.io/2018/04/08/numBaseConversion/"/>
-    <id>https://chongtianhong.github.io/2018/04/08/numBaseConversion/</id>
-    <published>2018-04-08T10:21:18.000Z</published>
-    <updated>2018-07-28T14:28:12.408Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>JavaScript可以很简单地实现任意进制的转化，核心函数是全局函数<code>parseInt(str, radix)</code>与<code>Number.toString(radix)</code>。</li><li><code>parseInt(str, radix)</code>可以实现<strong>把任意进制字符串转为十进制返回</strong>。</li><li><code>Number.toString(radix)</code>可以实现<strong>2、8、10、16进制的数据相互转换</strong>，并<strong>以字符串形式输出</strong>。<a id="more"></a></li></ul><h4 id="parseInt-str-radix"><a href="#parseInt-str-radix" class="headerlink" title="parseInt(str,radix)"></a>parseInt(str,radix)</h4><ul><li><code>parseInt(str, radix)</code>将字符串str按照radix进制编码方式<strong>转换为十进制</strong>返回</li><li>如果省略radix参数，则数字将以 10 为基数来解析。</li><li>radix参数值介于 2 ~ 36 之间。如果该参数小于 2 或者大于 36，则<code>parseInt(str, radix)</code>的结果将返回 NaN。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//2进制到10进制</span><br><span class="line">parseInt(<span class="string">'10'</span>,2) // 2</span><br><span class="line"></span><br><span class="line">//2进制到10进制</span><br><span class="line">parseInt(<span class="string">'100'</span>,2) // 4</span><br><span class="line"></span><br><span class="line">//16进制到10进制</span><br><span class="line">parseInt(<span class="string">'12'</span>, 16) // 18</span><br><span class="line"></span><br><span class="line">//8进制到10进制</span><br><span class="line">parseInt(<span class="string">'12'</span>,8); // 10</span><br><span class="line">parseInt(<span class="string">'23'</span>,8) // 19</span><br></pre></td></tr></table></figure></li></ul><h4 id="Number-toString-radix"><a href="#Number-toString-radix" class="headerlink" title="Number.toString(radix)"></a>Number.toString(radix)</h4><ul><li>Number的一个方法：<code>toString(radix)</code>返回<strong>表示该数字</strong>的<strong>指定进制形式</strong>的<strong>字符串</strong>。</li><li>可以实现<strong>2进制，8进制，10进制，16进制之间的相互转换</strong>，并<strong>以字符串形式输出</strong>。</li><li><p>radix支持 [2, 36] 之间的整数，默认为10。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//10进制转为16进制</span><br><span class="line">(66).toString(16) // <span class="string">"42"</span></span><br><span class="line">(10).toString(16) // <span class="string">"a"</span></span><br><span class="line"></span><br><span class="line">//8进制转为16进制</span><br><span class="line">(012).toString(16) // <span class="string">"a"</span></span><br><span class="line"></span><br><span class="line">//16进制转为10进制</span><br><span class="line">(0x16).toString(10) // <span class="string">"22"</span></span><br><span class="line"></span><br><span class="line">//16进制转为8进制</span><br><span class="line">(0x16).toString(8) // =&gt;<span class="string">"26"</span></span><br><span class="line"></span><br><span class="line">//10进制转为2进制 </span><br><span class="line">(1111).toString(2) // <span class="string">"10001010111"</span></span><br><span class="line"></span><br><span class="line">//8进制转为2进制</span><br><span class="line">(01111).toString(2) // <span class="string">"1001001001"</span></span><br><span class="line"></span><br><span class="line">//16进制转为2进制</span><br><span class="line">(0x16).toString(2) // <span class="string">"10110"</span></span><br></pre></td></tr></table></figure></li><li><p>一个笔试题：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var n = (2).toString();</span><br><span class="line">console.log(typeof(n));</span><br><span class="line">//<span class="string">'string'</span></span><br></pre></td></tr></table></figure></li><li><p>数字2通过<code>toString()</code>方法转为字符串，没有参数，默认转为10进制。最后n变成”2’，类型为字符串。</p></li></ul><h4 id="实现把m进制的数字转为n进制"><a href="#实现把m进制的数字转为n进制" class="headerlink" title="实现把m进制的数字转为n进制"></a>实现把m进制的数字转为n进制</h4><ul><li><p>实现把m进制的数字num转为n进制的方法是：先用<code>parseInt(str,radix)</code>将m进制的数字转化为十进制，再把十进制的数字用<code>toString()</code>方法返回n进制的形式。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> main(num, m, n)&#123;</span><br><span class="line">    var s = num + <span class="string">''</span>;</span><br><span class="line">    var result = parseInt(s, m).toString(n); </span><br><span class="line">    <span class="built_in">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line">console.log(main(36, 8, 6)); // 50</span><br></pre></td></tr></table></figure></li><li><p>注意：Number类型下的<code>toString()</code>函数容易忽略。</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;JavaScript可以很简单地实现任意进制的转化，核心函数是全局函数&lt;code&gt;parseInt(str, radix)&lt;/code&gt;与&lt;code&gt;Number.toString(radix)&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;parseInt(str, radix)&lt;/code&gt;可以实现&lt;strong&gt;把任意进制字符串转为十进制返回&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Number.toString(radix)&lt;/code&gt;可以实现&lt;strong&gt;2、8、10、16进制的数据相互转换&lt;/strong&gt;，并&lt;strong&gt;以字符串形式输出&lt;/strong&gt;。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="进制转换" scheme="https://chongtianhong.github.io/tags/%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2/"/>
     
   </entry>
   
