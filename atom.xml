@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-07T14:24:28.441Z</updated>
+  <updated>2018-08-07T14:41:16.841Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -17,16 +17,31 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>reflow_repaint</title>
-    <link href="https://chongtianhong.github.io/2018/08/07/reflow-repaint/"/>
-    <id>https://chongtianhong.github.io/2018/08/07/reflow-repaint/</id>
-    <published>2018-08-07T14:24:28.000Z</published>
-    <updated>2018-08-07T14:24:28.441Z</updated>
+    <title>页面的重绘与回流及优化</title>
+    <link href="https://chongtianhong.github.io/2018/04/30/reflow-repaint/"/>
+    <id>https://chongtianhong.github.io/2018/04/30/reflow-repaint/</id>
+    <published>2018-04-30T14:24:28.000Z</published>
+    <updated>2018-08-07T14:41:16.841Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。<a id="more"></a></li></ul><blockquote>Step1</blockquote><ul><li>浏览器把获取到的<strong>HTML代码解析成1个DOM树</strong>，HTML中的每个tag都是DOM树中的1个节点，<strong>根节点</strong>就是我们常用的<strong>document对象</strong>。</li><li>DOM树里包含了<strong>所有HTML标签</strong>，包括<strong>使用了<code>display:none</code>隐藏的元素</strong>，还有<strong>用JS动态添加的元素</strong>等。</li></ul><blockquote>Step2</blockquote><ul><li>浏览器把<strong>所有样式（用户定义的CSS和用户代理）解析成样式结构体（CSSOM树）</strong>，在解析的过程中会<strong>去掉浏览器不能识别的样式</strong>，比如IE会去掉-moz开头的样式，而FF会去掉_开头的样式。</li></ul><blockquote>Step3</blockquote><ul><li><strong>DOM树</strong>和<strong>样式结构体（CSSOM树）</strong>组合后构建<strong>render tree</strong>。</li><li>render tree类似于DOM tree，但区别很大，render tree能识别样式，render tree中每个NODE都有自己的style，而且 render tree不包含隐藏的节点 (比如display:none的节点，还有head节点)，因为这些节点不会用于呈现，而且不会影响呈现的，所以就不会包含到 render tree中。</li><li>注意：visibility:hidden隐藏的元素还是会包含到 render tree中的，因为visibility:hidden 会影响布局(layout)，会占有空间。根据CSS2的标准，render tree中的每个节点都称为Box (Box dimensions)，理解页面元素为一个具有填充、边距、边框和位置的盒子。</li></ul><blockquote>Step4</blockquote><ul><li>一旦render tree构建完毕后，浏览器就可以根据render tree来绘制页面了。如下图：<br><img src="/images/pageShow.jpg" width="600" alt="页面呈现的具体过程" style="border:none"></li></ul>]]></content>
     
     <summary type="html">
     
+      &lt;ul&gt;
+&lt;li&gt;在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。
+    
     </summary>
     
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="浏览器" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    
+      <category term="重绘" scheme="https://chongtianhong.github.io/tags/%E9%87%8D%E7%BB%98/"/>
+    
+      <category term="回流" scheme="https://chongtianhong.github.io/tags/%E5%9B%9E%E6%B5%81/"/>
     
   </entry>
   
@@ -459,13 +474,13 @@
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
-      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
-    
       <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
-      <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
-    
       <category term="浏览器渲染机制" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
+    
+      <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
     
   </entry>
   
