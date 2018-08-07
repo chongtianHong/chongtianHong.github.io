@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="CSS,开发,浏览器,重绘,回流," />
+  <meta name="keywords" content="开发,CSS,浏览器,重绘,回流," />
 
 
 
@@ -124,7 +124,7 @@
 
 
 <meta name="description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
-<meta name="keywords" content="CSS,开发,浏览器,重绘,回流">
+<meta name="keywords" content="开发,CSS,浏览器,重绘,回流">
 <meta property="og:type" content="article">
 <meta property="og:title" content="页面的重绘与回流及优化">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/04/30/reflow-repaint/index.html">
@@ -132,7 +132,7 @@
 <meta property="og:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/pageShow.jpg">
-<meta property="og:updated_time" content="2018-08-07T14:59:14.313Z">
+<meta property="og:updated_time" content="2018-08-07T15:08:17.022Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="页面的重绘与回流及优化">
 <meta name="twitter:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
@@ -459,6 +459,19 @@
 <li><strong>display: none</strong>指的是元素完全不陈列出来，不占据空间，涉及到了DOM结构的改变，因此产生回流和重绘。</li>
 <li><strong>visibility：hidden指</strong>的是元素不可见但存在，保留空间，不影响DOM结构的变化，因此只产生重绘。</li>
 </ul>
+<h4 id="减少回流、重绘的方法"><a href="#减少回流、重绘的方法" class="headerlink" title="减少回流、重绘的方法"></a>减少回流、重绘的方法</h4><ul>
+<li><strong>减少回流、重绘</strong>其实就是需要<strong>减少对render tree的操作</strong>（合并多次对DOM和样式的修改），并<strong>减少对一些style信息的请求</strong>，尽量<strong>利用好浏览器的优化策略</strong>。接下来介绍解决方法。</li>
+<li><p>尽量不用内联样式style属性，操作元素样式的时候用添加去掉class类的方式:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 不好的写法</span><br><span class="line">var left = 1;</span><br><span class="line">var top = 1;</span><br><span class="line">el.style.left = left + <span class="string">"px"</span>;</span><br><span class="line">el.style.top = top + <span class="string">"px"</span>;</span><br><span class="line">// 比较好的写法</span><br><span class="line">el.className += <span class="string">" className1"</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>让要操作的元素进行”离线处理”，处理完后一起更新：<br>a) 使用DocumentFragment进行缓存操作,引发一次回流和重绘；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//不好的写法（模式中所说的反模式）</span><br><span class="line">var p, t;</span><br><span class="line">p = document.creatElement(<span class="string">'p'</span>);</span><br><span class="line">t = document.creatTextNode(<span class="string">'fist paragraph'</span>);</span><br><span class="line">p.appendChild(t);</span><br><span class="line">document.body.appendChild(p);  //将引起一次回流</span><br><span class="line"></span><br><span class="line">p = document.creatElement(<span class="string">'p'</span>);</span><br><span class="line">t = document.creatTextNode(<span class="string">'second paragraph'</span>);</span><br><span class="line">p.appendChild(t);</span><br><span class="line">document.body.appendChild(p);  //将再引起一次回流</span><br><span class="line"></span><br><span class="line">//好的写法</span><br><span class="line">var p, t, frag;</span><br><span class="line">frag = document.creatDocumentFragment();</span><br><span class="line">p = document.creatElement(<span class="string">'p'</span>);</span><br><span class="line">t = document.creatTextNode(<span class="string">'fist paragraph'</span>);</span><br><span class="line">p.appendChild(t);</span><br><span class="line">farg.appendChild(p);</span><br><span class="line"></span><br><span class="line">p = document.creatElement(<span class="string">'p'</span>);</span><br><span class="line">t = document.creatTextNode(<span class="string">'second paragraph'</span>);</span><br><span class="line">p.appendChild(t);</span><br><span class="line">farg.appendChild(p);</span><br><span class="line"></span><br><span class="line">document.body.appendChild(frag);    //相比前面的方法，这里仅仅引起一次回流，倘若页面里有很多这样的操作，利用文档随便将会提升很多</span><br></pre></td></tr></table></figure>
+<p>b) 使用display:none技术，只引发两次回流和重绘; (只是减少重绘和回流的次数，display：none 是会引起重绘并回流，相对来说，visibility: hidden只会引起重绘)<br>c) 使用cloneNode(true or false) 和 replaceChild 技术，引发一次回流和重绘；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//建立克隆镜像</span><br><span class="line">var oldNode = document.getElementById(<span class="string">'target'</span>),</span><br><span class="line">      <span class="built_in">clone</span> = oldNode.cloneNode(<span class="literal">true</span>);   //深复制</span><br><span class="line"></span><br><span class="line">//   处理克隆对象的操作....</span><br><span class="line"></span><br><span class="line">//完成后</span><br><span class="line">oldNode.parentNode.replaceChild(<span class="built_in">clone</span>, oldNode);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>给元素加动画的时</strong>候，可以<strong>把该元素的定位设置成absolute或者fixed（动画元素脱离文档流）</strong>，这样不会影响其他元素，<strong>减少回流的Render Tree的规模</strong></p>
+</li>
+</ul>
 
       
     </div>
@@ -486,9 +499,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
-          
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
           
             <a href="/tags/浏览器/" rel="tag"><i class="fa fa-tag"></i> 浏览器</a>
           
@@ -667,7 +680,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#页面呈现的具体过程"><span class="nav-number">1.</span> <span class="nav-text">页面呈现的具体过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回流与重绘"><span class="nav-number">2.</span> <span class="nav-text">回流与重绘</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#回流"><span class="nav-number">2.1.</span> <span class="nav-text">回流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重绘"><span class="nav-number">2.2.</span> <span class="nav-text">重绘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#两者的关系"><span class="nav-number">2.3.</span> <span class="nav-text">两者的关系</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#页面呈现的具体过程"><span class="nav-number">1.</span> <span class="nav-text">页面呈现的具体过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回流与重绘"><span class="nav-number">2.</span> <span class="nav-text">回流与重绘</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#回流"><span class="nav-number">2.1.</span> <span class="nav-text">回流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重绘"><span class="nav-number">2.2.</span> <span class="nav-text">重绘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#两者的关系"><span class="nav-number">2.3.</span> <span class="nav-text">两者的关系</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#减少回流、重绘的方法"><span class="nav-number">3.</span> <span class="nav-text">减少回流、重绘的方法</span></a></li></ol></div>
             
 
           </div>
