@@ -132,7 +132,7 @@
 <meta property="og:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/pageShow.jpg">
-<meta property="og:updated_time" content="2018-08-07T15:14:47.342Z">
+<meta property="og:updated_time" content="2018-08-08T13:58:10.454Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="页面的重绘与回流及优化">
 <meta name="twitter:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
@@ -452,6 +452,7 @@
 </ul>
 <h5 id="重绘"><a href="#重绘" class="headerlink" title="重绘"></a>重绘</h5><ul>
 <li>重绘指的是当render tree中的一些<strong>元素</strong>需要<strong>更新属性</strong>，而这些属性只是<strong>影响元素的外观，风格</strong>，而<strong>不会影响布局</strong>的，比如background-color，visibility，outline等。</li>
+<li>重绘不会带来重新布局，并<strong>不一定伴随回流（重排）</strong>。</li>
 </ul>
 <h5 id="两者的关系"><a href="#两者的关系" class="headerlink" title="两者的关系"></a>两者的关系</h5><ul>
 <li>回流必将引起重绘，而重绘不一定会引起回流</li>
