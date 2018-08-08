@@ -132,7 +132,7 @@
 <meta property="og:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/pageShow.jpg">
-<meta property="og:updated_time" content="2018-08-08T14:00:58.771Z">
+<meta property="og:updated_time" content="2018-08-08T14:08:47.588Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="页面的重绘与回流及优化">
 <meta name="twitter:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
@@ -443,7 +443,7 @@
 <li>当<strong>页面布局</strong>和<strong>几何属性改变</strong>时就会<strong>产生回流</strong>。下述情况会发生浏览器回流：<ul>
 <li>添加或者删除可见的DOM元素；</li>
 <li>元素位置改变；</li>
-<li>元素尺寸改变——边距、填充、边框、宽度和高度；</li>
+<li><strong>元素尺寸改变</strong>（边距、填充、边框、宽度和高度）：当DOM元素的几何属性变化时，渲染树中的相关节点就会失效，浏览器会根据DOM元素的变化重新构建渲染树中失效的节点。</li>
 <li>内容改变——比如文本改变或者图片大小改变而引起的计算值宽度和高度改变；</li>
 <li>页面渲染初始化；</li>
 <li>浏览器窗口尺寸改变 —— resize事件发生时。</li>
@@ -455,8 +455,8 @@
 <li>重绘不会带来重新布局，并<strong>不一定伴随回流（重排）</strong>。</li>
 </ul>
 <h5 id="两者的关系"><a href="#两者的关系" class="headerlink" title="两者的关系"></a>两者的关系</h5><ul>
-<li>回流必将引起重绘，而重绘不一定会引起回流</li>
-<li>页面若发生回流则需要付出很高的代价。如果回流的频率很高，CPU使用率会大大增加。</li>
+<li>回流必将引起重绘，而重绘不一定会引起回流。</li>
+<li>如果<strong>回流</strong>的频率很高，CPU使用率会大大增加。一个元素的重排通常会带来一系列的反应，甚至触发整个文档的重排和重绘，<strong>性能代价是高昂的</strong>。</li>
 <li><strong>display: none</strong>指的是元素完全不陈列出来，不占据空间，涉及到了DOM结构的改变，因此产生回流和重绘。</li>
 <li><strong>visibility：hidden指</strong>的是元素不可见但存在，保留空间，不影响DOM结构的变化，因此只产生重绘。</li>
 </ul>
