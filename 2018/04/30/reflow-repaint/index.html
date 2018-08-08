@@ -132,7 +132,7 @@
 <meta property="og:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/pageShow.jpg">
-<meta property="og:updated_time" content="2018-08-08T14:15:55.510Z">
+<meta property="og:updated_time" content="2018-08-08T14:23:57.155Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="页面的重绘与回流及优化">
 <meta name="twitter:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
@@ -462,7 +462,7 @@
 </ul>
 <h4 id="减少回流、重绘的方法"><a href="#减少回流、重绘的方法" class="headerlink" title="减少回流、重绘的方法"></a>减少回流、重绘的方法</h4><ul>
 <li><strong>减少回流、重绘</strong>其实就是需要<strong>减少对render tree的操作</strong>（合并多次对DOM和样式的修改），并<strong>减少对一些style信息的请求</strong>，尽量<strong>利用好浏览器的优化策略</strong>。接下来介绍解决方法。</li>
-<li><p>尽量不用内联样式style属性，操作元素样式的时候用添加去掉class类的方式:</p>
+<li><p>尽量不用内联样式style属性，操作元素样式的时候用添加去掉class类的方式，实现合并多次改变样式属性的操作:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 不好的写法</span><br><span class="line">var left = 1;</span><br><span class="line">var top = 1;</span><br><span class="line">el.style.left = left + <span class="string">"px"</span>;</span><br><span class="line">el.style.top = top + <span class="string">"px"</span>;</span><br><span class="line">// 比较好的写法</span><br><span class="line">el.className += <span class="string">" className1"</span>;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>让要操作的元素进行“离线处理”，处理完后一起更新：<br>a) 使用DocumentFragment进行缓存操作,引发一次回流和重绘；</p>
@@ -470,8 +470,9 @@
 <p>b) 使用display:none技术，只引发两次回流和重绘; (只是减少重绘和回流的次数，display：none 是会引起重绘并回流，相对来说，visibility: hidden只会引起重绘)<br>c) 使用cloneNode(true or false) 和 replaceChild 技术，引发一次回流和重绘；</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//建立克隆镜像</span><br><span class="line">var oldNode = document.getElementById(<span class="string">'target'</span>),</span><br><span class="line">      <span class="built_in">clone</span> = oldNode.cloneNode(<span class="literal">true</span>);   //深复制</span><br><span class="line"></span><br><span class="line">//   处理克隆对象的操作....</span><br><span class="line"></span><br><span class="line">//完成后</span><br><span class="line">oldNode.parentNode.replaceChild(<span class="built_in">clone</span>, oldNode);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>给元素加动画的时</strong>候，可以<strong>把该元素的定位设置成absolute或者fixed（动画元素脱离文档流）</strong>，这样不会影响其他元素，<strong>减少回流的Render Tree的规模</strong></p>
+<li><p><strong>给元素加动画的时</strong>候，可以<strong>把该元素的定位设置成absolute或者fixed（动画元素脱离文档流）</strong>，这样不会影响其他元素，<strong>减少回流的Render Tree的规模</strong>。</p>
 </li>
+<li>在<strong>需要经常获取那些引起浏览器重排的属性值</strong>时，要<strong>缓存到变量</strong>。</li>
 </ul>
 
       
