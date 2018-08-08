@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,CSS,浏览器,重绘,回流," />
+  <meta name="keywords" content="CSS,开发,浏览器,重绘,回流," />
 
 
 
@@ -124,7 +124,7 @@
 
 
 <meta name="description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
-<meta name="keywords" content="开发,CSS,浏览器,重绘,回流">
+<meta name="keywords" content="CSS,开发,浏览器,重绘,回流">
 <meta property="og:type" content="article">
 <meta property="og:title" content="页面的重绘与回流及优化">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/04/30/reflow-repaint/index.html">
@@ -132,7 +132,7 @@
 <meta property="og:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/pageShow.jpg">
-<meta property="og:updated_time" content="2018-08-08T13:58:10.454Z">
+<meta property="og:updated_time" content="2018-08-08T14:00:58.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="页面的重绘与回流及优化">
 <meta name="twitter:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
@@ -432,7 +432,7 @@
 <li>一旦render tree构建完毕后，<strong>浏览器</strong>就可以<strong>根据render tree来绘制页面</strong>了。如下图：<br><img src="/images/pageShow.jpg" width="600" alt="页面呈现的具体过程" style="border:none"></li>
 </ul>
 <h4 id="回流与重绘"><a href="#回流与重绘" class="headerlink" title="回流与重绘"></a>回流与重绘</h4><h5 id="回流"><a href="#回流" class="headerlink" title="回流"></a>回流</h5><ul>
-<li><strong>回流(reflow)</strong>指的是当<strong>render tree中的一部分(或全部)</strong>因为<strong>元素的规模尺寸，布局，隐藏等改变</strong>而<strong>需要重新构建</strong>。</li>
+<li><strong>回流(reflow)</strong>指的是当<strong>render tree中的一部分(或全部)</strong>因为<strong>元素的规模尺寸，布局，隐藏等改变</strong>而<strong>需要重新构建</strong>，即渲染树需要重新计算。</li>
 <li>也就是说，回流是指<strong>DOM的变化影响到了元素的几何属性（宽和高）</strong>，浏览器会<strong>重新计算元素的几何属性</strong>，会<strong>使渲染树中受到影响的部分失效</strong>，浏览器会<strong>验证DOM树上的所有其他节点的visibility属性</strong>，因此，<strong>回流是低效的</strong>。</li>
 <li><strong>每个页面至少需要一次回流</strong>，就是在<strong>页面第一次加载</strong>的时候。</li>
 <li>在回流的时候，<strong>浏览器</strong>会使渲染树中受到影响的部分失效，并<strong>重新构造这部分渲染树</strong>，<strong>完成回流后</strong>，浏览器会<strong>重新绘制受影响的部分到屏幕中</strong>，该过程称为<strong>重绘</strong>。</li>
@@ -500,9 +500,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
-          
             <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
             <a href="/tags/浏览器/" rel="tag"><i class="fa fa-tag"></i> 浏览器</a>
           
