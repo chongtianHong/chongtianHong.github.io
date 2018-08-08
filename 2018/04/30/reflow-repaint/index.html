@@ -132,7 +132,7 @@
 <meta property="og:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/pageShow.jpg">
-<meta property="og:updated_time" content="2018-08-08T14:23:57.155Z">
+<meta property="og:updated_time" content="2018-08-08T14:37:26.170Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="页面的重绘与回流及优化">
 <meta name="twitter:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
@@ -456,8 +456,11 @@
 </ul>
 <h5 id="两者的关系"><a href="#两者的关系" class="headerlink" title="两者的关系"></a>两者的关系</h5><ul>
 <li>回流必将引起重绘，而重绘不一定会引起回流。</li>
-<li>如果<strong>回流</strong>的频率很高，CPU使用率会大大增加。一个元素的重排通常会带来一系列的反应，甚至触发整个文档的重排和重绘，<strong>性能代价是高昂的</strong>。</li>
-<li><strong>display: none</strong>指的是元素完全不陈列出来，不占据空间，涉及到了DOM结构的改变，因此产生回流和重绘。</li>
+<li><p>如果<strong>回流</strong>的频率很高，CPU使用率会大大增加。一个元素的重排通常会带来一系列的反应，甚至触发整个文档的重排和重绘，<strong>性能代价是高昂的</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var s = document.body.style; </span><br><span class="line"></span><br><span class="line">s.padding = <span class="string">"2px"</span>; // 回流+重绘</span><br><span class="line"></span><br><span class="line">s.border = <span class="string">"1px solid red"</span>; // 再一次 回流+重绘</span><br><span class="line"></span><br><span class="line">s.color = <span class="string">"blue"</span>; // 再一次重绘</span><br><span class="line"></span><br><span class="line">s.backgroundColor = <span class="string">"#ccc"</span>; // 再一次 重绘</span><br><span class="line"></span><br><span class="line">s.fontSize = <span class="string">"14px"</span>; // 再一次 回流+重绘</span><br><span class="line"></span><br><span class="line">// 添加node，再一次 回流+重绘</span><br><span class="line">document.body.appendChild(document.createTextNode(<span class="string">'abc!'</span>));</span><br><span class="line"></span><br><span class="line">///可以看到每次DOM元素的样式操作都会引发重绘，如果涉及布局还会引发回流。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>display: none</strong>指的是元素完全不陈列出来，不占据空间，涉及到了DOM结构的改变，因此产生回流和重绘。</p>
+</li>
 <li><strong>visibility：hidden指</strong>的是元素不可见但存在，保留空间，不影响DOM结构的变化，因此只产生重绘。</li>
 </ul>
 <h4 id="减少回流、重绘的方法"><a href="#减少回流、重绘的方法" class="headerlink" title="减少回流、重绘的方法"></a>减少回流、重绘的方法</h4><ul>
@@ -473,6 +476,20 @@
 <li><p><strong>给元素加动画的时</strong>候，可以<strong>把该元素的定位设置成absolute或者fixed（动画元素脱离文档流）</strong>，这样不会影响其他元素，<strong>减少回流的Render Tree的规模</strong>。</p>
 </li>
 <li>在<strong>需要经常获取那些引起浏览器重排的属性值</strong>时，要<strong>缓存到变量</strong>。</li>
+</ul>
+<h4 id="减少回流的方法"><a href="#减少回流的方法" class="headerlink" title="减少回流的方法"></a>减少回流的方法</h4><h5 id="CSS中避免回流"><a href="#CSS中避免回流" class="headerlink" title="CSS中避免回流"></a>CSS中避免回流</h5><ul>
+<li>尽可能在DOM树的最末端改变class</li>
+<li>避免设置多层内联样式</li>
+<li>动画效果应用到position属性为absolute或fixed的元素上</li>
+<li>牺牲平滑度换取速度</li>
+<li>避免使用table布局</li>
+<li>避免使用CSS的JavaScript表达式</li>
+</ul>
+<h5 id="JS操作避免回流"><a href="#JS操作避免回流" class="headerlink" title="JS操作避免回流"></a>JS操作避免回流</h5><ul>
+<li>避免逐项更改样式。最好一次性更改style属性，或者将样式列表定义为class并一次性更改class属性。</li>
+<li>避免循环操作DOM。创建一个documentFragment或div，在它上面应用所有DOM操作，最后再把它添加到window.document。</li>
+<li>可以在一个display:none的元素上进行操作，最终把它显示出来。因为display:none上的DOM操作不会引发回流和重绘。</li>
+<li>避免循环读取offsetLeft等属性，在循环之前把它们存起来。</li>
 </ul>
 
       
@@ -682,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#页面呈现的具体过程"><span class="nav-number">1.</span> <span class="nav-text">页面呈现的具体过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回流与重绘"><span class="nav-number">2.</span> <span class="nav-text">回流与重绘</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#回流"><span class="nav-number">2.1.</span> <span class="nav-text">回流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重绘"><span class="nav-number">2.2.</span> <span class="nav-text">重绘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#两者的关系"><span class="nav-number">2.3.</span> <span class="nav-text">两者的关系</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#减少回流、重绘的方法"><span class="nav-number">3.</span> <span class="nav-text">减少回流、重绘的方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#页面呈现的具体过程"><span class="nav-number">1.</span> <span class="nav-text">页面呈现的具体过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回流与重绘"><span class="nav-number">2.</span> <span class="nav-text">回流与重绘</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#回流"><span class="nav-number">2.1.</span> <span class="nav-text">回流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重绘"><span class="nav-number">2.2.</span> <span class="nav-text">重绘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#两者的关系"><span class="nav-number">2.3.</span> <span class="nav-text">两者的关系</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#减少回流、重绘的方法"><span class="nav-number">3.</span> <span class="nav-text">减少回流、重绘的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#减少回流的方法"><span class="nav-number">4.</span> <span class="nav-text">减少回流的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CSS中避免回流"><span class="nav-number">4.1.</span> <span class="nav-text">CSS中避免回流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JS操作避免回流"><span class="nav-number">4.2.</span> <span class="nav-text">JS操作避免回流</span></a></li></ol></li></ol></div>
             
 
           </div>
