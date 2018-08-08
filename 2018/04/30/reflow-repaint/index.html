@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="CSS,开发,浏览器,重绘,回流," />
+  <meta name="keywords" content="开发,CSS,浏览器,重绘,回流," />
 
 
 
@@ -124,7 +124,7 @@
 
 
 <meta name="description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
-<meta name="keywords" content="CSS,开发,浏览器,重绘,回流">
+<meta name="keywords" content="开发,CSS,浏览器,重绘,回流">
 <meta property="og:type" content="article">
 <meta property="og:title" content="页面的重绘与回流及优化">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/04/30/reflow-repaint/index.html">
@@ -132,7 +132,7 @@
 <meta property="og:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/pageShow.jpg">
-<meta property="og:updated_time" content="2018-08-08T14:12:20.802Z">
+<meta property="og:updated_time" content="2018-08-08T14:15:55.510Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="页面的重绘与回流及优化">
 <meta name="twitter:description" content="在理解页面的重绘与回流（重排）之前，首先要清楚页面呈现的具体过程。">
@@ -443,9 +443,10 @@
 <li>当<strong>页面布局</strong>和<strong>几何属性改变</strong>时就会<strong>产生回流</strong>。下述情况会发生浏览器回流：<ul>
 <li><strong>DOM树的结构变化</strong>：例如<strong>节点的增减、移动</strong>等。浏览器引擎布局的过程，类似于树的前序遍历，是一个从上到下从左到右的过程。通常在这个过程中，当前元素不会再影响其前面已经遍历过的元素。所以，<strong>如果在body最前面插入一个元素，会导致整个文档的重新渲染</strong>，而<strong>在其后插入一个元素，则不会影响到前面的元素</strong>。</li>
 <li><strong>元素尺寸改变</strong>（边距、填充、边框、宽度和高度）：当DOM元素的几何属性变化时，渲染树中的相关节点就会失效，浏览器会根据DOM元素的变化重新构建渲染树中失效的节点。</li>
+<li><strong>获取某些属性</strong>：当获取一些属性时，浏览器为取得正确的值也会触发重排。这些属性包括：<code>offsetTop</code>、<code>offsetLeft</code>、 <code>offsetWidth</code>、<code>offsetHeight</code>、<code>scrollTop</code>、<code>scrollLeft</code>、<code>scrollWidth</code>、<code>scrollHeight</code>、<code>clientTop</code>、<code>clientLeft</code>、<code>clientWidth</code>、<code>clientHeight</code>、<code>getComputedStyle() (currentStyle in IE)</code>。所以，<strong>在多次使用这些值时应进行缓存</strong>。</li>
 <li><strong>内容改变</strong>，比如文本改变或者图片大小改变而引起的计算值宽度和高度改变；</li>
 <li>页面渲染初始化；</li>
-<li>浏览器窗口尺寸改变 —— resize事件发生时。</li>
+<li><strong>浏览器窗口尺寸改变</strong>，如resize事件发生时。</li>
 </ul>
 </li>
 </ul>
@@ -499,9 +500,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
-          
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
           
             <a href="/tags/浏览器/" rel="tag"><i class="fa fa-tag"></i> 浏览器</a>
           
