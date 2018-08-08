@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-08T14:38:52.194Z</updated>
+  <updated>2018-08-08T15:33:21.452Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue2.0 $set()的正确使用方式</title>
+    <link href="https://chongtianhong.github.io/2018/05/01/vue-set/"/>
+    <id>https://chongtianhong.github.io/2018/05/01/vue-set/</id>
+    <published>2018-05-01T15:07:06.000Z</published>
+    <updated>2018-08-08T15:33:21.452Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>在Vue开发中，当生成Vue实例后，再次给数据赋值时，有时候并不会自动更新到视图上去。</li><li>Vue文档中写明：如果<strong>在实例创建之后添加新的属性到实例上</strong>，它<strong>不会触发视图更新</strong>。<a id="more"></a></li><li><p>如下代码，给 student对象新增 age 属性：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">data</span></span> () &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        student: &#123;</span><br><span class="line">            name: <span class="string">''</span>,</span><br><span class="line">            sex: <span class="string">''</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p><strong>直接</strong>给student<strong>赋值操作</strong>，虽然<strong>可以新增属性</strong>，但是<strong>不会触发视图更新</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">mounted</span></span> () &#123;</span><br><span class="line">    this.student.age = 24</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p><strong>原因</strong>：受 ES5 的限制，Vue.js 不能检测到对象属性的添加或删除。因为 Vue.js 在初始化实例时将属性转为 getter/setter，所以属性必须在 data 对象上才能让 Vue.js 转换它，才能让它是响应的。</p></li><li>要处理这种情况，我们可以<strong>使用<code>$set()</code>方法</strong>，既可以新增属性，又可以触发视图更新。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 语法：this.<span class="variable">$set</span>(this.data,<span class="string">"key"</span>,value)</span><br><span class="line"><span class="function"><span class="title">mounted</span></span> () &#123;</span><br><span class="line">    this.<span class="variable">$set</span>(this.student,<span class="string">"age"</span>, 24)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;在Vue开发中，当生成Vue实例后，再次给数据赋值时，有时候并不会自动更新到视图上去。&lt;/li&gt;
+&lt;li&gt;Vue文档中写明：如果&lt;strong&gt;在实例创建之后添加新的属性到实例上&lt;/strong&gt;，它&lt;strong&gt;不会触发视图更新&lt;/strong&gt;。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="Vue" scheme="https://chongtianhong.github.io/tags/Vue/"/>
+    
+  </entry>
   
   <entry>
     <title>页面的重绘与回流及优化</title>
@@ -94,9 +122,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -122,9 +150,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -150,9 +178,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -177,9 +205,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="闭包" scheme="https://chongtianhong.github.io/tags/%E9%97%AD%E5%8C%85/"/>
     
@@ -231,9 +259,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Vue" scheme="https://chongtianhong.github.io/tags/Vue/"/>
     
@@ -263,9 +291,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Vue" scheme="https://chongtianhong.github.io/tags/Vue/"/>
     
@@ -291,13 +319,13 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Object" scheme="https://chongtianhong.github.io/tags/Object/"/>
     
       <category term="defineProperty" scheme="https://chongtianhong.github.io/tags/defineProperty/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -321,9 +349,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Date" scheme="https://chongtianhong.github.io/tags/Date/"/>
     
@@ -351,9 +379,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
     
@@ -380,11 +408,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="封装" scheme="https://chongtianhong.github.io/tags/%E5%B0%81%E8%A3%85/"/>
     
@@ -536,9 +564,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="CSS选择器" scheme="https://chongtianhong.github.io/tags/CSS%E9%80%89%E6%8B%A9%E5%99%A8/"/>
     
@@ -563,9 +591,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="this" scheme="https://chongtianhong.github.io/tags/this/"/>
     
@@ -574,39 +602,6 @@
       <category term="apply" scheme="https://chongtianhong.github.io/tags/apply/"/>
     
       <category term="bind" scheme="https://chongtianhong.github.io/tags/bind/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>深入理解ES6箭头函数中的this</title>
-    <link href="https://chongtianhong.github.io/2018/04/10/arrowFunction/"/>
-    <id>https://chongtianhong.github.io/2018/04/10/arrowFunction/</id>
-    <published>2018-04-10T13:34:05.000Z</published>
-    <updated>2018-07-28T14:14:53.021Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>箭头函数看上去是匿名函数的一种简写，但实际上，箭头函数和匿名函数有个明显的<strong>区别</strong>：<ul><li>箭头函数内部的this是<strong>词法作用域，由上下文确定</strong>。</li><li>箭头函数中的this是在<strong>定义函数的时候绑定</strong>，而不是在执行函数的时候绑定。<a id="more"></a></li></ul></li><li>由于this在箭头函数中已经按照词法作用域绑定了，所以，用<code>call()</code>或者<code>apply()</code>、<code>bind()</code>调用箭头函数时，无法对this进行绑定（无法使用<code>call()</code>或者<code>apply()</code>、<code>bind()</code>改变this的指向），即传入的第一个参数被忽略。内部的this指向<strong>父执行上下文</strong>里面的this。</li><li>箭头函数中，this指向的固定化，并不是因为箭头函数内部有绑定this的机制，实际原因是<strong>箭头函数根本没有自己的this</strong>，导致内部的this就是<strong>外层代码块</strong>的this。正是因为它没有this，所以也就<strong>不能用作构造函数</strong>。</li><li><p>箭头函数中的this是在<strong>定义函数的时候绑定</strong>，看一个例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var x = 11;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    x: 22,</span><br><span class="line">    say: ()=&gt;&#123;</span><br><span class="line">        console.log(this.x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.say();  //输出的值为11</span><br></pre></td></tr></table></figure></li><li><p>所谓的<strong>定义时候绑定</strong>，就是this是继承自<strong>父执行上下文中的this</strong>，比如这里的箭头函数中的this.x，箭头函数本身与say平级以key:value的形式，也就是箭头函数本身所在的对象为obj，而<strong>obj的父执行上下文就是window</strong>，因此这里的this.x实际上表示的是window.x，因此输出的是11。</p></li><li><p>而对于下面的例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">    birth: 1990,</span><br><span class="line">    getAge: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        var b = this.birth; // 1990</span><br><span class="line">        var fn = () =&gt; new Date().getFullYear() - this.birth; // this指向obj对象</span><br><span class="line">        <span class="built_in">return</span> fn();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.getAge(); // 25</span><br></pre></td></tr></table></figure></li><li><p>例子中箭头函数本身是在getAge方法中定义的，因此，getAge方法的<strong>父执行上下文</strong>是obj，因此这里的this指向则为obj对象。</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;箭头函数看上去是匿名函数的一种简写，但实际上，箭头函数和匿名函数有个明显的&lt;strong&gt;区别&lt;/strong&gt;：&lt;ul&gt;
-&lt;li&gt;箭头函数内部的this是&lt;strong&gt;词法作用域，由上下文确定&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;箭头函数中的this是在&lt;strong&gt;定义函数的时候绑定&lt;/strong&gt;，而不是在执行函数的时候绑定。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
-    
-      <category term="箭头函数" scheme="https://chongtianhong.github.io/tags/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="this" scheme="https://chongtianhong.github.io/tags/this/"/>
     
   </entry>
   
