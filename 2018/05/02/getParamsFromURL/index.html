@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="在WEB开发中，时常会用到JavaScript来获取当前页面的url网址信息，这篇文章主要介绍了JS准确获取当前页面url网址信息的多种方法，包括正则法、split拆分法等。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-09T16:23:18.550Z">
+<meta property="og:updated_time" content="2018-08-09T16:24:25.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用JS准确获取URL网址中参数的几种方法">
 <meta name="twitter:description" content="在WEB开发中，时常会用到JavaScript来获取当前页面的url网址信息，这篇文章主要介绍了JS准确获取当前页面url网址信息的多种方法，包括正则法、split拆分法等。">
@@ -403,8 +403,11 @@
 </li>
 </ul>
 <h4 id="获取整个URL字符串"><a href="#获取整个URL字符串" class="headerlink" title="获取整个URL字符串"></a>获取整个URL字符串</h4><ul>
-<li>要想获取URL中的参数，首先我们就要获取到整个URL字符串。我们使用下面这个URL为例：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xbhong.top/2018/05/01/vueSet/<span class="comment">#more?token=zhihua_wei</span></span><br></pre></td></tr></table></figure>
+<li><p>要想获取URL中的参数，首先我们就要<strong>获取到整个URL字符串</strong>。我们使用下面这个URL为例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xbhong.top/2018/05/01/vueSet/<span class="comment">#more?token=zhihua_wei</span></span><br></pre></td></tr></table></figure>
 </li>
+<li><p>获取(或设置) URL 的协议部分：<code>window.location.protocol</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// window.location.protocol设置或获取 URL 的协议部分</span><br><span class="line">var <span class="built_in">test</span> = window.location.protocol;</span><br><span class="line">alert(<span class="built_in">test</span>);</span><br><span class="line">// 返回弹出：http</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
