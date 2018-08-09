@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,JavaScript,异步编程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="yield表达式本身没有返回值，或者说总是返回undefined。 next()方法可以带一个参数，该参数就会被当作上一个yield表达式的返回值。">
+<meta name="keywords" content="开发,JavaScript,异步编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="generator函数返回的遍历器对象中的next方法">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/04/27/nextOfGenerator/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="yield表达式本身没有返回值，或者说总是返回undefined。 next()方法可以带一个参数，该参数就会被当作上一个yield表达式的返回值。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-09T16:12:05.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="generator函数返回的遍历器对象中的next方法">
+<meta name="twitter:description" content="yield表达式本身没有返回值，或者说总是返回undefined。 next()方法可以带一个参数，该参数就会被当作上一个yield表达式的返回值。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/04/27/nextOfGenerator/"/>
+
+
+
+
+
+  <title>generator函数返回的遍历器对象中的next方法 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/04/27/nextOfGenerator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">generator函数返回的遍历器对象中的next方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-27T22:01:36+08:00">
+                2018-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><strong><code>yield</code>表达式本身没有返回值</strong>，或者说<strong>总是返回<code>undefined</code></strong>。</li>
+<li><strong><code>next()</code>方法可以带一个参数</strong>，该参数就会被当作<strong>上一个<code>yield</code>表达式的返回值</strong>。<a id="more"></a></li>
+<li><p>先看一个例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">f</span></span>() &#123;</span><br><span class="line">    <span class="keyword">for</span>(var i = 0; <span class="literal">true</span>; i++) &#123;</span><br><span class="line">        var reset = yield i;</span><br><span class="line">        <span class="keyword">if</span>(reset) &#123; </span><br><span class="line">            i = -1; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var g = f();</span><br><span class="line">g.next() // &#123; value: 0, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br><span class="line">g.next() // &#123; value: 1, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br><span class="line">g.next(<span class="literal">true</span>) // &#123; value: 0, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面代码先定义了一个<strong>可以无限运行的Generator函数<code>f</code></strong>，如果<code>next()</code>方法没有参数，每次运行到<code>yield</code>表达式，变量<code>reset</code>的值总是<code>undefined</code>。当<code>next()</code>方法带一个参数<code>true</code>时，变量<code>reset</code>就被重置为这个参数（即<code>true</code>），因此<code>i</code>会等于<code>-1</code>，下一轮循环就会从<code>-1</code>开始递增。</p>
+</li>
+<li>注：<strong>每次调用遍历器对象的next方法</strong>，就会<strong>返回一个有着value和done两个属性的对象</strong>。其中，<strong>value属性表示当前的内部状态的值</strong>，是<strong>本次<code>yield</code>表达式</strong>后面的值。</li>
+<li>这个功能有很重要的语法意义。<strong>Generator函数从暂停状态到恢复运行，它的上下文状态（context）是不变的</strong>。通过<code>next()</code>方法的参数，就有办法在 Generator函数开始运行之后，继续向函数体内部注入值。也就是说，<strong>可以在Generator函数运行的不同阶段，从外部向内部注入不同的值</strong>，从而<strong>调整函数行为</strong>。</li>
+<li><p>再看一个例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* foo(x) &#123;</span><br><span class="line">    var y = 2 * (yield (x + 1));</span><br><span class="line">    var z = yield (y / 3);</span><br><span class="line">    <span class="built_in">return</span> (x + y + z);</span><br><span class="line">&#125;</span><br><span class="line">var a = foo(5);</span><br><span class="line">a.next() // Object&#123;value:6, <span class="keyword">done</span>:<span class="literal">false</span>&#125;</span><br><span class="line">a.next() // Object&#123;value:NaN, <span class="keyword">done</span>:<span class="literal">false</span>&#125;</span><br><span class="line">a.next() // Object&#123;value:NaN, <span class="keyword">done</span>:<span class="literal">true</span>&#125;</span><br><span class="line">var b = foo(5);</span><br><span class="line">b.next() // &#123; value:6, <span class="keyword">done</span>:<span class="literal">false</span> &#125;</span><br><span class="line">b.next(12) // &#123; value:8, <span class="keyword">done</span>:<span class="literal">false</span> &#125;</span><br><span class="line">b.next(13) // &#123; value:42, <span class="keyword">done</span>:<span class="literal">true</span> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面代码中，第二次运行<code>next()</code>方法的时候不带参数，导致 y 的值等于<code>2 * undefined</code>（即<code>NaN</code>），除以 3 以后还是<code>NaN</code>，因此返回对象的<code>value</code>属性也等于<code>NaN</code>。第三次运行<code>next()</code>方法的时候不带参数，所以<code>z</code>等于<code>undefined</code>，返回对象的<code>value</code>属性等于<code>5 + NaN + undefined</code>，即<code>NaN</code>。</p>
+</li>
+<li>如果向<code>next()</code>方法提供参数，返回结果就完全不一样了。上面代码第一次调用<code>b</code>的<code>next()</code>方法时，返回<code>x+1</code>的值<code>6</code>；第二次调用<code>next()</code>方法，将上一次<code>yield</code>表达式的值设为<code>12</code>，因此<code>y</code>等于<code>24</code>，返回<code>y / 3</code>的值<code>8</code>；第三次调用<code>next()</code>方法，将上一次<code>yield</code>表达式的值设为<code>13</code>，因此<code>z</code>等于<code>13</code>，这时<code>x</code>等于<code>5</code>，<code>y</code>等于<code>24</code>，所以<code>return</code>语句的值等于<code>42</code>。</li>
+<li>注意：由于<strong>next()方法的参数表示上一个yield表达式的返回值</strong>，所以<strong>在第一次使用next()方法时，传递参数是无效的</strong>。</li>
+<li>V8 引擎直接忽略第一次使用next()方法时的参数，<strong>只有从第二次使用next()方法开始，参数才是有效的</strong>。从语义上讲，第一个next()方法用来启动遍历器对象，所以不用带有参数。</li>
+<li><p>再看一个通过<code>next()</code>方法的参数，向<strong>Generator函数</strong>内部输入值的例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">dataConsumer</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">'Started'</span>);</span><br><span class="line">    console.log(`1. <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    console.log(`2. <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'result'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> genObj = dataConsumer();</span><br><span class="line">genObj.next();</span><br><span class="line">// Started</span><br><span class="line">// &#123;value: undefined, <span class="keyword">done</span>: <span class="literal">false</span>&#125;</span><br><span class="line">genObj.next(<span class="string">'a'</span>)</span><br><span class="line">// 1. a</span><br><span class="line">// &#123;value: undefined, <span class="keyword">done</span>: <span class="literal">false</span>&#125;</span><br><span class="line">genObj.next(<span class="string">'b'</span>)</span><br><span class="line">// 2. b</span><br><span class="line">// &#123;value: <span class="string">"result"</span>, <span class="keyword">done</span>: <span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面代码是一个很直观的例子，每次通过<code>next()</code>方法向<strong>Generator函数</strong>输入值，然后打印出来。</p>
+</li>
+<li><p>如果想要第一次调用<code>next()</code>方法时，就能够输入值，可以<strong><strong>在Generator函数外面再包一层</strong></strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> wrapper(generatorFunction) &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="keyword">function</span> (...args) &#123;</span><br><span class="line">        <span class="built_in">let</span> generatorObject = generatorFunction(...args);</span><br><span class="line">        generatorObject.next();</span><br><span class="line">        <span class="built_in">return</span> generatorObject;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">const wrapped = wrapper(<span class="keyword">function</span>* () &#123;</span><br><span class="line">    console.log(`First input: <span class="variable">$&#123;yield&#125;</span>`);</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'DONE'</span>;</span><br><span class="line">&#125;);</span><br><span class="line">wrapped().next(<span class="string">'hello!'</span>)</span><br><span class="line">// First input: hello!</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面代码中，Generator函数如果不用<code>wrapper</code>先包一层，是无法第一次调用<code>next()</code>方法就输入参数的。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/异步编程/" rel="tag"><i class="fa fa-tag"></i> 异步编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/26/yield/" rel="next" title="yield 表达式">
+                <i class="fa fa-chevron-left"></i> yield 表达式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/28/block/" rel="prev" title="block，inline和inline-block的区别">
+                block，inline和inline-block的区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
