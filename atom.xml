@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-09T16:15:50.285Z</updated>
+  <updated>2018-08-09T16:23:18.550Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -21,9 +21,14 @@
     <link href="https://chongtianhong.github.io/2018/05/02/getParamsFromURL/"/>
     <id>https://chongtianhong.github.io/2018/05/02/getParamsFromURL/</id>
     <published>2018-05-01T16:11:36.000Z</published>
-    <updated>2018-08-09T16:15:50.285Z</updated>
+    <updated>2018-08-09T16:23:18.550Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>在WEB开发中，时常会用到JavaScript来获取当前页面的url网址信息，这篇文章主要介绍了JS准确获取当前页面url网址信息的多种方法，包括正则法、split拆分法等。<a id="more"></a></li></ul><h4 id="获取整个URL字符串"><a href="#获取整个URL字符串" class="headerlink" title="获取整个URL字符串"></a>获取整个URL字符串</h4><ul><li>要想获取URL中的参数，首先我们就要获取到整个URL字符串。我们使用下面这个URL为例：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xbhong.top/2018/05/01/vueSet/<span class="comment">#more?token=zhihua_wei</span></span><br></pre></td></tr></table></figure></li></ul>]]></content>
     
     <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;在WEB开发中，时常会用到JavaScript来获取当前页面的url网址信息，这篇文章主要介绍了JS准确获取当前页面url网址信息的多种方法，包括正则法、split拆分法等。
     
     </summary>
     
@@ -83,9 +88,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
       <category term="浏览器" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
     
@@ -116,9 +121,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
   </entry>
   
@@ -522,6 +527,8 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
       <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
       <category term="浏览器渲染机制" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/"/>
@@ -529,8 +536,6 @@
       <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
       <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -558,9 +563,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="HTML" scheme="https://chongtianhong.github.io/tags/HTML/"/>
     
   </entry>
   
