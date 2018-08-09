@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="在WEB开发中，时常会用到JavaScript来获取当前页面的url网址信息，这篇文章主要介绍了JS准确获取当前页面url网址信息的多种方法，包括正则法、split拆分法等。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-09T16:24:25.595Z">
+<meta property="og:updated_time" content="2018-08-09T16:29:23.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用JS准确获取URL网址中参数的几种方法">
 <meta name="twitter:description" content="在WEB开发中，时常会用到JavaScript来获取当前页面的url网址信息，这篇文章主要介绍了JS准确获取当前页面url网址信息的多种方法，包括正则法、split拆分法等。">
@@ -404,10 +404,22 @@
 </ul>
 <h4 id="获取整个URL字符串"><a href="#获取整个URL字符串" class="headerlink" title="获取整个URL字符串"></a>获取整个URL字符串</h4><ul>
 <li><p>要想获取URL中的参数，首先我们就要<strong>获取到整个URL字符串</strong>。我们使用下面这个URL为例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xbhong.top/2018/05/01/vueSet/<span class="comment">#more?token=zhihua_wei</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.xbhong.top/2018/05/01/vueSet/<span class="comment">#more?token=zhihua_wei</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>获取(或设置) URL 的协议部分：<code>window.location.protocol</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// window.location.protocol设置或获取 URL 的协议部分</span><br><span class="line">var <span class="built_in">test</span> = window.location.protocol;</span><br><span class="line">alert(<span class="built_in">test</span>);</span><br><span class="line">// 返回弹出：http</span><br></pre></td></tr></table></figure></li>
+<li><p>获取(或设置) URL 的协议部分：<code>window.location.protocol</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// window.location.protocol设置或获取 URL 的协议部分</span><br><span class="line">var <span class="built_in">test</span> = window.location.protocol;</span><br><span class="line">alert(<span class="built_in">test</span>);</span><br><span class="line">// 返回弹出：http</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取(或设置) URL 的主机部分：<code>window.location.host</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// window.location.host设置或获取 URL 的主机部分</span><br><span class="line">var <span class="built_in">test</span> = window.location.host;</span><br><span class="line">alert(<span class="built_in">test</span>);</span><br><span class="line">// 返回弹出：www.xbhong.top</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取(或设置)  URL 关联的端口号码：<code>window.location.port</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// window.location.port设置或获取与 URL 关联的端口号码</span><br><span class="line">var <span class="built_in">test</span> = window.location.port;</span><br><span class="line">alert(<span class="built_in">test</span>);</span><br><span class="line">// 返回弹出：空字符(如果采用默认的80端口(即使添加了:80)，那么返回值并不是默认的80而是空字符)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取(或设置)  URL 的路径部分也就是文件地址：<code>window.location.pathname</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// window.location.pathname设置或获取 URL 的路径部分（就是文件地址）</span><br><span class="line">var <span class="built_in">test</span> = window.location.pathname;</span><br><span class="line">alert(<span class="built_in">test</span>);</span><br><span class="line">// 返回弹出：/2018/05/01/vueSet/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取(或设置) URL属性中跟在问号后面的部分：<code>window.location.search</code></p>
+</li>
 </ul>
 
       
