@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="使用var声明的变量和不使用var声明的变量的区别 使用var声明的变量声明前调用，那么该变量的值为undefined；不使用var声明的变量声明前调用直接报错Uncaught ReferenceError：xxx is not difined； 使用var声明的变量不可delete，不使用var声明则可以delete掉释放空间。（实则浏览器的垃圾回收机制也会清理掉用var声明但是不再使用的的变量">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-12T08:30:47.887Z">
+<meta property="og:updated_time" content="2018-08-12T08:51:03.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="var与ES6中const、let声明的变量的区别">
 <meta name="twitter:description" content="使用var声明的变量和不使用var声明的变量的区别 使用var声明的变量声明前调用，那么该变量的值为undefined；不使用var声明的变量声明前调用直接报错Uncaught ReferenceError：xxx is not difined； 使用var声明的变量不可delete，不使用var声明则可以delete掉释放空间。（实则浏览器的垃圾回收机制也会清理掉用var声明但是不再使用的的变量">
@@ -415,8 +415,28 @@
 <li>如果要<strong>彻底将对象冻结（不可修改其属性）</strong>，应该使用<code>Object.freeze(obj)</code>方法。同理，数组也是一样的：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const group = [];</span><br><span class="line">group.push(<span class="string">'Bob'</span>);</span><br><span class="line">console.log(group[0]); //Bob</span><br><span class="line">group = [<span class="string">"Tom"</span>];//Uncaught TypeError: Assignment to constant variable.</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h5 id="var和let"><a href="#var和let" class="headerlink" title="var和let"></a>var和let</h5><ul>
-<li>var 和 let 就有意思了，let声明的变量声明前使用也会报错，这个与const一致；最重要的一点是let声明了一个块级作用域的变量在一个块的“}”结束的时候，该变量消失。例子：</li>
+<h5 id="let"><a href="#let" class="headerlink" title="let"></a>let</h5><ul>
+<li>由于let也不会变量提升，let声明的变量在声明前使用也会报错，这个与const一致；</li>
+<li><p>let声明了一个<strong>块级作用域</strong>的变量，在一个块的“}”结束的时候，该变量消失。例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(x,y)&#123;</span><br><span class="line">    var b = x;</span><br><span class="line">    <span class="built_in">let</span> c = y;</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        var b = 5;</span><br><span class="line">        <span class="built_in">let</span> c = 6;</span><br><span class="line">        console.log(b);  //5</span><br><span class="line">        console.log(c);  //6，这里的<span class="built_in">let</span> c在下一行的<span class="string">"&#125;"</span>之后消失</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(b);  //5</span><br><span class="line">    console.log(c);  //3 ，这里仍然是第三行的<span class="built_in">let</span> c；</span><br><span class="line">&#125;(2,3));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>let是一个比较保守的变量，因此，let声明的变量适合用于循环体中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var array1 = []，array2 = [];</span><br><span class="line"><span class="keyword">for</span>(var i = 0; i &lt; 10; i++)&#123; </span><br><span class="line">    array1[i] = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> j = 0; j &lt; 10; j++)&#123;  </span><br><span class="line">    array2[j] = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        console.log(j);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">array1[6]();  //10</span><br><span class="line">array2[6]();  //6</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代码分析：</p>
+<ul>
+<li>这里变量为<code>i</code>的for循环中，<code>i</code>是一个全局变量，<code>array1[i]</code>是一个<code>console.log(i)</code>的函数，而<code>i</code>的最终结果为10，故而每次调用<code>array1[i]</code>，实际上都是<code>console.log(10)</code>;</li>
+<li>而let作为<strong>仅在其代码块有效的变量</strong>，当前的<code>j</code>仅在本轮的循环中有效，就是说每一次循环，<code>j</code>其实都是一个新产生的变量。所以<strong>let变量适合用于循环体中</strong>。</li>
+</ul>
+</li>
+<li><p>再看一个例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var tmp = 1;</span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    tmp = 2;   //ReferenceError</span><br><span class="line">    <span class="built_in">let</span> tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这个例子中<code>tmp=2</code>的赋值会报错，因为在<strong>if块中的let对tmp变量进行了声明</strong>，导致该tmp绑定了这个作用域，而<strong>let不会像var那样“变量提升”</strong>，所以<strong>未声明赋值会报错</strong>。</p>
+</li>
+<li>ES6中明确规定：<strong>如果区块中存在let和const命令</strong>，则<strong>这个区块对这些命令声明的变量</strong>从一开始就<strong>形成了封闭作用域</strong>，只要<strong>在声明之前做任何使用，都会报错</strong>。这在语法上称为V“暂时性死区”（temporal dead zone ，简称TDZ**。<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5></li>
+<li><strong>var声明的变量为全局变量</strong>，而<strong>let，const声明的变量不为全局变量，使用window访问不到</strong>，如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">console.log(window.a); //1</span><br><span class="line"><span class="built_in">let</span> b = 2;</span><br><span class="line">console.log(window.b) //undefined</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 
       
@@ -622,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用var声明的变量和不使用var声明的变量的区别"><span class="nav-number">1.</span> <span class="nav-text">使用var声明的变量和不使用var声明的变量的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#let，var，const声明的变量的区别"><span class="nav-number">2.</span> <span class="nav-text">let，var，const声明的变量的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#const"><span class="nav-number">2.1.</span> <span class="nav-text">const</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#var和let"><span class="nav-number">2.2.</span> <span class="nav-text">var和let</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用var声明的变量和不使用var声明的变量的区别"><span class="nav-number">1.</span> <span class="nav-text">使用var声明的变量和不使用var声明的变量的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#let，var，const声明的变量的区别"><span class="nav-number">2.</span> <span class="nav-text">let，var，const声明的变量的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#const"><span class="nav-number">2.1.</span> <span class="nav-text">const</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#let"><span class="nav-number">2.2.</span> <span class="nav-text">let</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注意"><span class="nav-number">2.3.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></div>
             
 
           </div>
