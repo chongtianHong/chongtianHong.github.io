@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 计算属性是需要复杂的逻辑和很多组件基础状态最后才能得到其正确值的属性。 模板内的表达式非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-03T15:44:38.896Z">
+<meta property="og:updated_time" content="2018-08-12T07:57:57.277Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue的计算属性">
 <meta name="twitter:description" content="基本介绍 计算属性是需要复杂的逻辑和很多组件基础状态最后才能得到其正确值的属性。 模板内的表达式非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。">
@@ -459,6 +459,11 @@
 <li><p>现在再运行 <code>vm.fullName = ‘John Doe’</code> 时，setter 会被调用，<code>vm.firstName</code> 和 <code>vm.lastName</code> 也会相应地被更新。</p>
 </li>
 </ul>
+<h4 id="watch、computed和methods之间的对比"><a href="#watch、computed和methods之间的对比" class="headerlink" title="watch、computed和methods之间的对比"></a>watch、computed和methods之间的对比</h4><ul>
+<li><code>computed</code>属性的结果会被<strong>缓存</strong>，除非<strong>依赖的响应式属性变化</strong>才会<strong>重新计算</strong>。主要当做<strong>属性</strong>来使用；</li>
+<li><code>methods</code>方法表示一个具体的操作，主要<strong>书写业务逻辑</strong>；</li>
+<li><code>watch</code>一个对象，<strong>键</strong>是需要观察的表达式，<strong>值</strong>是对应回调函数。主要用来监听某些特定数据的变化，从而进行某些具体的业务逻辑操作；可以看作是<code>computed</code>和<code>methods</code>的结合体。</li>
+</ul>
 
       
     </div>
@@ -665,7 +670,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性的使用方法"><span class="nav-number">2.</span> <span class="nav-text">计算属性的使用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性缓存-vs-方法"><span class="nav-number">3.</span> <span class="nav-text">计算属性缓存 vs 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性-vs-侦听属性"><span class="nav-number">4.</span> <span class="nav-text">计算属性 vs 侦听属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性的-setter"><span class="nav-number">5.</span> <span class="nav-text">计算属性的 setter</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性的使用方法"><span class="nav-number">2.</span> <span class="nav-text">计算属性的使用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性缓存-vs-方法"><span class="nav-number">3.</span> <span class="nav-text">计算属性缓存 vs 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性-vs-侦听属性"><span class="nav-number">4.</span> <span class="nav-text">计算属性 vs 侦听属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算属性的-setter"><span class="nav-number">5.</span> <span class="nav-text">计算属性的 setter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#watch、computed和methods之间的对比"><span class="nav-number">6.</span> <span class="nav-text">watch、computed和methods之间的对比</span></a></li></ol></div>
             
 
           </div>
