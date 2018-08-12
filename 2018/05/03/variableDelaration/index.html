@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="let，var，const声明的变量的区别使用var声明的变量和不使用var声明的变量的区别 使用var声明的变量声明前调用，那么该变量的值为undefined；不使用var声明的变量声明前调用直接报错Uncaught ReferenceError：xxx is not difined； 使用var声明的变量不可delete，不使用var声明则可以delete掉释放空间。（实则浏览器的垃圾回收机制">
+<meta name="description" content="在ES6之前，JavaScript是没有块级作用域的，如果在块内使用var声明一个变量，它在代码块外面仍旧是可见的。  ES6规范给开发者带来了块级作用域，let和const添加了块级作用域。">
 <meta name="keywords" content="开发,JavaScript,ES6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="var与ES6中const、let声明的变量的区别">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/05/03/variableDelaration/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="let，var，const声明的变量的区别使用var声明的变量和不使用var声明的变量的区别 使用var声明的变量声明前调用，那么该变量的值为undefined；不使用var声明的变量声明前调用直接报错Uncaught ReferenceError：xxx is not difined； 使用var声明的变量不可delete，不使用var声明则可以delete掉释放空间。（实则浏览器的垃圾回收机制">
+<meta property="og:description" content="在ES6之前，JavaScript是没有块级作用域的，如果在块内使用var声明一个变量，它在代码块外面仍旧是可见的。  ES6规范给开发者带来了块级作用域，let和const添加了块级作用域。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-12T09:10:47.130Z">
+<meta property="og:updated_time" content="2018-08-12T09:24:57.875Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="var与ES6中const、let声明的变量的区别">
-<meta name="twitter:description" content="let，var，const声明的变量的区别使用var声明的变量和不使用var声明的变量的区别 使用var声明的变量声明前调用，那么该变量的值为undefined；不使用var声明的变量声明前调用直接报错Uncaught ReferenceError：xxx is not difined； 使用var声明的变量不可delete，不使用var声明则可以delete掉释放空间。（实则浏览器的垃圾回收机制">
+<meta name="twitter:description" content="在ES6之前，JavaScript是没有块级作用域的，如果在块内使用var声明一个变量，它在代码块外面仍旧是可见的。  ES6规范给开发者带来了块级作用域，let和const添加了块级作用域。">
 
 
 
@@ -398,25 +398,22 @@
       
 
       
-        <h4 id="let，var，const声明的变量的区别"><a href="#let，var，const声明的变量的区别" class="headerlink" title="let，var，const声明的变量的区别"></a>let，var，const声明的变量的区别</h4><h5 id="使用var声明的变量和不使用var声明的变量的区别"><a href="#使用var声明的变量和不使用var声明的变量的区别" class="headerlink" title="使用var声明的变量和不使用var声明的变量的区别"></a>使用var声明的变量和不使用var声明的变量的区别</h5><ul>
+        <ul>
+<li>在ES6之前，JavaScript是没有块级作用域的，如果在块内使用var声明一个变量，它在代码块外面仍旧是可见的。 </li>
+<li>ES6规范给开发者带来了块级作用域，let和const添加了块级作用域。<a id="more"></a></li>
+<li>let和const大大改进了ES5的变量机制，使得JS更严谨和规范：<ul>
+<li>let和const<strong>约束了变量提升</strong>。</li>
+<li>let和const有<strong>暂时性死区</strong>。</li>
+<li>let和const<strong>禁止重复声明变量</strong>。</li>
+<li>let和const<strong>不会成为全局对象的属性</strong>。</li>
+<li>特别的是，<strong>const声明的变量不能重新赋值</strong>，也是由于这个规则，<strong>const变量声明时必须初始化</strong>，不能留到以后赋值。</li>
+</ul>
+</li>
+</ul>
+<h4 id="let，var，const声明的变量的区别"><a href="#let，var，const声明的变量的区别" class="headerlink" title="let，var，const声明的变量的区别"></a>let，var，const声明的变量的区别</h4><h5 id="使用var声明的变量和不使用var声明的变量的区别。"><a href="#使用var声明的变量和不使用var声明的变量的区别。" class="headerlink" title="使用var声明的变量和不使用var声明的变量的区别。"></a>使用var声明的变量和不使用var声明的变量的区别。</h5><ul>
 <li>使用var声明的变量声明前调用，那么该变量的值为undefined；不使用var声明的变量声明前调用直接报错Uncaught ReferenceError：xxx is not difined；</li>
 <li>使用var声明的变量不可delete，不使用var声明则可以delete掉释放空间。（实则浏览器的垃圾回收机制也会清理掉用var声明但是不再使用的的变量，比如某个仅执行一次的函数中被调用的某个var 声明的变量）</li>
 <li>在使用’use strict’的模式之下，不使用var 声明变量的语法是不被允许的，报错：Uncaugth SyntaxError;<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">console.log(a);   //undefined，这里还涉及变量提升的概念</span><br><span class="line">console.log(b);   //报错 Uncaught ReferenceError: b is not defined</span><br><span class="line">var a = 1;</span><br><span class="line">b = 2;</span><br><span class="line">console.log(a);   //1</span><br><span class="line">console.log(b);   //2</span><br><span class="line">delete a;</span><br><span class="line">delete b;</span><br><span class="line">console.log(a);   //1</span><br><span class="line">console.log(b);   //报错 Uncaught ReferenceError: b is not defined,可见b在声明前使用和声明后delete再使用是一样的结果</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="const"><a href="#const" class="headerlink" title="const"></a>const</h5><ul>
-<li>const是常量的意思，也就是说<strong>只能被定义一次</strong>，且<strong>不可再改变</strong>，否则就会报错：<code>Uncaught TypeError: Assignment to constant variable</code>。</li>
-<li><p>const定义的变量不可以修改，而且必须初始化：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const b = 2;//正确</span><br><span class="line">// const b;//错误，必须初始化</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>另外，由于const不会变量提升，所以<strong>在声明前使用也会报错</strong>：<code>Uncaught ReferenceError: a is not defined</code>。</p>
-</li>
-<li><p>看一个例子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const foo = &#123;&#125;;</span><br><span class="line">foo.prop = 123;</span><br><span class="line">console.log(foo.prop);  //123</span><br><span class="line">foo.prop = 456;</span><br><span class="line">console.log(foo.prop);  //456</span><br><span class="line">const foo = &#123;&#125;;   //Identifier <span class="string">'foo'</span> has already been declared</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>这里const定义一个foo之后，对其添加了属性prop，随后又对该属性进行了修改，<strong>没有报错</strong>是因为<strong>常量foo本身存储的是一个地址</strong>，<strong>该地址指向一个对象</strong>，<strong>不可变的是foo这个地址</strong>，即不能把foo指向另一个地址，但<strong>对象本身是可变的</strong>，所以依然可以为foo添加新属性，改变新属性值，而最后一行中尝试改变foo的地址，就会报错。</p>
-</li>
-<li>如果要<strong>彻底将对象冻结（不可修改其属性）</strong>，应该使用<code>Object.freeze(obj)</code>方法。同理，数组也是一样的：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const group = [];</span><br><span class="line">group.push(<span class="string">'Bob'</span>);</span><br><span class="line">console.log(group[0]); //Bob</span><br><span class="line">group = [<span class="string">"Tom"</span>];//Uncaught TypeError: Assignment to constant variable.</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="let"><a href="#let" class="headerlink" title="let"></a>let</h5><blockquote>不存在变量提升</blockquote>
@@ -464,6 +461,35 @@
 <h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><ul>
 <li><strong>var声明的变量为全局变量</strong>，而<strong>let，const声明的变量不为全局变量，使用window访问不到</strong>，如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">console.log(window.a); //1</span><br><span class="line"><span class="built_in">let</span> b = 2;</span><br><span class="line">console.log(window.b) //undefined</span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+<h5 id="const"><a href="#const" class="headerlink" title="const"></a>const</h5><blockquote>声明一个只读的常量</blockquote>
+
+<ul>
+<li>const 声明一个<strong>只读</strong>的常量，<strong>一旦声明，常量的值就不允许改变</strong>，否则就会报错：<code>Uncaught TypeError: Assignment to constant variable</code>。</li>
+<li><p><strong>const定义的变量</strong>不可以修改，而且<strong>必须初始化</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const b = 2;// 正确</span><br><span class="line">// const b;// 错误，必须初始化 </span><br><span class="line"></span><br><span class="line">const a = 1; </span><br><span class="line">a = 2; </span><br><span class="line">console.log(a);  //报错</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对于<strong>复合类型的变量</strong>，比如<strong>数组</strong>，<strong>存储的是一个地址，不可改变的是这个地址</strong>，即<strong>不能把一个地址指向另一个地址</strong>，但是<strong>对象本身是可变的</strong>，比如<strong>可以给它添加新的属性</strong>。看一个例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const foo = &#123;&#125;;</span><br><span class="line">foo.prop = 123;</span><br><span class="line">console.log(foo.prop);  //123</span><br><span class="line">foo.prop = 456;</span><br><span class="line">console.log(foo.prop);  //456</span><br><span class="line">const foo = &#123;&#125;;   //Identifier <span class="string">'foo'</span> has already been declared</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这里const定义一个foo之后，对其添加了属性prop，随后又对该属性进行了修改，<strong>没有报错</strong>是因为<strong>常量foo本身存储的是一个地址</strong>，<strong>该地址指向一个对象</strong>，<strong>不可变的是foo这个地址</strong>，即不能把foo指向另一个地址，但<strong>对象本身是可变的</strong>，所以依然可以为foo添加新属性，改变新属性值，而最后一行中尝试改变foo的地址，就会报错。</p>
+</li>
+<li><p>如果要<strong>彻底将对象冻结（不可修改其属性）</strong>，应该使用<code>Object.freeze(obj)</code>方法。同理，数组也是一样的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const group = [];</span><br><span class="line">group.push(<span class="string">'Bob'</span>);</span><br><span class="line">console.log(group[0]); //Bob</span><br><span class="line">group = [<span class="string">"Tom"</span>];//Uncaught TypeError: Assignment to constant variable.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>另外，由于<strong>const不会变量提升</strong>，所以<strong>在声明前使用也会报错</strong>：<code>Uncaught ReferenceError: a is not defined</code>。</p>
+</li>
+</ul>
+<blockquote>块级作用域</blockquote>
+
+<ul>
+<li>const的作用域与let命令相同；只在声明所在的块级作用域内有效：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    const aa = 1;</span><br><span class="line">&#125; </span><br><span class="line">console.log(aa);  // 报错</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>不允许重复声明</blockquote>
+
+<ul>
+<li>和let一样，const不允许在相同作用域内，重复声明同一个变量：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var message = <span class="string">"Hello!"</span>;</span><br><span class="line"><span class="built_in">let</span> age = 25;</span><br><span class="line">// 以下两行都会报错</span><br><span class="line">const message = <span class="string">"Goodbye!"</span>;</span><br><span class="line">const age = 30;</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -669,7 +695,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#let，var，const声明的变量的区别"><span class="nav-number">1.</span> <span class="nav-text">let，var，const声明的变量的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用var声明的变量和不使用var声明的变量的区别"><span class="nav-number">1.1.</span> <span class="nav-text">使用var声明的变量和不使用var声明的变量的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#const"><span class="nav-number">1.2.</span> <span class="nav-text">const</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#let"><span class="nav-number">1.3.</span> <span class="nav-text">let</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注意"><span class="nav-number">1.4.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#let，var，const声明的变量的区别"><span class="nav-number">1.</span> <span class="nav-text">let，var，const声明的变量的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用var声明的变量和不使用var声明的变量的区别。"><span class="nav-number">1.1.</span> <span class="nav-text">使用var声明的变量和不使用var声明的变量的区别。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#let"><span class="nav-number">1.2.</span> <span class="nav-text">let</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注意"><span class="nav-number">1.3.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#const"><span class="nav-number">1.4.</span> <span class="nav-text">const</span></a></li></ol></li></ol></div>
             
 
           </div>
