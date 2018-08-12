@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,Array,JavaScript," />
+  <meta name="keywords" content="CSS,开发," />
 
 
 
@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="在 JavaScript 中提供了如下四种循环遍历数组元素的方式： for：循环遍历数组元素最简单的方式。 for-in：循环遍历对象的属性。 forEach：调用数组的每个元素，并将元素传递给回调函数。 for-of：循环遍历集合对象的属性值。">
-<meta name="keywords" content="开发,Array,JavaScript">
+<meta name="description" content="前言 在前端开发过程中，经常会遇到文字超过一行内容的情况，要求隐藏超出部分并且以省略号显示。">
+<meta name="keywords" content="CSS,开发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript 中的循环数组遍历">
-<meta property="og:url" content="https://chongtianhong.github.io/2018/03/13/array1/index.html">
+<meta property="og:title" content="css控制超出一行内容显示省略号">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/08/12/textOverflow/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="在 JavaScript 中提供了如下四种循环遍历数组元素的方式： for：循环遍历数组元素最简单的方式。 for-in：循环遍历对象的属性。 forEach：调用数组的每个元素，并将元素传递给回调函数。 for-of：循环遍历集合对象的属性值。">
+<meta property="og:description" content="前言 在前端开发过程中，经常会遇到文字超过一行内容的情况，要求隐藏超出部分并且以省略号显示。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-23T14:42:38.022Z">
+<meta property="og:updated_time" content="2018-08-12T10:07:05.602Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript 中的循环数组遍历">
-<meta name="twitter:description" content="在 JavaScript 中提供了如下四种循环遍历数组元素的方式： for：循环遍历数组元素最简单的方式。 for-in：循环遍历对象的属性。 forEach：调用数组的每个元素，并将元素传递给回调函数。 for-of：循环遍历集合对象的属性值。">
+<meta name="twitter:title" content="css控制超出一行内容显示省略号">
+<meta name="twitter:description" content="前言 在前端开发过程中，经常会遇到文字超过一行内容的情况，要求隐藏超出部分并且以省略号显示。">
 
 
 
@@ -164,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="https://chongtianhong.github.io/2018/03/13/array1/"/>
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/08/12/textOverflow/"/>
 
 
 
 
 
-  <title>JavaScript 中的循环数组遍历 | Ice's Blog</title>
+  <title>css控制超出一行内容显示省略号 | Ice's Blog</title>
   
 
 
@@ -309,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/03/13/array1/">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/08/12/textOverflow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaobing Hong">
@@ -326,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript 中的循环数组遍历</h1>
+          <h1 class="post-title" itemprop="name headline">css控制超出一行内容显示省略号</h1>
         
 
         <div class="post-meta">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T23:25:36+08:00">
-                2018-03-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T17:34:33+08:00">
+                2018-08-12
               </time>
             
 
@@ -398,64 +398,116 @@
       
 
       
-        <ul>
-<li>在 JavaScript 中提供了如下四种循环遍历数组元素的方式：<ul>
-<li><code>for</code>：循环遍历数组元素最简单的方式。</li>
-<li><code>for-in</code>：循环遍历对象的<strong>属性</strong>。</li>
-<li><code>forEach</code>：调用数组的每个元素，并将元素传递给回调函数。</li>
-<li><code>for-of</code>：循环遍历集合对象的<strong>属性值</strong>。<a id="more"></a>
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li>在前端开发过程中，经常会遇到<strong>文字超过一行内容</strong>的情况，要求<strong>隐藏超出部分</strong>并且<strong>以省略号显示</strong>。<a id="more"></a>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4></li>
+<li><p>使用以下CSS代码即可解决这个需求：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">white-space: nowrap; /*规定段落中的文本不进行换行*/</span><br><span class="line">overflow: hidden; /*内容会被修剪，并且其余内容是不可见的。*/</span><br><span class="line">text-overflow: ellipsis; /*显示省略号来代表被修剪的文本*/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来具体来看这三个CSS属性的用法。</p>
 </li>
 </ul>
-</li>
+<h5 id="white-space属性"><a href="#white-space属性" class="headerlink" title="white-space属性"></a>white-space属性</h5><h6 id="定义和用法："><a href="#定义和用法：" class="headerlink" title="定义和用法："></a>定义和用法：</h6><ul>
+<li>white-space属性设置如何处理元素内的空白。</li>
 </ul>
-<blockquote>for</blockquote>
-
-<ul>
-<li>这是循环遍历数组元素最简单的方式。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    console.log(arr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">值</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">默认值。空白被浏览器忽略</td>
+</tr>
+<tr>
+<td style="text-align:center">pre</td>
+<td style="text-align:center">空白会被浏览器保留。其行为方式类似于HTML中的pre标签</td>
+</tr>
+<tr>
+<td style="text-align:center">nowrap</td>
+<td style="text-align:center">文本不会换行，在同一行上继续，直到遇到br标签为止</td>
+</tr>
+<tr>
+<td style="text-align:center">pre-wrap</td>
+<td style="text-align:center">保留空白符序列，但是正常地进行换行</td>
+</tr>
+<tr>
+<td style="text-align:center">pre-line</td>
+<td style="text-align:center">合并空白符序列，但是保留换行符</td>
+</tr>
+<tr>
+<td style="text-align:center">inherit</td>
+<td style="text-align:center">规定应该从父元素继承white-space属性的值</td>
+</tr>
+</tbody>
+</table>
+<h6 id="浏览器支持："><a href="#浏览器支持：" class="headerlink" title="浏览器支持："></a>浏览器支持：</h6><ul>
+<li>所有浏览器<strong>都支持</strong>white-space属性。</li>
+<li><strong>注释</strong>：任何版本的Internet Explorer（包括IE8）都不支持属性值“inherit”。</li>
 </ul>
-<blockquote>for-in</blockquote>
-
-<ul>
-<li><p>for-in 语句以任意顺序（即显示顺序不是可控的）<strong>遍历一个对象的</strong>可枚举<strong>属性</strong>:</p>
-<ul>
-<li>对于<strong>数组</strong>即是<strong>数组下标</strong>，对于<strong>对象</strong>即是<strong>对象的 key 值</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var index <span class="keyword">in</span> myArray) &#123;</span><br><span class="line">    console.log(myArray[index]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<h5 id="overflow属性"><a href="#overflow属性" class="headerlink" title="overflow属性"></a>overflow属性</h5><h6 id="定义和用法：-1"><a href="#定义和用法：-1" class="headerlink" title="定义和用法："></a>定义和用法：</h6><ul>
+<li>overflow属性规定<strong>当内容溢出元素框时</strong>发生的事情。</li>
 </ul>
-</li>
-<li><p><strong>不推荐</strong>使用 for-in 语句。</p>
-</li>
-<li><p>注意：for-in 遍历返回的对象属性都是<strong>字符串类型</strong>，即使是数组下标，也是字符串 “0”, “1”, “2” 等等。如果使用字符串的 index 去参与某些运算（”2” + 1 == “21”），运算结果可能会不符合预期。例如以下代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var myArray=[1,2,3,4,5];</span><br><span class="line"><span class="keyword">for</span> (var index <span class="keyword">in</span> myArray) &#123; </span><br><span class="line">    console.log(index+1); // 01 11 21 31 41</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>还有一个缺点是不仅数组本身的元素将被遍历到，用户自己为数组添加的一些属性也会被遍历到，甚至数组原型链上的属性也可能被遍历到。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var myArray=new Array(1,2,3,4,5);</span><br><span class="line">myArray.name=<span class="string">"hello"</span>;</span><br><span class="line">Array.prototype.method=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    console.log(<span class="string">"world"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (var index <span class="keyword">in</span> myArray) &#123;</span><br><span class="line">    console.log(index); // 0 1 2 3 4 name method</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>for-in 设计的目的是用于<strong>遍历包含键值对的对象</strong>，对数组并不是那么友好。 </p>
-</li>
-<li>遍历数组的话还是用es6的for-of循环遍历比较好。</li>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">值</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">visible</td>
+<td style="text-align:center">默认值。内容不会被修剪，会呈现在元素框之外</td>
+</tr>
+<tr>
+<td style="text-align:center">hidden</td>
+<td style="text-align:center">内容会被修剪，并且超出内容是不可见的</td>
+</tr>
+<tr>
+<td style="text-align:center">scroll</td>
+<td style="text-align:center">内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容</td>
+</tr>
+<tr>
+<td style="text-align:center">auto</td>
+<td style="text-align:center">如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容</td>
+</tr>
+<tr>
+<td style="text-align:center">inherit</td>
+<td style="text-align:center">规定应该从父元素继承overflow属性的值</td>
+</tr>
+</tbody>
+</table>
+<h5 id="text-overflow属性"><a href="#text-overflow属性" class="headerlink" title="text-overflow属性"></a>text-overflow属性</h5><h6 id="定义和用法：-2"><a href="#定义和用法：-2" class="headerlink" title="定义和用法："></a>定义和用法：</h6><ul>
+<li>text-overflow 属性规定<strong>当文本溢出包含元素时</strong>发生的事情。</li>
 </ul>
-<blockquote>for-of</blockquote>
-
-<ul>
-<li><p>for-of 语句为各种 collection 集合对象专门定制的，遍历集合对象的<strong>属性值</strong>，注意和 for-in 的区别。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var value of myArray) &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>for-of和for-in的区别：</p>
-<ul>
-<li>推荐在循环<strong>对象属性</strong>的时候，使用<code>for…in</code>，在<strong>遍历数组</strong>的时候的时候使用<code>for…of</code>。</li>
-<li><code>for…in</code>循环出的是<code>key</code>，<code>for…of</code>循环出的是<code>value</code>。</li>
-<li>注意，<code>for…of</code>是ES6新引入的特性。修复了ES5引入的<code>for…in</code>的不足。</li>
-<li><code>for…of</code>不能循环普通的对象，需要通过和<code>Object.keys()</code>搭配使用。</li>
-</ul>
-</li>
-</ul>
-<blockquote>forEach</blockquote>
-
-<ul>
-<li>forEach 方法用于<strong>调用数组的每个元素</strong>，并<strong>将元素传递给回调函数</strong>；</li>
-<li>注意：在回调函数中<strong>无法使用 break 跳出当前循环</strong>，也<strong>无法使用 return 返回值</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myArray.forEach(<span class="keyword">function</span> (value) &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">值</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">clip</td>
+<td style="text-align:center">修剪文本</td>
+</tr>
+<tr>
+<td style="text-align:center">ellipsis</td>
+<td style="text-align:center">显示省略符号来代表被修剪的文本</td>
+</tr>
+<tr>
+<td style="text-align:center">string</td>
+<td style="text-align:center">使用给定字符串来代替被修剪文本</td>
+</tr>
+</tbody>
+</table>
+<h6 id="浏览器支持：-1"><a href="#浏览器支持：-1" class="headerlink" title="浏览器支持："></a>浏览器支持：</h6><ul>
+<li>所有主流浏览器<strong>都支持</strong>text-overflow属性。</li>
 </ul>
 
       
@@ -484,11 +536,9 @@
       
         <div class="post-tags">
           
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+          
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
-          
-            <a href="/tags/Array/" rel="tag"><i class="fa fa-tag"></i> Array</a>
-          
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
         </div>
       
@@ -501,8 +551,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/12/commonjs/" rel="next" title="CommonJS 与 ES6 Modules的区别">
-                <i class="fa fa-chevron-left"></i> CommonJS 与 ES6 Modules的区别
+              <a href="/2018/05/03/variableDelaration/" rel="next" title="var与ES6中const、let声明的变量的区别">
+                <i class="fa fa-chevron-left"></i> var与ES6中const、let声明的变量的区别
               </a>
             
           </div>
@@ -510,10 +560,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/14/multiprocessing/" rel="prev" title="Node.js中的多进程">
-                Node.js中的多进程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -565,8 +611,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -646,6 +701,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法"><span class="nav-number">2.</span> <span class="nav-text">解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#white-space属性"><span class="nav-number">2.1.</span> <span class="nav-text">white-space属性</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#定义和用法："><span class="nav-number">2.1.1.</span> <span class="nav-text">定义和用法：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#浏览器支持："><span class="nav-number">2.1.2.</span> <span class="nav-text">浏览器支持：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#overflow属性"><span class="nav-number">2.2.</span> <span class="nav-text">overflow属性</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#定义和用法：-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">定义和用法：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#text-overflow属性"><span class="nav-number">2.3.</span> <span class="nav-text">text-overflow属性</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#定义和用法：-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">定义和用法：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#浏览器支持：-1"><span class="nav-number">2.3.2.</span> <span class="nav-text">浏览器支持：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
