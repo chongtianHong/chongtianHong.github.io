@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 JavaScript是单线程语言，也就是说一次就只能做一件事情。如果有多个任务，则需要进行排队，因此有了同步任务和异步任务之分。 同步任务：在主线程上排队执行的任务，前一个任务执行完毕，才能执行后一个任务。 异步任务：不进入主线程、而进入“任务队列”（task queue）的任务，只有“任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。 只要主线程空了，就会去读取“任务">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-13T15:03:29.031Z">
+<meta property="og:updated_time" content="2018-08-13T15:07:54.299Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事件循环中microtask和macrotask的优先级比较">
 <meta name="twitter:description" content="前言 JavaScript是单线程语言，也就是说一次就只能做一件事情。如果有多个任务，则需要进行排队，因此有了同步任务和异步任务之分。 同步任务：在主线程上排队执行的任务，前一个任务执行完毕，才能执行后一个任务。 异步任务：不进入主线程、而进入“任务队列”（task queue）的任务，只有“任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。 只要主线程空了，就会去读取“任务">
@@ -412,8 +412,8 @@
 </ul>
 </li>
 <li>我们之前说的<strong>异步任务队列</strong>，指的是<code>macro-task</code>。而<code>micro-task</code>的执行顺序，与之不同。<ul>
-<li>一个事件循环(event loop)会有一个或多个任务队列(task queue)。任务队列(task queue)就是<code>macro-task queue</code>。</li>
-<li>每一个事件循环(event loop)都有一个<code>micro-task queue</code>。任务队列(task queue) == <code>macro-task queue</code> != <code>micro-task queue</code>。</li>
+<li>一个<strong>事件循环(event loop)</strong>会有一个或多个<strong>任务队列(task queue)</strong>。<strong>任务队列(task queue)</strong>就是<code>macro-task queue</code>。</li>
+<li>每一个<strong>事件循环(event loop)</strong>都有一个<code>micro-task queue</code>。<strong>任务队列(task queue)</strong> == <code>macro-task queue</code> != <code>micro-task queue</code>。</li>
 <li>一个任务(task)可以放入<code>macro-task queue</code>也可以放入<code>micro-task queue</code>中。</li>
 </ul>
 </li>
