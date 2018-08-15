@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-14T13:16:34.418Z</updated>
+  <updated>2018-08-15T13:38:34.545Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript的三种类型检测的比较</title>
+    <link href="https://chongtianhong.github.io/2018/05/09/typeChecking/"/>
+    <id>https://chongtianhong.github.io/2018/05/09/typeChecking/</id>
+    <published>2018-05-09T09:37:13.000Z</published>
+    <updated>2018-08-15T13:38:34.545Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>在JavaScript中，可使用<code>typeof</code>、<code>instanceof</code>、<code>Object.prototype.toString</code>对变量类型进行检测，接下来将对它们进行比较。<a id="more"></a></li></ul><h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4><ul><li><code>typeof</code>是JavaScript的一个<strong>一元运算符</strong>，放在一个运算数之前，运算数可以是任意类型。</li><li><code>typeof</code>返回一个<strong>用来表示表达式的数据类型的字符串</strong>，返回结果为JavaScript中的<strong>基本数据类型</strong>，包括：<code>number</code>、<code>boolean</code>、<code>string</code>、<code>object</code>、<code>undefined</code>、<code>function</code>等6种数据类型。</li><li>也就是说，<code>typeof</code>只能返回这几种类型，而<strong>对于</strong>我们的<strong>自定义对象</strong>，它<strong>只会返回object</strong>，在实际应用中作用约等于零。</li><li>此外，<code>typeof</code>在不同浏览器中<strong>可能存在一些兼容性的问题</strong>，如将function类型认作是object等。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">console.log(typeof <span class="string">''</span>);//string</span><br><span class="line">console.log(typeof []);//object</span><br><span class="line">console.log(typeof &#123;&#125;);//object</span><br><span class="line">console.log(typeof 1);//number</span><br><span class="line">console.log(typeof null);//object</span><br><span class="line">console.log(typeof undefined);//undefined</span><br><span class="line">console.log(typeof <span class="literal">true</span>);//boolean</span><br><span class="line">console.log(typeof <span class="function"><span class="title">function</span></span>()&#123;&#125;);//<span class="keyword">function</span></span><br><span class="line">console.log(typeof /\d/);//object</span><br></pre></td></tr></table></figure></li></ul><h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><ul><li>在使用<code>typeof</code>运算符对<strong>引用类型变量</strong>进行类型判断时，会出现一个问题，无论引用的是什么类型的对象，它<strong>都返回 “object”</strong>。这就需要用到<code>instanceof</code>来<strong>检测某个对象是不是另一个对象的实例</strong>。</li><li><code>instanceof</code>主要的目的是用来检测<strong>引用类型</strong>，如判断Array、RegExp、日期对象等。</li><li><code>instanceof</code>操作符采用了<strong>原型链方式</strong>来判断对象类型。</li><li><p>如 a instanceof b只要能在a对象的原型链上找到b，则认为a是b类型的一个对象。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a=new Array();</span><br><span class="line">alert(a instanceof Array); // <span class="literal">true</span>，</span><br><span class="line">// 同时 </span><br><span class="line">alert(a instanceof Object) // 也会返回 <span class="literal">true</span>;</span><br><span class="line">// 因为 Array 是 object 的子类。</span><br></pre></td></tr></table></figure></li><li><p>再如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">test</span></span>()&#123;&#125;;</span><br><span class="line">var a = new <span class="built_in">test</span>();</span><br><span class="line">alert(a instanceof <span class="built_in">test</span>) // 会返回<span class="literal">true</span></span><br></pre></td></tr></table></figure></li></ul><blockquote>关于null的类型判断</blockquote><ul><li><strong>null是个特殊的Object类型的值</strong>，表示空引用的意思 。但<code>typeof null</code>返回<strong>“object”</strong>这个其实是最初JavaScript的实现的一个错误，然后被ECMAScript沿用了，成为了现在的标准，不过我们可以<strong>把null理解为尚未存在的对象的占位符</strong>。</li><li>注意：<code>null instanceof Object</code>会返回<strong>false</strong>。</li></ul><h4 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h4><ul><li><code>Object.prototype.toString</code>是对象的一个原生原型扩展函数，用来<strong>精确的区分数据类型</strong>。</li><li>使用<code>Object.prototype.toString.call(value)</code>方法去调用对象，可得到对象的构造函数名。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">type</span>=Object.prototype.toString</span><br><span class="line">console.log(type.call(<span class="string">''</span>));//object String</span><br><span class="line">console.log(type.call([]));//object Array</span><br><span class="line">console.log(type.call(&#123;&#125;));//object Object</span><br><span class="line">console.log(type.call(<span class="literal">false</span>));//object Boolean</span><br><span class="line">console.log(type.call(null));//object Null</span><br><span class="line">console.log(type.call(undefined));//object Undefined</span><br><span class="line">console.log(type.call(<span class="function"><span class="title">function</span></span>()&#123;&#125;));//object Function</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;在JavaScript中，可使用&lt;code&gt;typeof&lt;/code&gt;、&lt;code&gt;instanceof&lt;/code&gt;、&lt;code&gt;Object.prototype.toString&lt;/code&gt;对变量类型进行检测，接下来将对它们进行比较。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="类型检测" scheme="https://chongtianhong.github.io/tags/%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>HTTP 协议入门</title>
@@ -157,9 +184,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -263,9 +290,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="浏览器" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
     
@@ -296,9 +323,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -554,36 +581,6 @@
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Date" scheme="https://chongtianhong.github.io/tags/Date/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript中filter的用法</title>
-    <link href="https://chongtianhong.github.io/2018/04/18/filter/"/>
-    <id>https://chongtianhong.github.io/2018/04/18/filter/</id>
-    <published>2018-04-18T07:37:48.000Z</published>
-    <updated>2018-08-13T15:23:17.736Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul><li>filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。</li><li>filter是数组的一个常用的操作，它用于<strong>把Array的某些元素过滤掉</strong>，然后<strong>返回剩下的元素</strong>。</li><li><strong>注意</strong>： filter() <strong>不会对空数组进行检测</strong>。</li><li><strong>注意</strong>： filter() <strong>不会改变原始数组</strong>。<a id="more"></a></li><li>和map()类似，Array的filter()也接收一个函数。</li><li>和map()不同的是，filter()把传入的函数依次作用于每个元素，然后根据返回值是true还是false决定保留还是丢弃该元素。</li><li><p>例如，在一个Array中，<strong>删掉偶数，只保留奇数</strong>，可以这么写：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1, 2, 4, 5, 6, 9, 10, 15];</span><br><span class="line">var result = arr.filter(<span class="keyword">function</span> (x) &#123;</span><br><span class="line">    <span class="built_in">return</span> x % 2 !== 0;</span><br><span class="line">&#125;);</span><br><span class="line">console.log(result); // [1, 5, 9, 15]</span><br></pre></td></tr></table></figure></li><li><p>把一个Array中的空字符串删掉，可以这么写：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr = [<span class="string">'A'</span>, <span class="string">''</span>, <span class="string">'B'</span>, null, undefined, <span class="string">'C'</span>, <span class="string">'  '</span>];</span><br><span class="line">var result = arr.filter(<span class="keyword">function</span> (s) &#123;</span><br><span class="line">    <span class="built_in">return</span> s &amp;&amp; s.trim(); // 注意：IE9以下的版本没有trim()方法</span><br><span class="line">&#125;);</span><br><span class="line">console.log(result); // [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>]</span><br></pre></td></tr></table></figure></li><li><p>可见，用filter()这个<strong>高阶函数</strong>，关键在于正确实现一个<strong>“筛选”函数</strong>。</p></li></ul><h4 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h4><ul><li>filter()接收的回调函数，其实可以有多个参数。通常我们仅使用第一个参数，表示<strong>Array的某个元素</strong>。回调函数还可以接收另外两个参数，表示<strong>元素的位置</strong>和<strong>数组本身</strong>：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var arr = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>];</span><br><span class="line">var r = arr.filter(<span class="keyword">function</span> (element, index, self) &#123;</span><br><span class="line">    console.log(element); // 依次打印<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span></span><br><span class="line">    console.log(index); // 依次打印0, 1, 2</span><br><span class="line">    console.log(self); // self就是变量arr</span><br><span class="line">    <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li></ul><blockquote>去除Array的重复元素</blockquote><ul><li><p>利用filter，可以巧妙地去除Array的重复元素：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line"></span><br><span class="line">var result;</span><br><span class="line">var arr = [<span class="string">'apple'</span>, <span class="string">'strawberry'</span>, <span class="string">'banana'</span>, <span class="string">'pear'</span>, <span class="string">'apple'</span>, <span class="string">'orange'</span>, <span class="string">'orange'</span>, <span class="string">'strawberry'</span>];</span><br><span class="line">result = arr.filter(<span class="keyword">function</span> (element, index, self) &#123;</span><br><span class="line">    <span class="built_in">return</span> self.indexOf(element) === index;</span><br><span class="line">&#125;);</span><br><span class="line">console.log(result.toString()); // <span class="string">"apple,strawberry,banana,pear,orange"</span></span><br></pre></td></tr></table></figure></li><li><p>去除重复元素依靠的是<strong>indexOf总是返回第一个元素的位置</strong>，后续的重复元素位置与indexOf返回的位置不相等，因此被filter滤掉了。</p></li></ul><blockquote>筛选出素数</blockquote><ul><li><p>可以尝试用filter()筛选出素数：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> get_primes(arr) &#123;</span><br><span class="line">    var i;</span><br><span class="line">    <span class="built_in">return</span> arr.filter(<span class="keyword">function</span>(element) &#123;  </span><br><span class="line">            var flag = <span class="literal">true</span>;  </span><br><span class="line">            <span class="keyword">if</span>(element &lt; 2)&#123;  </span><br><span class="line">            flag = <span class="literal">false</span>;  </span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;  </span><br><span class="line">            <span class="keyword">for</span>(var i = 2; i &lt; element; i++)&#123;  </span><br><span class="line">                <span class="keyword">if</span> (element % i == 0)&#123;  </span><br><span class="line">                    flag = <span class="literal">false</span>;  </span><br><span class="line">                    <span class="built_in">break</span>;  </span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="built_in">return</span> flag;  </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 测试:</span><br><span class="line">var result;</span><br><span class="line">var arr = [];</span><br><span class="line"><span class="keyword">for</span> (var x = 1; x &lt; 100; x++) &#123;</span><br><span class="line">    arr.push(x);</span><br><span class="line">&#125;</span><br><span class="line">result = get_primes(arr);</span><br><span class="line"><span class="keyword">if</span> (result.toString() === [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97].toString()) &#123;</span><br><span class="line">    console.log(<span class="string">'测试通过!'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    console.log(<span class="string">'测试失败: '</span> + result.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>运行结果：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">测试通过!</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;基本介绍&quot;&gt;&lt;a href=&quot;#基本介绍&quot; class=&quot;headerlink&quot; title=&quot;基本介绍&quot;&gt;&lt;/a&gt;基本介绍&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。&lt;/li&gt;
-&lt;li&gt;filter是数组的一个常用的操作，它用于&lt;strong&gt;把Array的某些元素过滤掉&lt;/strong&gt;，然后&lt;strong&gt;返回剩下的元素&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;注意&lt;/strong&gt;： filter() &lt;strong&gt;不会对空数组进行检测&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;注意&lt;/strong&gt;： filter() &lt;strong&gt;不会改变原始数组&lt;/strong&gt;。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
