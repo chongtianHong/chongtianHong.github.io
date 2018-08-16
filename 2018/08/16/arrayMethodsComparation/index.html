@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,强缓存,浏览器缓存," />
+  <meta name="keywords" content="JavaScript,开发,Array," />
 
 
 
@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="基本介绍 在Chrome浏览器中的控制台Network中size栏通常会有三种状态:  from memory cache from disk cache 资源本身的大小(如：1.5k)">
-<meta name="keywords" content="开发,强缓存,浏览器缓存">
+<meta name="description" content="遍历数组最常用到的for循环，是最为熟知的一种方法，在ES5中定义了一些新的遍历方法，更加适用于函数式编程。 本文对各种数组遍历方法的区别和效率进行分析记录。">
+<meta name="keywords" content="JavaScript,开发,Array">
 <meta property="og:type" content="article">
-<meta property="og:title" content="内存缓存和硬盘缓存的区别">
-<meta property="og:url" content="https://chongtianhong.github.io/2018/04/16/fromCacheType/index.html">
+<meta property="og:title" content="for循环、forEach、map、filter区别及效率分析">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/08/16/arrayMethodsComparation/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="基本介绍 在Chrome浏览器中的控制台Network中size栏通常会有三种状态:  from memory cache from disk cache 资源本身的大小(如：1.5k)">
+<meta property="og:description" content="遍历数组最常用到的for循环，是最为熟知的一种方法，在ES5中定义了一些新的遍历方法，更加适用于函数式编程。 本文对各种数组遍历方法的区别和效率进行分析记录。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-13T15:23:17.169Z">
+<meta property="og:updated_time" content="2018-08-16T13:53:59.453Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="内存缓存和硬盘缓存的区别">
-<meta name="twitter:description" content="基本介绍 在Chrome浏览器中的控制台Network中size栏通常会有三种状态:  from memory cache from disk cache 资源本身的大小(如：1.5k)">
+<meta name="twitter:title" content="for循环、forEach、map、filter区别及效率分析">
+<meta name="twitter:description" content="遍历数组最常用到的for循环，是最为熟知的一种方法，在ES5中定义了一些新的遍历方法，更加适用于函数式编程。 本文对各种数组遍历方法的区别和效率进行分析记录。">
 
 
 
@@ -164,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="https://chongtianhong.github.io/2018/04/16/fromCacheType/"/>
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/08/16/arrayMethodsComparation/"/>
 
 
 
 
 
-  <title>内存缓存和硬盘缓存的区别 | Ice's Blog</title>
+  <title>for循环、forEach、map、filter区别及效率分析 | Ice's Blog</title>
   
 
 
@@ -309,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/04/16/fromCacheType/">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/08/16/arrayMethodsComparation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaobing Hong">
@@ -326,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">内存缓存和硬盘缓存的区别</h1>
+          <h1 class="post-title" itemprop="name headline">for循环、forEach、map、filter区别及效率分析</h1>
         
 
         <div class="post-meta">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T16:37:51+08:00">
-                2018-04-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-16T19:55:57+08:00">
+                2018-08-16
               </time>
             
 
@@ -398,82 +398,52 @@
       
 
       
-        <h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul>
-<li>在Chrome浏览器中的控制台Network中size栏通常会有<strong>三种状态</strong>: <ul>
-<li><strong>from memory cache</strong></li>
-<li><strong>from disk cache</strong></li>
-<li><strong>资源本身的大小</strong>(如：1.5k)<a id="more"></a></li>
-</ul>
+        <ul>
+<li>遍历数组最常用到的for循环，是最为熟知的一种方法，在ES5中定义了一些新的遍历方法，更加适用于函数式编程。</li>
+<li>本文对各种数组遍历方法的区别和效率进行分析记录。<a id="more"></a></li>
+<li><p>首先，写入以下脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var testData = [];//数组初始化</span><br><span class="line">var x = 9999;</span><br><span class="line"><span class="keyword">for</span>(var i = 0; i &lt; x; i++)&#123;</span><br><span class="line">    testData[i] = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><strong>from memory cache</strong>代表使用内存中的缓存，<strong>from disk cache</strong>则代表使用的是硬盘中的缓存，浏览器读取<strong>命中强缓存资源</strong>的顺序为<strong>memory –&gt; disk</strong>：<ul>
-<li>先去内存看，如果有，直接加载；</li>
-<li>如果内存没有，则取硬盘获取，如果有直接加载；</li>
-<li>如果硬盘也没有，那么就进行网络请求；</li>
-<li>加载到的资源缓存到硬盘和内存。</li>
-</ul>
+<li><p>在每个遍历开始前和结束后取时间戳的差值，每个测试10次取平均值查看结果。<strong>以下测试结果基于Google浏览器</strong>。</p>
 </li>
 </ul>
-<h4 id="三者的区别"><a href="#三者的区别" class="headerlink" title="三者的区别"></a>三者的区别</h4><blockquote>from memory cache</blockquote>
-
-<ul>
-<li>from memory cache代表<strong>使用内存中的缓存</strong>，即请求的资源是直接从内存中拿到的，不会请求服务器。</li>
-<li>一般已经加载过该资源且资源已经缓存在了内存当中，<strong>当关闭该页面时，此资源就被内存释放掉了</strong>，<strong>再次重新打开相同页面时不会出现from memory cache的情况</strong>。</li>
-<li><strong>内存缓存(from memory cache)</strong>：内存缓存具有两个特点，分别是<strong>快速读取</strong>和<strong>时效性</strong>：<ul>
-<li><strong>快速读取</strong>：内存缓存会将编译解析后的文件，直接存入该进程的内存中，占据该进程一定的内存资源，以方便下次运行使用时的快速读取。</li>
-<li><strong>时效性</strong>：一旦该进程关闭，则该进程的内存则会清空。</li>
+<h5 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h5><ul>
+<li><p>对于普通的for循环来说:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(var i = 0; i &lt; testData.length; i++)&#123;</span><br><span class="line">    code...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取完平均值是7.3ms。</p>
+</li>
+<li><p>重新对for循环进行优化：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(var i = 0,len = testData.length; i &lt; len; i++)&#123;</span><br><span class="line">    code...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取完平均值是2.7ms。</p>
+</li>
+<li>但是当x = 99999，到达10^5级时，遍历时间分别是7ms和7.1ms，二者几乎没有差别；当 x = 999999时，遍历时间分别是，14.1ms和14.6ms，前者循环耗时比后者要少，即<strong>遍历数据从10^5级别开始，普通for循环相比优化的for循环效率更高</strong>。</li>
 </ul>
+<h5 id="forEach方法"><a href="#forEach方法" class="headerlink" title="forEach方法"></a>forEach方法</h5><ul>
+<li><p>当使用forEach方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">testData.forEach(<span class="keyword">function</span>(value, item, arr)&#123; </span><br><span class="line">    arr[item]++;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取完平均值是2.1ms，x = 99999时，取值8.9ms，x = 999999时，取值39ms，由此可见，<strong>在10^4级别及以下forEach的效率占有绝对优势</strong>，但从10^5级别开始就走下坡了了。然而用<strong>火狐</strong>测过以后，结果却<strong>截然不同</strong>（见页底）。</p>
 </li>
 </ul>
-<blockquote>from disk cache</blockquote>
-
-<ul>
-<li>from disk cache表示此资源是从<strong>磁盘</strong>当中取出的，也是在已经在之前的某个时间加载过该资源，不会请求服务器。但<strong>此资源不会随着该页面的关闭而释放掉</strong>，因为是存在硬盘当中的，下次打开仍会出现from disk cache的情况。</li>
-<li><strong>硬盘缓存(from disk cache</strong>)：硬盘缓存则是直接将缓存写入硬盘文件中，读取缓存需要对该缓存存放的硬盘文件进行I/O操作，然后重新解析该缓存内容，读取复杂，<strong>速度比内存缓存慢</strong>。</li>
+<h5 id="map方法"><a href="#map方法" class="headerlink" title="map方法"></a>map方法</h5><ul>
+<li><p>当使用map方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.map(<span class="keyword">function</span>(value, item, arr)&#123; </span><br><span class="line">    arr[item]++;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>传递给map()函数的调用方式和传递给forEach()函数的调用方式一样，但传递给map()函数应该有返回值。在<strong>Google浏览器</strong>环境下，<strong>耗时是forEach方法的基础上相应增加的</strong>。</p>
+</li>
 </ul>
-<blockquote>资源本身大小数值</blockquote>
-
-<ul>
-<li>当HTTP状态码为200时，资源是实实在在从服务器请求后获取得到的（不是缓存数据），该数字是资源本身的大小；</li>
-<li>当HTTP状态码为304时，该数字是<strong>与服务端通信报文的大小</strong>，并<strong>不是该资源本身的大小</strong>，该资源是从本地获取的（协商缓存）。</li>
+<h5 id="filter方法"><a href="#filter方法" class="headerlink" title="filter方法"></a>filter方法</h5><ul>
+<li><p>当使用filter方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.filter(<span class="keyword">function</span>(value, item, arr)&#123; </span><br><span class="line">    arr[item]++;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>filter()方法返回的数组元素是调用的数组的一个子集，传递的函数用来进行逻辑判定的，该函数返回true或false，同样的的式子，在<strong>Google浏览器</strong>环境下，<strong>耗时相比较是map方法的40%左右</strong>。</p>
+</li>
 </ul>
-<h4 id="Chrome采取措施的准则"><a href="#Chrome采取措施的准则" class="headerlink" title="Chrome采取措施的准则"></a>Chrome采取措施的准则</h4><ul>
-<li>如下表所示：</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">状态</th>
-<th style="text-align:center">类型</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">200</td>
-<td style="text-align:center">from memory cache</td>
-<td style="text-align:center">不请求网络资源，资源在内存当中，一般<code>脚本</code>、<code>字体</code>、<code>图片</code>会存在内存当中</td>
-</tr>
-<tr>
-<td style="text-align:center">200</td>
-<td style="text-align:center">from disk cache</td>
-<td style="text-align:center">不请求网络资源，在磁盘当中，一般非脚本会存在内存当中，如<code>CSS</code>等</td>
-</tr>
-<tr>
-<td style="text-align:center">200</td>
-<td style="text-align:center">资源大小数值</td>
-<td style="text-align:center">从服务器下载最新资源</td>
-</tr>
-<tr>
-<td style="text-align:center">304</td>
-<td style="text-align:center">报文大小</td>
-<td style="text-align:center">请求服务端发现资源没有更新，使用本地资源（协商缓存）</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>可以看到，<strong>200和304</strong>是Chrome在<strong>请求资源时最常见的两种HTTP状态码</strong>。</li>
-<li>由此可见<strong>样式表一般在磁盘中</strong>，不会缓存到内存中去，因为CSS样式加载一次即可渲染出网页。</li>
-<li>但是，<strong>脚本</strong>却<strong>可能随时会执行</strong>，如果脚本在磁盘当中，在执行该脚本需要从磁盘中取到内存当中来。这样的IO开销是比较大的，有可能会导致浏览器失去响应。因此，<strong>脚本一般在内存中</strong>。</li>
+<h5 id="不同浏览器的结果对比"><a href="#不同浏览器的结果对比" class="headerlink" title="不同浏览器的结果对比"></a>不同浏览器的结果对比</h5><ul>
+<li>Google环境下的测试结果：<br><img src="" alt="Google环境下的测试结果"></li>
+<li>Firefox环境下的测试结果：<br><img src="" alt="Firefox环境下的测试结果"></li>
 </ul>
 
       
@@ -502,11 +472,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
-            <a href="/tags/强缓存/" rel="tag"><i class="fa fa-tag"></i> 强缓存</a>
-          
-            <a href="/tags/浏览器缓存/" rel="tag"><i class="fa fa-tag"></i> 浏览器缓存</a>
+            <a href="/tags/Array/" rel="tag"><i class="fa fa-tag"></i> Array</a>
           
         </div>
       
@@ -519,8 +489,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/15/browserCache/" rel="next" title="浏览器强缓存和协商缓存">
-                <i class="fa fa-chevron-left"></i> 浏览器强缓存和协商缓存
+              <a href="/2018/05/10/30JSproblems/" rel="next" title="30个你“不可能全部会做”的JavaScript题目及解析">
+                <i class="fa fa-chevron-left"></i> 30个你“不可能全部会做”的JavaScript题目及解析
               </a>
             
           </div>
@@ -528,10 +498,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/17/commonInstancesOfJS/" rel="prev" title="JavaScript常用实例的实现与封装">
-                JavaScript常用实例的实现与封装 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -683,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三者的区别"><span class="nav-number">2.</span> <span class="nav-text">三者的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Chrome采取措施的准则"><span class="nav-number">3.</span> <span class="nav-text">Chrome采取措施的准则</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#for循环"><span class="nav-number">1.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#forEach方法"><span class="nav-number">2.</span> <span class="nav-text">forEach方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#map方法"><span class="nav-number">3.</span> <span class="nav-text">map方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#filter方法"><span class="nav-number">4.</span> <span class="nav-text">filter方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不同浏览器的结果对比"><span class="nav-number">5.</span> <span class="nav-text">不同浏览器的结果对比</span></a></li></ol></div>
             
 
           </div>
