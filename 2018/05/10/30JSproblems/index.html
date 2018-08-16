@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-16T13:57:51.004Z">
+<meta property="og:updated_time" content="2018-08-16T14:28:26.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="30个你“不可能全部会做”的JavaScript题目及解析">
 <meta name="twitter:description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
@@ -408,7 +408,7 @@
 <li><p>以下表达式的运行结果是：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>].map(parseInt)</span><br><span class="line"></span><br><span class="line">　　A.[<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>]</span><br><span class="line"></span><br><span class="line">　　B.[1,2,3]</span><br><span class="line"></span><br><span class="line">　　C.[0,1,2]</span><br><span class="line"></span><br><span class="line">　　D.其他</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>解析：</p>
+<li><p>解析:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">答案：D</span><br><span class="line">解析：</span><br><span class="line">map对数组的每个元素调用定义的回调函数并返回包含结果的数组。</span><br><span class="line">[<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>].map(parseInt)对于数组中每个元素调用paresInt。</span><br><span class="line">map中回调函数的语法：<span class="keyword">function</span> callbackfn(value, index, array1)，可使用最多三个参数来声明回调函数。第一参数value，数组元素的值；第二个参数index，数组元素的数组所以；array1，包含该元素的数组对象。</span><br><span class="line">map在作用parseInt函数时，其实传入了元素的值(作为需要转化为十进制的字符串)，以及所对应的索引(作为转化的基数)。</span><br><span class="line">因此，题目等同于[parseInt(1,0), parseInt(2,1), parseInt(3,2)]</span><br><span class="line">最终返回[1, NaN, NaN]</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
