@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,JavaScript,ES6,Promise," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言 本文主要讲的是如何实现 Promise 的链式调用，也就是promise().then().then().catch()的形式，然后讨论如何在某一个 then() 里面中止 Promise。">
+<meta name="keywords" content="开发,JavaScript,ES6,Promise">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise 的链式调用与中止">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/05/14/promiseChain/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="前言 本文主要讲的是如何实现 Promise 的链式调用，也就是promise().then().then().catch()的形式，然后讨论如何在某一个 then() 里面中止 Promise。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://chongtianhong.github.io/images/promiseProcess.png">
+<meta property="og:updated_time" content="2018-08-17T14:58:09.644Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Promise 的链式调用与中止">
+<meta name="twitter:description" content="前言 本文主要讲的是如何实现 Promise 的链式调用，也就是promise().then().then().catch()的形式，然后讨论如何在某一个 then() 里面中止 Promise。">
+<meta name="twitter:image" content="https://chongtianhong.github.io/images/promiseProcess.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/05/14/promiseChain/"/>
+
+
+
+
+
+  <title>Promise 的链式调用与中止 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/05/14/promiseChain/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Promise 的链式调用与中止</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-14T15:04:43+08:00">
+                2018-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li>本文主要讲的是如何<strong>实现 Promise 的链式调用</strong>，也就是<code>promise().then().then().catch()</code>的形式，然后讨论如何<strong>在某一个 then() 里面中止 Promise</strong>。<a id="more"></a></li>
+<li>在程序中，只要<strong>返回了一个 promise 对象</strong>，只要<strong>该 promise 对象不是 Rejected 或 Fulfilled 状态，then 方法就会继续调用</strong>。利用这个特性，可以<strong>处理多个异步逻辑</strong>。</li>
+<li>但有时候某个 then 方法的执行结果可能会决定是否需要执行下一个 then，这个时候就需中止 promise，主要思想就是<strong>使用 reject 来中止 promise 的 then 继续执行</strong>。</li>
+</ul>
+<h4 id="回顾Promise知识点"><a href="#回顾Promise知识点" class="headerlink" title="回顾Promise知识点"></a>回顾Promise知识点</h4><ul>
+<li><p><strong>Promise</strong>其实很简单，就<strong>是一个处理异步的方法</strong>。一般可以通过 new 方法来调用 Promise 的构造器实例化一个 promise 对象：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var promise = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    // 异步处理</span><br><span class="line">    // 处理结束后，调用 resolve 或 reject</span><br><span class="line">    //      成功时就调用 resolve</span><br><span class="line">    //      失败时就调用 reject</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用<code>new Promise</code>实例化的 promise 对象有以下三个状态：</p>
+<ul>
+<li>“has-resolution” - <strong>Fulfilled</strong>。resolve(成功)时，此时会调用 onFulfilled;</li>
+<li>“has-rejection” - <strong>Rejected</strong>。reject(失败)时，此时会调用 onRejected;</li>
+<li>“unresolved” - <strong>Pending</strong>。既不是resolve也不是reject的状态，也就是promise对象刚被创建后的初始化状态等。</li>
+</ul>
+</li>
+<li>状态变化只能有两种，只能<strong>从Pending变成Fulfilled</strong>或<strong>从Pending变成Rejected</strong>。<strong>状态一旦发生变化，则不会再改变</strong>。<br><img src="/images/promiseProcess.png" alt="promise的状态变化示意图" width="600" style="border:none"></li>
+</ul>
+<h4 id="Promise的链式调用"><a href="#Promise的链式调用" class="headerlink" title="Promise的链式调用"></a>Promise的链式调用</h4><ul>
+<li><code>then()</code>方法的作用是<strong>为Promise实例添加解决（fulfillment）和拒绝（rejection）状态的回调函数</strong>。</li>
+<li><code>then()</code>方法会<strong>返回一个新的Promise实例</strong>，所以<strong><code>then()</code>方法后面可以继续跟另一个<code>then()</code>方法进行链式调用</strong>。</li>
+<li><p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">// promise start</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">start</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> new Promise((resolve) =&gt; &#123;</span><br><span class="line">        resolve(<span class="string">'start'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// promise p1</span><br><span class="line"><span class="keyword">function</span> p1(data)&#123;</span><br><span class="line">    <span class="built_in">return</span> new Promose((resolve)=&gt;&#123;</span><br><span class="line">        console.log(<span class="string">'result of start: '</span>, data);</span><br><span class="line">        resolve(1);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// promise p2</span><br><span class="line"><span class="keyword">function</span> p2(data)&#123;</span><br><span class="line">    <span class="built_in">return</span> new Promose((reject)=&gt;&#123;</span><br><span class="line">        console.log(<span class="string">'result of p1: '</span>, data);</span><br><span class="line">        reject(2);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// promise p3</span><br><span class="line"><span class="keyword">function</span> p3(data)&#123;</span><br><span class="line">    <span class="built_in">return</span> new Promose((resolve)=&gt;&#123;</span><br><span class="line">        console.log(<span class="string">'result of p2: '</span>, data);</span><br><span class="line">        resolve(3);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// promise p4</span><br><span class="line"><span class="keyword">function</span> p4(ex)&#123;</span><br><span class="line">    <span class="built_in">return</span> new Promose((resolve)=&gt;&#123;</span><br><span class="line">        console.log(<span class="string">'ex: '</span>, ex);</span><br><span class="line">        resolve(4);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">start()</span><br><span class="line">    .<span class="keyword">then</span>(p1)</span><br><span class="line">    .<span class="keyword">then</span>(p2)</span><br><span class="line">    .<span class="keyword">then</span>(p3)</span><br><span class="line">    .catch(p4)</span><br><span class="line">    .<span class="keyword">then</span>(data =&gt; &#123;</span><br><span class="line">        // end</span><br><span class="line">        console.log(<span class="string">'result of p4: '</span>, data);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面的代码最终会输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">result of start:  start</span><br><span class="line">result of p1:  1</span><br><span class="line">ex:  2</span><br><span class="line">result of p4:  4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以看到，代码的执行逻辑是<code>promise start –&gt; promise p1 –&gt; promise p3 –&gt; promise p4 –&gt; end</code>。所以可总结出以下几点：</p>
+<ul>
+<li>promise 的 <strong>then 方法里面</strong>可以<strong>继续返回一个新的 promise 对象</strong>;</li>
+<li>下一个 <strong>then 方法的参数</strong>是<strong>上一个 promise 对象的 resolve 参数</strong>;</li>
+<li><strong>catch 方法的参数</strong>是其<strong>之前某个 promise 对象的 rejecte 参数</strong>;</li>
+<li>一旦某个 then 方法里面的 <strong>promise 状态改变为了 rejected</strong>，则promise 方法连会<strong>跳过后面的 then 直接执行 catch</strong>;</li>
+<li><strong>catch 方法</strong>里面依旧<strong>可以返回一个新的 promise 对象</strong>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="如何中指promise的链式调用"><a href="#如何中指promise的链式调用" class="headerlink" title="如何中指promise的链式调用"></a>如何中指promise的链式调用</h4><ul>
+<li>通过上面的例子，我们可以知道<strong> promise 的状态改变为 rejected 后，promise 就会跳过后面的 then 方法</strong>。</li>
+<li>也就是说，当<strong>某个 then 里面发生异常后</strong>，就会<strong>跳过 then 方法</strong>，<strong>直接执行 catch</strong>。</li>
+<li><p>所以，当在构造的 promise 方法链中，如果<strong>在某个 then 后面，不需要再执行 then 方法了，就可以把它当作一个异常来处理</strong>，返回一个异常信息给 catch，其参数可自定义，比如该异常的参数信息为 { notRealPromiseException: true}，然后在 catch 里面判断一下 notRealPromiseException 是否为 true，如果为 true，就说明不是程序出现异常，而是在正常逻辑里面中止 then 方法的执行。代码示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">start()</span><br><span class="line">    .<span class="keyword">then</span>(data =&gt; &#123;</span><br><span class="line">        // promise start</span><br><span class="line">        console.log(<span class="string">'result of start: '</span>, data);</span><br><span class="line">        <span class="built_in">return</span> Promise.resolve(1); // p1</span><br><span class="line">    )</span><br><span class="line">    .<span class="keyword">then</span>(data =&gt; &#123;</span><br><span class="line">        // promise p1</span><br><span class="line">        console.log(<span class="string">'result of p1: '</span>, data);</span><br><span class="line">        <span class="built_in">return</span> Promise.reject(&#123;</span><br><span class="line">            notRealPromiseException: <span class="literal">true</span>,</span><br><span class="line">        &#125;); // p2</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="keyword">then</span>(data =&gt; &#123;</span><br><span class="line">        // promise p2</span><br><span class="line">        console.log(<span class="string">'result of p2: '</span>, data);</span><br><span class="line">        <span class="built_in">return</span> Promise.resolve(3); // p3</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(ex =&gt; &#123;</span><br><span class="line">        console.log(<span class="string">'ex: '</span>, ex);</span><br><span class="line">        <span class="keyword">if</span> (ex.notRealPromiseException) &#123;</span><br><span class="line">            // 一切正常，只是通过 catch 方法来中止 promise chain</span><br><span class="line">            // 也就是中止 promise p2 的执行</span><br><span class="line">            <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        // 真正发生异常</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这样的做法可能不符合<code>catch</code>的语义。不过从某种意义上来说，promise 方法链没有继续执行，也可以算是一种“异常”。</p>
+</li>
+</ul>
+<h4 id="Promise-all-与-Promise-race"><a href="#Promise-all-与-Promise-race" class="headerlink" title="Promise.all 与 Promise.race"></a>Promise.all 与 Promise.race</h4><ul>
+<li>其实 promise 方法链更好用的一点是，当<strong>下一个操作依赖于上一个操作的结果</strong>的时候，可以很方便地<strong>通过 then 方法的参数来传递数据</strong>。</li>
+<li>前面也提到过，<strong>下一个 then 方法的参数就是上一个 then 方法里面 resolve 的参数</strong>，所以当然就可以<strong>把上一个 then 方法的执行结果作为参数传递给下一个 then 方法</strong>。</li>
+<li><p>还有些时候，可能 then 方法的执行顺序也没有太多要求，只需要 promise 方法链中的两个或多个 promise 全部都执行正确。这时，如果依旧一个一个去写 then 可能就比较麻烦，比如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">p1</span></span>() &#123;</span><br><span class="line">  <span class="built_in">return</span> new Promise((resolve) =&gt; &#123;</span><br><span class="line">    console.log(1);</span><br><span class="line">    resolve();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">p2</span></span>() &#123;</span><br><span class="line">  <span class="built_in">return</span> new Promise((resolve) =&gt; &#123;</span><br><span class="line">    console.log(2);</span><br><span class="line">    resolve();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">p3</span></span>() &#123;</span><br><span class="line">  <span class="built_in">return</span> new Promise((resolve) =&gt; &#123;</span><br><span class="line">    console.log(3);</span><br><span class="line">    resolve();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>现在<strong>只需要<code>p1</code>、<code>p2</code>、<code>p3</code>这三个 promise 都执行</strong>，并且 <strong>promise 最终状态都是 Fulfilled</strong>，那么如果还是使用链式调用，这时这样调用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">p1()</span><br><span class="line">.<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">    <span class="built_in">return</span> p2();</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">    <span class="built_in">return</span> p3();</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">    console.log(<span class="string">'all done'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(e =&gt; &#123;</span><br><span class="line">    console.log(<span class="string">'e: '</span>, e);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 输出结果：</span><br><span class="line">// 1</span><br><span class="line">// 2</span><br><span class="line">// 3</span><br><span class="line">// all <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代码貌似就不那么精炼了。这个时候就有了 <code>Promise.all</code> 这个方法。</p>
+</li>
+<li><code>Promise.all</code> 接收一个<strong>promise对象的数组</strong>作为参数，当这个数组里的所有 promise 对象<strong>全部变为 resolve</strong> 或 <strong>reject 状态</strong>的时候，它才会去调用 then 方法。</li>
+<li><p>于是，调用这几个 promise 的代码就可以这样写了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Promise.all([p1, p2, p3]).<span class="keyword">then</span>(()=&gt;&#123;</span><br><span class="line">    console.log(<span class="string">'all done'</span>);</span><br><span class="line">&#125;).catch(e =&gt; &#123;</span><br><span class="line">    console.log(<span class="string">'e: '</span>, e);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 输出结果：</span><br><span class="line">// 1</span><br><span class="line">// 2</span><br><span class="line">// 3</span><br><span class="line">// all <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对于 <code>Promise.race</code>，其<strong>参数</strong>也跟 <code>Promise.all</code> 一样<strong>*是一个数组</strong>。只是<strong>数组中的任何一个 promise 对象如果变为 resolve 或者reject 的话，该函数就会返回</strong>，并<strong>使用这个 promise 对象的值进行 resolve 或者 reject</strong>。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/ES6/" rel="tag"><i class="fa fa-tag"></i> ES6</a>
+          
+            <a href="/tags/Promise/" rel="tag"><i class="fa fa-tag"></i> Promise</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/13/ajaxDataType/" rel="next" title="Ajax中返回数据的格式和处理方法分析">
+                <i class="fa fa-chevron-left"></i> Ajax中返回数据的格式和处理方法分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回顾Promise知识点"><span class="nav-number">2.</span> <span class="nav-text">回顾Promise知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise的链式调用"><span class="nav-number">3.</span> <span class="nav-text">Promise的链式调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何中指promise的链式调用"><span class="nav-number">4.</span> <span class="nav-text">如何中指promise的链式调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise-all-与-Promise-race"><span class="nav-number">5.</span> <span class="nav-text">Promise.all 与 Promise.race</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

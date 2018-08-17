@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-17T14:56:37.439Z</updated>
+  <updated>2018-08-17T14:58:09.644Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Promise 的链式调用与中止</title>
+    <link href="https://chongtianhong.github.io/2018/05/14/promiseChain/"/>
+    <id>https://chongtianhong.github.io/2018/05/14/promiseChain/</id>
+    <published>2018-05-14T07:04:43.000Z</published>
+    <updated>2018-08-17T14:58:09.644Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul><li>本文主要讲的是如何<strong>实现 Promise 的链式调用</strong>，也就是<code>promise().then().then().catch()</code>的形式，然后讨论如何<strong>在某一个 then() 里面中止 Promise</strong>。<a id="more"></a></li><li>在程序中，只要<strong>返回了一个 promise 对象</strong>，只要<strong>该 promise 对象不是 Rejected 或 Fulfilled 状态，then 方法就会继续调用</strong>。利用这个特性，可以<strong>处理多个异步逻辑</strong>。</li><li>但有时候某个 then 方法的执行结果可能会决定是否需要执行下一个 then，这个时候就需中止 promise，主要思想就是<strong>使用 reject 来中止 promise 的 then 继续执行</strong>。</li></ul><h4 id="回顾Promise知识点"><a href="#回顾Promise知识点" class="headerlink" title="回顾Promise知识点"></a>回顾Promise知识点</h4><ul><li><p><strong>Promise</strong>其实很简单，就<strong>是一个处理异步的方法</strong>。一般可以通过 new 方法来调用 Promise 的构造器实例化一个 promise 对象：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var promise = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    // 异步处理</span><br><span class="line">    // 处理结束后，调用 resolve 或 reject</span><br><span class="line">    //      成功时就调用 resolve</span><br><span class="line">    //      失败时就调用 reject</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li><li><p>用<code>new Promise</code>实例化的 promise 对象有以下三个状态：</p><ul><li>“has-resolution” - <strong>Fulfilled</strong>。resolve(成功)时，此时会调用 onFulfilled;</li><li>“has-rejection” - <strong>Rejected</strong>。reject(失败)时，此时会调用 onRejected;</li><li>“unresolved” - <strong>Pending</strong>。既不是resolve也不是reject的状态，也就是promise对象刚被创建后的初始化状态等。</li></ul></li><li>状态变化只能有两种，只能<strong>从Pending变成Fulfilled</strong>或<strong>从Pending变成Rejected</strong>。<strong>状态一旦发生变化，则不会再改变</strong>。<br><img src="/images/promiseProcess.png" alt="promise的状态变化示意图" width="600" style="border:none"></li></ul><h4 id="Promise的链式调用"><a href="#Promise的链式调用" class="headerlink" title="Promise的链式调用"></a>Promise的链式调用</h4><ul><li><code>then()</code>方法的作用是<strong>为Promise实例添加解决（fulfillment）和拒绝（rejection）状态的回调函数</strong>。</li><li><code>then()</code>方法会<strong>返回一个新的Promise实例</strong>，所以<strong><code>then()</code>方法后面可以继续跟另一个<code>then()</code>方法进行链式调用</strong>。</li><li><p>例如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">// promise start</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">start</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> new Promise((resolve) =&gt; &#123;</span><br><span class="line">        resolve(<span class="string">'start'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// promise p1</span><br><span class="line"><span class="keyword">function</span> p1(data)&#123;</span><br><span class="line">    <span class="built_in">return</span> new Promose((resolve)=&gt;&#123;</span><br><span class="line">        console.log(<span class="string">'result of start: '</span>, data);</span><br><span class="line">        resolve(1);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// promise p2</span><br><span class="line"><span class="keyword">function</span> p2(data)&#123;</span><br><span class="line">    <span class="built_in">return</span> new Promose((reject)=&gt;&#123;</span><br><span class="line">        console.log(<span class="string">'result of p1: '</span>, data);</span><br><span class="line">        reject(2);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// promise p3</span><br><span class="line"><span class="keyword">function</span> p3(data)&#123;</span><br><span class="line">    <span class="built_in">return</span> new Promose((resolve)=&gt;&#123;</span><br><span class="line">        console.log(<span class="string">'result of p2: '</span>, data);</span><br><span class="line">        resolve(3);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// promise p4</span><br><span class="line"><span class="keyword">function</span> p4(ex)&#123;</span><br><span class="line">    <span class="built_in">return</span> new Promose((resolve)=&gt;&#123;</span><br><span class="line">        console.log(<span class="string">'ex: '</span>, ex);</span><br><span class="line">        resolve(4);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">start()</span><br><span class="line">    .<span class="keyword">then</span>(p1)</span><br><span class="line">    .<span class="keyword">then</span>(p2)</span><br><span class="line">    .<span class="keyword">then</span>(p3)</span><br><span class="line">    .catch(p4)</span><br><span class="line">    .<span class="keyword">then</span>(data =&gt; &#123;</span><br><span class="line">        // end</span><br><span class="line">        console.log(<span class="string">'result of p4: '</span>, data);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure></li><li><p>上面的代码最终会输出：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">result of start:  start</span><br><span class="line">result of p1:  1</span><br><span class="line">ex:  2</span><br><span class="line">result of p4:  4</span><br></pre></td></tr></table></figure></li><li><p>可以看到，代码的执行逻辑是<code>promise start –&gt; promise p1 –&gt; promise p3 –&gt; promise p4 –&gt; end</code>。所以可总结出以下几点：</p><ul><li>promise 的 <strong>then 方法里面</strong>可以<strong>继续返回一个新的 promise 对象</strong>;</li><li>下一个 <strong>then 方法的参数</strong>是<strong>上一个 promise 对象的 resolve 参数</strong>;</li><li><strong>catch 方法的参数</strong>是其<strong>之前某个 promise 对象的 rejecte 参数</strong>;</li><li>一旦某个 then 方法里面的 <strong>promise 状态改变为了 rejected</strong>，则promise 方法连会<strong>跳过后面的 then 直接执行 catch</strong>;</li><li><strong>catch 方法</strong>里面依旧<strong>可以返回一个新的 promise 对象</strong>。</li></ul></li></ul><h4 id="如何中指promise的链式调用"><a href="#如何中指promise的链式调用" class="headerlink" title="如何中指promise的链式调用"></a>如何中指promise的链式调用</h4><ul><li>通过上面的例子，我们可以知道<strong> promise 的状态改变为 rejected 后，promise 就会跳过后面的 then 方法</strong>。</li><li>也就是说，当<strong>某个 then 里面发生异常后</strong>，就会<strong>跳过 then 方法</strong>，<strong>直接执行 catch</strong>。</li><li><p>所以，当在构造的 promise 方法链中，如果<strong>在某个 then 后面，不需要再执行 then 方法了，就可以把它当作一个异常来处理</strong>，返回一个异常信息给 catch，其参数可自定义，比如该异常的参数信息为 { notRealPromiseException: true}，然后在 catch 里面判断一下 notRealPromiseException 是否为 true，如果为 true，就说明不是程序出现异常，而是在正常逻辑里面中止 then 方法的执行。代码示例：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">start()</span><br><span class="line">    .<span class="keyword">then</span>(data =&gt; &#123;</span><br><span class="line">        // promise start</span><br><span class="line">        console.log(<span class="string">'result of start: '</span>, data);</span><br><span class="line">        <span class="built_in">return</span> Promise.resolve(1); // p1</span><br><span class="line">    )</span><br><span class="line">    .<span class="keyword">then</span>(data =&gt; &#123;</span><br><span class="line">        // promise p1</span><br><span class="line">        console.log(<span class="string">'result of p1: '</span>, data);</span><br><span class="line">        <span class="built_in">return</span> Promise.reject(&#123;</span><br><span class="line">            notRealPromiseException: <span class="literal">true</span>,</span><br><span class="line">        &#125;); // p2</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="keyword">then</span>(data =&gt; &#123;</span><br><span class="line">        // promise p2</span><br><span class="line">        console.log(<span class="string">'result of p2: '</span>, data);</span><br><span class="line">        <span class="built_in">return</span> Promise.resolve(3); // p3</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(ex =&gt; &#123;</span><br><span class="line">        console.log(<span class="string">'ex: '</span>, ex);</span><br><span class="line">        <span class="keyword">if</span> (ex.notRealPromiseException) &#123;</span><br><span class="line">            // 一切正常，只是通过 catch 方法来中止 promise chain</span><br><span class="line">            // 也就是中止 promise p2 的执行</span><br><span class="line">            <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        // 真正发生异常</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure></li><li><p>这样的做法可能不符合<code>catch</code>的语义。不过从某种意义上来说，promise 方法链没有继续执行，也可以算是一种“异常”。</p></li></ul><h4 id="Promise-all-与-Promise-race"><a href="#Promise-all-与-Promise-race" class="headerlink" title="Promise.all 与 Promise.race"></a>Promise.all 与 Promise.race</h4><ul><li>其实 promise 方法链更好用的一点是，当<strong>下一个操作依赖于上一个操作的结果</strong>的时候，可以很方便地<strong>通过 then 方法的参数来传递数据</strong>。</li><li>前面也提到过，<strong>下一个 then 方法的参数就是上一个 then 方法里面 resolve 的参数</strong>，所以当然就可以<strong>把上一个 then 方法的执行结果作为参数传递给下一个 then 方法</strong>。</li><li><p>还有些时候，可能 then 方法的执行顺序也没有太多要求，只需要 promise 方法链中的两个或多个 promise 全部都执行正确。这时，如果依旧一个一个去写 then 可能就比较麻烦，比如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">p1</span></span>() &#123;</span><br><span class="line">  <span class="built_in">return</span> new Promise((resolve) =&gt; &#123;</span><br><span class="line">    console.log(1);</span><br><span class="line">    resolve();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">p2</span></span>() &#123;</span><br><span class="line">  <span class="built_in">return</span> new Promise((resolve) =&gt; &#123;</span><br><span class="line">    console.log(2);</span><br><span class="line">    resolve();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">p3</span></span>() &#123;</span><br><span class="line">  <span class="built_in">return</span> new Promise((resolve) =&gt; &#123;</span><br><span class="line">    console.log(3);</span><br><span class="line">    resolve();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>现在<strong>只需要<code>p1</code>、<code>p2</code>、<code>p3</code>这三个 promise 都执行</strong>，并且 <strong>promise 最终状态都是 Fulfilled</strong>，那么如果还是使用链式调用，这时这样调用：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">p1()</span><br><span class="line">.<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">    <span class="built_in">return</span> p2();</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">    <span class="built_in">return</span> p3();</span><br><span class="line">&#125;)</span><br><span class="line">.<span class="keyword">then</span>(() =&gt; &#123;</span><br><span class="line">    console.log(<span class="string">'all done'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(e =&gt; &#123;</span><br><span class="line">    console.log(<span class="string">'e: '</span>, e);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 输出结果：</span><br><span class="line">// 1</span><br><span class="line">// 2</span><br><span class="line">// 3</span><br><span class="line">// all <span class="keyword">done</span></span><br></pre></td></tr></table></figure></li><li><p>代码貌似就不那么精炼了。这个时候就有了 <code>Promise.all</code> 这个方法。</p></li><li><code>Promise.all</code> 接收一个<strong>promise对象的数组</strong>作为参数，当这个数组里的所有 promise 对象<strong>全部变为 resolve</strong> 或 <strong>reject 状态</strong>的时候，它才会去调用 then 方法。</li><li><p>于是，调用这几个 promise 的代码就可以这样写了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Promise.all([p1, p2, p3]).<span class="keyword">then</span>(()=&gt;&#123;</span><br><span class="line">    console.log(<span class="string">'all done'</span>);</span><br><span class="line">&#125;).catch(e =&gt; &#123;</span><br><span class="line">    console.log(<span class="string">'e: '</span>, e);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 输出结果：</span><br><span class="line">// 1</span><br><span class="line">// 2</span><br><span class="line">// 3</span><br><span class="line">// all <span class="keyword">done</span></span><br></pre></td></tr></table></figure></li><li><p>对于 <code>Promise.race</code>，其<strong>参数</strong>也跟 <code>Promise.all</code> 一样<strong>*是一个数组</strong>。只是<strong>数组中的任何一个 promise 对象如果变为 resolve 或者reject 的话，该函数就会返回</strong>，并<strong>使用这个 promise 对象的值进行 resolve 或者 reject</strong>。</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;本文主要讲的是如何&lt;strong&gt;实现 Promise 的链式调用&lt;/strong&gt;，也就是&lt;code&gt;promise().then().then().catch()&lt;/code&gt;的形式，然后讨论如何&lt;strong&gt;在某一个 then() 里面中止 Promise&lt;/strong&gt;。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
+    
+      <category term="Promise" scheme="https://chongtianhong.github.io/tags/Promise/"/>
+    
+  </entry>
   
   <entry>
     <title>Ajax中返回数据的格式和处理方法分析</title>
@@ -35,9 +64,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Ajax" scheme="https://chongtianhong.github.io/tags/Ajax/"/>
     
@@ -62,11 +91,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="arguments" scheme="https://chongtianhong.github.io/tags/arguments/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
@@ -90,9 +119,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
     
@@ -117,11 +146,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="习题" scheme="https://chongtianhong.github.io/tags/%E4%B9%A0%E9%A2%98/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -144,9 +173,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="类型检测" scheme="https://chongtianhong.github.io/tags/%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B/"/>
     
@@ -201,9 +230,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="高阶函数" scheme="https://chongtianhong.github.io/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
     
@@ -232,9 +261,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="高阶函数" scheme="https://chongtianhong.github.io/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
     
@@ -262,9 +291,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="同步" scheme="https://chongtianhong.github.io/tags/%E5%90%8C%E6%AD%A5/"/>
     
@@ -319,9 +348,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
@@ -346,9 +375,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
@@ -372,9 +401,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Vue.js" scheme="https://chongtianhong.github.io/tags/Vue-js/"/>
     
@@ -458,9 +487,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -486,9 +515,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -514,9 +543,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -541,37 +570,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
-      <category term="闭包" scheme="https://chongtianhong.github.io/tags/%E9%97%AD%E5%8C%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue的计算属性</title>
-    <link href="https://chongtianhong.github.io/2018/04/23/vueComputed/"/>
-    <id>https://chongtianhong.github.io/2018/04/23/vueComputed/</id>
-    <published>2018-04-23T14:51:42.000Z</published>
-    <updated>2018-08-12T07:59:17.416Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul><li>计算属性是需要<strong>复杂的逻辑</strong>和很多<strong>组件基础状态</strong>最后才能得到其<strong>正确值</strong>的属性。</li><li><strong>模板内的表达式</strong>非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。<a id="more"></a></li><li><p>如下面的代码所示，模板不再是简单的声明式逻辑，这里是想要显示变量 message 的翻转字符串：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"example"</span>&gt;</span><br><span class="line">  &#123;&#123; message.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>) &#125;&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></li><li><p>当我们想要<strong>在模板中多次引用此处的翻转字符串</strong>时，就会更加难以处理。</p></li><li>所以，对于任何<strong>复杂逻辑</strong>，我们都应当<strong>使用计算属性</strong>。</li></ul><h4 id="计算属性的使用方法"><a href="#计算属性的使用方法" class="headerlink" title="计算属性的使用方法"></a>计算属性的使用方法</h4><ul><li><p>在Vue里面，所有的计算属性都写在 vue 实例的 <code>computed</code> 属性中，这个<strong>计算属性就是一个函数</strong>，<strong>返回值</strong>为最后<strong>属性的值</strong>。如下面的例子所示，totalPrice 就是一个计算属性：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed:&#123;</span><br><span class="line">  <span class="function"><span class="title">totalPrice</span></span>()&#123;</span><br><span class="line">    <span class="built_in">return</span> (this.good.price * this.good.count) * this.discount + this.deliver;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>定义完成之后，我们就可以像用普通属性一样去用计算属性：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;h2&gt;本店起送金额￥20&lt;/h2&gt;</span><br><span class="line">    &lt;h3&gt;配送费￥5&lt;/h3&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      您购买了&#123;&#123;good.name&#125;&#125;共&#123;&#123;good.count&#125;&#125;份===￥&#123;&#123;good.price&#125;&#125;/份</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div&gt;总价：&#123;&#123;totalPrice&#125;&#125;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data:&#123;</span><br><span class="line">    good:&#123;id:1,price:10,name:<span class="string">'红烧牛肉盖饭'</span>,count:1&#125;,</span><br><span class="line">    discount:0.8,</span><br><span class="line">    deliver:5</span><br><span class="line">  &#125;,</span><br><span class="line">  computed:&#123;</span><br><span class="line">    <span class="function"><span class="title">totalPrice</span></span>()&#123;</span><br><span class="line">      <span class="built_in">return</span> (this.good.price*this.good.count)*this.discount+this.deliver;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li><li><p>计算属性的方法可以包含很多繁重的逻辑，最终返回我们需要的值。</p></li><li>通过计算属性的使用，View层的代码会变的非常精简，且容易维护。</li></ul><h4 id="计算属性缓存-vs-方法"><a href="#计算属性缓存-vs-方法" class="headerlink" title="计算属性缓存 vs 方法"></a>计算属性缓存 vs 方法</h4><ul><li><p>我们可以通过在表达式中调用方法来达到同样的效果：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;总价：&#123;&#123;totalPrice()&#125;&#125;&lt;/div&gt;</span><br></pre></td></tr></table></figure></li><li><p>同时，将computed属性换成methods属性：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 在组件中</span><br><span class="line">methods: &#123;</span><br><span class="line">  <span class="function"><span class="title">totalPrice</span></span>()&#123;</span><br><span class="line">    <span class="built_in">return</span> (this.good.price*this.good.count)*this.discount+this.deliver;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>可见，我们可以将<strong>同一函数</strong>定义为一个方法而不是一个计算属性。两种方式的<strong>最终结果是完全相同的</strong>。</p></li><li>然而，不同的是<strong>计算属性是基于它们的依赖进行缓存的</strong>。计算属性<strong>只有在它的相关依赖发生改变时</strong>才会<strong>重新求值</strong>。</li><li>这就意味着只要<strong>函数使用的变量</strong>还没有发生改变，<strong>多次访问</strong>totalPrice<strong>计算属性</strong>会<strong>立即返回之前的计算结果</strong>，而<strong>不必再次执行函数</strong>。</li><li><p>注意：因为 Date.now() 不是响应式依赖，因此下面例子的计算属性将不再更新：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  now: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    <span class="built_in">return</span> Date.now()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>相比之下，每当<strong>触发重新渲染</strong>时，<strong>调用方法将总会再次执行函数</strong>。</p></li></ul><blockquote>两者的区别</blockquote><ul><li>对于计算属性而言，它<strong>返回的是运算的结果</strong>，它是<strong>基于依赖进行缓存</strong>的（某些属性是非依赖的），只有调用的返回的结果发生改变的时候们才会导致computed属性重新计算调用。</li><li>对于<strong>方法</strong>来说，<strong>需要触发源</strong>。与computed不同的是，它<strong>可以有返回值或者可以没有返回值</strong>（即可以只有逻辑代码）。但是<strong>方法的每次调用都会重新计算</strong>，所以相较于计算属性来说，<strong>在性能消耗上，是会有相较高的性能消耗</strong>。</li></ul><h4 id="计算属性-vs-侦听属性"><a href="#计算属性-vs-侦听属性" class="headerlink" title="计算属性 vs 侦听属性"></a>计算属性 vs 侦听属性</h4><ul><li>Vue 提供了一种更通用的方式来观察和响应 Vue 实例上的数据变动：侦听（watch）属性。</li><li>当我们有一些数据需要随着其它数据变动而变动时，也可以使用侦听（watch）属性。</li><li><p>然而，通常更好的做法是使用计算属性而不是命令式的 watch 回调。如下面的例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"demo"</span>&gt;&#123;&#123; fullName &#125;&#125;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: <span class="string">'#demo'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    firstName: <span class="string">'Foo'</span>,</span><br><span class="line">    lastName: <span class="string">'Bar'</span>,</span><br><span class="line">    fullName: <span class="string">'Foo Bar'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    firstName: <span class="keyword">function</span> (val) &#123;</span><br><span class="line">      this.fullName = val + <span class="string">' '</span> + this.lastName</span><br><span class="line">    &#125;,</span><br><span class="line">    lastName: <span class="keyword">function</span> (val) &#123;</span><br><span class="line">      this.fullName = this.firstName + <span class="string">' '</span> + val</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li><li><p>上面代码是命令式且重复的。将它与计算属性的版本进行比较：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  el: <span class="string">'#demo'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    firstName: <span class="string">'Foo'</span>,</span><br><span class="line">    lastName: <span class="string">'Bar'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    fullName: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      <span class="built_in">return</span> this.firstName + <span class="string">' '</span> + this.lastName</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li></ul><h4 id="计算属性的-setter"><a href="#计算属性的-setter" class="headerlink" title="计算属性的 setter"></a>计算属性的 setter</h4><ul><li><p>计算属性默认只有 getter ，不过在需要时也可以提供一个 setter ：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// ...</span><br><span class="line">computed: &#123;</span><br><span class="line">  fullName: &#123;</span><br><span class="line">    // getter</span><br><span class="line">    get: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">      <span class="built_in">return</span> this.firstName + <span class="string">' '</span> + this.lastName</span><br><span class="line">    &#125;,</span><br><span class="line">    // setter</span><br><span class="line">    <span class="built_in">set</span>: <span class="keyword">function</span> (newValue) &#123;</span><br><span class="line">      var names = newValue.split(<span class="string">' '</span>)</span><br><span class="line">      this.firstName = names[0]</span><br><span class="line">      this.lastName = names[names.length - 1]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// ...</span><br></pre></td></tr></table></figure></li><li><p>现在再运行 <code>vm.fullName = ‘John Doe’</code> 时，setter 会被调用，<code>vm.firstName</code> 和 <code>vm.lastName</code> 也会相应地被更新。</p></li></ul><h4 id="watch、computed和methods之间的对比"><a href="#watch、computed和methods之间的对比" class="headerlink" title="watch、computed和methods之间的对比"></a>watch、computed和methods之间的对比</h4><ul><li><code>computed</code>属性的结果会被<strong>缓存</strong>，除非<strong>依赖的响应式属性变化</strong>才会<strong>重新计算</strong>。主要当做<strong>属性</strong>来使用；</li><li><code>methods</code>方法表示一个具体的操作，主要<strong>书写业务逻辑</strong>；</li><li><code>watch</code>一个对象，<strong>键</strong>是需要观察的表达式，<strong>值</strong>是对应回调函数。主要用来<strong>监听某些特定数据的变化</strong>，从而<strong>进行某些具体的业务逻辑操作</strong>；可以看作是<code>computed</code>和<code>methods</code>的结合体。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;基本介绍&quot;&gt;&lt;a href=&quot;#基本介绍&quot; class=&quot;headerlink&quot; title=&quot;基本介绍&quot;&gt;&lt;/a&gt;基本介绍&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;计算属性是需要&lt;strong&gt;复杂的逻辑&lt;/strong&gt;和很多&lt;strong&gt;组件基础状态&lt;/strong&gt;最后才能得到其&lt;strong&gt;正确值&lt;/strong&gt;的属性。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;模板内的表达式&lt;/strong&gt;非常便利，但是设计它们的初衷是用于简单运算的。在模板中放入太多的逻辑会让模板过重且难以维护。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
-      <category term="Vue.js" scheme="https://chongtianhong.github.io/tags/Vue-js/"/>
+      <category term="闭包" scheme="https://chongtianhong.github.io/tags/%E9%97%AD%E5%8C%85/"/>
     
   </entry>
   
