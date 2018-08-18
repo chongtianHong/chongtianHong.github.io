@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="在 JavaScript 中提供了如下四种循环遍历数组元素的方式： for：循环遍历数组元素最简单的方式。 for-in：循环遍历对象的属性。 forEach：调用数组的每个元素，并将元素传递给回调函数。 for-of：循环遍历集合对象的属性值。">
+<meta name="description" content="在 JavaScript 中提供了如下四种循环遍历数组元素的方式： for：循环遍历数组元素最简单的方式。 for…in：循环遍历对象的属性。 forEach：调用数组的每个元素，并将元素传递给回调函数。 for…of：循环遍历集合对象的属性值。">
 <meta name="keywords" content="JavaScript,开发,Array">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 中的循环数组遍历">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/03/13/array1/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="在 JavaScript 中提供了如下四种循环遍历数组元素的方式： for：循环遍历数组元素最简单的方式。 for-in：循环遍历对象的属性。 forEach：调用数组的每个元素，并将元素传递给回调函数。 for-of：循环遍历集合对象的属性值。">
+<meta property="og:description" content="在 JavaScript 中提供了如下四种循环遍历数组元素的方式： for：循环遍历数组元素最简单的方式。 for…in：循环遍历对象的属性。 forEach：调用数组的每个元素，并将元素传递给回调函数。 for…of：循环遍历集合对象的属性值。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-23T14:42:38.022Z">
+<meta property="og:updated_time" content="2018-08-18T14:12:19.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 中的循环数组遍历">
-<meta name="twitter:description" content="在 JavaScript 中提供了如下四种循环遍历数组元素的方式： for：循环遍历数组元素最简单的方式。 for-in：循环遍历对象的属性。 forEach：调用数组的每个元素，并将元素传递给回调函数。 for-of：循环遍历集合对象的属性值。">
+<meta name="twitter:description" content="在 JavaScript 中提供了如下四种循环遍历数组元素的方式： for：循环遍历数组元素最简单的方式。 for…in：循环遍历对象的属性。 forEach：调用数组的每个元素，并将元素传递给回调函数。 for…of：循环遍历集合对象的属性值。">
 
 
 
@@ -401,9 +401,9 @@
         <ul>
 <li>在 JavaScript 中提供了如下四种循环遍历数组元素的方式：<ul>
 <li><code>for</code>：循环遍历数组元素最简单的方式。</li>
-<li><code>for-in</code>：循环遍历对象的<strong>属性</strong>。</li>
+<li><code>for…in</code>：循环遍历对象的<strong>属性</strong>。</li>
 <li><code>forEach</code>：调用数组的每个元素，并将元素传递给回调函数。</li>
-<li><code>for-of</code>：循环遍历集合对象的<strong>属性值</strong>。<a id="more"></a>
+<li><code>for…of</code>：循环遍历集合对象的<strong>属性值</strong>。<a id="more"></a>
 </li>
 </ul>
 </li>
@@ -414,34 +414,34 @@
 <li>这是循环遍历数组元素最简单的方式。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i = 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">    console.log(arr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<blockquote>for-in</blockquote>
+<blockquote>for…in</blockquote>
 
 <ul>
-<li><p>for-in 语句以任意顺序（即显示顺序不是可控的）<strong>遍历一个对象的</strong>可枚举<strong>属性</strong>:</p>
+<li><p><code>for…in</code>语句以任意顺序（即显示顺序不是可控的）<strong>遍历一个对象的</strong>可枚举<strong>属性</strong>:</p>
 <ul>
 <li>对于<strong>数组</strong>即是<strong>数组下标</strong>，对于<strong>对象</strong>即是<strong>对象的 key 值</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var index <span class="keyword">in</span> myArray) &#123;</span><br><span class="line">    console.log(myArray[index]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p><strong>不推荐</strong>使用 for-in 语句。</p>
+<li><p><strong>不推荐</strong>使用<code>for…in</code>语句。</p>
 </li>
-<li><p>注意：for-in 遍历返回的对象属性都是<strong>字符串类型</strong>，即使是数组下标，也是字符串 “0”, “1”, “2” 等等。如果使用字符串的 index 去参与某些运算（”2” + 1 == “21”），运算结果可能会不符合预期。例如以下代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var myArray=[1,2,3,4,5];</span><br><span class="line"><span class="keyword">for</span> (var index <span class="keyword">in</span> myArray) &#123; </span><br><span class="line">    console.log(index+1); // 01 11 21 31 41</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>注意：<code>for…in</code>遍历返回的对象属性都是<strong>字符串类型</strong>，即使是数组下标，也是字符串 “0”, “1”, “2” 等等。如果使用字符串的 index 去参与某些运算（“2” + 1 == “21”），运算结果可能会不符合预期。例如以下代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var myArray=[1, 2, 3, 4, 5];</span><br><span class="line"><span class="keyword">for</span> (var index <span class="keyword">in</span> myArray) &#123; </span><br><span class="line">    console.log(index + 1); // 01 11 21 31 41</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>还有一个缺点是不仅数组本身的元素将被遍历到，用户自己为数组添加的一些属性也会被遍历到，甚至数组原型链上的属性也可能被遍历到。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var myArray=new Array(1,2,3,4,5);</span><br><span class="line">myArray.name=<span class="string">"hello"</span>;</span><br><span class="line">Array.prototype.method=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    console.log(<span class="string">"world"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (var index <span class="keyword">in</span> myArray) &#123;</span><br><span class="line">    console.log(index); // 0 1 2 3 4 name method</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>还有一个缺点是<strong>不仅数组本身的元素将被遍历到</strong>，<strong>用户自己为数组添加的一些属性也会被遍历到</strong>，甚至<strong>数组原型链上的属性也可能被遍历到</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var myArray = new Array(1, 2, 3, 4,5 );</span><br><span class="line">myArray.name = <span class="string">"hello"</span>;</span><br><span class="line">Array.prototype.method = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    console.log(<span class="string">"world"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (var index <span class="keyword">in</span> myArray) &#123;</span><br><span class="line">    console.log(index); // 0 1 2 3 4 name method</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>for-in 设计的目的是用于<strong>遍历包含键值对的对象</strong>，对数组并不是那么友好。 </p>
+<li><p><code>for…in</code>设计的目的是用于<strong>遍历包含键值对的对象</strong>，对数组并不是那么友好。 </p>
 </li>
-<li>遍历数组的话还是用es6的for-of循环遍历比较好。</li>
+<li><strong>遍历数组</strong>的话还是<strong>用es6的<code>for…of</code>循环遍历</strong>比较好。</li>
 </ul>
-<blockquote>for-of</blockquote>
+<blockquote>for…of</blockquote>
 
 <ul>
-<li><p>for-of 语句为各种 collection 集合对象专门定制的，遍历集合对象的<strong>属性值</strong>，注意和 for-in 的区别。</p>
+<li><p><code>for…of</code>语句为各种 collection 集合对象专门定制的，遍历集合对象的<strong>属性值</strong>，注意和<code>for…in</code>的区别。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var value of myArray) &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>for-of和for-in的区别：</p>
+<li><p><code>for…of</code>和<code>for…in</code>的区别：</p>
 <ul>
 <li>推荐在循环<strong>对象属性</strong>的时候，使用<code>for…in</code>，在<strong>遍历数组</strong>的时候的时候使用<code>for…of</code>。</li>
 <li><code>for…in</code>循环出的是<code>key</code>，<code>for…of</code>循环出的是<code>value</code>。</li>
@@ -453,7 +453,7 @@
 <blockquote>forEach</blockquote>
 
 <ul>
-<li>forEach 方法用于<strong>调用数组的每个元素</strong>，并<strong>将元素传递给回调函数</strong>；</li>
+<li>forEach法用于<strong>调用数组的每个元素</strong>，并<strong>将元素传递给回调函数</strong>；</li>
 <li>注意：在回调函数中<strong>无法使用 break 跳出当前循环</strong>，也<strong>无法使用 return 返回值</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myArray.forEach(<span class="keyword">function</span> (value) &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
