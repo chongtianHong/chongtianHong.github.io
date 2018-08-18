@@ -133,7 +133,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/Google.jpg">
 <meta property="og:image" content="https://chongtianhong.github.io/images/Firefox.jpg">
-<meta property="og:updated_time" content="2018-08-16T14:28:45.673Z">
+<meta property="og:updated_time" content="2018-08-18T14:22:25.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="for循环、forEach、map、filter区别及效率分析">
 <meta name="twitter:description" content="遍历数组最常用到的for循环，是最为熟知的一种方法，在ES5中定义了一些新的遍历方法，更加适用于函数式编程。 本文对各种数组遍历方法的区别和效率进行分析记录。">
@@ -405,7 +405,7 @@
 <li><strong>遍历数组</strong>最常用到的for循环，是最为熟知的一种方法，在ES5中定义了一些新的遍历方法，更加适用于函数式编程。</li>
 <li>本文对各种数组遍历方法的区别和效率进行分析记录。<a id="more"></a></li>
 <li><p>首先，写入以下脚本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var testData = [];//数组初始化</span><br><span class="line">var x = 9999;</span><br><span class="line"><span class="keyword">for</span>(var i = 0; i &lt; x; i++)&#123;</span><br><span class="line">    testData[i] = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var testData = []; // 数组初始化</span><br><span class="line">var x = 9999;</span><br><span class="line"><span class="keyword">for</span>(var i = 0; i &lt; x; i++)&#123;</span><br><span class="line">    testData[i] = i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在每个遍历开始前和结束后取时间戳的差值，每个测试10次取平均值查看结果。<strong>以下测试结果基于Google浏览器</strong>。</p>
 </li>
@@ -417,7 +417,7 @@
 <li><p>取完平均值是7.3ms。</p>
 </li>
 <li><p>重新对for循环进行优化：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(var i = 0,len = testData.length; i &lt; len; i++)&#123;</span><br><span class="line">    code...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(var i = 0, len = testData.length; i &lt; len; i++)&#123;</span><br><span class="line">    code...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>取完平均值是2.7ms。</p>
 </li>
