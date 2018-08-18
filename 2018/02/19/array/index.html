@@ -133,7 +133,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/object.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/object2.png">
-<meta property="og:updated_time" content="2018-07-20T14:11:33.533Z">
+<meta property="og:updated_time" content="2018-08-18T12:44:13.127Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript数组方法大全">
 <meta name="twitter:description" content="基本内容 JavaScript中创建数组有两种方式，第一种是使用Array构造函数，另一种是使用数组字面量表示法。 有三种方法可以用来判断变量是否为数组(Array)，分别是instance of、constructor和isArray。 数组的方法有数组原型方法，也有从object对象继承来的方法，常见的数组原型方法主要有： join() push()和pop() shift() 和 unshi">
@@ -432,28 +432,28 @@
 </ul>
 <blockquote>instance of</blockquote>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a=new Array();</span><br><span class="line">a instanceof Array; //<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = new Array();</span><br><span class="line">a instanceof Array; //<span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <blockquote>constructor</blockquote>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a=new Array();</span><br><span class="line">a.constructor==Array; //<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = new Array();</span><br><span class="line">a.constructor == Array; //<span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <blockquote>isArray</blockquote>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//对支持isArray的浏览器</span><br><span class="line">var a=new Array();</span><br><span class="line">Array.isArray(a); //<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h4 id="常见的数组方法"><a href="#常见的数组方法" class="headerlink" title="常见的数组方法"></a>常见的数组方法</h4><h5 id="数组元素的添加"><a href="#数组元素的添加" class="headerlink" title="数组元素的添加"></a>数组元素的添加</h5><blockquote>push 方法</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//对支持isArray的浏览器</span><br><span class="line">var a = new Array();</span><br><span class="line">Array.isArray(a); //<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h4 id="常见的数组方法"><a href="#常见的数组方法" class="headerlink" title="常见的数组方法"></a>常见的数组方法</h4><h5 id="数组元素的添加"><a href="#数组元素的添加" class="headerlink" title="数组元素的添加"></a>数组元素的添加</h5><blockquote>push方法</blockquote>
 
 <ul>
 <li>将一个或多个新元素添加到原数组末尾，并返回数组的长度。</li>
 <li>该方法会<strong>改变原始数组</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,2,3];</span><br><span class="line">var b = arr.push([4,5]); //arr：[1,2,3,4,5]  b：5</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<blockquote>unshift 方法</blockquote>
+<blockquote>unshift方法</blockquote>
 
 <ul>
 <li>将一个或多个新元素添加到数组开头，并返回数组的长度。</li>
 <li>该方法会<strong>改变原始数组</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,2,3];</span><br><span class="line">var b = arr.unshift(-2,-1); //arr：[-2,-1,1,2,3]  b：5</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<blockquote>splice 方法</blockquote>
+<blockquote>splice方法</blockquote>
 
 <ul>
 <li>将一个或多个新元素插入到数组的指定位置，插入位置的元素自动后移，返回””。</li>
@@ -462,20 +462,20 @@
 <li>函数原型: splice(insertIndex,0,element1,…..,elementX)。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var fruits = [<span class="string">"Banana"</span>, <span class="string">"Orange"</span>, <span class="string">"Apple"</span>, <span class="string">"Mango"</span>];</span><br><span class="line">var result = fruits.splice(2,0,<span class="string">"Lemon"</span>,<span class="string">"Kiwi"</span>);//在数组的第二个位置插入元素</span><br><span class="line">//result : <span class="string">""</span></span><br><span class="line">//fruits: [Banana, Orange, Lemon, Kiwi, Apple, Mango]</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h5 id="数组元素的删除"><a href="#数组元素的删除" class="headerlink" title="数组元素的删除"></a>数组元素的删除</h5><blockquote>pop 方法</blockquote>
+<h5 id="数组元素的删除"><a href="#数组元素的删除" class="headerlink" title="数组元素的删除"></a>数组元素的删除</h5><blockquote>pop方法</blockquote>
 
 <ul>
 <li>删除原数组最后一个元素，并返回删除元素的值；如果数组为空则返回undefined。</li>
 <li>该方法会<strong>改变原始数组</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,2,3];</span><br><span class="line">var b = arr.pop(); //arr：[1,2]  b：3</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<blockquote>shift 方法</blockquote>
+<blockquote>shift方法</blockquote>
 
 <ul>
 <li>删除原数组第一项，并返回删除元素的值；如果数组为空则返回undefined。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,2,3];</span><br><span class="line">var b = arr.shift(); //arr：[2,3]  b：1</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<blockquote>splice 方法</blockquote>
+<blockquote>splice方法</blockquote>
 
 <ul>
 <li>splice 方法向/从数组中删除项目，然后返回被删除的项目。</li>
@@ -484,7 +484,7 @@
 <li>函数原型: splice(insertIndex,deleteCount,element1,…..,elementX)。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//删除并插入</span><br><span class="line">var arr = [1,2,3,4,5];</span><br><span class="line">var b = arr.splice(2,2,7,8,9); //arr：[1,2,7,8,9,5]  b：[3,4]</span><br><span class="line">//同<span class="built_in">shift</span></span><br><span class="line">var b = arr.splice(0,1); </span><br><span class="line">//同unshift</span><br><span class="line">arr.splice(0,0,-2,-1); </span><br><span class="line">//同pop</span><br><span class="line">var b = arr.splice(a.length-1,1); </span><br><span class="line">//同push</span><br><span class="line">arr.splice(arr.length,0,6,7);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h5 id="数组元素的截取"><a href="#数组元素的截取" class="headerlink" title="数组元素的截取"></a>数组元素的截取</h5><blockquote>slice 方法</blockquote>
+<h5 id="数组元素的截取"><a href="#数组元素的截取" class="headerlink" title="数组元素的截取"></a>数组元素的截取</h5><blockquote>slice方法</blockquote>
 
 <ul>
 <li>函数原型: slice(start,end)。</li>
@@ -494,7 +494,7 @@
 <li>如果有两个参数，该方法返回起始和结束位置之间的项——但不包括结束位置的项。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,2,3,4,5];</span><br><span class="line">var b = arr.slice(2,5); //arr：[1,2,3,4,5]  b：[3,4,5]</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h5 id="数组元素的合并"><a href="#数组元素的合并" class="headerlink" title="数组元素的合并"></a>数组元素的合并</h5><blockquote>concat 方法</blockquote>
+<h5 id="数组元素的合并"><a href="#数组元素的合并" class="headerlink" title="数组元素的合并"></a>数组元素的合并</h5><blockquote>concat方法</blockquote>
 
 <ul>
 <li>将多个数组（也可以是字符串，或者是数组和字符串的混合）连接为一个数组，返回连接好的<strong>新数组</strong>。</li>
@@ -505,14 +505,14 @@
 <li>可以实现数组拷贝的方法有slice方法和concat方法。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//slice(start,end):start设置为0，省略end则表示从头截取到尾，即对数组进行了一份拷贝</span><br><span class="line">//返回数组的拷贝数组，注意是一个新的数组，不是指向</span><br><span class="line">arrayObj.slice(0);</span><br><span class="line">//在没有给 concat()方法传递参数的情况下，它只是复制当前数组并返回副本</span><br><span class="line">//返回数组的拷贝数组，注意是一个新的数组，不是指向</span><br><span class="line">arrayObj.concat();</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h5 id="数组的排序"><a href="#数组的排序" class="headerlink" title="数组的排序"></a>数组的排序</h5><blockquote>reverse 方法</blockquote>
+<h5 id="数组的排序"><a href="#数组的排序" class="headerlink" title="数组的排序"></a>数组的排序</h5><blockquote>reverse方法</blockquote>
 
 <ul>
 <li>该方法用来反转数组中的元素（前后颠倒）。</li>
 <li>此方法会<strong>修改原数组</strong>，并不会创建新数组。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3].reverse();  </span><br><span class="line">//[3, 2, 1]</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<blockquote>sort 方法</blockquote>
+<blockquote>sort方法</blockquote>
 
 <ul>
 <li>该方法将数组中的元素排序并返回排序后的数组。</li>
@@ -526,7 +526,7 @@
 </ul>
 </li>
 </ul>
-<h5 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h5><blockquote>join 方法</blockquote>
+<h5 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h5><blockquote>join方法</blockquote>
 
 <ul>
 <li>该方法用来拼接字符串。返回一个<strong>字符串</strong>。</li>
@@ -541,14 +541,14 @@
 <li>若第二个参数缺省，则从数组的开头（位置 0）开始向后查找。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 4, 2].indexOf(2);         //1  </span><br><span class="line">[1, 2, 3, 4, 2].indexOf(2, 2);      //4</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<blockquote>lastIndexOf 方法</blockquote>
+<blockquote>lastIndexOf方法</blockquote>
 
 <ul>
 <li>该方法用于判断数组中是否有相匹配的值，第二个参数（可选的）表示从数组的某个开始位置<strong>往前检索</strong>。</li>
 <li>若第二个参数缺省，从数组的末尾开始向前查找。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1,3,5,7,7,5,3,1];</span><br><span class="line">console.log(arr.lastIndexOf(5)); //5</span><br><span class="line">console.log(arr.lastIndexOf(5,4)); //2</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<blockquote>forEach 方法</blockquote>
+<blockquote>forEach方法</blockquote>
 
 <ul>
 <li>该方法用于对数组进行遍历循环，对数组中的每一项运行给定函数。</li>
@@ -556,7 +556,7 @@
 <li>参数是function类型，默认有传参，参数分别为：遍历的数组内容val；第对应的数组索引index，数组本身arr。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3].forEach(<span class="keyword">function</span>(val, index, arr)&#123;  </span><br><span class="line">    console.log(val);  </span><br><span class="line">&#125;);</span><br><span class="line">//1 2 3</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<blockquote>toString 方法</blockquote>
+<blockquote>toString方法</blockquote>
 
 <ul>
 <li>该方法用于将每个元素转化为字符串并且输出用逗号隔开。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, 4].toString();  </span><br><span class="line">//1,2,3,4  </span><br><span class="line">//等价于[1, 2, 3, 4].join();</span><br></pre></td></tr></table></figure>
@@ -566,30 +566,28 @@
 
 <ul>
 <li>因为arguments是一个类数组对象，虽然它也有下标，但它并非真正的数组，所以不能和数组一样进行排序添加之类的操作。</li>
-<li>这种情况下，借用array.prototype对象上的方法，可以对arguments完成push，shift等操作。</li>
-<li><code>[].slice.call(arguments)</code>就可以把arguments转换成真正的数组。<ul>
+<li>这种情况下，借用Array.prototype对象上的方法，可以对arguments完成push，shift等操作。</li>
+<li><code>[].slice.call(arguments)</code>就可以把arguments转换成真正的数组。</li>
 <li>通过call显式绑定来实现arguments对象变相有slice这个方法。</li>
-</ul>
-</li>
-<li>等价于<code>Array.slice.call(arguments)</code>。</li>
+<li>等价于<code>Array.prototype.slice.call(arguments)</code>。</li>
 </ul>
 <blockquote>基本类型和引用类型的区别</blockquote>
 
 <ul>
 <li>JS变量中包含两种不同数据类型的值：<strong>基本（原始）类型值</strong>和<strong>引用（对象）类型值</strong>。</li>
 <li><strong>基本的数据类型</strong>有：undefined，boolean，number，string，null。基本类型的访问是<strong>按值访问</strong>的，其值保存在栈内存中，就是说我们可以操作保存在变量中的实际的值。</li>
-<li>基本类型变量的复制：从一个变量向一个变量复制时，会在栈中创建一个新值，然后把值复制到为新变量分配的位置上。</li>
+<li><strong>基本类型</strong>变量的复制：从一个变量向一个变量复制时，会在栈中创建一个新值，然后把值复制到为新变量分配的位置上。</li>
 <li><p>基本类型有以下几个特点：</p>
 <ul>
 <li><p>基本类型的值是不可变的。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//任何方法都无法改变一个基本类型的值</span><br><span class="line">//比如一个字符串：</span><br><span class="line">var name = <span class="string">'jozo'</span>;</span><br><span class="line">name.toUpperCase(); // 输出 <span class="string">'JOZO'</span></span><br><span class="line">console.log(name); // 输出  <span class="string">'jozo'</span></span><br><span class="line">//可以发现原始的name并未发生改变，调用了toUpperCase()方法后返回的是一个新的字符串。</span><br><span class="line"></span><br><span class="line">//不能给基本类型添加属性和方法</span><br><span class="line">var person = <span class="string">'jozo'</span>;</span><br><span class="line">person.age = 22;</span><br><span class="line">person.method = <span class="function"><span class="title">function</span></span>()&#123;//...&#125;;</span><br><span class="line">console.log(person.age); // undefined</span><br><span class="line">console.log(person.method); // undefined</span><br><span class="line">//该例子说明基本类型是不可变的；</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>基本类型的比较是<strong>值的比较</strong>。只有在它们的值相等的时候它们才相等。</p>
+<li><p><strong>基本类型</strong>的比较是<strong>值的比较</strong>。只有在它们的值相等的时候它们才相等。</p>
 </li>
-<li>基本类型的变量是存放在栈区的（栈区指内存里的栈内存）。</li>
+<li><strong>基本类型</strong>的变量是存放在栈区的（栈区指内存里的栈内存）。</li>
 </ul>
 </li>
-<li><p>引用数据类型：引用数据类型值指保存在<strong>堆内存</strong>中的对象。也就是，变量中保存的实际上的只是一个指针，这个指针指向内存中的另一个位置，该位置保存着对象。访问方式是按引用访问。</p>
+<li><p><strong>引用数据类型</strong>：引用数据类型值指保存在<strong>堆内存</strong>中的对象。也就是，变量中保存的实际上的只是一个指针，这个指针指向内存中的另一个位置，该位置保存着对象。访问方式是按引用访问。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a = new Object();</span><br></pre></td></tr></table></figure>
 <p><img src="/images/object.png"></p>
 <ul>
@@ -597,10 +595,10 @@
 </li>
 <li><p><strong>引用类型</strong>又称为对象类型，如对象、数组等。引用类型有以下几个特点：</p>
 </li>
-<li><p>引用类型的值是可变的。</p>
+<li><p><strong>引用类型</strong>的值是可变的。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//可以为引用类型添加属性和方法，也可以删除其属性和方法，如：</span><br><span class="line">var person = &#123;&#125;;//创建个空对象 --引用类型</span><br><span class="line">person.name = <span class="string">'jozo'</span>;</span><br><span class="line">person.age = 22;</span><br><span class="line">person.sayName = <span class="function"><span class="title">function</span></span>()&#123;console.log(person.name);&#125; </span><br><span class="line">person.sayName();// <span class="string">'jozo'</span></span><br><span class="line">delete person.name; //删除person对象的name属性</span><br><span class="line">person.sayName(); // undefined</span><br><span class="line">//说明引用类型可以拥有属性和方法，并且是可以动态改变的。</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>引用类型的值是同时保存在栈内存和堆内存中的对象。JS中引用类型的值是<strong>按引用访问</strong>的。</p>
+<li><p><strong>引用类型</strong>的值是同时保存在栈内存和堆内存中的对象。JS中引用类型的值是<strong>按引用访问</strong>的。</p>
 </li>
 <li>引用类型的比较是<strong>引用的比较</strong>，即<strong>比较</strong>两个对象的堆内存中的<strong>地址</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var person1 = &#123;&#125;;</span><br><span class="line">var person2 = &#123;&#125;;</span><br><span class="line">console.log(person1 == person2); // <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 </li>
