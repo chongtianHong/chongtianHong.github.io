@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,开发,ES6,箭头函数,this," />
+  <meta name="keywords" content="开发,JavaScript,ES6,箭头函数,this," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="箭头函数看上去是匿名函数的一种简写，但实际上，箭头函数和匿名函数有个明显的区别： 箭头函数内部的this是词法作用域，由上下文确定。 箭头函数中的this是在定义函数的时候绑定，而不是在执行函数的时候绑定。">
-<meta name="keywords" content="JavaScript,开发,ES6,箭头函数,this">
+<meta name="keywords" content="开发,JavaScript,ES6,箭头函数,this">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解ES6箭头函数中的this">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/04/10/arrowFunction/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="箭头函数看上去是匿名函数的一种简写，但实际上，箭头函数和匿名函数有个明显的区别： 箭头函数内部的this是词法作用域，由上下文确定。 箭头函数中的this是在定义函数的时候绑定，而不是在执行函数的时候绑定。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-13T15:23:16.638Z">
+<meta property="og:updated_time" content="2018-08-19T06:57:29.181Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解ES6箭头函数中的this">
 <meta name="twitter:description" content="箭头函数看上去是匿名函数的一种简写，但实际上，箭头函数和匿名函数有个明显的区别： 箭头函数内部的this是词法作用域，由上下文确定。 箭头函数中的this是在定义函数的时候绑定，而不是在执行函数的时候绑定。">
@@ -407,14 +407,14 @@
 <li>由于this在箭头函数中已经按照词法作用域绑定了，所以，用<code>call()</code>或者<code>apply()</code>、<code>bind()</code>调用箭头函数时，无法对this进行绑定（无法使用<code>call()</code>或者<code>apply()</code>、<code>bind()</code>改变this的指向），即传入的第一个参数被忽略。内部的this指向<strong>父执行上下文</strong>里面的this。</li>
 <li>箭头函数中，this指向的固定化，并不是因为箭头函数内部有绑定this的机制，实际原因是<strong>箭头函数根本没有自己的this</strong>，导致内部的this就是<strong>外层代码块</strong>的this。正是因为它没有this，所以也就<strong>不能用作构造函数</strong>。</li>
 <li><p>箭头函数中的this是在<strong>定义函数的时候绑定</strong>，看一个例子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var x = 11;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    x: 22,</span><br><span class="line">    say: ()=&gt;&#123;</span><br><span class="line">        console.log(this.x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.say();  //输出的值为11</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var x = 11;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    x: 22,</span><br><span class="line">    say: ()=&gt;&#123;</span><br><span class="line">        console.log(this.x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.say();  // 输出的值为11</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>所谓的<strong>定义时候绑定</strong>，就是this是继承自<strong>父执行上下文中的this</strong>，比如这里的箭头函数中的this.x，箭头函数本身与say平级以key:value的形式，也就是箭头函数本身所在的对象为obj，而<strong>obj的父执行上下文就是window</strong>，因此这里的this.x实际上表示的是window.x，因此输出的是11。</p>
+<li><p>所谓的<strong>定义时候绑定</strong>，就是this是继承自<strong>父执行上下文中的this</strong>，比如这里的箭头函数中的<code>this.x</code>，箭头函数本身与say平级以<code>key:value</code>的形式，也就是箭头函数本身所在的对象为obj，而<strong>obj的父执行上下文就是window</strong>，因此这里的<code>this.x</code>实际上表示的是window.x，因此输出的是11。</p>
 </li>
 <li><p>而对于下面的例子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">    birth: 1990,</span><br><span class="line">    getAge: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        var b = this.birth; // 1990</span><br><span class="line">        var fn = () =&gt; new Date().getFullYear() - this.birth; // this指向obj对象</span><br><span class="line">        <span class="built_in">return</span> fn();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.getAge(); // 25</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">    birth: 1990,</span><br><span class="line">    getAge: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        var b = this.birth; // 1990</span><br><span class="line">        var fn = () =&gt; new Date().getFullYear() - this.birth; // this指向obj对象</span><br><span class="line">        <span class="built_in">return</span> fn();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.getAge(); // 28</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>例子中箭头函数本身是在getAge方法中定义的，因此，getAge方法的<strong>父执行上下文</strong>是obj，因此这里的this指向则为obj对象。</p>
+<li><p>例子中<strong>箭头函数本身是在getAge方法中定义的</strong>，因此，getAge方法的<strong>父执行上下文</strong>是obj，因此这里的this指向则为obj对象。</p>
 </li>
 </ul>
 
@@ -444,9 +444,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
             <a href="/tags/ES6/" rel="tag"><i class="fa fa-tag"></i> ES6</a>
           
