@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 ES6诞生以前，异步编程的方法，大概有如下四种：回调函数、事件监听、发布/订阅、Promise对象； ES6中，引入了Generator函数； ES7中，async更是将异步编程带入了一个全新的阶段。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-18T15:07:58.792Z">
+<meta property="og:updated_time" content="2018-08-19T08:46:06.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Promise、Generator及async的笔记整理">
 <meta name="twitter:description" content="基本介绍 ES6诞生以前，异步编程的方法，大概有如下四种：回调函数、事件监听、发布/订阅、Promise对象； ES6中，引入了Generator函数； ES7中，async更是将异步编程带入了一个全新的阶段。">
@@ -405,7 +405,7 @@
 </li>
 </ul>
 <h4 id="Promise对象"><a href="#Promise对象" class="headerlink" title="Promise对象"></a>Promise对象</h4><ul>
-<li>Promise，就是一个对象，用来<strong>传递异步操作的消息</strong>，避免了层层嵌套的回调函数。它代表了某个未来才会知道结果的事件（通常是一个异步操作），并且这个事件提供统一的API，可供进一步处理。<br>（1）对象的状态不受外界影响。有三种状态：<strong>Pending（进行中）</strong>、<strong>Resolved（已完成，又称Fulfilled）</strong>和<strong>Rejected（已失败）</strong>。<br>（2）一旦<strong>状态改变，就不会再变</strong>，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：<strong>从Pending变为Resolve</strong>d和<strong>从Pending变为Rejected</strong>。只要这两种情况发生，<strong>状态</strong>就<strong>凝固</strong>了，<strong>不会再变</strong>了，会一直保持这个结果。</li>
+<li>Promise，就是一个对象，用来<strong>传递异步操作的消息</strong>，避免了层层嵌套的回调函数。它代表了某个未来才会知道结果的事件（通常是一个异步操作），并且这个事件提供统一的API，可供进一步处理。<br>（1）对象的状态不受外界影响。有三种状态：<strong>Pending（进行中）</strong>、<strong>Resolved（已完成，又称Fulfilled）</strong>和<strong>Rejected（已失败）</strong>。<br>（2）一旦<strong>状态改变，就不会再变</strong>，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：<strong>从Pending变为Resolved</strong>和<strong>从Pending变为Rejected</strong>。只要这两种情况发生，<strong>状态</strong>就<strong>凝固</strong>了，<strong>不会再变</strong>了，会一直保持这个结果。</li>
 </ul>
 <blockquote>生成Promise对象</blockquote>
 

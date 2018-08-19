@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,开发,ES6,Promise," />
+  <meta name="keywords" content="开发,JavaScript,ES6,Promise," />
 
 
 
@@ -124,7 +124,7 @@
 
 
 <meta name="description" content="前言 本文主要讲的是如何实现 Promise 的链式调用，也就是promise().then().then().catch()的形式，然后讨论如何在某一个 then() 里面中止 Promise。">
-<meta name="keywords" content="JavaScript,开发,ES6,Promise">
+<meta name="keywords" content="开发,JavaScript,ES6,Promise">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Promise 的链式调用与中止">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/05/14/promiseChain/index.html">
@@ -132,7 +132,7 @@
 <meta property="og:description" content="前言 本文主要讲的是如何实现 Promise 的链式调用，也就是promise().then().then().catch()的形式，然后讨论如何在某一个 then() 里面中止 Promise。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/promiseProcess.png">
-<meta property="og:updated_time" content="2018-08-17T14:58:09.644Z">
+<meta property="og:updated_time" content="2018-08-19T08:45:53.730Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Promise 的链式调用与中止">
 <meta name="twitter:description" content="前言 本文主要讲的是如何实现 Promise 的链式调用，也就是promise().then().then().catch()的形式，然后讨论如何在某一个 then() 里面中止 Promise。">
@@ -416,7 +416,7 @@
 <li>“unresolved” - <strong>Pending</strong>。既不是resolve也不是reject的状态，也就是promise对象刚被创建后的初始化状态等。</li>
 </ul>
 </li>
-<li>状态变化只能有两种，只能<strong>从Pending变成Fulfilled</strong>或<strong>从Pending变成Rejected</strong>。<strong>状态一旦发生变化，则不会再改变</strong>。<br><img src="/images/promiseProcess.png" alt="promise的状态变化示意图" width="600" style="border:none"></li>
+<li>Promise对象的状态改变，只有两种可能：<strong>从Pending变为Fulfilled</strong>和<strong>从Pending变为Rejected</strong>。只要这两种情况发生，<strong>状态</strong>就<strong>凝固</strong>了，<strong>不会再变</strong>了，会一直保持这个结果。<br><img src="/images/promiseProcess.png" alt="promise的状态变化示意图" width="600" style="border:none"></li>
 </ul>
 <h4 id="Promise的链式调用"><a href="#Promise的链式调用" class="headerlink" title="Promise的链式调用"></a>Promise的链式调用</h4><ul>
 <li><code>then()</code>方法的作用是<strong>为Promise实例添加解决（fulfillment）和拒绝（rejection）状态的回调函数</strong>。</li>
@@ -491,9 +491,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
             <a href="/tags/ES6/" rel="tag"><i class="fa fa-tag"></i> ES6</a>
           
