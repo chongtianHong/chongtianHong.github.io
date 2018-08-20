@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-19T08:45:53.730Z</updated>
+  <updated>2018-08-20T14:07:38.379Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hideDOM</title>
+    <link href="https://chongtianhong.github.io/2018/08/20/hideDOM/"/>
+    <id>https://chongtianhong.github.io/2018/08/20/hideDOM/</id>
+    <published>2018-08-20T14:07:38.000Z</published>
+    <updated>2018-08-20T14:07:38.379Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>前端路由的两种实现原理</title>
+    <link href="https://chongtianhong.github.io/2018/05/15/frontEndRouting/"/>
+    <id>https://chongtianhong.github.io/2018/05/15/frontEndRouting/</id>
+    <published>2018-05-15T07:14:00.000Z</published>
+    <updated>2018-08-20T14:00:02.727Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul><li>在<strong>单页应用</strong>上，前端路由并不陌生。单页应用是指<strong>在浏览器中运行的应用，在使用期间页面不会重新加载</strong>。</li><li>早期的路由都是后端实现的，直接<strong>根据url来重载页面</strong>，当页面变得越来越复杂时，服务器端压力变大。</li><li>随着<strong>ajax</strong>的出现，页面实现<strong>非重载</strong>就能刷新数据，也给前端路由的出现奠定了基础。我们可以<strong>通过修改 url 来记录 ajax 的变化</strong>，从而实现<strong>前端路由</strong>。<a id="more"></a></li><li>从<strong>性能</strong>和<strong>用户体验</strong>的层面来比较的话，<strong>后端路由每次访问一个新页面的时候都要向服务器发送请求</strong>，然后<strong>服务器</strong>再<strong>响应请求</strong>，这个过程肯定会有延迟。而<strong>前端路由在访问一个新页面的时候仅仅是变换了一下路径</strong>而已，<strong>没有了网络延迟</strong>，对于<strong>用户体验</strong>来说会有<strong>相当大的提升</strong>。 </li><li>从<strong>用户的角度</strong>看，前端路由主要实现了两个功能（使用ajax更新页面状态的情况下）：<ul><li><strong>记录当前页面的状态</strong>（保存或分享当前页的url，再次打开该url时，网页还是保存（分享）时的状态）；</li><li><strong>可以使用浏览器的前进后退功能</strong>（如点击后退按钮，可以使页面回到使用ajax更新页面之前的状态，url也回到之前的状态）；</li></ul></li><li>作为<strong>开发者</strong>，要实现这两个功能，我们需要做到：<ul><li>改变url且不让浏览器向服务器发出请求；</li><li>监测 url 的变化；</li><li>截获 url 地址，并解析出需要的信息来匹配路由规则。</li></ul></li><li>路由常用的hash模式和history模式实际上就是实现了上面的功能。</li></ul><h4 id="History-API"><a href="#History-API" class="headerlink" title="History API"></a>History API</h4><ul><li>history 是 HTML5 才有的新 API，可以用来<strong>操作浏览器的 session history (会话历史)</strong>。</li><li>History API 能让开发人员在<strong>不刷新整个页面的情况下修改站点的URL</strong>。这个功能很有用，例如通过一段JavaScript代码局部加载页面的内容，你希望<strong>通过改变当前页面的URL来反应出页面内容的变化</strong>，这时该功能可以派上用场。</li><li>举个例子，当用户从首页进入帮助页面时，我们<strong>通过Ajax来加载帮助页面的内容</strong>。然后这个用户又转到产品页面，我们需要再一次通<strong>过Ajax请求来替换页面的内容</strong>。当用户想分享页面的URL时，通过History API，我们可以改变页面的URL来反应内容的修改，这样不管是用户分享还是保存的URL都能和页面的内容对应起来。</li><li>要查看这个API提供了哪些功能非常简单，打开浏览器的开发者工具面板（F12），然后在控制台（console）中输入<code>history</code>。如果浏览器支持History API，将会看到这个对象下面附带了很多方法。关于每个API的用法，可以查看MDN的文档。<br><img src="" alt="History API提供的功能"></li><li>重点说其中的两个新增的API：<code>history.pushState</code>和<code>history.replaceState</code>。</li><li>这两个 API 都接收三个参数，分别是：<ul><li><strong>状态对象（state object）</strong>：一个JavaScript对象，与用pushState()方法创建的新历史记录条目关联。无论何时用户导航到新创建的状态，popstate事件都会被触发，并且事件对象的state属性都包含历史记录条目的状态对象的拷贝。</li><li><strong>标题（title）</strong>：截止到目前，几乎所有的浏览器都忽略该参数，虽然以后可能会用上。考虑到未来可能会对该方法进行修改，传一个空字符串会比较安全。或者，你也可以传入一个简短的标题，标明将要进入的状态。</li><li><strong>地址（URL）</strong>：<strong>新的历史记录条目的地址</strong>。浏览器不会在调用pushState()方法后加载该地址，但之后，可能会试图加载，例如用户重启浏览器。新的URL不一定是绝对路径；如果是相对路径，它将以当前URL为基准；传入的URL与当前URL应该是同源的，否则，pushState()会抛出异常。该参数是可选的；<strong>不指定的话则为文档当前URL</strong>。</li></ul></li><li><strong>相同之处</strong>是两个 API 都会<strong>操作浏览器的历史记录</strong>，而<strong>不会引起页面的刷新</strong>。</li><li><strong>不同之处</strong>在于，<code>history.pushState</code>会<strong>增加一条新的历史记录</strong>，而<code>history.replaceState</code>则会<strong>替换当前的历史记录</strong>。</li><li><code>history.pushState</code>将我们传给它的URL添加到浏览器的历史记录中，从而改变了浏览器的history。</li><li><strong><code>history.replaceState</code>只是简单地替换了地址栏中的URL（当前的历史记录），不会产生新的记录</strong>。也就是说，<code>history.replaceState</code>改变了当前页面的URL，并没有发出任何request请求，当前窗口仍然停留在之前的页面。当我们点击浏览器的后退按钮时，页面并不会回退到我们通过<code>history.replaceState</code>修改之前的那个URL，而是直接回退到了上一个页面（即我们进入到这个页面之前的那个页面）。</li></ul><blockquote>举例说明</blockquote><ul><li><p>在<strong>百度首页</strong>打开控制台，在控制台输入：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.history.pushState(null, null, <span class="string">"https://www.baidu.com/?name=xbhong"</span>);</span><br></pre></td></tr></table></figure></li><li><p>观察此时的 url 变成了:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.baidu.com/?name=xbhong</span><br></pre></td></tr></table></figure></li><li><p>其他用法：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">window.history.pushState(null, null, <span class="string">"https://www.baidu.com/name/xbhong"</span>);</span><br><span class="line">//url: https://www.baidu.com/name/xbhong</span><br><span class="line"></span><br><span class="line">window.history.pushState(null, null, <span class="string">"?name=xbhong"</span>);</span><br><span class="line">//url: https://www.baidu.com?name=xbhong</span><br><span class="line"></span><br><span class="line">window.history.pushState(null, null, <span class="string">"name=xbhong"</span>);</span><br><span class="line">//url: https://www.baidu.com/name=xbhong</span><br><span class="line"></span><br><span class="line">window.history.pushState(null, null, <span class="string">"/name/xbhong"</span>);</span><br><span class="line">//url: https://www.baidu.com/name/xbhong</span><br></pre></td></tr></table></figure></li><li><p><strong>注意</strong>：这里的<strong>url不支持跨域</strong>，当我们把<code>www.baidu.com</code>换成<code>baidu.com</code>时就会报错：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncaught DOMException: Failed to execute <span class="string">'pushState'</span> on <span class="string">'History'</span>: A <span class="built_in">history</span> state object with URL <span class="string">'https://baidu.com/?name=xbhong'</span> cannot be created <span class="keyword">in</span> a document with origin <span class="string">'https://www.baidu.com'</span> and URL <span class="string">'https://www.baidu.com/?name=xbhong'</span>.</span><br></pre></td></tr></table></figure></li><li><p>从上面的例子可以看到，每次<strong>改变url页面并没有刷新</strong>，而浏览器会产生历史记录（可查询到历史记录），这就是<strong>实现页面无刷新情况下改变url</strong>的前提。</p></li></ul><h4 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h4><ul><li>这里的 hash 就是指<strong>url尾巴后的 # 号以及后面的字符</strong>。这里的 # 和 css 里的 # 是一个意思。hash 也称作<strong>锚点</strong>，本身是用来做<strong>页面定位</strong>的，它可以<strong>使对应 id 的元素显示在可视区域内</strong>。</li><li><strong>基于hash的前端路由</strong>优点是：能<strong>兼容低版本的浏览器</strong>。大型框架的路由系统大多都是hash（哈希）实现的。</li><li><strong>基本原理</strong>：当 url 的 hash 发生改变时，触发 hashchange 注册的回调，回调中去进行不同的操作，进行不同的内容的展示。</li><li>使用到的api：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">window.location.hash = <span class="string">'qq'</span> // 设置 url 的 <span class="built_in">hash</span>，会在当前url后加上 <span class="string">'#qq'</span></span><br><span class="line"></span><br><span class="line">var <span class="built_in">hash</span> = window.location.hash // <span class="string">'#qq'</span>  </span><br><span class="line"></span><br><span class="line">window.addEventListener(<span class="string">'hashchange'</span>, <span class="function"><span class="title">function</span></span>()&#123; </span><br><span class="line">    // 监听<span class="built_in">hash</span>变化，点击浏览器的前进后退会触发</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li></ul><blockquote>hash 模式能兼容低版本的浏览器，为什么需要History API</blockquote><ul><li>hash 能兼容到IE8， History API只能兼容到 IE10，使用History API的原因是：<ul><li><strong>hash 本来是拿来做页面定位的</strong>，如果拿来做路由的话，原来的锚点功能就不能用了。</li><li>hash 的传参是基于 url 的，如果要传递复杂的数据，会有体积的限制，而 <strong>history 模式不仅可以在url里放参数，还可以将数据存放在一个特定的对象中</strong>。</li><li>路由的 history 模式比较美观（没有#）</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;在&lt;strong&gt;单页应用&lt;/strong&gt;上，前端路由并不陌生。单页应用是指&lt;strong&gt;在浏览器中运行的应用，在使用期间页面不会重新加载&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;早期的路由都是后端实现的，直接&lt;strong&gt;根据url来重载页面&lt;/strong&gt;，当页面变得越来越复杂时，服务器端压力变大。&lt;/li&gt;
+&lt;li&gt;随着&lt;strong&gt;ajax&lt;/strong&gt;的出现，页面实现&lt;strong&gt;非重载&lt;/strong&gt;就能刷新数据，也给前端路由的出现奠定了基础。我们可以&lt;strong&gt;通过修改 url 来记录 ajax 的变化&lt;/strong&gt;，从而实现&lt;strong&gt;前端路由&lt;/strong&gt;。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
+    
+      <category term="Router" scheme="https://chongtianhong.github.io/tags/Router/"/>
+    
+  </entry>
   
   <entry>
     <title>Promise 的链式调用与中止</title>
@@ -35,9 +80,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
@@ -64,9 +109,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Ajax" scheme="https://chongtianhong.github.io/tags/Ajax/"/>
     
@@ -91,9 +136,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="arguments" scheme="https://chongtianhong.github.io/tags/arguments/"/>
     
@@ -119,9 +164,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
     
@@ -146,11 +191,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="习题" scheme="https://chongtianhong.github.io/tags/%E4%B9%A0%E9%A2%98/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -173,9 +218,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="类型检测" scheme="https://chongtianhong.github.io/tags/%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B/"/>
     
@@ -228,9 +273,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="高阶函数" scheme="https://chongtianhong.github.io/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
     
@@ -259,9 +304,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="高阶函数" scheme="https://chongtianhong.github.io/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
     
@@ -289,9 +334,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="同步" scheme="https://chongtianhong.github.io/tags/%E5%90%8C%E6%AD%A5/"/>
     
@@ -346,9 +391,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
@@ -373,9 +418,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -399,9 +444,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Vue.js" scheme="https://chongtianhong.github.io/tags/Vue-js/"/>
     
@@ -485,9 +530,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
@@ -513,66 +558,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Generator 函数的语法</title>
-    <link href="https://chongtianhong.github.io/2018/04/25/generator/"/>
-    <id>https://chongtianhong.github.io/2018/04/25/generator/</id>
-    <published>2018-04-25T11:17:06.000Z</published>
-    <updated>2018-08-13T15:23:17.333Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li><strong>Generator函数</strong>是 ES6 提供的一种<strong>异步编程解决方案</strong>，语法行为与传统函数完全不同。</li><li><strong>Generator函数</strong>有多种理解角度。可以从<strong>语法</strong>和<strong>形式</strong>上进行理解。<a id="more"></a></li></ul><blockquote>从语法上进行理解</blockquote><ul><li>语法上，<strong>Generator函数是一个状态机，封装了多个内部状态</strong>。</li><li><strong>执行Generator函数</strong>会<strong>返回一个遍历器对象</strong>，也就是说，<strong>Generator 函数</strong>除了是状态机，还是一个遍历器对象生成函数。<strong>返回的遍历器对象，可以依次遍历Generator函数内部的每一个状态</strong>。</li></ul><blockquote>从形式上进行理解</blockquote><ul><li>形式上，<strong>Generator函数</strong>是一个普通函数，但是有两个特征<ul><li><code>function</code>关键字与函数名之间有一个星号(*)；</li><li>函数体内部使用<code>yield</code>表达式，定义不同的内部状态。</li></ul></li><li><p>例如，下面代码定义了一个<strong>Generator函数</strong><code>helloWorldGenerator</code>，它内部有两个<code>yield</code>表达式（hello和world），即该函数有三个状态：hello，world 和 return 语句（结束执行）。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">helloWorldGenerator</span></span>() &#123;</span><br><span class="line">    yield <span class="string">'hello'</span>;</span><br><span class="line">    yield <span class="string">'world'</span>;</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'ending'</span>;</span><br><span class="line">&#125;</span><br><span class="line">var hw = helloWorldGenerator();</span><br></pre></td></tr></table></figure></li><li><p>然后，<strong>Generator函数</strong>的调用方法与普通函数一样，也是在函数名后面加上一对圆括号。</p></li><li><p><strong>不同</strong>的是，<strong>调用Generator函数后，该函数并不执行</strong>，<strong>返回的</strong>也不是函数运行结果，而<strong>是一个指向内部状态的指针对象</strong>。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hw.next()  // &#123; value: <span class="string">'hello'</span>, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br><span class="line">hw.next()  // &#123; value: <span class="string">'world'</span>, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br><span class="line">hw.next()  // &#123; value: <span class="string">'ending'</span>, <span class="keyword">done</span>: <span class="literal">true</span> &#125;</span><br><span class="line">hw.next()  // &#123; value: undefined, <span class="keyword">done</span>: <span class="literal">true</span> &#125;</span><br></pre></td></tr></table></figure></li><li><p>下一步，必须<strong>调用遍历器对象的<code>next</code>方法，使得指针移向下一个状态</strong>。也就是说，每次调用<code>next</code>方法，内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个<code>yield</code>表达式（或return语句）为止。</p></li><li>换言之，<strong>Generator函数是分段执行的，<code>yield</code>表达式是暂停执行的标记，而<code>next</code>方法可以恢复执行</strong>。</li></ul><blockquote>判断是否为generator</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> isGen(fn) &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'function'</span> === typeof fn &amp;&amp; fn.constructor.name === <span class="string">'GeneratorFunction'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote>总结</blockquote><ul><li><strong>调用Generator函数，返回一个遍历器对象</strong>，代表<strong>Generator函数</strong>的<strong>内部指针</strong>。以后，<strong>每次调用遍历器对象的next方法</strong>，就会<strong>返回一个有着value和done两个属性的对象</strong>。<ul><li>value属性表示当前的内部状态的值，是<code>yield</code>表达式后面那个表达式的值；</li><li><code>done</code>属性是一个<strong>布尔值</strong>，表示<strong>是否遍历结束</strong>。</li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Generator函数&lt;/strong&gt;是 ES6 提供的一种&lt;strong&gt;异步编程解决方案&lt;/strong&gt;，语法行为与传统函数完全不同。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Generator函数&lt;/strong&gt;有多种理解角度。可以从&lt;strong&gt;语法&lt;/strong&gt;和&lt;strong&gt;形式&lt;/strong&gt;上进行理解。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript深入理解JS闭包</title>
-    <link href="https://chongtianhong.github.io/2018/04/24/closure/"/>
-    <id>https://chongtianhong.github.io/2018/04/24/closure/</id>
-    <published>2018-04-24T11:14:57.000Z</published>
-    <updated>2018-08-13T15:23:16.908Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>闭包（closure）是Javascript语言的一个难点，也是它的特色，很多高级应用都要依靠闭包实现。<a id="more"></a></li></ul><h4 id="变量的作用域"><a href="#变量的作用域" class="headerlink" title="变量的作用域"></a>变量的作用域</h4><ul><li>要理解闭包，首先必须理解Javascript特殊的<strong>变量作用域</strong>。</li><li>变量的作用域无非就是两种：<strong>全局变量</strong>和<strong>局部变量</strong>。</li><li><p>Javascript语言的特殊之处，就在于<strong>函数内部可以直接读取全局变量</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var n = 999;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>()&#123;</span><br><span class="line">    alert(n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f1(); // 999</span><br></pre></td></tr></table></figure></li><li><p>另一方面，在<strong>函数外部无法读取函数内的局部变量</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>()&#123;</span><br><span class="line">    var n = 999;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(n); // Uncaught ReferenceError: n is not defined</span><br></pre></td></tr></table></figure></li><li><p>这里有一个地方需要注意，函数内部声明变量的时候，一定要使用<code>var</code>命令。如果不用的话，实际上相当于声明了一个全局变量：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>()&#123;</span><br><span class="line">    n = 999;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f1();</span><br><span class="line"></span><br><span class="line">alert(n); // 999</span><br></pre></td></tr></table></figure></li></ul><h4 id="如何从函数外部读取局部变量？"><a href="#如何从函数外部读取局部变量？" class="headerlink" title="如何从函数外部读取局部变量？"></a>如何从函数外部读取局部变量？</h4><ul><li><p>出于种种原因，我们有时候<strong>需要得到函数内的局部变量</strong>。但是，前面已经说过了，正常情况下，这是办不到的，只有通过变通方法才能实现。那就是<strong>在函数的内部，再定义一个函数</strong>。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>()&#123;</span><br><span class="line">    n = 999;</span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">f2</span></span>()&#123;</span><br><span class="line">        alert(n); // 999</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>在上面的代码中，函数f2就被包括在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。但是反过来就不行，f2内部的局部变量，对f1 就是不可见的。这就是Javascript语言特有的<strong>“链式作用域（chain scope）”</strong>结构，子对象会一级一级地向上寻找所有父对象的变量。所以，<strong>父对象的所有变量，对子对象都是可见的，反之则不成立</strong>。</p></li><li>因为f2可以读取f1中的局部变量，所以只要把f2作为返回值，就可以在f1外部读取它的内部变量了：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>()&#123;</span><br><span class="line">    n = 999;</span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">f2</span></span>()&#123;</span><br><span class="line">        alert(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> f2;</span><br><span class="line">&#125;</span><br><span class="line">var result = f1();</span><br><span class="line"></span><br><span class="line">result(); // 999</span><br></pre></td></tr></table></figure></li></ul><h4 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h4><ul><li>上面代码中的提到的f2函数，就是闭包。</li><li>使用闭包的原因：<strong>局部变量无法共享和长久的保存</strong>，而<strong>全局变量可能造成变量污染</strong>，所以我们希望有一种机制<strong>既可以长久的保存变量又不会造成全局污染</strong>。</li><li><strong>有权访问另一个函数作用域内变量的函数</strong>都是闭包。</li><li>由于在Javascript语言中，<strong>只有函数内部的子函数才能读取局部变量</strong>，因此可以把闭包简单理解成“<strong>定义在一个函数内部的函数</strong>”。</li><li>利用闭包可以<strong>突破作用链域</strong>，将函数内部的<strong>变量</strong>和<strong>方法</strong>传递到外部。所以，在本质上，<strong>闭包</strong>就是将<strong>函数内部</strong>和<strong>函数外部</strong>连接起来的一座<strong>桥梁</strong>。</li></ul><h4 id="闭包的用途"><a href="#闭包的用途" class="headerlink" title="闭包的用途"></a>闭包的用途</h4><ul><li>闭包可以用在许多地方。它的最大用处有两个，一个是前面提到的<strong>可以读取函数内部的变量</strong>；另一个就是<strong>让这些变量的值始终保持在内存中</strong>，这些变量不会被垃圾回收机制回收。</li><li><p>如下面的例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>()&#123;</span><br><span class="line">    var n = 999;</span><br><span class="line">    nAdd = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        n += 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">f2</span></span>()&#123;</span><br><span class="line">        alert(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> f2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var result = f1();</span><br><span class="line">result(); // 999</span><br><span class="line">nAdd();</span><br><span class="line">result(); // 1000</span><br></pre></td></tr></table></figure></li><li><p>在这段代码中，<strong>result实际上就是闭包f2函数</strong>。它一共运行了两次，第一次的值是999，第二次的值是1000。这证明了，<strong>函数f1中的局部变量n一直保存在内存中</strong>，并没有在f1调用后被自动清除。</p></li><li>原因：<strong>f1是f2的父函数</strong>，而<strong>f2被赋给了一个全局变量</strong>，这导致<strong>f2始终在内存中</strong>，而<strong>f2的存在依赖于f1</strong>，因此<strong>f1也始终在内存中</strong>，不会在调用结束后，被垃圾回收机制（garbage collection）回收。</li><li>这段代码中另一个值得注意的地方，就是<code>nAdd=function(){n+=1}</code>这一部分的代码，首先在<strong>nAdd前面没有使用var关键字</strong>，因此，<strong>nAdd是一个全局变量</strong>，而不是局部变量。其次，nAdd的值是一个匿名函数（anonymous function），而这个匿名函数本身也是一个闭包，所以<strong>nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作</strong>。</li><li>再看一个例子：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 代码片段一</span><br><span class="line">var name = <span class="string">"The Window"</span>;   </span><br><span class="line">var object = &#123;   </span><br><span class="line">    name : <span class="string">"My Object"</span>,   </span><br><span class="line">    getNameFunc : <span class="function"><span class="title">function</span></span>()&#123;   </span><br><span class="line">        <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>()&#123;   </span><br><span class="line">            <span class="built_in">return</span> this.name;   </span><br><span class="line">        &#125;;   </span><br><span class="line">    &#125;   </span><br><span class="line">&#125;;   </span><br><span class="line">alert(object.getNameFunc()());  //The Window</span><br><span class="line"></span><br><span class="line">// 代码片段二</span><br><span class="line">var name = <span class="string">"The Window"</span>;</span><br><span class="line">var object = &#123;</span><br><span class="line">    name: <span class="string">"My Object"</span>,</span><br><span class="line">    getNameFunc: <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        var that = this;</span><br><span class="line">        <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">            <span class="built_in">return</span> that.name;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(object.getNameFunc()()); //My Object</span><br></pre></td></tr></table></figure></li></ul><h4 id="使用闭包的注意点"><a href="#使用闭包的注意点" class="headerlink" title="使用闭包的注意点"></a>使用闭包的注意点</h4><ul><li>由于<strong>闭包会使得函数中的变量都被保存在内存中</strong>，<strong>内存消耗很大</strong>，所以<strong>不能滥用闭包</strong>，否则会造成网页的性能问题，在IE中可能导致<strong>内存泄露</strong>。<strong>解决方法</strong>：在<strong>退出函数之前，将不使用的局部变量全部删除</strong>。</li><li><strong>闭包会在父函数外部，改变父函数内部变量的值</strong>。所以，如果我们把<strong>父函数</strong>当作<strong>对象（object）</strong>使用，把<strong>闭包</strong>当作它的<strong>公用方法（Public Method）</strong>，把<strong>内部变量</strong>当作它的<strong>私有属性（private value）</strong>，这时一定要小心，<strong>不要随便改变父函数内部变量的值</strong>。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;闭包（closure）是Javascript语言的一个难点，也是它的特色，很多高级应用都要依靠闭包实现。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="闭包" scheme="https://chongtianhong.github.io/tags/%E9%97%AD%E5%8C%85/"/>
     
   </entry>
   
