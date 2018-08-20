@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-20T14:10:33.149Z</updated>
+  <updated>2018-08-20T14:00:02.727Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,28 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>让DOM从页面中消失的几种方法</title>
-    <link href="https://chongtianhong.github.io/2018/05/16/hideDOM/"/>
-    <id>https://chongtianhong.github.io/2018/05/16/hideDOM/</id>
-    <published>2018-05-16T14:07:38.000Z</published>
-    <updated>2018-08-20T14:10:33.149Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
-    
-      <category term="DOM" scheme="https://chongtianhong.github.io/tags/DOM/"/>
-    
-  </entry>
   
   <entry>
     <title>前端路由的两种实现原理</title>
@@ -560,6 +538,34 @@
       &lt;ul&gt;
 &lt;li&gt;由于&lt;strong&gt;执行Generator函数返回的遍历器对象，只有调用&lt;code&gt;next&lt;/code&gt;方法才会遍历下一个内部状态&lt;/strong&gt;，所以其实提供了一种可以&lt;strong&gt;暂停执行&lt;/strong&gt;的函数。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code&gt;yield&lt;/code&gt;表达式&lt;/strong&gt;就是&lt;strong&gt;暂停标志&lt;/strong&gt;。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Generator 函数的语法</title>
+    <link href="https://chongtianhong.github.io/2018/04/25/generator/"/>
+    <id>https://chongtianhong.github.io/2018/04/25/generator/</id>
+    <published>2018-04-25T11:17:06.000Z</published>
+    <updated>2018-08-13T15:23:17.333Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><strong>Generator函数</strong>是 ES6 提供的一种<strong>异步编程解决方案</strong>，语法行为与传统函数完全不同。</li><li><strong>Generator函数</strong>有多种理解角度。可以从<strong>语法</strong>和<strong>形式</strong>上进行理解。<a id="more"></a></li></ul><blockquote>从语法上进行理解</blockquote><ul><li>语法上，<strong>Generator函数是一个状态机，封装了多个内部状态</strong>。</li><li><strong>执行Generator函数</strong>会<strong>返回一个遍历器对象</strong>，也就是说，<strong>Generator 函数</strong>除了是状态机，还是一个遍历器对象生成函数。<strong>返回的遍历器对象，可以依次遍历Generator函数内部的每一个状态</strong>。</li></ul><blockquote>从形式上进行理解</blockquote><ul><li>形式上，<strong>Generator函数</strong>是一个普通函数，但是有两个特征<ul><li><code>function</code>关键字与函数名之间有一个星号(*)；</li><li>函数体内部使用<code>yield</code>表达式，定义不同的内部状态。</li></ul></li><li><p>例如，下面代码定义了一个<strong>Generator函数</strong><code>helloWorldGenerator</code>，它内部有两个<code>yield</code>表达式（hello和world），即该函数有三个状态：hello，world 和 return 语句（结束执行）。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">helloWorldGenerator</span></span>() &#123;</span><br><span class="line">    yield <span class="string">'hello'</span>;</span><br><span class="line">    yield <span class="string">'world'</span>;</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'ending'</span>;</span><br><span class="line">&#125;</span><br><span class="line">var hw = helloWorldGenerator();</span><br></pre></td></tr></table></figure></li><li><p>然后，<strong>Generator函数</strong>的调用方法与普通函数一样，也是在函数名后面加上一对圆括号。</p></li><li><p><strong>不同</strong>的是，<strong>调用Generator函数后，该函数并不执行</strong>，<strong>返回的</strong>也不是函数运行结果，而<strong>是一个指向内部状态的指针对象</strong>。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hw.next()  // &#123; value: <span class="string">'hello'</span>, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br><span class="line">hw.next()  // &#123; value: <span class="string">'world'</span>, <span class="keyword">done</span>: <span class="literal">false</span> &#125;</span><br><span class="line">hw.next()  // &#123; value: <span class="string">'ending'</span>, <span class="keyword">done</span>: <span class="literal">true</span> &#125;</span><br><span class="line">hw.next()  // &#123; value: undefined, <span class="keyword">done</span>: <span class="literal">true</span> &#125;</span><br></pre></td></tr></table></figure></li><li><p>下一步，必须<strong>调用遍历器对象的<code>next</code>方法，使得指针移向下一个状态</strong>。也就是说，每次调用<code>next</code>方法，内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个<code>yield</code>表达式（或return语句）为止。</p></li><li>换言之，<strong>Generator函数是分段执行的，<code>yield</code>表达式是暂停执行的标记，而<code>next</code>方法可以恢复执行</strong>。</li></ul><blockquote>判断是否为generator</blockquote> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> isGen(fn) &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'function'</span> === typeof fn &amp;&amp; fn.constructor.name === <span class="string">'GeneratorFunction'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote>总结</blockquote><ul><li><strong>调用Generator函数，返回一个遍历器对象</strong>，代表<strong>Generator函数</strong>的<strong>内部指针</strong>。以后，<strong>每次调用遍历器对象的next方法</strong>，就会<strong>返回一个有着value和done两个属性的对象</strong>。<ul><li>value属性表示当前的内部状态的值，是<code>yield</code>表达式后面那个表达式的值；</li><li><code>done</code>属性是一个<strong>布尔值</strong>，表示<strong>是否遍历结束</strong>。</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Generator函数&lt;/strong&gt;是 ES6 提供的一种&lt;strong&gt;异步编程解决方案&lt;/strong&gt;，语法行为与传统函数完全不同。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Generator函数&lt;/strong&gt;有多种理解角度。可以从&lt;strong&gt;语法&lt;/strong&gt;和&lt;strong&gt;形式&lt;/strong&gt;上进行理解。
     
     </summary>
     
