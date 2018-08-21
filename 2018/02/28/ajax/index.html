@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 前端工程师除了UI重构外，还有一个非常重要的职责就是在正确的区域渲染出服务端的数据。要构建一个大的web应用，不只是普普通通的由静态页面构成。  前后端如何实现交互前端请求数据URL由后台来写 在开发中，URL主要是由后台来写好给前端。  若后台在查询数据，需要借助查询条件才能查询到前端需要的数据时，这时后台会要求前端提供相关的查询参数（即URL请求的参数）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-21T15:01:07.539Z">
+<meta property="og:updated_time" content="2018-08-21T15:05:35.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前后端交互指南">
 <meta name="twitter:description" content="前言 前端工程师除了UI重构外，还有一个非常重要的职责就是在正确的区域渲染出服务端的数据。要构建一个大的web应用，不只是普普通通的由静态页面构成。  前后端如何实现交互前端请求数据URL由后台来写 在开发中，URL主要是由后台来写好给前端。  若后台在查询数据，需要借助查询条件才能查询到前端需要的数据时，这时后台会要求前端提供相关的查询参数（即URL请求的参数）。">
@@ -466,18 +466,14 @@
 <h3 id="Ajax"><a href="#Ajax" class="headerlink" title="Ajax"></a>Ajax</h3><ul>
 <li>AJAX = 异步 JavaScript 和 XML。</li>
 <li>通过<strong>在后台与服务器进行少量数据交换</strong>，AJAX 可以<strong>使网页实现异步更新</strong>。这意味着可以在<strong>不重新加载整个网页的情况下，对网页的某部分进行更新</strong>。</li>
-<li>XMLHttpRequest 是 AJAX 的基础。<ul>
-<li>所有现代浏览器均支持 XMLHttpRequest 对象。</li>
-<li>XMLHttpRequest 用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</li>
-</ul>
-</li>
+<li><strong>XMLHttpRequest 是 AJAX 的基础</strong>。所有现代浏览器均支持 XMLHttpRequest 对象。</li>
 <li>通过 AJAX，JavaScript 无需等待服务器的响应，而是：<ul>
 <li>在等待服务器响应时执行其他脚本</li>
 <li>当响应就绪后对响应进行处理</li>
 </ul>
 </li>
 <li>Web的运作原理：一次HTTP请求对应一个页面。<ul>
-<li>如果要让用户留在当前页面中，同时发出新的HTTP请求，就必须用JavaScript发送这个新请求，接收到数据后，再用JavaScript更新页面，这样一来，用户就感觉自己仍然停留在当前页面，但是数据却可以不断地更新。</li>
+<li>如果要让用户留在当前页面中，同时发出新的HTTP请求，就必须用JavaScript发送这个AJAX请求，接收到数据后，再用JavaScript更新页面，这样一来，用户就感觉自己仍然停留在当前页面，但是数据却可以不断地更新。</li>
 </ul>
 </li>
 </ul>
