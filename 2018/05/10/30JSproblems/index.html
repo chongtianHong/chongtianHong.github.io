@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-21T13:54:06.551Z">
+<meta property="og:updated_time" content="2018-08-21T13:57:00.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="30个你“不可能全部会做”的JavaScript题目及解析">
 <meta name="twitter:description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
@@ -541,11 +541,11 @@
 </li>
 </ul>
 <h5 id="题目6-1"><a href="#题目6-1" class="headerlink" title="题目6"></a>题目6</h5><ul>
-<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">答案：D</span><br><span class="line">解析：</span><br><span class="line">10进制的整数的精确表达范围是-9007199254740992(-2^53)到9007199254740992(2^53)</span><br><span class="line">END = 9007199254740992 ,START = 9007199254740892目的是计算的END和START之间的差。但是2的53次方计算出的结果由于精度问题使得i++失效。</span><br></pre></td></tr></table></figure>
+<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">答案：D</span><br><span class="line">解析：</span><br><span class="line">10进制的整数的精确表达范围是-9007199254740992(-2^53)到9007199254740992(2^53)</span><br><span class="line">END = 9007199254740992 ,START = 9007199254740892目的是计算的END和START之间的差。</span><br><span class="line">但是2的53次方计算出的结果由于精度问题使得i++失效。</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="题目7-1"><a href="#题目7-1" class="headerlink" title="题目7"></a>题目7</h5><ul>
-<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">答案：C</span><br><span class="line">解析：</span><br><span class="line">filter不会接触到没有被赋值的元素，即在arr中，长度为11但实际数值元素列表为[0, 1, 2, 10]，因此，最终返回一个空的数组[]</span><br></pre></td></tr></table></figure>
+<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">答案：C</span><br><span class="line">解析：</span><br><span class="line">filter不会接触到没有被赋值的元素，</span><br><span class="line">即在arr中，长度为11但实际数值元素列表为[0, 1, 2, 10]，</span><br><span class="line">因此，最终返回一个空的数组[]</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="题目8-1"><a href="#题目8-1" class="headerlink" title="题目8"></a>题目8</h5><ul>
