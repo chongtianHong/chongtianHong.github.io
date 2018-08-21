@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,JavaScript,习题," />
+  <meta name="keywords" content="JavaScript,习题,开发," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
-<meta name="keywords" content="开发,JavaScript,习题">
+<meta name="keywords" content="JavaScript,习题,开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="30个你“不可能全部会做”的JavaScript题目及解析">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/05/10/30JSproblems/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-21T14:04:55.924Z">
+<meta property="og:updated_time" content="2018-08-21T14:12:34.028Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="30个你“不可能全部会做”的JavaScript题目及解析">
 <meta name="twitter:description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
@@ -561,11 +561,11 @@
 </li>
 </ul>
 <h5 id="题目11-1"><a href="#题目11-1" class="headerlink" title="题目11"></a>题目11</h5><ul>
-<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">答案：C</span><br><span class="line">解析：</span><br><span class="line">该函数判断num是否为正整数，<span class="string">'13'</span>被强制转换为数值13，-9%2结果为-1，Infinity%2为NaN。</span><br></pre></td></tr></table></figure>
+<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">答案：C</span><br><span class="line">解析：</span><br><span class="line">该函数判断num是否为正整数，</span><br><span class="line"><span class="string">'13'</span>被强制转换为数值13，-9%2结果为-1，Infinity%2为NaN。</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="题目12-1"><a href="#题目12-1" class="headerlink" title="题目12"></a>题目12</h5><ul>
-<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">答案：D</span><br><span class="line">解析：</span><br><span class="line">最终结果为[3, NaN, 3]； </span><br><span class="line">parseInt() 函数可解析一个字符串，并返回一个整数。当参数 radix 的值为 0，或没有设置该参数时，则数字将以 10 为基础来解析。</span><br></pre></td></tr></table></figure>
+<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">答案：D</span><br><span class="line">解析：</span><br><span class="line">最终结果为[3, NaN, 3]； </span><br><span class="line">parseInt() 函数可解析一个字符串，并返回一个整数。</span><br><span class="line">当参数 radix 的值为 0，或没有设置该参数时，则数字将以 10 为基础来解析。</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="题目13-1"><a href="#题目13-1" class="headerlink" title="题目13"></a>题目13</h5><ul>
@@ -573,7 +573,7 @@
 </li>
 </ul>
 <h5 id="题目14-1"><a href="#题目14-1" class="headerlink" title="题目14"></a>题目14</h5><ul>
-<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">答案：B</span><br><span class="line">解析：</span><br><span class="line">由于Boolean([0]) === <span class="literal">true</span></span><br><span class="line">因此进入<span class="keyword">if</span>为<span class="literal">true</span>的语句块中，由于a为数组(对象)，与布尔值进行相对等于比较，需要两边都转化为数值后在进行判断。</span><br><span class="line">左边[0]先转化为字符串<span class="string">"0"</span>，接着转化为数值0，而右边<span class="literal">true</span>转化为数值1。</span><br><span class="line">因此a == <span class="literal">true</span>最终返回为<span class="literal">false</span>。</span><br></pre></td></tr></table></figure>
+<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">答案：B</span><br><span class="line">解析：</span><br><span class="line">由于Boolean([0]) === <span class="literal">true</span></span><br><span class="line">因此进入<span class="keyword">if</span>为<span class="literal">true</span>的语句块中，</span><br><span class="line">由于a为数组(对象)，与布尔值进行相对等于比较，需要两边都转化为数值后在进行判断。</span><br><span class="line">左边[0]先转化为字符串<span class="string">"0"</span>，接着转化为数值0，而右边<span class="literal">true</span>转化为数值1。</span><br><span class="line">因此a == <span class="literal">true</span>最终返回为<span class="literal">false</span>。</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="题目15-1"><a href="#题目15-1" class="headerlink" title="题目15"></a>题目15</h5><ul>
@@ -663,11 +663,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
-          
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
             <a href="/tags/习题/" rel="tag"><i class="fa fa-tag"></i> 习题</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
         </div>
       
