@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,习题,开发," />
+  <meta name="keywords" content="开发,JavaScript,习题," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
-<meta name="keywords" content="JavaScript,习题,开发">
+<meta name="keywords" content="开发,JavaScript,习题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="30个你“不可能全部会做”的JavaScript题目及解析">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/05/10/30JSproblems/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-21T13:44:08.949Z">
+<meta property="og:updated_time" content="2018-08-21T13:51:31.765Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="30个你“不可能全部会做”的JavaScript题目及解析">
 <meta name="twitter:description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
@@ -537,7 +537,7 @@
 </li>
 </ul>
 <h5 id="题目5-1"><a href="#题目5-1" class="headerlink" title="题目5"></a>题目5</h5><ul>
-<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">答案：A</span><br><span class="line">解析：</span><br><span class="line">判断语句被包裹在立即调用函数里，函数中声明了一个局部变量name，变量在函数内部进行变量提升，在进行判断时，name已经声明但尚未初始化，因此，进入了<span class="keyword">if</span>(<span class="literal">true</span>)的语句块中，name被初始化为<span class="string">"Jack"</span>，最终输出Goodbye Jack。</span><br><span class="line">与C系语言不同的是，JavaScript是函数级作用域(<span class="keyword">function</span>-level scope)，只有函数才会创建新的作用域。 </span><br><span class="line">。在<span class="keyword">if</span>语句块中，声明新的变量，这些变量会影响到外部作用域。</span><br><span class="line">如：</span><br><span class="line">var x = 1; </span><br><span class="line">console.log(x); // 1 </span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123; </span><br><span class="line">var x = 2; </span><br><span class="line">console.log(x); //2 </span><br><span class="line">&#125; </span><br><span class="line">console.log(x);// 2 </span><br><span class="line">若将题目改成：</span><br><span class="line">var name = <span class="string">'World'</span>;</span><br><span class="line">(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">　　<span class="keyword">if</span>(typeof name === <span class="string">'undefined'</span>)&#123;</span><br><span class="line">　　　　console.info(<span class="string">'Goodbye '</span>+ name);</span><br><span class="line">　　&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">　　　　console.info(<span class="string">'Hello '</span> + name);</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;)();</span><br><span class="line">将得到Hello World的结果</span><br></pre></td></tr></table></figure>
+<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">答案：A</span><br><span class="line">解析：</span><br><span class="line">判断语句被包裹在立即调用函数里，函数中声明了一个局部变量name，</span><br><span class="line">变量在函数内部进行变量提升，在进行判断时，</span><br><span class="line">name已经声明但尚未初始化，因此，进入了<span class="keyword">if</span>(<span class="literal">true</span>)的语句块中，</span><br><span class="line">name被初始化为<span class="string">"Jack"</span>，最终输出Goodbye Jack。</span><br><span class="line">与C系语言不同的是，JavaScript是函数级作用域(<span class="keyword">function</span>-level scope)，只有函数才会创建新的作用域。 </span><br><span class="line">。在<span class="keyword">if</span>语句块中，声明新的变量，这些变量会影响到外部作用域。</span><br><span class="line">如：</span><br><span class="line">var x = 1; </span><br><span class="line">console.log(x); // 1 </span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123; </span><br><span class="line">var x = 2; </span><br><span class="line">console.log(x); //2 </span><br><span class="line">&#125; </span><br><span class="line">console.log(x);// 2 </span><br><span class="line">若将题目改成：</span><br><span class="line">var name = <span class="string">'World'</span>;</span><br><span class="line">(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">　　<span class="keyword">if</span>(typeof name === <span class="string">'undefined'</span>)&#123;</span><br><span class="line">　　　　console.info(<span class="string">'Goodbye '</span>+ name);</span><br><span class="line">　　&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">　　　　console.info(<span class="string">'Hello '</span> + name);</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;)();</span><br><span class="line">将得到Hello World的结果</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="题目6-1"><a href="#题目6-1" class="headerlink" title="题目6"></a>题目6</h5><ul>
@@ -663,11 +663,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
             <a href="/tags/习题/" rel="tag"><i class="fa fa-tag"></i> 习题</a>
-          
-            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
         </div>
       
