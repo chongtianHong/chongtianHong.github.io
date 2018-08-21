@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,习题,开发," />
+  <meta name="keywords" content="开发,JavaScript,习题," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
-<meta name="keywords" content="JavaScript,习题,开发">
+<meta name="keywords" content="开发,JavaScript,习题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="30个你“不可能全部会做”的JavaScript题目及解析">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/05/10/30JSproblems/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-21T14:00:05.421Z">
+<meta property="og:updated_time" content="2018-08-21T14:04:55.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="30个你“不可能全部会做”的JavaScript题目及解析">
 <meta name="twitter:description" content="本文记录了30个你“不可能全部会做”的JavaScript题目，并对各个答案进行分析。">
@@ -553,11 +553,11 @@
 </li>
 </ul>
 <h5 id="题目9-1"><a href="#题目9-1" class="headerlink" title="题目9"></a>题目9</h5><ul>
-<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">答案：C</span><br><span class="line">解析：</span><br><span class="line">使用new String()使用构造函数调用将一个全新的对象作为this变量的值，并且隐式返回这个新对象作为调用的结果，因此showCase()接收的参数为String &#123;0: “A”&#125;而不是我们所认为的“A”，为一个对象。</span><br><span class="line">switch是进行绝对等于判断，new String(<span class="string">'A'</span>) !== <span class="string">'A'</span> 而 new String(<span class="string">'A'</span>) == <span class="string">'A'</span></span><br></pre></td></tr></table></figure>
+<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">答案：C</span><br><span class="line">解析：</span><br><span class="line">使用new String()使用构造函数调用将一个全新的对象作为this变量的值，并且隐式返回这个新对象作为调用的结果，</span><br><span class="line">因此showCase()接收的参数为String &#123;0: “A”&#125;而不是我们所认为的“A”，为一个对象。</span><br><span class="line">switch是进行绝对等于判断，new String(<span class="string">'A'</span>) !== <span class="string">'A'</span> 而 new String(<span class="string">'A'</span>) == <span class="string">'A'</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="题目10-1"><a href="#题目10-1" class="headerlink" title="题目10"></a>题目10</h5><ul>
-<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">答案：A</span><br><span class="line">解析：</span><br><span class="line">直接调用String(“A”)创建的变量和”A”无异。</span><br><span class="line">例子：</span><br><span class="line">var a=<span class="string">"123"</span>; // 只是设置变量</span><br><span class="line">b=new String(<span class="string">'123'</span>); // 设置一个成员</span><br><span class="line"></span><br><span class="line">var a=<span class="string">"123"</span>;</span><br><span class="line">a.sex=1;</span><br><span class="line">alert(a.sex); // 输出未定义，因为不是成员，没有这属性</span><br><span class="line"></span><br><span class="line">b=new String(<span class="string">'123'</span>);</span><br><span class="line">b.sex=1;</span><br><span class="line">alert(b.sex); // 输出1，成员的属性</span><br></pre></td></tr></table></figure>
+<li>解析：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">答案：A</span><br><span class="line">解析：</span><br><span class="line">直接调用String(“A”)创建的变量和”A”无异。</span><br><span class="line">例子：</span><br><span class="line">var a = <span class="string">"123"</span>; // 只是设置变量</span><br><span class="line">b = new String(<span class="string">'123'</span>); // 设置一个成员</span><br><span class="line"></span><br><span class="line">var a = <span class="string">"123"</span>;</span><br><span class="line">a.sex = 1;</span><br><span class="line">alert(a.sex); // 输出未定义，因为不是成员，没有这属性</span><br><span class="line"></span><br><span class="line">b = new String(<span class="string">'123'</span>);</span><br><span class="line">b.sex = 1;</span><br><span class="line">alert(b.sex); // 输出1，成员的属性</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="题目11-1"><a href="#题目11-1" class="headerlink" title="题目11"></a>题目11</h5><ul>
@@ -663,11 +663,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
             <a href="/tags/习题/" rel="tag"><i class="fa fa-tag"></i> 习题</a>
-          
-            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
         </div>
       
