@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,开发,Web,交互,AJAX," />
+  <meta name="keywords" content="开发,Web,交互,AJAX,JavaScript," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="前言 前端工程师除了UI重构外，还有一个非常重要的职责就是在正确的区域渲染出服务端的数据。要构建一个大的web应用，不只是普普通通的由静态页面构成。  前后端如何实现交互前端请求数据URL由后台来写 在开发中，URL主要是由后台来写好给前端。  若后台在查询数据，需要借助查询条件才能查询到前端需要的数据时，这时后台会要求前端提供相关的查询参数（即URL请求的参数）。">
-<meta name="keywords" content="JavaScript,开发,Web,交互,AJAX">
+<meta name="keywords" content="开发,Web,交互,AJAX,JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前后端交互指南">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/02/28/ajax/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 前端工程师除了UI重构外，还有一个非常重要的职责就是在正确的区域渲染出服务端的数据。要构建一个大的web应用，不只是普普通通的由静态页面构成。  前后端如何实现交互前端请求数据URL由后台来写 在开发中，URL主要是由后台来写好给前端。  若后台在查询数据，需要借助查询条件才能查询到前端需要的数据时，这时后台会要求前端提供相关的查询参数（即URL请求的参数）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-21T15:05:35.185Z">
+<meta property="og:updated_time" content="2018-08-21T15:11:06.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前后端交互指南">
 <meta name="twitter:description" content="前言 前端工程师除了UI重构外，还有一个非常重要的职责就是在正确的区域渲染出服务端的数据。要构建一个大的web应用，不只是普普通通的由静态页面构成。  前后端如何实现交互前端请求数据URL由后台来写 在开发中，URL主要是由后台来写好给前端。  若后台在查询数据，需要借助查询条件才能查询到前端需要的数据时，这时后台会要求前端提供相关的查询参数（即URL请求的参数）。">
@@ -481,7 +481,7 @@
 
 <ul>
 <li><p>jQuery 代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"#b01"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        htmlobj=$.ajax(&#123;url:<span class="string">"/jquery/test1.txt"</span>,async:<span class="literal">false</span>&#125;);</span><br><span class="line">        $(<span class="string">"#myDiv"</span>).html(htmlobj.responseText);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"#b01"</span>).click(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        htmlobj = $.ajax(&#123;</span><br><span class="line">            url: <span class="string">"/jquery/test1.txt"</span>, </span><br><span class="line">            async: <span class="literal">false</span></span><br><span class="line">        &#125;);</span><br><span class="line">        $(<span class="string">"#myDiv"</span>).html(htmlobj.responseText);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>HTML 代码：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"myDiv"</span>&gt;&lt;h2&gt;Let AJAX change this text&lt;/h2&gt;&lt;/div&gt;</span><br><span class="line">&lt;button id=<span class="string">"b01"</span> <span class="built_in">type</span>=<span class="string">"button"</span>&gt;Change Content&lt;/button&gt;</span><br></pre></td></tr></table></figure>
@@ -490,10 +490,10 @@
 <h4 id="AJAX-load-方法"><a href="#AJAX-load-方法" class="headerlink" title="AJAX load() 方法"></a>AJAX load() 方法</h4><ul>
 <li>jQuery load() 方法是简单但强大的 AJAX 方法。</li>
 <li>load() 方法从服务器加载数据，并把返回的数据放入被选元素中。</li>
-<li>语法：<code>$(selector).load(URL,data,callback);</code><ul>
-<li>必需的 URL 参数规定希望加载数据的URL。</li>
-<li>可选的 data 参数规定与请求一同发送的查询字符串键/值对集合。</li>
-<li>可选的 callback 参数是 load() 方法完成后所执行的函数名称。</li>
+<li>语法：<code>$(selector).load(URL, data, callback);</code><ul>
+<li><strong>必需</strong>的 <strong>URL 参数</strong>规定希望加载数据的URL。</li>
+<li><strong>可选</strong>的 <strong>data 参数</strong>规定与请求一同发送的查询字符串键/值对集合。</li>
+<li><strong>可选</strong>的 <strong>callback 参数</strong>是 load() 方法完成后所执行的函数名称。</li>
 </ul>
 </li>
 </ul>
@@ -530,14 +530,14 @@
 </li>
 </ul>
 <h4 id="AJAX-get-和-post-方法"><a href="#AJAX-get-和-post-方法" class="headerlink" title="AJAX get() 和 post() 方法"></a>AJAX get() 和 post() 方法</h4><ul>
-<li>jQuery get() 和 post() 方法用于通过 HTTP GET 或 POST 请求从服务器请求数据。</li>
-<li>两种在客户端和服务器端进行请求-响应的常用方法是：GET 和 POST。<ul>
-<li>GET - 从指定的资源请求数据</li>
-<li>POST - 向指定的资源提交要处理的数据</li>
+<li>jQuery <code>get()</code> 和 <code>post()</code> 方法用于通过 HTTP <code>GET</code> 或 <code>POST</code> 请求从服务器请求数据。</li>
+<li>两种在客户端和服务器端进行请求-响应的常用方法是：<code>GET</code> 和 <code>POST</code>。<ul>
+<li><code>GET</code>：从指定的资源请求数据</li>
+<li><code>POST</code>：向指定的资源提交要处理的数据</li>
 </ul>
 </li>
-<li>GET 基本上用于从服务器获得（取回）数据。注释：GET 方法可能返回缓存数据。</li>
-<li>POST 也可用于从服务器获取数据。不过，POST 方法不会缓存数据，并且常用于连同请求一起发送数据。</li>
+<li><code>GET</code> 基本上用于从服务器获得（取回）数据。注释：<code>GET</code> 方法可能返回缓存数据。</li>
+<li><code>POST</code> 也可用于从服务器获取数据。不过，<code>POST</code> 方法不会缓存数据，并且常用于连同请求一起发送数据。</li>
 </ul>
 <h5 id="jQuery-get-方法"><a href="#jQuery-get-方法" class="headerlink" title="jQuery $.get() 方法"></a>jQuery $.get() 方法</h5><ul>
 <li>$.get() 方法通过 HTTP GET 请求从服务器上请求数据。</li>
@@ -581,12 +581,12 @@
 <blockquote>服务器端：</blockquote>
 
 <ul>
-<li><code>Access-Control-Allow-Origin:*</code> 表示允许任何域名跨域访问。</li>
+<li><code>Access-Control-Allow-Origin: *</code> 表示允许任何域名跨域访问。</li>
 <li>如果需要指定某域名才允许跨域访问，只需把<ul>
-<li><code>Access-Control-Allow-Origin:*</code> 改为 <code>Access-Control-Allow-Origin:允许的域名</code>。</li>
+<li><code>Access-Control-Allow-Origin: *</code> 改为 <code>Access-Control-Allow-Origin: 允许的域名</code>。</li>
 </ul>
 </li>
-<li>某些header请求头：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 指定允许其他域名访问</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Origin:*'</span>);</span><br><span class="line">// 响应类型</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Methods:POST'</span>);</span><br><span class="line">// 响应头设置</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Headers:x-requested-with,content-type'</span>);</span><br><span class="line"></span><br><span class="line">//设置内容类型为json</span><br><span class="line"></span><br><span class="line">header(<span class="string">'content-type:application:json;charset=utf8'</span>);</span><br></pre></td></tr></table></figure>
+<li>某些header请求头：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 指定允许其他域名访问</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Origin: *'</span>);</span><br><span class="line">// 响应类型</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Methods: POST'</span>);</span><br><span class="line">// 响应头设置</span><br><span class="line">header(<span class="string">'Access-Control-Allow-Headers: x-requested-with, content-type'</span>);</span><br><span class="line"></span><br><span class="line">//设置内容类型为json</span><br><span class="line"></span><br><span class="line">header(<span class="string">'content-type: application:json; charset = utf8'</span>);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 
@@ -616,8 +616,6 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
             <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
@@ -625,6 +623,8 @@
             <a href="/tags/交互/" rel="tag"><i class="fa fa-tag"></i> 交互</a>
           
             <a href="/tags/AJAX/" rel="tag"><i class="fa fa-tag"></i> AJAX</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
         </div>
       
