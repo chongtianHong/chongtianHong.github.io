@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-22T14:21:41.074Z</updated>
+  <updated>2018-08-22T14:27:06.535Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>Object.getOwnPropertyNames的使用</title>
-    <link href="https://chongtianhong.github.io/2018/08/22/ObejectGetOwnPropertyNames/"/>
-    <id>https://chongtianhong.github.io/2018/08/22/ObejectGetOwnPropertyNames/</id>
-    <published>2018-08-22T02:11:02.000Z</published>
-    <updated>2018-08-22T14:21:41.074Z</updated>
+    <link href="https://chongtianhong.github.io/2018/05/17/ObejectGetOwnPropertyNames/"/>
+    <id>https://chongtianhong.github.io/2018/05/17/ObejectGetOwnPropertyNames/</id>
+    <published>2018-05-17T02:11:02.000Z</published>
+    <updated>2018-08-22T14:27:06.535Z</updated>
     
     <content type="html"><![CDATA[<ul><li><code>Object.getOwnPropertyNames()</code>方法返回一个由<strong>指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）</strong>组成的<strong>字符串数组</strong>。<a id="more"></a></li><li><code>Object.getOwnPropertyNames()</code>返回的数组中，<strong>枚举属性</strong>的顺序与通过<code>for…in</code>循环（或 Object.keys）迭代该对象属性时一致。数组中<strong>不可枚举属性的顺序未定义</strong>。</li><li><p>例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">var arr = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>];</span><br><span class="line">console.log(Object.getOwnPropertyNames(arr).sort()); // [<span class="string">"0"</span>, <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"length"</span>]</span><br><span class="line"></span><br><span class="line">// 类数组对象</span><br><span class="line">var obj = &#123; 0: <span class="string">"a"</span>, 1: <span class="string">"b"</span>, 2: <span class="string">"c"</span>&#125;;</span><br><span class="line">console.log(Object.getOwnPropertyNames(obj).sort()); // [<span class="string">"0"</span>, <span class="string">"1"</span>, <span class="string">"2"</span>]</span><br><span class="line"></span><br><span class="line">// 使用Array.forEach输出属性名和属性值</span><br><span class="line">Object.getOwnPropertyNames(obj).forEach(<span class="keyword">function</span>(val, idx, array) &#123;</span><br><span class="line">    console.log(val + <span class="string">" -&gt; "</span> + obj[val]);</span><br><span class="line">&#125;);</span><br><span class="line">// 输出</span><br><span class="line">// 0 -&gt; a</span><br><span class="line">// 1 -&gt; b</span><br><span class="line">// 2 -&gt; c</span><br><span class="line"></span><br><span class="line">//不可枚举属性</span><br><span class="line">var my_obj = Object.create(&#123;&#125;, &#123;</span><br><span class="line">    getFoo: &#123;</span><br><span class="line">        value: <span class="function"><span class="title">function</span></span>() &#123; <span class="built_in">return</span> this.foo; &#125;,</span><br><span class="line">        enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">my_obj.foo = 1;</span><br><span class="line"></span><br><span class="line">console.log(Object.getOwnPropertyNames(my_obj).sort()); // [<span class="string">"foo"</span>, <span class="string">"getFoo"</span>]</span><br></pre></td></tr></table></figure></li><li><p>如果<strong>只要获取到可枚举属性</strong>，可使用<code>Object.keys</code>或用<code>for…in</code>循环（<code>for…in</code>还会获取到原型链上的可枚举属性，不过<strong>可以使用<code>hasOwnProperty()</code>方法过滤掉</strong>）。</p></li><li>下面的例子演示了<code>Object.getOwnPropertyNames()</code>方法<strong>不会获取到原型链上的属性</strong>：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">ParentClass</span></span>() &#123;&#125;</span><br><span class="line">ParentClass.prototype.inheritedMethod = <span class="function"><span class="title">function</span></span>() &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">ChildClass</span></span>() &#123;</span><br><span class="line">  this.prop = 5;</span><br><span class="line">  this.method = <span class="function"><span class="title">function</span></span>() &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ChildClass.prototype = new ParentClass;</span><br><span class="line">ChildClass.prototype.prototypeMethod = <span class="function"><span class="title">function</span></span>() &#123;&#125;;</span><br><span class="line"></span><br><span class="line">console.log(</span><br><span class="line">  Object.getOwnPropertyNames(</span><br><span class="line">    new ChildClass()  // [<span class="string">"prop"</span>, <span class="string">"method"</span>]</span><br><span class="line">  )</span><br><span class="line">);</span><br></pre></td></tr></table></figure></li></ul><blockquote>只获取不可枚举的属性</blockquote><ul><li><p>下面的例子使用了<code>Array.prototype.filter()</code>方法，从所有的属性名数组（使用<code>Object.getOwnPropertyNames()</code>方法获得）中去除可枚举的属性（使用<code>Object.keys()</code>方法获得），剩余的属性便是不可枚举的属性了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var target = myObject;</span><br><span class="line">var enum_and_nonenum = Object.getOwnPropertyNames(target);</span><br><span class="line">var enum_only = Object.keys(target);</span><br><span class="line">var nonenum_only = enum_and_nonenum.filter(<span class="keyword">function</span>(key) &#123;</span><br><span class="line">    var indexInEnum = enum_only.indexOf(key);</span><br><span class="line">    <span class="keyword">if</span> (indexInEnum == -1) &#123;</span><br><span class="line">        // 没有发现在enum_only键集中意味着这个键是不可枚举的,</span><br><span class="line">        // 因此返回<span class="literal">true</span> 以便让它保持在过滤结果中</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(nonenum_only);</span><br></pre></td></tr></table></figure></li><li><p><strong>注</strong>：<code>Array.filter(filt_func)</code>方法<strong>创建一个新数组</strong>, 其包含<strong>通过</strong>所提供函数实现的<strong>测试的所有元素</strong>。</p></li><li><p><strong>注意</strong>：</p><ul><li>在 ES5 中，如果参数不是一个原始对象类型，将抛出一个 TypeError  异常。</li><li>在 ES2015 中，非对象参数被强制转换为对象 。</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object.getOwnPropertyNames(<span class="string">'foo'</span>);</span><br><span class="line">// TypeError: <span class="string">"foo"</span> is not an object (ES5 code)</span><br><span class="line"></span><br><span class="line">Object.getOwnPropertyNames(<span class="string">'foo'</span>);</span><br><span class="line">// [<span class="string">'length'</span>, <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>]  (ES2015 code)</span><br></pre></td></tr></table></figure></li></ul>]]></content>
     
@@ -35,9 +35,36 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
+      <category term="ES5" scheme="https://chongtianhong.github.io/tags/ES5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Object.create()的使用</title>
+    <link href="https://chongtianhong.github.io/2018/05/16/ObjectCreate/"/>
+    <id>https://chongtianhong.github.io/2018/05/16/ObjectCreate/</id>
+    <published>2018-05-16T02:49:41.000Z</published>
+    <updated>2018-08-22T14:27:55.163Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul><li><code>Object.create()</code>是Object的内置方法，可以创建一个新对象，<strong>使用现有的对象</strong>来<strong>提供新创建的对象的<code>__proto__</code></strong>。 <a id="more"></a></li><li>语法：<code>Object.create ( proto, [ propertiesObject ] ) </code></li><li>该方法有两个参数：<ul><li>第一个<strong>参数proto</strong>是一个对象，作为新建对象的原型对象；</li><li>第二个<strong>参数propertiesObject</strong>是可选的，如果<strong>没有则指定为 undefined</strong>。该<strong>参数对象</strong>是一组属性与值，该对象的<strong>属性名称</strong>将是<strong>新创建的对象的属性名称</strong>，<strong>值</strong>是<strong>属性描述符</strong>（这些属性描述符的结构与Object.defineProperties()的第三个参数一样）。如果<strong>propertiesObject参数不是 null 或一个对象，则抛出一个 TypeError 异常</strong>。</li></ul></li><li>使用该方法，创建对象会执行以下步骤：<br>①方法内部定义一个新的空对象obj<br>②将obj.__proto__的对象指向传入的参数proto<br>③返回一个新的对象</li><li><p>例子1：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const person = &#123;</span><br><span class="line">    isHuman: <span class="literal">false</span>,</span><br><span class="line">    printIntroduction: <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        console.log(`My name is <span class="variable">$&#123;this.name&#125;</span>. Am I human? <span class="variable">$&#123;this.isHuman&#125;</span>`);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const me = Object.create(person);</span><br><span class="line"></span><br><span class="line">me.name = <span class="string">"Matthew"</span>; // <span class="string">"name"</span> is a property <span class="built_in">set</span> on <span class="string">"me"</span>, but not on <span class="string">"person"</span></span><br><span class="line">me.isHuman = <span class="literal">true</span>; // inherited properties can be overwritten</span><br><span class="line"></span><br><span class="line">me.printIntroduction();</span><br><span class="line">// expected output: <span class="string">"My name is Matthew. Am I human? true"</span></span><br></pre></td></tr></table></figure></li><li><p>例子2：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">var o;</span><br><span class="line"></span><br><span class="line">// 创建一个原型为null的空对象</span><br><span class="line">o = Object.create(null);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">o = &#123;&#125;;</span><br><span class="line">// 以字面量方式创建的空对象就相当于:</span><br><span class="line">o = Object.create(Object.prototype);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">o = Object.create(Object.prototype, &#123;</span><br><span class="line">  // foo会成为所创建对象的数据属性</span><br><span class="line">    foo: &#123; </span><br><span class="line">        writable:<span class="literal">true</span>,</span><br><span class="line">        configurable:<span class="literal">true</span>,</span><br><span class="line">        value: <span class="string">"hello"</span> </span><br><span class="line">    &#125;,</span><br><span class="line">    // bar会成为所创建对象的访问器属性</span><br><span class="line">    bar: &#123;</span><br><span class="line">        configurable: <span class="literal">false</span>,</span><br><span class="line">        get: <span class="function"><span class="title">function</span></span>() &#123; <span class="built_in">return</span> 10 &#125;,</span><br><span class="line">        <span class="built_in">set</span>: <span class="keyword">function</span>(value) &#123;</span><br><span class="line">        console.log(<span class="string">"Setting `o.bar` to"</span>, value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Constructor</span></span>()&#123;&#125;</span><br><span class="line">o = new Constructor();</span><br><span class="line">// 上面的一句就相当于:</span><br><span class="line">o = Object.create(Constructor.prototype);</span><br><span class="line">// 当然，如果在Constructor函数中有一些初始化代码，Object.create不能执行那些代码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 创建一个以另一个空对象为原型，且拥有一个属性p的对象</span><br><span class="line">o = Object.create(&#123;&#125;, &#123; p: &#123; value: 42 &#125; &#125;)</span><br><span class="line"></span><br><span class="line">// 省略了的属性特性默认为<span class="literal">false</span>，所以属性p是不可写，不可枚举，不可配置的:</span><br><span class="line">o.p = 24</span><br><span class="line">o.p</span><br><span class="line">//42</span><br><span class="line"></span><br><span class="line">o.q = 12</span><br><span class="line"><span class="keyword">for</span> (var prop <span class="keyword">in</span> o) &#123;</span><br><span class="line">    console.log(prop)</span><br><span class="line">&#125;</span><br><span class="line">//<span class="string">"q"</span></span><br><span class="line"></span><br><span class="line">delete o.p</span><br><span class="line">//<span class="literal">false</span></span><br><span class="line"></span><br><span class="line">//创建一个可写的，可枚举的，可配置的属性p</span><br><span class="line">o2 = Object.create(&#123;&#125;, &#123;</span><br><span class="line">    p: &#123;</span><br><span class="line">        value: 42, </span><br><span class="line">        writable: <span class="literal">true</span>,</span><br><span class="line">        enumerable: <span class="literal">true</span>,</span><br><span class="line">        configurable: <span class="literal">true</span> </span><br><span class="line">    &#125; </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li></ul><h4 id="与使用关键字new对象的区别"><a href="#与使用关键字new对象的区别" class="headerlink" title="与使用关键字new对象的区别"></a>与使用关键字new对象的区别</h4><ul><li>使用<code>Object.create()</code>是将对象继承到<code>__proto__</code>属性上：</li><li><code>new Object()</code>方法的实质是，<strong>使用引用类型Object的构造函数创建了一个新的实例</strong>，<strong>这个实例拥有Object默认的方法</strong>如<code>toString</code>、<code>toLocaleString</code>等：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">test</span> = Object.create(&#123;x:123,y:345&#125;);</span><br><span class="line">console.log(<span class="built_in">test</span>);// &#123;&#125;</span><br><span class="line">console.log(test.x);// 123</span><br><span class="line">console.log(test.__proto__.x);// 3</span><br><span class="line">console.log(test.__proto__.x === test.x);// <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">var test1 = new Object(&#123;x:123,y:345&#125;);</span><br><span class="line">console.log(test1);// &#123;x:123,y:345&#125;</span><br><span class="line">console.log(test1.x);// 123</span><br><span class="line">console.log(test1.__proto__.x);// undefined</span><br><span class="line">console.log(test1.__proto__.x === test1.x);// <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">var test2 = &#123;x:123,y:345&#125;;</span><br><span class="line">console.log(test2);// &#123;x:123,y:345&#125;;</span><br><span class="line">console.log(test2.x);// 123</span><br><span class="line">console.log(test2.__proto__.x);// undefined</span><br><span class="line">console.log(test2.__proto__.x === test2.x);// <span class="literal">false</span></span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;基本介绍&quot;&gt;&lt;a href=&quot;#基本介绍&quot; class=&quot;headerlink&quot; title=&quot;基本介绍&quot;&gt;&lt;/a&gt;基本介绍&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Object.create()&lt;/code&gt;是Object的内置方法，可以创建一个新对象，&lt;strong&gt;使用现有的对象&lt;/strong&gt;来&lt;strong&gt;提供新创建的对象的&lt;code&gt;__proto__&lt;/code&gt;&lt;/strong&gt;。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES5" scheme="https://chongtianhong.github.io/tags/ES5/"/>
     
@@ -64,9 +91,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
@@ -93,9 +120,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
@@ -122,9 +149,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Ajax" scheme="https://chongtianhong.github.io/tags/Ajax/"/>
     
@@ -149,9 +176,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="arguments" scheme="https://chongtianhong.github.io/tags/arguments/"/>
     
@@ -177,9 +204,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
     
@@ -204,11 +231,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="习题" scheme="https://chongtianhong.github.io/tags/%E4%B9%A0%E9%A2%98/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -231,9 +258,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="类型检测" scheme="https://chongtianhong.github.io/tags/%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B/"/>
     
@@ -286,9 +313,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="高阶函数" scheme="https://chongtianhong.github.io/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
     
@@ -317,9 +344,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="高阶函数" scheme="https://chongtianhong.github.io/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
     
@@ -347,9 +374,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="同步" scheme="https://chongtianhong.github.io/tags/%E5%90%8C%E6%AD%A5/"/>
     
@@ -378,9 +405,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
   </entry>
   
@@ -404,9 +431,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
@@ -431,9 +458,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -457,9 +484,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Vue.js" scheme="https://chongtianhong.github.io/tags/Vue-js/"/>
     
@@ -484,9 +511,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
       <category term="浏览器" scheme="https://chongtianhong.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
     
@@ -517,9 +544,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
     
   </entry>
   
@@ -543,37 +570,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
-      <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>yield 表达式</title>
-    <link href="https://chongtianhong.github.io/2018/04/26/yield/"/>
-    <id>https://chongtianhong.github.io/2018/04/26/yield/</id>
-    <published>2018-04-26T13:04:08.000Z</published>
-    <updated>2018-08-13T15:23:17.779Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>由于<strong>执行Generator函数返回的遍历器对象，只有调用<code>next</code>方法才会遍历下一个内部状态</strong>，所以其实提供了一种可以<strong>暂停执行</strong>的函数。</li><li><strong><code>yield</code>表达式</strong>就是<strong>暂停标志</strong>。<a id="more"></a></li><li>遍历器对象的<code>next</code>方法的运行逻辑如下:<br>1）遇到<code>yield</code>表达式，就暂停执行后面的操作，并将紧跟在<code>yield</code>后面的那个表达式的值，作为返回的对象的<code>value</code>属性值。<br>2）下一次调用<code>next</code>方法时，再继续往下执行，直到遇到下一个<code>yield</code>表达式。<br>3）如果没有再遇到新的<code>yield</code>表达式，就一直运行到函数结束，直到<code>return</code>语句为止，并将<code>return</code>语句后面的表达式的值，作为返回的对象的<code>value</code>属性值。<br>4）如果该函数没有<code>return</code>语句，则返回的对象的<code>value</code>属性值为<code>undefined</code>。</li><li>需要注意的是，<strong><code>yield</code>表达式后面的表达式，只有当调用<code>next</code>方法、内部指针指向该语句时才会执行</strong>，因此等于为 JavaScript 提供了手动的“惰性求值”（Lazy Evaluation）的语法功能。</li><li><code>yield</code>表达式与<code>return</code>语句既有相似之处，也有区别：<ul><li>相似之处：都能返回紧跟在语句后面的那个表达式的值。</li><li>区别：①每次遇到<code>yield</code>，函数暂停执行，下一次再从该位置继续向后执行，而<strong><code>return</code>语句不具备位置记忆的功能</strong>。②一个函数里面，只能执行一次（或者说一个）<code>return</code>语句，但是可以执行多次（或者说多个）<code>yield</code>表达式。</li></ul></li><li>正常函数只能返回一个值，因为只能执行一次<code>return</code>；<strong>Generator函数</strong>可以返回一系列的值，因为可以有任意多个<code>yield</code>。</li><li><p><strong>Generator函数</strong>可以<strong>不用<code>yield</code>表达式</strong>，这时就变成了一个单纯的<strong>暂缓执行函数</strong>。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="function"><span class="title">f</span></span>() &#123;</span><br><span class="line">    console.log(<span class="string">'执行了！'</span>)</span><br><span class="line">&#125;</span><br><span class="line">var generator = f();</span><br><span class="line">setTimeout(<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    generator.next()</span><br><span class="line">&#125;, 2000);</span><br></pre></td></tr></table></figure></li><li><p>上面代码中，函数f如果是普通函数，在为变量generator赋值时就会执行。但是，<strong>函数f是一个 Generator 函数</strong>，就变成<strong>只有调用next方法时，函数f才会执行</strong>。</p></li><li><strong>注意</strong>：<code>yield</code>表达式<strong>只能用在Generator函数里面</strong>，用在其他地方都会报错。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;由于&lt;strong&gt;执行Generator函数返回的遍历器对象，只有调用&lt;code&gt;next&lt;/code&gt;方法才会遍历下一个内部状态&lt;/strong&gt;，所以其实提供了一种可以&lt;strong&gt;暂停执行&lt;/strong&gt;的函数。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;yield&lt;/code&gt;表达式&lt;/strong&gt;就是&lt;strong&gt;暂停标志&lt;/strong&gt;。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
     
