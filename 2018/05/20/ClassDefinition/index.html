@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 在面向对象编程中，类（class）是对象（object）的模板，定义了同一组对象（又称”实例”）共有的属性和方法。 Javascript语言不支持”类”，但是可以用一些变通的方法，模拟出”类”。 本文总结了Javascript定义”类”的三种方法，同时讨论了每种方法的特点。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-23T14:56:28.109Z">
+<meta property="og:updated_time" content="2018-08-23T15:09:25.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript定义类（class）的三种方法">
 <meta name="twitter:description" content="前言 在面向对象编程中，类（class）是对象（object）的模板，定义了同一组对象（又称”实例”）共有的属性和方法。 Javascript语言不支持”类”，但是可以用一些变通的方法，模拟出”类”。 本文总结了Javascript定义”类”的三种方法，同时讨论了每种方法的特点。">
@@ -404,10 +404,10 @@
 <li>本文总结了Javascript定义”类”的三种方法，同时讨论了每种方法的特点。<a id="more"></a>
 <h4 id="构造函数法"><a href="#构造函数法" class="headerlink" title="构造函数法"></a>构造函数法</h4></li>
 <li>这是经典方法，也是教科书必教的方法。</li>
-<li><p>它用构造函数模拟”类”，在其内部用<code>this</code>关键字指代实例对象。</p>
+<li><p>它用<strong>构造函数模拟”类”</strong>，在其内部用<code>this</code>关键字指代实例对象。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Cat</span></span>() &#123;</span><br><span class="line">    this.name = <span class="string">"大毛"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>生成实例的时候，使用new关键字：</p>
+<li><p>生成实例的时候，使用<code>new</code>关键字：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var cat1 = new Cat();</span><br><span class="line">alert(cat1.name); // 大毛</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>类的属性和方法，还可以<strong>定义在构造函数的prototype对象之上</strong>，<strong>实现不同实例属性和方法的共享</strong>。</p>
@@ -421,7 +421,7 @@
 <li><p>用这个方法，<strong>“类”</strong>就<strong>是一个对象</strong>，不是函数：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var Cat = &#123;</span><br><span class="line">    name: <span class="string">"大毛"</span>,</span><br><span class="line">    makeSound: <span class="function"><span class="title">function</span></span>()&#123; </span><br><span class="line">        alert(<span class="string">"喵喵喵"</span>); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>然后，直接用<code>Object.create()</code>生成实例，不需要用到new：</p>
+<li><p>然后，直接用<code>Object.create()</code>生成实例，不需要用到<code>new</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var cat1 = Object.create(Cat);</span><br><span class="line">alert(cat1.name); // 大毛</span><br><span class="line">cat1.makeSound(); // 喵喵喵</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>目前，各大浏览器的最新版本（包括IE9）都部署了这个方法。如果遇到老式浏览器，可以用下面的代码自行部署：</p>
