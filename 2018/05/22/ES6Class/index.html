@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,开发,ES6,Class," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="类(Class)的基本用法 在 ES6 规范中，引入了Class的概念。使得 JS 开发者终于告别了直接使用原型对象模仿面向对象中的类和类继承时代。 但是JS 中并没有一个真正的Class原始类型，Class仅仅只是对原型对象运用语法糖，作为对象的模板。所以，只有理解如何使用原型对象实现类和类继承，才能真正地用好Class。">
+<meta name="keywords" content="JavaScript,开发,ES6,Class">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 类(Class)基本用法与静态属性 + 静态方法">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/05/22/ES6Class/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="类(Class)的基本用法 在 ES6 规范中，引入了Class的概念。使得 JS 开发者终于告别了直接使用原型对象模仿面向对象中的类和类继承时代。 但是JS 中并没有一个真正的Class原始类型，Class仅仅只是对原型对象运用语法糖，作为对象的模板。所以，只有理解如何使用原型对象实现类和类继承，才能真正地用好Class。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-24T14:17:14.287Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 类(Class)基本用法与静态属性 + 静态方法">
+<meta name="twitter:description" content="类(Class)的基本用法 在 ES6 规范中，引入了Class的概念。使得 JS 开发者终于告别了直接使用原型对象模仿面向对象中的类和类继承时代。 但是JS 中并没有一个真正的Class原始类型，Class仅仅只是对原型对象运用语法糖，作为对象的模板。所以，只有理解如何使用原型对象实现类和类继承，才能真正地用好Class。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/05/22/ES6Class/"/>
+
+
+
+
+
+  <title>ES6 类(Class)基本用法与静态属性 + 静态方法 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/05/22/ES6Class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ES6 类(Class)基本用法与静态属性 + 静态方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T14:33:15+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="类-Class-的基本用法"><a href="#类-Class-的基本用法" class="headerlink" title="类(Class)的基本用法"></a>类(Class)的基本用法</h4><ul>
+<li>在 ES6 规范中，引入了<code>Class</code>的概念。使得 JS 开发者终于告别了<strong>直接使用原型对象模仿面向对象中的类</strong>和<strong>类继承</strong>时代。</li>
+<li>但是JS 中并没有一个真正的<code>Class</code>原始类型，<strong><code>Class</code></strong>仅仅只是对原型对象运用语法糖，<strong>作为对象的模板</strong>。所以，只有理解如何使用原型对象实现类和类继承，才能真正地用好<code>Class</code>。<a id="more"></a></li>
+<li><p>下面代码定义了一个“类”，可以看到里面有一个<code>constructor</code>方法，这就是构造方法，而<code>this</code>关键字则代表实例对象。也就是说，ES5的构造函数<code>Point</code>，对应ES6的<code>Point</code>类的构造方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// ES6定义类</span><br><span class="line">class Point &#123;</span><br><span class="line">    constructor(x, y) &#123;</span><br><span class="line">        this.x = x;</span><br><span class="line">        this.y = y;</span><br><span class="line">    &#125;</span><br><span class="line">    // prototype属性</span><br><span class="line">    <span class="function"><span class="title">toString</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="string">'('</span> + this.x + <span class="string">', '</span> + this.y + <span class="string">')'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 等价于</span><br><span class="line">// ES5的构造函数</span><br><span class="line"><span class="keyword">function</span> Point(x, y) &#123;</span><br><span class="line">    this.x = x;</span><br><span class="line">    this.y = y;</span><br><span class="line">&#125;</span><br><span class="line">Point.prototype = <span class="function"><span class="title">toString</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'('</span> + this.x + <span class="string">', '</span> + this.y + <span class="string">')'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>定义“类”的方法</strong>的时候，<strong>前面不需要加上<code>function</code>这个关键字</strong>，直接把函数定义放进去了就可以了。另外，<strong>方法之间不需要逗号分隔</strong>，加了会报错。</p>
+</li>
+<li><p>构造函数的prototype属性，在ES6的“类”上面继续存在。事实上，<strong>类的所有方法都定义在类的prototype属性上面</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Point &#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span></span>()&#123;</span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">toString</span></span>()&#123;</span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">toValue</span></span>()&#123;</span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 等同于</span><br><span class="line"></span><br><span class="line">Point.prototype = &#123;</span><br><span class="line">    <span class="function"><span class="title">toString</span></span>()&#123;&#125;,</span><br><span class="line">    <span class="function"><span class="title">toValue</span></span>()&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Object.assign</code>方法可以很方便地<strong>一次向类添加多个方法</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Point &#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span></span>()&#123;</span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Object.assign(Point.prototype, &#123;</span><br><span class="line">    <span class="function"><span class="title">toString</span></span>()&#123;&#125;,</span><br><span class="line">    <span class="function"><span class="title">toValue</span></span>()&#123;&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>类的内部所有定义的方法</strong>，都是<strong>不可枚举的（non-enumerable）</strong>。这一点与ES5的行为不一致：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// ES5可枚举，ES6不可枚举</span><br><span class="line">Object.keys(Point.prototype)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>constructor方法是类的默认方法，<strong>通过new命令生成对象实例时，自动调用该方法</strong>。一个类必须有constructor方法，如果<strong>没有显式定义，一个空的constructor方法会被默认添加</strong>。constructor方法默认返回实例对象（即this），完全可以指定返回另外一个对象。</p>
+</li>
+<li><strong>类的构造函数，不使用new是没法调用的</strong>，会报错。</li>
+<li><p>可以<strong>通过实例的<code>__proto__</code>属性</strong>为Class添加方法，<strong>可被所有的实例所共享</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var p1 = new Point(2,3);</span><br><span class="line">var p2 = new Point(3,2);</span><br><span class="line"></span><br><span class="line">p1.__proto__.printName = <span class="function"><span class="title">function</span></span> () &#123; <span class="built_in">return</span> <span class="string">'Oops'</span> &#125;;</span><br><span class="line"></span><br><span class="line">p1.printName() // <span class="string">"Oops"</span></span><br><span class="line">p2.printName() // <span class="string">"Oops"</span></span><br><span class="line"></span><br><span class="line">var p3 = new Point(4,2);</span><br><span class="line">p3.printName() // <span class="string">"Oops"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可见，<strong>使用实例的<code>__proto__</code>属性改写原型，必须相当谨慎</strong>，不推荐使用，因为这<strong>会改变Class的原始定义，影响到所有实例</strong>。</p>
+</li>
+<li><code>Class</code><strong>不存在变量提升（hoist）</strong>。</li>
+</ul>
+<h4 id="typeof-class-“function”"><a href="#typeof-class-“function”" class="headerlink" title="typeof class == “function”"></a>typeof class == “function”</h4><ul>
+<li>使用<code>Class</code>的语法，让开发者告别了使用 prototype 模仿面向对象的时代。但是，<strong><code>Class</code></strong>并不是 ES6 引入的全新概念，它的<strong>原理依旧是原型继承</strong>。</li>
+<li>通过类型判断，我们可以得知，<strong><code>Class</code></strong>的并不是什么全新的数据类型，它<strong>实际只是 function (或者说 object)</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">typeof Person // <span class="keyword">function</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="类继承"><a href="#类继承" class="headerlink" title="类继承"></a>类继承</h4><ul>
+<li>在传统面向对象中，类是可以继承类的。这样子<strong>类</strong>就<strong>可以复制父类的方法，达到代码复用的目的</strong>。</li>
+<li><p>ES6 也提供了类继承的语法<code>extends</code>，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Foo &#123;</span><br><span class="line">    constructor(who)&#123;</span><br><span class="line">        this.me = who;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">identify</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="string">"I am "</span> + this.me;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Bar extends Foo &#123;</span><br><span class="line">    constructor(who)&#123;</span><br><span class="line">        // super() 指的是调用父类</span><br><span class="line">        // 调用的同时，会绑定 this 。</span><br><span class="line">        // 如：Foo.call(this, who)</span><br><span class="line">        super(who);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="title">speak</span></span>()&#123;</span><br><span class="line">        alert( <span class="string">"Hello, "</span> + this.identify() + <span class="string">"."</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var b1 = new Bar( <span class="string">"b1"</span> );</span><br><span class="line"></span><br><span class="line">b1.speak();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当实例<code>b1</code>调用<code>speak</code>方法时，<code>b1</code>本身没有 <code>speak</code>，所以会到<code>Bar.prototype</code>原型对象上查找，并且调用原型对象上的<code>speak</code>方法。调用<code>identify</code>方式时，由于<code>this</code>指向的是<code>b1</code>对象。所以也会先在<code>b1</code>本身查找，然后沿着原型链，查找<code>Bar.prototype</code>，最后在<code>Foo.prototype</code>原型对象上找到<code>identify</code>方法，然后调用。</p>
+</li>
+<li>实际上，在 JavaScript 中，<strong>类继承的本质依旧是原型对象</strong>。</li>
+</ul>
+<h4 id="Class的静态方法"><a href="#Class的静态方法" class="headerlink" title="Class的静态方法"></a>Class的静态方法</h4><ul>
+<li><p>类相当于实例的原型，<strong>所有在类中定义的方法，都会被实例继承</strong>。如果<strong>在一个方法前，加上static关键字，就表示该方法不会被实例继承</strong>，而是<strong>直接通过类来调用</strong>，这就称为<strong>“静态方法”</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// StaticMethod.js</span><br><span class="line">// 定义静态方法</span><br><span class="line">static <span class="function"><span class="title">getAge</span></span>()&#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'获取Age的静态方法'</span>;</span><br><span class="line">&#125;</span><br><span class="line">// 通过类名直接调用</span><br><span class="line">console.log(StaticMethod.getAge());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>静态方法只能在静态方法中调用，不能在实例方法中调用</strong>。</p>
+</li>
+</ul>
+<h4 id="Class的静态属性和实例属性"><a href="#Class的静态属性和实例属性" class="headerlink" title="Class的静态属性和实例属性"></a>Class的静态属性和实例属性</h4><ul>
+<li><p><strong>静态属性</strong>指的是<strong>Class本身的属性</strong>，即<code>Class.propname</code>，而不是定义在实例对象（this）上的属性。ES6使用静态属性和实例属性:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// StaticMethod.js</span><br><span class="line"></span><br><span class="line">// 定义静态属性</span><br><span class="line">StaticMethod.firstName = <span class="string">'pca'</span>;</span><br><span class="line">console.log(StaticMethod.firstName);</span><br><span class="line"></span><br><span class="line">// 定义实例属性</span><br><span class="line">// ES6实例属性只能在constructor构造函数中定义</span><br><span class="line"><span class="function"><span class="title">constructor</span></span>() &#123;</span><br><span class="line">    super();</span><br><span class="line">    this.width = <span class="string">'40cm'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">getWidth</span></span>()&#123;</span><br><span class="line">    <span class="built_in">return</span> this.width;//使用的时候需要加上this</span><br><span class="line">&#125;</span><br><span class="line">// 为了可读性的目的，对于那些在constructor里面已经定义的实例属性，新写法允许直接列出。</span><br><span class="line">width;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>说明</strong>：目前ES6，只有这种写法可行，<strong>因为ES6明确规定，Class内部只有静态方法，没有静态属性</strong>。</p>
+</li>
+<li><p><strong>ES7</strong>有一个<strong>静态属性的提案</strong>，目前Babel转码器支持。安装babel-preset-stage-0 包含了0-3的stage，可根据需要添加，不同的stage封装了不同的插件，官方推荐是使用stage-1安装命令(根据自己的需求调整):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save babel-preset-stage-0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ES7使用静态属性和实例属性：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// StaticMethod.js</span><br><span class="line"></span><br><span class="line">// ES7提案 定义静态属性</span><br><span class="line">static lastName = <span class="string">'pcaca'</span>;</span><br><span class="line"></span><br><span class="line">// ES7定义实例属性</span><br><span class="line">height = <span class="string">'150cm'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>说明</strong>：<strong>ES7和ES6的静态属性和实例属性</strong>只是<strong>定义不一样</strong>，<strong>调用的方式是一样的</strong>。</p>
+</li>
+<li>Class的静态方法/Class静态属性和实例属性的整个案例:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">// StaticMethodParent.js</span><br><span class="line"><span class="built_in">export</span> default class StaticMethodParent&#123;</span><br><span class="line">    static <span class="function"><span class="title">getCommon</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="string">'父类的静态方法'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// StaticMethod.js</span><br><span class="line">import StaticMethodParent from <span class="string">'./StaticMethodParent'</span></span><br><span class="line"> </span><br><span class="line">// 定义静态属性和静态方法</span><br><span class="line">class StaticMethod extends StaticMethodParent&#123;</span><br><span class="line">    // 因为ES6明确规定，Class内部只有静态方法，没有静态属性,所以ES6在类中定义静态属性都是错误的。</span><br><span class="line">    // static lastName = <span class="string">'pcaca'</span>;ES6错误</span><br><span class="line"> </span><br><span class="line">    // ES7提案 定义静态属性</span><br><span class="line">    // 安装babel-preset-stage-0 包含了0-3的stage，可根据需要添加，</span><br><span class="line">    // 不同的stage封装了不同的插件，官方推荐是使用stage-1</span><br><span class="line">    static lastName = <span class="string">'pcaca'</span>;</span><br><span class="line"> </span><br><span class="line">    // ES7定义实例属性</span><br><span class="line">    height = <span class="string">'150cm'</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="title">getHeight</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> this.height;//ES7的使用也要加上this</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    // ES6实例属性只能在constructor构造函数中定义</span><br><span class="line">    <span class="function"><span class="title">constructor</span></span>() &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.width = <span class="string">'40cm'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    // 为了可读性的目的，对于那些在constructor里面已经定义的实例属性，新写法允许直接列出。</span><br><span class="line">    width;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="title">getWidth</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> this.width;//使用的时候需要加上this</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    // 定义静态方法</span><br><span class="line">    static <span class="function"><span class="title">getAge</span></span>()&#123;</span><br><span class="line">        // 子类可以调用父类的静态方法</span><br><span class="line">        console.log(super.getCommon());</span><br><span class="line">        <span class="built_in">return</span> <span class="string">'获取Age的静态方法'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">// 定义静态属性</span><br><span class="line">StaticMethod.firstName = <span class="string">'pca'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">export</span> &#123;StaticMethod&#125;;</span><br><span class="line"> </span><br><span class="line">// index.js</span><br><span class="line">import &#123;StaticMethod&#125; from <span class="string">'./StaticMethod'</span>;</span><br><span class="line">console.log(StaticMethod.getAge());</span><br><span class="line">console.log(StaticMethod.getCommon());</span><br><span class="line">console.log(StaticMethod.firstName);</span><br><span class="line">console.log(StaticMethod.lastName);</span><br><span class="line"><span class="built_in">let</span> staticMethod = new StaticMethod();</span><br><span class="line">console.log(staticMethod.height);</span><br><span class="line">console.log(staticMethod.getHeight());</span><br><span class="line">console.log(staticMethod.width);</span><br><span class="line">console.log(staticMethod.getWidth());</span><br><span class="line">//staticMethod.getAge();//bundle.js:7906 Uncaught TypeError: staticMethod.getAge is not a <span class="keyword">function</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/ES6/" rel="tag"><i class="fa fa-tag"></i> ES6</a>
+          
+            <a href="/tags/Class/" rel="tag"><i class="fa fa-tag"></i> Class</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/21/frontEndMonitor/" rel="next" title="使用Javascript监控前端相关数据">
+                <i class="fa fa-chevron-left"></i> 使用Javascript监控前端相关数据
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">101</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#类-Class-的基本用法"><span class="nav-number">1.</span> <span class="nav-text">类(Class)的基本用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#typeof-class-“function”"><span class="nav-number">2.</span> <span class="nav-text">typeof class == “function”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类继承"><span class="nav-number">3.</span> <span class="nav-text">类继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Class的静态方法"><span class="nav-number">4.</span> <span class="nav-text">Class的静态方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Class的静态属性和实例属性"><span class="nav-number">5.</span> <span class="nav-text">Class的静态属性和实例属性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
