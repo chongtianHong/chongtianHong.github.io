@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,开发,Web,性能优化,函数去抖," />
+  <meta name="keywords" content="开发,Web,JavaScript,性能优化,函数去抖," />
 
 
 
@@ -124,7 +124,7 @@
 
 
 <meta name="description" content="基本介绍 概念：函数去抖是通过一个定时器，阻断连续重复的函数调用，从而一定程度上优化性能。 用途：主要用于用户界面调用的函数，如：resize事件、mousemove事件、keyup事件的监听函数。  这类监听函数的主要特征：1、短时间内连续多次重复触发；2、大量的DOM操作。 意义：在用户察觉范围外，降低函数调用的频率，从而提升性能。">
-<meta name="keywords" content="JavaScript,开发,Web,性能优化,函数去抖">
+<meta name="keywords" content="开发,Web,JavaScript,性能优化,函数去抖">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS性能优化之函数去抖">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/04/05/debounce/index.html">
@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://chongtianhong.github.io/images/search1.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/search2.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/search3.png">
-<meta property="og:updated_time" content="2018-08-25T03:16:34.355Z">
+<meta property="og:updated_time" content="2018-08-25T03:17:09.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS性能优化之函数去抖">
 <meta name="twitter:description" content="基本介绍 概念：函数去抖是通过一个定时器，阻断连续重复的函数调用，从而一定程度上优化性能。 用途：主要用于用户界面调用的函数，如：resize事件、mousemove事件、keyup事件的监听函数。  这类监听函数的主要特征：1、短时间内连续多次重复触发；2、大量的DOM操作。 意义：在用户察觉范围外，降低函数调用的频率，从而提升性能。">
@@ -411,9 +411,9 @@
 </ul>
 <h4 id="函数去抖的原理"><a href="#函数去抖的原理" class="headerlink" title="函数去抖的原理"></a>函数去抖的原理</h4><ul>
 <li>某些代码不可以<strong>在没有间断的情况下连续重复执行</strong>。</li>
-<li>第一次调用函数，创建一个定时器，在指定的时间间隔之后运行代码。当第二次调用该函数时，它会清除前一次的定时器并设置另一个。</li>
+<li>第一次调用函数，创建一个定时器，在<strong>指定的时间间隔之后运行代码</strong>。当第二次调用该函数时，它会<strong>清除前一次的定时器并设置另一个</strong>。</li>
 <li>如果前一个定时器已经执行过了，这个操作就没有任何意义。</li>
-<li>然而，如果前一个定时器尚未执行，其实就是将其替换为一个新的定时器。目的是只有<strong>在执行函数的请求停止了一段时间之后才执行</strong>。</li>
+<li>然而，如果<strong>前一个定时器尚未执行</strong>，其实就是<strong>将其替换为一个新的定时器</strong>。目的是只有<strong>在执行函数的请求停止了一段时间之后才执行</strong>。</li>
 </ul>
 <h4 id="具体用法"><a href="#具体用法" class="headerlink" title="具体用法"></a>具体用法</h4><ul>
 <li>例如： <ul>
@@ -476,11 +476,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
             <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
             <a href="/tags/性能优化/" rel="tag"><i class="fa fa-tag"></i> 性能优化</a>
           
