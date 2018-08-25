@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="性能优化,开发,JavaScript,Web,函数去抖," />
+  <meta name="keywords" content="JavaScript,开发,Web,性能优化,函数去抖," />
 
 
 
@@ -124,7 +124,7 @@
 
 
 <meta name="description" content="基本介绍 概念：函数去抖是通过一个定时器，阻断连续重复的函数调用，从而一定程度上优化性能。 用途：主要用于用户界面调用的函数，如：resize事件、mousemove事件、keyup事件的监听函数。  这类监听函数的主要特征：1、短时间内连续多次重复触发；2、大量的DOM操作。 意义：在用户察觉范围外，降低函数调用的频率，从而提升性能。">
-<meta name="keywords" content="性能优化,开发,JavaScript,Web,函数去抖">
+<meta name="keywords" content="JavaScript,开发,Web,性能优化,函数去抖">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS性能优化之函数去抖">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/04/05/debounce/index.html">
@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://chongtianhong.github.io/images/search1.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/search2.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/search3.png">
-<meta property="og:updated_time" content="2018-08-25T03:51:24.496Z">
+<meta property="og:updated_time" content="2018-08-25T04:06:00.184Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS性能优化之函数去抖">
 <meta name="twitter:description" content="基本介绍 概念：函数去抖是通过一个定时器，阻断连续重复的函数调用，从而一定程度上优化性能。 用途：主要用于用户界面调用的函数，如：resize事件、mousemove事件、keyup事件的监听函数。  这类监听函数的主要特征：1、短时间内连续多次重复触发；2、大量的DOM操作。 意义：在用户察觉范围外，降低函数调用的频率，从而提升性能。">
@@ -439,7 +439,7 @@
 </ul>
 <blockquote>3、函数防抖增强版</blockquote>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"search"</span> <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"search"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> queryData(text)&#123;</span><br><span class="line">    console.log(<span class="string">"搜索："</span> + text);</span><br><span class="line">&#125;</span><br><span class="line">var input = document.getElementById(<span class="string">"search"</span>);</span><br><span class="line">input.addEventListener(<span class="string">"keyup"</span>, <span class="keyword">function</span>(event)&#123;</span><br><span class="line">    debounce(queryData, null, 500, this.value, 1000);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> debounce(fn, context, delay, text, mustApplyTime)&#123;</span><br><span class="line">    clearTimeout(fn.timer);</span><br><span class="line">    fn._cur = Date.now(); //记录当前时间</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!fn._start)&#123; //若该函数是第一次调用，则直接设置_start,即开始时间，为_cur，即此刻的时间</span><br><span class="line">        fn._start = fn._cur;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(fn._cur-fn._start &gt; mustApplyTime)&#123; </span><br><span class="line">    //当前时间与上一次函数被执行的时间作差，与mustApplyTime比较，若大于，则必须执行一次函数，若小于，则重新设置计时器</span><br><span class="line">        fn.call(context, text);</span><br><span class="line">        fn._start = fn._cur;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        fn.timer = setTimeout(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            fn.call(context, text);</span><br><span class="line">        &#125;, delay);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"search"</span> <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"search"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> queryData(text)&#123;</span><br><span class="line">    console.log(<span class="string">"搜索："</span> + text);</span><br><span class="line">&#125;</span><br><span class="line">var input = document.getElementById(<span class="string">"search"</span>);</span><br><span class="line">input.addEventListener(<span class="string">"keyup"</span>, <span class="keyword">function</span>(event)&#123;</span><br><span class="line">    debounce(queryData, null, 500, this.value, 1000);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> debounce(fn, context, delay, text, mustApplyTime)&#123;</span><br><span class="line">    clearTimeout(fn.timer);</span><br><span class="line">    fn._cur = Date.now(); //记录当前时间</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!fn._start)&#123; //若该函数是第一次调用，则直接设置_start,即开始时间，为_cur，即此刻的时间</span><br><span class="line">        fn._start = fn._cur;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(fn._cur - fn._start &gt; mustApplyTime)&#123; </span><br><span class="line">    //当前时间与上一次函数被执行的时间作差，与mustApplyTime比较，若大于，则必须执行一次函数，若小于，则重新设置计时器</span><br><span class="line">        fn.call(context, text);</span><br><span class="line">        fn._start = fn._cur;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        fn.timer = setTimeout(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            fn.call(context, text);</span><br><span class="line">        &#125;, delay);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>结果如图：<br><img src="/images/search3.png" alt="函数防抖增强版"></li>
 <li>显然，连续的输入，到一定时间间隔之后，queryData函数必然会被调用，但是又不是频繁的调用。这既达到了防抖的目的，又不会影响用户体验。</li>
@@ -476,13 +476,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/性能优化/" rel="tag"><i class="fa fa-tag"></i> 性能优化</a>
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          
             <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+          
+            <a href="/tags/性能优化/" rel="tag"><i class="fa fa-tag"></i> 性能优化</a>
           
             <a href="/tags/函数去抖/" rel="tag"><i class="fa fa-tag"></i> 函数去抖</a>
           
