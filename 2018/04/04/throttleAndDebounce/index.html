@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 函数节流和函数防抖，两者都是优化高频率执行js代码的一种手段。 在一些场景中，函数会因为一些用户操作被频繁触发，例如频繁操作DOM，重绘Layout，加载资源，请求数据，而导致浏览器卡顿或者崩溃。 常见场景有：输入监听，滚动监听，鼠标移入/移出/移动。这个时候就需要我们去优化，从而提高Javascript性能。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-13T15:23:17.667Z">
+<meta property="og:updated_time" content="2018-08-25T04:26:46.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数节流和函数防抖之间的区别">
 <meta name="twitter:description" content="基本介绍 函数节流和函数防抖，两者都是优化高频率执行js代码的一种手段。 在一些场景中，函数会因为一些用户操作被频繁触发，例如频繁操作DOM，重绘Layout，加载资源，请求数据，而导致浏览器卡顿或者崩溃。 常见场景有：输入监听，滚动监听，鼠标移入/移出/移动。这个时候就需要我们去优化，从而提高Javascript性能。">
@@ -406,7 +406,7 @@
 </ul>
 <h4 id="throttle"><a href="#throttle" class="headerlink" title="throttle"></a>throttle</h4><ul>
 <li><strong>throttle</strong>：<strong>一定的时间间隔内执行</strong>，即设定一个时间间隔，当大于或等于时间间隔时，立即执行一次方法。</li>
-<li>简而言之，指定时间间隔内<strong>只会执行一次任务</strong>。</li>
+<li>简而言之，<strong>指定时间间隔内只会执行一次任务</strong>。</li>
 <li><p>比如人的眨眼睛，就是一定时间内眨一次。这是函数节流最形象的解释。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> canRun = <span class="literal">true</span>;</span><br><span class="line">window.addEventListener(<span class="string">'resize'</span>, () =&gt; &#123;</span><br><span class="line">    // 判断是否已空闲，如果在执行中，则直接<span class="built_in">return</span></span><br><span class="line">    <span class="keyword">if</span>(!canRun)&#123;</span><br><span class="line">        <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    canRun = <span class="literal">false</span>;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">        console.log(<span class="string">'执行'</span>);</span><br><span class="line">        canRun = <span class="literal">true</span>;</span><br><span class="line">    &#125;, 500);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </li>
