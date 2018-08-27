@@ -135,7 +135,7 @@
 <meta property="og:image" content="https://chongtianhong.github.io/2018/05/23/clearFloat/images/clearFloat2.png">
 <meta property="og:image" content="https://chongtianhong.github.io/2018/05/23/clearFloat/images/clearFloat3.png">
 <meta property="og:image" content="https://chongtianhong.github.io/2018/05/23/clearFloat/images/clearFloat4.png">
-<meta property="og:updated_time" content="2018-08-27T03:42:30.172Z">
+<meta property="og:updated_time" content="2018-08-27T03:44:16.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="清除浮动的四种方式及其原理理解">
 <meta name="twitter:description" content="本文介绍了四种清除浮动的方法，并尝试解释其原理。 在理解了各种清除浮动的原理之后，我们会发现，很多清除浮动的方法本质上其实是一样的。">
@@ -435,6 +435,7 @@
 <li>设置样式为<code>clear: both</code>也有相同的效果，即<strong>两边都不允许有浮动元素</strong>，clear就是对应方向的值，两边都不允许就是both。</li>
 </ul>
 </li>
+<li><strong>注意</strong>：这个规则<strong>只能影响使用清除的元素本身，不能影响其他元素</strong>。</li>
 <li><p>但是，如果我们把HTML中的<code>.floatDiv</code>和<code>.textDiv</code>55：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">"topDiv"</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">"textDiv"</span>&gt;...&lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">"floatDiv"</span>&gt;<span class="built_in">float</span> left&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=<span class="string">"bottomDiv"</span>&gt;...&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 </li>
