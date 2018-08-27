@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="在JavaScript中，可使用typeof、instanceof、Object.prototype.toString对变量类型进行检测，接下来将对它们进行比较。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-15T13:38:34.545Z">
+<meta property="og:updated_time" content="2018-08-27T05:29:52.334Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript的三种类型检测的比较">
 <meta name="twitter:description" content="在JavaScript中，可使用typeof、instanceof、Object.prototype.toString对变量类型进行检测，接下来将对它们进行比较。">
@@ -428,7 +428,7 @@
 </ul>
 <h4 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h4><ul>
 <li><code>Object.prototype.toString</code>是对象的一个原生原型扩展函数，用来<strong>精确的区分数据类型</strong>。</li>
-<li>使用<code>Object.prototype.toString.call(value)</code>方法去调用对象，可得到对象的构造函数名。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">type</span>=Object.prototype.toString</span><br><span class="line">console.log(type.call(<span class="string">''</span>));//object String</span><br><span class="line">console.log(type.call([]));//object Array</span><br><span class="line">console.log(type.call(&#123;&#125;));//object Object</span><br><span class="line">console.log(type.call(<span class="literal">false</span>));//object Boolean</span><br><span class="line">console.log(type.call(null));//object Null</span><br><span class="line">console.log(type.call(undefined));//object Undefined</span><br><span class="line">console.log(type.call(<span class="function"><span class="title">function</span></span>()&#123;&#125;));//object Function</span><br></pre></td></tr></table></figure>
+<li>使用<code>Object.prototype.toString.call(value)</code>方法去调用对象，可得到对象的构造函数名。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">type</span> = Object.prototype.toString;</span><br><span class="line">console.log(type.call(<span class="string">''</span>));//object String</span><br><span class="line">console.log(type.call([]));//object Array</span><br><span class="line">console.log(type.call(&#123;&#125;));//object Object</span><br><span class="line">console.log(type.call(<span class="literal">false</span>));//object Boolean</span><br><span class="line">console.log(type.call(null));//object Null</span><br><span class="line">console.log(type.call(undefined));//object Undefined</span><br><span class="line">console.log(type.call(<span class="function"><span class="title">function</span></span>()&#123;&#125;));//object Function</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 
