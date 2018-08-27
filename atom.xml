@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-27T10:47:57.841Z</updated>
+  <updated>2018-08-27T10:53:52.184Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>前端面试题整理（JS部分一）</title>
+    <title>前端面试题整理一（JS部分）</title>
     <link href="https://chongtianhong.github.io/2018/05/25/interviewMap1/"/>
     <id>https://chongtianhong.github.io/2018/05/25/interviewMap1/</id>
     <published>2018-05-25T05:42:04.000Z</published>
-    <updated>2018-08-27T10:47:57.841Z</updated>
+    <updated>2018-08-27T10:53:52.184Z</updated>
     
     <content type="html"><![CDATA[<h4 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h4><h5 id="内置类型"><a href="#内置类型" class="headerlink" title="内置类型"></a>内置类型</h5><ul><li>JS 中分为<strong>七种内置类型</strong>，七种内置类型<strong>又分为两大类型</strong>：<strong>基本类型</strong>和<strong>对象（Object）</strong>。</li><li>基本类型有六种： <code>null</code>，<code>undefined</code>，<code>boolean</code>，<code>number</code>，<code>string</code>，<code>symbol</code>。</li><li>其中 <strong>JS 的数字类型是浮点类型的，没有整型</strong>。并且浮点类型基于 IEEE 754标准实现，在使用中会遇到某些 Bug。</li><li><code>NaN</code> 也属于 number 类型，并且<strong><code>NaN</code> 不等于自身</strong>。</li><li><p>对于<strong>基本类型</strong>来说，如果<strong>使用字面量的方式</strong>，那么<strong>这个变量只是个字面量</strong>，只有<strong>在必要的时候才会转换为对应的类型</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> a = 111 // 这只是字面量，不是 number 类型</span><br><span class="line">a.toString() // 使用时候才会转换为对象类型</span><br></pre></td></tr></table></figure></li><li><p>对<strong>象（Object）</strong>是<strong>引用类型</strong>，在使用过程中会遇到<strong>浅拷贝</strong>和<strong>深拷贝</strong>的问题：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> a = &#123; name: <span class="string">'FE'</span> &#125;</span><br><span class="line"><span class="built_in">let</span> b = a</span><br><span class="line">b.name = <span class="string">'EF'</span></span><br><span class="line">console.log(a.name) // EF</span><br></pre></td></tr></table></figure></li></ul><h5 id="Typeof"><a href="#Typeof" class="headerlink" title="Typeof"></a>Typeof</h5><ul><li><p><code>typeof</code>对于<strong>基本类型</strong>，<strong>除了<code>null</code></strong>都可以显示正确的类型：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typeof 1 // <span class="string">'number'</span></span><br><span class="line">typeof <span class="string">'1'</span> // <span class="string">'string'</span></span><br><span class="line">typeof undefined // <span class="string">'undefined'</span></span><br><span class="line">typeof <span class="literal">true</span> // <span class="string">'boolean'</span></span><br><span class="line">typeof Symbol() // <span class="string">'symbol'</span></span><br><span class="line">typeof b // b 没有声明，但是还会显示 undefined</span><br></pre></td></tr></table></figure></li><li><p><code>typeof</code>对于<strong>对象</strong>，<strong>除了函数</strong>都会显示<code>object</code>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">typeof [] // <span class="string">'object'</span></span><br><span class="line">typeof &#123;&#125; // <span class="string">'object'</span></span><br><span class="line">typeof console.log // <span class="string">'function'</span></span><br></pre></td></tr></table></figure></li><li><p>对于<code>null</code>来说，虽然它是<strong>基本类型</strong>，但是会<strong>显示 <code>object</code></strong>，这是一个存在很久了的 Bug：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">typeof null // <span class="string">'object'</span></span><br><span class="line">/* 原因：</span><br><span class="line">因为在 JS 的最初版本中，使用的是 32 位系统，</span><br><span class="line">为了性能考虑使用低位存储了变量的类型信息，000 开头代表是对象，</span><br><span class="line">然而 null 表示为全零，所以将它错误的判断为 object 。</span><br><span class="line">虽然现在的内部类型判断代码已经改变了，</span><br><span class="line">但是对于这个 Bug 却是一直流传下来。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure></li><li><p>如果我们想获得一个变量的正确类型，可以通过<code>Object.prototype.toString.call(xx)</code>。这样我们就可以获得类似<code>[object Type]</code>的字符串：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">type</span> = Object.prototype.toString;</span><br><span class="line">console.log(type.call(<span class="string">''</span>));//object String</span><br><span class="line">console.log(type.call([]));//object Array</span><br><span class="line">console.log(type.call(&#123;&#125;));//object Object</span><br><span class="line">console.log(type.call(<span class="literal">false</span>));//object Boolean</span><br><span class="line">console.log(type.call(null));//object Null</span><br><span class="line">console.log(type.call(undefined));//object Undefined</span><br><span class="line">console.log(type.call(<span class="function"><span class="title">function</span></span>()&#123;&#125;));//object Function</span><br></pre></td></tr></table></figure></li></ul><h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><h5 id="转Boolean"><a href="#转Boolean" class="headerlink" title="转Boolean"></a>转Boolean</h5><ul><li>在条件判断时，除了<code>undefined</code>，<code>null</code>，<code>false</code>，<code>NaN</code>，<code>‘’</code>，<code>0</code>，<code>-0</code>，<strong>其他所有值都转为<code>true</code>，包括所有对象</strong>。</li></ul><h5 id="对象转基本类型"><a href="#对象转基本类型" class="headerlink" title="对象转基本类型"></a>对象转基本类型</h5><ul><li><p><strong>对象在转换基本类型</strong>时，首先会<strong>调用<code>valueOf</code></strong>，然后<strong>调用<code>toString</code></strong>。并且这两个方法是<strong>可以重写</strong>的：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> a = &#123;</span><br><span class="line">    <span class="function"><span class="title">valueOf</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> 0</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>当然也<strong>可以重写<code>Symbol.toPrimitive</code></strong>，该方法<strong>在转基本类型时调用优先级最高</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> a = &#123;</span><br><span class="line">  <span class="function"><span class="title">valueOf</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">toString</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> <span class="string">'1'</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  [Symbol.toPrimitive]() &#123;</span><br><span class="line">    <span class="built_in">return</span> 2;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">1 + a // =&gt; 3</span><br><span class="line"><span class="string">'1'</span> + a // =&gt; <span class="string">'12'</span></span><br></pre></td></tr></table></figure></li></ul><h5 id="四则运算符"><a href="#四则运算符" class="headerlink" title="四则运算符"></a>四则运算符</h5><ul><li>只有当<strong>加法运算</strong>时，其中<strong>一方是字符串类型</strong>，就会<strong>把另一个也转为字符串类型</strong>。</li><li>并且<strong>加法运算会触发三种类型转换</strong>：将值转换为原始值，转换为数字，转换为字符串。</li><li><p><strong>其他运算</strong>只要其中一方是数字，那么另一方就转为数字。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1 + <span class="string">'1'</span> // <span class="string">'11'</span></span><br><span class="line">2 * <span class="string">'2'</span> // 4</span><br><span class="line">[1, 2] + [2, 1] // <span class="string">'1,22,1'</span></span><br><span class="line">// [1, 2].toString() -&gt; <span class="string">'1,2'</span></span><br><span class="line">// [2, 1].toString() -&gt; <span class="string">'2,1'</span></span><br><span class="line">// <span class="string">'1,2'</span> + <span class="string">'2,1'</span> = <span class="string">'1,22,1'</span></span><br></pre></td></tr></table></figure></li><li><p>对于加号需要注意这个表达式 ‘a’ + + ‘b’，<strong>一元加操作符</strong>可以<strong>实现与<code>Number</code>相同的作用</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'a'</span> + + <span class="string">'b'</span> // -&gt; <span class="string">"aNaN"</span></span><br><span class="line">// 因为 + <span class="string">'b'</span> -&gt; NaN</span><br></pre></td></tr></table></figure></li></ul><h5 id="操作符"><a href="#操作符" class="headerlink" title="== 操作符"></a>== 操作符</h5><ul><li><p>比较运算<code>x==y</code>，其中<code>x</code>和<code>y</code>是值，比较运算产生<code>true</code>或<code>false</code>。这样的比较按如下方式进行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">1. 若Type(x)与Type(y)相同，则</span><br><span class="line">    a. 若Type(x)为Undefined，返回<span class="literal">true</span>。</span><br><span class="line">    b. 若Type(x)为Null，返回<span class="literal">true</span>。</span><br><span class="line">    c. 若Type(x)为Number，则</span><br><span class="line">        i. 若x为NaN，返回<span class="literal">false</span>。</span><br><span class="line">       ii. 若y为NaN，返回<span class="literal">false</span>。</span><br><span class="line">      iii. 若x与为为相同数值，返回<span class="literal">true</span>。</span><br><span class="line">       iv. 若x为+0且y为-0，返回<span class="literal">true</span>。</span><br><span class="line">        v. 若x为-0且y为+0，返回<span class="literal">true</span>。</span><br><span class="line">       vi. 返回<span class="literal">false</span>。</span><br><span class="line">    d. 若Type(x)为String，则当x和y为完全相同的字符串序列（长度相等且相同字符在相同位置）时返回ture，否则返回<span class="literal">false</span>。</span><br><span class="line">    e. 若Type(x)为Boolean，当x和y同为<span class="literal">true</span>或者同为<span class="literal">false</span>时返回<span class="literal">true</span>，否则返回<span class="literal">false</span>。</span><br><span class="line">    f. 当x和y引用同一对象时返回<span class="literal">true</span>，否则返回<span class="literal">false</span>。</span><br><span class="line">2. 若x为null且y为undefined，返回<span class="literal">true</span>。</span><br><span class="line">3. 若x为undefined且y为null，返回ture。</span><br><span class="line">4. 若Type(x)为Number且Type(y)为String，返回x==Number(y)的结果。</span><br><span class="line">5. 若Type(x)为String且Type(y)为Number，返回Number(x)==y的结果。</span><br><span class="line">6. 若Type(x)为Boolean，返回比较Number(x)==y的结果。</span><br><span class="line">7. 若Type(y)为Boolean，返回比较X==Number(y)的结果。</span><br><span class="line">8. 若Type(x)为String或Number，且Type(y)为Object，返回比较x==ToPrimitive(y)的结果。</span><br><span class="line">9. 若Type(x)为Object，且Type(y)为String或Number，返回比较ToPrimitive(x)==y的结果。</span><br><span class="line">10.其余情况返回<span class="literal">false</span>。</span><br></pre></td></tr></table></figure></li><li><p>上面提到的<code>toPrimitive</code>就是<strong>对象转基本类型</strong>。</p></li><li>解析一道题目<code>[] == ![] // -&gt; true</code>，下面是这个表达式为何为 true 的步骤：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// [] 转成 <span class="literal">true</span>，然后取反变成 <span class="literal">false</span></span><br><span class="line">[] == <span class="literal">false</span></span><br><span class="line">// 根据第 8 条得出</span><br><span class="line">[] == ToNumber(<span class="literal">false</span>)</span><br><span class="line">[] == 0</span><br><span class="line">// 根据第 10 条得出</span><br><span class="line">ToPrimitive([]) == 0</span><br><span class="line">// [].toString() -&gt; <span class="string">''</span></span><br><span class="line"><span class="string">''</span> == 0</span><br><span class="line">// 根据第 6 条得出</span><br><span class="line">0 == 0 // -&gt; <span class="literal">true</span></span><br></pre></td></tr></table></figure></li></ul><h5 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h5><ul><li>如果是<strong>对象</strong>，就<strong>通过<code>toPrimitive<code>将对象转换为基本类型</code></code></strong>。</li><li>如果是<strong>字符串</strong>，就<strong>通过<code>unicode<code>字符索引</code></code></strong>来比较。</li></ul>]]></content>
     
@@ -37,9 +37,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="面试题" scheme="https://chongtianhong.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     
@@ -65,9 +65,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -121,9 +121,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
@@ -179,9 +179,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -204,9 +204,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -229,9 +229,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES5" scheme="https://chongtianhong.github.io/tags/ES5/"/>
     
@@ -256,9 +256,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES5" scheme="https://chongtianhong.github.io/tags/ES5/"/>
     
@@ -283,9 +283,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES5" scheme="https://chongtianhong.github.io/tags/ES5/"/>
     
@@ -312,11 +312,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Router" scheme="https://chongtianhong.github.io/tags/Router/"/>
     
@@ -341,9 +341,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
@@ -370,9 +370,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Ajax" scheme="https://chongtianhong.github.io/tags/Ajax/"/>
     
@@ -397,9 +397,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="arguments" scheme="https://chongtianhong.github.io/tags/arguments/"/>
     
@@ -425,9 +425,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Array" scheme="https://chongtianhong.github.io/tags/Array/"/>
     
@@ -452,9 +452,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="习题" scheme="https://chongtianhong.github.io/tags/%E4%B9%A0%E9%A2%98/"/>
     
@@ -479,9 +479,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="类型检测" scheme="https://chongtianhong.github.io/tags/%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%B5%8B/"/>
     
@@ -534,9 +534,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="高阶函数" scheme="https://chongtianhong.github.io/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
     
@@ -565,9 +565,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="高阶函数" scheme="https://chongtianhong.github.io/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
     
