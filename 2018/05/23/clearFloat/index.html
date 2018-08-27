@@ -135,7 +135,7 @@
 <meta property="og:image" content="https://chongtianhong.github.io/2018/05/23/clearFloat/images/clearFloat2.png">
 <meta property="og:image" content="https://chongtianhong.github.io/2018/05/23/clearFloat/images/clearFloat3.png">
 <meta property="og:image" content="https://chongtianhong.github.io/2018/05/23/clearFloat/images/clearFloat4.png">
-<meta property="og:updated_time" content="2018-08-27T03:17:48.693Z">
+<meta property="og:updated_time" content="2018-08-27T03:29:16.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="清除浮动的四种方式及其原理理解">
 <meta name="twitter:description" content="本文介绍了四种清除浮动的方法，并尝试解释其原理。 在理解了各种清除浮动的原理之后，我们会发现，很多清除浮动的方法本质上其实是一样的。">
@@ -454,7 +454,31 @@
 </li>
 <li>和第一个例子里<code>.textDiv</code>应用clear清除浮动，撑起父级元素高度的原理完全一样。这里强调一点，即，<strong>在父级元素末尾添加的元素必须是一个块级元素，否则无法撑起父级元素高度</strong>。</li>
 </ul>
-<p>##### </p>
+<h5 id="利用伪元素（clearfix）"><a href="#利用伪元素（clearfix）" class="headerlink" title="利用伪元素（clearfix）"></a>利用伪元素（clearfix）</h5><ul>
+<li><p>HTML结构如下，在<code>.topDiv</code>的div上再添加一个<code>clearfix</code>类：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">"topDiv clearfix"</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">"textDiv"</span>&gt;...&lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">"floatDiv"</span>&gt;<span class="built_in">float</span> left&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=<span class="string">"bottomDiv"</span>&gt;...&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>样式应用如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 省略基本的样式</span><br><span class="line">// 区别在这里</span><br><span class="line">.clearfix:after &#123;</span><br><span class="line">    content: <span class="string">'.'</span>;       /*生成内容作为最后一个元素，至于content里面是点还是其他都是可以的*/</span><br><span class="line">    height: 0;          /*避免生成内容破坏原有布局的高度*/</span><br><span class="line">    visibility:hidden;  /*使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互*/</span><br><span class="line">    display: block;     /*使生成的元素以块级元素显示,占满剩余空间*/</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>该样式在<code>.clearfix</code>，即父级元素的最后，添加了一个:after伪元素，<strong>通过清除伪元素的浮动，达到撑起父元素高度的目的</strong>。</p>
+</li>
+<li>注意到该伪元素的<code>display</code>值为<code>block</code>，即，它是一个<strong>不可见的块级元素</strong>。你可能已经意识到，这也只不过是前一种清除浮动方法（添加空白div）的另一种变形，其底层逻辑也是完全一样的。这三种方法，其本质上是一样的。</li>
+</ul>
+<h5 id="利用overflow清除浮动"><a href="#利用overflow清除浮动" class="headerlink" title="利用overflow清除浮动"></a>利用overflow清除浮动</h5><ul>
+<li>首先直观地看看，<code>overflow</code>是如何清除浮动的。</li>
+<li><p>HTML结构如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">"topDiv"</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">"floatDiv"</span>&gt;<span class="built_in">float</span> left&lt;/div&gt;</span><br><span class="line">    &lt;div class=<span class="string">"textDiv"</span>&gt;...&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=<span class="string">"bottomDiv"</span>&gt;...&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>样式应用如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">.topDiv &#123;</span><br><span class="line">    width: 500px;</span><br><span class="line">    padding: 4px;</span><br><span class="line">    border: 2px solid black;</span><br><span class="line"> </span><br><span class="line">    // 区别在这里</span><br><span class="line">    overflow: auto;</span><br><span class="line">&#125;</span><br><span class="line">.floatDiv &#123;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    border: 2px dotted red;</span><br><span class="line">    color: red;</span><br><span class="line">    margin: 4px;</span><br><span class="line">    <span class="built_in">float</span>: left;</span><br><span class="line">&#125;</span><br><span class="line">.bottomDiv &#123;</span><br><span class="line">    width: 500px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    margin: 5px 0;</span><br><span class="line">    border: 2px dotted black;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br><span class="line">.textDiv &#123;</span><br><span class="line">    color: blue;</span><br><span class="line">    border: 2px solid blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用CSS后的渲染效果如下：<br>&lt;img src=”images/clearFloat5.png” stype=”border:none” alt=”利用overflow清除浮动后的渲染效果&gt;</p>
+</li>
+<li>仅仅只<strong>在父级元素上添加了一个值为<code>auto</code>的<code>overflow</code>属性，父元素的高度立即被撑起</strong>，将浮动元素包裹在内。看起来，浮动被清除了，浮动不再会影响到后续元素的渲染。</li>
+<li>其实，<strong>这里的<code>overflow</code>值</strong>，还可以是<strong>除了”visible”之外的任何有效值，它们都能达到撑起父元素高度，清除浮动的目的</strong>。</li>
+<li>不过，<strong>有的值可能会带来副作用</strong>，比如，scroll值会导致滚动条始终可见，hidden会使得超出边框部分不可见等。</li>
+</ul>
 
       
     </div>
@@ -661,7 +685,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要清除浮动"><span class="nav-number">1.</span> <span class="nav-text">为什么要清除浮动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#清除浮动的方法"><span class="nav-number">2.</span> <span class="nav-text">清除浮动的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#利用clear样式"><span class="nav-number">2.1.</span> <span class="nav-text">利用clear样式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#父元素结束标签之前插入清除浮动的块级元素"><span class="nav-number">2.2.</span> <span class="nav-text">父元素结束标签之前插入清除浮动的块级元素</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要清除浮动"><span class="nav-number">1.</span> <span class="nav-text">为什么要清除浮动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#清除浮动的方法"><span class="nav-number">2.</span> <span class="nav-text">清除浮动的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#利用clear样式"><span class="nav-number">2.1.</span> <span class="nav-text">利用clear样式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#父元素结束标签之前插入清除浮动的块级元素"><span class="nav-number">2.2.</span> <span class="nav-text">父元素结束标签之前插入清除浮动的块级元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#利用伪元素（clearfix）"><span class="nav-number">2.3.</span> <span class="nav-text">利用伪元素（clearfix）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#利用overflow清除浮动"><span class="nav-number">2.4.</span> <span class="nav-text">利用overflow清除浮动</span></a></li></ol></li></ol></div>
             
 
           </div>
