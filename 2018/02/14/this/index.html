@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call/apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向调用当前函数的对象（箭头函数的this在定义函数的时候绑定）。 this是保留关键字，不能修改this的值。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-28T14:59:39.135Z">
+<meta property="og:updated_time" content="2018-08-28T15:06:57.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中的this引用">
 <meta name="twitter:description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call/apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向调用当前函数的对象（箭头函数的this在定义函数的时候绑定）。 this是保留关键字，不能修改this的值。">
@@ -406,20 +406,20 @@
 </li>
 </ul>
 <h4 id="this"><a href="#this" class="headerlink" title="this"></a>this</h4><ul>
-<li>this是函数内部的一个特殊对象（或this引用）–它引用的是函数据以执行的环境对象。</li>
+<li>this是函数内部的一个特殊对象（或this引用），它引用的是<strong>函数据以执行的环境对象</strong>。</li>
 <li>this是JavaScript的一个关键字，随着函数使用场合不同，this的值会发生变化。但总有一个原则，即this指的是<strong>调用当前函数的对象</strong>。<ul>
-<li>JavaScript是动态语言，this关键字在执行的时候才能确定其值。</li>
-<li>this永远指向调用者，即对“调用对象”的引用。简单点说，this指向调用当前函数的所属对象。</li>
+<li>JavaScript是动态语言，this关键字<strong>在执行的时候才能确定其值</strong>。</li>
+<li>this永远指向调用者，即对“调用对象”的引用。简单点说，<strong>this指向调用当前函数的所属对象</strong>。</li>
 <li>根据函数调用方式的不同，this可以指向全局对象，当前对象，或其他任意对象。</li>
 </ul>
 </li>
 <li>this对象（引用）的使用情况可总结为：<ul>
-<li>全局函数调用</li>
-<li>构造函数调用</li>
-<li>对象方法的调用</li>
-<li>通过apply或call方法调用</li>
-<li>原型链中的this</li>
-<li>闭包中的this</li>
+<li><strong>全局函数</strong>调用</li>
+<li><strong>构造函数</strong>调用</li>
+<li><strong>对象方法</strong>的调用</li>
+<li>通过<strong>apply或call方法</strong>调用</li>
+<li><strong>原型链</strong>中的this</li>
+<li><strong>闭包</strong>中的this</li>
 <li>内嵌在HTML元素中的脚本段</li>
 </ul>
 </li>
