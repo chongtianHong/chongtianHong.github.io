@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,JavaScript," />
+  <meta name="keywords" content="JavaScript,开发," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call/apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向调用当前函数的对象（箭头函数的this在定义函数的时候绑定）。 this是保留关键字，不能修改this的值。">
-<meta name="keywords" content="开发,JavaScript">
+<meta name="keywords" content="JavaScript,开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript中的this引用">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/02/14/this/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call/apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向调用当前函数的对象（箭头函数的this在定义函数的时候绑定）。 this是保留关键字，不能修改this的值。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-28T16:08:06.283Z">
+<meta property="og:updated_time" content="2018-08-28T16:11:29.682Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中的this引用">
 <meta name="twitter:description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call/apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向调用当前函数的对象（箭头函数的this在定义函数的时候绑定）。 this是保留关键字，不能修改this的值。">
@@ -449,16 +449,19 @@
 </li>
 </ul>
 <h5 id="闭包中的this"><a href="#闭包中的this" class="headerlink" title="闭包中的this"></a>闭包中的this</h5><ul>
-<li>闭包：写在function中的function，this指向全局对象window。</li>
+<li><strong>闭包</strong>：写在function中的function，<strong>this指向全局对象window</strong>。</li>
 </ul>
 <blockquote>对象中的闭包</blockquote>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var name = <span class="string">"The window"</span>;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    name: <span class="string">"My Object"</span>,</span><br><span class="line">    getNameFunc: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            <span class="built_in">return</span> this.name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(obj.getNameFunc()()); //The window</span><br></pre></td></tr></table></figure>
-<p>可见，闭包中的this指向全局对象window，只能取到全局对象的属性。若要访问对象内部的属性（外部函数的变量），则要把外部函数的this对象保存为一个闭包能访问的变量(that)。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var name = <span class="string">"The window"</span>;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    name: <span class="string">"My Object"</span>,</span><br><span class="line">    getNameFunc: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        var that = this;</span><br><span class="line">        <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            <span class="built_in">return</span> that.name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(obj.getNameFunc()()); //My object</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var name = <span class="string">"The window"</span>;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    name: <span class="string">"My Object"</span>,</span><br><span class="line">    getNameFunc: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            <span class="built_in">return</span> this.name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(obj.getNameFunc()()); // The window</span><br></pre></td></tr></table></figure>
 <ul>
-<li>不管是直接引用function，还是实例化一个function，其返回的闭包函数里的this都是指向window。</li>
-</ul>
+<li><p>可见，<strong>闭包中的this指向全局对象window，只能取到全局对象的属性</strong>。若要访问对象内部的属性（外部函数的变量），则要<strong>把外部函数的this对象保存为一个闭包能访问的变量(that)</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var name = <span class="string">"The window"</span>;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    name: <span class="string">"My Object"</span>,</span><br><span class="line">    getNameFunc: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        var that = this;</span><br><span class="line">        <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            <span class="built_in">return</span> that.name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(obj.getNameFunc()()); //My object</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不管是直接引用function，还是实例化一个function，其<strong>返回的闭包函数里的this都是指向window</strong>。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">a</span></span>() &#123;</span><br><span class="line">    alert(this == window);</span><br><span class="line">    var that = this;</span><br><span class="line">    var func = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        alert(this == window);</span><br><span class="line">        alert(that);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">return</span> func;</span><br><span class="line">&#125;</span><br><span class="line">var b = a();</span><br><span class="line">b(); //<span class="literal">true</span>, <span class="literal">true</span>, [object Window]</span><br><span class="line">var c = new a();</span><br><span class="line">c(); //<span class="literal">false</span>, <span class="literal">true</span>, [object object]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <h5 id="内嵌在HTML元素中的脚本段"><a href="#内嵌在HTML元素中的脚本段" class="headerlink" title="内嵌在HTML元素中的脚本段"></a>内嵌在HTML元素中的脚本段</h5><ul>
 <li>内嵌在HTML元素中的脚本段，this指向元素本身。</li>
 </ul>
@@ -507,9 +510,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
-          
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
         </div>
       
