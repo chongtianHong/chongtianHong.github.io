@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,开发," />
+  <meta name="keywords" content="开发,JavaScript," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call/apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向调用当前函数的对象（箭头函数的this在定义函数的时候绑定）。 this是保留关键字，不能修改this的值。">
-<meta name="keywords" content="JavaScript,开发">
+<meta name="keywords" content="开发,JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript中的this引用">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/02/14/this/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call/apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向调用当前函数的对象（箭头函数的this在定义函数的时候绑定）。 this是保留关键字，不能修改this的值。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-28T16:06:16.982Z">
+<meta property="og:updated_time" content="2018-08-28T16:08:06.283Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中的this引用">
 <meta name="twitter:description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call/apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向调用当前函数的对象（箭头函数的this在定义函数的时候绑定）。 this是保留关键字，不能修改this的值。">
@@ -444,10 +444,10 @@
 </li>
 </ul>
 <h5 id="原型链中的this"><a href="#原型链中的this" class="headerlink" title="原型链中的this"></a>原型链中的this</h5><ul>
-<li>原型对象及构造函数中的this指向新创建的实例对象。</li>
-<li>使用prototype扩展方法可以使用this获取到源对象的实例，<strong>私有字段</strong>无法通过原型链获取。</li>
+<li>原型对象及构造函数中的<strong>this指向新创建的实例对象</strong>。</li>
+<li>使用prototype扩展方法可以使用this获取到源对象的实例，<strong>私有字段</strong>无法通过原型链获取。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Func</span></span>() &#123;</span><br><span class="line">    this.fieldA = <span class="string">"I'm a field"</span>;</span><br><span class="line">    var privateFieldA = <span class="string">"I'm a var"</span>;// 私有属性</span><br><span class="line">&#125;</span><br><span class="line">Func.prototype = &#123;// prototype扩展方法可以获取到Func对象的实例</span><br><span class="line">    ExtendMethod: <span class="keyword">function</span>(str) &#123;</span><br><span class="line">        alert(str + <span class="string">" :"</span> + this.fieldA);</span><br><span class="line">        alert(privateFieldA); // 出错,私有字段无法通过原型链获取。</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var obj = new Func();</span><br><span class="line">obj.ExtendMethod(<span class="string">"From prototype"</span>); // 此时构造函数及原型链中的this指向对象obj</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Func</span></span>() &#123;</span><br><span class="line">    this.fieldA = <span class="string">"I'm a field"</span>;</span><br><span class="line">    var privateFieldA = <span class="string">"I'm a var"</span>;//私有属性</span><br><span class="line">&#125;</span><br><span class="line">Func.prototype = &#123;//prototype扩展方法可以获取到Func对象的实例</span><br><span class="line">    ExtendMethod: <span class="keyword">function</span>(str) &#123;</span><br><span class="line">        alert(str + <span class="string">" :"</span> + this.fieldA);</span><br><span class="line">        alert(privateFieldA); //出错,私有字段无法通过原型链获取。</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var obj = new Func();</span><br><span class="line">obj.ExtendMethod(<span class="string">"From prototype"</span>); //此时构造函数及原型链中的this指向对象obj</span><br></pre></td></tr></table></figure>
 <h5 id="闭包中的this"><a href="#闭包中的this" class="headerlink" title="闭包中的this"></a>闭包中的this</h5><ul>
 <li>闭包：写在function中的function，this指向全局对象window。</li>
 </ul>
@@ -507,9 +507,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
         </div>
       
