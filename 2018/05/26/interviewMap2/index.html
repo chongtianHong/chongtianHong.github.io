@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="JS原型 每个对象都有__proto__属性，指向了创建该对象的构造函数的原型。其实这个属性指向了[[prototype]]，但是[[prototype]]是内部属性，我们并不能访问到，所以使用__proto__来访问。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-27T11:56:25.074Z">
+<meta property="og:updated_time" content="2018-08-28T14:21:38.232Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端面试题整理二（JS部分）">
 <meta name="twitter:description" content="JS原型 每个对象都有__proto__属性，指向了创建该对象的构造函数的原型。其实这个属性指向了[[prototype]]，但是[[prototype]]是内部属性，我们并不能访问到，所以使用__proto__来访问。">
@@ -418,6 +418,9 @@
 </li>
 <li>对于第二个函数来说，先执行<code>new Foo()</code>产生了一个实例，然后通过原型链找到了<code>Foo</code>上的<code>getName</code>函数，所以结果为<code>2</code>。</li>
 </ul>
+<h5 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h5><ul>
+<li><code>instanceof</code>可以正确的判断对象的类型，因为内部机制是通过<strong>判断对象的原型链中是否能找到类型的<code>prototype</code></strong>。</li>
+</ul>
 
       
     </div>
@@ -622,7 +625,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#JS"><span class="nav-number">1.</span> <span class="nav-text">JS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原型"><span class="nav-number">1.1.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#new"><span class="nav-number">1.2.</span> <span class="nav-text">new</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#JS"><span class="nav-number">1.</span> <span class="nav-text">JS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原型"><span class="nav-number">1.1.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#new"><span class="nav-number">1.2.</span> <span class="nav-text">new</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#instanceof"><span class="nav-number">1.3.</span> <span class="nav-text">instanceof</span></a></li></ol></li></ol></div>
             
 
           </div>
