@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call/apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向调用当前函数的对象（箭头函数的this在定义函数的时候绑定）。 this是保留关键字，不能修改this的值。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-28T16:03:44.390Z">
+<meta property="og:updated_time" content="2018-08-28T16:06:16.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中的this引用">
 <meta name="twitter:description" content="基本介绍 JavaScript函数有4种调用模式，分别是：函数直接执行模式、对象方法的调用模式、构造器的调用模式和call/apply调用模式。 函数调用每种方式的不同在于this值的初始化。 一般而言，在JavaScript中，this指向调用当前函数的对象（箭头函数的this在定义函数的时候绑定）。 this是保留关键字，不能修改this的值。">
@@ -437,12 +437,12 @@
 </li>
 </ul>
 <h5 id="通过apply或call方法调用"><a href="#通过apply或call方法调用" class="headerlink" title="通过apply或call方法调用"></a>通过apply或call方法调用</h5><ul>
-<li>通过apply或call方法改变this的指向，this指向传入的对象。</li>
-<li>apply或call方法可以用来代替另一个对象调用一个方法。</li>
-<li>apply或call方法可将一个函数的对象上下文从初始的上下文改变为由thisObj指定的新对象。</li>
-<li>如果没有提供thisObj参数，那么全局对象被用作 thisObj。</li>
+<li>通过<code>apply</code>或<code>call</code>方法改变this的指向，this指向传入的对象。</li>
+<li><code>apply</code>或<code>call</code>方法可以用来代替另一个对象调用一个方法。</li>
+<li><code>apply</code>或<code>call</code>方法可将一个函数的对象上下文从初始的上下文改变为由thisObj指定的新对象。</li>
+<li>如果没有提供<code>thisObj</code>参数，那么全局对象被用作<code>thisObj</code>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">    x: 3,</span><br><span class="line">    doit: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"method is called: "</span> + this.x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var obj2 = &#123;x: 4&#125;;</span><br><span class="line">obj.doit(); // 3, this指向obj</span><br><span class="line">obj.doit.apply(obj2); // 4, this指向obj2</span><br><span class="line">obj.doit.call(obj2); // 4, this指向obj2</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">    x: 3,</span><br><span class="line">    doit: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"method is called: "</span> + this.x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var obj2 = &#123;x: 4&#125;;</span><br><span class="line">obj.doit(); //3,this指向obj</span><br><span class="line">obj.doit.apply(obj2); //4,this指向obj2</span><br><span class="line">obj.doit.call(obj2); //4,this指向obj2</span><br></pre></td></tr></table></figure>
 <h5 id="原型链中的this"><a href="#原型链中的this" class="headerlink" title="原型链中的this"></a>原型链中的this</h5><ul>
 <li>原型对象及构造函数中的this指向新创建的实例对象。</li>
 <li>使用prototype扩展方法可以使用this获取到源对象的实例，<strong>私有字段</strong>无法通过原型链获取。</li>
