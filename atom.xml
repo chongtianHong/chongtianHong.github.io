@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-28T14:54:31.422Z</updated>
+  <updated>2018-08-29T13:57:00.970Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Node.js使用MySQL数据库时对RowDataPacket对象的使用</title>
+    <link href="https://chongtianhong.github.io/2018/05/27/RowDataPacket/"/>
+    <id>https://chongtianhong.github.io/2018/05/27/RowDataPacket/</id>
+    <published>2018-05-27T03:30:12.000Z</published>
+    <updated>2018-08-29T13:57:00.970Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><strong>使用Node.js连接数据库查询表后</strong>，拿到的<strong>数据是一个数组</strong>，数组里面是<strong>JSON格式的数据</strong>，但是每个JSON前面都有一个<strong>RowDataPacket</strong>，这就导致<strong>前端获取到这些数据</strong>后不得不<strong>进行一些格式处理</strong>。<a id="more"></a></li><li><p>未处理前是这个样子的：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[ </span><br><span class="line">  RowDataPacket &#123;</span><br><span class="line">    contractname: <span class="string">'datatime'</span>,</span><br><span class="line">    contractdesc: <span class="string">'sdfsd'</span>,</span><br><span class="line">    deploystatus: <span class="string">'0'</span>,</span><br><span class="line">    deployuser: null,</span><br><span class="line">    uploaddate: <span class="string">'2018-07-16 16:36:08'</span>,</span><br><span class="line">    deploydate: null,</span><br><span class="line">    isvalid: <span class="string">'1'</span> </span><br><span class="line">  &#125;,</span><br><span class="line">  RowDataPacket &#123;</span><br><span class="line">    contractname: <span class="string">'sd'</span>,</span><br><span class="line">    contractdesc: <span class="string">'sdf'</span>,</span><br><span class="line">    deploystatus: <span class="string">'0'</span>,</span><br><span class="line">    deployuser: <span class="string">''</span>,</span><br><span class="line">    uploaddate: null,</span><br><span class="line">    deploydate: null,</span><br><span class="line">    isvalid: <span class="string">'1'</span> </span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li><li><p>我们可以在拿到数据后，进行一个<strong>JSON的格式化处理</strong>，即利用<code>JSON.stringify()</code>把对象转为对象字符串，可<strong>去掉RowDataPacket</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var dataString = JSON.stringify(results);</span><br><span class="line">var data = JSON.parse(dataString);</span><br></pre></td></tr></table></figure></li><li><p>其中<code>results</code>就是<strong>从数据库拿到的数据</strong>，通过这样的格式化后，我们得到最终的数据如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[ </span><br><span class="line">  &#123; </span><br><span class="line">    contractname: <span class="string">'datatime'</span>,</span><br><span class="line">    contractdesc: <span class="string">'sdfsd'</span>,</span><br><span class="line">    deploystatus: <span class="string">'0'</span>,</span><br><span class="line">    deployuser: null,</span><br><span class="line">    uploaddate: <span class="string">'2018-07-16 16:36:08'</span>,</span><br><span class="line">    deploydate: null,</span><br><span class="line">    isvalid: <span class="string">'1'</span> </span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; </span><br><span class="line">    contractname: <span class="string">'sd'</span>,</span><br><span class="line">    contractdesc: <span class="string">'sdf'</span>,</span><br><span class="line">    deploystatus: <span class="string">'0'</span>,</span><br><span class="line">    deployuser: <span class="string">''</span>,</span><br><span class="line">    uploaddate: null,</span><br><span class="line">    deploydate: null,</span><br><span class="line">    isvalid: <span class="string">'1'</span> </span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;使用Node.js连接数据库查询表后&lt;/strong&gt;，拿到的&lt;strong&gt;数据是一个数组&lt;/strong&gt;，数组里面是&lt;strong&gt;JSON格式的数据&lt;/strong&gt;，但是每个JSON前面都有一个&lt;strong&gt;RowDataPacket&lt;/strong&gt;，这就导致&lt;strong&gt;前端获取到这些数据&lt;/strong&gt;后不得不&lt;strong&gt;进行一些格式处理&lt;/strong&gt;。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Node.js" scheme="https://chongtianhong.github.io/tags/Node-js/"/>
+    
+      <category term="MySQL" scheme="https://chongtianhong.github.io/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>前端面试题整理二（JS部分）</title>
@@ -481,9 +510,9 @@
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
-      <category term="习题" scheme="https://chongtianhong.github.io/tags/%E4%B9%A0%E9%A2%98/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="习题" scheme="https://chongtianhong.github.io/tags/%E4%B9%A0%E9%A2%98/"/>
     
   </entry>
   
@@ -539,37 +568,6 @@
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
       <category term="HTTP" scheme="https://chongtianhong.github.io/tags/HTTP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS中parseInt()和map()用法分析</title>
-    <link href="https://chongtianhong.github.io/2018/05/07/paseIntAndMap/"/>
-    <id>https://chongtianhong.github.io/2018/05/07/paseIntAndMap/</id>
-    <published>2018-05-07T08:10:35.000Z</published>
-    <updated>2018-08-14T13:20:31.772Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>本文对<code>[“1”, “2”, “3”].map(parseInt)</code>得到的结果答案是<code>[1, NaN, NaN]</code>的原因进行具体分析。<a id="more"></a></li></ul><blockquote>parseInt(string, radix)</blockquote><ul><li><code>parseInt(string, radix)<code>用来<strong>解析字符串</strong>，返回<strong>整数</strong>。<ul><li><strong>参数<code>string</code></strong><code>必需。要被解析的字符串。</code></li><li><strong>参数<code>radix</code></strong><code>可选，<strong>其值必须介于2~36之间</strong>；如果<strong>省略该参数</strong>或<strong>其值为 0</strong>，则<strong>数字将以 10 为基础来解析</strong>。如果它以 “0x” 或 “0X” 开头，将以 16 为基数。<strong>如果该参数小于 2 或者大于 36，则 parseInt() 将返回 NaN</strong>。</code></li></ul></code></code></li></ul><blockquote>parseInt(string, radix)</blockquote><ul><li><code>map()<code>是<strong>对数组的每一个元素调用回调函数</strong>并<strong>返回一个包含结果的数组</strong>。</code></code></li><li><code>map()<code>的callback回调<strong>最多可传递3个参数</strong>，分别为<strong>数组中当前被传递的元素</strong>item、<strong>数组中当前被传递的元素的索引</strong>index、<strong>调用 map 方法的数组</strong>array。</code></code></li></ul><blockquote>例子分析</blockquote><ul><li>前面提到，<code>parseInt(string, radix)<code>接收的是两个参数，<code>map()<code>回调传递的是3个参数。</code></code></code></code></li><li><p>因此，<code>[“1”, “2”, “3”].map(parseInt)</code>等于<code>[parseInt(1,0),parseInt(2,1),parseInt(3,2)]</code>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>].map(parseInt)</span><br><span class="line">// 等同于</span><br><span class="line"><span class="keyword">function</span> testFuc(item, index)&#123;</span><br><span class="line">    <span class="built_in">return</span> parseInt(item, index);</span><br><span class="line">&#125;</span><br><span class="line">[<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>].map(testFuc)</span><br><span class="line"></span><br><span class="line">parseInt(1,0) // radix为0，数字将以 10 为基础来解，1转化为十进制后结果为1</span><br><span class="line">parseInt(2,1) // radix小于2，返回NaN</span><br><span class="line">parseInt(3,2) // radix为2, 无法将3用二进制解析，结果为NaN</span><br></pre></td></tr></table></figure></li><li><p>再看一个例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a=[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>,<span class="string">"5"</span>,6,7,8,9,10,11,12,13,14,15];</span><br><span class="line">a.map(parseInt);</span><br><span class="line">// 返回结果为：[1,NaN,NaN,NaN,NaN,NaN,NaN,NaN,NaN,9,11,13,15,17,19]</span><br></pre></td></tr></table></figure></li><li><p>由于<code>map()<code>的回调函数的参数index索引值作了<code>parseInt(string, radix)<code>的基数radix，导致出现<strong>超范围的radix赋值</strong>和<strong>不合法的进制解析</strong>，才会返回NaN。</code></code></code></code></p></li><li><p>重新定义parseInt函数，再来测试一下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> parseInt(str, radix) &#123; </span><br><span class="line">    <span class="built_in">return</span> str+<span class="string">'-'</span>+radix; </span><br><span class="line">&#125;;</span><br><span class="line">var a=[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>,<span class="string">"5"</span>,6,7,8,9,10,11,12,13,14,15];</span><br><span class="line">a.map(parseInt);</span><br><span class="line">// 输出结果为：[<span class="string">"1-0"</span>,<span class="string">"2-1"</span>,<span class="string">"3-2"</span>,<span class="string">"4-3"</span>,<span class="string">"5-4"</span>,<span class="string">"6-5"</span>,<span class="string">"7-6"</span>,<span class="string">"8-7"</span>,<span class="string">"9-8"</span>,<span class="string">"10-9"</span>,<span class="string">"11-10"</span>,<span class="string">"12-11"</span>,<span class="string">"13-12"</span>,<span class="string">"14-13"</span>,<span class="string">"15-14"</span>]</span><br></pre></td></tr></table></figure></li><li><p>因此，如果要得到正确的整数数组，正确的代码应该为：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> arr = [<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>];</span><br><span class="line">arr.map((item)=&gt;&#123;</span><br><span class="line">    <span class="built_in">return</span> parseInt(item);</span><br><span class="line">&#125;)</span><br><span class="line">// 结果为[1, 2, 3]</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;本文对&lt;code&gt;[“1”, “2”, “3”].map(parseInt)&lt;/code&gt;得到的结果答案是&lt;code&gt;[1, NaN, NaN]&lt;/code&gt;的原因进行具体分析。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="高阶函数" scheme="https://chongtianhong.github.io/tags/%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="parseInt" scheme="https://chongtianhong.github.io/tags/parseInt/"/>
-    
-      <category term="map" scheme="https://chongtianhong.github.io/tags/map/"/>
     
   </entry>
   
