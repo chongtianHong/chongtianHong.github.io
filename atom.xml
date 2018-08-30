@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-08-29T13:52:54.019Z</updated>
+  <updated>2018-08-30T13:31:19.807Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>SeaJS中use函数用法实例分析</title>
-    <link href="https://chongtianhong.github.io/2018/08/29/SeaJS/"/>
-    <id>https://chongtianhong.github.io/2018/08/29/SeaJS/</id>
-    <published>2018-08-29T09:34:57.000Z</published>
-    <updated>2018-08-29T13:52:54.019Z</updated>
+    <link href="https://chongtianhong.github.io/2018/05/28/SeaJS/"/>
+    <id>https://chongtianhong.github.io/2018/05/28/SeaJS/</id>
+    <published>2018-05-28T09:34:57.000Z</published>
+    <updated>2018-08-30T13:31:19.807Z</updated>
     
     <content type="html"><![CDATA[<ul><li>这篇文章主要介绍了<strong>SeaJS</strong>中<strong>use函数</strong>的用法，结合实例形式分析了<strong>use函数</strong>加载模块的使用方法与相关操作技巧。<a id="more"></a></li><li><p>有了<code>define</code>等<strong>模块定义规范</strong>的实现，我们可以开发出很多模块。但光有一堆模块不管用，我们还得让它们能跑起来。在 SeaJS 里，要<strong>启动模块系统</strong>很简单：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"path/to/sea.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    seajs.use(<span class="string">'./main'</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li><li><p><code>seajs.use</code>用来<strong>在页面中加载模块</strong>。通过<code>use</code>方法，可以在页面中加载任意模块。</p></li><li><p>语法：<code>seajs.use seajs.use(id, callback?)</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 加载模块 main，并在加载完成时，执行指定回调</span><br><span class="line">seajs.use(<span class="string">'./main'</span>, <span class="keyword">function</span>(main) &#123;</span><br><span class="line">    main.init();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li><li><p><code>use</code>方法还可以<strong>一次加载多个模块</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 并发加载模块 a 和模块 b，并在都加载完成时，执行指定回调</span><br><span class="line">seajs.use([<span class="string">'./a'</span>, <span class="string">'./b'</span>], <span class="keyword">function</span>(a, b) &#123;</span><br><span class="line">    a.init();</span><br><span class="line">    b.init();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li><li><p><strong><code>callback</code>参数可选</strong>。当<strong>只加载一个模块，且不需要<code>callback</code>时</strong>，可以用<code>data-main</code>属性来简化：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"path/to/sea.js"</span> data-main=<span class="string">"./main"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></li><li><p>上面的代码等价于：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"path/to/sea.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    seajs.use(<span class="string">'./main'</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li><li><p><strong>SeaJS</strong>还提供<code>data-config</code>来<strong>加载配置文件</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"path/to/sea.js"</span> data-config=<span class="string">"path/to/config"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></li><li><p><code>data-config</code>等价：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">seajs.config(&#123;</span><br><span class="line">    preload: [<span class="string">'path/to/config'</span>]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li><li><p><strong>路径解析规则</strong>与<code>seajs.use</code>一致。</p></li><li><p>再看一个例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"/js/lib/sea.js"</span> data-config=<span class="string">"/js/config.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">seajs.use(<span class="string">'/js/main'</span>, <span class="keyword">function</span>(main) &#123;</span><br><span class="line">    main.banner_focus(<span class="string">'#focus'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li><li><p><strong>注</strong>：<code>main</code>为<strong>模块名</strong>，<code>main.method</code>为<strong>模块定义的函数</strong>，<strong>可以传递参数</strong>过去。</p></li></ul>]]></content>
     
@@ -539,9 +539,9 @@
     
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
-      <category term="习题" scheme="https://chongtianhong.github.io/tags/%E4%B9%A0%E9%A2%98/"/>
-    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="习题" scheme="https://chongtianhong.github.io/tags/%E4%B9%A0%E9%A2%98/"/>
     
   </entry>
   
