@@ -131,12 +131,12 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 前端模块规范有三种，分别是CommonJs、AMD和CMD。 CommonJs用在服务器端，AMD和CMD用在浏览器环境。 AMD是RequireJS在推广过程中对模块定义的规范化产出。 CMD是SeaJS在推广过程中对模块定义的规范化产出。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://chongtianhong.github.io/2018/05/29/frontEndModule/images/frontEndModule.png">
-<meta property="og:updated_time" content="2018-08-31T15:24:16.192Z">
+<meta property="og:image" content="https://chongtianhong.github.io/images/frontEndModule.png">
+<meta property="og:updated_time" content="2018-08-31T15:27:55.014Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端模块化（CommonJs、AMD和CMD）">
 <meta name="twitter:description" content="前言 前端模块规范有三种，分别是CommonJs、AMD和CMD。 CommonJs用在服务器端，AMD和CMD用在浏览器环境。 AMD是RequireJS在推广过程中对模块定义的规范化产出。 CMD是SeaJS在推广过程中对模块定义的规范化产出。">
-<meta name="twitter:image" content="https://chongtianhong.github.io/2018/05/29/frontEndModule/images/frontEndModule.png">
+<meta name="twitter:image" content="https://chongtianhong.github.io/images/frontEndModule.png">
 
 
 
@@ -492,7 +492,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 定义模块  myModule.js</span><br><span class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</span><br><span class="line">    var $ = require(<span class="string">'jquery.js'</span>)</span><br><span class="line">    $(<span class="string">'div'</span>).addClass(<span class="string">'active'</span>);</span><br><span class="line">    exports.data = 1;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 加载模块</span><br><span class="line">seajs.use([<span class="string">'myModule.js'</span>], <span class="keyword">function</span>(my)&#123;</span><br><span class="line">    var star = my.data;</span><br><span class="line">    console.log(star);  // 1</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><img src="images/frontEndModule.png" alt="模块方案" style="border:none" width="600"></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><img src="/images/frontEndModule.png" alt="模块方案" style="border:none" width="600"></p>
 <ul>
 <li>AMD和CMD的区别：<ul>
 <li>CMD 推崇<strong>依赖就近</strong>；AMD 推崇<strong>依赖前置</strong>；</li>
