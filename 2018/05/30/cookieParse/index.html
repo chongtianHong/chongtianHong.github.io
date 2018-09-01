@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 cookie-parser是Express的中间件，用来实现cookie的解析，是官方脚手架内置的中间件之一。 它的使用非常简单，但在使用过程中偶尔也会遇到问题。一般都是因为对Express + cookie-parser的签名、验证机制不了解导致的。 本文深入讲解Express + cookie-parser的签名和验证的实现机制，以及cookie签名是如何增强网站的安全性的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-01T11:47:56.190Z">
+<meta property="og:updated_time" content="2018-09-01T11:49:40.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Express使用进阶：cookie-parser中间件实现深入剖析">
 <meta name="twitter:description" content="前言 cookie-parser是Express的中间件，用来实现cookie的解析，是官方脚手架内置的中间件之一。 它的使用非常简单，但在使用过程中偶尔也会遇到问题。一般都是因为对Express + cookie-parser的签名、验证机制不了解导致的。 本文深入讲解Express + cookie-parser的签名和验证的实现机制，以及cookie签名是如何增强网站的安全性的。">
@@ -426,7 +426,7 @@
 </li>
 </ul>
 <h4 id="入门例子：cookie设置与解析"><a href="#入门例子：cookie设置与解析" class="headerlink" title="入门例子：cookie设置与解析"></a>入门例子：cookie设置与解析</h4><ul>
-<li>先从最简单的例子来看下<code>cookie-parser</code>的使用，这里采用默认配置：<br>1、cookie设置：使用Express的内置方法<code>res.cookie()</code>。<br>2、cookie解析：使用<code>cookie-parser</code>中间件。</li>
+<li>先从最简单的例子来看下<code>cookie-parser</code>的使用，这里采用默认配置：<br>1、<strong>cookie设置</strong>：使用Express的内置方法<code>res.cookie()</code>。<br>2、<strong>cookie解析</strong>：使用<code>cookie-parser</code>中间件。</li>
 <li><p>代码如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var express = require(<span class="string">'express'</span>);</span><br><span class="line">var cookieParser = require(<span class="string">'cookie-parser'</span>);</span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">app.use(cookieParser());</span><br><span class="line"></span><br><span class="line">app.use(<span class="keyword">function</span> (req, res, next) &#123;</span><br><span class="line">    console.log(req.cookies.nick); // 第二次访问，输出hongxb</span><br><span class="line">    next();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.use(<span class="keyword">function</span> (req, res, next) &#123;  </span><br><span class="line">    res.cookie(<span class="string">'nick'</span>, <span class="string">'hongxb'</span>);</span><br><span class="line">    res.end(<span class="string">'ok'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000);</span><br></pre></td></tr></table></figure>
 </li>
