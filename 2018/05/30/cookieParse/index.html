@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 cookie-parser是Express的中间件，用来实现cookie的解析，是官方脚手架内置的中间件之一。 它的使用非常简单，但在使用过程中偶尔也会遇到问题。一般都是因为对Express + cookie-parser的签名、验证机制不了解导致的。 本文深入讲解Express + cookie-parser的签名和验证的实现机制，以及cookie签名是如何增强网站的安全性的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-01T11:53:46.717Z">
+<meta property="og:updated_time" content="2018-09-01T11:56:04.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Express使用进阶：cookie-parser中间件实现深入剖析">
 <meta name="twitter:description" content="前言 cookie-parser是Express的中间件，用来实现cookie的解析，是官方脚手架内置的中间件之一。 它的使用非常简单，但在使用过程中偶尔也会遇到问题。一般都是因为对Express + cookie-parser的签名、验证机制不了解导致的。 本文深入讲解Express + cookie-parser的签名和验证的实现机制，以及cookie签名是如何增强网站的安全性的。">
@@ -401,16 +401,16 @@
         <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
 <li><code>cookie-parser</code>是Express的中间件，用来<strong>实现cookie的解析</strong>，是官方脚手架内置的中间件之一。</li>
 <li>它的使用非常简单，但在使用过程中偶尔也会遇到问题。一般都是因为对<code>Express + cookie-parser</code>的<strong>签名、验证机制</strong>不了解导致的。</li>
-<li>本文深入讲解<code>Express + cookie-parser</code>的签名和验证的实现机制，以及cookie签名是如何<strong>增强网站的安全性</strong>的。<a id="more"></a>
+<li>本文深入讲解<code>Express + cookie-parser</code>的<strong>签名和验证</strong>的实现机制，以及cookie签名是如何<strong>增强网站的安全性</strong>的。<a id="more"></a>
 </li>
 </ul>
 <h4 id="cookie特点"><a href="#cookie特点" class="headerlink" title="cookie特点"></a>cookie特点</h4><ul>
 <li>cookie 保存在<strong>浏览器</strong>本地；</li>
 <li>正常设置的 cookie 是不加密的，用户可以自由看到；</li>
 <li>用户可以删除 cookie，或者禁用它；</li>
-<li>cookie 可以被篡改；</li>
-<li>cookie 可以用于攻击；</li>
-<li>cookie 存储量很小。</li>
+<li>cookie 可以<strong>被篡改</strong>；</li>
+<li>cookie 可以用于XSS攻击；</li>
+<li>cookie <strong>存储量很小</strong>。</li>
 </ul>
 <h4 id="cookie的创建"><a href="#cookie的创建" class="headerlink" title="cookie的创建"></a>cookie的创建</h4><ul>
 <li><p>Express直接提供了api，只需要在需要使用的地方调用如下api即可：</p>
