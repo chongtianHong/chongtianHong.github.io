@@ -135,7 +135,7 @@
 <meta property="og:image" content="https://chongtianhong.github.io/2018/05/23/clearFloat/images/clearFloat2.png">
 <meta property="og:image" content="https://chongtianhong.github.io/2018/05/23/clearFloat/images/clearFloat3.png">
 <meta property="og:image" content="https://chongtianhong.github.io/2018/05/23/clearFloat/images/clearFloat4.png">
-<meta property="og:updated_time" content="2018-09-01T11:57:05.841Z">
+<meta property="og:updated_time" content="2018-09-01T12:18:09.371Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="清除浮动的四种方式及其原理理解">
 <meta name="twitter:description" content="本文介绍了四种清除浮动的方法，并尝试解释其原理。 在理解了各种清除浮动的原理之后，我们会发现，很多清除浮动的方法本质上其实是一样的。">
@@ -501,7 +501,7 @@
 <blockquote>使用br清浮动</blockquote>
 
 <ul>
-<li><p><strong>br标签自带clear属性</strong>，将它的<strong>clear属性设置成both</strong>其实和添加空div原理是一样的：</p>
+<li><p><strong>br标签自带clear属性</strong>，将它的<strong>clear属性设置成both</strong>其实和<strong>添加空div</strong>原理是一样的：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=<span class="string">"box"</span>&gt;</span><br><span class="line">    &lt;div class=<span class="string">"top"</span>&gt;&lt;/div&gt;</span><br><span class="line">    &lt;br clear=<span class="string">"both"</span> /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>缺点：<strong>不符合工作中结构、样式、行为，三者分离的要求</strong>。</p>
