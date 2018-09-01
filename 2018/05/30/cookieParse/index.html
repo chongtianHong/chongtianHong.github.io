@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 cookie-parser是Express的中间件，用来实现cookie的解析，是官方脚手架内置的中间件之一。 它的使用非常简单，但在使用过程中偶尔也会遇到问题。一般都是因为对Express + cookie-parser的签名、验证机制不了解导致的。 本文深入讲解Express + cookie-parser的签名和验证的实现机制，以及cookie签名是如何增强网站的安全性的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-01T11:44:21.148Z">
+<meta property="og:updated_time" content="2018-09-01T11:47:56.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Express使用进阶：cookie-parser中间件实现深入剖析">
 <meta name="twitter:description" content="前言 cookie-parser是Express的中间件，用来实现cookie的解析，是官方脚手架内置的中间件之一。 它的使用非常简单，但在使用过程中偶尔也会遇到问题。一般都是因为对Express + cookie-parser的签名、验证机制不了解导致的。 本文深入讲解Express + cookie-parser的签名和验证的实现机制，以及cookie签名是如何增强网站的安全性的。">
@@ -405,7 +405,7 @@
 </li>
 </ul>
 <h4 id="cookie特点"><a href="#cookie特点" class="headerlink" title="cookie特点"></a>cookie特点</h4><ul>
-<li>cookie 保存在浏览器本地；</li>
+<li>cookie 保存在<strong>浏览器</strong>本地；</li>
 <li>正常设置的 cookie 是不加密的，用户可以自由看到；</li>
 <li>用户可以删除 cookie，或者禁用它；</li>
 <li>cookie 可以被篡改；</li>
@@ -416,7 +416,7 @@
 <li><p>Express直接提供了api，只需要在需要使用的地方调用如下api即可：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">res.cookie(name, value [, options]);</span><br><span class="line"></span><br><span class="line">// name: 类型为String</span><br><span class="line">// value: 类型为String和Object，如果是Object会在cookie.serialize()之前自动调用JSON.stringify对其进行处理</span><br><span class="line">// Option: 类型为对象，可使用的属性如下:</span><br><span class="line">domain：cookie在什么域名下有效，类型为String,。默认为网站域名</span><br><span class="line">expires: cookie过期时间，类型为Date。如果没有设置或者设置为0，那么该cookie只在这个这个session有效，即关闭浏览器后，这个cookie会被浏览器删除。</span><br><span class="line">httpOnly: 只能被web server访问，类型Boolean，默认<span class="literal">false</span>，设置为<span class="literal">true</span>时不允许客户端脚本访问，能有效的防止XSS攻击。</span><br><span class="line">maxAge: 实现expires的功能，设置cookie过期的时间，类型为String，指明从现在开始，多少毫秒以后，cookie到期。</span><br><span class="line">path: cookie在什么路径下有效，默认为<span class="string">'/'</span>，类型为String</span><br><span class="line">secure：只能被HTTPS使用，类型Boolean，默认为<span class="literal">false</span></span><br><span class="line">signed：使用签名，类型Boolean，默认为<span class="literal">false</span>。`express会使用req.secret来完成签名，需要cookie-parser配合使用`</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Express就会将其填入Response Header中的Set-Cookie，达到<strong>在浏览器中设置cookie</strong>的作用。</p>
+<li><p>Express就会将其填入<code>Response Header</code>中的<code>Set-Cookie</code>，达到<strong>在浏览器中设置cookie</strong>的作用。</p>
 </li>
 <li>用例如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">res.cookie(<span class="string">'name'</span>, <span class="string">'koby'</span>, &#123; domain: <span class="string">'.example.com'</span>, path: <span class="string">'/admin'</span>, secure: <span class="literal">true</span> &#125;);</span><br><span class="line">//cookie的有效期为900000ms</span><br><span class="line">res.cookie(<span class="string">'rememberme'</span>, <span class="string">'1'</span>, &#123; expires: new Date(Date.now() + 900000), httpOnly: <span class="literal">true</span> &#125;);</span><br><span class="line">//cookie的有效期为900000ms</span><br><span class="line">res.cookie(<span class="string">'rememberme'</span>, <span class="string">'1'</span>, &#123; maxAge: 900000, httpOnly: <span class="literal">true</span> &#125;);</span><br><span class="line"></span><br><span class="line">//cookie的value为对象</span><br><span class="line">res.cookie(<span class="string">'cart'</span>, &#123; items: [1,2,3] &#125;);</span><br><span class="line">res.cookie(<span class="string">'cart'</span>, &#123; items: [1,2,3] &#125;, &#123; maxAge: 900000 &#125;);</span><br><span class="line"></span><br><span class="line">res.cookie(<span class="string">'name'</span>, <span class="string">'tobi'</span>, &#123; signed: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>
 </li>
