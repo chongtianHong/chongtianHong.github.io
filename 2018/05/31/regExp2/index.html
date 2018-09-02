@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,JavaScript,正则表达式," />
+  <meta name="keywords" content="JavaScript,开发,正则表达式," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="前言 不管哪门语言中都有括号。正则表达式也是一门语言，而括号的存在使这门语言更为强大。 对括号的使用是否得心应手，是衡量对正则的掌握水平的一个侧面标准。">
-<meta name="keywords" content="开发,JavaScript,正则表达式">
+<meta name="keywords" content="JavaScript,开发,正则表达式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="正则表达式括号的作用">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/05/31/regExp2/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 不管哪门语言中都有括号。正则表达式也是一门语言，而括号的存在使这门语言更为强大。 对括号的使用是否得心应手，是衡量对正则的掌握水平的一个侧面标准。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-02T10:10:56.717Z">
+<meta property="og:updated_time" content="2018-09-02T10:12:30.085Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式括号的作用">
 <meta name="twitter:description" content="前言 不管哪门语言中都有括号。正则表达式也是一门语言，而括号的存在使这门语言更为强大。 对括号的使用是否得心应手，是衡量对正则的掌握水平的一个侧面标准。">
@@ -405,7 +405,7 @@
 <li>引用某个分组，会有两种情形：在<strong>JavaScript里引用（使用相应API）</strong>，在<strong>正则表达式里引用</strong>。</li>
 </ul>
 <h4 id="分组和分支结构"><a href="#分组和分支结构" class="headerlink" title="分组和分支结构"></a>分组和分支结构</h4><ul>
-<li>这二者是括号最直觉的作用，也是最原始的功能。</li>
+<li>这二者是括号最直接的作用，也是最原始的功能。</li>
 </ul>
 <h5 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h5><ul>
 <li>我们知道<code>/a+/</code>匹配连续出现的“a”，而要匹配连续出现的“ab”时，需要使用<code>/(ab)+/</code>。其中<strong>括号是提供分组功能</strong>，使量词“+”作用于“ab”这个整体，测试如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var regex = /(ab)+/g;</span><br><span class="line">var string = <span class="string">"ababa abbb ababab"</span>;</span><br><span class="line">console.log( string.match(regex) ); // [<span class="string">"abab"</span>, <span class="string">"ab"</span>, <span class="string">"ababab"</span>]</span><br></pre></td></tr></table></figure>
@@ -571,9 +571,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
-          
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
             <a href="/tags/正则表达式/" rel="tag"><i class="fa fa-tag"></i> 正则表达式</a>
           
