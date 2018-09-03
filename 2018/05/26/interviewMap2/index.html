@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="JS Part原型 每个对象都有__proto__属性，指向了创建该对象的构造函数的原型。其实这个属性指向了[[prototype]]，但是[[prototype]]是内部属性，我们并不能访问到，所以使用__proto__来访问。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-30T13:56:18.228Z">
+<meta property="og:updated_time" content="2018-09-03T08:48:19.487Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端面试题整理二（JS部分）">
 <meta name="twitter:description" content="JS Part原型 每个对象都有__proto__属性，指向了创建该对象的构造函数的原型。其实这个属性指向了[[prototype]]，但是[[prototype]]是内部属性，我们并不能访问到，所以使用__proto__来访问。">
@@ -425,11 +425,27 @@
 </ul>
 <h5 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h5><ul>
 <li>当执行 JS 代码时，会产生三种执行上下文：<ul>
-<li>全局执行上下文</li>
-<li>函数执行上下文</li>
-<li>eval 执行上下文</li>
+<li>全局执行上下文；</li>
+<li>函数执行上下文；</li>
+<li>eval执行上下文。</li>
 </ul>
 </li>
+<li>每个执行上下文中都有三个重要的属性：<ul>
+<li><strong>变量对象（VO）</strong>，包含变量、函数声明和函数的形参，该属性只能在全局上下文中访问；</li>
+<li><strong>作用域链</strong>，JS 采用词法作用域，也就是说<strong>变量的作用域是在定义时就决定了</strong>；</li>
+<li><strong>this</strong>。</li>
+</ul>
+</li>
+<li><p>接下来看一个老生常谈的例子，<code>var</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">b() // call b</span><br><span class="line">console.log(a) // undefined</span><br><span class="line"></span><br><span class="line">var a = <span class="string">'Hello world'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">b</span></span>() &#123;</span><br><span class="line">	console.log(<span class="string">'call b'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这是因为函数和变量提升的原因。在生成执行上下文时，会有两个阶段。</p>
+<ul>
+<li>第一个阶段是创建<strong>变量对象（VO）</strong>的阶段，JS 解释器会找出需要提升的变量和函数，并且给他们提前在内存中开辟好空间，<strong>函数</strong>的话会<strong>将整个函数存入内存中</strong>，<strong>变量只声明并且赋值为 undefined</strong>；</li>
+<li>所以在第二个阶段，也就是<strong>代码执行阶段</strong>，我们可以<strong>直接提前使用函数和变量</strong>。</li>
+</ul>
+</li>
+<li>在提升的过程中，相同的函数会覆盖上一个函数，并且<strong>函数优先于变量提升</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">b() // call b second</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">b</span></span>() &#123;</span><br><span class="line">	console.log(<span class="string">'call b fist'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">b</span></span>() &#123;</span><br><span class="line">	console.log(<span class="string">'call b second'</span>)</span><br><span class="line">&#125;</span><br><span class="line">var b = <span class="string">'Hello world'</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
