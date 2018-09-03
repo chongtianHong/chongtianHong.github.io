@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="在ES6之前，JavaScript是没有块级作用域的，如果在块内使用var声明一个变量，它在代码块外面仍旧是可见的。  ES6规范给开发者带来了块级作用域，let和const添加了块级作用域。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-13T15:23:16.638Z">
+<meta property="og:updated_time" content="2018-09-03T09:11:40.251Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="var与ES6中const、let声明的变量的区别">
 <meta name="twitter:description" content="在ES6之前，JavaScript是没有块级作用域的，如果在块内使用var声明一个变量，它在代码块外面仍旧是可见的。  ES6规范给开发者带来了块级作用域，let和const添加了块级作用域。">
@@ -416,10 +416,10 @@
 <li>在使用’use strict’的模式之下，不使用var 声明变量的语法是不被允许的，报错：Uncaugth SyntaxError;<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">console.log(a);   //undefined，这里还涉及变量提升的概念</span><br><span class="line">console.log(b);   //报错 Uncaught ReferenceError: b is not defined</span><br><span class="line">var a = 1;</span><br><span class="line">b = 2;</span><br><span class="line">console.log(a);   //1</span><br><span class="line">console.log(b);   //2</span><br><span class="line">delete a;</span><br><span class="line">delete b;</span><br><span class="line">console.log(a);   //1</span><br><span class="line">console.log(b);   //报错 Uncaught ReferenceError: b is not defined,可见b在声明前使用和声明后delete再使用是一样的结果</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h5 id="let"><a href="#let" class="headerlink" title="let"></a>let</h5><blockquote>不存在变量提升</blockquote>
+<h5 id="let"><a href="#let" class="headerlink" title="let"></a>let</h5><blockquote>变量提升受到约束</blockquote>
 
 <ul>
-<li>由于<strong>let</strong>也<strong>不会变量提升</strong>，let声明的变量在声明前使用也会报错，这个与const一致；因此，<strong>变量需要先声明然后再使用</strong>，否则报错：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// var 的情况</span><br><span class="line">console.log(foo);  // undefined</span><br><span class="line">var foo = 2;</span><br><span class="line"></span><br><span class="line">// <span class="built_in">let</span>的情况；</span><br><span class="line">console.log(bar);  // 报错</span><br><span class="line"><span class="built_in">let</span> bar = 2;</span><br></pre></td></tr></table></figure>
+<li><strong><code>let</code>提升了声明但没有赋值</strong>，因为<strong>临时死区导致了并不能在声明前使用</strong>，这个与const一致；因此，<strong>变量需要先声明然后再使用</strong>，否则报错：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// var 的情况</span><br><span class="line">console.log(foo);  // undefined</span><br><span class="line">var foo = 2;</span><br><span class="line"></span><br><span class="line">// <span class="built_in">let</span>的情况；</span><br><span class="line">console.log(bar);  // 报错</span><br><span class="line"><span class="built_in">let</span> bar = 2;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>块级作用域</blockquote>
@@ -444,7 +444,7 @@
 <li><p><strong>块级作用域内存在let命令，它所声明的变量就绑定在这个区域，不再受外部影响</strong>，如下代码：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var tmp = 1;</span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    tmp = 2;   //ReferenceError</span><br><span class="line">    <span class="built_in">let</span> tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>这个例子中<code>tmp=2</code>的赋值会报错，因为在<strong>if块中的let对tmp变量进行了声明</strong>，导致该tmp绑定了这个作用域，而<strong>let不会像var那样“变量提升”</strong>，所以<strong>未声明赋值会报错</strong>。</p>
+<li><p>这个例子中<code>tmp=2</code>的赋值会报错，因为在<strong>if块中的let对tmp变量进行了声明</strong>，导致该tmp绑定了这个作用域，而<strong>let临时死区导致了并不能在声明前使用</strong>，所以<strong>在声明前对变量赋值会报错</strong>。</p>
 </li>
 <li>ES6中明确规定：<strong>如果区块中存在let和const命令</strong>，则<strong>这个区块对这些命令声明的变量</strong>从一开始就<strong>形成了封闭作用域</strong>，只要<strong>在声明之前做任何使用，都会报错</strong>。这在语法上称为<strong>“暂时性死区”（temporal dead zone ，简称TDZ）</strong>。</li>
 </ul>
@@ -477,7 +477,7 @@
 <li><p>如果要<strong>彻底将对象冻结（不可修改其属性）</strong>，应该使用<code>Object.freeze(obj)</code>方法。同理，数组也是一样的：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const group = [];</span><br><span class="line">group.push(<span class="string">'Bob'</span>);</span><br><span class="line">console.log(group[0]); //Bob</span><br><span class="line">group = [<span class="string">"Tom"</span>];//Uncaught TypeError: Assignment to constant variable.</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>另外，由于<strong>const不会变量提升</strong>，所以<strong>在声明前使用也会报错</strong>：<code>Uncaught ReferenceError: a is not defined</code>。</p>
+<li><p>另外，和let一样，<strong>使用const定义的变量，在声明前使用也会报错</strong>：<code>Uncaught ReferenceError: a is not defined</code>。</p>
 </li>
 </ul>
 <blockquote>块级作用域</blockquote>
