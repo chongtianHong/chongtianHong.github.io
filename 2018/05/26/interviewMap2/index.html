@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="JS Part原型 每个对象都有__proto__属性，指向了创建该对象的构造函数的原型。其实这个属性指向了[[prototype]]，但是[[prototype]]是内部属性，我们并不能访问到，所以使用__proto__来访问。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-03T08:48:19.487Z">
+<meta property="og:updated_time" content="2018-09-03T09:00:58.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端面试题整理二（JS部分）">
 <meta name="twitter:description" content="JS Part原型 每个对象都有__proto__属性，指向了创建该对象的构造函数的原型。其实这个属性指向了[[prototype]]，但是[[prototype]]是内部属性，我们并不能访问到，所以使用__proto__来访问。">
@@ -445,7 +445,11 @@
 <li>所以在第二个阶段，也就是<strong>代码执行阶段</strong>，我们可以<strong>直接提前使用函数和变量</strong>。</li>
 </ul>
 </li>
-<li>在提升的过程中，相同的函数会覆盖上一个函数，并且<strong>函数优先于变量提升</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">b() // call b second</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">b</span></span>() &#123;</span><br><span class="line">	console.log(<span class="string">'call b fist'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">b</span></span>() &#123;</span><br><span class="line">	console.log(<span class="string">'call b second'</span>)</span><br><span class="line">&#125;</span><br><span class="line">var b = <span class="string">'Hello world'</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在提升的过程中，相同的函数会覆盖上一个函数，并且<strong>函数优先于变量提升</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">b() // call b second</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">b</span></span>() &#123;</span><br><span class="line">	console.log(<span class="string">'call b fist'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">b</span></span>() &#123;</span><br><span class="line">	console.log(<span class="string">'call b second'</span>)</span><br><span class="line">&#125;</span><br><span class="line">var b = <span class="string">'Hello world'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>var</code>会产生很多错误，所以在 ES6中引入了<code>let</code>。<strong><code>let</code>不能在声明前使用</strong>，但是这并不是常说的 <code>let</code>不会提升，<strong><code>let</code>提升了声明但没有赋值</strong>，因为<strong>临时死区导致了并不能在声明前使用</strong>。</p>
+</li>
 </ul>
 
       
