@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-09-03T11:39:22.357Z</updated>
+  <updated>2018-09-03T11:49:38.038Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>setTimeout中被遗忘的第三个参数</title>
-    <link href="https://chongtianhong.github.io/2018/09/03/theThridParamOfSetTimeOut/"/>
-    <id>https://chongtianhong.github.io/2018/09/03/theThridParamOfSetTimeOut/</id>
-    <published>2018-09-03T10:11:44.000Z</published>
-    <updated>2018-09-03T11:39:22.357Z</updated>
+    <link href="https://chongtianhong.github.io/2018/06/01/theThridParamOfSetTimeOut/"/>
+    <id>https://chongtianhong.github.io/2018/06/01/theThridParamOfSetTimeOut/</id>
+    <published>2018-06-01T10:11:44.000Z</published>
+    <updated>2018-09-03T11:49:38.038Z</updated>
     
     <content type="html"><![CDATA[<ul><li>最熟悉的地方，往往会忽略一些细节。就比如 setTimeout 函数，做前端开发的同学都会很熟悉这个函数，经常使用这个函数，但是知道这个函数还有第三个参数的小伙伴可能就不多了。<a id="more"></a></li><li><p>阮老师的es6的primise章节里有这样一段代码。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> timeout(ms) &#123;</span><br><span class="line">    <span class="built_in">return</span> new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        setTimeout(resolve, ms, <span class="string">'done'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">timeout(100).<span class="keyword">then</span>((value) =&gt; &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li><li><p>仔细查看MDN中的定义：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var timeoutID = scope.setTimeout(<span class="keyword">function</span>[, delay, param1, param2, ...]);</span><br><span class="line">var timeoutID = scope.setTimeout(<span class="keyword">function</span>[, delay]);</span><br><span class="line">var timeoutID = scope.setTimeout(code[, delay]);</span><br></pre></td></tr></table></figure></li><li><p>定时器启动时候，第三个以后的参数是作为第一个<code>func()</code>的参数传进去。</p></li><li><p>另外一个例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// HTML content</span><br><span class="line">&lt;p&gt;Live Example&lt;/p&gt;</span><br><span class="line">&lt;button onclick=<span class="string">"delayedAlert();"</span>&gt;Show an alert box after two seconds&lt;/button&gt;</span><br><span class="line">&lt;p&gt;&lt;/p&gt;</span><br><span class="line">&lt;button onclick=<span class="string">"clearAlert();"</span>&gt;Cancel alert before it happens&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// JavaScript content</span><br><span class="line">var timeoutID;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">delayedAlert</span></span>() &#123;</span><br><span class="line">    timeoutID = window.setTimeout(window.alert, 2000, <span class="string">'That was really slow!'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">clearAlert</span></span>() &#123;</span><br><span class="line">    window.clearTimeout(timeoutID)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p><strong>注意</strong>：这种传参方式在<strong>IE9及更低的版本下</strong>是不起作用的，需要使用<code>polyfill</code>。</p></li></ul>]]></content>
     
@@ -326,11 +326,11 @@
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
       <category term="Class" scheme="https://chongtianhong.github.io/tags/Class/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
   </entry>
   
@@ -546,9 +546,9 @@
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
-      <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
       <category term="Promise" scheme="https://chongtianhong.github.io/tags/Promise/"/>
     
