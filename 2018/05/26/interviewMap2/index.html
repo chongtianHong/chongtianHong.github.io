@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="JS Part原型 每个对象都有__proto__属性，指向了创建该对象的构造函数的原型。其实这个属性指向了[[prototype]]，但是[[prototype]]是内部属性，我们并不能访问到，所以使用__proto__来访问。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-03T09:31:31.097Z">
+<meta property="og:updated_time" content="2018-09-03T09:51:51.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端面试题整理二（JS部分）">
 <meta name="twitter:description" content="JS Part原型 每个对象都有__proto__属性，指向了创建该对象的构造函数的原型。其实这个属性指向了[[prototype]]，但是[[prototype]]是内部属性，我们并不能访问到，所以使用__proto__来访问。">
@@ -456,6 +456,30 @@
 <li><p>因为<strong>当 JS 解释器在遇到非匿名的立即执行函数时</strong>，会创建一个<strong>辅助的特定对象</strong>，然后<strong>将函数名称作为这个对象的属性</strong>，因此<strong>函数内部才可以访问到 foo</strong>，但是<strong>这个值又是只读的</strong>，所以<strong>对它的赋值并不生效</strong>，所以打印的结果还是这个函数，并且外部的值也没有发生更改。</p>
 </li>
 </ul>
+<h5 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h5><ul>
+<li><p>闭包的定义很简单：函数 A 返回了一个函数 B，并且函数 B 中使用了函数 A 的变量，函数 B 就被称为闭包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">A</span></span>() &#123;</span><br><span class="line">    <span class="built_in">let</span> a = 1</span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">B</span></span>() &#123;</span><br><span class="line">        console.log(a)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> B</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>问题：为什么函数 A 已经弹出调用栈了，为什么函数 B 还能引用到函数 A 中的变量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">因为函数 A 中的变量这时候是存储在堆上的。</span><br><span class="line">现在的 JS 引擎可以通过逃逸分析</span><br><span class="line">辨别出哪些变量需要存储在堆上，哪些需要存储在栈上。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>经典面试题，循环中使用闭包解决 var 定义函数的问题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var i = 1; i &lt;= 5; i++) &#123;</span><br><span class="line">	setTimeout( <span class="keyword">function</span> <span class="function"><span class="title">timer</span></span>() &#123;</span><br><span class="line">		console.log( i );</span><br><span class="line">	&#125;, i * 1000 );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>首先因为<code>setTimeout</code>是个<strong>异步函数</strong>，所有会<strong>先把循环全部执行完毕</strong>，这时候 i 就是 6 了，所以会输出一堆 6（输出6的间隔是1秒）。</p>
+</li>
+<li><p>解决办法有三种，<strong>第一种使用闭包</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var i = 1; i &lt;= 5; i++) &#123;</span><br><span class="line">    (<span class="keyword">function</span>(j)&#123;</span><br><span class="line">        setTimeout( <span class="keyword">function</span> <span class="function"><span class="title">timer</span></span>() &#123;</span><br><span class="line">            console.log( j );</span><br><span class="line">        &#125;, j*1000 );</span><br><span class="line">    &#125;)(i)	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二种就是使用<code>setTimeout</code>的第三个参数，作为第一个<code>func()</code>的参数传进去：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( var i = 1; i &lt;= 5; i++) &#123;</span><br><span class="line">	setTimeout( <span class="keyword">function</span> timer(j) &#123;</span><br><span class="line">		console.log( j );</span><br><span class="line">	&#125;, i*1000, i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第三种就是使用<code>let</code>定义<code>i</code>了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( <span class="built_in">let</span> i = 1; i &lt;= 5; i++) &#123;</span><br><span class="line">	setTimeout( <span class="keyword">function</span> <span class="function"><span class="title">timer</span></span>() &#123;</span><br><span class="line">		console.log( i );</span><br><span class="line">	&#125;, i*1000 );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>因为对于<code>let</code>来说，它会创建一个块级作用域。</p>
+</li>
+</ul>
 
       
     </div>
@@ -664,7 +688,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#JS-Part"><span class="nav-number">1.</span> <span class="nav-text">JS Part</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原型"><span class="nav-number">1.1.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#new"><span class="nav-number">1.2.</span> <span class="nav-text">new</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#instanceof"><span class="nav-number">1.3.</span> <span class="nav-text">instanceof</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#执行上下文"><span class="nav-number">1.4.</span> <span class="nav-text">执行上下文</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#JS-Part"><span class="nav-number">1.</span> <span class="nav-text">JS Part</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原型"><span class="nav-number">1.1.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#new"><span class="nav-number">1.2.</span> <span class="nav-text">new</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#instanceof"><span class="nav-number">1.3.</span> <span class="nav-text">instanceof</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#执行上下文"><span class="nav-number">1.4.</span> <span class="nav-text">执行上下文</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#闭包"><span class="nav-number">1.5.</span> <span class="nav-text">闭包</span></a></li></ol></li></ol></div>
             
 
           </div>
