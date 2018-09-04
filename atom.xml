@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-09-03T11:49:38.038Z</updated>
+  <updated>2018-09-04T14:16:18.926Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>前端面试题整理三（JS部分）</title>
+    <link href="https://chongtianhong.github.io/2018/09/03/interviewMap3/"/>
+    <id>https://chongtianhong.github.io/2018/09/03/interviewMap3/</id>
+    <published>2018-09-03T12:52:04.000Z</published>
+    <updated>2018-09-04T14:16:18.926Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="JS-Part"><a href="#JS-Part" class="headerlink" title="JS Part"></a>JS Part</h4><h5 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h5><ul><li><p>先看一个例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> a = &#123;</span><br><span class="line">    age: 1</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> b = a</span><br><span class="line">a.age = 2</span><br><span class="line">console.log(b.age) // 2</span><br></pre></td></tr></table></figure></li><li><p>从上述例子中我们可以发现，如果给一个<strong>变量赋值一个对象</strong>，那么<strong>两者的值会是同一个引用</strong>，其中一方改变，另一方也会相应改变。</p></li><li>通常在开发中我们不希望出现这样的问题，我们可以使用<strong>浅拷贝</strong>来解决这个问题。</li></ul><h6 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h6><ul><li><p>首先可以通过<code>Object.assign</code>来解决这个问题。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> a = &#123;</span><br><span class="line">    age: 1</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> b = Object.assign(&#123;&#125;, a)</span><br><span class="line">a.age = 2</span><br><span class="line">console.log(b.age) // 1</span><br></pre></td></tr></table></figure></li><li><p>也可以通过<strong>展开运算符（…）</strong>来解决：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> a = &#123;</span><br><span class="line">    age: 1</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> b = &#123;...a&#125;</span><br><span class="line">a.age = 2</span><br><span class="line">console.log(b.age) // 1</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;JS-Part&quot;&gt;&lt;a href=&quot;#JS-Part&quot; class=&quot;headerlink&quot; title=&quot;JS Part&quot;&gt;&lt;/a&gt;JS Part&lt;/h4&gt;&lt;h5 id=&quot;深浅拷贝&quot;&gt;&lt;a href=&quot;#深浅拷贝&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="面试题" scheme="https://chongtianhong.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    
+  </entry>
   
   <entry>
     <title>setTimeout中被遗忘的第三个参数</title>
@@ -35,9 +64,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -61,9 +90,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="正则表达式" scheme="https://chongtianhong.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     
@@ -182,9 +211,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Node.js" scheme="https://chongtianhong.github.io/tags/Node-js/"/>
     
@@ -211,9 +240,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="面试题" scheme="https://chongtianhong.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     
@@ -240,9 +269,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="面试题" scheme="https://chongtianhong.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     
@@ -268,9 +297,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -324,9 +353,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
@@ -382,9 +411,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -407,9 +436,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -432,9 +461,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES5" scheme="https://chongtianhong.github.io/tags/ES5/"/>
     
@@ -459,9 +488,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES5" scheme="https://chongtianhong.github.io/tags/ES5/"/>
     
@@ -486,9 +515,9 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES5" scheme="https://chongtianhong.github.io/tags/ES5/"/>
     
@@ -515,11 +544,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="Router" scheme="https://chongtianhong.github.io/tags/Router/"/>
     
@@ -544,40 +573,13 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="ES6" scheme="https://chongtianhong.github.io/tags/ES6/"/>
     
       <category term="Promise" scheme="https://chongtianhong.github.io/tags/Promise/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ajax中返回数据的格式和处理方法分析</title>
-    <link href="https://chongtianhong.github.io/2018/05/13/ajaxDataType/"/>
-    <id>https://chongtianhong.github.io/2018/05/13/ajaxDataType/</id>
-    <published>2018-05-13T05:51:23.000Z</published>
-    <updated>2018-08-18T12:35:57.196Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>Ajax中常见的<strong>返回数据的格式</strong>有三种：分别为<strong>文本</strong>，<strong>XML</strong>和<strong>JSON</strong>。<a id="more"></a></li></ul><h4 id="Text-HTML格式"><a href="#Text-HTML格式" class="headerlink" title="Text/HTML格式"></a>Text/HTML格式</h4><ul><li>通过Ajax对象的<code>responseText</code>属性就可以获取到返回的文本信息。</li><li>为了方便使用，封装成如下函数：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* @<span class="keyword">function</span> 利用ajax动态交换数据(Text/HTML格式)</span><br><span class="line">* @param url   要提交请求的页面</span><br><span class="line">* @param jsonData  要提交的数据, 利用Json传递</span><br><span class="line">* @param getMsg  这个函数可以获取到处理后的数据</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> ajaxText(url, jsonData, getMsg)</span><br><span class="line">&#123;</span><br><span class="line">    // 创建Ajax对象,ActiveXObject兼容IE5,6</span><br><span class="line">    var oAjax = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br><span class="line">    // 打开请求</span><br><span class="line">    oAjax.open(<span class="string">'POST'</span>, url, <span class="literal">true</span>);// 方法, URL, 异步传输</span><br><span class="line">    // 发送请求</span><br><span class="line">    var data = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span>(var d <span class="keyword">in</span> jsonData)   // 拼装数据</span><br><span class="line">        data += (d + <span class="string">'='</span> + jsonData[d] + <span class="string">'&amp;'</span>);</span><br><span class="line">    oAjax.setRequestHeader(<span class="string">"Content-type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</span><br><span class="line">    oAjax.send(data);</span><br><span class="line">    // 接收返回,当服务器有东西返回时触发</span><br><span class="line">    oAjax.onreadystatechange = <span class="keyword">function</span> ()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(oAjax.readyState == 4 &amp;&amp; oAjax.status == 200)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(getMsg)&#123;</span><br><span class="line">                getMsg(oAjax.responseText);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h4 id="XML格式"><a href="#XML格式" class="headerlink" title="XML格式"></a>XML格式</h4><ul><li>通过Ajax对象的<code>responseXML</code>属性就可以获取到返回的<strong>XML DOM</strong>对象。</li><li><p>解析<strong>XML DOM</strong>的数据就类似于HTML DOM 编程. 比如<strong>通过TagName获取标签对象</strong>(数组形式)，再从该数组中获取需要的标签对象，再从标签对象中获取文本值：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* @<span class="keyword">function</span> 利用ajax动态交换数据(XML格式)</span><br><span class="line">* @param url   要提交请求的页面</span><br><span class="line">* @param jsonData  要提交的数据, 利用Json传递</span><br><span class="line">* @param tagName  要获取值的标签名</span><br><span class="line">* @param getMsg  这个函数可以获取到处理后的数据</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> ajaxXML(url, jsonData, tagName, getMsg)</span><br><span class="line">&#123;</span><br><span class="line">    // 创建Ajax对象,ActiveXObject兼容IE5,6</span><br><span class="line">    var oAjax = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br><span class="line">    // 打开请求</span><br><span class="line">    oAjax.open(<span class="string">'POST'</span>, url, <span class="literal">true</span>);// 方法, URL, 异步传输</span><br><span class="line">    // 发送请求</span><br><span class="line">    var data = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span>(var d <span class="keyword">in</span> jsonData)   //拼 装数据</span><br><span class="line">        data += (d + <span class="string">'='</span> + jsonData[d] + <span class="string">'&amp;'</span>);</span><br><span class="line">    oAjax.setRequestHeader(<span class="string">"Content-type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</span><br><span class="line">    oAjax.send(data);</span><br><span class="line">    // 接收返回,当服务器有东西返回时触发</span><br><span class="line">    oAjax.onreadystatechange = <span class="keyword">function</span> ()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(oAjax.readyState == 4 &amp;&amp; oAjax.status == 200)</span><br><span class="line">        &#123;</span><br><span class="line">            var oXml =  oAjax.responseXML; //返 回的是一个XML DOM对象</span><br><span class="line">            var oTag = oXml.getElementsByTagName(tagName);</span><br><span class="line">            var tagValue = oTag[0].childNodes[0].nodeValue;</span><br><span class="line">            <span class="keyword">if</span>(getMsg)&#123;</span><br><span class="line">                getMsg(tagValue);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>XML文件具有的几大特点：</p><ul><li>标签没有预定义，开发者根据自己的需求发明标签</li><li>结构清晰，具有自我描述性。从XML文档就可以看出数据的内容</li><li>都是双标签</li><li>和HTML相似，同样也具有树结构</li></ul></li></ul><h4 id="JSON格式"><a href="#JSON格式" class="headerlink" title="JSON格式"></a>JSON格式</h4><ul><li>由于JSON格式相比XML更小，传输更快，所以现在Ajax返回json数据格式的情况更多。</li><li>为了方便使用，封装成如下函数：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* @<span class="keyword">function</span> 利用ajax动态交换数据(Text/HTML格式)，但是返回的是Json类型的文本数据</span><br><span class="line">* @param url   要提交请求的页面</span><br><span class="line">* @param jsonData  要提交的数据,利用Json传递</span><br><span class="line">* @param getMsg  这个函数可以获取到处理后的数据</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> ajaxJson(url, jsonData, getMsg)</span><br><span class="line">&#123;</span><br><span class="line">    // 创建Ajax对象,ActiveXObject兼容IE5,6</span><br><span class="line">    var oAjax = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br><span class="line">    // 打开请求</span><br><span class="line">    oAjax.open(<span class="string">'POST'</span>, url, <span class="literal">true</span>); // 方法, URL, 异步传输</span><br><span class="line">    // 发送请求</span><br><span class="line">    var data = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span>(var d <span class="keyword">in</span> jsonData)   // 拼装数据</span><br><span class="line">        data += (d + <span class="string">'='</span> + jsonData[d] + <span class="string">'&amp;'</span>);</span><br><span class="line">    oAjax.setRequestHeader(<span class="string">"Content-type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</span><br><span class="line">    oAjax.send(data);</span><br><span class="line">    // 接收返回,当服务器有东西返回时触发</span><br><span class="line">    oAjax.onreadystatechange = <span class="keyword">function</span> ()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(oAjax.readyState == 4 &amp;&amp; oAjax.status == 200)</span><br><span class="line">        &#123;</span><br><span class="line">            var json = JSON.parse(oAjax.responseText);// 把传回来的字符串解析成json对象</span><br><span class="line">            <span class="keyword">if</span>(getMsg)&#123;</span><br><span class="line">                getMsg(json);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h4 id="三种格式的函数封装"><a href="#三种格式的函数封装" class="headerlink" title="三种格式的函数封装"></a>三种格式的函数封装</h4><ul><li>为了方便使用，可以把三个函数合并，合并后的函数如下:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @<span class="keyword">function</span> 利用ajax动态交换数据</span><br><span class="line"> * @param url   要提交请求的页面</span><br><span class="line"> * @param jsonData  要提交的数据,利用Json传递</span><br><span class="line"> * @param getMsg  这个函数可以获取到处理后的数据</span><br><span class="line"> * @param <span class="built_in">type</span>    接受的数据类型,text/xml/json</span><br><span class="line"> * @param tagName <span class="built_in">type</span> = xml 的时候这个参数设置为要获取的文本的标签名</span><br><span class="line"> * @<span class="built_in">return</span> 无</span><br><span class="line"> */</span><br><span class="line"><span class="keyword">function</span> ajax(url,jsonData,getMsg,<span class="built_in">type</span>,tagName)&#123;</span><br><span class="line">    // 创建Ajax对象,ActiveXObject兼容IE5,6</span><br><span class="line">    var oAjax = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br><span class="line">    // 打开请求</span><br><span class="line">    oAjax.open(<span class="string">'POST'</span>, url, <span class="literal">true</span>);// 方法, URL, 异步传输</span><br><span class="line">    // 发送请求</span><br><span class="line">    var data = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span>(var d <span class="keyword">in</span> jsonData)   // 拼装数据</span><br><span class="line">        data += (d + <span class="string">'='</span> + jsonData[d] + <span class="string">'&amp;'</span>);</span><br><span class="line">    oAjax.setRequestHeader(<span class="string">"Content-type"</span>,<span class="string">"application/x-www-form-urlencoded"</span>);</span><br><span class="line">    oAjax.send(data);</span><br><span class="line">    // 接收返回,当服务器有东西返回时触发</span><br><span class="line">    oAjax.onreadystatechange = <span class="keyword">function</span> ()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(oAjax.readyState == 4 &amp;&amp; oAjax.status == 200)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">type</span> == <span class="string">'text'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(getMsg)&#123;</span><br><span class="line">                    getMsg(oAjax.responseText);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">type</span> == <span class="string">'json'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                var json = JSON.parse(oAjax.responseText); // 把传回来的字符串解析成json对象</span><br><span class="line">                <span class="keyword">if</span>(getMsg)&#123;</span><br><span class="line">                    getMsg(json);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">type</span> == <span class="string">'xml'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                var oXml =  oAjax.responseXML; // 返回的是一个XML DOM对象</span><br><span class="line">                var oTag = oXml.getElementsByTagName(tagName);</span><br><span class="line">                var tagValue = oTag[0].childNodes[0].nodeValue;</span><br><span class="line">                <span class="keyword">if</span>(getMsg)&#123;</span><br><span class="line">                    getMsg(tagValue);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;Ajax中常见的&lt;strong&gt;返回数据的格式&lt;/strong&gt;有三种：分别为&lt;strong&gt;文本&lt;/strong&gt;，&lt;strong&gt;XML&lt;/strong&gt;和&lt;strong&gt;JSON&lt;/strong&gt;。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="Ajax" scheme="https://chongtianhong.github.io/tags/Ajax/"/>
     
   </entry>
   
