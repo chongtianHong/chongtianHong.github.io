@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,JavaScript,ES6," />
+  <meta name="keywords" content="JavaScript,开发,ES6," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="声明变量的新姿势用let不用var ES6之前我们用var声明一个变量，但是它有很多弊病：">
-<meta name="keywords" content="开发,JavaScript,ES6">
+<meta name="keywords" content="JavaScript,开发,ES6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用ES6新特性优化代码">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/06/03/codeOptimizationUsingES6/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="声明变量的新姿势用let不用var ES6之前我们用var声明一个变量，但是它有很多弊病：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-05T14:35:01.213Z">
+<meta property="og:updated_time" content="2018-09-05T14:37:19.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用ES6新特性优化代码">
 <meta name="twitter:description" content="声明变量的新姿势用let不用var ES6之前我们用var声明一个变量，但是它有很多弊病：">
@@ -470,10 +470,10 @@
 </li>
 </ul>
 <h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><h5 id="箭头函数-gt"><a href="#箭头函数-gt" class="headerlink" title="箭头函数=&gt;"></a>箭头函数=&gt;</h5><ul>
-<li><p>立即执行函数可以写成箭头函数的形式：</p>
+<li><p><strong>立即执行函数</strong>可以写成箭头函数的形式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(() =&gt; &#123;</span><br><span class="line">    console.log(<span class="string">'Welcome to the Internet.'</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>尽量写箭头函数使你的代码看起来简洁优雅：</p>
+<li><p><strong>尽量写箭头函数</strong>使你的代码看起来简洁优雅：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// low</span><br><span class="line">[1, 2, 3].map(<span class="keyword">function</span> (x) &#123;</span><br><span class="line">  <span class="built_in">return</span> x * x;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// cool !</span><br><span class="line">[1, 2, 3].map(x =&gt; x * x);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -483,7 +483,7 @@
 </ul>
 <h5 id="传参时可设置默认值"><a href="#传参时可设置默认值" class="headerlink" title="传参时可设置默认值"></a>传参时可设置默认值</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// low</span><br><span class="line"><span class="keyword">function</span> handleThings(opts) &#123;</span><br><span class="line">    opts = opts || &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// good</span><br><span class="line"><span class="keyword">function</span> handleThings(opts = &#123;&#125;) &#123;</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="简单的键值对优先Map"><a href="#简单的键值对优先Map" class="headerlink" title="简单的键值对优先Map"></a>简单的键值对优先Map</h4><ul>
-<li>如果只是简单的key: value结构，建议<strong>优先使用Map</strong>，因为Map提供方便的遍历机制。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> map = new Map(arr);</span><br><span class="line">// 遍历key值</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">let</span> key of map.keys()) &#123;</span><br><span class="line">    console.log(key);</span><br><span class="line">&#125;</span><br><span class="line">// 遍历value值</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">let</span> value of map.values()) &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">&#125;</span><br><span class="line">// 遍历key和value值</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">let</span> item of map.entries()) &#123;</span><br><span class="line">    console.log(item[0], item[1]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>如果只是简单的<code>key: value</code>结构，建议<strong>优先使用Map</strong>，因为Map提供方便的遍历机制。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> map = new Map(arr);</span><br><span class="line">// 遍历key值</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">let</span> key of map.keys()) &#123;</span><br><span class="line">    console.log(key);</span><br><span class="line">&#125;</span><br><span class="line">// 遍历value值</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">let</span> value of map.values()) &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">&#125;</span><br><span class="line">// 遍历key和value值</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">let</span> item of map.entries()) &#123;</span><br><span class="line">    console.log(item[0], item[1]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="更加简洁直观class语法"><a href="#更加简洁直观class语法" class="headerlink" title="更加简洁直观class语法"></a>更加简洁直观class语法</h4> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// low</span><br><span class="line"><span class="keyword">function</span> Queue(contents = []) &#123;</span><br><span class="line">    this._queue = [...contents];</span><br><span class="line">&#125;</span><br><span class="line">Queue.prototype.pop = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">    const value = this._queue[0];</span><br><span class="line">    this._queue.splice(0, 1);</span><br><span class="line">    <span class="built_in">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// good</span><br><span class="line">class Queue &#123;</span><br><span class="line">    constructor(contents = []) &#123;</span><br><span class="line">        this._queue = [...contents];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">pop</span></span>() &#123;</span><br><span class="line">        const value = this._queue[0];</span><br><span class="line">        this._queue.splice(0, 1);</span><br><span class="line">        <span class="built_in">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -534,9 +534,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
-          
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
             <a href="/tags/ES6/" rel="tag"><i class="fa fa-tag"></i> ES6</a>
           
