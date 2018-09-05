@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,开发,ES6," />
+  <meta name="keywords" content="开发,JavaScript,ES6," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="声明变量的新姿势用let不用var ES6之前我们用var声明一个变量，但是它有很多弊病：">
-<meta name="keywords" content="JavaScript,开发,ES6">
+<meta name="keywords" content="开发,JavaScript,ES6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用ES6新特性优化代码">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/06/03/codeOptimizationUsingES6/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="声明变量的新姿势用let不用var ES6之前我们用var声明一个变量，但是它有很多弊病：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-05T14:34:21.512Z">
+<meta property="og:updated_time" content="2018-09-05T14:35:01.213Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用ES6新特性优化代码">
 <meta name="twitter:description" content="声明变量的新姿势用let不用var ES6之前我们用var声明一个变量，但是它有很多弊病：">
@@ -478,7 +478,7 @@
 </li>
 </ul>
 <h5 id="rest-运算符（…）"><a href="#rest-运算符（…）" class="headerlink" title="rest 运算符（…）"></a>rest 运算符（…）</h5><ul>
-<li>不需要再用arguments（类数组），使用 rest 运算符（…）代替，rest 运算符可以提供一个真正的数组。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// low</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">concatenateAll</span></span>() &#123;</span><br><span class="line">    const args = Array.prototype.slice.call(arguments);</span><br><span class="line">    <span class="built_in">return</span> args.join(<span class="string">''</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// good</span><br><span class="line"><span class="keyword">function</span> concatenateAll(...args) &#123;</span><br><span class="line">    <span class="built_in">return</span> args.join(<span class="string">''</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>不需要再用<code>arguments</code>（类数组），使用<strong>rest 运算符（…）</strong>代替，rest 运算符可以提供一个真正的数组。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// low</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">concatenateAll</span></span>() &#123;</span><br><span class="line">    const args = Array.prototype.slice.call(arguments);</span><br><span class="line">    <span class="built_in">return</span> args.join(<span class="string">''</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// good</span><br><span class="line"><span class="keyword">function</span> concatenateAll(...args) &#123;</span><br><span class="line">    <span class="built_in">return</span> args.join(<span class="string">''</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="传参时可设置默认值"><a href="#传参时可设置默认值" class="headerlink" title="传参时可设置默认值"></a>传参时可设置默认值</h5> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// low</span><br><span class="line"><span class="keyword">function</span> handleThings(opts) &#123;</span><br><span class="line">    opts = opts || &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// good</span><br><span class="line"><span class="keyword">function</span> handleThings(opts = &#123;&#125;) &#123;</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -534,9 +534,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
             <a href="/tags/ES6/" rel="tag"><i class="fa fa-tag"></i> ES6</a>
           
