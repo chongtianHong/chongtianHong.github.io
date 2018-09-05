@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 Object.assign()方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-05T00:04:58.775Z">
+<meta property="og:updated_time" content="2018-09-05T14:31:38.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Object.assign()的使用">
 <meta name="twitter:description" content="基本介绍 Object.assign()方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。">
@@ -409,7 +409,7 @@
 <li><p>如果目标对象中的属性具有相同的键，则属性将被源中的属性覆盖。<strong>后来的源的属性将类似地覆盖早先的属性</strong>。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const object1 = &#123;</span><br><span class="line">    a: 1,</span><br><span class="line">    b: 2,</span><br><span class="line">    c: 3</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">const object2 = Object.assign(&#123;c: 4, d: 5&#125;, object1);</span><br><span class="line"></span><br><span class="line">console.log(object2.c, object2.d);</span><br><span class="line">// expected output: 3 5</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><code>Object.assign</code>方法只会拷贝源对象自身的并且可枚举的属性到目标对象。该方法使用源对象的<code>[[Get]]</code>和目标对象的<code>[[Set]]</code>，所以它会调用相关 getter 和 setter。因此，它分配属性，而不仅仅是复制或定义新的属性。</p>
+<li><p><code>Object.assign</code>方法只会<strong>拷贝源对象自身的</strong>并且<strong>可枚举的属性</strong>到目标对象。该方法使用源对象的<code>[[Get]]</code>和目标对象的<code>[[Set]]</code>，所以它会调用相关 getter 和 setter。因此，它分配属性，而不仅仅是复制或定义新的属性。</p>
 </li>
 <li>注意：<code>Object.assign</code>不会跳过那些值为<code>null</code>或<code>undefined</code>的源对象。</li>
 </ul>
