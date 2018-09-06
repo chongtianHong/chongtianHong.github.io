@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-09-06T14:16:55.026Z</updated>
+  <updated>2018-09-06T14:02:16.302Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,36 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>前端面试题整理三（JS部分）</title>
-    <link href="https://chongtianhong.github.io/2018/09/03/interviewMap3/"/>
-    <id>https://chongtianhong.github.io/2018/09/03/interviewMap3/</id>
-    <published>2018-09-03T12:52:04.000Z</published>
-    <updated>2018-09-06T14:16:55.026Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a><h4 id="JS-Part"><a href="#JS-Part" class="headerlink" title="JS Part"></a>JS Part</h4><h5 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h5><ul><li><p>先看一个例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> a = &#123;</span><br><span class="line">    age: 1</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> b = a</span><br><span class="line">a.age = 2</span><br><span class="line">console.log(b.age) // 2</span><br></pre></td></tr></table></figure></li><li><p>从上述例子中我们可以发现，如果给一个<strong>变量赋值一个对象</strong>，那么<strong>两者的值会是同一个引用</strong>，其中一方改变，另一方也会相应改变。</p></li><li>通常在开发中我们不希望出现这样的问题，我们可以使用<strong>浅拷贝</strong>来解决这个问题。</li></ul><h6 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h6><ul><li><p>首先可以通过<code>Object.assign</code>来解决这个问题。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> a = &#123;</span><br><span class="line">    age: 1</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> b = Object.assign(&#123;&#125;, a)</span><br><span class="line">a.age = 2</span><br><span class="line">console.log(b.age) // 1</span><br></pre></td></tr></table></figure></li><li><p>也可以通过<strong>展开运算符（…）</strong>来解决：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> a = &#123;</span><br><span class="line">    age: 1</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> b = &#123;...a&#125;</span><br><span class="line">a.age = 2</span><br><span class="line">console.log(b.age) // 1</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h4 id=&quot;JS-Part&quot;&gt;&lt;a href=&quot;#JS-Part&quot; class=&quot;headerlink&quot; title=&quot;JS Part&quot;&gt;&lt;/a&gt;JS Part&lt;/h4&gt;&lt;h5 id=&quot;深浅拷贝&quot;&gt;&lt;a href=&quot;#深浅拷贝&quot; class
-      
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="面试题" scheme="https://chongtianhong.github.io/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    
-  </entry>
   
   <entry>
     <title>ES6中的解构赋值</title>
@@ -575,6 +545,33 @@
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Object.getOwnPropertyNames的使用</title>
+    <link href="https://chongtianhong.github.io/2018/05/18/ObejectGetOwnPropertyNames/"/>
+    <id>https://chongtianhong.github.io/2018/05/18/ObejectGetOwnPropertyNames/</id>
+    <published>2018-05-18T02:11:02.000Z</published>
+    <updated>2018-08-22T14:30:04.210Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><code>Object.getOwnPropertyNames()</code>方法返回一个由<strong>指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）</strong>组成的<strong>字符串数组</strong>。<a id="more"></a></li><li><code>Object.getOwnPropertyNames()</code>返回的数组中，<strong>枚举属性</strong>的顺序与通过<code>for…in</code>循环（或 Object.keys）迭代该对象属性时一致。数组中<strong>不可枚举属性的顺序未定义</strong>。</li><li><p>例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">var arr = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>];</span><br><span class="line">console.log(Object.getOwnPropertyNames(arr).sort()); // [<span class="string">"0"</span>, <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"length"</span>]</span><br><span class="line"></span><br><span class="line">// 类数组对象</span><br><span class="line">var obj = &#123; 0: <span class="string">"a"</span>, 1: <span class="string">"b"</span>, 2: <span class="string">"c"</span>&#125;;</span><br><span class="line">console.log(Object.getOwnPropertyNames(obj).sort()); // [<span class="string">"0"</span>, <span class="string">"1"</span>, <span class="string">"2"</span>]</span><br><span class="line"></span><br><span class="line">// 使用Array.forEach输出属性名和属性值</span><br><span class="line">Object.getOwnPropertyNames(obj).forEach(<span class="keyword">function</span>(val, idx, array) &#123;</span><br><span class="line">    console.log(val + <span class="string">" -&gt; "</span> + obj[val]);</span><br><span class="line">&#125;);</span><br><span class="line">// 输出</span><br><span class="line">// 0 -&gt; a</span><br><span class="line">// 1 -&gt; b</span><br><span class="line">// 2 -&gt; c</span><br><span class="line"></span><br><span class="line">//不可枚举属性</span><br><span class="line">var my_obj = Object.create(&#123;&#125;, &#123;</span><br><span class="line">    getFoo: &#123;</span><br><span class="line">        value: <span class="function"><span class="title">function</span></span>() &#123; <span class="built_in">return</span> this.foo; &#125;,</span><br><span class="line">        enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">my_obj.foo = 1;</span><br><span class="line"></span><br><span class="line">console.log(Object.getOwnPropertyNames(my_obj).sort()); // [<span class="string">"foo"</span>, <span class="string">"getFoo"</span>]</span><br></pre></td></tr></table></figure></li><li><p>如果<strong>只要获取到可枚举属性</strong>，可使用<code>Object.keys</code>或用<code>for…in</code>循环（<code>for…in</code>还会获取到原型链上的可枚举属性，不过<strong>可以使用<code>hasOwnProperty()</code>方法过滤掉</strong>）。</p></li><li>下面的例子演示了<code>Object.getOwnPropertyNames()</code>方法<strong>不会获取到原型链上的属性</strong>：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">ParentClass</span></span>() &#123;&#125;</span><br><span class="line">ParentClass.prototype.inheritedMethod = <span class="function"><span class="title">function</span></span>() &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">ChildClass</span></span>() &#123;</span><br><span class="line">  this.prop = 5;</span><br><span class="line">  this.method = <span class="function"><span class="title">function</span></span>() &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ChildClass.prototype = new ParentClass;</span><br><span class="line">ChildClass.prototype.prototypeMethod = <span class="function"><span class="title">function</span></span>() &#123;&#125;;</span><br><span class="line"></span><br><span class="line">console.log(</span><br><span class="line">  Object.getOwnPropertyNames(</span><br><span class="line">    new ChildClass()  // [<span class="string">"prop"</span>, <span class="string">"method"</span>]</span><br><span class="line">  )</span><br><span class="line">);</span><br></pre></td></tr></table></figure></li></ul><blockquote>只获取不可枚举的属性</blockquote><ul><li><p>下面的例子使用了<code>Array.prototype.filter()</code>方法，从所有的属性名数组（使用<code>Object.getOwnPropertyNames()</code>方法获得）中去除可枚举的属性（使用<code>Object.keys()</code>方法获得），剩余的属性便是不可枚举的属性了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var target = myObject;</span><br><span class="line">var enum_and_nonenum = Object.getOwnPropertyNames(target);</span><br><span class="line">var enum_only = Object.keys(target);</span><br><span class="line">var nonenum_only = enum_and_nonenum.filter(<span class="keyword">function</span>(key) &#123;</span><br><span class="line">    var indexInEnum = enum_only.indexOf(key);</span><br><span class="line">    <span class="keyword">if</span> (indexInEnum == -1) &#123;</span><br><span class="line">        // 没有发现在enum_only键集中意味着这个键是不可枚举的,</span><br><span class="line">        // 因此返回<span class="literal">true</span> 以便让它保持在过滤结果中</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(nonenum_only);</span><br></pre></td></tr></table></figure></li><li><p><strong>注</strong>：<code>Array.filter(filt_func)</code>方法<strong>创建一个新数组</strong>, 其包含<strong>通过</strong>所提供函数实现的<strong>测试的所有元素</strong>。</p></li><li><p><strong>注意</strong>：</p><ul><li>在 ES5 中，如果参数不是一个原始对象类型，将抛出一个 TypeError  异常。</li><li>在 ES2015 中，非对象参数被强制转换为对象 。</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object.getOwnPropertyNames(<span class="string">'foo'</span>);</span><br><span class="line">// TypeError: <span class="string">"foo"</span> is not an object (ES5 code)</span><br><span class="line"></span><br><span class="line">Object.getOwnPropertyNames(<span class="string">'foo'</span>);</span><br><span class="line">// [<span class="string">'length'</span>, <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>]  (ES2015 code)</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Object.getOwnPropertyNames()&lt;/code&gt;方法返回一个由&lt;strong&gt;指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）&lt;/strong&gt;组成的&lt;strong&gt;字符串数组&lt;/strong&gt;。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="ES5" scheme="https://chongtianhong.github.io/tags/ES5/"/>
     
   </entry>
   
