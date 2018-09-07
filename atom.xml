@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-09-07T15:26:14.298Z</updated>
+  <updated>2018-09-07T15:29:00.189Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Express中使用模板引擎</title>
+    <link href="https://chongtianhong.github.io/2018/06/08/usingViewEngineInExpress/"/>
+    <id>https://chongtianhong.github.io/2018/06/08/usingViewEngineInExpress/</id>
+    <published>2018-06-08T07:03:23.000Z</published>
+    <updated>2018-09-07T15:29:00.189Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>本文将介绍如何在express中设置模板引擎。<a id="more"></a></li></ul><h4 id="定义模板引擎"><a href="#定义模板引擎" class="headerlink" title="定义模板引擎"></a>定义模板引擎</h4><ul><li><p>通过以下方法注册指定的ejs模板引擎：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var express = require(<span class="string">'express'</span>);</span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">app.set(<span class="string">'views'</span>, <span class="string">'./app/views'</span>); // 设置views的默认路径</span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);   // 设置引擎扩展名</span><br><span class="line">app.engine(<span class="string">'.ejs'</span>, require(<span class="string">'ejs'</span>).__express); // 注册ejs模板引擎</span><br></pre></td></tr></table></figure></li><li><p>当然，如果想使用<strong>html后缀</strong>的文件，可以做以下修改，这样就可以支持了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app.engine(<span class="string">'.html'</span>, require(<span class="string">'ejs'</span>).__express);</span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'html'</span>);</span><br></pre></td></tr></table></figure></li><li><p>也可以在ejs模板文件中，使用模板语法引入<strong>html后缀</strong>的页面片：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;% include header.html %&gt;</span><br></pre></td></tr></table></figure></li></ul><h4 id="添加变量"><a href="#添加变量" class="headerlink" title="添加变量"></a>添加变量</h4><ul><li><p>我们可以使用<strong>app对象</strong>的<strong>locals属性</strong>来添加，比如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app.locals.name = <span class="string">'App'</span>;</span><br><span class="line">app.locals.age = 13;</span><br></pre></td></tr></table></figure></li><li><p>这些变量会在<strong>渲染模板的时候填充到页面中</strong>去。</p></li><li>当然，locals也可以通过render的第二个参数直接传入。</li></ul><h4 id="渲染模板并显示"><a href="#渲染模板并显示" class="headerlink" title="渲染模板并显示"></a>渲染模板并显示</h4><ul><li><p>我们可以使用render方法来渲染页面，对应的api是：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.render(view, [locals], callback)</span><br></pre></td></tr></table></figure></li><li><p>其中：</p><ul><li><code>view</code>：模板文件名，必须；</li><li><code>[locals]</code>：一个locals对象（即在app.locals中定义的locals对象），可选；</li><li><code>callback</code>：回调函数，在模板呈现后执行。第一个参数，err错误对象，第二个参数是 html，即呈现后的模板字符串。可选。</li></ul></li><li><p>直接调用app对象的render方法：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>, <span class="keyword">function</span>(req, res) &#123;</span><br><span class="line">    res.render(<span class="string">'index'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li><li><p>用render的回调方法：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>, <span class="keyword">function</span>(req, res) &#123;</span><br><span class="line">    res.render(<span class="string">'index'</span>, <span class="keyword">function</span>(err, html) &#123;</span><br><span class="line">        res.send(html);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li><li><p>直接传入locals对象：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.render(<span class="string">'/'</span>, &#123; name: <span class="string">'aaa'</span> &#125;, <span class="keyword">function</span>(err, html)&#123;</span><br><span class="line">    // ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;本文将介绍如何在express中设置模板引擎。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Node.js" scheme="https://chongtianhong.github.io/tags/Node-js/"/>
+    
+      <category term="Express" scheme="https://chongtianhong.github.io/tags/Express/"/>
+    
+  </entry>
   
   <entry>
     <title>GET和POST两种基本请求方法的区别</title>
@@ -536,31 +563,6 @@
 &lt;li&gt;在&lt;strong&gt;面向对象编程&lt;/strong&gt;中，&lt;strong&gt;类（class）是对象（object）的模板&lt;/strong&gt;，定义了&lt;strong&gt;同一组对象（又称”实例”）共有的属性和方法&lt;/strong&gt;。&lt;/li&gt;
 &lt;li&gt;Javascript语言不支持”类”，但是可以用一些变通的方法，模拟出”类”。&lt;/li&gt;
 &lt;li&gt;本文总结了Javascript定义”类”的三种方法，同时讨论了每种方法的特点。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>defer和async的区别</title>
-    <link href="https://chongtianhong.github.io/2018/05/19/asyncAndDefer/"/>
-    <id>https://chongtianhong.github.io/2018/05/19/asyncAndDefer/</id>
-    <published>2018-05-19T10:35:46.000Z</published>
-    <updated>2018-08-22T14:42:14.840Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h4><ul><li><code>script</code>标签用于<strong>加载脚本与执行脚本</strong>，直接使用<code>script</code>标签（不加<code>defer</code>或<code>async</code>属性）的话，<strong>HTML会按照顺序来加载并执行脚本</strong>，在<strong>脚本加载&amp;执行的过程中</strong>，会<strong>阻塞后续的DOM渲染</strong>。<a id="more"></a></li><li><p>使用<code>async</code>属性，<strong>加载和渲染后续文档元素的过程</strong>将和 script.js 的<strong>加载与执行</strong>并行进行（异步）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script async src=<span class="string">"script.js"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></li><li><p>使用<code>defer</code>属性，<strong>加载后续文档元素的过程</strong>将和script.js的<strong>加载</strong>并行进行（异步），但是<strong>script.js的执行要在所有元素解析完成之后</strong>、<strong>DOMContentLoaded 事件触发之前</strong>完成：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script defer src=<span class="string">"myscript.js"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></li><li><p>从实用角度来说，<strong>把所有脚本都丢到HTML文档最后、&lt;/body&gt;之前</strong>是最佳实践，因为对于旧浏览器来说这是唯一的优化选择，此法可<strong>保证非脚本的其他一切元素</strong>能够<strong>以最快的速度得到加载和解析</strong>。</p></li><li>下图中，蓝色线代表网络读取，红色线代表执行时间，这俩都是针对脚本的；绿色线代表 HTML 解析。<br><img src="/images/asyncAndDefer1.png" alt="脚本加载和执行过程" width="600" style="border:none"></li><li>此图告诉我们以下几个要点：<br>1.<code>defer</code> 和 async 在<strong>网络读取（下载）时都是异步的</strong>（相较于 HTML 解析）。<br>2.它们差别在于脚本下载完之后何时执行，显然<strong><code>defer</code>是最接近我们对于应用脚本加载和执行的要求的</strong>。<br>3.关于<code>defer</code>，HTML5规范要求脚本执行应该按照脚本出现的先后顺序执行，但<strong>实际情况下，延迟脚本不一定按照先后顺序执行</strong>。<br>4.<strong><code>async</code>的执行</strong>，并<strong>不会按着<code>script</code>在页面中的顺序来执行</strong>，而是<strong>谁先加载完谁执行</strong>，与声明顺序无关。<br>5.<code>async</code>对于应用脚本的用处不大，因为它完全不考虑依赖（哪怕是最低级的顺序执行），不过它<strong>对于那些可以不依赖任何脚本或不被任何脚本依赖的脚本来说却是非常合适</strong>的，最典型的例子：谷歌/百度统计。</li></ul><h4 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h4><ul><li>如果<code>script</code>标签设置了<code>defer</code>属性，则浏览器会<strong>异步的下载该文件</strong>并且<strong>不会影响到后续DOM的渲染</strong>；</li><li>如果有<strong>多个设置了<code>defer</code>的<code>script</code>标签</strong>存在，则会<strong>按照顺序执行所有的<code>script</code></strong>；</li><li><code>defer</code>脚本会<strong>在文档渲染完毕后，DOMContentLoaded事件调用前执行</strong>。</li></ul><h4 id="async"><a href="#async" class="headerlink" title="async"></a>async</h4><ul><li><code>async</code>的设置，会使得<strong><code>script</code>脚本异步的加载</strong>并在允许的情况下执行。</li><li><strong><code>async</code>的执行</strong>，并<strong>不会按着<code>script</code>在页面中的顺序来执行</strong>，而是<strong>谁先加载完谁执行</strong>。</li><li><strong>DOMContentLoaded事件的触发并不受设置了<code>async</code>属性的脚本加载的影响</strong>，也就是说，<strong><code>async</code>属性脚本的加载不计入DOMContentLoaded事件统计</strong>。在脚本加载完之前，有可能已经触发了DOMContentLoaded。如果给设置了<code>async</code>属性的脚本一定的时间，是<strong>有可能在DOMContentLoaded事件之前就执行</strong>的。</li><li>设置了<code>async</code>属性的脚本的执行是<strong>加载完成就会去执行</strong>，而不像defer那样要等待所有的脚本加载完后按照顺序执行。</li></ul><h4 id="图例分析"><a href="#图例分析" class="headerlink" title="图例分析"></a>图例分析</h4><ul><li>拿四个不同的颜色来标明各自代表的含义，蓝色为文档解析，紫色为脚本渲染，黄色为脚本执行，绿色为DOMContentLoaded。</li></ul><h5 id="普通script"><a href="#普通script" class="headerlink" title="普通script"></a>普通script</h5><ul><li>文档解析的过程中，如果遇到script脚本，就会停止页面的解析进行下载（但是Chrome会做一个优化，如果遇到script脚本，会快速的查看后边有没有需要下载其他资源的，如果有的话，会先下载那些资源，然后再进行下载script所对应的资源，这样能够节省一部分下载的时间）。</li><li><strong>资源的下载是在解析过程中进行</strong>的，虽说script1脚本会很快的加载完毕，但是如果它前边的script2并没有加载&amp;执行，所以它只能处于一个挂起的状态，等待script2执行完毕后再执行。</li><li>当这两个脚本都执行完毕后，才会继续解析页面。<br><img src="/images/asyncAndDefer2.png" alt="普通script的加载和执行过程" width="600" style="border:none"></li></ul><h5 id="defer-1"><a href="#defer-1" class="headerlink" title="defer"></a>defer</h5><ul><li>文档解析时，遇到设置了<code>defer</code>的脚本，就会在后台进行下载，但是并不会阻止文档的渲染，当页面解析&amp;渲染完毕后。</li><li>会<strong>等到所有的<code>defer</code>脚本加载完毕并按照顺序执行，执行完毕后</strong>会<strong>触发DOMContentLoaded事件</strong>。<br><img src="/images/asyncAndDefer3.png" alt="设置defer属性script的加载和执行过程" width="600" style="border:none"></li></ul><h5 id="async-1"><a href="#async-1" class="headerlink" title="async"></a>async</h5><ul><li><code>async</code>脚本会在<strong>加载完毕后立即执行</strong>。</li><li><code>async</code>脚本的加载<strong>不计入DOMContentLoaded事件统计</strong>，也就是说下图两种情况都是有可能发生的。</li><li>情况一：<br><img src="/images/asyncAndDefer4.png" alt="设置async属性script的加载和执行过程情况1" width="600" style="border:none"></li><li>情况二：<br><img src="/images/asyncAndDefer5.png" alt="设置async属性script的加载和执行过程情况2" width="600" style="border:none"></li></ul><h4 id="推荐的应用场景"><a href="#推荐的应用场景" class="headerlink" title="推荐的应用场景"></a>推荐的应用场景</h4><h5 id="defer-2"><a href="#defer-2" class="headerlink" title="defer"></a>defer</h5><ul><li>如果<strong>脚本代码依赖于页面中的DOM元素</strong>（文档是否解析完毕），或者<strong>被其他脚本文件依赖</strong>。例：<ul><li>评论框</li><li>代码语法高亮</li><li>polyfill.js</li></ul></li></ul><h5 id="async-2"><a href="#async-2" class="headerlink" title="async"></a>async</h5><ul><li>如果<strong>脚本并不关心页面中的DOM元素</strong>（文档是否解析完毕），并且<strong>也不会产生其他脚本需要的数据</strong>。例：<ul><li>谷歌/百度统计</li></ul></li><li>如果不太能确定的话，用defer总是会比async稳定（保证脚本执行顺序性、文档渲染完成后才执行）。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;基本介绍&quot;&gt;&lt;a href=&quot;#基本介绍&quot; class=&quot;headerlink&quot; title=&quot;基本介绍&quot;&gt;&lt;/a&gt;基本介绍&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;script&lt;/code&gt;标签用于&lt;strong&gt;加载脚本与执行脚本&lt;/strong&gt;，直接使用&lt;code&gt;script&lt;/code&gt;标签（不加&lt;code&gt;defer&lt;/code&gt;或&lt;code&gt;async&lt;/code&gt;属性）的话，&lt;strong&gt;HTML会按照顺序来加载并执行脚本&lt;/strong&gt;，在&lt;strong&gt;脚本加载&amp;amp;执行的过程中&lt;/strong&gt;，会&lt;strong&gt;阻塞后续的DOM渲染&lt;/strong&gt;。
     
     </summary>
     
