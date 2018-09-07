@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="本文将介绍如何在express中设置模板引擎。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-07T15:36:27.433Z">
+<meta property="og:updated_time" content="2018-09-07T15:38:09.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Express中使用模板引擎">
 <meta name="twitter:description" content="本文将介绍如何在express中设置模板引擎。">
@@ -438,7 +438,7 @@
 <li><p>用render的回调方法：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>, <span class="keyword">function</span>(req, res) &#123;</span><br><span class="line">    res.render(<span class="string">'index'</span>, <span class="keyword">function</span>(err, html) &#123;</span><br><span class="line">        res.send(html);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>直接传入locals对象：</p>
+<li><p>直接传入<strong>locals对象</strong>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.render(<span class="string">'/'</span>, &#123; name: <span class="string">'aaa'</span> &#125;, <span class="keyword">function</span>(err, html)&#123;</span><br><span class="line">    // ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
 </ul>
 
