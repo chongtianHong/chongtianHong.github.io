@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-09-06T14:02:16.302Z</updated>
+  <updated>2018-09-05T14:29:54.575Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GET和POST两种基本请求方法的区别</title>
+    <link href="https://chongtianhong.github.io/2018/09/05/diffBetweenGetAndPost/"/>
+    <id>https://chongtianhong.github.io/2018/09/05/diffBetweenGetAndPost/</id>
+    <published>2018-09-05T01:32:58.000Z</published>
+    <updated>2018-09-05T14:29:54.575Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><strong>GET</strong>和<strong>POST</strong>是HTTP请求的两种基本方法，它们之间<strong>最直观的区别</strong>就是<strong>GET把参数包含在URL中</strong>，<strong>POST通过request body传递参数</strong>。<a id="more"></a></li><li>其余的区别有：<br>· <strong>GET在浏览器回退时是无害的（会使用缓存）</strong>，而POST会再次提交请求。即GET会将请求参数放在请求的url中，回退操作实际上浏览器会从之前的缓存中拿结果。而<strong>POST每次调用都会创建新的资源</strong>。<br>· GET产生的URL地址可以被Bookmark，而POST不可以。<br>· <strong>GET请求会被浏览器主动cache，而POST不会，除非手动设置</strong>。浏览器缓存又分为<strong>强缓存</strong>和<strong>协商缓存</strong>。<br>· <strong>GET请求只能进行url编码(urlEncode)</strong>，而<strong>POST支持多种编码方式</strong>(application/x-www-form-urlencoded、multipart/form-data、application/json、text/xml)。<br>· <strong>GET请求参数会被完整保留在浏览器历史记录里</strong>，而POST中的参数不会被保留。<br>· <strong>GET请求在URL中传送的参数是有长度限制</strong>的，而POST没有。<br>· 对<strong>参数的数据类型，GET只接受ASCII字符</strong>，而POST没有限制。URL 是 HTTP 的一个首部。既然作为一个首部，那么根据约定，一定是 ASCII 字符的。<br>· <strong>GET比POST更不安全</strong>，因为<strong>参数直接暴露在URL上</strong>，所以不能用来传递敏感信息。</li></ul><blockquote>GET和POST本质上没有区别</blockquote><ul><li>GET和POST是HTTP协议中的两种发送请求的方法。</li><li>HTTP是基于TCP/IP的<strong>关于数据如何在万维网中进行通信的协议</strong>。</li><li>HTTP的底层是TCP/IP，所以GET和POST的底层也是TCP/IP，也就是说，<strong>GET/POST都是TCP链接</strong>。GET和POST能做的事情是一样的。如果要给GET加上request body，给POST带上url参数，技术上是完全行的通的。但是由于<strong>HTTP的规定</strong>和<strong>浏览器/服务器的限制</strong>，导致它们在应用过程中体现出一些不同（以上提到的区别）。</li></ul><blockquote>GET和POST的一个重大区别</blockquote><ul><li><strong>GET</strong>产生<strong>一个</strong>TCP数据包；<strong>POST</strong>产生<strong>两个</strong>TCP数据包。</li><li>对于GET方式的请求，浏览器会<strong>把http header和data一并发送出去</strong>，服务器响应200（返回数据）；</li><li>而对于POST，浏览器<strong>先发送header</strong>，服务器响应100 continue，浏览器<strong>再发送data</strong>，服务器响应200 ok（返回数据）。</li></ul><blockquote>用GET替换POST的不现实想法</blockquote><ul><li>因为<strong>POST需要两步，时间上消耗的要多一点</strong>，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。但这是一个坑！跳入需谨慎。为什么？<ol><li>GET与POST都有自己的语义，不能随便混用。</li><li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而<strong>在网络环境差的情况下</strong>，<strong>两次包</strong>的TCP在<strong>验证数据包完整性</strong>上，<strong>有非常大的优点</strong>。</li><li><strong>并不是所有浏览器都会在POST中发送两次包</strong>，Firefox就只发送一次。</li></ol></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GET&lt;/strong&gt;和&lt;strong&gt;POST&lt;/strong&gt;是HTTP请求的两种基本方法，它们之间&lt;strong&gt;最直观的区别&lt;/strong&gt;就是&lt;strong&gt;GET把参数包含在URL中&lt;/strong&gt;，&lt;strong&gt;POST通过request body传递参数&lt;/strong&gt;。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="HTTP" scheme="https://chongtianhong.github.io/tags/HTTP/"/>
+    
+  </entry>
   
   <entry>
     <title>ES6中的解构赋值</title>
@@ -545,33 +570,6 @@
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Object.getOwnPropertyNames的使用</title>
-    <link href="https://chongtianhong.github.io/2018/05/18/ObejectGetOwnPropertyNames/"/>
-    <id>https://chongtianhong.github.io/2018/05/18/ObejectGetOwnPropertyNames/</id>
-    <published>2018-05-18T02:11:02.000Z</published>
-    <updated>2018-08-22T14:30:04.210Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li><code>Object.getOwnPropertyNames()</code>方法返回一个由<strong>指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）</strong>组成的<strong>字符串数组</strong>。<a id="more"></a></li><li><code>Object.getOwnPropertyNames()</code>返回的数组中，<strong>枚举属性</strong>的顺序与通过<code>for…in</code>循环（或 Object.keys）迭代该对象属性时一致。数组中<strong>不可枚举属性的顺序未定义</strong>。</li><li><p>例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">var arr = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>];</span><br><span class="line">console.log(Object.getOwnPropertyNames(arr).sort()); // [<span class="string">"0"</span>, <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"length"</span>]</span><br><span class="line"></span><br><span class="line">// 类数组对象</span><br><span class="line">var obj = &#123; 0: <span class="string">"a"</span>, 1: <span class="string">"b"</span>, 2: <span class="string">"c"</span>&#125;;</span><br><span class="line">console.log(Object.getOwnPropertyNames(obj).sort()); // [<span class="string">"0"</span>, <span class="string">"1"</span>, <span class="string">"2"</span>]</span><br><span class="line"></span><br><span class="line">// 使用Array.forEach输出属性名和属性值</span><br><span class="line">Object.getOwnPropertyNames(obj).forEach(<span class="keyword">function</span>(val, idx, array) &#123;</span><br><span class="line">    console.log(val + <span class="string">" -&gt; "</span> + obj[val]);</span><br><span class="line">&#125;);</span><br><span class="line">// 输出</span><br><span class="line">// 0 -&gt; a</span><br><span class="line">// 1 -&gt; b</span><br><span class="line">// 2 -&gt; c</span><br><span class="line"></span><br><span class="line">//不可枚举属性</span><br><span class="line">var my_obj = Object.create(&#123;&#125;, &#123;</span><br><span class="line">    getFoo: &#123;</span><br><span class="line">        value: <span class="function"><span class="title">function</span></span>() &#123; <span class="built_in">return</span> this.foo; &#125;,</span><br><span class="line">        enumerable: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">my_obj.foo = 1;</span><br><span class="line"></span><br><span class="line">console.log(Object.getOwnPropertyNames(my_obj).sort()); // [<span class="string">"foo"</span>, <span class="string">"getFoo"</span>]</span><br></pre></td></tr></table></figure></li><li><p>如果<strong>只要获取到可枚举属性</strong>，可使用<code>Object.keys</code>或用<code>for…in</code>循环（<code>for…in</code>还会获取到原型链上的可枚举属性，不过<strong>可以使用<code>hasOwnProperty()</code>方法过滤掉</strong>）。</p></li><li>下面的例子演示了<code>Object.getOwnPropertyNames()</code>方法<strong>不会获取到原型链上的属性</strong>：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">ParentClass</span></span>() &#123;&#125;</span><br><span class="line">ParentClass.prototype.inheritedMethod = <span class="function"><span class="title">function</span></span>() &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">ChildClass</span></span>() &#123;</span><br><span class="line">  this.prop = 5;</span><br><span class="line">  this.method = <span class="function"><span class="title">function</span></span>() &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ChildClass.prototype = new ParentClass;</span><br><span class="line">ChildClass.prototype.prototypeMethod = <span class="function"><span class="title">function</span></span>() &#123;&#125;;</span><br><span class="line"></span><br><span class="line">console.log(</span><br><span class="line">  Object.getOwnPropertyNames(</span><br><span class="line">    new ChildClass()  // [<span class="string">"prop"</span>, <span class="string">"method"</span>]</span><br><span class="line">  )</span><br><span class="line">);</span><br></pre></td></tr></table></figure></li></ul><blockquote>只获取不可枚举的属性</blockquote><ul><li><p>下面的例子使用了<code>Array.prototype.filter()</code>方法，从所有的属性名数组（使用<code>Object.getOwnPropertyNames()</code>方法获得）中去除可枚举的属性（使用<code>Object.keys()</code>方法获得），剩余的属性便是不可枚举的属性了：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var target = myObject;</span><br><span class="line">var enum_and_nonenum = Object.getOwnPropertyNames(target);</span><br><span class="line">var enum_only = Object.keys(target);</span><br><span class="line">var nonenum_only = enum_and_nonenum.filter(<span class="keyword">function</span>(key) &#123;</span><br><span class="line">    var indexInEnum = enum_only.indexOf(key);</span><br><span class="line">    <span class="keyword">if</span> (indexInEnum == -1) &#123;</span><br><span class="line">        // 没有发现在enum_only键集中意味着这个键是不可枚举的,</span><br><span class="line">        // 因此返回<span class="literal">true</span> 以便让它保持在过滤结果中</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(nonenum_only);</span><br></pre></td></tr></table></figure></li><li><p><strong>注</strong>：<code>Array.filter(filt_func)</code>方法<strong>创建一个新数组</strong>, 其包含<strong>通过</strong>所提供函数实现的<strong>测试的所有元素</strong>。</p></li><li><p><strong>注意</strong>：</p><ul><li>在 ES5 中，如果参数不是一个原始对象类型，将抛出一个 TypeError  异常。</li><li>在 ES2015 中，非对象参数被强制转换为对象 。</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object.getOwnPropertyNames(<span class="string">'foo'</span>);</span><br><span class="line">// TypeError: <span class="string">"foo"</span> is not an object (ES5 code)</span><br><span class="line"></span><br><span class="line">Object.getOwnPropertyNames(<span class="string">'foo'</span>);</span><br><span class="line">// [<span class="string">'length'</span>, <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>]  (ES2015 code)</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Object.getOwnPropertyNames()&lt;/code&gt;方法返回一个由&lt;strong&gt;指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）&lt;/strong&gt;组成的&lt;strong&gt;字符串数组&lt;/strong&gt;。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="ES5" scheme="https://chongtianhong.github.io/tags/ES5/"/>
     
   </entry>
   
