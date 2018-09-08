@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,Node.js,异步编程,async," />
+  <meta name="keywords" content="开发,Node.js,async,异步编程," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="前言 异步编程是指由于异步I/O等因素，无法同步获得执行结果时，在回调函数中进行下一步操作的代码编写风格，常见的如setTimeout函数、ajax请求等。">
-<meta name="keywords" content="开发,Node.js,异步编程,async">
+<meta name="keywords" content="开发,Node.js,async,异步编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Node.js之async异步编程">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/06/09/asyncProgrammingOfNodeJS/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 异步编程是指由于异步I/O等因素，无法同步获得执行结果时，在回调函数中进行下一步操作的代码编写风格，常见的如setTimeout函数、ajax请求等。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-08T16:20:41.030Z">
+<meta property="og:updated_time" content="2018-09-08T16:22:43.298Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node.js之async异步编程">
 <meta name="twitter:description" content="前言 异步编程是指由于异步I/O等因素，无法同步获得执行结果时，在回调函数中进行下一步操作的代码编写风格，常见的如setTimeout函数、ajax请求等。">
@@ -406,7 +406,7 @@
 <li><p>这里大部分人会认为输出<code>123</code>，或者<code>333</code>。其实它会输出<code>444</code>，这里就是我们要说的异步编程了。</p>
 </li>
 <li>解析：在正常情况下，for循环每次执行，在块级作用域结束后，这个i就会被回收。而由于<code>setTimeout</code>是异步的，引用的索引是最后的i，所以输出的都为4。</li>
-<li><p>改写：</p>
+<li><p>重新改写例子，使之输出我们想要的结果：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var i = 1; i &lt;= 3; i++) &#123; </span><br><span class="line">    (<span class="keyword">function</span>(j)&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            console.log(j); </span><br><span class="line">        &#125;, 0); </span><br><span class="line">    &#125;)(i);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>解析：加了<strong>立即执行函数后，形成了闭包</strong>，每次的i就会在内存中保留下来，不会立即回收，并且这个<strong>i是保存在堆中</strong>的。因此每个<code>setTimeout</code>就能找到自己要输出的i。当每次<code>setTimeout</code>输出完自己需要的i后，堆中的i就可以被回收了。</p>
@@ -490,9 +490,9 @@
           
             <a href="/tags/Node-js/" rel="tag"><i class="fa fa-tag"></i> Node.js</a>
           
-            <a href="/tags/异步编程/" rel="tag"><i class="fa fa-tag"></i> 异步编程</a>
-          
             <a href="/tags/async/" rel="tag"><i class="fa fa-tag"></i> async</a>
+          
+            <a href="/tags/异步编程/" rel="tag"><i class="fa fa-tag"></i> 异步编程</a>
           
         </div>
       
