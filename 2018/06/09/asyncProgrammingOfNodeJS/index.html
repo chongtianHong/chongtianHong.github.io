@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 异步编程是指由于异步I/O等因素，无法同步获得执行结果时，在回调函数中进行下一步操作的代码编写风格，常见的如setTimeout函数、ajax请求等。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-08T16:12:57.920Z">
+<meta property="og:updated_time" content="2018-09-08T16:19:03.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node.js之async异步编程">
 <meta name="twitter:description" content="前言 异步编程是指由于异步I/O等因素，无法同步获得执行结果时，在回调函数中进行下一步操作的代码编写风格，常见的如setTimeout函数、ajax请求等。">
@@ -399,7 +399,7 @@
 
       
         <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
-<li><strong>异步编程</strong>是指由于<strong>异步I/O</strong>等因素，<strong>无法同步获得执行结果</strong>时，在回调函数中进行下一步操作的代码编写风格，常见的如<code>setTimeout</code>函数、<code>ajax</code>请求等。<a id="more"></a></li>
+<li><strong>异步编程</strong>是指由于<strong>异步I/O</strong>等因素，<strong>无法同步获得执行结果</strong>时，在<strong>回调函数中进行下一步操作</strong>的代码编写风格，常见的如<code>setTimeout</code>函数、<code>ajax</code>请求等。<a id="more"></a></li>
 <li><p>示例：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (var i = 1; i &lt;= 3; i++) &#123; </span><br><span class="line">    setTimeout(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        console.log(i); </span><br><span class="line">    &#125;, 0); </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
@@ -413,7 +413,7 @@
 </li>
 </ul>
 <h4 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h4><ul>
-<li>async 是JavaScript的扩展库。它可以简化Node.js异步操作的书写，使代码更容易被读懂，而不是嵌套一堆的括号让人难以理解。</li>
+<li><strong>async</strong>是JavaScript的扩展库。它可以简化Node.js异步操作的书写，使代码更容易被读懂，而不是嵌套一堆的括号让人难以理解。</li>
 <li><p>我们可以使用Node.js的包管理器npm直接安装它，在shell中输入：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install async</span><br></pre></td></tr></table></figure>
 </li>
