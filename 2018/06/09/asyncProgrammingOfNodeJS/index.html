@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,Node.js,async,异步编程," />
+  <meta name="keywords" content="开发,Node.js,异步编程,async," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="前言 异步编程是指由于异步I/O等因素，无法同步获得执行结果时，在回调函数中进行下一步操作的代码编写风格，常见的如setTimeout函数、ajax请求等。">
-<meta name="keywords" content="开发,Node.js,async,异步编程">
+<meta name="keywords" content="开发,Node.js,异步编程,async">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Node.js之async异步编程">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/06/09/asyncProgrammingOfNodeJS/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 异步编程是指由于异步I/O等因素，无法同步获得执行结果时，在回调函数中进行下一步操作的代码编写风格，常见的如setTimeout函数、ajax请求等。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-08T16:19:03.745Z">
+<meta property="og:updated_time" content="2018-09-08T16:20:41.030Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node.js之async异步编程">
 <meta name="twitter:description" content="前言 异步编程是指由于异步I/O等因素，无法同步获得执行结果时，在回调函数中进行下一步操作的代码编写风格，常见的如setTimeout函数、ajax请求等。">
@@ -417,7 +417,7 @@
 <li><p>我们可以使用Node.js的包管理器npm直接安装它，在shell中输入：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install async</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>async的流程控制相关函数有：</p>
+<li><p><strong>asyn</strong>c的流程控制相关函数有：</p>
 <ul>
 <li><code>series</code></li>
 <li><code>waterfall</code></li>
@@ -428,7 +428,7 @@
 </ul>
 <h5 id="series函数"><a href="#series函数" class="headerlink" title="series函数"></a>series函数</h5><ul>
 <li>语法：<code>async.series(tasks,callback)</code></li>
-<li><code>series</code>函数：串行无关联，多个函数<strong>依次执行</strong>，函数之间没有数据交换，其中一个函数出错，后续函数不再执行。</li>
+<li><code>series</code>函数：<strong>串行无关联</strong>，多个函数<strong>依次执行</strong>，函数之间没有数据交换，其中一个函数出错，后续函数不再执行。</li>
 <li><p><code>series</code>函数的<strong>第一个参数</strong>可以是一个<strong>数组</strong>也可以是一个<strong>JSON对象</strong>，参数类型不同，影响的是返回数据的格式。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">async.series(&#123;</span><br><span class="line">    one: <span class="keyword">function</span>(callback)&#123;</span><br><span class="line">        callback(null, 1);</span><br><span class="line">    &#125;,</span><br><span class="line">    two: <span class="keyword">function</span>(callback)&#123;</span><br><span class="line">        callback(null, 2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, <span class="keyword">function</span>(err, results) &#123;</span><br><span class="line">    console.log(results);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </li>
@@ -490,9 +490,9 @@
           
             <a href="/tags/Node-js/" rel="tag"><i class="fa fa-tag"></i> Node.js</a>
           
-            <a href="/tags/async/" rel="tag"><i class="fa fa-tag"></i> async</a>
-          
             <a href="/tags/异步编程/" rel="tag"><i class="fa fa-tag"></i> 异步编程</a>
+          
+            <a href="/tags/async/" rel="tag"><i class="fa fa-tag"></i> async</a>
           
         </div>
       
