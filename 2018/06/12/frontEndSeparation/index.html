@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,Node.js,前后端分离," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言 由于Node.js的逐渐成熟和日趋稳定，越来越多的公司中的前端团队开始尝试使用Node.js来练一下手，尝一尝鲜。 一般的做法都是将原本属于后端的一部分相对于业务不是很重要的功能迁移到Node.js上面来，也有一些公司将Node.js作为前后端分离的一个解决方案去施行。而像淘宝网这类的大型网站也很早的完成了前后端的分离，给我们这样的后来者提供了宝贵的经验。">
+<meta name="keywords" content="开发,Node.js,前后端分离">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前后端分离内容介绍">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/06/12/frontEndSeparation/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="前言 由于Node.js的逐渐成熟和日趋稳定，越来越多的公司中的前端团队开始尝试使用Node.js来练一下手，尝一尝鲜。 一般的做法都是将原本属于后端的一部分相对于业务不是很重要的功能迁移到Node.js上面来，也有一些公司将Node.js作为前后端分离的一个解决方案去施行。而像淘宝网这类的大型网站也很早的完成了前后端的分离，给我们这样的后来者提供了宝贵的经验。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://chongtianhong.github.io/images/frontEndSeparation1.jpg">
+<meta property="og:image" content="https://chongtianhong.github.io/images/frontEndSeparation2.jpg">
+<meta property="og:image" content="https://chongtianhong.github.io/images/frontEndSeparation3.jpg">
+<meta property="og:image" content="https://chongtianhong.github.io/images/frontEndSeparation4.jpg">
+<meta property="og:image" content="https://chongtianhong.github.io/images/frontEndSeparation5.jpg">
+<meta property="og:updated_time" content="2018-09-11T07:50:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前后端分离内容介绍">
+<meta name="twitter:description" content="前言 由于Node.js的逐渐成熟和日趋稳定，越来越多的公司中的前端团队开始尝试使用Node.js来练一下手，尝一尝鲜。 一般的做法都是将原本属于后端的一部分相对于业务不是很重要的功能迁移到Node.js上面来，也有一些公司将Node.js作为前后端分离的一个解决方案去施行。而像淘宝网这类的大型网站也很早的完成了前后端的分离，给我们这样的后来者提供了宝贵的经验。">
+<meta name="twitter:image" content="https://chongtianhong.github.io/images/frontEndSeparation1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/06/12/frontEndSeparation/"/>
+
+
+
+
+
+  <title>前后端分离内容介绍 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/06/12/frontEndSeparation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前后端分离内容介绍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-12T14:20:54+08:00">
+                2018-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li>由于Node.js的逐渐成熟和日趋稳定，越来越多的公司中的前端团队开始尝试使用Node.js来练一下手，尝一尝鲜。</li>
+<li>一般的做法都是将<strong>原本属于后端的一部分相对于业务不是很重要的功能</strong>迁移到Node.js上面来，也有一些公司<strong>将Node.js作为前后端分离的一个解决方案</strong>去施行。而像淘宝网这类的大型网站也很早的完成了前后端的分离，给我们这样的后来者提供了宝贵的经验。<a id="more"></a></li>
+<li>接下来将对前后端分离的内容进行介绍。</li>
+</ul>
+<h4 id="认识前后端分离"><a href="#认识前后端分离" class="headerlink" title="认识前后端分离"></a>认识前后端分离</h4><ul>
+<li>在<strong>传统的web应用开发</strong>中，大多数的程序员会<strong>将浏览器作为前后端的分界线</strong>。将<strong>浏览器中为用户进行页面展示的部分</strong>称之为<strong>前端</strong>，而将<strong>运行在服务器，为前端提供业务逻辑和数据准备的所有代码</strong>统称为<strong>后端</strong>。</li>
+<li>由于前后端分离这个概念相对来说刚出现不久，很多人都是只闻其声，不见其形，所以可能会对它产生一些误解，误以为前后端分离只是一种web应用开发模式，只要在web应用的开发期进行了前后端开发工作的分工就是前后端分离。</li>
+<li>其实<strong>前后端分离并不只是开发模式，还是web应用的一种架构模式</strong>。在开发阶段，前后端工程师约定好数据交互接口，实现<strong>并行开发和测试</strong>；在运行阶段前后端分离模式需要对web应用进行<strong>分离部署</strong>，前后端之间使用HTTP或者其他协议进行交互请求。然而作为一种<strong>架构模式</strong>，我们在实施的过程中主要对以下四个方面来进行比较和重新认识。</li>
+<li>前后端分离大概可以从四个方面来理解：<br>1、交互形式<br>2、代码组织方式<br>3、开发模式<br>4、数据接口规范流程</li>
+</ul>
+<h5 id="交互形式"><a href="#交互形式" class="headerlink" title="交互形式"></a>交互形式</h5><ul>
+<li>在前后端分离架构中，<strong>后端</strong>只需要负责<strong>按照约定的数据格式向前端提供可调用的API服务</strong>即可。<strong>前后端之间通过HTTP请求进行交互，前端获取到数据后，进行页面的组装和渲染，最终返回给浏览器</strong>。<br><img src="/images/frontEndSeparation1.jpg" width="600" alt="交互形式" style="border:none"></li>
+</ul>
+<h5 id="代码组织方式"><a href="#代码组织方式" class="headerlink" title="代码组织方式"></a>代码组织方式</h5><ul>
+<li>在<strong>传统架构模式</strong>中，前后端代码存放于<strong>同一个代码库</strong>中，甚至是<strong>同一工程目录</strong>下。页面中还夹杂着后端代码。前后端工程师进行开发时，都必须把整个项目导入到开发工具中。<br><img src="/images/frontEndSeparation2.jpg" width="600" alt="代码组织方式" style="border:none"></li>
+<li>而前后端分离模式在代码组织形式上有以下两种：<ul>
+<li><strong>半分离</strong><br><strong>前后端共用一个代码库，但是代码分别存放在两个工程中</strong>。后端不关心或很少关心前端元素的输出情况，前端不能独立进行开发和测试，项目中缺乏前后端交互的测试用例。</li>
+<li><strong>分离</strong><br><strong>前后端代码库分离</strong>，前端代码中有可以进行Mock测试(通过构造虚拟测试对象以简化测试环境的方法)的伪后端，能支持前端的独立开发和测试。而后端代码中除了功能实现外，还有着详细的测试用例，以保证API的可用性，降低集成风险。</li>
+</ul>
+</li>
+</ul>
+<h5 id="开发模式"><a href="#开发模式" class="headerlink" title="开发模式"></a>开发模式</h5><ul>
+<li><strong>传统的MVC架构，整体没有进行前后端分离</strong>。在项目的开发阶段，前端工程师负责编写HTML，完成前端的页面设计并套页面，然后再使用模板技术将写好的前端代码转换为Smarty脚本，同时内嵌一些后端提供的模板变量和一些逻辑操作。应用运行期，将全部代码进行打包，和后端代码部署到同一服务器上，同时会进行简单的动静态分离部署。</li>
+<li>此时，应用的开发流程如下图所示：<br><img src="/images/frontEndSeparation3.jpg" width="600" alt="开发模式1" style="border:none"></li>
+<li>而在<strong>实现前后端分离架构之后</strong>，前端工程师只需要编写HTML、js、CSS等前端资源，然后通过HTTP请求调用后端提供的服务即可。除了<strong>开发期的分离</strong>，在<strong>运行期前后端资源</strong>也会<strong>进行分离部署</strong>。</li>
+<li>前后端分离之后，开发流程将如下图所示。<br><img src="/images/frontEndSeparation4.jpg" width="600" alt="开发模式2" style="border:none"></li>
+<li>通过上面的两幅流程图，不难发现，在开发模式上，前后端分离不仅仅只是工程师的分工开发，更重要的意义在于<strong>实现了前后端的并行开发，简化了开发流程</strong>。</li>
+</ul>
+<h5 id="数据接口规范流程"><a href="#数据接口规范流程" class="headerlink" title="数据接口规范流程"></a>数据接口规范流程</h5><ul>
+<li>在<strong>开发期间</strong>前后端共同商定好数据接口的交互形式和数据格式。然后实现<strong>前后端的并行开发</strong>，其中前端工程师再开发完成之后可以独自进行mock测试，而后端也可以使用接口测试平台进行接口自测，然后<strong>前后端一起进行功能联调并校验格式</strong>，最终进行<strong>自动化测试</strong>。<br><img src="/images/frontEndSeparation5.jpg" width="600" alt="数据接口规范流程" style="border:none"></li>
+</ul>
+<h4 id="分离的四个好处"><a href="#分离的四个好处" class="headerlink" title="分离的四个好处"></a>分离的四个好处</h4><ul>
+<li>前后端分离模式和传统的web应用架构相比有很大的不同，从目前应用软件开发的发展趋势来看，主要有两方面需要注意：<br>1、越来越<strong>注重用户体验</strong>，随着互联网的发展，开始<strong>多终端化</strong>。<br>2、大型应用架构模式正在向<strong>云化、微服务化</strong>发展。</li>
+<li>通过前后端分离架构，可以为我们带来以下四个方面的提升：<ul>
+<li><strong>为优质产品打造精益团队</strong><br>通过将开发团队前后端分离化，让前后端工程师只需要专注于前端或后端的开发工作，是的前后端工程师实现自治，培养其独特的技术特性，然后构建出一个全栈式的精益开发团队。</li>
+<li><strong>提升开发效率</strong><br>前后端分离以后，可以实现前后端代码的解耦，只要前后端沟通约定好应用所需接口以及接口参数，便可以开始并行开发，无需等待对方的开发工作结束。与此同时，即使需求发生变更，只要接口与数据格式不变，后端开发人员就不需要修改代码，只要前端进行变动即可。如此一来整个应用的开发效率必然会有质的提升。</li>
+<li><strong>完美应对复杂多变的前端需求</strong><br>如果开发团队能完成前后端分离的转型，打造优秀的前后端团队，开发独立化，让开发人员做到专注专精，开发能力必然会有所提升，能够完美应对各种复杂多变的前端需求。</li>
+<li><strong>增强代码可维护性</strong><br>前后端分离后，应用的代码不再是前后端混合，只有在运行期才会有调用依赖关系。</li>
+</ul>
+</li>
+<li>应用代码将会变得整洁清晰，不论是代码阅读还是代码维护都会比以前轻松。</li>
+</ul>
+<h4 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h4><ul>
+<li>前后端分离并非仅仅只是前后端开发的分工，而是<ul>
+<li>在<strong>开发期</strong>进行<strong>代码存放分离</strong>、<strong>前后端开发职责分离</strong>，<strong>前后端能够独立进行开发测试</strong>；</li>
+<li>在<strong>运行期</strong>进行<strong>应用部署分离</strong>，<strong>前后端之间通过HTTP请求进行通讯</strong>。</li>
+</ul>
+</li>
+<li>前后端分离的开发模式与传统模式相比，能为我们<strong>提升开发效率、增强代码可维护性</strong>，让我们有规划地打造一个前后端并重的精益开发团队，更好地应对越来越复杂多变的Web应用开发需求。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/Node-js/" rel="tag"><i class="fa fa-tag"></i> Node.js</a>
+          
+            <a href="/tags/前后端分离/" rel="tag"><i class="fa fa-tag"></i> 前后端分离</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/11/webStudyLink/" rel="next" title="前端有用网址收藏">
+                <i class="fa fa-chevron-left"></i> 前端有用网址收藏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/13/regExpMatchingUnderCycles/" rel="prev" title="循环下的正则匹配？说说正则中的lastIndex">
+                循环下的正则匹配？说说正则中的lastIndex <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">123</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#认识前后端分离"><span class="nav-number">2.</span> <span class="nav-text">认识前后端分离</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#交互形式"><span class="nav-number">2.1.</span> <span class="nav-text">交互形式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码组织方式"><span class="nav-number">2.2.</span> <span class="nav-text">代码组织方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#开发模式"><span class="nav-number">2.3.</span> <span class="nav-text">开发模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据接口规范流程"><span class="nav-number">2.4.</span> <span class="nav-text">数据接口规范流程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分离的四个好处"><span class="nav-number">3.</span> <span class="nav-text">分离的四个好处</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
