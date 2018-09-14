@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,开发,事件," />
+  <meta name="keywords" content="开发,JavaScript,事件," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="事件处理程序 JavaScript事件（一）事件流中提到，事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。 响应某个事件的函数就叫事件处理程序（也叫事件处理函数、事件句柄）。">
-<meta name="keywords" content="JavaScript,开发,事件">
+<meta name="keywords" content="开发,JavaScript,事件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript事件（二）事件处理程序">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/06/16/eventHandler/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="事件处理程序 JavaScript事件（一）事件流中提到，事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。 响应某个事件的函数就叫事件处理程序（也叫事件处理函数、事件句柄）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-14T14:16:06.853Z">
+<meta property="og:updated_time" content="2018-09-14T14:28:59.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件（二）事件处理程序">
 <meta name="twitter:description" content="事件处理程序 JavaScript事件（一）事件流中提到，事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。 响应某个事件的函数就叫事件处理程序（也叫事件处理函数、事件句柄）。">
@@ -419,7 +419,7 @@
 <li>把一个<strong>函数赋值</strong>给一个<strong>事件处理程序属性</strong>。**</li>
 <li>这种方法简单而且跨浏览器，但是<strong>只能为一个元素添加一个事件处理函数</strong>，即这种方法<strong>无法为元素添加多个相同事件的事件处理函数</strong>，则<strong>后面的会覆盖前面的</strong>。</li>
 <li><p><strong>添加</strong>事件处理程序：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"myBtn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span>/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    myBtn.onclick = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"clicked!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">/*</span><br><span class="line">    第一步：myBtn=document.getElementById(<span class="string">"myBtn"</span>);取得btn对象</span><br><span class="line">    第二步：myBtn.onclick其实相当于给myBtn添加了一个onclick的属性。</span><br><span class="line">    第三步：myBtn.onclick=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"clicked!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    把函数赋值给onclick事件处理程序属性。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"myBtn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span>/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    myBtn.onclick = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"clicked!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">/*</span><br><span class="line">    第一步：myBtn = document.getElementById(<span class="string">"myBtn"</span>);取得btn对象</span><br><span class="line">    第二步：myBtn.onclick其实相当于给myBtn添加了一个onclick的属性。</span><br><span class="line">    第三步：myBtn.onclick = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"clicked!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    把函数赋值给onclick事件处理程序属性。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>删除</strong>事件处理程序：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myBtn.onclick = null;</span><br></pre></td></tr></table></figure>
@@ -515,9 +515,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
             <a href="/tags/事件/" rel="tag"><i class="fa fa-tag"></i> 事件</a>
           
