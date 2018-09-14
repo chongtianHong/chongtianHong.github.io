@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,开发,事件," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="事件处理程序 JavaScript事件（一）事件流中提到，事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。 响应某个事件的函数就叫事件处理程序（也叫事件处理函数、事件句柄）。">
+<meta name="keywords" content="JavaScript,开发,事件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript事件（二）事件处理程序">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/06/16/eventHandler/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="事件处理程序 JavaScript事件（一）事件流中提到，事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。 响应某个事件的函数就叫事件处理程序（也叫事件处理函数、事件句柄）。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-14T14:16:06.853Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript事件（二）事件处理程序">
+<meta name="twitter:description" content="事件处理程序 JavaScript事件（一）事件流中提到，事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。 响应某个事件的函数就叫事件处理程序（也叫事件处理函数、事件句柄）。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/06/16/eventHandler/"/>
+
+
+
+
+
+  <title>JavaScript事件（二）事件处理程序 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/06/16/eventHandler/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript事件（二）事件处理程序</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-16T11:44:32+08:00">
+                2018-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="事件处理程序"><a href="#事件处理程序" class="headerlink" title="事件处理程序"></a>事件处理程序</h4><ul>
+<li><a href="http://xbhong.top/2018/06/15/eventFlow/#more" target="_blank" rel="noopener">JavaScript事件（一）事件流</a>中提到，事件是<strong>用户</strong>或<strong>浏览器自身</strong>执行的某种动作，如<code>click</code>，<code>load</code>和<code>mouseover</code>都是事件的名字。</li>
+<li><strong>响应某个事件的函数</strong>就叫<strong>事件处理程序</strong>（也叫事件处理函数、事件句柄）。<a id="more"></a></li>
+<li>事件处理程序的名字以”on”开头，因此<code>click</code>事件的事件处理程序就是<strong>onclick</strong>，<code>load</code>事件的事件处理程序就是<strong>onload</strong>。</li>
+<li><strong>为事件指定事件处理程序的方法</strong>主要有3种，分别是<strong>HTML事件处理程序</strong>、<strong>DOM0级事件处理程序</strong>和<strong>DOM2级事件处理程序</strong>。</li>
+</ul>
+<h5 id="HTML事件处理程序"><a href="#HTML事件处理程序" class="headerlink" title="HTML事件处理程序"></a>HTML事件处理程序</h5><ul>
+<li>事件直接加在HTML元素上。这种方式也有两种方法，都很简单：</li>
+<li><p>第一种：直接<strong>在HTML元素中定义事件处理程序及包含的动作</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span> onclick=<span class="string">"alert('clicked!')"</span>/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二种：HTML元素中定义事件处理程序，<strong>执行的动作</strong>则<strong>调用其他地方定义的脚本</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span> onclick=<span class="string">"showMessage()"</span>/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">function</span> <span class="function"><span class="title">showMessage</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"clicked!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>知识点：<br>1）通过<strong>event变量</strong>可以<strong>直接访问事件本身</strong>，比如<code>onclick=”alert(event.type)”</code>会弹出<code>click</code>事件。<br>2）<strong>this值等于事件的目标元素</strong>，这里目标元素是input。比如<code>onclick=”alert(this.value)”</code>可以得到input元素的value值。</p>
+</li>
+</ul>
+<h5 id="DOM0级事件处理程序"><a href="#DOM0级事件处理程序" class="headerlink" title="DOM0级事件处理程序"></a>DOM0级事件处理程序</h5><ul>
+<li>把一个<strong>函数赋值</strong>给一个<strong>事件处理程序属性</strong>。**</li>
+<li>这种方法简单而且跨浏览器，但是<strong>只能为一个元素添加一个事件处理函数</strong>，即这种方法<strong>无法为元素添加多个相同事件的事件处理函数</strong>，则<strong>后面的会覆盖前面的</strong>。</li>
+<li><p><strong>添加</strong>事件处理程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"myBtn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span>/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    myBtn.onclick = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"clicked!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">/*</span><br><span class="line">    第一步：myBtn=document.getElementById(<span class="string">"myBtn"</span>);取得btn对象</span><br><span class="line">    第二步：myBtn.onclick其实相当于给myBtn添加了一个onclick的属性。</span><br><span class="line">    第三步：myBtn.onclick=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"clicked!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    把函数赋值给onclick事件处理程序属性。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除</strong>事件处理程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myBtn.onclick = null;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="DOM2级事件处理程序"><a href="#DOM2级事件处理程序" class="headerlink" title="DOM2级事件处理程序"></a>DOM2级事件处理程序</h5><ul>
+<li>DOM2级事件处理程序可以<strong>为一个元素添加多个事件处理程序</strong>。其定义了两个方法用于添加和删除事件处理程序：<code>addEventListener()</code>和<code>removeEventListener()</code>。</li>
+<li><strong>所有的DOM节点都包含这2个方法</strong>。</li>
+<li>这两个方法都需要3个参数：事件名，事件处理函数，布尔值。布尔值为<code>true</code>时，在捕获阶段处理事件；为<code>false</code>时，在冒泡阶段处理事件。布尔值默认为<code>false</code>。</li>
+<li><p><strong>添加事件处理程序</strong>：现在为按钮添加两个事件处理函数，一个弹出“hello”，一个弹出“world”：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"myBtn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span>/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    myBtn.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;, <span class="literal">false</span>);</span><br><span class="line">    myBtn.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"world"</span>);</span><br><span class="line">    &#125;, <span class="literal">false</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除事件处理程序</strong>：通过<code>addEventListener()</code>添加的事件处理程序必须通过<code>removeEventListener()</code>删除，且<strong>参数一致</strong>。</p>
+</li>
+<li><p><strong>注意</strong>：通过<code>addEventListener()</code>添加的<strong>匿名函数将无法删除</strong>。下面这段代码将不起作用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myBtn.removeEventListener(<span class="string">"click"</span>,<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    alert(<span class="string">"world"</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>看似该<code>removeEventListener()</code>与上面的<code>addEventListener()</code>参数一致，实则<strong>第二个参数中匿名函数是完全不同的</strong>。所以<strong>为了能删除事件处理程序</strong>，代码可以这样写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"myBtn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span>/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    var handler = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    myBtn.addEventListener(<span class="string">"click"</span>, handler, <span class="literal">false</span>);</span><br><span class="line">    myBtn.removeEventListener(<span class="string">"click"</span>, handler, <span class="literal">false</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="IE事件处理程序"><a href="#IE事件处理程序" class="headerlink" title="IE事件处理程序"></a>IE事件处理程序</h4><h5 id="实际应用场景"><a href="#实际应用场景" class="headerlink" title="实际应用场景"></a>实际应用场景</h5><ul>
+<li><strong>IE8及以下浏览器不支持<code>addEventListener()</code></strong>，在实际开发中如果要兼容到IE8及以下浏览器。</li>
+<li><p>如果用原生的绑定事件，需要做兼容处理，可利用jquery的bind代替。语法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).<span class="built_in">bind</span>(event, data, <span class="keyword">function</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其中：</p>
+<ul>
+<li>event是必需的。规定添加到元素的一个或多个事件。可由空格分隔多个事件。必须是有效的事件。</li>
+<li>data是可选的。规定传递到函数的额外数据。</li>
+<li>function是必需的。规定当事件发生时运行的函数。</li>
+</ul>
+</li>
+<li>例子：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"button"</span>).<span class="built_in">bind</span>(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"p"</span>).slideToggle();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="IE8事件绑定"><a href="#IE8事件绑定" class="headerlink" title="IE8事件绑定"></a>IE8事件绑定</h5><ul>
+<li>IE8及以下版本浏览器实现了与DOM中类似的两个方法：<code>attachEvent()</code>和<code>detachEvent()</code>。</li>
+<li>这两个方法都需要两个参数：<strong>事件处理程序名称</strong>和<strong>事件处理程序函数</strong>。由于<strong>IE8及更早版本只支持事件冒泡</strong>，所以通过attachEvent()添加的事件处理程序都会被添加到冒泡阶段。</li>
+<li><strong>注意</strong>是<strong>事件处理程序名称</strong>而不是事件名称，所以要加上on，是<strong>onclick</strong>而不是click。</li>
+<li>知识点：<ul>
+<li>IE11只支持<code>addEventListener</code>。</li>
+<li>IE9，IE10对<code>attachEvent</code>和<code>addEventListener</code>都支持。</li>
+<li>IE8及以下版本只支持<code>attachEvent</code>。</li>
+</ul>
+</li>
+<li><p>可以拿下面代码在IE各个版本浏览器中进行测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"myBtn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span>/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    var handlerIE = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"helloIE"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    var handlerDOM = <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        alert(<span class="string">"helloDOM"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    myBtn.addEventListener(<span class="string">"click"</span>, handlerDOM, <span class="literal">false</span>);</span><br><span class="line">    myBtn.attachEvent(<span class="string">"onclick"</span>, handlerIE);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>添加事件处理程序</strong>：现在为按钮添加两个事件处理函数，一个弹出“hello”，一个弹出“world”：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    myBtn.attachEvent(<span class="string">"onclick"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    myBtn.attachEvent(<span class="string">"onclick"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"world"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这里运行效果值得注意一下：</p>
+<ul>
+<li><strong>IE8以下浏览器</strong>中先弹出“world”，再弹出“hello”。<strong>和DOM中事件触发顺序相反</strong>。</li>
+<li><strong>IE9及以上浏览器</strong>先弹出“hello”，再弹出“world”。<strong>和DOM中事件触发顺序相同</strong>。</li>
+</ul>
+</li>
+<li><strong>删除事件处理程序</strong>：通过<code>attachEvent</code>添加的事件处理程序必须通过<code>detachEvent</code>方法删除，且参数一致。</li>
+<li><p>和DOM事件一样，<strong>添加的匿名函数将无法删除</strong>。所以为了能删除事件处理程序，代码可以这样写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"myBtn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span>/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    var handler = <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        alert(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    myBtn.attachEvent(<span class="string">"onclick"</span>, handler);</span><br><span class="line">    myBtn.detachEvent(<span class="string">"onclick"</span>, handler);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IE事件处理程序中还有一个地方需要注意：<strong>作用域</strong>。</p>
+</li>
+<li>使用<code>attachEvent</code>方法，事件处理程序会在全局作用域中运行，因此<strong>this等于window</strong>。在编写跨浏览器的代码时，需牢记这点。</li>
+<li>而DOM2或DOM20级的方法<strong>作用域都是在元素内部，this值为目标元素</strong>。</li>
+<li>下面例子会弹出true：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"myBtn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span>/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    myBtn.attachEvent(<span class="string">"onclick"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(this === window);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/事件/" rel="tag"><i class="fa fa-tag"></i> 事件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/15/eventFlow/" rel="next" title="JavaScript事件（一）事件流">
+                <i class="fa fa-chevron-left"></i> JavaScript事件（一）事件流
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件处理程序"><span class="nav-number">1.</span> <span class="nav-text">事件处理程序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HTML事件处理程序"><span class="nav-number">1.1.</span> <span class="nav-text">HTML事件处理程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DOM0级事件处理程序"><span class="nav-number">1.2.</span> <span class="nav-text">DOM0级事件处理程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DOM2级事件处理程序"><span class="nav-number">1.3.</span> <span class="nav-text">DOM2级事件处理程序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IE事件处理程序"><span class="nav-number">2.</span> <span class="nav-text">IE事件处理程序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实际应用场景"><span class="nav-number">2.1.</span> <span class="nav-text">实际应用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#IE8事件绑定"><span class="nav-number">2.2.</span> <span class="nav-text">IE8事件绑定</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
