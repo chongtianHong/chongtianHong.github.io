@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,开发,事件," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="事件 事件是在文档或者浏览器窗口中发生的，特定的交互瞬间。 事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。">
+<meta name="keywords" content="JavaScript,开发,事件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript事件（一）事件流">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/09/14/eventFlow/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="事件 事件是在文档或者浏览器窗口中发生的，特定的交互瞬间。 事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-14T13:29:56.024Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript事件（一）事件流">
+<meta name="twitter:description" content="事件 事件是在文档或者浏览器窗口中发生的，特定的交互瞬间。 事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/09/14/eventFlow/"/>
+
+
+
+
+
+  <title>JavaScript事件（一）事件流 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/09/14/eventFlow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript事件（一）事件流</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-14T10:09:33+08:00">
+                2018-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><ul>
+<li>事件是在<strong>文档</strong>或者<strong>浏览器窗口</strong>中发生的，特定的交互瞬间。</li>
+<li>事件是<strong>用户</strong>或<strong>浏览器自身</strong>执行的某种动作，如<code>click</code>，<code>load</code>和<code>mouseover</code>都是事件的名字。<a id="more"></a></li>
+<li>事件是<strong>JavaScript</strong>和<strong>DOM</strong>之间<strong>交互的桥梁</strong>。</li>
+<li>事件发生，调用它的处理函数执行相应的JavaScript代码给出响应（你若触发，我便执行）。</li>
+<li>典型的例子有：<strong>页面加载完毕</strong>触发<code>load</code>和<code>事件；<strong>用户单击元素</strong>触发<code>click</code>事件。</code></li>
+</ul>
+<h4 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h4><ul>
+<li>事件流描述的是<strong>从页面中接收事件的顺序</strong>。</li>
+</ul>
+<h5 id="事件流感性认识"><a href="#事件流感性认识" class="headerlink" title="事件流感性认识"></a>事件流感性认识</h5><ul>
+<li>问题：单击页面元素，什么样的元素能感应到这样一个事件？</li>
+<li>答案：单击元素的同时，也单击了元素的容器元素，甚至整个页面。</li>
+<li>例子：有三个同心圆， 给每个圆添加对应的事件处理函数，弹出对应的文字。单击最里面的圆，同时也单击了外面的圆，所以外面圆的<code>click</code>事件也会被触发。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head lang=<span class="string">"en"</span>&gt;</span><br><span class="line">        &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">        &lt;title&gt;&lt;/title&gt;</span><br><span class="line">        &lt;style&gt;</span><br><span class="line">            <span class="comment">#outer&#123;</span></span><br><span class="line">                position: absolute;</span><br><span class="line">                width: 400px;</span><br><span class="line">                height: 400px;</span><br><span class="line">                top:0;</span><br><span class="line">                left: 0;</span><br><span class="line">                bottom:0;</span><br><span class="line">                right: 0;</span><br><span class="line">                margin: auto;</span><br><span class="line">                background-color: deeppink;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">#middle&#123;</span></span><br><span class="line">                position: absolute;</span><br><span class="line">                width: 300px;</span><br><span class="line">                height:300px;</span><br><span class="line">                top:50%;</span><br><span class="line">                left: 50%;</span><br><span class="line">                margin-left: -150px;</span><br><span class="line">                margin-top: -150px;</span><br><span class="line">                background-color: deepskyblue;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">#inner&#123;</span></span><br><span class="line">                position: absolute;</span><br><span class="line">                width: 100px;</span><br><span class="line">                height:100px;</span><br><span class="line">                top:50%;</span><br><span class="line">                left:50%;</span><br><span class="line">                margin-left: -50px;</span><br><span class="line">                margin-top: -50px;;</span><br><span class="line">                background-color: darkgreen;</span><br><span class="line">                text-align: center;</span><br><span class="line">                line-height: 100px;</span><br><span class="line">                color:white;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">#outer,#middle,#inner&#123;</span></span><br><span class="line">                border-radius:100%;</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;/style&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div id=<span class="string">"outer"</span>&gt;</span><br><span class="line">            &lt;div id=<span class="string">"middle"</span>&gt;</span><br><span class="line">                &lt;div id=<span class="string">"inner"</span>&gt;</span><br><span class="line">                    click me!</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;script&gt;</span><br><span class="line">            var innerCircle= document.getElementById(<span class="string">"inner"</span>);</span><br><span class="line">            innerCircle.onclick= <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">                alert(<span class="string">"innerCircle"</span>);</span><br><span class="line">            &#125;;</span><br><span class="line">            var middleCircle= document.getElementById(<span class="string">"middle"</span>);</span><br><span class="line">            middleCircle.onclick=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                alert(<span class="string">"middleCircle"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            var outerCircle= document.getElementById(<span class="string">"outer"</span>);</span><br><span class="line">            outerCircle.onclick= <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">                alert(<span class="string">"outerCircle"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="事件流-1"><a href="#事件流-1" class="headerlink" title="事件流"></a>事件流</h5><ul>
+<li>事件发生时会在<strong>元素节点</strong>与<strong>根节点</strong>之间<strong>按照特定的顺序传播</strong>，<strong>路径所经过的所有节点</strong>都会<strong>收到该事件</strong>，这个传播过程即<strong>DOM事件流</strong>。</li>
+</ul>
+<h6 id="两种事件流模型"><a href="#两种事件流模型" class="headerlink" title="两种事件流模型"></a>两种事件流模型</h6><ul>
+<li><strong>事件传播的顺序</strong>对应<strong>浏览器的两种事件流模型</strong>：<strong>捕获型</strong>事件流和<strong>冒泡型</strong>事件流。</li>
+<li><strong>冒泡型</strong>事件流：事件的传播是从<strong>最特定的事件目标</strong>到最不特定的事件目标。即从DOM树的叶子到根。【推荐】</li>
+<li><strong>捕获型</strong>事件流：事件的传播是从<strong>最不特定的事件目标</strong>到最特定的事件目标。即从DOM树的根到叶子。</li>
+<li><p><strong>事件捕获</strong>的思想就是<strong>不太具体的节点应该更早接收到事件</strong>，而<strong>最具体的节点最后接收到事件</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head lang=<span class="string">"en"</span>&gt;</span><br><span class="line">        &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">        &lt;title&gt;&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div id=<span class="string">"myDiv"</span>&gt;Click me!&lt;/div&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面这段html代码中，单击了页面中的&lt;div&gt;元素，</p>
+</li>
+<li>在<strong>冒泡型事件流</strong>中<code>click</code>事件传播顺序为：&lt;div&gt;—》&lt;body&gt;—》&lt;html&gt;—》document</li>
+<li>在<strong>捕获型事件流</strong>中<code>click</code>事件传播顺序为：document—》&lt;html&gt;—》&lt;body&gt;—》&lt;div&gt;<br><img src="" alt="两种事件流模型"></li>
+<li>总结：<br>1）、所有现代浏览器都支持事件冒泡，但在具体实现中略有差别：<br>IE5.5及更早版本中事件冒泡会跳过<html>元素(从body直接跳到document)。<br>IE9、Firefox、Chrome、和Safari则将事件一直冒泡到window对象。<br>2）、IE9、Firefox、Chrome、Opera、和Safari都支持事件捕获。尽管DOM标准要求事件应该从document对象开始传播，但这些浏览器<strong>都是从window对象开始捕获事件的</strong>。<br>3）、由于老版本浏览器不支持，很少有人使用事件捕获。<strong>建议使用事件冒泡</strong>。</html></li>
+</ul>
+<h6 id="DOM事件流"><a href="#DOM事件流" class="headerlink" title="DOM事件流"></a>DOM事件流</h6><ul>
+<li>DOM标准采用<strong>捕获+冒泡</strong>。两种事件流都会触发DOM的所有对象，<strong>从document对象开始</strong>，也<strong>在document对象结束</strong>。<br><img src="" alt="DOM事件流"></li>
+<li>DOM标准规定<strong>事件流包括三个阶段</strong>：事件捕获阶段、处于目标阶段和事件冒泡阶段。<ul>
+<li><strong>事件捕获阶段</strong>：实际目标（&lt;div&gt;）在捕获阶段不会接收事件。也就是在捕获阶段，事件从document到&lt;html&gt;再到&lt;body&gt;就停止了。上图中为1~3。</li>
+<li><strong>处于目标阶段</strong>：事件在&lt;div&gt;上发生并处理。<strong>绑定在目标元素上的事件按绑定顺序依次触发</strong>。</li>
+<li><strong>冒泡阶段</strong>：事件又传播回文档。</li>
+</ul>
+</li>
+<li><strong>注意</strong>：并非所有的事件都会经过冒泡阶段。<strong>所有的事件</strong>都要经过<strong>捕获阶段</strong>和<strong>处于目标阶段</strong>，但是<strong>有些事件会跳过冒泡阶段</strong>：如，获得输入焦点的<code>focus</code>事件和失去输入焦点的<code>blur</code>事件。</li>
+<li><p>DOM事件流例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head lang=<span class="string">"en"</span>&gt;</span><br><span class="line">        &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">        &lt;title&gt;&lt;/title&gt;</span><br><span class="line">        &lt;style&gt;</span><br><span class="line">            <span class="comment">#outer&#123;</span></span><br><span class="line">                position: absolute;</span><br><span class="line">                width: 400px;</span><br><span class="line">                height: 400px;</span><br><span class="line">                top:0;</span><br><span class="line">                left: 0;</span><br><span class="line">                bottom:0;</span><br><span class="line">                right: 0;</span><br><span class="line">                margin: auto;</span><br><span class="line">                background-color: deeppink;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">#middle&#123;</span></span><br><span class="line">                position: absolute;</span><br><span class="line">                width: 300px;</span><br><span class="line">                height:300px;</span><br><span class="line">                top:50%;</span><br><span class="line">                left: 50%;</span><br><span class="line">                margin-left: -150px;</span><br><span class="line">                margin-top: -150px;</span><br><span class="line">                background-color: deepskyblue;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">#inner&#123;</span></span><br><span class="line">                position: absolute;</span><br><span class="line">                width: 100px;</span><br><span class="line">                height:100px;</span><br><span class="line">                top:50%;</span><br><span class="line">                left:50%;</span><br><span class="line">                margin-left: -50px;</span><br><span class="line">                margin-top: -50px;;</span><br><span class="line">                background-color: darkgreen;</span><br><span class="line">                text-align: center;</span><br><span class="line">                line-height: 100px;</span><br><span class="line">                color:white;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">#outer,#middle,#inner&#123;</span></span><br><span class="line">                border-radius:100%;</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;/style&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div id=<span class="string">"outer"</span>&gt;</span><br><span class="line">            &lt;div id=<span class="string">"middle"</span>&gt;</span><br><span class="line">                &lt;div id=<span class="string">"inner"</span>&gt;</span><br><span class="line">                    click me!</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;script&gt;</span><br><span class="line">            var innerCircle = document.getElementById(<span class="string">"inner"</span>);</span><br><span class="line">            innerCircle.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">                alert(<span class="string">"innerCircle的click事件在捕获阶段被触发"</span>);</span><br><span class="line">            &#125;, <span class="literal">true</span>);</span><br><span class="line">            innerCircle.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">                alert(<span class="string">"innerCircle的click事件在冒泡阶段被触发"</span>);</span><br><span class="line">            &#125;, <span class="literal">false</span>);</span><br><span class="line">            var middleCircle = document.getElementById(<span class="string">"middle"</span>);</span><br><span class="line">            middleCircle.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">                alert(<span class="string">"middleCircle的click事件在捕获阶段被触发"</span>);</span><br><span class="line">            &#125;, <span class="literal">true</span>);</span><br><span class="line">            middleCircle.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">                alert(<span class="string">"middleCircle的click事件在冒泡阶段被触发"</span>);</span><br><span class="line">            &#125;, <span class="literal">false</span>);</span><br><span class="line">            var outerCircle = document.getElementById(<span class="string">"outer"</span>);</span><br><span class="line">            outerCircle.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">                alert(<span class="string">"outerCircle的click事件在捕获阶段被触发"</span>);</span><br><span class="line">            &#125;, <span class="literal">true</span>);</span><br><span class="line">            outerCircle.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">                alert(<span class="string">"outerCircle的click事件在冒泡阶段被触发"</span>);</span><br><span class="line">            &#125;, <span class="literal">false</span>);</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当点击id为inner的圆时，运行效果就是会陆续弹出6个框，结果如下图所示：<br><img src="" alt="运行结果"></p>
+<h6 id="事件流的典型应用：事件代理"><a href="#事件流的典型应用：事件代理" class="headerlink" title="事件流的典型应用：事件代理"></a>事件流的典型应用：事件代理</h6></li>
+<li><strong>传统的事件处理</strong>中，需要为<strong>每个元素</strong>添加事件处理器。</li>
+<li>JS<strong>事件代理</strong>则是一种简单有效的技巧，通过它可以<strong>把事件处理器添加到一个父级元素上</strong>，从而<strong>避免把事件处理器添加到多个子级元素上</strong>。</li>
+</ul>
+<blockquote>事件代理</blockquote>
+
+<ul>
+<li><strong>事件代理的原理</strong>用到的就是事件冒泡和目标元素，<strong>把事件处理器添加到父元素，等待子元素事件冒泡</strong>，并<strong>且父元素能够通过target（IE为srcElement）判断是哪个子元素</strong>，从而<strong>做相应处理</strong>。</li>
+<li><p>传统事件处理，为每个元素添加事件处理器，代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;ul id=<span class="string">"color-list"</span>&gt;</span><br><span class="line">        &lt;li&gt;red&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;orange&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;yellow&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;green&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;blue&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;indigo&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;purple&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        (<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            var colorList = document.getElementById(<span class="string">"color-list"</span>);</span><br><span class="line">            var colors = colorList.getElementsByTagName(<span class="string">"li"</span>);</span><br><span class="line">            <span class="keyword">for</span>(var i  =0; i &lt; colors.length; i++) &#123;</span><br><span class="line">                colors[i].addEventListener(<span class="string">'click'</span>, showColor, <span class="literal">false</span>);</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="keyword">function</span> showColor(e) &#123;</span><br><span class="line">                e = e || window.event;</span><br><span class="line">                var targetElement = e.target || e.srcElement;</span><br><span class="line">                alert(targetElement.innerHTML);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)();</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>事件代理</strong>的处理方式，代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;ul id=<span class="string">"color-list"</span>&gt;</span><br><span class="line">        &lt;li&gt;red&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;orange&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;yellow&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;green&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;blue&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;indigo&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;purple&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        (<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            var colorList = document.getElementById(<span class="string">"color-list"</span>);</span><br><span class="line">            colorList.addEventListener(<span class="string">'click'</span>, showColor, <span class="literal">false</span>);</span><br><span class="line">            <span class="keyword">function</span> showColor(e) &#123;</span><br><span class="line">                e = e || window.event;</span><br><span class="line">                var targetElement = e.target || e.srcElement;</span><br><span class="line">                <span class="keyword">if</span>(targetElement.nodeName.toLowerCase() === <span class="string">"li"</span>)&#123;</span><br><span class="line">                    alert(targetElement.innerHTML);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)();</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>事件代理的好处</blockquote>
+
+<ul>
+<li>在<strong>传统的事件处理</strong>中，需要<strong>为每一个元素添加</strong>或者是<strong>删除事件处理器</strong>。然而，事件处理器<strong>将有可能导致内存泄露或者是性能下降</strong>（用得越多这种风险就越大）。</li>
+<li><strong>事件代理的好处</strong>总结如下：<ul>
+<li><strong>将多个事件处理器减少到一个</strong>，因为事件处理器要驻留内存，这样就<strong>提高了性能</strong>。想象如果有一个100行的表格，对比传统的为每个单元格绑定事件处理器的方式和事件代理（即table上添加一个事件处理器），不难得出结论，事件代理确实避免了一些潜在的风险，提高了性能。</li>
+<li><strong>DOM更新无需重新绑定事件处理器</strong>，因为事件代理对不同子元素可采用不同处理方法。如果新增其他子元素（a, span, div等），直接修改事件代理的事件处理函数即可，不需要重新绑定处理器，不需要再次循环遍历。</li>
+</ul>
+</li>
+</ul>
+<blockquote>事件代理的问题</blockquote>
+
+<ul>
+<li><p>代码如下：事件代理同时绑定了li和span，当点击span的时候，li和span都会冒泡：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;li&gt;</span><br><span class="line">    &lt;span&gt;li中的span的内容&lt;/span&gt;</span><br><span class="line">&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    $(document).on(<span class="string">'click'</span>, <span class="string">'li'</span>, <span class="keyword">function</span>(e)&#123;</span><br><span class="line">        alert(<span class="string">'li li'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    $(document).on(<span class="string">'click'</span>, <span class="string">'span'</span>, <span class="keyword">function</span>(e)&#123;</span><br><span class="line">        alert(<span class="string">'li span'</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决方法一：span的事件处理程序中阻止冒泡：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(document).on(<span class="string">'click'</span>, <span class="string">'span'</span>, <span class="keyword">function</span>(e)&#123;</span><br><span class="line">    alert(<span class="string">'li span'</span>);</span><br><span class="line">    e.stopPropagation();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决方法二：li的事件处理程序中检测target元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(document).on(<span class="string">'click'</span>, <span class="string">'li'</span>, <span class="keyword">function</span> (e) &#123;</span><br><span class="line">    <span class="keyword">if</span> (e.target.nodeName == <span class="string">'SPAN'</span>) &#123;</span><br><span class="line">        e.stopPropagation();</span><br><span class="line">        <span class="built_in">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    alert(<span class="string">'li li'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>事件代理的一个有趣应用</blockquote>
+
+<ul>
+<li>点击一个列表时，输出对应的索引：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var ul = document.querySelector(<span class="string">'ul'</span>);</span><br><span class="line">    var lis = ul.querySelectorAll(<span class="string">'ul li'</span>);</span><br><span class="line">    ul.addEventListener(<span class="string">'click'</span>, <span class="keyword">function</span> (e) &#123;</span><br><span class="line">        var target = e.target;</span><br><span class="line">        <span class="keyword">if</span>(target.nodeName.toUpperCase() === <span class="string">'LI'</span>)&#123;</span><br><span class="line">            alert([].indexOf.call(lis, target));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="literal">false</span>)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<div class="note info"><br>参考链接：<a href="http://www.cnblogs.com/starof/p/4066381.html" target="_blank" rel="noopener">http://www.cnblogs.com/starof/p/4066381.html</a><br></div>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/事件/" rel="tag"><i class="fa fa-tag"></i> 事件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/14/cookie/" rel="next" title="Cookie知识点整理">
+                <i class="fa fa-chevron-left"></i> Cookie知识点整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">126</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件"><span class="nav-number">1.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件流"><span class="nav-number">2.</span> <span class="nav-text">事件流</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#事件流感性认识"><span class="nav-number">2.1.</span> <span class="nav-text">事件流感性认识</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#事件流-1"><span class="nav-number">2.2.</span> <span class="nav-text">事件流</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#两种事件流模型"><span class="nav-number">2.2.1.</span> <span class="nav-text">两种事件流模型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#DOM事件流"><span class="nav-number">2.2.2.</span> <span class="nav-text">DOM事件流</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#事件流的典型应用：事件代理"><span class="nav-number">2.2.3.</span> <span class="nav-text">事件流的典型应用：事件代理</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
