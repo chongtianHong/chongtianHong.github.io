@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://chongtianhong.github.io/images/eventflow1.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/eventflow2.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/eventflow3.png">
-<meta property="og:updated_time" content="2018-09-14T14:04:25.177Z">
+<meta property="og:updated_time" content="2018-09-14T14:09:43.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件（一）事件流">
 <meta name="twitter:description" content="事件 事件是在文档或者浏览器窗口中发生的，特定的交互瞬间。 事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。">
@@ -432,7 +432,7 @@
 </li>
 <li>在<strong>冒泡型事件流</strong>中<code>click</code>事件传播顺序为：&lt;div&gt;—》&lt;body&gt;—》&lt;html&gt;—》document</li>
 <li>在<strong>捕获型事件流</strong>中<code>click</code>事件传播顺序为：document—》&lt;html&gt;—》&lt;body&gt;—》&lt;div&gt;<br><img src="/images/eventflow1.png" alt="两种事件流模型" width="600" style="border:none"></li>
-<li>总结：<br>1）、所有现代浏览器都支持事件冒泡，但在具体实现中略有差别：<br>IE5.5及更早版本中事件冒泡会跳过<html>元素(从body直接跳到document)。<br>IE9、Firefox、Chrome、和Safari则将事件一直冒泡到window对象。<br>2）、IE9、Firefox、Chrome、Opera、和Safari都支持事件捕获。尽管DOM标准要求事件应该从document对象开始传播，但这些浏览器<strong>都是从window对象开始捕获事件的</strong>。<br>3）、由于老版本浏览器不支持，很少有人使用事件捕获。<strong>建议使用事件冒泡</strong>。</html></li>
+<li>总结：<br>1）<strong>所有现代浏览器都支持事件冒泡</strong>，但在<strong>具体实现中略有差别</strong>：<br>IE5.5及更早版本中事件冒泡会跳过<html>元素(从body直接跳到document)。<br>IE9、Firefox、Chrome、和Safari则将事件一直冒泡到window对象。<br>2）IE9、Firefox、Chrome、Opera、和Safari都支持事件捕获。尽管DOM标准要求事件应该从document对象开始传播，但这些浏览器<strong>都是从window对象开始捕获事件的</strong>。<br>3）由于老版本浏览器不支持，很少有人使用事件捕获。<strong>建议使用事件冒泡</strong>。</html></li>
 </ul>
 <h6 id="DOM事件流"><a href="#DOM事件流" class="headerlink" title="DOM事件流"></a>DOM事件流</h6><ul>
 <li>DOM标准采用<strong>捕获+冒泡</strong>。两种事件流都会触发DOM的所有对象，<strong>从document对象开始</strong>，也<strong>在document对象结束</strong>。<br><img src="/images/eventflow2.png" alt="DOM事件流" width="400" style="border:none"></li>
