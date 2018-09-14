@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://chongtianhong.github.io/images/eventflow1.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/eventflow2.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/eventflow3.png">
-<meta property="og:updated_time" content="2018-09-14T14:04:08.134Z">
+<meta property="og:updated_time" content="2018-09-14T14:04:25.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件（一）事件流">
 <meta name="twitter:description" content="事件 事件是在文档或者浏览器窗口中发生的，特定的交互瞬间。 事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。">
@@ -491,7 +491,7 @@
 <li>点击一个列表时，输出对应的索引：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var ul = document.querySelector(<span class="string">'ul'</span>);</span><br><span class="line">    var lis = ul.querySelectorAll(<span class="string">'ul li'</span>);</span><br><span class="line">    ul.addEventListener(<span class="string">'click'</span>, <span class="keyword">function</span> (e) &#123;</span><br><span class="line">        var target = e.target;</span><br><span class="line">        <span class="keyword">if</span>(target.nodeName.toUpperCase() === <span class="string">'LI'</span>)&#123;</span><br><span class="line">            alert([].indexOf.call(lis, target));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="literal">false</span>)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<div class="note info"><br>参考链接：<a href="http://www.cnblogs.com/starof/p/4066381.html" target="_blank" rel="noopener">http://www.cnblogs.com/starof/p/4066381.html</a><br></div>
+<div class="note info">参考链接：<a href="http://www.cnblogs.com/starof/p/4066381.html" target="_blank" rel="noopener">http://www.cnblogs.com/starof/p/4066381.html</a></div>
 
       
     </div>
