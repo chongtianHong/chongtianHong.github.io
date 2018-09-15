@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="事件处理程序 JavaScript事件（一）事件流中提到，事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。 响应某个事件的函数就叫事件处理程序（也叫事件处理函数、事件句柄）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-14T14:28:59.643Z">
+<meta property="og:updated_time" content="2018-09-15T14:04:41.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件（二）事件处理程序">
 <meta name="twitter:description" content="事件处理程序 JavaScript事件（一）事件流中提到，事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。 响应某个事件的函数就叫事件处理程序（也叫事件处理函数、事件句柄）。">
@@ -485,7 +485,7 @@
 <li><p>IE事件处理程序中还有一个地方需要注意：<strong>作用域</strong>。</p>
 </li>
 <li>使用<code>attachEvent</code>方法，事件处理程序会在全局作用域中运行，因此<strong>this等于window</strong>。在编写跨浏览器的代码时，需牢记这点。</li>
-<li>而DOM2或DOM20级的方法<strong>作用域都是在元素内部，this值为目标元素</strong>。</li>
+<li>而<strong>DOM2</strong>或<strong>DOM0</strong>级的方法<strong>作用域都是在元素内部，this值为目标元素</strong>。</li>
 <li>下面例子会弹出true：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"myBtn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span>/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    myBtn.attachEvent(<span class="string">"onclick"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(this === window);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
 
