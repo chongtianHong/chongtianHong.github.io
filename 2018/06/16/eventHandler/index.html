@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="事件处理程序 JavaScript事件（一）事件流中提到，事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。 响应某个事件的函数就叫事件处理程序（也叫事件处理函数、事件句柄）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-15T14:05:04.159Z">
+<meta property="og:updated_time" content="2018-09-15T14:09:01.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件（二）事件处理程序">
 <meta name="twitter:description" content="事件处理程序 JavaScript事件（一）事件流中提到，事件是用户或浏览器自身执行的某种动作，如click，load和mouseover都是事件的名字。 响应某个事件的函数就叫事件处理程序（也叫事件处理函数、事件句柄）。">
@@ -428,7 +428,7 @@
 <h5 id="DOM2级事件处理程序"><a href="#DOM2级事件处理程序" class="headerlink" title="DOM2级事件处理程序"></a>DOM2级事件处理程序</h5><ul>
 <li>DOM2级事件处理程序可以<strong>为一个元素添加多个事件处理程序</strong>。其定义了两个方法用于添加和删除事件处理程序：<code>addEventListener()</code>和<code>removeEventListener()</code>。</li>
 <li><strong>所有的DOM节点都包含这2个方法</strong>。</li>
-<li>这两个方法都需要3个参数：事件名，事件处理函数，布尔值。布尔值为<code>true</code>时，在捕获阶段处理事件；为<code>false</code>时，在冒泡阶段处理事件。布尔值默认为<code>false</code>。</li>
+<li>这两个方法都需要3个参数：<strong>事件名</strong>，<strong>事件处理函数</strong>，<strong>布尔值</strong>。布尔值为<code>true</code>时，在捕获阶段处理事件；为<code>false</code>时，在冒泡阶段处理事件。布尔值默认为<code>false</code>。</li>
 <li><p><strong>添加事件处理程序</strong>：现在为按钮添加两个事件处理函数，一个弹出“hello”，一个弹出“world”：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"myBtn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span>/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    myBtn.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;, <span class="literal">false</span>);</span><br><span class="line">    myBtn.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"world"</span>);</span><br><span class="line">    &#125;, <span class="literal">false</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 </li>
@@ -448,9 +448,9 @@
 </li>
 <li><p>其中：</p>
 <ul>
-<li>event是必需的。规定添加到元素的一个或多个事件。可由空格分隔多个事件。必须是有效的事件。</li>
-<li>data是可选的。规定传递到函数的额外数据。</li>
-<li>function是必需的。规定当事件发生时运行的函数。</li>
+<li><code>event</code>是必需的。规定添加到元素的一个或多个事件。可由空格分隔多个事件。必须是有效的事件。</li>
+<li><code>data</code>是可选的。规定传递到函数的额外数据。</li>
+<li><code>function</code>是必需的。规定当事件发生时运行的函数。</li>
 </ul>
 </li>
 <li>例子：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"button"</span>).<span class="built_in">bind</span>(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">    $(<span class="string">"p"</span>).slideToggle();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -469,7 +469,7 @@
 <li><p>可以拿下面代码在IE各个版本浏览器中进行测试：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"myBtn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click me!"</span>/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    var handlerIE = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"helloIE"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    var handlerDOM = <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        alert(<span class="string">"helloDOM"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    myBtn.addEventListener(<span class="string">"click"</span>, handlerDOM, <span class="literal">false</span>);</span><br><span class="line">    myBtn.attachEvent(<span class="string">"onclick"</span>, handlerIE);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>添加事件处理程序</strong>：现在为按钮添加两个事件处理函数，一个弹出“hello”，一个弹出“world”：</p>
+<li><p><strong>添加事件处理程序</strong>：现在为按钮添加两个事件处理函数，一个弹出<code>“hello”</code>，一个弹出<code>“world”</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var myBtn = document.getElementById(<span class="string">"myBtn"</span>);</span><br><span class="line">    myBtn.attachEvent(<span class="string">"onclick"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    myBtn.attachEvent(<span class="string">"onclick"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        alert(<span class="string">"world"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>这里运行效果值得注意一下：</p>
