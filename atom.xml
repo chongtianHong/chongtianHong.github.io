@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-09-16T04:21:53.588Z</updated>
+  <updated>2018-09-16T04:47:11.921Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://chongtianhong.github.io/2018/06/17/eventObject/"/>
     <id>https://chongtianhong.github.io/2018/06/17/eventObject/</id>
     <published>2018-06-17T05:15:29.000Z</published>
-    <updated>2018-09-16T04:21:53.588Z</updated>
+    <updated>2018-09-16T04:47:11.921Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h4><ul><li>在触发DOM上的事件时都会产生一个对象，这个对象则称为事件对象。<a id="more"></a></li></ul>]]></content>
+    <content type="html"><![CDATA[<h4 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h4><ul><li>在触发DOM上的事件时都会产生一个对象，这个对象则称为事件对象。<a id="more"></a></li></ul><h5 id="认识事件对象"><a href="#认识事件对象" class="headerlink" title="认识事件对象"></a>认识事件对象</h5><ul><li>事件<strong>在浏览器中</strong>是<strong>以对象的形式存在</strong>的，即<strong>event</strong>。触发一个事件，就会产生一个事件对象event，<strong>该对象包含着所有与事件有关的信息</strong>。包括<strong>导致事件的元素</strong>、<strong>事件的类型</strong>以及其他<strong>与特定事件相关的信息</strong>。</li><li>例如：<strong>鼠标操作</strong>产生的event中会包含鼠标位置的信息；<strong>键盘操作</strong>产生的event中会包含与按下的键有关的信息。</li><li>所有浏览器都支持event对象，但支持方式不同，在DOM中<strong>event对象必须作为唯一的参数传给事件处理函数</strong>，在IE中<strong>event是window对象的一个属性</strong>。</li></ul><h5 id="html事件处理程序中event"><a href="#html事件处理程序中event" class="headerlink" title="html事件处理程序中event"></a>html事件处理程序中event</h5><ul><li><p>下面的例子会创建一个包含局部变量event的函数。可通过event直接访问事件对象：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=<span class="string">"btn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click"</span> onclick=<span class="string">"console.log('html事件处理程序'+event.type)"</span>/&gt;</span><br></pre></td></tr></table></figure></li><li><p>当点击input按钮时，控制台将输出<code>html事件处理程序click</code>。</p></li></ul>]]></content>
     
     <summary type="html">
     
