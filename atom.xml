@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-09-15T14:13:00.267Z</updated>
+  <updated>2018-09-16T04:21:53.588Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -18,12 +18,17 @@
   
   <entry>
     <title>JavaScript事件（三）事件对象</title>
-    <link href="https://chongtianhong.github.io/2018/09/15/eventObject/"/>
-    <id>https://chongtianhong.github.io/2018/09/15/eventObject/</id>
-    <published>2018-09-15T05:15:29.000Z</published>
-    <updated>2018-09-15T14:13:00.267Z</updated>
+    <link href="https://chongtianhong.github.io/2018/06/17/eventObject/"/>
+    <id>https://chongtianhong.github.io/2018/06/17/eventObject/</id>
+    <published>2018-06-17T05:15:29.000Z</published>
+    <updated>2018-09-16T04:21:53.588Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h4><ul><li>在触发DOM上的事件时都会产生一个对象，这个对象则称为事件对象。<a id="more"></a></li></ul>]]></content>
     
     <summary type="html">
+    
+      &lt;h4 id=&quot;事件对象&quot;&gt;&lt;a href=&quot;#事件对象&quot; class=&quot;headerlink&quot; title=&quot;事件对象&quot;&gt;&lt;/a&gt;事件对象&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;在触发DOM上的事件时都会产生一个对象，这个对象则称为事件对象。
     
     </summary>
     
