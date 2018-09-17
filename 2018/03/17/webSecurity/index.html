@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="基本介绍 在 Web 安全领域中，XSS 和 CSRF 是最常见的攻击方式。本文将会对 XSS 和 CSRF 的攻防问题进行介绍。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-18T15:58:40.830Z">
+<meta property="og:updated_time" content="2018-09-17T14:30:11.081Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS和CSRF攻击的学习">
 <meta name="twitter:description" content="基本介绍 在 Web 安全领域中，XSS 和 CSRF 是最常见的攻击方式。本文将会对 XSS 和 CSRF 的攻防问题进行介绍。">
@@ -403,7 +403,7 @@
 </li>
 </ul>
 <h4 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h4><ul>
-<li>XSS，即 Cross Site Script，中译是跨站脚本攻击；其原本缩写是 CSS，但为了和层叠样式表(Cascading Style Sheet)有所区分，因而在安全领域叫做 XSS。</li>
+<li>XSS，即 Cross Site Script，中译是<strong>跨站脚本攻击</strong>；其原本缩写是 CSS，但为了和层叠样式表(Cascading Style Sheet)有所区分，因而在安全领域叫做 XSS。</li>
 <li>XSS 攻击是指攻击者<strong>在网站上注入恶意的客户端代码</strong>，通过恶意脚本<strong>对客户端网页进行篡改</strong>，从而在用户浏览网页时，<strong>对用户浏览器进行控制</strong>或者<strong>获取用户隐私数据</strong>的一种攻击方式。</li>
 <li>攻击者对客户端网页注入的恶意脚本一般包括 JavaScript，有时也会包含 HTML 和 Flash。有很多种方式进行 XSS 攻击，但它们的<strong>共同点</strong>为：<strong>将一些隐私数据像 cookie、session 发送给攻击者，将受害者重定向到一个由攻击者控制的网站，在受害者的机器上进行一些恶意操作</strong>。</li>
 <li>XSS攻击可以分为3类：<strong>反射型（非持久型）</strong>、<strong>存储型（持久型）</strong>、<strong>基于DOM</strong>。</li>
@@ -443,7 +443,7 @@
 <li>用户的输入会存在问题，服务端的输出也会存在问题。一般来说，除富文本的输出外，在变量输出到 HTML 页面时，可以使用编码或转义的方式来防御 XSS 攻击。例如利用 sanitize-html 对输出内容进行有规则的过滤之后再输出到页面中。</li>
 </ul>
 <h4 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h4><ul>
-<li>CSRF，即 Cross Site Request Forgery，中译是跨站请求伪造，是一种<strong>劫持受信任用户向服务器发送非预期请求</strong>的攻击方式。</li>
+<li>CSRF，即 Cross Site Request Forgery，中译是<strong>跨站请求伪造</strong>，是一种<strong>劫持受信任用户向服务器发送非预期请求</strong>的攻击方式。</li>
 <li>通常情况下，CSRF 攻击是攻击者<strong>借助受害者的 Cookie 骗取服务器的信任</strong>，可以在受害者毫不知情的情况下<strong>以受害者名义伪造请求发送给受攻击服务器</strong>，从而<strong>在并未授权的情况下</strong>执行在<strong>权限保护之下</strong>的操作。</li>
 <li>在举例子之前，先说说浏览器的 Cookie 策略。</li>
 </ul>
@@ -508,15 +508,10 @@
 <li>token的生成是通过前端和服务器协商好算法（摘要算法），浏览器生成，随着请求发送给服务器，服务端进行算法解密验证。</li>
 </ul>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li><p>在 Web 安全领域，除了这两种常见的攻击方式，也存在着 SQL 注入等其它攻击方式。接下来对本文提到的 XSS 攻击和 CSRF 攻击的常见防御措施进行总结：</p>
-<p>1.防御 XSS 攻击</p>
-<ul>
+<li>在 Web 安全领域，除了这两种常见的攻击方式，也存在着 SQL 注入等其它攻击方式。接下来对本文提到的 XSS 攻击和 CSRF 攻击的常见防御措施进行总结：<br>1.防御 XSS 攻击<ul>
 <li>HttpOnly 防止劫取 Cookie</li>
 <li>用户的输入检查</li>
-<li>服务端的输出检查</li>
-</ul>
-<p>2.防御 CSRF 攻击</p>
-<ul>
+<li>服务端的输出检查<br>2.防御 CSRF 攻击</li>
 <li>验证码</li>
 <li>Referer Check</li>
 <li>Token 验证</li>
