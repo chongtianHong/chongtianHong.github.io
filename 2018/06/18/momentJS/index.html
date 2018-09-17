@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前言 moment.js是一个非常好用的时间处理插件，对js中的date对象进行了一层封装，使之具有更加强大日期处理能力。 moment.js里面包含了非常多而且有用的对时间进行操作的方法，例如：时间加减法、比较大小/差值计算、isBefore/isAfter，还支持非常多的时间格式及语言。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-17T14:37:19.658Z">
+<meta property="og:updated_time" content="2018-09-17T14:38:52.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用moment.js轻松管理日期和时间">
 <meta name="twitter:description" content="前言 moment.js是一个非常好用的时间处理插件，对js中的date对象进行了一层封装，使之具有更加强大日期处理能力。 moment.js里面包含了非常多而且有用的对时间进行操作的方法，例如：时间加减法、比较大小/差值计算、isBefore/isAfter，还支持非常多的时间格式及语言。">
@@ -407,11 +407,11 @@
 <li>Momentjs<strong>支持多个环境</strong>，既可以<strong>在浏览器中使用</strong>，也可以<strong>脱离浏览器的环境在nodejs中使用</strong>。</li>
 </ul>
 <h5 id="node"><a href="#node" class="headerlink" title="node"></a>node</h5><ul>
-<li>在nodejs中使用momentjs的话需要<strong>安装moment模块</strong>，然后<strong>加载模块</strong>就行了。命令如下: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install moment </span><br><span class="line">var moment = require(<span class="string">'moment'</span>);</span><br><span class="line">moment().format();</span><br></pre></td></tr></table></figure>
+<li>在Node.js中使用momentjs的话需要<strong>安装moment模块</strong>，然后<strong>加载模块</strong>就行了。命令如下: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install moment </span><br><span class="line">var moment = require(<span class="string">'moment'</span>);</span><br><span class="line">moment().format();</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h5 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h5><ul>
-<li>在浏览器中使用，则用下面方法引入momentjs文件即可，使用的时候在nodejs和浏览器中并没有什么区别。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"moment.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    moment().format();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<li>在浏览器中使用，则用下面方法引入momentjs文件即可，使用的时候在Node.js和浏览器中并没有什么区别。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"moment.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    moment().format();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><ul>
@@ -462,131 +462,131 @@
 <table>
 <thead>
 <tr>
-<th>格式代码</th>
+<th style="text-align:center">格式代码</th>
 <th style="text-align:center">说明</th>
-<th style="text-align:right">返回值例子</th>
+<th style="text-align:center">返回值例子</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>M</td>
+<td style="text-align:center">M</td>
 <td style="text-align:center">数字表示的月份，没有前导零</td>
-<td style="text-align:right">1到12</td>
+<td style="text-align:center">1到12</td>
 </tr>
 <tr>
-<td>MM</td>
+<td style="text-align:center">MM</td>
 <td style="text-align:center">数字表示的月份，有前导零</td>
-<td style="text-align:right">01到12</td>
+<td style="text-align:center">01到12</td>
 </tr>
 <tr>
-<td>MMM</td>
+<td style="text-align:center">MMM</td>
 <td style="text-align:center">三个字母缩写表示的月份</td>
-<td style="text-align:right">Jan到Dec</td>
+<td style="text-align:center">Jan到Dec</td>
 </tr>
 <tr>
-<td>MMMM</td>
+<td style="text-align:center">MMMM</td>
 <td style="text-align:center">月份，完整的文本格式</td>
-<td style="text-align:right">January到December</td>
+<td style="text-align:center">January到December</td>
 </tr>
 <tr>
-<td>Q</td>
+<td style="text-align:center">Q</td>
 <td style="text-align:center">季度</td>
-<td style="text-align:right">1到4</td>
+<td style="text-align:center">1到4</td>
 </tr>
 <tr>
-<td>D</td>
+<td style="text-align:center">D</td>
 <td style="text-align:center">月份中的第几天，没有前导零</td>
-<td style="text-align:right">1到31</td>
+<td style="text-align:center">1到31</td>
 </tr>
 <tr>
-<td>DD</td>
+<td style="text-align:center">DD</td>
 <td style="text-align:center">月份中的第几天，有前导零</td>
-<td style="text-align:right">01到31</td>
+<td style="text-align:center">01到31</td>
 </tr>
 <tr>
-<td>d</td>
+<td style="text-align:center">d</td>
 <td style="text-align:center">星期中的第几天，数字表示</td>
-<td style="text-align:right">0到6，0表示周日，6表示周六</td>
+<td style="text-align:center">0到6，0表示周日，6表示周六</td>
 </tr>
 <tr>
-<td>ddd</td>
+<td style="text-align:center">ddd</td>
 <td style="text-align:center">三个字母缩写表示星期中的第几天</td>
-<td style="text-align:right">Sun到Sat</td>
+<td style="text-align:center">Sun到Sat</td>
 </tr>
 <tr>
-<td>dddd</td>
+<td style="text-align:center">dddd</td>
 <td style="text-align:center">星期几，完整的星期文本</td>
-<td style="text-align:right">从Sunday到Saturday</td>
+<td style="text-align:center">从Sunday到Saturday</td>
 </tr>
 <tr>
-<td>w</td>
+<td style="text-align:center">w</td>
 <td style="text-align:center">年份中的第几周</td>
-<td style="text-align:right">如42：表示第42周</td>
+<td style="text-align:center">如42：表示第42周</td>
 </tr>
 <tr>
-<td>YYYY</td>
+<td style="text-align:center">YYYY</td>
 <td style="text-align:center">四位数字完整表示的年份</td>
-<td style="text-align:right">如：2014 或 2000</td>
+<td style="text-align:center">如：2014 或 2000</td>
 </tr>
 <tr>
-<td>YY</td>
+<td style="text-align:center">YY</td>
 <td style="text-align:center">两位数字表示的年份</td>
-<td style="text-align:right">如：14 或 98</td>
+<td style="text-align:center">如：14 或 98</td>
 </tr>
 <tr>
-<td>A</td>
+<td style="text-align:center">A</td>
 <td style="text-align:center">大写的AM PM</td>
-<td style="text-align:right">AM PM</td>
+<td style="text-align:center">AM PM</td>
 </tr>
 <tr>
-<td>a</td>
+<td style="text-align:center">a</td>
 <td style="text-align:center">小写的am pm</td>
-<td style="text-align:right">am pm</td>
+<td style="text-align:center">am pm</td>
 </tr>
 <tr>
-<td>H</td>
+<td style="text-align:center">H</td>
 <td style="text-align:center">小时，24小时制，无前导零</td>
-<td style="text-align:right">0到23</td>
+<td style="text-align:center">0到23</td>
 </tr>
 <tr>
-<td>HH</td>
+<td style="text-align:center">HH</td>
 <td style="text-align:center">小时，24小时制，有前导零</td>
-<td style="text-align:right">00到23</td>
+<td style="text-align:center">00到23</td>
 </tr>
 <tr>
-<td>h</td>
+<td style="text-align:center">h</td>
 <td style="text-align:center">小时，12小时制，无前导零</td>
-<td style="text-align:right">0到12</td>
+<td style="text-align:center">0到12</td>
 </tr>
 <tr>
-<td>hh</td>
+<td style="text-align:center">hh</td>
 <td style="text-align:center">小时，12小时制，有前导零</td>
-<td style="text-align:right">00到12</td>
+<td style="text-align:center">00到12</td>
 </tr>
 <tr>
-<td>m</td>
+<td style="text-align:center">m</td>
 <td style="text-align:center">没有前导零的分钟数</td>
-<td style="text-align:right">0到59</td>
+<td style="text-align:center">0到59</td>
 </tr>
 <tr>
-<td>mm</td>
+<td style="text-align:center">mm</td>
 <td style="text-align:center">有前导零的分钟数</td>
-<td style="text-align:right">00到59</td>
+<td style="text-align:center">00到59</td>
 </tr>
 <tr>
-<td>s</td>
+<td style="text-align:center">s</td>
 <td style="text-align:center">没有前导零的秒数</td>
-<td style="text-align:right">0到59</td>
+<td style="text-align:center">0到59</td>
 </tr>
 <tr>
-<td>ss</td>
+<td style="text-align:center">ss</td>
 <td style="text-align:center">有前导零的描述</td>
-<td style="text-align:right">00到59</td>
+<td style="text-align:center">00到59</td>
 </tr>
 <tr>
-<td>X</td>
+<td style="text-align:center">X</td>
 <td style="text-align:center">Unix时间戳</td>
-<td style="text-align:right">1411572969</td>
+<td style="text-align:center">1411572969</td>
 </tr>
 </tbody>
 </table>
