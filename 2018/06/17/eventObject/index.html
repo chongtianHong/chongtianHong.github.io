@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="事件对象 在触发DOM上的事件时都会产生一个对象，这个对象则称为事件对象。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-17T14:46:36.768Z">
+<meta property="og:updated_time" content="2018-09-17T14:53:14.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件（三）事件对象">
 <meta name="twitter:description" content="事件对象 在触发DOM上的事件时都会产生一个对象，这个对象则称为事件对象。">
@@ -416,7 +416,15 @@
 </ul>
 <h5 id="DOM中的事件对象"><a href="#DOM中的事件对象" class="headerlink" title="DOM中的事件对象"></a>DOM中的事件对象</h5><ul>
 <li><strong>DOM0级</strong>和<strong>DOM2级</strong>事件处理程序都会<strong>把event作为参数传入</strong>。</li>
-<li><strong>根据习惯来：可以用e，或者ev或者event</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;input id=<span class="string">"btn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click"</span>/&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var btn = document.getElementById(<span class="string">"btn"</span>);</span><br><span class="line">        btn.onclick = <span class="keyword">function</span>(event)&#123;</span><br><span class="line">            console.log(<span class="string">"DOM0 &amp; click"</span>);</span><br><span class="line">            console.log(event.type);    // click</span><br><span class="line">        &#125;</span><br><span class="line">        btn.addEventListener(<span class="string">"click"</span>, <span class="keyword">function</span> (event) &#123;</span><br><span class="line">            console.log(<span class="string">"DOM2 &amp; click"</span>);</span><br><span class="line">            console.log(event.type);    // click</span><br><span class="line">        &#125;,<span class="literal">false</span>);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>根据习惯来：可以用e，或者ev或者event</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;input id=<span class="string">"btn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click"</span>/&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var btn = document.getElementById(<span class="string">"btn"</span>);</span><br><span class="line">        btn.onclick = <span class="keyword">function</span>(event)&#123;</span><br><span class="line">            console.log(<span class="string">"DOM0 &amp; click"</span>);</span><br><span class="line">            console.log(event.type);    // click</span><br><span class="line">        &#125;</span><br><span class="line">        btn.addEventListener(<span class="string">"click"</span>, <span class="keyword">function</span> (event) &#123;</span><br><span class="line">            console.log(<span class="string">"DOM2 &amp; click"</span>);</span><br><span class="line">            console.log(event.type);    // click</span><br><span class="line">        &#125;,<span class="literal">false</span>);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DOM中事件对象重要<strong>属性和方法</strong>总结如下：</p>
+<ul>
+<li><strong>属性</strong>：<br>①<code>type</code>属性，用于<strong>获取事件类型</strong>。<br>②<code>target</code>属性，用于<strong>获取事件目标事件加在哪个元素上</strong>。（更具体target.nodeName）</li>
+<li><strong>方法</strong>：<br>①<code>stopPropagation()</code>方法用于<strong>阻止事件冒泡</strong>。<br>②<code>preventDefault()</code>方法<strong>阻止事件的默认行为</strong>(移动端用的多)。</li>
+</ul>
+</li>
 </ul>
 
       
