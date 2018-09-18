@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,开发,事件," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="事件对象的公共成员DOM中的event的公共成员 event对象包含与创建它的特定事件有关的属性和方法。触发的事件类型不一样，可用的属性和方法不一样。但是，DOM中所有事件都有以下公共成员。【注意bubbles属性和cancelable属性】">
+<meta name="keywords" content="JavaScript,开发,事件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript事件（四）event的公共成员（属性和方法）">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/09/18/publicMembersOfEvent/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="事件对象的公共成员DOM中的event的公共成员 event对象包含与创建它的特定事件有关的属性和方法。触发的事件类型不一样，可用的属性和方法不一样。但是，DOM中所有事件都有以下公共成员。【注意bubbles属性和cancelable属性】">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-18T14:34:50.178Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript事件（四）event的公共成员（属性和方法）">
+<meta name="twitter:description" content="事件对象的公共成员DOM中的event的公共成员 event对象包含与创建它的特定事件有关的属性和方法。触发的事件类型不一样，可用的属性和方法不一样。但是，DOM中所有事件都有以下公共成员。【注意bubbles属性和cancelable属性】">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/09/18/publicMembersOfEvent/"/>
+
+
+
+
+
+  <title>JavaScript事件（四）event的公共成员（属性和方法） | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/09/18/publicMembersOfEvent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript事件（四）event的公共成员（属性和方法）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-18T20:34:43+08:00">
+                2018-09-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="事件对象的公共成员"><a href="#事件对象的公共成员" class="headerlink" title="事件对象的公共成员"></a>事件对象的公共成员</h4><h5 id="DOM中的event的公共成员"><a href="#DOM中的event的公共成员" class="headerlink" title="DOM中的event的公共成员"></a>DOM中的event的公共成员</h5><ul>
+<li><code>event</code>对象包含与<strong>创建它的特定事件有关</strong>的属性和方法。触发的事件类型不一样，可用的属性和方法不一样。但是，DOM中所有事件都有以下<strong>公共成员</strong>。【注意<code>bubbles</code>属性和<code>cancelable</code>属性】<a id="more"></a>
+| 属性/方法 | 类型 | 读/写 | 说明 |<br>| :-: | :-: | :-: | :-: |<br>| bubbles | Boolean | 只读 | 表明事件是否冒泡 |<br>| stopPropagation() | Function | 只读 | 取消事件的进一步捕获或冒泡。如果bubbles为true，则可以使用这个方法 |<br>| stopImmediatePropagation() | Function | 只读 | 取消事件的进一步捕获或冒泡，同时阻止任何事件处理程序被调用（DOM3级事件中新增） |<br>| cancelable | Boolean | 只读 | 表明是否可以取消事件的默认行为 |<br>| preventDefault() | Function | 只读 | 取消事件的默认行为。如果cancelable是true，则可以使用这个方法 |<br>| defaultPrevented | Boolean | 只读 | 为true表示已经调用了preventDefault()(DOM3级事件中新增) |<br>| currentTarget | Element | 只读 | 其事件处理程序当前正在处理事件的那个元素（currentTarget始终===this，即处理事件的元素） |<br>| target | Element | 只读 | 直接事件目标，真正触发事件的目标 |<br>| detail | Integer | 只读 | 与事件相关的细节信息 |<br>| eventPhase | Integer | 只读 | 调用事件处理程序的阶段：1表示捕获阶段，2表示处于目标阶段，3表示冒泡阶段 |<br>| trusted | Boolean     | 只读 | 为true表示事件是由浏览器生成的。为false表示事件是由开发人员通过JavaScript创建的（DOM3级事件中新增）|<br>| type | String | 只读 | 被触发的事件的类型 |<br>| view | AbstractView | 只读 | 关联 |</li>
+</ul>
+<blockquote>对比currentTarget和target</blockquote>
+
+<ul>
+<li>在事件处理程序内部，<strong>对象this始终等于currentTarget的值</strong>，而<strong>target则只是包含事件的实际目标</strong>。</li>
+<li><p>举例：页面有个按钮，在body（按钮的父节点）中注册click事件，点按钮时click事件会<strong>冒泡到body进行处理</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;input id=<span class="string">"btn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click"</span>/&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        document.body.onclick = <span class="keyword">function</span>(event)&#123;</span><br><span class="line">            console.log(<span class="string">"body中注册的click事件"</span>);</span><br><span class="line">            console.log(<span class="string">"this === event.currentTarget? "</span> + (this === event.currentTarget)); // <span class="literal">true</span></span><br><span class="line">            console.log(<span class="string">"currentTarget === document.body? "</span> + (event.currentTarget === document.body)); // <span class="literal">true</span></span><br><span class="line">            console.log(<span class="string">'event.target === document.getElementById("btn")? '</span> + (event.target === document.getElementById(<span class="string">"btn"</span>))); // <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行结果为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">body中注册的click事件</span><br><span class="line">this === event.currentTarget? <span class="literal">true</span> // this始终等于currentTarget</span><br><span class="line">currentTarget === document.body? <span class="literal">true</span> // 属于body上注册的事件，所以currentTarget为body</span><br><span class="line">event.target === document.getElementById(<span class="string">"btn"</span>)? <span class="literal">true</span> // 按钮触发的事件，所以target为button</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>通过type属性，可以在一个函数中处理多个事件</blockquote>
+
+<ul>
+<li><strong>原理</strong>：通过检测<code>event.type</code>属性，对不同事件进行不同处理。</li>
+<li><p><strong>举例</strong>：定义一个<code>handler</code>函数用来处理3种事件：click，mouseover，mouseout：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;input id=<span class="string">"btn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click"</span>/&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var handler = <span class="keyword">function</span>(event)&#123;</span><br><span class="line">            switch (event.type)&#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"click"</span>:</span><br><span class="line">                    alert(<span class="string">"clicked"</span>);</span><br><span class="line">                    <span class="built_in">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"mouseover"</span>:</span><br><span class="line">                    event.target.style.backgroundColor = <span class="string">"pink"</span>;</span><br><span class="line">                    <span class="built_in">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"mouseout"</span>:</span><br><span class="line">                    event.target.style.backgroundColor = <span class="string">""</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        var btn = document.getElementById(<span class="string">"btn"</span>);</span><br><span class="line">        btn.onclick = handler;</span><br><span class="line">        btn.onmouseover = handler;</span><br><span class="line">        btn.onmouseout = handler;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行效果：</p>
+<ul>
+<li><strong>点击</strong>按钮，弹出框；</li>
+<li>鼠标<strong>经过</strong>按钮，按钮背景色变为粉色；</li>
+<li>鼠标<strong>离开</strong>按钮，按钮背景色恢复默认颜色。</li>
+</ul>
+</li>
+</ul>
+<blockquote>stopPropagation()和stopImmediatePropagation()对比</blockquote>
+
+<ul>
+<li><strong>同</strong>：<code>stopPropagation()</code>和<code>stopImmediatePropagation()</code>都可以用来<strong>取消事件的进一步捕获或冒泡</strong>。</li>
+<li><strong>异</strong>：二者的区别在于<strong>当一个事件有多个事件处理程序时</strong>，<code>stopImmediatePropagation()</code>可以<strong>阻止之后事件处理程序被调用</strong>。</li>
+<li><p>举例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;input id=<span class="string">"btn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click"</span>/&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var btn = document.getElementById(<span class="string">"btn"</span>);</span><br><span class="line">        btn.addEventListener(<span class="string">"click"</span>, <span class="keyword">function</span>(event)&#123;</span><br><span class="line">            console.log(<span class="string">"buttn click listened once"</span>);</span><br><span class="line">            // event.stopPropagation(); // 取消注释查看效果</span><br><span class="line">            // event.stopImmediatePropagation(); // 取消注释查看效果</span><br><span class="line">        &#125;, <span class="literal">false</span>);</span><br><span class="line">        btn.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            console.log(<span class="string">"button click listened twice"</span>);</span><br><span class="line">        &#125;, <span class="literal">false</span>);</span><br><span class="line">        document.body.onclick = <span class="keyword">function</span> (event) &#123;</span><br><span class="line">            console.log(<span class="string">"body clicked"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>若不使用<code>stopPropagation()</code>和<code>stopImmediatePropagation()</code>，运行效果为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">buttn click listened once</span><br><span class="line">button click listened twice</span><br><span class="line">body clicked</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>若给<strong>按钮的第一个事件处理程序</strong>添加<code>stopPropagation()</code>，将<strong>阻止事件进一步冒泡</strong>，所以body上的事件处理程序不被触发，运行效果为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">buttn click listened once</span><br><span class="line">button click listened twice</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>若给<strong>按钮的第一个事件处理程序</strong>添加<code>stopImmediatePropagation()</code>，将<strong>阻止之后事件处理程序被调用</strong>，所以第二个事件处理程序不被触发，同时事件冒泡也被阻止，运行效果为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buttn click listened once</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>eventPhase</blockquote>
+
+<ul>
+<li><code>eventPhase</code>值在捕获阶段为1，处于目标阶段为2，冒泡阶段为3。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">常量</th>
+<th style="text-align:center">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Event.CAPTURING_PHASE</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">Event.AT_TARGET</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">Event.BUBBLING_PHASE</td>
+<td style="text-align:center">3</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>可以通过下面代码查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var btn = document.getElementById(<span class="string">"btn"</span>);</span><br><span class="line">btn.onclick = <span class="keyword">function</span> (event) &#123;</span><br><span class="line">console.log(event.CAPTURING_PHASE); // 1</span><br><span class="line">console.log(event.AT_TARGET); // 2</span><br><span class="line">console.log(event.BUBBLING_PHASE); // 3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;input id=<span class="string">"btn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click"</span>/&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var btn = document.getElementById(<span class="string">"btn"</span>);</span><br><span class="line">        btn.onclick = <span class="keyword">function</span> (event) &#123;</span><br><span class="line">            console.log(<span class="string">"按钮DOM0级方法添加事件处理程序eventPhase值为？"</span> + event.eventPhase);</span><br><span class="line">        &#125;</span><br><span class="line">        btn.addEventListener(<span class="string">"click"</span>,<span class="keyword">function</span>(event)&#123;</span><br><span class="line">            console.log(<span class="string">"按钮DOM2级方法添加事件处理程序，且addEventListener第三个参数为true时eventPhase值为？"</span> + event.eventPhase);</span><br><span class="line">        &#125;, <span class="literal">true</span>);</span><br><span class="line">        btn.addEventListener(<span class="string">"click"</span>,<span class="keyword">function</span>(event)&#123;</span><br><span class="line">            console.log(<span class="string">"按钮DOM2级方法添加事件处理程序，且addEventListener第三个参数为false时eventPhase值为？"</span> + event.eventPhase);</span><br><span class="line">        &#125;, <span class="literal">false</span>);</span><br><span class="line">            document.body.addEventListener(<span class="string">"click"</span>, <span class="keyword">function</span> (event) &#123;</span><br><span class="line">                console.log(<span class="string">"body上添加事件处理程序，且在捕获阶段eventPhase值为？"</span> + event.eventPhase);</span><br><span class="line">            &#125;, <span class="literal">true</span>);</span><br><span class="line">        document.body.addEventListener(<span class="string">"click"</span>, <span class="keyword">function</span> (event) &#123;</span><br><span class="line">            console.log(<span class="string">"body上添加事件处理程序，且在冒泡阶段eventPhase值为？"</span> + event.eventPhase);</span><br><span class="line">        &#125;, <span class="literal">false</span>);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行效果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">body上添加事件处理程序，且在捕获阶段eventPhase值为？1</span><br><span class="line">按钮DOM0级方法添加事件处理程序eventPhase值为？2</span><br><span class="line">按钮DOM2级方法添加事件处理程序，且addEventListener第三个参数为<span class="literal">true</span>时eventPhase值为？2</span><br><span class="line">按钮DOM2级方法添加事件处理程序，且addEventListener第三个参数为<span class="literal">false</span>时eventPhase值为？2</span><br><span class="line">body上添加事件处理程序，且在冒泡阶段eventPhase值为？3</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">捕获阶段调用事件处理程序，eventPhase值为1</span><br><span class="line">处于目标阶段，eventPhase值为2</span><br><span class="line">冒泡阶段调用事件处理程序，eventPhase值为3</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="IE中event的公共成员"><a href="#IE中event的公共成员" class="headerlink" title="IE中event的公共成员"></a>IE中event的公共成员</h5><ul>
+<li>IE中的event的属性和方法和DOM一样会随着事件类型的不同而不同，但是也有一些是所有对象都有的公共成员，且这些成员大部分有对应的DOM属性或方法。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性/方法</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">读/写</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">cancelBubble</td>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">读/写</td>
+<td style="text-align:center">默认为false，但将其设置为true就可以取消事件冒泡（与DOM中stopPropagation()方法的作用相同）</td>
+</tr>
+<tr>
+<td style="text-align:center">returnValue()</td>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">读/写</td>
+<td style="text-align:center">默认为true，但将其设置为false就可以取消事件的默认行为（与DOM中的preventDefault()方法的作用相同）</td>
+</tr>
+<tr>
+<td style="text-align:center">srcElement()</td>
+<td style="text-align:center">Element</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">事件的目标（与DOM中的target属性相同）</td>
+</tr>
+<tr>
+<td style="text-align:center">type</td>
+<td style="text-align:center">String</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">被触发的事件的类型</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/事件/" rel="tag"><i class="fa fa-tag"></i> 事件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/20/setNavigationBarTitle/" rel="next" title="微信小程序动态修改页面标题">
+                <i class="fa fa-chevron-left"></i> 微信小程序动态修改页面标题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">131</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件对象的公共成员"><span class="nav-number">1.</span> <span class="nav-text">事件对象的公共成员</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DOM中的event的公共成员"><span class="nav-number">1.1.</span> <span class="nav-text">DOM中的event的公共成员</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#IE中event的公共成员"><span class="nav-number">1.2.</span> <span class="nav-text">IE中event的公共成员</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
