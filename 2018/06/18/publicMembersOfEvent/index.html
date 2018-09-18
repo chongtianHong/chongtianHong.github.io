@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="开发,JavaScript,事件," />
+  <meta name="keywords" content="JavaScript,开发,事件," />
 
 
 
@@ -124,14 +124,14 @@
 
 
 <meta name="description" content="事件对象的公共成员DOM中的event的公共成员 event对象包含与创建它的特定事件有关的属性和方法。触发的事件类型不一样，可用的属性和方法不一样。但是，DOM中所有事件都有以下公共成员。【注意bubbles属性和cancelable属性】">
-<meta name="keywords" content="开发,JavaScript,事件">
+<meta name="keywords" content="JavaScript,开发,事件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript事件（四）event的公共成员（属性和方法）">
 <meta property="og:url" content="https://chongtianhong.github.io/2018/06/18/publicMembersOfEvent/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="事件对象的公共成员DOM中的event的公共成员 event对象包含与创建它的特定事件有关的属性和方法。触发的事件类型不一样，可用的属性和方法不一样。但是，DOM中所有事件都有以下公共成员。【注意bubbles属性和cancelable属性】">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-18T14:43:47.981Z">
+<meta property="og:updated_time" content="2018-09-18T14:46:07.259Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件（四）event的公共成员（属性和方法）">
 <meta name="twitter:description" content="事件对象的公共成员DOM中的event的公共成员 event对象包含与创建它的特定事件有关的属性和方法。触发的事件类型不一样，可用的属性和方法不一样。但是，DOM中所有事件都有以下公共成员。【注意bubbles属性和cancelable属性】">
@@ -400,8 +400,98 @@
       
         <h4 id="事件对象的公共成员"><a href="#事件对象的公共成员" class="headerlink" title="事件对象的公共成员"></a>事件对象的公共成员</h4><h5 id="DOM中的event的公共成员"><a href="#DOM中的event的公共成员" class="headerlink" title="DOM中的event的公共成员"></a>DOM中的event的公共成员</h5><ul>
 <li><code>event</code>对象包含与<strong>创建它的特定事件有关</strong>的属性和方法。触发的事件类型不一样，可用的属性和方法不一样。但是，DOM中所有事件都有以下<strong>公共成员</strong>。【注意<code>bubbles</code>属性和<code>cancelable</code>属性】<a id="more"></a>
-| 属性/方法 | 类型 | 读/写 | 说明 |<br>| :-: | :-: | :-: | :-: |<br>| bubbles | Boolean | 只读 | 表明事件是否冒泡 |<br>| stopPropagation() | Function | 只读 | 取消事件的进一步捕获或冒泡。如果bubbles为true，则可以使用这个方法 |<br>| stopImmediatePropagation() | Function | 只读 | 取消事件的进一步捕获或冒泡，同时阻止任何事件处理程序被调用（DOM3级事件中新增） |<br>| cancelable | Boolean | 只读 | 表明是否可以取消事件的默认行为 |<br>| preventDefault() | Function | 只读 | 取消事件的默认行为。如果cancelable是true，则可以使用这个方法 |<br>| defaultPrevented | Boolean | 只读 | 为true表示已经调用了preventDefault()(DOM3级事件中新增) |<br>| currentTarget | Element | 只读 | 其事件处理程序当前正在处理事件的那个元素（currentTarget始终===this，即处理事件的元素） |<br>| target | Element | 只读 | 直接事件目标，真正触发事件的目标 |<br>| detail | Integer | 只读 | 与事件相关的细节信息 |<br>| eventPhase | Integer | 只读 | 调用事件处理程序的阶段：1表示捕获阶段，2表示处于目标阶段，3表示冒泡阶段 |<br>| trusted | Boolean     | 只读 | 为true表示事件是由浏览器生成的。为false表示事件是由开发人员通过JavaScript创建的（DOM3级事件中新增）|<br>| type | String | 只读 | 被触发的事件的类型 |<br>| view | AbstractView | 只读 | 关联 |</li>
+</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性/方法</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">读/写</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">bubbles</td>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">表明事件是否冒泡</td>
+</tr>
+<tr>
+<td style="text-align:center">stopPropagation()</td>
+<td style="text-align:center">Function</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">取消事件的进一步捕获或冒泡。如果bubbles为true，则可以使用这个方法</td>
+</tr>
+<tr>
+<td style="text-align:center">stopImmediatePropagation()</td>
+<td style="text-align:center">Function</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">取消事件的进一步捕获或冒泡，同时阻止任何事件处理程序被调用（DOM3级事件中新增）</td>
+</tr>
+<tr>
+<td style="text-align:center">cancelable</td>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">表明是否可以取消事件的默认行为</td>
+</tr>
+<tr>
+<td style="text-align:center">preventDefault()</td>
+<td style="text-align:center">Function</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">取消事件的默认行为。如果cancelable是true，则可以使用这个方法</td>
+</tr>
+<tr>
+<td style="text-align:center">defaultPrevented</td>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">为true表示已经调用了preventDefault()(DOM3级事件中新增)</td>
+</tr>
+<tr>
+<td style="text-align:center">currentTarget</td>
+<td style="text-align:center">Element</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">其事件处理程序当前正在处理事件的那个元素（currentTarget始终===this，即处理事件的元素）</td>
+</tr>
+<tr>
+<td style="text-align:center">target</td>
+<td style="text-align:center">Element</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">直接事件目标，真正触发事件的目标</td>
+</tr>
+<tr>
+<td style="text-align:center">detail</td>
+<td style="text-align:center">Integer</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">与事件相关的细节信息</td>
+</tr>
+<tr>
+<td style="text-align:center">eventPhase</td>
+<td style="text-align:center">Integer</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">调用事件处理程序的阶段：1表示捕获阶段，2表示处于目标阶段，3表示冒泡阶段</td>
+</tr>
+<tr>
+<td style="text-align:center">trusted</td>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">为true表示事件是由浏览器生成的。为false表示事件是由开发人员通过JavaScript创建的（DOM3级事件中新增）</td>
+</tr>
+<tr>
+<td style="text-align:center">type</td>
+<td style="text-align:center">String</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">被触发的事件的类型</td>
+</tr>
+<tr>
+<td style="text-align:center">view</td>
+<td style="text-align:center">AbstractView</td>
+<td style="text-align:center">只读</td>
+<td style="text-align:center">关联</td>
+</tr>
+</tbody>
+</table>
 <blockquote>对比currentTarget和target</blockquote>
 
 <ul>
@@ -550,9 +640,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
-          
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
             <a href="/tags/事件/" rel="tag"><i class="fa fa-tag"></i> 事件</a>
           
