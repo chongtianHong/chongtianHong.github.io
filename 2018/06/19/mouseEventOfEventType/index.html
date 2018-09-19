@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,开发,事件," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="鼠标事件 DOM3级事件中定义了9个鼠标事件： mousedown：鼠标按钮被按下（左键或者右键）时触发。不能通过键盘触发。 mouseup：鼠标按钮被释放弹起时触发。不能通过键盘触发。 click：单击鼠标左键或者按下回车键时触发。这点对确保易访问性很重要，意味着onclick事件处理程序既可以通过键盘也可以通过鼠标执行。 dblclick：双击鼠标左键时触发。 mouseover：鼠标移入目标">
+<meta name="keywords" content="JavaScript,开发,事件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript事件（五）事件类型之鼠标事件">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/06/19/mouseEventOfEventType/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="鼠标事件 DOM3级事件中定义了9个鼠标事件： mousedown：鼠标按钮被按下（左键或者右键）时触发。不能通过键盘触发。 mouseup：鼠标按钮被释放弹起时触发。不能通过键盘触发。 click：单击鼠标左键或者按下回车键时触发。这点对确保易访问性很重要，意味着onclick事件处理程序既可以通过键盘也可以通过鼠标执行。 dblclick：双击鼠标左键时触发。 mouseover：鼠标移入目标">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-19T14:09:10.472Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript事件（五）事件类型之鼠标事件">
+<meta name="twitter:description" content="鼠标事件 DOM3级事件中定义了9个鼠标事件： mousedown：鼠标按钮被按下（左键或者右键）时触发。不能通过键盘触发。 mouseup：鼠标按钮被释放弹起时触发。不能通过键盘触发。 click：单击鼠标左键或者按下回车键时触发。这点对确保易访问性很重要，意味着onclick事件处理程序既可以通过键盘也可以通过鼠标执行。 dblclick：双击鼠标左键时触发。 mouseover：鼠标移入目标">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/06/19/mouseEventOfEventType/"/>
+
+
+
+
+
+  <title>JavaScript事件（五）事件类型之鼠标事件 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/06/19/mouseEventOfEventType/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript事件（五）事件类型之鼠标事件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-19T19:46:45+08:00">
+                2018-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h4><ul>
+<li>DOM3级事件中定义了9个鼠标事件：<ul>
+<li><code>mousedown</code>：<strong>鼠标按钮被按下（左键或者右键）</strong>时触发。不能通过键盘触发。</li>
+<li><code>mouseup</code>：<strong>鼠标按钮被释放弹起</strong>时触发。不能通过键盘触发。</li>
+<li><code>click</code>：<strong>单击鼠标左键</strong>或者<strong>按下回车键</strong>时触发。这点对确保易访问性很重要，意味着<code>onclick</code>事件处理程序<strong>既可以通过键盘也可以通过鼠标执行</strong>。</li>
+<li><code>dblclick</code>：<strong>双击鼠标左键</strong>时触发。</li>
+<li><code>mouseover</code>：鼠标移入目标元素上方。鼠标移到其后代元素上时会触发。</li>
+<li><code>mouseout</code>：鼠标移出目标元素上方。</li>
+<li><code>mouseenter</code>：鼠标移入元素范围内触发，该事件<strong>不冒泡</strong>，即<strong>鼠标移到其后代元素上时不会触发</strong>。</li>
+<li><code>mouseleave</code>：鼠标移出元素范围时触发，该事件<strong>不冒泡</strong>，即<strong>鼠标移到其后代元素时不会触发</strong>。</li>
+<li><code>mousemove</code>：<strong>鼠标在元素内部移动</strong>时不断触发。不能通过键盘触发。</li>
+</ul>
+</li>
+</ul>
+<h5 id="事件触发的顺序"><a href="#事件触发的顺序" class="headerlink" title="事件触发的顺序"></a>事件触发的顺序</h5><ul>
+<li><p>举例：通过双击按钮，看一下所触发的事件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;input id=<span class="string">"btn"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"click"</span>/&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var btn = document.getElementById(<span class="string">"btn"</span>);</span><br><span class="line">        btn.addEventListener(<span class="string">"mousedown"</span>, <span class="keyword">function</span>(event) &#123;</span><br><span class="line">            console.log(<span class="string">"mousedown"</span>);</span><br><span class="line">        &#125;, <span class="literal">false</span>);</span><br><span class="line">        btn.addEventListener(<span class="string">"mouseup"</span>, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">            console.log(<span class="string">"mouseup"</span>);</span><br><span class="line">        &#125;, <span class="literal">false</span>);</span><br><span class="line">        btn.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">            console.log(<span class="string">"click"</span>);</span><br><span class="line">        &#125;, <span class="literal">false</span>);</span><br><span class="line">        btn.addEventListener(<span class="string">"dblclick"</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">            console.log(<span class="string">"dblclick"</span>);</span><br><span class="line">        &#125;, <span class="literal">false</span>);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>事件触发的顺序如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mousedown</span><br><span class="line">mouseup</span><br><span class="line">click</span><br><span class="line">mousedown</span><br><span class="line">mouseup</span><br><span class="line">click</span><br><span class="line">dbclick</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="mouseenter和mouseover的区别"><a href="#mouseenter和mouseover的区别" class="headerlink" title="mouseenter和mouseover的区别"></a>mouseenter和mouseover的区别</h5><ul>
+<li><code>mouseover</code>事件<strong>会冒泡</strong>，这意味着，鼠标移到其后代元素上时会触发。</li>
+<li><code>mouseenter</code>事件<strong>不冒泡</strong>，这意味着，鼠标移到其后代元素上时不会触发。</li>
+<li><p>举例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head lang=<span class="string">"en"</span>&gt;</span><br><span class="line">        &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">        &lt;title&gt;&lt;/title&gt;</span><br><span class="line">        &lt;style&gt;</span><br><span class="line">            <span class="comment">#outer&#123;</span></span><br><span class="line">                position: absolute;</span><br><span class="line">                width: 200px;</span><br><span class="line">                height: 200px;</span><br><span class="line">                top:0;</span><br><span class="line">                left: 0;</span><br><span class="line">                bottom:0;</span><br><span class="line">                right: 0;</span><br><span class="line">                margin: auto;</span><br><span class="line">                background-color: pink;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">#inner&#123;</span></span><br><span class="line">                position: absolute;</span><br><span class="line">                width: 100px;</span><br><span class="line">                height:100px;</span><br><span class="line">                top:50%;</span><br><span class="line">                left:50%;</span><br><span class="line">                margin-left: -50px;</span><br><span class="line">                margin-top: -50px;;</span><br><span class="line">                background-color: orange;</span><br><span class="line">                text-align: center;</span><br><span class="line">                line-height: 100px;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">#outer,#inner&#123;</span></span><br><span class="line">                border-radius:50%;</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;/style&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div id=<span class="string">"outer"</span>&gt;</span><br><span class="line">                &lt;div id=<span class="string">"inner"</span>&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;script&gt;</span><br><span class="line">            var parentDiv = document.getElementById(<span class="string">"outer"</span>);</span><br><span class="line">            parentDiv.addEventListener(<span class="string">"mouseover"</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">                console.log(<span class="string">"父div的mouseover事件被触发"</span>);</span><br><span class="line">            &#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">            //parentDiv.addEventListener(<span class="string">"mouseenter"</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">            //    console.log(<span class="string">"父div的mouseenter事件被触发"</span>);</span><br><span class="line">            //&#125;,<span class="literal">false</span>);</span><br><span class="line">            //parentDiv.addEventListener(<span class="string">"mouseout"</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">            //    console.log(<span class="string">"父div的mouseout事件被触发"</span>);</span><br><span class="line">            //&#125;, <span class="literal">false</span>);</span><br><span class="line">            //parentDiv.addEventListener(<span class="string">"mouseleave"</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">            //    console.log(<span class="string">"父div的mouseleave事件被触发"</span>);</span><br><span class="line">            //&#125;, <span class="literal">false</span>);</span><br><span class="line">        &lt;/script&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当<strong>鼠标从外面移入圆心</strong>，外面圆的<code>mouseover</code>事件被触发2次，第二次是<strong>里面圆的<code>mouseover</code>事件冒泡到外面圆</strong>而触发的。</p>
+</li>
+<li>当鼠标从外面移入圆心，外面圆的<code>mouseenter</code>事件被触发一次，因为<strong><code>mouseenter</code>事件不冒泡</strong>，鼠标移到后代元素不会触发。</li>
+<li>另外，<code>mouseover</code>对应<code>mouseout</code>，<code>mouseenter</code>对应<code>mouseleave</code>。效果可以取消上面代码的注释来看。</li>
+</ul>
+<h5 id="鼠标左键和右键"><a href="#鼠标左键和右键" class="headerlink" title="鼠标左键和右键"></a>鼠标左键和右键</h5><ul>
+<li>IE下鼠标的左键是1，右键是2。</li>
+<li>ff和chrome下，鼠标左键是0，右键是2。</li>
+<li>示例代码：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">document.onmousedown = <span class="keyword">function</span> (ev) &#123;</span><br><span class="line">    var oEvent = ev || event; //IE浏览器直接使用event或者window.event得到事件本身。</span><br><span class="line">    alert(oEvent.button); // IE下鼠标的 左键是1 ，  右键是2   ff和chrome下 鼠标左键是0  右键是2</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="mouseover和mousemove的区别"><a href="#mouseover和mousemove的区别" class="headerlink" title="mouseover和mousemove的区别"></a>mouseover和mousemove的区别</h5><ul>
+<li><code>mousemove</code>事件通过鼠标在元素上移动来触发。事件处理函数会被传递一个事件对象event，<code>event.clientX</code>和 <code>event.clientY</code>属性代表鼠标的坐标。</li>
+<li><code>mouseover</code>事件会在<strong>鼠标移入对象</strong>时触发。</li>
+<li>一般情况下<code>mouseover</code>即可，特殊情况才用<code>mousemove</code>，因为<strong><code>mousemove</code>更耗资源</strong>，比如要<strong>监控鼠标坐标的变化</strong>等。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/事件/" rel="tag"><i class="fa fa-tag"></i> 事件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/18/publicMembersOfEvent/" rel="next" title="JavaScript事件（四）event的公共成员（属性和方法）">
+                <i class="fa fa-chevron-left"></i> JavaScript事件（四）event的公共成员（属性和方法）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/20/setNavigationBarTitle/" rel="prev" title="微信小程序动态修改页面标题">
+                微信小程序动态修改页面标题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">132</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#鼠标事件"><span class="nav-number">1.</span> <span class="nav-text">鼠标事件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#事件触发的顺序"><span class="nav-number">1.1.</span> <span class="nav-text">事件触发的顺序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mouseenter和mouseover的区别"><span class="nav-number">1.2.</span> <span class="nav-text">mouseenter和mouseover的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#鼠标左键和右键"><span class="nav-number">1.3.</span> <span class="nav-text">鼠标左键和右键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mouseover和mousemove的区别"><span class="nav-number">1.4.</span> <span class="nav-text">mouseover和mousemove的区别</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
