@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Web,开发," />
+  <meta name="keywords" content="CDN加速,性能优化,Web," />
 
 
 
@@ -123,18 +123,20 @@
 
 
 
-<meta name="description" content="基本介绍 浏览器从服务器得到的超文本标记文档的后缀通常分为两大类： 静态页面：htm、html、shtml、xml 动态页面：asp、jsp、php、perl、cgi   静态网页和动态网页有着相同的使命，二者的共同之处在于： 首先，它们的目标都是呈现内容给用户 其次，内容都是用超文本标记语言（HTML）表示的">
-<meta name="keywords" content="Web,开发">
+<meta name="description" content="前言 大多数人都知道，一个用户在打开一个新网站的时候，如果网站打开的速度过慢，用户是很难继续浏览的。 因此，很多网站的运营人员想方设法的提高网站的加载速度。网站的加载速度是一个成功网站的必备要素之一，速度不够快，会降低转化率。">
+<meta name="keywords" content="CDN加速,性能优化,Web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="静态网页与动态网页的理解">
-<meta property="og:url" content="https://chongtianhong.github.io/2018/02/15/static/index.html">
+<meta property="og:title" content="为什么使用CDN可以加快网络速度">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/06/24/CDN/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="基本介绍 浏览器从服务器得到的超文本标记文档的后缀通常分为两大类： 静态页面：htm、html、shtml、xml 动态页面：asp、jsp、php、perl、cgi   静态网页和动态网页有着相同的使命，二者的共同之处在于： 首先，它们的目标都是呈现内容给用户 其次，内容都是用超文本标记语言（HTML）表示的">
+<meta property="og:description" content="前言 大多数人都知道，一个用户在打开一个新网站的时候，如果网站打开的速度过慢，用户是很难继续浏览的。 因此，很多网站的运营人员想方设法的提高网站的加载速度。网站的加载速度是一个成功网站的必备要素之一，速度不够快，会降低转化率。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-18T13:49:55.948Z">
+<meta property="og:image" content="https://chongtianhong.github.io/images/CDN.png">
+<meta property="og:updated_time" content="2018-09-20T16:08:17.350Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="静态网页与动态网页的理解">
-<meta name="twitter:description" content="基本介绍 浏览器从服务器得到的超文本标记文档的后缀通常分为两大类： 静态页面：htm、html、shtml、xml 动态页面：asp、jsp、php、perl、cgi   静态网页和动态网页有着相同的使命，二者的共同之处在于： 首先，它们的目标都是呈现内容给用户 其次，内容都是用超文本标记语言（HTML）表示的">
+<meta name="twitter:title" content="为什么使用CDN可以加快网络速度">
+<meta name="twitter:description" content="前言 大多数人都知道，一个用户在打开一个新网站的时候，如果网站打开的速度过慢，用户是很难继续浏览的。 因此，很多网站的运营人员想方设法的提高网站的加载速度。网站的加载速度是一个成功网站的必备要素之一，速度不够快，会降低转化率。">
+<meta name="twitter:image" content="https://chongtianhong.github.io/images/CDN.png">
 
 
 
@@ -164,13 +166,13 @@
 
 
 
-  <link rel="canonical" href="https://chongtianhong.github.io/2018/02/15/static/"/>
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/06/24/CDN/"/>
 
 
 
 
 
-  <title>静态网页与动态网页的理解 | Ice's Blog</title>
+  <title>为什么使用CDN可以加快网络速度 | Ice's Blog</title>
   
 
 
@@ -309,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/02/15/static/">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/06/24/CDN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaobing Hong">
@@ -326,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">静态网页与动态网页的理解</h1>
+          <h1 class="post-title" itemprop="name headline">为什么使用CDN可以加快网络速度</h1>
         
 
         <div class="post-meta">
@@ -338,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-15T00:04:29+08:00">
-                2018-02-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-24T18:26:12+08:00">
+                2018-06-24
               </time>
             
 
@@ -398,71 +400,32 @@
       
 
       
-        <h3 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h3><ul>
-<li>浏览器从服务器得到的超文本标记文档的后缀通常分为两大类：<ul>
-<li>静态页面：htm、html、shtml、xml</li>
-<li>动态页面：asp、jsp、php、perl、cgi</li>
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li>大多数人都知道，一个用户在打开一个新网站的时候，如果网站打开的速度过慢，用户是很难继续浏览的。</li>
+<li>因此，很多网站的运营人员想方设法的<strong>提高网站的加载速度</strong>。网站的加载速度是一个成功网站的必备要素之一，速度不够快，会<strong>降低转化率</strong>。<a id="more"></a></li>
+<li>本文将简单地介绍下CDN，<strong>CDN是帮助一个网站能够快速打开的有效和实用方法</strong>。</li>
+</ul>
+<h4 id="网站打开速度慢的原因"><a href="#网站打开速度慢的原因" class="headerlink" title="网站打开速度慢的原因"></a>网站打开速度慢的原因</h4><ul>
+<li><strong>网站打开速度慢</strong>受很多因素的影响，简单归纳下常见的几个原因：<ul>
+<li><strong>共享主机服务器</strong>不堪重负，<strong>响应速度慢</strong>；</li>
+<li><strong>网站的图片和内容太大</strong>，需要花费很多时间下载；</li>
+<li>网站使用了太多不同的脚本和图片，这些<strong>脚本和图片没有针对快速加载网站进行优化，加载时间长</strong>；</li>
+<li>网站的服务器位置与网站的访问者<strong>位于不同的地理位置</strong>。</li>
 </ul>
 </li>
-<li>静态网页和动态网页有着相同的使命，二者的共同之处在于：<ul>
-<li>首先，它们的目标都是呈现内容给用户</li>
-<li>其次，内容都是用超文本标记语言（HTML）表示的<a id="more"></a></li>
+<li>其实还有许多其他的原因，但这些以上列举的几点是最主要的。</li>
 </ul>
-</li>
-<li>静态网页中的内容是固定写在html文件中的，只需要使用单纯的html语言就可写出一个静态页面。它基本不需要与数据库和后端语言（如java,python,ruby等）的支持；</li>
-<li>动态网页则不同，它的完整页面大体上可以认为是分为两个部分，即<strong>视图模板</strong>和<strong>数据</strong>，<strong>数据</strong>是从后端获得（如从数据库中），然后插入到<strong>视图模板</strong>中。</li>
+<h4 id="什么是CDN"><a href="#什么是CDN" class="headerlink" title="什么是CDN"></a>什么是CDN</h4><ul>
+<li>CDN指的是<strong>内容分发网络</strong>。其基本思路是<strong>尽可能的避开互联网上</strong>有可能影响<strong>数据传输速度</strong>和<strong>稳定性</strong>的瓶颈和环节，使内容传输的更快、更稳定。</li>
+<li>CDN是通过<strong>在网络各处放置节点服务器</strong>所构成的在现有的互联网基础之上的一层<strong>智能虚拟网络</strong>，它能够实<strong>时地根据网络流量和各节点的连接、负载状况以及到用户的距离和响应时间</strong>等综合信息<strong>将用户的请求重新导向离用户最近的服务节点上</strong>。</li>
+<li>CDN系统的目的是使用户可就<strong>近取得所需内容</strong>，<strong>解决Internet网络拥挤</strong>的状况，<strong>提高用户访问网站的响应速度</strong>。</li>
+<li>CDN起到<strong>内容分发</strong>的作用，就是<strong>网站的内容是被复制到各个地区的不同服务器上面</strong>，这个距离离访问者所在地越近越好。</li>
+<li>下图就展示了未使用CDN和使用CDN的区别图，显而易见，<strong>使用CDN可以提高访问速度</strong>：<br><img src="/images/CDN.png" alt="未使用CDN和使用CDN的区别图" width="600" style="border:none"></li>
 </ul>
-<h3 id="静态网页"><a href="#静态网页" class="headerlink" title="静态网页"></a>静态网页</h3><ul>
-<li>静态网页是指存放在服务器文件系统中实实在在的HTML文件。当用户在浏览器中输入页面的URL，然后回车，浏览器就会将对应的html文件下载、渲染并呈现在窗口中。早期的网站通常都是由静态页面制作的。</li>
-<li>通常，使用HTML或XML即可完成静态页面的制作。</li>
-<li>静态网页<strong>一经制成，内容就不会变化</strong>，不管何人何时访问，显示的内容都是一样的。</li>
-<li>如果要修改网页的内容，就必须修改其源代码，然后重新上传到服务器上。</li>
-</ul>
-<h4 id="静态网页的工作原理"><a href="#静态网页的工作原理" class="headerlink" title="静态网页的工作原理"></a>静态网页的工作原理</h4><ul>
-<li>静态网页的工作流程可以分为以下4个步骤：<br>  ① 编写一个静态文件，并在web服务器上发布；<br>  ② 用户在浏览器的地址栏中输入该静态网页的URL并按回车键，浏览器发送访问请求到web服务器；<br>  ③ web服务器找到此静态文件的位置，并将它转换为<strong>HTML流</strong>传到用户的浏览器；<br>  ④ 浏览器收到<strong>HTML流</strong>后，显示此网页的内容。</li>
-<li>在步骤② - ④中，静态网页的内容不会发生任何变化。</li>
-</ul>
-<h3 id="动态网页"><a href="#动态网页" class="headerlink" title="动态网页"></a>动态网页</h3><ul>
-<li>动态网页是指在网页文件中除了HTML标记以外，还包括一些实现特定功能的程序代码，这些程序代码使得浏览器与服务器之间可以进行交互，即<strong>服务端可以根据客户端的不同请求动态产生网页内容</strong>。</li>
-<li>动态网页是相对于静态网页而言的。当浏览器请求服务器的某个页面时，服务器根据当前时间、环境参数、数据库操作等动态的生成HTML页面，然后再发送给浏览器（后面的处理跟静态网页一样）。</li>
-<li>动态网页中的“动态”是指服务器端页面的动态生成，相反，“静态”则指页面是实实在在的、独立的文件。</li>
-<li>动态网页的后缀名通常取决于所用的程序设计语言，一般为.asp、.aspx、.cgi、.psp、.perl、.jsp等。</li>
-<li>动态网页可以<strong>根据</strong> <em>不同的时间</em>、<em>不同的浏览器</em> 显示 <em>不同的信息</em>，比如常见的留言板、论坛、聊天室都是用动态网页实现的。</li>
-<li>动态网页相对复杂，不能直接双击打开。</li>
-</ul>
-<h4 id="动态网页的工作原理"><a href="#动态网页的工作原理" class="headerlink" title="动态网页的工作原理"></a>动态网页的工作原理</h4><ul>
-<li>动态网页的工作流程分为以下4个步骤：<br>  ① 编写动态网页文件，其中包括程序代码，并在web服务器上发布；<br>  ② 用户在浏览器的地址栏中输入该动态网页的URL并按回车键，浏览器发送访问请求到web服务器；<br>  ③ web服务器找到此动态网页的位置，并根据其中的程序代码<strong>动态建立HTML流</strong>传到用户的浏览器；<br>  ④ 浏览器收到<strong>HTML流</strong>后，显示此网页的内容。</li>
-<li>从整个工作流程可以看出，用户浏览动态页面时，需要在服务器上<strong>动态执行</strong>该网页文件，将含有程序代码的<strong>动态网页转化为标准的静态页面</strong>，最后把静态页面发送给用户。</li>
-</ul>
-<h4 id="动态网页的开发技术"><a href="#动态网页的开发技术" class="headerlink" title="动态网页的开发技术"></a>动态网页的开发技术</h4><ul>
-<li>动态网页的生成技术有多中，常见的有：<ul>
-<li>HTML+JavaScript(Node.js)</li>
-<li>HTML+PHP</li>
-<li>HTML+ASP.NET(或ASP)</li>
-<li>HTML+JSP</li>
-<li>HTML+CGI(早期的动态网页技术)</li>
-</ul>
-</li>
-</ul>
-<h4 id="动态网页的特征"><a href="#动态网页的特征" class="headerlink" title="动态网页的特征"></a>动态网页的特征</h4><ul>
-<li>动态网页一般以<strong>数据库</strong>技术为基础，可以大大降低网站维护的工作量；</li>
-<li>采用动态网页技术的网站可以实现更多的功能，如用户注册、用户登录、在线调查、用户管理、订单管理等等；</li>
-<li>动态网页实际上并不是独立存在于服务器上的网页文件，只有当用户请求时服务器才返回一个完整的网页；</li>
-<li>动态网页地址中的“?”对<strong>搜索引擎检索</strong>存在一定的问题，搜索引擎一般不可能从一个网站的数据库中访问全部网页，或者出于技术方面的考虑，搜索爬虫不去抓取网址中“?”后面的内容，因此采用动态网页的网站在进行搜索引擎推广时<strong>需要做一定的技术处理</strong>才能适应搜索引擎的要求。</li>
-</ul>
-<h4 id="动态网页的好处"><a href="#动态网页的好处" class="headerlink" title="动态网页的好处"></a>动态网页的好处</h4><ul>
-<li>维护方便，能实现人们需要的各种需求。</li>
-<li>查询信息方便，能存储大量数据，需要时能立即查询。</li>
-</ul>
-<h4 id="动态网页的不足"><a href="#动态网页的不足" class="headerlink" title="动态网页的不足"></a>动态网页的不足</h4><ul>
-<li>动态网站用到数据库，所以对数据库的安全和保密性要求较高，要专业技术人员提供维护才能保证网站的安全。</li>
-<li>动态网站不利于搜索引擎收录。</li>
-<li>动态网站制作成本较高。</li>
-</ul>
-<h3 id="和谐统一"><a href="#和谐统一" class="headerlink" title="和谐统一"></a>和谐统一</h3><ul>
-<li>静态网页和动态网页各有特点，网站采用动态网页还是静态网页主要取决于网站的功能需求和网站内容的多少，如果网站功能比较简单，内容更新量不是很大，采用纯静态网页的方式会更简单，反之一般要采用动态网页技术来实现。</li>
-<li>静态网页是网站建设的基础，静态网页和动态网页之间也并不矛盾，为了网站适应搜索引擎检索的需要，即使采用动态网站技术，也可以将网页内容转化为静态网页发布。</li>
-<li>动态网站也可以采用静动结合的原则，适合采用动态网页的地方用动态网页，如果必要使用静态网页，则可以考虑用静态网页的方法来实现，在同一个网站上，动态网页内容和静态网页内容同时存在也是很常见的事情。</li>
+<h4 id="网站使用CDN加速的好处"><a href="#网站使用CDN加速的好处" class="headerlink" title="网站使用CDN加速的好处"></a>网站使用CDN加速的好处</h4><ul>
+<li><strong>网站加速，利于Google的排名</strong>：Google 把网站的打开速度当做一个比较重要的指标，所以网站打开的速度会影响Google排名。使用CDN之后，网站打开速度变快，就可以减少跳出率，也可以增加用户对网站的友好体验。</li>
+<li><strong>有利于提高网站的转化率</strong>：毫无疑问，用户的访问网站的时间提高了，跳出率减少了，当然会利于网站的转化率和销售量。现在大环境下的人们都比较浮躁，我想谁都没有耐心去等一个需要10秒才能打开的网站，这样的网站一开始就不友好，更别想提高网站的转化率了。</li>
+<li><strong>提升网站的稳定性和安全性</strong>：CDN因为节点分散，攻击者比较难下手，攻击一个节点仅仅是影响一个节点的缓存访问而已，并且CDN的“内容路由”会自动的启用另一个节点，如果CDN服务节点数量够多，那么攻击者需要的流量包就会呈几何级的增加，这样攻击成本自然就高了。</li>
 </ul>
 
       
@@ -491,9 +454,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+            <a href="/tags/CDN加速/" rel="tag"><i class="fa fa-tag"></i> CDN加速</a>
           
-            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+            <a href="/tags/性能优化/" rel="tag"><i class="fa fa-tag"></i> 性能优化</a>
+          
+            <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
           
         </div>
       
@@ -506,8 +471,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/14/this/" rel="next" title="JavaScript中的this引用">
-                <i class="fa fa-chevron-left"></i> JavaScript中的this引用
+              <a href="/2018/06/23/frontEndDisasterRecoveryPlan/" rel="next" title="大流量的下兜底容灾方案（转）">
+                <i class="fa fa-chevron-left"></i> 大流量的下兜底容灾方案（转）
               </a>
             
           </div>
@@ -515,10 +480,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/16/seo/" rel="prev" title="前端工程与搜索引擎优化（SEO）">
-                前端工程与搜索引擎优化（SEO） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -670,7 +631,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态网页"><span class="nav-number">2.</span> <span class="nav-text">静态网页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态网页的工作原理"><span class="nav-number">2.1.</span> <span class="nav-text">静态网页的工作原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态网页"><span class="nav-number">3.</span> <span class="nav-text">动态网页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#动态网页的工作原理"><span class="nav-number">3.1.</span> <span class="nav-text">动态网页的工作原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态网页的开发技术"><span class="nav-number">3.2.</span> <span class="nav-text">动态网页的开发技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态网页的特征"><span class="nav-number">3.3.</span> <span class="nav-text">动态网页的特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态网页的好处"><span class="nav-number">3.4.</span> <span class="nav-text">动态网页的好处</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态网页的不足"><span class="nav-number">3.5.</span> <span class="nav-text">动态网页的不足</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#和谐统一"><span class="nav-number">4.</span> <span class="nav-text">和谐统一</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网站打开速度慢的原因"><span class="nav-number">2.</span> <span class="nav-text">网站打开速度慢的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是CDN"><span class="nav-number">3.</span> <span class="nav-text">什么是CDN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网站使用CDN加速的好处"><span class="nav-number">4.</span> <span class="nav-text">网站使用CDN加速的好处</span></a></li></ol></div>
             
 
           </div>
