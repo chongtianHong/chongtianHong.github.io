@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,开发,正则表达式," />
+  <meta name="keywords" content="JavaScript,开发,Cookie," />
 
 
 
@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="发现问题 最近在使用正则匹配的时候，我遇到一个非常有意思的现象，代码如下所示：">
-<meta name="keywords" content="JavaScript,开发,正则表达式">
+<meta name="description" content="问题描述 静态页面间如何跳转传值？我在网上搜索后发现方法有几种：① 通过 url 携带数据② 通过 cookie③ 通过 html5 的 sessionStorage 或 localStorage 本文总结了通过 cookie的方法。">
+<meta name="keywords" content="JavaScript,开发,Cookie">
 <meta property="og:type" content="article">
-<meta property="og:title" content="循环下的正则匹配？说说正则中的lastIndex">
-<meta property="og:url" content="https://chongtianhong.github.io/2018/06/13/regExpMatchingUnderCycles/index.html">
+<meta property="og:title" content="通过cookie在HTML页面间跳转传值">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/06/15/passValuesByCookieBThtmlPages/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="发现问题 最近在使用正则匹配的时候，我遇到一个非常有意思的现象，代码如下所示：">
+<meta property="og:description" content="问题描述 静态页面间如何跳转传值？我在网上搜索后发现方法有几种：① 通过 url 携带数据② 通过 cookie③ 通过 html5 的 sessionStorage 或 localStorage 本文总结了通过 cookie的方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-12T02:09:36.000Z">
+<meta property="og:updated_time" content="2018-09-25T13:11:41.540Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="循环下的正则匹配？说说正则中的lastIndex">
-<meta name="twitter:description" content="发现问题 最近在使用正则匹配的时候，我遇到一个非常有意思的现象，代码如下所示：">
+<meta name="twitter:title" content="通过cookie在HTML页面间跳转传值">
+<meta name="twitter:description" content="问题描述 静态页面间如何跳转传值？我在网上搜索后发现方法有几种：① 通过 url 携带数据② 通过 cookie③ 通过 html5 的 sessionStorage 或 localStorage 本文总结了通过 cookie的方法。">
 
 
 
@@ -164,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="https://chongtianhong.github.io/2018/06/13/regExpMatchingUnderCycles/"/>
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/06/15/passValuesByCookieBThtmlPages/"/>
 
 
 
 
 
-  <title>循环下的正则匹配？说说正则中的lastIndex | Ice's Blog</title>
+  <title>通过cookie在HTML页面间跳转传值 | Ice's Blog</title>
   
 
 
@@ -309,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/06/13/regExpMatchingUnderCycles/">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/06/15/passValuesByCookieBThtmlPages/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaobing Hong">
@@ -326,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">循环下的正则匹配？说说正则中的lastIndex</h1>
+          <h1 class="post-title" itemprop="name headline">通过cookie在HTML页面间跳转传值</h1>
         
 
         <div class="post-meta">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T09:40:12+08:00">
-                2018-06-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-15T13:50:22+08:00">
+                2018-06-15
               </time>
             
 
@@ -398,68 +398,24 @@
       
 
       
-        <h4 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h4><ul>
-<li><p>最近在使用正则匹配的时候，我遇到一个非常有意思的现象，代码如下所示：</p>
-<a id="more"></a>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const reg = /\.jpg/g;</span><br><span class="line">const arr = [</span><br><span class="line">    <span class="string">'test1.jpg'</span>,</span><br><span class="line">    <span class="string">'test2.jpg'</span>,</span><br><span class="line">    <span class="string">'test3.jpg'</span>,</span><br><span class="line">    <span class="string">'test4.jpg'</span>,</span><br><span class="line">    <span class="string">'test5.jpg'</span>,</span><br><span class="line">];</span><br><span class="line">arr.map(item =&gt; console.log(reg.test(item)));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>这段代码很好理解：它的规则就是判断字符串中是否含有<code>.jpg</code>，然后再循环地和数组中的字符串进行匹配，打印出结果。</p>
-</li>
-<li><p>一开始认为输出的结果应该全为<code>true</code>，然而，它的结果是这样的：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">false</span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">false</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>代码的执行结果非常神奇：它并没有全部打印<code>true</code>，而是<strong>交替打印</strong><code>true</code>和<code>false</code>值，这到底是为什么？</p>
-</li>
-<li>为了查清楚到底是怎么回事，我开始上网搜索相关资料，经过一番搜索后，发现正则并没有我们想象的那么简单…</li>
+        <h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><ul>
+<li>静态页面间如何跳转传值？我在网上搜索后发现方法有几种：<br>① 通过 url 携带数据<br>② 通过 cookie<br>③ 通过 html5 的 sessionStorage 或 localStorage</li>
+<li>本文总结了<strong>通过 cookie</strong>的方法。<a id="more"></a></li>
+<li>Cookie是浏览器存储少量命名数据，它<strong>与某个特定的网页或网站关联</strong>在一起.</li>
+<li>Cookie用来<strong>给浏览器提供内存</strong>，以便<strong>脚本和服务器程序</strong>可以<strong>在一个页面中使用另一个页面的输入数据</strong>。</li>
 </ul>
-<h4 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h4><ul>
-<li>首先正则有一个<code>lastIndex</code>属性，它表示<strong>正则下一次匹配时的起始位置</strong>。一般情况下我们是使用不到它的，但<strong>在正则中包含全局标志g时，正则的test和exec方法就会使用到它</strong>，具体规则如下：<ul>
-<li>初始状态下<code>lastIndex</code>的值为0；</li>
-<li>若成功匹配，<code>lastIndex</code>的值就被更新成<strong>被匹配字符串后面的第一个字符的<code>index</code></strong>，或者可理解为被匹配字符串的最后一个字符<code>index + 1</code>；</li>
-<li>若匹配失败，<code>lastIndex</code>则被重置为0；</li>
-<li>如果我们<strong>继续使用原先的正则进行下一轮匹配</strong>，它则会<strong>从字符串<code>lastIndex</code>的位置开始进行</strong>。</li>
-</ul>
+<h4 id="场景及实现"><a href="#场景及实现" class="headerlink" title="场景及实现"></a>场景及实现</h4><ul>
+<li>假设有 Post.htm、Read.htm 两个页面，Read.htm 将通过 cookie 使用 Post.htm 页面的数据。</li>
+<li><p>先看 Post.htm 页面代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"txt1"</span>&gt;</span><br><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"Post"</span>&gt;</span><br><span class="line">&lt;script language=<span class="string">"javascript"</span> &gt;</span><br><span class="line">    <span class="keyword">function</span> setCookie(name, value) &#123;</span><br><span class="line">        /*</span><br><span class="line">        *--------------- setCookie(name, value) -----------------</span><br><span class="line">        * setCookie(name, value)</span><br><span class="line">        * 功能：设置变量name的值</span><br><span class="line">        * 参数：name,字符串; value,字符串.</span><br><span class="line">        * 实例：setCookie(<span class="string">'username'</span>, <span class="string">'baobao'</span>)</span><br><span class="line">        *--------------- setCookie(name, value) -----------------</span><br><span class="line">        */</span><br><span class="line">        var Days = 30; // 此 cookie 将被保存 30 天</span><br><span class="line">        var exp　= new Date();</span><br><span class="line">        exp.setTime(exp.getTime() + Days*24*60*60*1000);</span><br><span class="line">        document.cookie = name + <span class="string">"="</span>+ escape (value) + <span class="string">";expires="</span> + exp.toGMTString();</span><br><span class="line">        location.href = <span class="string">"Read.htm"</span>; //接收页面.</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li>为验证这个结论，我特意做了三个实验：</li>
-</ul>
-<blockquote>实验一</blockquote>
-
-<ul>
-<li><p>直接将正则的<code>lastIndex</code>打印出来：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const reg = /\.jpg/g;</span><br><span class="line">const arr = [</span><br><span class="line">    <span class="string">'test1.jpg'</span>,</span><br><span class="line">    <span class="string">'test2.jpg'</span>,</span><br><span class="line">    <span class="string">'test3.jpg'</span>,</span><br><span class="line">    <span class="string">'test4.jpg'</span>,</span><br><span class="line">    <span class="string">'test5.jpg'</span>,</span><br><span class="line">];</span><br><span class="line">arr.map(item =&gt; console.log(reg.test(item), reg.lastIndex));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>结果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span> 9</span><br><span class="line"><span class="literal">false</span> 0</span><br><span class="line"><span class="literal">true</span> 9</span><br><span class="line"><span class="literal">false</span> 0</span><br><span class="line"><span class="literal">true</span> 9</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从实验结果可以看到，由于数组中字符串的长度都是一致的，成功匹配后<code>lastIndex</code>的值直接更新为9，下次匹配的时候直接从第10个字符开始，因此<strong>匹配失败，<code>lastIndex</code>重置为0</strong>。以此类推，最终以9、0、9的形式<strong>交替打印</strong>。</p>
-</li>
-</ul>
-<blockquote>实验二</blockquote>
-
-<ul>
-<li><p>对数组中的字符串稍作修改：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const reg = /\.jpg/g;</span><br><span class="line">const arr = [</span><br><span class="line">    <span class="string">'test1.jpg'</span>,</span><br><span class="line">    <span class="string">'longTest4.jpg'</span>,</span><br><span class="line">    <span class="string">'test3.jpg'</span>,</span><br><span class="line">    <span class="string">'longTest4.jpg'</span>,</span><br><span class="line">    <span class="string">'test5.jpg'</span>,</span><br><span class="line">];</span><br><span class="line">arr.map(item =&gt; console.log(reg.test(item), reg.lastIndex));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>结果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span> 9</span><br><span class="line"><span class="literal">true</span> 13</span><br><span class="line"><span class="literal">false</span> 0</span><br><span class="line"><span class="literal">true</span> 13</span><br><span class="line"><span class="literal">false</span> 0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从实验结果可以看到，由于我们增加了部分字符串的长度，因此对于第2、4个字符串而言，即使从第9个字符开始匹配，依然能匹配到后边的<code>.jpg</code>，故<code>lastIndex</code>继续更新到13。</p>
-</li>
-</ul>
-<blockquote>实验三</blockquote>
-
-<ul>
-<li><p>对正则表达式进行修改，去掉全局匹配模式：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const reg = /\.jpg/;</span><br><span class="line">const arr = [</span><br><span class="line">    <span class="string">'test1.jpg'</span>,</span><br><span class="line">    <span class="string">'longTest4.jpg'</span>,</span><br><span class="line">    <span class="string">'test3.jpg'</span>,</span><br><span class="line">    <span class="string">'longTest4.jpg'</span>,</span><br><span class="line">    <span class="string">'test5.jpg'</span>,</span><br><span class="line">];</span><br><span class="line">arr.map(item =&gt; console.log(reg.test(item), reg.lastIndex));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>结果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span> 0</span><br><span class="line"><span class="literal">true</span> 0</span><br><span class="line"><span class="literal">true</span> 0</span><br><span class="line"><span class="literal">true</span> 0</span><br><span class="line"><span class="literal">true</span> 0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可以看到，<strong>当正则中不包含全局标志g时</strong>，正则的<code>test</code>方法的<code>lastIndex</code>每一次判断时都为0，即不起作用，因此都能匹配到结果。</p>
+<li><p>接着看 Read.htm 页面代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language=<span class="string">"javascript"</span> &gt;</span><br><span class="line">    <span class="keyword">function</span> getCookie(name) &#123;</span><br><span class="line">        /*</span><br><span class="line">        *--------------- getCookie(name) -----------------</span><br><span class="line">        * getCookie(name)</span><br><span class="line">        * 功能：取得变量name的值</span><br><span class="line">        * 参数：name, 字符串</span><br><span class="line">        * 实例：alert(getCookie(<span class="string">"baobao"</span>));</span><br><span class="line">        *--------------- getCookie(name) -----------------</span><br><span class="line">        */</span><br><span class="line">        var arr = document.cookie.match(new RegExp(<span class="string">"(^| )"</span>+name+<span class="string">"=([^;]*)(;|$)"</span>));</span><br><span class="line">        <span class="keyword">if</span>(arr != null)&#123;</span><br><span class="line">            <span class="built_in">return</span> unescape(arr[2]); </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> null;</span><br><span class="line">    &#125;</span><br><span class="line">    alert(getCookie(<span class="string">"baobao"</span>));</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>使用正则的时候还是要多加小心，对于<code>test</code>和<code>exec</code>方法，最好还是<strong>不要随意加上全局标志g</strong>。</li>
+<li><strong>通过 cookie</strong>的方法优点是<strong>可以在同源内的任意网页内访问</strong>，生命期可以设置。</li>
+<li>缺点是<strong>值长度有限制</strong>（cookie大小限制导致）。</li>
 </ul>
 
       
@@ -492,7 +448,7 @@
           
             <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
-            <a href="/tags/正则表达式/" rel="tag"><i class="fa fa-tag"></i> 正则表达式</a>
+            <a href="/tags/Cookie/" rel="tag"><i class="fa fa-tag"></i> Cookie</a>
           
         </div>
       
@@ -505,8 +461,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/12/frontEndSeparation/" rel="next" title="前后端分离内容介绍">
-                <i class="fa fa-chevron-left"></i> 前后端分离内容介绍
+              <a href="/2018/06/15/eventFlow/" rel="next" title="JavaScript事件（一）事件流">
+                <i class="fa fa-chevron-left"></i> JavaScript事件（一）事件流
               </a>
             
           </div>
@@ -515,8 +471,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/14/passUrlValuesBThtmlPages/" rel="prev" title="通过url携带数据在HTML页面间跳转传值">
-                通过url携带数据在HTML页面间跳转传值 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/16/eventHandler/" rel="prev" title="JavaScript事件（二）事件处理程序">
+                JavaScript事件（二）事件处理程序 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -669,7 +625,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#发现问题"><span class="nav-number">1.</span> <span class="nav-text">发现问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原因分析"><span class="nav-number">2.</span> <span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景及实现"><span class="nav-number">2.</span> <span class="nav-text">场景及实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
