@@ -63,11 +63,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
       <category term="兜底" scheme="https://chongtianhong.github.io/tags/%E5%85%9C%E5%BA%95/"/>
     
@@ -512,9 +512,9 @@
     
       <category term="Node.js" scheme="https://chongtianhong.github.io/tags/Node-js/"/>
     
-      <category term="async" scheme="https://chongtianhong.github.io/tags/async/"/>
-    
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="async" scheme="https://chongtianhong.github.io/tags/async/"/>
     
   </entry>
   
