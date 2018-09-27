@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="CDN加速,性能优化,Web," />
+  <meta name="keywords" content="JavaScript,开发,HTML,锚点," />
 
 
 
@@ -123,20 +123,18 @@
 
 
 
-<meta name="description" content="前言 大多数人都知道，一个用户在打开一个新网站的时候，如果网站打开的速度过慢，用户是很难继续浏览的。 因此，很多网站的运营人员想方设法的提高网站的加载速度。网站的加载速度是一个成功网站的必备要素之一，速度不够快，会降低转化率。">
-<meta name="keywords" content="CDN加速,性能优化,Web">
+<meta name="description" content="前言 HTML中的链接，正确的说法应该称作”锚点“。 锚点链接（也叫书签链接）常常用于那些内容庞大繁琐的网页，通过点击命名锚点，不仅让我们能指向文档，还能指向页面里的特定段落，更能当作“精准链接”的便利工具，让链接对象接近焦点。便于浏览者查看网页内容。类似于我们阅读书籍时的目录页码或章回提示。 在需要指定到页面的特定部分时，标记锚点是最佳的方法。">
+<meta name="keywords" content="JavaScript,开发,HTML,锚点">
 <meta property="og:type" content="article">
-<meta property="og:title" content="为什么使用CDN可以加快网络速度">
-<meta property="og:url" content="https://chongtianhong.github.io/2018/06/24/CDN/index.html">
+<meta property="og:title" content="页面添加锚点的三种方式">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/06/25/methodOfAddingAnchorPoints/index.html">
 <meta property="og:site_name" content="Ice&#39;s Blog">
-<meta property="og:description" content="前言 大多数人都知道，一个用户在打开一个新网站的时候，如果网站打开的速度过慢，用户是很难继续浏览的。 因此，很多网站的运营人员想方设法的提高网站的加载速度。网站的加载速度是一个成功网站的必备要素之一，速度不够快，会降低转化率。">
+<meta property="og:description" content="前言 HTML中的链接，正确的说法应该称作”锚点“。 锚点链接（也叫书签链接）常常用于那些内容庞大繁琐的网页，通过点击命名锚点，不仅让我们能指向文档，还能指向页面里的特定段落，更能当作“精准链接”的便利工具，让链接对象接近焦点。便于浏览者查看网页内容。类似于我们阅读书籍时的目录页码或章回提示。 在需要指定到页面的特定部分时，标记锚点是最佳的方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://chongtianhong.github.io/images/CDN.png">
-<meta property="og:updated_time" content="2018-09-20T16:08:17.350Z">
+<meta property="og:updated_time" content="2018-09-27T15:01:56.883Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="为什么使用CDN可以加快网络速度">
-<meta name="twitter:description" content="前言 大多数人都知道，一个用户在打开一个新网站的时候，如果网站打开的速度过慢，用户是很难继续浏览的。 因此，很多网站的运营人员想方设法的提高网站的加载速度。网站的加载速度是一个成功网站的必备要素之一，速度不够快，会降低转化率。">
-<meta name="twitter:image" content="https://chongtianhong.github.io/images/CDN.png">
+<meta name="twitter:title" content="页面添加锚点的三种方式">
+<meta name="twitter:description" content="前言 HTML中的链接，正确的说法应该称作”锚点“。 锚点链接（也叫书签链接）常常用于那些内容庞大繁琐的网页，通过点击命名锚点，不仅让我们能指向文档，还能指向页面里的特定段落，更能当作“精准链接”的便利工具，让链接对象接近焦点。便于浏览者查看网页内容。类似于我们阅读书籍时的目录页码或章回提示。 在需要指定到页面的特定部分时，标记锚点是最佳的方法。">
 
 
 
@@ -166,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="https://chongtianhong.github.io/2018/06/24/CDN/"/>
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/06/25/methodOfAddingAnchorPoints/"/>
 
 
 
 
 
-  <title>为什么使用CDN可以加快网络速度 | Ice's Blog</title>
+  <title>页面添加锚点的三种方式 | Ice's Blog</title>
   
 
 
@@ -311,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/06/24/CDN/">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/06/25/methodOfAddingAnchorPoints/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaobing Hong">
@@ -328,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">为什么使用CDN可以加快网络速度</h1>
+          <h1 class="post-title" itemprop="name headline">页面添加锚点的三种方式</h1>
         
 
         <div class="post-meta">
@@ -340,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-24T18:26:12+08:00">
-                2018-06-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-25T10:15:36+08:00">
+                2018-06-25
               </time>
             
 
@@ -401,31 +399,52 @@
 
       
         <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
-<li>大多数人都知道，一个用户在打开一个新网站的时候，如果网站打开的速度过慢，用户是很难继续浏览的。</li>
-<li>因此，很多网站的运营人员想方设法的<strong>提高网站的加载速度</strong>。网站的加载速度是一个成功网站的必备要素之一，速度不够快，会<strong>降低转化率</strong>。<a id="more"></a></li>
-<li>本文将简单地介绍下CDN，<strong>CDN是帮助一个网站能够快速打开的有效和实用方法</strong>。</li>
+<li><strong>HTML中的链接</strong>，正确的说法应该称作”<strong>锚点</strong>“。</li>
+<li>锚点链接（也叫书签链接）常常用于那些内容庞大繁琐的网页，通过<strong>点击命名锚点</strong>，不仅让我们能<strong>指向文档</strong>，还能<strong>指向页面里的特定段落</strong>，更能当作<strong>“精准链接”的便利工</strong>具，让链接对象接近焦点。便于浏览者查看网页内容。类似于我们阅读书籍时的目录页码或章回提示。</li>
+<li>在需要<strong>指定到页面的特定部分</strong>时，<strong>标记锚点</strong>是最佳的方法。　<a id="more"></a>
+</li>
 </ul>
-<h4 id="网站打开速度慢的原因"><a href="#网站打开速度慢的原因" class="headerlink" title="网站打开速度慢的原因"></a>网站打开速度慢的原因</h4><ul>
-<li><strong>网站打开速度慢</strong>受很多因素的影响，简单归纳下常见的几个原因：<ul>
-<li><strong>共享主机服务器</strong>不堪重负，<strong>响应速度慢</strong>；</li>
-<li><strong>网站的图片和内容太大</strong>，需要花费很多时间下载；</li>
-<li>网站使用了太多不同的脚本和图片，这些<strong>脚本和图片没有针对快速加载网站进行优化，加载时间长</strong>；</li>
-<li>网站的服务器位置与网站的访问者<strong>位于不同的地理位置</strong>。</li>
+<h4 id="锚点链接对SEO的作用"><a href="#锚点链接对SEO的作用" class="headerlink" title="锚点链接对SEO的作用"></a>锚点链接对SEO的作用</h4><ul>
+<li>锚链接是一个非常重要的概念，在网页中增加恰当的锚链接，会让所在网页和所指向网页的重要程度有所提升，从而影响到关键词排名。<strong>锚链接对SEO的作用</strong>主要体现在以下几个方面：</li>
+</ul>
+<p><blockquote>对锚链接所在的页面的作用</blockquote>
+　　</p>
+<ul>
+<li>正常来讲，<strong>页面中增加的锚链接都和页面本身有一定的关系</strong>，因此，<strong>锚文本可以作为锚链接所在的页面的内容的评估</strong>。例如：本篇文章中含有“SEO”的链接，那么，说明本篇文章和SEO有一定关系。</li>
+</ul>
+<p><blockquote>对锚链接所指向页面的作用</blockquote>
+　　</p>
+<ul>
+<li>锚链接能精确的描述所指向页面的内容，因此，<strong>锚链接能可以对所指向页面的评估</strong>。</li>
+</ul>
+<p><blockquote>锚链接对关键词排名的影响</blockquote>
+　　</p>
+<ul>
+<li><strong>锚链接对于关键字排名的意义</strong>在于它可以<strong>让内容页随机链接在一起</strong>，<strong>让蜘蛛可以很好的抓取更多页面</strong>，<strong>权重</strong>也能<strong>均匀的传递</strong>，同时<strong>增强页面的相关性</strong>，<strong>最终提升网站的关键词排名</strong>。</li>
+</ul>
+<h4 id="锚点的添加方式"><a href="#锚点的添加方式" class="headerlink" title="锚点的添加方式"></a>锚点的添加方式</h4><h5 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h5><ul>
+<li><p>给锚点文本标签添加id，使用&lt;a href=”#”&gt;&lt;/a&gt;来定位，当单击a链接时，就会跳到id为a01的p标签处：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;a href=<span class="string">"#a01"</span>&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p id=<span class="string">"a01"</span>&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这样的定位<strong>可以针对任何标签来定位</strong>。</p>
+</li>
+</ul>
+<h5 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h5><ul>
+<li><p>给a标签的文本添加锚点，单击链接可跳到name为a01的a标签处：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;a href=<span class="string">"#a01"</span>&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;a name=<span class="string">"a01"</span> href=“<span class="comment">#”&gt;练习&lt;/a&gt;</span></span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用name属性<strong>只能针对a标签来定位</strong>，而对div等其他标签就不能起到定位作用。</p>
+</li>
+</ul>
+<h5 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h5><ul>
+<li>使用JS中<strong>与页面（容器）滚动相关的API</strong> <code>scrollIntoView</code>，可让当前的元素滚动到浏览器窗口的可视区域内。</li>
+<li>调用方法为<code>element.scrollIntoView()</code>，参数默认为true。<ul>
+<li>参数为true时调用该函数，页面（或容器）发生滚动，使element的顶部与视图（容器）顶部对齐；</li>
+<li>参数为false时，使element的底部与视图（容器）底部对齐。</li>
 </ul>
 </li>
-<li>其实还有许多其他的原因，但这些以上列举的几点是最主要的。</li>
-</ul>
-<h4 id="什么是CDN"><a href="#什么是CDN" class="headerlink" title="什么是CDN"></a>什么是CDN</h4><ul>
-<li>CDN指的是<strong>内容分发网络</strong>。其基本思路是<strong>尽可能的避开互联网上</strong>有可能影响<strong>数据传输速度</strong>和<strong>稳定性</strong>的瓶颈和环节，使内容传输的更快、更稳定。</li>
-<li>CDN是通过<strong>在网络各处放置节点服务器</strong>所构成的在现有的互联网基础之上的一层<strong>智能虚拟网络</strong>，它能够实<strong>时地根据网络流量和各节点的连接、负载状况以及到用户的距离和响应时间</strong>等综合信息<strong>将用户的请求重新导向离用户最近的服务节点上</strong>。</li>
-<li>CDN系统的目的是使用户可就<strong>近取得所需内容</strong>，<strong>解决Internet网络拥挤</strong>的状况，<strong>提高用户访问网站的响应速度</strong>。</li>
-<li>CDN起到<strong>内容分发</strong>的作用，就是<strong>网站的内容是被复制到各个地区的不同服务器上面</strong>，这个距离离访问者所在地越近越好。</li>
-<li>下图就展示了未使用CDN和使用CDN的区别图，显而易见，<strong>使用CDN可以提高访问速度</strong>：<br><img src="/images/CDN.png" alt="未使用CDN和使用CDN的区别图" width="600" style="border:none"></li>
-</ul>
-<h4 id="网站使用CDN加速的好处"><a href="#网站使用CDN加速的好处" class="headerlink" title="网站使用CDN加速的好处"></a>网站使用CDN加速的好处</h4><ul>
-<li><strong>网站加速，利于Google的排名</strong>：Google 把网站的打开速度当做一个比较重要的指标，所以网站打开的速度会影响Google排名。使用CDN之后，网站打开速度变快，就可以减少跳出率，也可以增加用户对网站的友好体验。</li>
-<li><strong>有利于提高网站的转化率</strong>：毫无疑问，用户的访问网站的时间提高了，跳出率减少了，当然会利于网站的转化率和销售量。现在大环境下的人们都比较浮躁，我想谁都没有耐心去等一个需要10秒才能打开的网站，这样的网站一开始就不友好，更别想提高网站的转化率了。</li>
-<li><strong>提升网站的稳定性和安全性</strong>：CDN因为节点分散，攻击者比较难下手，攻击一个节点仅仅是影响一个节点的缓存访问而已，并且CDN的“内容路由”会自动的启用另一个节点，如果CDN服务节点数量够多，那么攻击者需要的流量包就会呈几何级的增加，这样攻击成本自然就高了。</li>
+<li><strong>注意</strong>：只有当页面（容器）可滚动时此API才能起作用。</li>
+<li>示例：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li onclick=<span class="string">"javascript:document.getElementById('here').scrollIntoView()"</span>&gt;&lt;/li&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -454,11 +473,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CDN加速/" rel="tag"><i class="fa fa-tag"></i> CDN加速</a>
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/性能优化/" rel="tag"><i class="fa fa-tag"></i> 性能优化</a>
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
           
-            <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+            <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+          
+            <a href="/tags/锚点/" rel="tag"><i class="fa fa-tag"></i> 锚点</a>
           
         </div>
       
@@ -471,8 +492,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/23/frontEndDisasterRecoveryPlan/" rel="next" title="大流量的下兜底容灾方案（转）">
-                <i class="fa fa-chevron-left"></i> 大流量的下兜底容灾方案（转）
+              <a href="/2018/06/24/CDN/" rel="next" title="为什么使用CDN可以加快网络速度">
+                <i class="fa fa-chevron-left"></i> 为什么使用CDN可以加快网络速度
               </a>
             
           </div>
@@ -480,10 +501,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/25/methodOfAddingAnchorPoints/" rel="prev" title="页面添加锚点的三种方式">
-                页面添加锚点的三种方式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -635,7 +652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网站打开速度慢的原因"><span class="nav-number">2.</span> <span class="nav-text">网站打开速度慢的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是CDN"><span class="nav-number">3.</span> <span class="nav-text">什么是CDN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网站使用CDN加速的好处"><span class="nav-number">4.</span> <span class="nav-text">网站使用CDN加速的好处</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#锚点链接对SEO的作用"><span class="nav-number">2.</span> <span class="nav-text">锚点链接对SEO的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#锚点的添加方式"><span class="nav-number">3.</span> <span class="nav-text">锚点的添加方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法一"><span class="nav-number">3.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法二"><span class="nav-number">3.2.</span> <span class="nav-text">方法二</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法三"><span class="nav-number">3.3.</span> <span class="nav-text">方法三</span></a></li></ol></li></ol></div>
             
 
           </div>

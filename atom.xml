@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-09-26T12:46:40.535Z</updated>
+  <updated>2018-09-27T15:01:56.883Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>页面添加锚点的三种方式</title>
-    <link href="https://chongtianhong.github.io/2018/09/26/methodOfAddingAnchorPoints/"/>
-    <id>https://chongtianhong.github.io/2018/09/26/methodOfAddingAnchorPoints/</id>
-    <published>2018-09-26T02:15:36.000Z</published>
-    <updated>2018-09-26T12:46:40.535Z</updated>
+    <link href="https://chongtianhong.github.io/2018/06/25/methodOfAddingAnchorPoints/"/>
+    <id>https://chongtianhong.github.io/2018/06/25/methodOfAddingAnchorPoints/</id>
+    <published>2018-06-25T02:15:36.000Z</published>
+    <updated>2018-09-27T15:01:56.883Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul><li><strong>HTML中的链接</strong>，正确的说法应该称作”<strong>锚点</strong>“。</li><li>锚点链接（也叫书签链接）常常用于那些内容庞大繁琐的网页，通过<strong>点击命名锚点</strong>，不仅让我们能<strong>指向文档</strong>，还能<strong>指向页面里的特定段落</strong>，更能当作<strong>“精准链接”的便利工</strong>具，让链接对象接近焦点。便于浏览者查看网页内容。类似于我们阅读书籍时的目录页码或章回提示。</li><li>在需要<strong>指定到页面的特定部分</strong>时，<strong>标记锚点</strong>是最佳的方法。　<a id="more"></a></li></ul><h4 id="锚点链接对SEO的作用"><a href="#锚点链接对SEO的作用" class="headerlink" title="锚点链接对SEO的作用"></a>锚点链接对SEO的作用</h4><ul><li>锚链接是一个非常重要的概念，在网页中增加恰当的锚链接，会让所在网页和所指向网页的重要程度有所提升，从而影响到关键词排名。<strong>锚链接对SEO的作用</strong>主要体现在以下几个方面：</li></ul><p><blockquote>对锚链接所在的页面的作用</blockquote>　　</p><ul><li>正常来讲，<strong>页面中增加的锚链接都和页面本身有一定的关系</strong>，因此，<strong>锚文本可以作为锚链接所在的页面的内容的评估</strong>。例如：本篇文章中含有“SEO”的链接，那么，说明本篇文章和SEO有一定关系。</li></ul><p><blockquote>对锚链接所指向页面的作用</blockquote>　　</p><ul><li>锚链接能精确的描述所指向页面的内容，因此，<strong>锚链接能可以对所指向页面的评估</strong>。</li></ul><p><blockquote>锚链接对关键词排名的影响</blockquote>　　</p><ul><li><strong>锚链接对于关键字排名的意义</strong>在于它可以<strong>让内容页随机链接在一起</strong>，<strong>让蜘蛛可以很好的抓取更多页面</strong>，<strong>权重</strong>也能<strong>均匀的传递</strong>，同时<strong>增强页面的相关性</strong>，<strong>最终提升网站的关键词排名</strong>。</li></ul><h4 id="锚点的添加方式"><a href="#锚点的添加方式" class="headerlink" title="锚点的添加方式"></a>锚点的添加方式</h4><h5 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h5><ul><li><p>给锚点文本标签添加id，使用&lt;a href=”#”&gt;&lt;/a&gt;来定位，当单击a链接时，就会跳到id为a01的p标签处：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;a href=<span class="string">"#a01"</span>&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p id=<span class="string">"a01"</span>&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br></pre></td></tr></table></figure></li><li><p>这样的定位<strong>可以针对任何标签来定位</strong>。</p></li></ul><h5 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h5><ul><li><p>给a标签的文本添加锚点，单击链接可跳到name为a01的a标签处：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;a href=<span class="string">"#a01"</span>&gt;&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br><span class="line">&lt;a name=<span class="string">"a01"</span> href=“<span class="comment">#”&gt;练习&lt;/a&gt;</span></span><br><span class="line">&lt;p&gt;练习&lt;/p&gt;</span><br></pre></td></tr></table></figure></li><li><p>使用name属性<strong>只能针对a标签来定位</strong>，而对div等其他标签就不能起到定位作用。</p></li></ul><h5 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h5><ul><li>使用JS中<strong>与页面（容器）滚动相关的API</strong> <code>scrollIntoView</code>，可让当前的元素滚动到浏览器窗口的可视区域内。</li><li>调用方法为<code>element.scrollIntoView()</code>，参数默认为true。<ul><li>参数为true时调用该函数，页面（或容器）发生滚动，使element的顶部与视图（容器）顶部对齐；</li><li>参数为false时，使element的底部与视图（容器）底部对齐。</li></ul></li><li><strong>注意</strong>：只有当页面（容器）可滚动时此API才能起作用。</li><li>示例：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li onclick=<span class="string">"javascript:document.getElementById('here').scrollIntoView()"</span>&gt;&lt;/li&gt;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
     
@@ -543,9 +543,9 @@
     
       <category term="Node.js" scheme="https://chongtianhong.github.io/tags/Node-js/"/>
     
-      <category term="async" scheme="https://chongtianhong.github.io/tags/async/"/>
-    
       <category term="异步编程" scheme="https://chongtianhong.github.io/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="async" scheme="https://chongtianhong.github.io/tags/async/"/>
     
   </entry>
   
