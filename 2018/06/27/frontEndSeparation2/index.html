@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,Node.js,前后端分离," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言 后端出于性能和别的原因，提供的接口所返回的数据格式也许不太适合前端直接使用，前端所需的排序功能、筛选功能，以及到了视图层的页面展现，也许都需要对接口所提供的数据进行二次处理。 这些处理虽可以放在前端来进行，但也许数据量一大便会浪费浏览器性能。因而现今，增加node端便是一种良好的解决方案。">
+<meta name="keywords" content="开发,Node.js,前后端分离">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从NodeJS搭建中间层再谈前后端分离">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/06/27/frontEndSeparation2/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="前言 后端出于性能和别的原因，提供的接口所返回的数据格式也许不太适合前端直接使用，前端所需的排序功能、筛选功能，以及到了视图层的页面展现，也许都需要对接口所提供的数据进行二次处理。 这些处理虽可以放在前端来进行，但也许数据量一大便会浪费浏览器性能。因而现今，增加node端便是一种良好的解决方案。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://chongtianhong.github.io/images/frontEndSeparation.png">
+<meta property="og:updated_time" content="2018-09-29T14:14:12.634Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从NodeJS搭建中间层再谈前后端分离">
+<meta name="twitter:description" content="前言 后端出于性能和别的原因，提供的接口所返回的数据格式也许不太适合前端直接使用，前端所需的排序功能、筛选功能，以及到了视图层的页面展现，也许都需要对接口所提供的数据进行二次处理。 这些处理虽可以放在前端来进行，但也许数据量一大便会浪费浏览器性能。因而现今，增加node端便是一种良好的解决方案。">
+<meta name="twitter:image" content="https://chongtianhong.github.io/images/frontEndSeparation.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/06/27/frontEndSeparation2/"/>
+
+
+
+
+
+  <title>从NodeJS搭建中间层再谈前后端分离 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/06/27/frontEndSeparation2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从NodeJS搭建中间层再谈前后端分离</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-27T19:36:44+08:00">
+                2018-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul>
+<li><strong>后端</strong>出于性能和别的原因，<strong>提供的接口所返回的数据格式也许不太适合前端直接使用</strong>，前端所需的<strong>排序功能</strong>、<strong>筛选功能</strong>，以及到了<strong>视图层的页面展现</strong>，也许都<strong>需要对接口所提供的数据进行二次处理</strong>。</li>
+<li>这些处理虽可以放在前端来进行，但也许<strong>数据量一大便会浪费浏览器性能</strong>。因而现今，<strong>增加node端</strong>便是一种良好的解决方案。<a id="more"></a></li>
+<li>下面关于微信小程序demo的<strong>server端代码</strong>中，通过<strong>http模块</strong>对真实后台（网易云音乐API）发起http请求，然后通过<strong>express模块</strong>搭建后端服务。</li>
+<li><p>发起请求：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">// http.js</span><br><span class="line">var formatURL = require(<span class="string">'./formatURL.js'</span>);</span><br><span class="line">var http = require(<span class="string">'http'</span>);</span><br><span class="line">const POSThttp = <span class="keyword">function</span>(request)&#123;</span><br><span class="line">    <span class="built_in">return</span> new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        <span class="built_in">let</span> body = <span class="string">''</span>;</span><br><span class="line">        // http模块拿到真实后台api的数据</span><br><span class="line">        http.get(formatURL(request.body.musicname), <span class="keyword">function</span>(res)&#123;</span><br><span class="line">        res.on(<span class="string">'data'</span>, (data) =&gt; &#123;</span><br><span class="line">            body += data;</span><br><span class="line">        &#125;).on(<span class="string">'end'</span>, () =&gt; &#123;</span><br><span class="line">            // 格式化</span><br><span class="line">            const &#123;</span><br><span class="line">            name,</span><br><span class="line">            audio: musicUrl,</span><br><span class="line">            page,</span><br><span class="line">            album: &#123;</span><br><span class="line">                name: musicName,</span><br><span class="line">                picUrl,</span><br><span class="line">            &#125;,</span><br><span class="line">            artists: [&#123;</span><br><span class="line">                name: singer,</span><br><span class="line">            &#125;],</span><br><span class="line">            &#125; = JSON.parse(body).result.songs[0];</span><br><span class="line">            const reply = &#123;</span><br><span class="line">            name,</span><br><span class="line">            picUrl,</span><br><span class="line">            musicUrl,</span><br><span class="line">            page,</span><br><span class="line">            singer,</span><br><span class="line">            &#125;;</span><br><span class="line">            resolve(reply);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">module.exports = POSThttp;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>得到数据传回前端：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var express = require(<span class="string">'express'</span>);</span><br><span class="line">var POSThttp = require(<span class="string">'./POSThttp.js'</span>);</span><br><span class="line">var bodyParser = require(<span class="string">'body-parser'</span>);</span><br><span class="line">// 使用body-parser解析post请求的参数，如果没有，req.body为undefined。</span><br><span class="line">var app = express();</span><br><span class="line">app.use(bodyParser.json());</span><br><span class="line">app.use(bodyParser.urlencoded(&#123;</span><br><span class="line">    extended: <span class="literal">true</span></span><br><span class="line">&#125;));</span><br><span class="line">app.post(<span class="string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    POSThttp(req).<span class="keyword">then</span>((data) =&gt; &#123;</span><br><span class="line">        res.send(data);</span><br><span class="line">    &#125;).catch((err) =&gt; &#123;</span><br><span class="line">        res.send(err);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(3000, () =&gt; &#123;</span><br><span class="line">    console.log(<span class="string">'open wx-audio server successful!'</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面的几十行代码也就<strong>实现了一个简单的中间层的demo</strong>，并做到了<strong>在中间层格式化参数</strong>，<strong>便于前端进行使用</strong>的过程。</p>
+</li>
+</ul>
+<h4 id="为什么需要中间层？"><a href="#为什么需要中间层？" class="headerlink" title="为什么需要中间层？"></a>为什么需要中间层？</h4><ul>
+<li>其实这个问题，我认为跟面试常考的题：“为什么需要前后端分离？”是类似的，现今大公司的老项目（包括百度、搜狐等公司所采用的后端渲染等），或多或少都会存在这样的一些问题：<ul>
+<li><strong>前端代码越来越复杂</strong></li>
+<li><strong>前后端</strong>依旧<strong>高度耦合</strong></li>
+<li>无法良好的支持<strong>跨终端</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="前辈们提出的解决方案"><a href="#前辈们提出的解决方案" class="headerlink" title="前辈们提出的解决方案"></a>前辈们提出的解决方案</h4><ul>
+<li>前端代码越来越复杂，我们希望尽可能地减少工作量，开始使用类似<strong>MV*的分层结构</strong>，使前端后分离成为必要。</li>
+<li>前端需要处理更多的工作，希望有权操控<code>View</code>，<code>Router</code>（如：SPA的尝试）</li>
+<li><strong>各种终端设备的兴起</strong>，需要我们<strong>把页面适配到更多的地方</strong>。</li>
+<li>开始：我们所尝试的<strong>CLIENT-SIDE MV* 框架</strong>，<strong>后端</strong>暴露数据接口、处理业务逻辑，<strong>前端</strong>接收数据、处理渲染逻辑。</li>
+</ul>
+<div class="note info">关于MVC的定义：<br>MVC是一种设计模式，它将应用划分为3个部分：数据（模型）、展现层（视图）和用户交互（控制器）。换句话说，一个事件的发生是这样的过程：<br>　　1. 用户和应用产生交互。<br>　　2. 控制器的事件处理器被触发。<br>　　3. 控制器从模型中请求数据，并将其交给视图。<br>　　4. 视图将数据呈现给用户。<br>我们不用类库或框架就可以实现这种MVC架构模式。关键是要将MVC的每部分按照职责进行划分，将代码清晰地分割为若干部分，并保持良好的解耦。这样可以对每个部分进行独立开发、测试和维护。</div>
+
+<ul>
+<li>如：<code>Backbone</code>，<code>EmberJS</code>，<code>KnockoutJS</code>，<code>AngularJS</code>等框架。</li>
+<li>但这样的方式仍旧存在问题：</li>
+</ul>
+<h5 id="各层职责重叠"><a href="#各层职责重叠" class="headerlink" title="各层职责重叠"></a>各层职责重叠</h5><ul>
+<li>Client-side Model 是 Server-side Model 的加工</li>
+<li>Client-side View 跟 Server-side是 不同层次的东西</li>
+<li>Client-side的Controller 跟 Sever-side的Controller 各搞各的</li>
+<li>Client-side的Route 但是 Server-side 可能没有</li>
+</ul>
+<h5 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h5><ul>
+<li><strong>渲染，取值都在客户端进行</strong>，有性能的问题</li>
+<li>需要等待资源到齐才能进行，会有<strong>短暂白屏与闪动</strong></li>
+<li>在移动设备<strong>低速网路</strong>的体验奇差无比</li>
+</ul>
+<h5 id="重用问题"><a href="#重用问题" class="headerlink" title="重用问题"></a>重用问题</h5><ul>
+<li><strong>模板</strong>无法重用，造成维护上的麻烦与不一致</li>
+<li><strong>逻辑</strong>无法重用，前端的校验后端仍须再做一次</li>
+<li><strong>路由</strong>无法重用，前端的路由在后端未必存在</li>
+</ul>
+<h5 id="跨终端问题"><a href="#跨终端问题" class="headerlink" title="跨终端问题"></a>跨终端问题</h5><ul>
+<li>业务太靠前，导致不同端重复实现</li>
+<li>逻辑太靠前，造成维护上的不易</li>
+</ul>
+<h5 id="渲染都在客户端，模板无法重用，SEO实现麻烦"><a href="#渲染都在客户端，模板无法重用，SEO实现麻烦" class="headerlink" title="渲染都在客户端，模板无法重用，SEO实现麻烦"></a>渲染都在客户端，模板无法重用，SEO实现麻烦</h5><h4 id="NodeJS作为中间层的全栈开发方案"><a href="#NodeJS作为中间层的全栈开发方案" class="headerlink" title="NodeJS作为中间层的全栈开发方案"></a>NodeJS作为中间层的全栈开发方案</h4><ul>
+<li>参考<code>淘宝前后端分离解决方案</code>中的一张图：<br><img src="/images/frontEndSeparation.png" alt="淘宝前后端分离解决方案配图" width="600" style="border:none"></li>
+<li>有了NodeJS之后，<strong>前端可以更加专注于视图层</strong>，而让<strong>更多的数据逻辑放在Node层处理</strong>。</li>
+<li>除了上图列举的作用，我们使用Node层还可以有下面的好处：<ul>
+<li>渲染页面，体验优化</li>
+<li>中间层带来的性能问题，在异步ajax转成同步渲染过程中得到平衡</li>
+</ul>
+</li>
+<li>NodeJS对于<strong>数据的运算、逻辑处理</strong>及<strong>数据库的操作</strong>不如java方便、快捷、稳定，因此，将NodeJS作为中间层，<strong>从底层java获取数据、对数据做简单的处理</strong>后返回给客户端。</li>
+<li>对于前端来说，NodeJS的学习成本是相当低的：我们无需学习一门新的语言，就能做到以前开发帮我们做的事情，一切都显得那么自然。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/Node-js/" rel="tag"><i class="fa fa-tag"></i> Node.js</a>
+          
+            <a href="/tags/前后端分离/" rel="tag"><i class="fa fa-tag"></i> 前后端分离</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/27/serializeOfJQuery/" rel="next" title="jQuery ajax()使用serialize()提交form数据">
+                <i class="fa fa-chevron-left"></i> jQuery ajax()使用serialize()提交form数据
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/28/josnpAndSecurity/" rel="prev" title="关于jsonp实现跨域访问，以及存在的安全问题">
+                关于jsonp实现跨域访问，以及存在的安全问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">142</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么需要中间层？"><span class="nav-number">2.</span> <span class="nav-text">为什么需要中间层？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前辈们提出的解决方案"><span class="nav-number">3.</span> <span class="nav-text">前辈们提出的解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#各层职责重叠"><span class="nav-number">3.1.</span> <span class="nav-text">各层职责重叠</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#性能问题"><span class="nav-number">3.2.</span> <span class="nav-text">性能问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重用问题"><span class="nav-number">3.3.</span> <span class="nav-text">重用问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#跨终端问题"><span class="nav-number">3.4.</span> <span class="nav-text">跨终端问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#渲染都在客户端，模板无法重用，SEO实现麻烦"><span class="nav-number">3.5.</span> <span class="nav-text">渲染都在客户端，模板无法重用，SEO实现麻烦</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NodeJS作为中间层的全栈开发方案"><span class="nav-number">4.</span> <span class="nav-text">NodeJS作为中间层的全栈开发方案</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

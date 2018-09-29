@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-09-28T13:55:08.805Z</updated>
+  <updated>2018-09-29T14:14:23.405Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,66 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于jsonp实现跨域访问，以及存在的安全问题</title>
+    <link href="https://chongtianhong.github.io/2018/06/28/josnpAndSecurity/"/>
+    <id>https://chongtianhong.github.io/2018/06/28/josnpAndSecurity/</id>
+    <published>2018-06-28T05:43:38.000Z</published>
+    <updated>2018-09-29T14:14:23.405Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="jsonp跨域访问的实现"><a href="#jsonp跨域访问的实现" class="headerlink" title="jsonp跨域访问的实现"></a>jsonp跨域访问的实现</h4><ul><li><strong>跨域的安全限制都是对浏览器端来说的</strong>，服务器端是不存在跨域安全限制的。</li><li><strong>浏览器的同源策略</strong>限制从一个源加载的文档或脚本与来自另一个源的资源进行交互。</li><li>如果<strong>协议，端口和主机</strong>对于两个页面是<strong>相同</strong>的，<strong>则两个页面具有相同的源</strong>，否则就是不同源的。</li><li>如果要<strong>在脚本里发起跨域请求</strong>，则要进行一些特殊处理了。例如，可以采用<strong>后台代理</strong>的方式，把请求发到自己的服务端，再通过后台代码发起请求，再将数据返回前端。<a id="more"></a></li><li><a href="https://www.cnblogs.com/chiangchou/p/jsonp.html" target="_blank" rel="noopener">一篇博客</a>对<strong>使用jquery的jsonp如何发起跨域请求及其原理</strong>进行了详细地介绍。</li></ul><h4 id="jsonp可能导致的安全问题"><a href="#jsonp可能导致的安全问题" class="headerlink" title="jsonp可能导致的安全问题"></a>jsonp可能导致的安全问题</h4><ul><li>了解了jsonp之后，可以看到，<strong>jsonp主要就是用来实现跨域的数据获取</strong>。</li><li>如果跨域的接口是暴露在公网上的，如果跨域接口是public级别，则无所谓安全问题，如果跨域接口是private级别，则<strong>必须对访问者做校验验证来访的Request的合法性</strong>的。目前已知的有<strong>Referer校验</strong>和<strong>Token校验</strong>。</li></ul><h5 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a>Referer</h5><div class="note info">HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。</div><ul><li>这里通过对header中的访问发起者的来源进行验证来保证安全性，但是这个<strong>Referer是存在被绕过的可能的</strong>，绕过的主要原理就是“不发送Referer” ，如<ul><li>使用data URI方案 </li><li>从HTTPS向HTTP发起请求</li></ul></li></ul><h5 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h5><div class="note info">主要是指能代表用户身份的标识</div><ul><li>这个部分破解的难度较高，但是通过在运行非同源跨域的网站植入恶意代码，间接依靠“白名单”站点来获取Token发起跨域访问，可以同时绕过Referer和Token的问题，但是植入恶意代码的难度较高。</li></ul><h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ul><li>总的来说<strong>Referer和Token校验是标准</strong>，必须要使用的，<strong>可以解决常规安全问题</strong>，<strong>最稳妥的是不使用jsonp</strong>，改用别的跨域方案（H5 提供的跨域方案postMessage、CORS、WebSocket）。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;jsonp跨域访问的实现&quot;&gt;&lt;a href=&quot;#jsonp跨域访问的实现&quot; class=&quot;headerlink&quot; title=&quot;jsonp跨域访问的实现&quot;&gt;&lt;/a&gt;jsonp跨域访问的实现&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;跨域的安全限制都是对浏览器端来说的&lt;/strong&gt;，服务器端是不存在跨域安全限制的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;浏览器的同源策略&lt;/strong&gt;限制从一个源加载的文档或脚本与来自另一个源的资源进行交互。&lt;/li&gt;
+&lt;li&gt;如果&lt;strong&gt;协议，端口和主机&lt;/strong&gt;对于两个页面是&lt;strong&gt;相同&lt;/strong&gt;的，&lt;strong&gt;则两个页面具有相同的源&lt;/strong&gt;，否则就是不同源的。&lt;/li&gt;
+&lt;li&gt;如果要&lt;strong&gt;在脚本里发起跨域请求&lt;/strong&gt;，则要进行一些特殊处理了。例如，可以采用&lt;strong&gt;后台代理&lt;/strong&gt;的方式，把请求发到自己的服务端，再通过后台代码发起请求，再将数据返回前端。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="跨域" scheme="https://chongtianhong.github.io/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+      <category term="jsonp" scheme="https://chongtianhong.github.io/tags/jsonp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>从NodeJS搭建中间层再谈前后端分离</title>
+    <link href="https://chongtianhong.github.io/2018/06/27/frontEndSeparation2/"/>
+    <id>https://chongtianhong.github.io/2018/06/27/frontEndSeparation2/</id>
+    <published>2018-06-27T11:36:44.000Z</published>
+    <updated>2018-09-29T14:14:12.634Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul><li><strong>后端</strong>出于性能和别的原因，<strong>提供的接口所返回的数据格式也许不太适合前端直接使用</strong>，前端所需的<strong>排序功能</strong>、<strong>筛选功能</strong>，以及到了<strong>视图层的页面展现</strong>，也许都<strong>需要对接口所提供的数据进行二次处理</strong>。</li><li>这些处理虽可以放在前端来进行，但也许<strong>数据量一大便会浪费浏览器性能</strong>。因而现今，<strong>增加node端</strong>便是一种良好的解决方案。<a id="more"></a></li><li>下面关于微信小程序demo的<strong>server端代码</strong>中，通过<strong>http模块</strong>对真实后台（网易云音乐API）发起http请求，然后通过<strong>express模块</strong>搭建后端服务。</li><li><p>发起请求：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">// http.js</span><br><span class="line">var formatURL = require(<span class="string">'./formatURL.js'</span>);</span><br><span class="line">var http = require(<span class="string">'http'</span>);</span><br><span class="line">const POSThttp = <span class="keyword">function</span>(request)&#123;</span><br><span class="line">    <span class="built_in">return</span> new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        <span class="built_in">let</span> body = <span class="string">''</span>;</span><br><span class="line">        // http模块拿到真实后台api的数据</span><br><span class="line">        http.get(formatURL(request.body.musicname), <span class="keyword">function</span>(res)&#123;</span><br><span class="line">        res.on(<span class="string">'data'</span>, (data) =&gt; &#123;</span><br><span class="line">            body += data;</span><br><span class="line">        &#125;).on(<span class="string">'end'</span>, () =&gt; &#123;</span><br><span class="line">            // 格式化</span><br><span class="line">            const &#123;</span><br><span class="line">            name,</span><br><span class="line">            audio: musicUrl,</span><br><span class="line">            page,</span><br><span class="line">            album: &#123;</span><br><span class="line">                name: musicName,</span><br><span class="line">                picUrl,</span><br><span class="line">            &#125;,</span><br><span class="line">            artists: [&#123;</span><br><span class="line">                name: singer,</span><br><span class="line">            &#125;],</span><br><span class="line">            &#125; = JSON.parse(body).result.songs[0];</span><br><span class="line">            const reply = &#123;</span><br><span class="line">            name,</span><br><span class="line">            picUrl,</span><br><span class="line">            musicUrl,</span><br><span class="line">            page,</span><br><span class="line">            singer,</span><br><span class="line">            &#125;;</span><br><span class="line">            resolve(reply);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">module.exports = POSThttp;</span><br></pre></td></tr></table></figure></li><li><p>得到数据传回前端：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var express = require(<span class="string">'express'</span>);</span><br><span class="line">var POSThttp = require(<span class="string">'./POSThttp.js'</span>);</span><br><span class="line">var bodyParser = require(<span class="string">'body-parser'</span>);</span><br><span class="line">// 使用body-parser解析post请求的参数，如果没有，req.body为undefined。</span><br><span class="line">var app = express();</span><br><span class="line">app.use(bodyParser.json());</span><br><span class="line">app.use(bodyParser.urlencoded(&#123;</span><br><span class="line">    extended: <span class="literal">true</span></span><br><span class="line">&#125;));</span><br><span class="line">app.post(<span class="string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    POSThttp(req).<span class="keyword">then</span>((data) =&gt; &#123;</span><br><span class="line">        res.send(data);</span><br><span class="line">    &#125;).catch((err) =&gt; &#123;</span><br><span class="line">        res.send(err);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(3000, () =&gt; &#123;</span><br><span class="line">    console.log(<span class="string">'open wx-audio server successful!'</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li><li><p>上面的几十行代码也就<strong>实现了一个简单的中间层的demo</strong>，并做到了<strong>在中间层格式化参数</strong>，<strong>便于前端进行使用</strong>的过程。</p></li></ul><h4 id="为什么需要中间层？"><a href="#为什么需要中间层？" class="headerlink" title="为什么需要中间层？"></a>为什么需要中间层？</h4><ul><li>其实这个问题，我认为跟面试常考的题：“为什么需要前后端分离？”是类似的，现今大公司的老项目（包括百度、搜狐等公司所采用的后端渲染等），或多或少都会存在这样的一些问题：<ul><li><strong>前端代码越来越复杂</strong></li><li><strong>前后端</strong>依旧<strong>高度耦合</strong></li><li>无法良好的支持<strong>跨终端</strong></li></ul></li></ul><h4 id="前辈们提出的解决方案"><a href="#前辈们提出的解决方案" class="headerlink" title="前辈们提出的解决方案"></a>前辈们提出的解决方案</h4><ul><li>前端代码越来越复杂，我们希望尽可能地减少工作量，开始使用类似<strong>MV*的分层结构</strong>，使前端后分离成为必要。</li><li>前端需要处理更多的工作，希望有权操控<code>View</code>，<code>Router</code>（如：SPA的尝试）</li><li><strong>各种终端设备的兴起</strong>，需要我们<strong>把页面适配到更多的地方</strong>。</li><li>开始：我们所尝试的<strong>CLIENT-SIDE MV* 框架</strong>，<strong>后端</strong>暴露数据接口、处理业务逻辑，<strong>前端</strong>接收数据、处理渲染逻辑。</li></ul><div class="note info">关于MVC的定义：<br>MVC是一种设计模式，它将应用划分为3个部分：数据（模型）、展现层（视图）和用户交互（控制器）。换句话说，一个事件的发生是这样的过程：<br>　　1. 用户和应用产生交互。<br>　　2. 控制器的事件处理器被触发。<br>　　3. 控制器从模型中请求数据，并将其交给视图。<br>　　4. 视图将数据呈现给用户。<br>我们不用类库或框架就可以实现这种MVC架构模式。关键是要将MVC的每部分按照职责进行划分，将代码清晰地分割为若干部分，并保持良好的解耦。这样可以对每个部分进行独立开发、测试和维护。</div><ul><li>如：<code>Backbone</code>，<code>EmberJS</code>，<code>KnockoutJS</code>，<code>AngularJS</code>等框架。</li><li>但这样的方式仍旧存在问题：</li></ul><h5 id="各层职责重叠"><a href="#各层职责重叠" class="headerlink" title="各层职责重叠"></a>各层职责重叠</h5><ul><li>Client-side Model 是 Server-side Model 的加工</li><li>Client-side View 跟 Server-side是 不同层次的东西</li><li>Client-side的Controller 跟 Sever-side的Controller 各搞各的</li><li>Client-side的Route 但是 Server-side 可能没有</li></ul><h5 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h5><ul><li><strong>渲染，取值都在客户端进行</strong>，有性能的问题</li><li>需要等待资源到齐才能进行，会有<strong>短暂白屏与闪动</strong></li><li>在移动设备<strong>低速网路</strong>的体验奇差无比</li></ul><h5 id="重用问题"><a href="#重用问题" class="headerlink" title="重用问题"></a>重用问题</h5><ul><li><strong>模板</strong>无法重用，造成维护上的麻烦与不一致</li><li><strong>逻辑</strong>无法重用，前端的校验后端仍须再做一次</li><li><strong>路由</strong>无法重用，前端的路由在后端未必存在</li></ul><h5 id="跨终端问题"><a href="#跨终端问题" class="headerlink" title="跨终端问题"></a>跨终端问题</h5><ul><li>业务太靠前，导致不同端重复实现</li><li>逻辑太靠前，造成维护上的不易</li></ul><h5 id="渲染都在客户端，模板无法重用，SEO实现麻烦"><a href="#渲染都在客户端，模板无法重用，SEO实现麻烦" class="headerlink" title="渲染都在客户端，模板无法重用，SEO实现麻烦"></a>渲染都在客户端，模板无法重用，SEO实现麻烦</h5><h4 id="NodeJS作为中间层的全栈开发方案"><a href="#NodeJS作为中间层的全栈开发方案" class="headerlink" title="NodeJS作为中间层的全栈开发方案"></a>NodeJS作为中间层的全栈开发方案</h4><ul><li>参考<code>淘宝前后端分离解决方案</code>中的一张图：<br><img src="/images/frontEndSeparation.png" alt="淘宝前后端分离解决方案配图" width="600" style="border:none"></li><li>有了NodeJS之后，<strong>前端可以更加专注于视图层</strong>，而让<strong>更多的数据逻辑放在Node层处理</strong>。</li><li>除了上图列举的作用，我们使用Node层还可以有下面的好处：<ul><li>渲染页面，体验优化</li><li>中间层带来的性能问题，在异步ajax转成同步渲染过程中得到平衡</li></ul></li><li>NodeJS对于<strong>数据的运算、逻辑处理</strong>及<strong>数据库的操作</strong>不如java方便、快捷、稳定，因此，将NodeJS作为中间层，<strong>从底层java获取数据、对数据做简单的处理</strong>后返回给客户端。</li><li>对于前端来说，NodeJS的学习成本是相当低的：我们无需学习一门新的语言，就能做到以前开发帮我们做的事情，一切都显得那么自然。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;后端&lt;/strong&gt;出于性能和别的原因，&lt;strong&gt;提供的接口所返回的数据格式也许不太适合前端直接使用&lt;/strong&gt;，前端所需的&lt;strong&gt;排序功能&lt;/strong&gt;、&lt;strong&gt;筛选功能&lt;/strong&gt;，以及到了&lt;strong&gt;视图层的页面展现&lt;/strong&gt;，也许都&lt;strong&gt;需要对接口所提供的数据进行二次处理&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;这些处理虽可以放在前端来进行，但也许&lt;strong&gt;数据量一大便会浪费浏览器性能&lt;/strong&gt;。因而现今，&lt;strong&gt;增加node端&lt;/strong&gt;便是一种良好的解决方案。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Node.js" scheme="https://chongtianhong.github.io/tags/Node-js/"/>
+    
+      <category term="前后端分离" scheme="https://chongtianhong.github.io/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>jQuery ajax()使用serialize()提交form数据</title>
@@ -520,58 +580,6 @@
       <category term="Node.js" scheme="https://chongtianhong.github.io/tags/Node-js/"/>
     
       <category term="前后端分离" scheme="https://chongtianhong.github.io/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端有用网址收藏</title>
-    <link href="https://chongtianhong.github.io/2018/06/11/webStudyLink/"/>
-    <id>https://chongtianhong.github.io/2018/06/11/webStudyLink/</id>
-    <published>2018-06-11T13:00:10.000Z</published>
-    <updated>2018-09-12T02:22:54.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="Web方面"><a href="#Web方面" class="headerlink" title="Web方面"></a>Web方面</h4><ul><li>JS注释规范：<a href="http://usejsdoc.org/" target="_blank" rel="noopener">http://usejsdoc.org/</a></li><li>查看HTML5是否符合大纲：<a href="https://gsnedders.html5.org/outliner/" target="_blank" rel="noopener">https://gsnedders.html5.org/outliner/</a></li><li>浏览器CSS支持情况查询：<a href="http://www.caniuse.com" target="_blank" rel="noopener">http://www.caniuse.com</a><a id="more"></a></li><li>TGideas整体WEB解决方案：<a href="http://tguide.qq.com/main/index.htm" target="_blank" rel="noopener">http://tguide.qq.com/main/index.htm</a></li><li>在线API文档：<a href="http://tool.oschina.net/apidocs/api" target="_blank" rel="noopener">http://tool.oschina.net/apidocs/api</a></li><li>剖析Vue原理：<a href="https://segmentfault.com/a/1190000006599500" target="_blank" rel="noopener">https://segmentfault.com/a/1190000006599500</a></li></ul><h4 id="学习教程或文档"><a href="#学习教程或文档" class="headerlink" title="学习教程或文档"></a>学习教程或文档</h4><ul><li>Vue.js：<a href="https://cn.vuejs.org/" target="_blank" rel="noopener">https://cn.vuejs.org/</a></li><li>React.js：<a href="https://react.bootcss.com/" target="_blank" rel="noopener">https://react.bootcss.com/</a></li><li>MDN：<a href="https://developer.mozilla.org/zh-CN/" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/</a></li><li>w3school：<a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">http://www.w3school.com.cn/</a></li><li>菜鸟教程：<a href="http://www.runoob.com/" target="_blank" rel="noopener">http://www.runoob.com/</a></li><li>易百教程：<a href="http://www.yiibai.com" target="_blank" rel="noopener">http://www.yiibai.com</a></li><li>瓢城WEB俱乐部：<a href="http://www.ycku.com/" target="_blank" rel="noopener">http://www.ycku.com/</a></li><li>coursera在线学习：<a href="https://www.coursera.org" target="_blank" rel="noopener">https://www.coursera.org</a></li><li>慕课网：<a href="https://www.imooc.com" target="_blank" rel="noopener">https://www.imooc.com</a></li><li>互联网工程任务组：<a href="https://tools.ietf.org" target="_blank" rel="noopener">https://tools.ietf.org</a></li></ul><h4 id="社区"><a href="#社区" class="headerlink" title="社区"></a>社区</h4><ul><li>牛客网：<a href="https://www.nowcoder.com/" target="_blank" rel="noopener">https://www.nowcoder.com/</a></li><li>知乎：<a href="https://www.zhihu.com" target="_blank" rel="noopener">https://www.zhihu.com</a></li><li>掘金：<a href="https://juejin.im" target="_blank" rel="noopener">https://juejin.im</a></li><li>推酷网：<a href="http://www.tuicool.com/" target="_blank" rel="noopener">http://www.tuicool.com/</a></li><li>Vue.js中文论坛：<a href="https://forum.vuejs.org/c/chinese" target="_blank" rel="noopener">https://forum.vuejs.org/c/chinese</a></li><li>IM开发社区：<a href="http://www.52im.net/" target="_blank" rel="noopener">http://www.52im.net/</a></li><li>SegmentFault：<a href="https://segmentfault.com" target="_blank" rel="noopener">https://segmentfault.com</a></li><li>StackOverFlow：<a href="https://stackoverflow.com" target="_blank" rel="noopener">https://stackoverflow.com</a></li></ul><h4 id="关于图标"><a href="#关于图标" class="headerlink" title="关于图标"></a>关于图标</h4><ul><li>阿里图标：<a href="http://www.iconfont.cn" target="_blank" rel="noopener">http://www.iconfont.cn</a></li><li>IconFinder：<a href="https://www.iconfinder.com" target="_blank" rel="noopener">https://www.iconfinder.com</a></li><li>FontAwesome：<a href="https://fontawesome.com/" target="_blank" rel="noopener">https://fontawesome.com/</a></li></ul><h4 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h4><ul><li>S6教程：<a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">http://es6.ruanyifeng.com/</a></li><li>Understanding ECMAScript 6：<a href="https://sagittarius-rev.gitbooks.io/understanding-ecmascript-6-zh-ver/content/" target="_blank" rel="noopener">https://sagittarius-rev.gitbooks.io/understanding-ecmascript-6-zh-ver/content/</a></li><li>Node入门：<a href="https://www.nodebeginner.org/index-zh-cn.html" target="_blank" rel="noopener">https://www.nodebeginner.org/index-zh-cn.html</a></li><li>Webpack入门：<a href="https://love2.io/@hfpp2012/doc/webpack-tutorial/README.md" target="_blank" rel="noopener">https://love2.io/@hfpp2012/doc/webpack-tutorial/README.md</a></li><li>Express框架：<a href="http://www.expressjs.com.cn/" target="_blank" rel="noopener">http://www.expressjs.com.cn/</a></li><li>Koa框架：<a href="https://koa.bootcss.com/" target="_blank" rel="noopener">https://koa.bootcss.com/</a></li></ul><h4 id="色彩查询"><a href="#色彩查询" class="headerlink" title="色彩查询"></a>色彩查询</h4><ul><li>网页色彩常用搭配表：<a href="http://tool.c7sky.com/webcolor/" target="_blank" rel="noopener">http://tool.c7sky.com/webcolor/</a> </li><li>颜色表及html代码：<a href="http://xh.5156edu.com/page/z1015m9220j18754.html" target="_blank" rel="noopener">http://xh.5156edu.com/page/z1015m9220j18754.html</a> </li><li>rgb颜色查询对照表：<a href="http://www.999.com/tool/rgb.html" target="_blank" rel="noopener">http://www.999.com/tool/rgb.html</a></li></ul><h4 id="博客推荐"><a href="#博客推荐" class="headerlink" title="博客推荐"></a>博客推荐</h4><ul><li>阮一峰：<a href="http://www.ruanyifeng.com/blog/" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/</a></li><li>刘哇勇：<a href="http://www.cnblogs.com/Wayou/" target="_blank" rel="noopener">http://www.cnblogs.com/Wayou/</a></li><li>胡孙杨：<a href="http://hcysun.me/" target="_blank" rel="noopener">http://hcysun.me/</a></li><li>郭锦荣：<a href="http://www.cnblogs.com/jr1993/" target="_blank" rel="noopener">http://www.cnblogs.com/jr1993/</a></li><li>张鑫旭：<a href="https://www.zhangxinxu.com/" target="_blank" rel="noopener">https://www.zhangxinxu.com/</a></li></ul><h4 id="测试调试"><a href="#测试调试" class="headerlink" title="测试调试"></a>测试调试</h4><ul><li>JSFiddle：<a href="https://jsfiddle.net/" target="_blank" rel="noopener">https://jsfiddle.net/</a></li><li>codeOpen：<a href="https://codepen.io/" target="_blank" rel="noopener">https://codepen.io/</a></li><li>在线正则表达式：<a href="http://tool.oschina.net/regex/" target="_blank" rel="noopener">http://tool.oschina.net/regex/</a></li><li>移动前端开发调试：<a href="http://yujiangshui.com/multidevice-frontend-debug/" target="_blank" rel="noopener">http://yujiangshui.com/multidevice-frontend-debug/</a></li></ul><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><ul><li>hexo博客搭建：<a href="https://hexo.io/" target="_blank" rel="noopener">https://hexo.io/</a></li><li>webstorm 2017 激活破解：<a href="http://blog.csdn.net/it_talk/article/details/52448597" target="_blank" rel="noopener">http://blog.csdn.net/it_talk/article/details/52448597</a></li><li>webstorm 2018 激活破解方法大全：<a href="https://blog.csdn.net/voke_/article/details/76418116" target="_blank" rel="noopener">https://blog.csdn.net/voke_/article/details/76418116</a></li><li>81道经典Vue面试题总结（长期更新）：<a href="https://segmentfault.com/a/1190000016351284" target="_blank" rel="noopener">https://segmentfault.com/a/1190000016351284</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;Web方面&quot;&gt;&lt;a href=&quot;#Web方面&quot; class=&quot;headerlink&quot; title=&quot;Web方面&quot;&gt;&lt;/a&gt;Web方面&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;JS注释规范：&lt;a href=&quot;http://usejsdoc.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://usejsdoc.org/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;查看HTML5是否符合大纲：&lt;a href=&quot;https://gsnedders.html5.org/outliner/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://gsnedders.html5.org/outliner/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;浏览器CSS支持情况查询：&lt;a href=&quot;http://www.caniuse.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://www.caniuse.com&lt;/a&gt;
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="网址" scheme="https://chongtianhong.github.io/tags/%E7%BD%91%E5%9D%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端渲染与后端渲染的区别</title>
-    <link href="https://chongtianhong.github.io/2018/06/10/diffBetweenFEandSE/"/>
-    <id>https://chongtianhong.github.io/2018/06/10/diffBetweenFEandSE/</id>
-    <published>2018-06-10T11:03:46.000Z</published>
-    <updated>2018-09-10T12:11:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li><strong>渲染</strong>的本质：字符串的拼接，将<strong>数据</strong>渲染进<strong>固定格式的html代码</strong>中，形成最终的html显示在用户页面上。<a id="more"></a></li></ul><h4 id="前端渲染"><a href="#前端渲染" class="headerlink" title="前端渲染"></a>前端渲染</h4><ul><li>指的是前端向后端发起请求，<strong>后端返回JSON数据</strong>，前端利用预先写的html模板，循环读取JSON数据，拼接字符串（es6的模板字符串特性大大减少了拼接字符串的的成本），并插入页面。</li><li>也就是说，<strong>前端渲染</strong>就是后端返回的html是静态文件，作为纯文件形式的存在，<strong>后端直接吐给前端，不做任何涂抹</strong>，前端拿到后执行决定做什么。</li><li><strong>好处</strong>：<ul><li>网络传输数据量小。</li><li>不占用服务端运算资源（解析模板），模板在前端（很有可能仅部分在前端），改结构变交互都由前端自己完成。</li></ul></li><li><strong>坏处</strong>：<ul><li>前端耗时较多，对前端工作人员水平要求相对较高。</li><li>前端代码较多，因为部分以前在后台处理的交互逻辑交给了前端处理。</li><li>占用少部分客户端运算资源用于解析模板。</li></ul></li></ul><h4 id="后端渲染"><a href="#后端渲染" class="headerlink" title="后端渲染"></a>后端渲染</h4><ul><li>指的是前端发起请求，<strong>后端用后台模板引擎（例如ejs等）直接生成html</strong>，前端接受到html数据之后，直接插入页面。</li><li>也就是说，<strong>后端渲染</strong>就是<strong>html先被后端涂抹过一遍</strong>再给前端（前端拿到后是否要再涂抹则随意）。</li><li>好处：<ul><li>前端耗时少，即<strong>减少了首屏时间</strong>，模板统一在后端。</li><li>前端（相对）省事，不占用客户端运算资源（解析模板）。</li></ul></li><li>坏处：<ul><li>占用服务器资源，请求的数据量偏大，前端的交互样式更改需要联动修改。</li></ul></li></ul><h4 id="前端渲染与后端渲染对比"><a href="#前端渲染与后端渲染对比" class="headerlink" title="前端渲染与后端渲染对比"></a>前端渲染与后端渲染对比</h4><h5 id="后端渲染-1"><a href="#后端渲染-1" class="headerlink" title="后端渲染"></a>后端渲染</h5><ul><li><strong>页面呈现速度快</strong>，受限于用户的带宽。</li><li><strong>流量消耗少一点点</strong>（可以省去前端框架部分的代码）。</li><li><strong>可维护性差</strong>，不利于前后端分离。</li><li><strong>seo友好度好</strong>，因为后端已经渲染好了，所以加载体验相对较好，网速差时表现较差。</li><li><strong>编码效率低</strong>。</li><li>相对模块化，适用于片展示型的页面。</li></ul><h5 id="前端渲染-1"><a href="#前端渲染-1" class="headerlink" title="前端渲染"></a>前端渲染</h5><ul><li>页面呈现速度主要<strong>受限于带宽和客户端机器的好坏</strong>，优化得好可以逐步动态展开内容，感觉上会更快一点。</li><li><strong>流量消耗多一点点</strong>（一个前端框架大概50KB），当然，有的用后端渲染的项目前端部分也有在用框架。</li><li><strong>可维护性好</strong>，不必反复请求，理论上更加符合前后端分离。</li><li><strong>SEO友好度差</strong>，大量使用ajax，多数浏览器不能抓取ajax数据。</li><li><strong>编码效率高</strong>，前后端各自只做自己擅长的东西，后端最后只输出接口，不用管页面呈现，只要前后端人员能力不错，效率不会低。</li><li>比较灵活，适用于<strong>DOM操作比较频繁</strong>或<strong>交互复杂</strong>的业务场景。</li></ul><h5 id="从后端渲染到前端渲染的改变"><a href="#从后端渲染到前端渲染的改变" class="headerlink" title="从后端渲染到前端渲染的改变"></a>从后端渲染到前端渲染的改变</h5><blockquote>计算机任务的转移</blockquote><ul><li>原本由服务器渲染的任务交给客户端，当有大量用户访问时，大大减轻了后端的压力。性能大大提高，因为服务器做的事情确实减少了。而且随着客户端硬件的发展，也能处理好多数的渲染任务。</li></ul><blockquote>放弃前端权限</blockquote><ul><li>将页面整个UI逻辑交给客户端的话，一些有经验的用户可能会看到一些本不该看到的页面，违反了安全原则。所以<strong>后端不能轻信从前端传来的数据</strong>，一定要<strong>做好过滤与验证</strong>。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;渲染&lt;/strong&gt;的本质：字符串的拼接，将&lt;strong&gt;数据&lt;/strong&gt;渲染进&lt;strong&gt;固定格式的html代码&lt;/strong&gt;中，形成最终的html显示在用户页面上。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="渲染" scheme="https://chongtianhong.github.io/tags/%E6%B8%B2%E6%9F%93/"/>
     
   </entry>
   
