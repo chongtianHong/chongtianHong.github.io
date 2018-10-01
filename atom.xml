@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-09-29T14:14:23.405Z</updated>
+  <updated>2018-10-01T14:44:54.279Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://chongtianhong.github.io/2018/06/28/josnpAndSecurity/"/>
     <id>https://chongtianhong.github.io/2018/06/28/josnpAndSecurity/</id>
     <published>2018-06-28T05:43:38.000Z</published>
-    <updated>2018-09-29T14:14:23.405Z</updated>
+    <updated>2018-10-01T14:44:54.279Z</updated>
     
     <content type="html"><![CDATA[<h4 id="jsonp跨域访问的实现"><a href="#jsonp跨域访问的实现" class="headerlink" title="jsonp跨域访问的实现"></a>jsonp跨域访问的实现</h4><ul><li><strong>跨域的安全限制都是对浏览器端来说的</strong>，服务器端是不存在跨域安全限制的。</li><li><strong>浏览器的同源策略</strong>限制从一个源加载的文档或脚本与来自另一个源的资源进行交互。</li><li>如果<strong>协议，端口和主机</strong>对于两个页面是<strong>相同</strong>的，<strong>则两个页面具有相同的源</strong>，否则就是不同源的。</li><li>如果要<strong>在脚本里发起跨域请求</strong>，则要进行一些特殊处理了。例如，可以采用<strong>后台代理</strong>的方式，把请求发到自己的服务端，再通过后台代码发起请求，再将数据返回前端。<a id="more"></a></li><li><a href="https://www.cnblogs.com/chiangchou/p/jsonp.html" target="_blank" rel="noopener">一篇博客</a>对<strong>使用jquery的jsonp如何发起跨域请求及其原理</strong>进行了详细地介绍。</li></ul><h4 id="jsonp可能导致的安全问题"><a href="#jsonp可能导致的安全问题" class="headerlink" title="jsonp可能导致的安全问题"></a>jsonp可能导致的安全问题</h4><ul><li>了解了jsonp之后，可以看到，<strong>jsonp主要就是用来实现跨域的数据获取</strong>。</li><li>如果跨域的接口是暴露在公网上的，如果跨域接口是public级别，则无所谓安全问题，如果跨域接口是private级别，则<strong>必须对访问者做校验验证来访的Request的合法性</strong>的。目前已知的有<strong>Referer校验</strong>和<strong>Token校验</strong>。</li></ul><h5 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a>Referer</h5><div class="note info">HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。</div><ul><li>这里通过对header中的访问发起者的来源进行验证来保证安全性，但是这个<strong>Referer是存在被绕过的可能的</strong>，绕过的主要原理就是“不发送Referer” ，如<ul><li>使用data URI方案 </li><li>从HTTPS向HTTP发起请求</li></ul></li></ul><h5 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h5><div class="note info">主要是指能代表用户身份的标识</div><ul><li>这个部分破解的难度较高，但是通过在运行非同源跨域的网站植入恶意代码，间接依靠“白名单”站点来获取Token发起跨域访问，可以同时绕过Referer和Token的问题，但是植入恶意代码的难度较高。</li></ul><h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ul><li>总的来说<strong>Referer和Token校验是标准</strong>，必须要使用的，<strong>可以解决常规安全问题</strong>，<strong>最稳妥的是不使用jsonp</strong>，改用别的跨域方案（H5 提供的跨域方案postMessage、CORS、WebSocket）。</li></ul>]]></content>
     
@@ -44,7 +44,7 @@
     
       <category term="跨域" scheme="https://chongtianhong.github.io/tags/%E8%B7%A8%E5%9F%9F/"/>
     
-      <category term="jsonp" scheme="https://chongtianhong.github.io/tags/jsonp/"/>
+      <category term="Jsonp" scheme="https://chongtianhong.github.io/tags/Jsonp/"/>
     
   </entry>
   
