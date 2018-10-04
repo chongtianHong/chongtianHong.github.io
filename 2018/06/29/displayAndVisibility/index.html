@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="深入display:none 我们都清楚当元素设置display:none后，界面上将不会显示该元素，并且该元素不占布局空间，但我们仍然可以通过JavaScript操作该元素。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-04T12:48:39.243Z">
+<meta property="og:updated_time" content="2018-10-04T13:46:53.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="display:none与visibility:hidden的对比">
 <meta name="twitter:description" content="深入display:none 我们都清楚当元素设置display:none后，界面上将不会显示该元素，并且该元素不占布局空间，但我们仍然可以通过JavaScript操作该元素。">
@@ -411,14 +411,14 @@
 <blockquote>2、HTML5中新增hidden布尔属性，让开发者自定义元素的隐藏</blockquote>
 
 <ul>
-<li>示例：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* 兼容原生不支持hidden属性的浏览器  */</span><br><span class="line">[hidden]&#123;</span><br><span class="line">  display: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;span hidden&gt;Hide and Seek: You can<span class="string">'t see me!&lt;/span&gt;</span></span><br></pre></td></tr></table></figure>
+<li>示例：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* 兼容原生不支持hidden属性的浏览器  */</span><br><span class="line">[hidden]&#123;</span><br><span class="line">    display: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;span hidden&gt;Hide and Seek: You can<span class="string">'t see me!&lt;/span&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>3、父元素为display:none，后代元素都不可见</blockquote>
 
 <ul>
 <li><p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.hidden&#123;</span><br><span class="line">  display: none;</span><br><span class="line">&#125;</span><br><span class="line">.visible&#123;</span><br><span class="line">  display: block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">*** START ***</span><br><span class="line">&lt;div class=<span class="string">"hidden"</span>&gt;</span><br><span class="line">  I<span class="string">'m parent!</span></span><br><span class="line"><span class="string">  &lt;div class="visible"&gt; I'</span>m son! &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">*** END ***</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.hidden&#123;</span><br><span class="line">    display: none;</span><br><span class="line">&#125;</span><br><span class="line">.visible&#123;</span><br><span class="line">    display: block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">*** START ***</span><br><span class="line">&lt;div class=<span class="string">"hidden"</span>&gt;</span><br><span class="line">    I<span class="string">'m parent!</span></span><br><span class="line"><span class="string">    &lt;div class="visible"&gt; I'</span>m son! &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">*** END ***</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>浏览器直接显示为：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*** START ***</span><br><span class="line">*** END ***</span><br></pre></td></tr></table></figure>
@@ -435,6 +435,52 @@
 <ul>
 <li>由于<strong><code>display:none</code>的元素根本不会在界面上渲染</strong>，就是连一个像素的都不占，因此自然<strong>无法通过鼠标点击命中</strong>，而<strong>元素也无法获取焦点</strong>，那么<strong>也不能成为键盘事件的命中目标</strong>。</li>
 <li>当父元素的<code>display</code>为<code>none</code>时，子元素的<code>display</code>必定为<code>none</code>，因此元素也没有机会位于事件捕获或冒泡阶段的路径上，因此<strong><code>display:none</code>的元素无法响应事件</strong>。</li>
+</ul>
+<blockquote>6、不耽误form表单提交数据</blockquote>
+
+<ul>
+<li>虽然我们无法看到<code>display:none</code>的元素，但<strong>当表单提交时，依然会将隐藏的input元素的值提交上去</strong>。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form&gt;</span><br><span class="line">    &lt;input <span class="built_in">type</span>=<span class="string">"hidden"</span> name=<span class="string">"id"</span>&gt;</span><br><span class="line">    &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"gguid"</span> style=<span class="string">"display:none"</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>7、display变化时将触发reflow</blockquote>
+
+<ul>
+<li>撇开<code>display:none</code>，我们看看<strong><code>display:block</code>表示元素位于BFC中</strong>，而<strong><code>display:inline</code>则表示元素位于IFC中</strong>，也就是说<strong>display就是用于设置元素所属的布局上下文</strong>，若<strong>修改display值</strong>则表示<strong>元素采用的布局方式已发生变化</strong>，因此，<strong>display变化时将触发reflow</strong>。</li>
+</ul>
+<blockquote>8、display:none让transition失效</blockquote>
+
+<ul>
+<li>详情请参考<a href="https://www.cnblogs.com/fsjohnhuang/p/9143035.html" target="_blank" rel="noopener">CSS魔法堂：Transition就这么好玩</a></li>
+</ul>
+<h4 id="深入visibility"><a href="#深入visibility" class="headerlink" title="深入visibility"></a>深入visibility</h4><ul>
+<li>visibility有两个不同的作用：<br>① 用于<strong>隐藏表格的行和列</strong><br>② 用于<strong>在不触发布局的情况下隐藏元素</strong></li>
+<li>visibility有四个有效值：<br>① visible：在界面上显示元素。<br>② hidden：让元素在见面上不可视，但保留元素原来占有的位置。<br>③ collapse：用于表格子元素(如tr,tbody,col,colgroup)时效果和<code>display:none</code>一样，用于其他元素上时则效果与<code>visibility:hidden</code>一样。不过由于各浏览器实现效果均有出入，因此<strong>一般不会使用这个值</strong>。<br>④ inherit：继承父元素的visibility值。</li>
+</ul>
+<h4 id="display-none和visibility-hidden的对比"><a href="#display-none和visibility-hidden的对比" class="headerlink" title="display:none和visibility:hidden的对比"></a>display:none和visibility:hidden的对比</h4><ul>
+<li>参照上面对<code>display:none</code>列出的8点注意事项，可对照列出<code>visibility:hidden</code>的注意事项：</li>
+</ul>
+<blockquote>1、父元素为visibility:hidden，而子元素可以设置为visibility:visible并且生效</blockquote>
+
+<ul>
+<li>示例：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">div&#123;</span><br><span class="line">    border: solid 2px blue;</span><br><span class="line">&#125;</span><br><span class="line">.visible&#123;</span><br><span class="line">    visibility: visible;</span><br><span class="line">&#125;</span><br><span class="line">.hidden&#123;</span><br><span class="line">    visibility: hidden;</span><br><span class="line">&#125;</span><br><span class="line">&lt;div class=<span class="string">"hidden"</span>&gt;</span><br><span class="line">    I<span class="string">'m Parent.</span></span><br><span class="line"><span class="string">    &lt;div class="visible"&gt;</span></span><br><span class="line"><span class="string">        I'</span>m Son.</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>2、和display:none一样无法获得焦点</blockquote>
+
+<blockquote>3、可在冒泡阶段响应事件</blockquote>
+
+<ul>
+<li>由于设置为<code>visibility:hidden</code>的元素其子元素可以为<code>visibility:visible</code>，因此隐藏的元素有可能位于事件冒泡的路径上，因此下面代码中，将鼠标移至属性为<code>.visible</code>的元素时，<code>.hidden</code>会的元素响应hover事件显示：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">div&#123;</span><br><span class="line">    border: solid 2px blue;</span><br><span class="line">&#125;</span><br><span class="line">.visible&#123;</span><br><span class="line">    visibility: visible;</span><br><span class="line">&#125;</span><br><span class="line">.hidden&#123;</span><br><span class="line">    visibility: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.hidden:hover&#123;</span><br><span class="line">    visibility: visible;</span><br><span class="line">&#125;</span><br><span class="line">&lt;div class=<span class="string">"hidden"</span>&gt;</span><br><span class="line">    I<span class="string">'m Parent.</span></span><br><span class="line"><span class="string">    &lt;div class="visible"&gt;</span></span><br><span class="line"><span class="string">        I'</span>m Son.</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>4、和display:none一样不妨碍form表单的提交</blockquote>
+
+<blockquote>5、Transition对visibility的变化有效</blockquote>
+
+<blockquote>6、visibility变化不会触发reflow</blockquote>
+
+<ul>
+<li>由于从<code>visible</code>设置为<code>hidden</code>时，<strong>不会改变元素布局相关的属性</strong>，因此<strong>不会触发reflow</strong>，只是静静地和其他渲染变化一起等待浏览器定时<strong>重绘</strong>界面。</li>
 </ul>
 
       
@@ -642,7 +688,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#深入display-none"><span class="nav-number">1.</span> <span class="nav-text">深入display:none</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#深入display-none"><span class="nav-number">1.</span> <span class="nav-text">深入display:none</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深入visibility"><span class="nav-number">2.</span> <span class="nav-text">深入visibility</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#display-none和visibility-hidden的对比"><span class="nav-number">3.</span> <span class="nav-text">display:none和visibility:hidden的对比</span></a></li></ol></div>
             
 
           </div>
