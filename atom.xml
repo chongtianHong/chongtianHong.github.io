@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-10-01T14:46:17.719Z</updated>
+  <updated>2018-10-04T06:54:22.212Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>display:none与visibility:hidden的对比</title>
+    <link href="https://chongtianhong.github.io/2018/10/04/displayAndVisibility/"/>
+    <id>https://chongtianhong.github.io/2018/10/04/displayAndVisibility/</id>
+    <published>2018-10-04T06:45:36.000Z</published>
+    <updated>2018-10-04T06:54:22.212Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="深入display-none"><a href="#深入display-none" class="headerlink" title="深入display:none"></a>深入display:none</h4><ul><li>我们都清楚当元素设置<code>display:none</code>后，<strong>界面上将不会显示该元素，并且该元素不占布局空间</strong>，但我们<strong>仍然可以通过JavaScript操作该元素</strong>。<a id="more"></a></li><li>这个涉及到<strong>浏览器的渲染原理</strong>：浏览器会<strong>解析HTML标签生成DOM Tree</strong>，<strong>解析CSS生成CSSOM</strong>，然后<strong>将DOM Tree和CSSOM合成生成Render Tree</strong>，元素在Render Tree中对应0或多个盒子，然后<strong>浏览器以盒子模型的信息布局和渲染界面</strong>。而<strong>设置为<code>display:none</code>的元素</strong>则在Render Tree中没有生成对应的盒子模型，因此<strong>后续的布局、渲染工作自然与它无关</strong>，至于<strong>DOM操作还是可以的</strong>。</li><li>但除了上面的知识点外，还有以下8个点我们需要注意的：</li></ul><blockquote>1、原生默认display:none的元素</blockquote><ul><li>其实<strong>浏览器原生元素</strong>中有不少自带<code>display:none</code>的元素，如<code>link</code>，<code>script</code>，<code>style</code>，<code>dialog</code>，<code>input[type=hidden]</code>等。</li></ul><blockquote>2、HTML5中新增hidden布尔属性，让开发者自定义元素的隐藏</blockquote><ul><li>示例：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* 兼容原生不支持hidden属性的浏览器  */</span><br><span class="line">[hidden]&#123;</span><br><span class="line">  display: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;span hidden&gt;Hide and Seek: You can<span class="string">'t see me!&lt;/span&gt;</span></span><br></pre></td></tr></table></figure></li></ul><blockquote>3、父元素为display:none，后代元素都不可见</blockquote><ul><li><p>示例：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.hidden&#123;</span><br><span class="line">  display: none;</span><br><span class="line">&#125;</span><br><span class="line">.visible&#123;</span><br><span class="line">  display: block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">*** START ***</span><br><span class="line">&lt;div class=<span class="string">"hidden"</span>&gt;</span><br><span class="line">  I<span class="string">'m parent!</span></span><br><span class="line"><span class="string">  &lt;div class="visible"&gt; I'</span>m son! &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">*** END ***</span><br></pre></td></tr></table></figure></li><li><p>浏览器直接显示为：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*** START ***</span><br><span class="line">*** END ***</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;深入display-none&quot;&gt;&lt;a href=&quot;#深入display-none&quot; class=&quot;headerlink&quot; title=&quot;深入display:none&quot;&gt;&lt;/a&gt;深入display:none&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;我们都清楚当元素设置&lt;code&gt;display:none&lt;/code&gt;后，&lt;strong&gt;界面上将不会显示该元素，并且该元素不占布局空间&lt;/strong&gt;，但我们&lt;strong&gt;仍然可以通过JavaScript操作该元素&lt;/strong&gt;。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="https://chongtianhong.github.io/tags/CSS/"/>
+    
+      <category term="display" scheme="https://chongtianhong.github.io/tags/display/"/>
+    
+      <category term="visibility" scheme="https://chongtianhong.github.io/tags/visibility/"/>
+    
+  </entry>
   
   <entry>
     <title>关于jsonp实现跨域访问，以及存在的安全问题</title>
@@ -209,11 +238,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
-    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
       <category term="兜底" scheme="https://chongtianhong.github.io/tags/%E5%85%9C%E5%BA%95/"/>
     
@@ -552,34 +581,6 @@
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="正则表达式" scheme="https://chongtianhong.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前后端分离内容介绍</title>
-    <link href="https://chongtianhong.github.io/2018/06/12/frontEndSeparation/"/>
-    <id>https://chongtianhong.github.io/2018/06/12/frontEndSeparation/</id>
-    <published>2018-06-12T06:20:54.000Z</published>
-    <updated>2018-09-11T07:50:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul><li>由于Node.js的逐渐成熟和日趋稳定，越来越多的公司中的前端团队开始尝试使用Node.js来练一下手，尝一尝鲜。</li><li>一般的做法都是将<strong>原本属于后端的一部分相对于业务不是很重要的功能</strong>迁移到Node.js上面来，也有一些公司<strong>将Node.js作为前后端分离的一个解决方案</strong>去施行。而像淘宝网这类的大型网站也很早的完成了前后端的分离，给我们这样的后来者提供了宝贵的经验。<a id="more"></a></li><li>接下来将对前后端分离的内容进行介绍。</li></ul><h4 id="认识前后端分离"><a href="#认识前后端分离" class="headerlink" title="认识前后端分离"></a>认识前后端分离</h4><ul><li>在<strong>传统的web应用开发</strong>中，大多数的程序员会<strong>将浏览器作为前后端的分界线</strong>。将<strong>浏览器中为用户进行页面展示的部分</strong>称之为<strong>前端</strong>，而将<strong>运行在服务器，为前端提供业务逻辑和数据准备的所有代码</strong>统称为<strong>后端</strong>。</li><li>由于前后端分离这个概念相对来说刚出现不久，很多人都是只闻其声，不见其形，所以可能会对它产生一些误解，误以为前后端分离只是一种web应用开发模式，只要在web应用的开发期进行了前后端开发工作的分工就是前后端分离。</li><li>其实<strong>前后端分离并不只是开发模式，还是web应用的一种架构模式</strong>。在开发阶段，前后端工程师约定好数据交互接口，实现<strong>并行开发和测试</strong>；在运行阶段前后端分离模式需要对web应用进行<strong>分离部署</strong>，前后端之间使用HTTP或者其他协议进行交互请求。然而作为一种<strong>架构模式</strong>，我们在实施的过程中主要对以下四个方面来进行比较和重新认识。</li><li>前后端分离大概可以从四个方面来理解：<br>1、交互形式<br>2、代码组织方式<br>3、开发模式<br>4、数据接口规范流程</li></ul><h5 id="交互形式"><a href="#交互形式" class="headerlink" title="交互形式"></a>交互形式</h5><ul><li>在前后端分离架构中，<strong>后端</strong>只需要负责<strong>按照约定的数据格式向前端提供可调用的API服务</strong>即可。<strong>前后端之间通过HTTP请求进行交互，前端获取到数据后，进行页面的组装和渲染，最终返回给浏览器</strong>。<br><img src="/images/frontEndSeparation1.jpg" width="600" alt="交互形式" style="border:none"></li></ul><h5 id="代码组织方式"><a href="#代码组织方式" class="headerlink" title="代码组织方式"></a>代码组织方式</h5><ul><li>在<strong>传统架构模式</strong>中，前后端代码存放于<strong>同一个代码库</strong>中，甚至是<strong>同一工程目录</strong>下。页面中还夹杂着后端代码。前后端工程师进行开发时，都必须把整个项目导入到开发工具中。<br><img src="/images/frontEndSeparation2.jpg" width="600" alt="代码组织方式" style="border:none"></li><li>而前后端分离模式在代码组织形式上有以下两种：<ul><li><strong>半分离</strong><br><strong>前后端共用一个代码库，但是代码分别存放在两个工程中</strong>。后端不关心或很少关心前端元素的输出情况，前端不能独立进行开发和测试，项目中缺乏前后端交互的测试用例。</li><li><strong>分离</strong><br><strong>前后端代码库分离</strong>，前端代码中有可以进行Mock测试(通过构造虚拟测试对象以简化测试环境的方法)的伪后端，能支持前端的独立开发和测试。而后端代码中除了功能实现外，还有着详细的测试用例，以保证API的可用性，降低集成风险。</li></ul></li></ul><h5 id="开发模式"><a href="#开发模式" class="headerlink" title="开发模式"></a>开发模式</h5><ul><li><strong>传统的MVC架构，整体没有进行前后端分离</strong>。在项目的开发阶段，前端工程师负责编写HTML，完成前端的页面设计并套页面，然后再使用模板技术将写好的前端代码转换为Smarty脚本，同时内嵌一些后端提供的模板变量和一些逻辑操作。应用运行期，将全部代码进行打包，和后端代码部署到同一服务器上，同时会进行简单的动静态分离部署。</li><li>此时，应用的开发流程如下图所示：<br><img src="/images/frontEndSeparation3.jpg" width="600" alt="开发模式1" style="border:none"></li><li>而在<strong>实现前后端分离架构之后</strong>，前端工程师只需要编写HTML、js、CSS等前端资源，然后通过HTTP请求调用后端提供的服务即可。除了<strong>开发期的分离</strong>，在<strong>运行期前后端资源</strong>也会<strong>进行分离部署</strong>。</li><li>前后端分离之后，开发流程将如下图所示。<br><img src="/images/frontEndSeparation4.jpg" width="600" alt="开发模式2" style="border:none"></li><li>通过上面的两幅流程图，不难发现，在开发模式上，前后端分离不仅仅只是工程师的分工开发，更重要的意义在于<strong>实现了前后端的并行开发，简化了开发流程</strong>。</li></ul><h5 id="数据接口规范流程"><a href="#数据接口规范流程" class="headerlink" title="数据接口规范流程"></a>数据接口规范流程</h5><ul><li>在<strong>开发期间</strong>前后端共同商定好数据接口的交互形式和数据格式。然后实现<strong>前后端的并行开发</strong>，其中前端工程师再开发完成之后可以独自进行mock测试，而后端也可以使用接口测试平台进行接口自测，然后<strong>前后端一起进行功能联调并校验格式</strong>，最终进行<strong>自动化测试</strong>。<br><img src="/images/frontEndSeparation5.jpg" width="600" alt="数据接口规范流程" style="border:none"></li></ul><h4 id="分离的四个好处"><a href="#分离的四个好处" class="headerlink" title="分离的四个好处"></a>分离的四个好处</h4><ul><li>前后端分离模式和传统的web应用架构相比有很大的不同，从目前应用软件开发的发展趋势来看，主要有两方面需要注意：<br>1、越来越<strong>注重用户体验</strong>，随着互联网的发展，开始<strong>多终端化</strong>。<br>2、大型应用架构模式正在向<strong>云化、微服务化</strong>发展。</li><li>通过前后端分离架构，可以为我们带来以下四个方面的提升：<ul><li><strong>为优质产品打造精益团队</strong><br>通过将开发团队前后端分离化，让前后端工程师只需要专注于前端或后端的开发工作，是的前后端工程师实现自治，培养其独特的技术特性，然后构建出一个全栈式的精益开发团队。</li><li><strong>提升开发效率</strong><br>前后端分离以后，可以实现前后端代码的解耦，只要前后端沟通约定好应用所需接口以及接口参数，便可以开始并行开发，无需等待对方的开发工作结束。与此同时，即使需求发生变更，只要接口与数据格式不变，后端开发人员就不需要修改代码，只要前端进行变动即可。如此一来整个应用的开发效率必然会有质的提升。</li><li><strong>完美应对复杂多变的前端需求</strong><br>如果开发团队能完成前后端分离的转型，打造优秀的前后端团队，开发独立化，让开发人员做到专注专精，开发能力必然会有所提升，能够完美应对各种复杂多变的前端需求。</li><li><strong>增强代码可维护性</strong><br>前后端分离后，应用的代码不再是前后端混合，只有在运行期才会有调用依赖关系。</li></ul></li><li>应用代码将会变得整洁清晰，不论是代码阅读还是代码维护都会比以前轻松。</li></ul><h4 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h4><ul><li>前后端分离并非仅仅只是前后端开发的分工，而是<ul><li>在<strong>开发期</strong>进行<strong>代码存放分离</strong>、<strong>前后端开发职责分离</strong>，<strong>前后端能够独立进行开发测试</strong>；</li><li>在<strong>运行期</strong>进行<strong>应用部署分离</strong>，<strong>前后端之间通过HTTP请求进行通讯</strong>。</li></ul></li><li>前后端分离的开发模式与传统模式相比，能为我们<strong>提升开发效率、增强代码可维护性</strong>，让我们有规划地打造一个前后端并重的精益开发团队，更好地应对越来越复杂多变的Web应用开发需求。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;由于Node.js的逐渐成熟和日趋稳定，越来越多的公司中的前端团队开始尝试使用Node.js来练一下手，尝一尝鲜。&lt;/li&gt;
-&lt;li&gt;一般的做法都是将&lt;strong&gt;原本属于后端的一部分相对于业务不是很重要的功能&lt;/strong&gt;迁移到Node.js上面来，也有一些公司&lt;strong&gt;将Node.js作为前后端分离的一个解决方案&lt;/strong&gt;去施行。而像淘宝网这类的大型网站也很早的完成了前后端的分离，给我们这样的后来者提供了宝贵的经验。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Node.js" scheme="https://chongtianhong.github.io/tags/Node-js/"/>
-    
-      <category term="前后端分离" scheme="https://chongtianhong.github.io/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/"/>
     
   </entry>
   
