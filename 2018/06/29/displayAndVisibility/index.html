@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="深入display:none 我们都清楚当元素设置display:none后，界面上将不会显示该元素，并且该元素不占布局空间，但我们仍然可以通过JavaScript操作该元素。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-04T13:46:53.398Z">
+<meta property="og:updated_time" content="2018-10-04T14:12:16.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="display:none与visibility:hidden的对比">
 <meta name="twitter:description" content="深入display:none 我们都清楚当元素设置display:none后，界面上将不会显示该元素，并且该元素不占布局空间，但我们仍然可以通过JavaScript操作该元素。">
@@ -401,14 +401,14 @@
         <h4 id="深入display-none"><a href="#深入display-none" class="headerlink" title="深入display:none"></a>深入display:none</h4><ul>
 <li>我们都清楚当元素设置<code>display:none</code>后，<strong>界面上将不会显示该元素，并且该元素不占布局空间</strong>，但我们<strong>仍然可以通过JavaScript操作该元素</strong>。<a id="more"></a></li>
 <li>这个涉及到<strong>浏览器的渲染原理</strong>：浏览器会<strong>解析HTML标签生成DOM Tree</strong>，<strong>解析CSS生成CSSOM</strong>，然后<strong>将DOM Tree和CSSOM合成生成Render Tree</strong>，元素在Render Tree中对应0或多个盒子，然后<strong>浏览器以盒子模型的信息布局和渲染界面</strong>。而<strong>设置为<code>display:none</code>的元素</strong>则在Render Tree中没有生成对应的盒子模型，因此<strong>后续的布局、渲染工作自然与它无关</strong>，至于<strong>DOM操作还是可以的</strong>。</li>
-<li>但除了上面的知识点外，还有以下8个点我们需要注意的：</li>
+<li>但除了上面的知识点外，还有以下8个是我们需要注意的：</li>
 </ul>
 <blockquote>1、原生默认display:none的元素</blockquote>
 
 <ul>
 <li>其实<strong>浏览器原生元素</strong>中有不少自带<code>display:none</code>的元素，如<code>link</code>，<code>script</code>，<code>style</code>，<code>dialog</code>，<code>input[type=hidden]</code>等。</li>
 </ul>
-<blockquote>2、HTML5中新增hidden布尔属性，让开发者自定义元素的隐藏</blockquote>
+<blockquote>2、HTML5中新增<strong>hidden布尔属性</strong>，让开发者自定义元素的隐藏</blockquote>
 
 <ul>
 <li>示例：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* 兼容原生不支持hidden属性的浏览器  */</span><br><span class="line">[hidden]&#123;</span><br><span class="line">    display: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;span hidden&gt;Hide and Seek: You can<span class="string">'t see me!&lt;/span&gt;</span></span><br></pre></td></tr></table></figure>
@@ -456,7 +456,7 @@
 <li>visibility有两个不同的作用：<br>① 用于<strong>隐藏表格的行和列</strong><br>② 用于<strong>在不触发布局的情况下隐藏元素</strong></li>
 <li>visibility有四个有效值：<br>① visible：在界面上显示元素。<br>② hidden：让元素在见面上不可视，但保留元素原来占有的位置。<br>③ collapse：用于表格子元素(如tr,tbody,col,colgroup)时效果和<code>display:none</code>一样，用于其他元素上时则效果与<code>visibility:hidden</code>一样。不过由于各浏览器实现效果均有出入，因此<strong>一般不会使用这个值</strong>。<br>④ inherit：继承父元素的visibility值。</li>
 </ul>
-<h4 id="display-none和visibility-hidden的对比"><a href="#display-none和visibility-hidden的对比" class="headerlink" title="display:none和visibility:hidden的对比"></a>display:none和visibility:hidden的对比</h4><ul>
+<h4 id="visibility-hidden的注意事项"><a href="#visibility-hidden的注意事项" class="headerlink" title="visibility:hidden的注意事项"></a>visibility:hidden的注意事项</h4><ul>
 <li>参照上面对<code>display:none</code>列出的8点注意事项，可对照列出<code>visibility:hidden</code>的注意事项：</li>
 </ul>
 <blockquote>1、父元素为visibility:hidden，而子元素可以设置为visibility:visible并且生效</blockquote>
@@ -688,7 +688,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#深入display-none"><span class="nav-number">1.</span> <span class="nav-text">深入display:none</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深入visibility"><span class="nav-number">2.</span> <span class="nav-text">深入visibility</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#display-none和visibility-hidden的对比"><span class="nav-number">3.</span> <span class="nav-text">display:none和visibility:hidden的对比</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#深入display-none"><span class="nav-number">1.</span> <span class="nav-text">深入display:none</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深入visibility"><span class="nav-number">2.</span> <span class="nav-text">深入visibility</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#visibility-hidden的注意事项"><span class="nav-number">3.</span> <span class="nav-text">visibility:hidden的注意事项</span></a></li></ol></div>
             
 
           </div>
