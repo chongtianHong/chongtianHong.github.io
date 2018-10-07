@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-10-06T09:58:55.755Z</updated>
+  <updated>2018-10-07T12:29:03.024Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux常用指令学习记录</title>
+    <link href="https://chongtianhong.github.io/2018/07/01/linux/"/>
+    <id>https://chongtianhong.github.io/2018/07/01/linux/</id>
+    <published>2018-07-01T12:17:26.000Z</published>
+    <updated>2018-10-07T12:29:03.024Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul><li>本文主要为学习贴，用来记录一些linux上的常用指令以供参考。<a id="more"></a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;本文主要为学习贴，用来记录一些linux上的常用指令以供参考。
+    
+    </summary>
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="linux" scheme="https://chongtianhong.github.io/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>webSocket</title>
@@ -555,34 +580,6 @@
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
     
       <category term="cookie" scheme="https://chongtianhong.github.io/tags/cookie/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>通过url携带数据在HTML页面间跳转传值</title>
-    <link href="https://chongtianhong.github.io/2018/06/14/passUrlValuesBThtmlPages/"/>
-    <id>https://chongtianhong.github.io/2018/06/14/passUrlValuesBThtmlPages/</id>
-    <published>2018-06-14T03:28:34.000Z</published>
-    <updated>2018-09-25T13:11:43.550Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><ul><li>静态页面间如何跳转传值？我在网上搜索后发现方法有几种：<br>① 通过 url 携带数据<br>② 通过 cookie<br>③ 通过 html5 的 sessionStorage 或 localStorage</li><li>本文总结了<strong>通过 url 携带数据传值</strong>的方法。<a id="more"></a></li></ul><h4 id="场景及实现"><a href="#场景及实现" class="headerlink" title="场景及实现"></a>场景及实现</h4><ul><li>假设有 A、B 两个页面，A 页面有一超链接跳转到 B 页面，并将携带的数据填充到 B 页面的 input 框里面。</li><li><p>先看 A 页面代码：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;A page&lt;/title&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.bootcss.com/jquery/3.2.1/jquery.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        $(document).ready(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">            // 拼接跳转url中要传输的数据</span><br><span class="line">            var dataList = [];</span><br><span class="line">            var dataStr;</span><br><span class="line">            dataList.push(<span class="string">'apple'</span>);</span><br><span class="line">            dataList.push(<span class="string">'bear'</span>);</span><br><span class="line">            dataStr = JSON.toStringify(dataList);</span><br><span class="line"></span><br><span class="line">            $(<span class="string">'#aPage'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                $(<span class="string">'#aPage'</span>).attr(<span class="string">"href"</span>, <span class="string">"b.html?data="</span> + dataStr);</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;a href=<span class="string">"b.html"</span> id=<span class="string">"aPage"</span>&gt;在url里带数据跳转到b页面&lt;/a&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li><li><p>说明：</p><ul><li>首先我定义一个字符串数组 dataList 来存放传递的数据；</li><li>这里假设我要传递的数据为 <strong>apple,bear</strong>；</li><li>通过 jQuery 的点击事件，将 a 标签的 href 属性修改成加上数据的 url。</li></ul></li><li><p>接着看 B 页面代码：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;B page&lt;/title&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.bootcss.com/jquery/3.2.1/jquery.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> id=<span class="string">"getUrlData"</span>&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        $(document).ready(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">            //使用正则表达式获取url中的参数</span><br><span class="line">            <span class="keyword">function</span> getUrlParam(name) &#123;</span><br><span class="line">                //构造一个含有目标参数的正则表达式对象</span><br><span class="line">                var reg = new RegExp(<span class="string">"(^|&amp;)"</span> + name + <span class="string">"=([^&amp;]*)(&amp;|$)"</span>);</span><br><span class="line">                //匹配目标参数 </span><br><span class="line">                var r = window.location.search.substr(1).match(reg);  </span><br><span class="line">                //返回参数值</span><br><span class="line">                <span class="keyword">if</span> (r != null) <span class="built_in">return</span> unescape(r[2]); <span class="built_in">return</span> null;</span><br><span class="line">            &#125;</span><br><span class="line">            var urlData = getUrlParam(<span class="string">'data'</span>);</span><br><span class="line">            // 将数据填充到input框里面</span><br><span class="line">            $(<span class="string">'#getUrlData'</span>).val(urlData);</span><br><span class="line">        &#125;);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li><li><p>说明：</p><ul><li>创建一个 JavaScript 函数，使用正则表达式获取 url 里面的数据值；</li><li>将数据填充到 input 框里面。</li></ul></li></ul><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul><li>利用 url 在静态页面间传值，无非是<strong>利用 url 里 <code>?</code> 后面携带的数据</strong>，然后<strong>在目标页面通过方法获取传过来的数据</strong>，在本文中<strong>通过正则表达式检索数据并获取</strong>。</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;静态页面间如何跳转传值？我在网上搜索后发现方法有几种：&lt;br&gt;① 通过 url 携带数据&lt;br&gt;② 通过 cookie&lt;br&gt;③ 通过 html5 的 sessionStorage 或 localStorage&lt;/li&gt;
-&lt;li&gt;本文总结了&lt;strong&gt;通过 url 携带数据传值&lt;/strong&gt;的方法。
-    
-    </summary>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
-    
-      <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="正则表达式" scheme="https://chongtianhong.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     
   </entry>
   
