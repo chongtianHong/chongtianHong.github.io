@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chongtianhong.github.io/"/>
-  <updated>2018-10-08T14:08:16.015Z</updated>
+  <updated>2018-10-08T14:27:23.740Z</updated>
   <id>https://chongtianhong.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://chongtianhong.github.io/2018/07/01/linux/"/>
     <id>https://chongtianhong.github.io/2018/07/01/linux/</id>
     <published>2018-07-01T12:17:26.000Z</published>
-    <updated>2018-10-08T14:08:16.015Z</updated>
+    <updated>2018-10-08T14:27:23.740Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul><li>本文主要为学习贴，用来记录一些linux上的常用指令以供参考。<a id="more"></a></li></ul><h4 id="文件内容查看"><a href="#文件内容查看" class="headerlink" title="文件内容查看"></a>文件内容查看</h4><h5 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h5><ul><li>cat命令常用来查看文件内容，命令格式：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat [-AbEnTv] FILENAME</span></span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><ul><li>本文主要为学习贴，用来记录一些linux上的常用指令以供参考。<a id="more"></a></li></ul><h4 id="文件内容查看"><a href="#文件内容查看" class="headerlink" title="文件内容查看"></a>文件内容查看</h4><h5 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h5><ul><li><p>cat命令常用来查看文件内容，命令格式：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat [-AbEnTv] FILENAME</span></span><br></pre></td></tr></table></figure></li><li><p>选项参数：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-A：相当于vTE的整合选项，可列出一些特殊字符而不是空白而已</span><br><span class="line">-b：列出行号，仅列出非空白行的行号，空白行不显示行号</span><br><span class="line">-E：将结尾的断行字符$显示出来</span><br><span class="line">-n：列出行号，连同空白行也显示行号，与-b选项不同</span><br><span class="line">-T：将[tab]按键以 ^I 显示出来</span><br><span class="line">-v：列出一些看不出来的特殊字符</span><br></pre></td></tr></table></figure></li></ul>]]></content>
     
     <summary type="html">
     
@@ -265,11 +265,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
+      <category term="CDN加速" scheme="https://chongtianhong.github.io/tags/CDN%E5%8A%A0%E9%80%9F/"/>
     
       <category term="性能优化" scheme="https://chongtianhong.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
-      <category term="CDN加速" scheme="https://chongtianhong.github.io/tags/CDN%E5%8A%A0%E9%80%9F/"/>
+      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
   </entry>
   
@@ -292,11 +292,11 @@
       <category term="开发" scheme="https://chongtianhong.github.io/categories/%E5%BC%80%E5%8F%91/"/>
     
     
+      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
+    
       <category term="JavaScript" scheme="https://chongtianhong.github.io/tags/JavaScript/"/>
     
       <category term="开发" scheme="https://chongtianhong.github.io/tags/%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Web" scheme="https://chongtianhong.github.io/tags/Web/"/>
     
       <category term="兜底" scheme="https://chongtianhong.github.io/tags/%E5%85%9C%E5%BA%95/"/>
     
