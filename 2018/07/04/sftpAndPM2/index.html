@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="开发,工具使用," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="sftpsftp 的安装和配置 在Visual Studio Code 中安装 sftp 扩展，安装完成后在工作空间中，按Ctrl + Shift + P并输入：">
+<meta name="keywords" content="开发,工具使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VScode中用sftp自动上传 | 服务端用pm2自动重启">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/07/04/sftpAndPM2/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="sftpsftp 的安装和配置 在Visual Studio Code 中安装 sftp 扩展，安装完成后在工作空间中，按Ctrl + Shift + P并输入：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-11T14:20:19.953Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VScode中用sftp自动上传 | 服务端用pm2自动重启">
+<meta name="twitter:description" content="sftpsftp 的安装和配置 在Visual Studio Code 中安装 sftp 扩展，安装完成后在工作空间中，按Ctrl + Shift + P并输入：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/07/04/sftpAndPM2/"/>
+
+
+
+
+
+  <title>VScode中用sftp自动上传 | 服务端用pm2自动重启 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/07/04/sftpAndPM2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">VScode中用sftp自动上传 | 服务端用pm2自动重启</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-04T10:04:26+08:00">
+                2018-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="sftp"><a href="#sftp" class="headerlink" title="sftp"></a>sftp</h4><h5 id="sftp-的安装和配置"><a href="#sftp-的安装和配置" class="headerlink" title="sftp 的安装和配置"></a>sftp 的安装和配置</h5><ul>
+<li><p>在Visual Studio Code 中<strong>安装 sftp 扩展</strong>，安装完成后在<strong>工作空间</strong>中，按<code>Ctrl + Shift + P</code>并输入：</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sftp config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这个指令会在<code>.vscode</code>中添加<code>sftp.json</code>文件，按需求修改其中的项目，示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"host"</span>: <span class="string">""</span>,     // 服务器ip</span><br><span class="line">    <span class="string">"port"</span>: 22,     // 端口，sftp模式是22</span><br><span class="line">    <span class="string">"username"</span>: <span class="string">""</span>, // 用户名</span><br><span class="line">    <span class="string">"password"</span>: <span class="string">""</span>, // 密码</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"sftp"</span>, // 模式</span><br><span class="line">    <span class="string">"agent"</span>: null,  </span><br><span class="line">    <span class="string">"privateKeyPath"</span>: null,</span><br><span class="line">    <span class="string">"passphrase"</span>: null,</span><br><span class="line">    <span class="string">"passive"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"interactiveAuth"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"remotePath"</span>: <span class="string">"/root/node/build/"</span>,  // 服务器上的文件地址</span><br><span class="line">    <span class="string">"context"</span>: <span class="string">"./server/build"</span>,        // 本地的文件地址</span><br><span class="line">    </span><br><span class="line">    <span class="string">"uploadOnSave"</span>: <span class="literal">true</span>,   // 监听保存并上传</span><br><span class="line">    <span class="string">"syncMode"</span>: <span class="string">"update"</span>,</span><br><span class="line">    <span class="string">"watcher"</span>: &#123;            // 监听外部文件</span><br><span class="line">        <span class="string">"files"</span>: <span class="literal">false</span>,     // 外部文件的绝对路径</span><br><span class="line">        <span class="string">"autoUpload"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="string">"autoDelete"</span>: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"ignore"</span>: [             // 忽略项</span><br><span class="line">        <span class="string">"**/.vscode/**"</span>,</span><br><span class="line">        <span class="string">"**/.git/**"</span>,</span><br><span class="line">        <span class="string">"**/.DS_Store"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>注意</strong>：其中的注释不能保留。</p>
+</li>
+</ul>
+<h5 id="sftp-的使用"><a href="#sftp-的使用" class="headerlink" title="sftp 的使用"></a>sftp 的使用</h5><ul>
+<li><p>按<code>Ctrl + Shift + P</code>并输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sftp Upload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>即可将项目上传到服务器中。类似的指令还有：</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">指令</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">SFTP Upload</td>
+<td style="text-align:center">上传到服务器，没有则创建，有则覆盖，多则忽略</td>
+</tr>
+<tr>
+<td style="text-align:center">SFTP Download</td>
+<td style="text-align:center">下载到本地，规则同上</td>
+</tr>
+<tr>
+<td style="text-align:center">SFTP Sync To Remote</td>
+<td style="text-align:center">同步到服务器，多则删除</td>
+</tr>
+<tr>
+<td style="text-align:center">SFTP Sync To Local</td>
+<td style="text-align:center">同步到本地，多则删除</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>若想单独操作项目中的某个文件，则右键，选择以上指令即可。</li>
+</ul>
+<h4 id="pm2-自动重载"><a href="#pm2-自动重载" class="headerlink" title="pm2 自动重载"></a>pm2 自动重载</h4><h5 id="安装-pm2"><a href="#安装-pm2" class="headerlink" title="安装 pm2"></a>安装 pm2</h5><ul>
+<li><p>登录服务器，输入以下指令安装pm2：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g pm2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查是否安装成功，输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果和下面一样出现版本信息，则安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_16_centos ~]<span class="comment"># pm2 -v</span></span><br><span class="line">2.9.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果没有出现版本信息，而是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_16_centos ~]<span class="comment"># pm2 -v</span></span><br><span class="line">-bash: pm2: <span class="built_in">command</span> not found</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>则可能是<strong>npm的环境变量没有配置好</strong>，参考<a href="http://www.cnblogs.com/AmosLee94/p/8337956.html" target="_blank" rel="noopener">CentOS 中永久修改环境变量</a>。</p>
+</li>
+</ul>
+<h5 id="通过pm2启动node-js服务并监听文件变化时自动重启"><a href="#通过pm2启动node-js服务并监听文件变化时自动重启" class="headerlink" title="通过pm2启动node.js服务并监听文件变化时自动重启"></a>通过pm2启动node.js服务并监听文件变化时自动重启</h5><ul>
+<li><p>使用指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start server.js --watch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>成功则显示如下：<br><img src="" alt="进程成功开启"></p>
+</li>
+<li>补充：执行<code>pm2 list</code>，可以看到node进程列表。如果要开启，执行<code>pm2 start + 对应id</code>，关闭则使用：<code>pm2 stop + 对应id</code>。</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>如果你是希望编写的代码保存后，自动上传、并且不用再切换到xshell中去操作远程端（使用<code>rz -bey</code>从本地win上传文件到远端linux、使用<code>sz –bey </code>从远端linux传输文件到本地win）。那么上面的方法已经实现了。</li>
+<li>但是事情往往没有那么简单，<strong>sftp的保存并上传功能</strong>，<strong>只能监听到保存这一动作</strong>，而<strong>无法监听到构建工具构建出来的文件</strong>。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/工具使用/" rel="tag"><i class="fa fa-tag"></i> 工具使用</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/03/cdOfLinux/" rel="next" title="Linux cd命令">
+                <i class="fa fa-chevron-left"></i> Linux cd命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">148</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">120</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#sftp"><span class="nav-number">1.</span> <span class="nav-text">sftp</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#sftp-的安装和配置"><span class="nav-number">1.1.</span> <span class="nav-text">sftp 的安装和配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sftp-的使用"><span class="nav-number">1.2.</span> <span class="nav-text">sftp 的使用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pm2-自动重载"><span class="nav-number">2.</span> <span class="nav-text">pm2 自动重载</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装-pm2"><span class="nav-number">2.1.</span> <span class="nav-text">安装 pm2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过pm2启动node-js服务并监听文件变化时自动重启"><span class="nav-number">2.2.</span> <span class="nav-text">通过pm2启动node.js服务并监听文件变化时自动重启</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
