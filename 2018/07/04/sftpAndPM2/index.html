@@ -132,7 +132,7 @@
 <meta property="og:description" content="sftpsftp 的安装和配置 在Visual Studio Code 中安装 sftp 扩展，安装完成后在工作空间中，按Ctrl + Shift + P并输入：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/sftpAndPM2.png">
-<meta property="og:updated_time" content="2018-10-11T14:23:11.866Z">
+<meta property="og:updated_time" content="2018-10-12T08:38:39.892Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VScode中用sftp自动上传 | 服务端用pm2自动重启">
 <meta name="twitter:description" content="sftpsftp 的安装和配置 在Visual Studio Code 中安装 sftp 扩展，安装完成后在工作空间中，按Ctrl + Shift + P并输入：">
@@ -472,7 +472,7 @@
 <li>补充：执行<code>pm2 list</code>，可以看到node进程列表。如果要开启，执行<code>pm2 start + 对应id</code>，关闭则使用：<code>pm2 stop + 对应id</code>。</li>
 </ul>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>如果你是希望编写的代码保存后，自动上传、并且不用再切换到xshell中去操作远程端（使用<code>rz -bey</code>从本地win上传文件到远端linux、使用<code>sz –bey </code>从远端linux传输文件到本地win）。那么上面的方法已经实现了。</li>
+<li>如果我们希望<strong>编写的代码保存后，自动上传</strong>、并且不<strong>用再切换到xshell中去操作远程端</strong>（使用<code>rz -bey</code>从本地win上传文件到远端linux、使用<code>sz –bey </code>从远端linux传输文件到本地win）。那么上面的方法已经实现了。</li>
 <li>但是事情往往没有那么简单，<strong>sftp的保存并上传功能</strong>，<strong>只能监听到保存这一动作</strong>，而<strong>无法监听到构建工具构建出来的文件</strong>。</li>
 </ul>
 
