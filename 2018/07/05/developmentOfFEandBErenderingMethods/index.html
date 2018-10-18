@@ -133,7 +133,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods1.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods2.png">
-<meta property="og:updated_time" content="2018-10-18T04:19:41.732Z">
+<meta property="og:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods3.png">
+<meta property="og:updated_time" content="2018-10-18T04:39:00.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="细说后端模板渲染、客户端渲染、node 中间层、服务器端渲染（ssr）">
 <meta name="twitter:description" content="前端与后端渲染方式的发展大致经历了这样几个阶段：后端模板渲染、客户端渲染、node 中间层、服务器端渲染（ssr）。">
@@ -398,8 +399,16 @@
 <li>其实，不难看出，<strong>客户端渲染</strong>与<strong>前后端分离</strong>有很大的好处：<br>1.前端独立出来，可以充分使用前端生态的强大功能。<br>2.更好的管理代码，更有效率的开发、调试、测试。<br>3.前后端代码解耦之后，能更好的扩展、重构。</li>
 <li>所以，客户端渲染与前后端分离现在已经是主流的开发方式了。但这种方式也有一些不足：<br>1.<strong>首屏加载缓慢</strong>，因为要等 js 加载完毕后，才能进行渲染。<br>2.<strong>SEO 不友好</strong>，因为 html 中几乎没有可用的信息。</li>
 </ul>
-<p>#### </p>
-
+<h4 id="node-中间层"><a href="#node-中间层" class="headerlink" title="node 中间层"></a>node 中间层</h4><ul>
+<li>为了解决客户端渲染的不足，便出现了 node 中间层的理念。</li>
+<li>传统的 B/S 架构中，是 <code>浏览器 -&gt; 后端服务器 -&gt; 浏览器</code>，上文所讲的都是这种架构。</li>
+<li>而加入了 <strong>node 中间层</strong>之后，就变成 <code>浏览器 -&gt; node -&gt; 后端服务器 -&gt; node -&gt; 浏览器</code>。</li>
+<li>这个过程大致分成以下几个步骤：<br><img src="/images/developmentOfFEandBErenderingMethods3.png" alt="加入node 中间层后的过程" width="600" style="border:none"><br>1.前端请求一个地址 <code>url</code><br>2.node 层接收到这个请求，然后根据请求信息，向后端服务器发起请求，获取数据<br>3.后端服务器接收到请求，然后根据请求信息，从数据库或者其他地方获取相应的数据，返回给 node 层<br>4.node 层根据这些数据渲染好首屏 <code>html</code><br>5.node 层将 <code>html</code> 文本返回给前端</li>
+<li>一个<strong>典型的 node 中间层应用</strong>就是<strong>后端提供数据、node 层渲染模板、前端动态渲染</strong>。</li>
+<li>这个过程中，node 层由前端开发人员掌控，页面中哪些页面在服务器上就渲染好，哪些页面在客户端渲染，由前端开发人员决定。这样做，达到了以下的目的：<br>1.保留<strong>后端模板渲染</strong>、<strong>首屏快速响应</strong>、<strong>SEO 友好</strong><br>2.保留<strong>前端后分离</strong>、<strong>客户端渲染</strong>的功能（首屏服务器端渲染、其他客户端渲染）</li>
+<li>但这种方式也有一些不足：<br>1.增加了一个中间层，应用性能有所降低<br>2.增加了架构的复杂度、不稳定性，降低应用的安全性<br>3.对开发人员要求高了很多</li>
+</ul>
+<h4 id="服务器端渲染（ssr）"><a href="#服务器端渲染（ssr）" class="headerlink" title="服务器端渲染（ssr）"></a>服务器端渲染（ssr）</h4>
       
     </div>
     
@@ -609,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#后端模板渲染"><span class="nav-number">1.</span> <span class="nav-text">后端模板渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端渲染"><span class="nav-number">2.</span> <span class="nav-text">客户端渲染</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#后端模板渲染"><span class="nav-number">1.</span> <span class="nav-text">后端模板渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端渲染"><span class="nav-number">2.</span> <span class="nav-text">客户端渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node-中间层"><span class="nav-number">3.</span> <span class="nav-text">node 中间层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器端渲染（ssr）"><span class="nav-number">4.</span> <span class="nav-text">服务器端渲染（ssr）</span></a></li></ol></div>
             
 
           </div>
