@@ -131,12 +131,13 @@
 <meta property="og:site_name" content="Ice&#39;s Blog">
 <meta property="og:description" content="前端与后端渲染方式的发展大致经历了这样几个阶段：后端模板渲染、客户端渲染、node 中间层、服务器端渲染（ssr）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods.png">
-<meta property="og:updated_time" content="2018-10-18T04:05:29.386Z">
+<meta property="og:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods1.png">
+<meta property="og:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods2.png">
+<meta property="og:updated_time" content="2018-10-18T04:19:41.732Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="细说后端模板渲染、客户端渲染、node 中间层、服务器端渲染（ssr）">
 <meta name="twitter:description" content="前端与后端渲染方式的发展大致经历了这样几个阶段：后端模板渲染、客户端渲染、node 中间层、服务器端渲染（ssr）。">
-<meta name="twitter:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods.png">
+<meta name="twitter:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods1.png">
 
 
 
@@ -384,11 +385,20 @@
 </ul>
 <h4 id="后端模板渲染"><a href="#后端模板渲染" class="headerlink" title="后端模板渲染"></a>后端模板渲染</h4><ul>
 <li>前端与后端最初的渲染方式是<strong>后端模板渲染</strong>，就是由<strong>后端使用模板引擎渲染好 <code>html</code></strong> 后，返回给前端，<strong>前端再用 <code>js</code> 去操作 <code>dom</code> 或者渲染其他动态的部分</strong>。</li>
-<li>这个过程大致分成以下几个步骤：<br><img src="/images/developmentOfFEandBErenderingMethods.png" alt="后端模板渲染过程" width="600" style="border:none"><br>1.前端请求一个地址 <code>url</code><br>2.后端接收到这个请求，然后根据请求信息，从数据库或者其他地方获取相应的数据<br>3.使用模板引擎（如 <code>java &gt; jsp、php &gt; smarty</code>）将这些数据渲染成 <code>html</code><br>4.将 <code>html</code> 文本返回给前端</li>
+<li>这个过程大致分成以下几个步骤：<br><img src="/images/developmentOfFEandBErenderingMethods1.png" alt="后端模板渲染过程" width="600" style="border:none"><br>1.前端请求一个地址 <code>url</code><br>2.后端接收到这个请求，然后根据请求信息，从数据库或者其他地方获取相应的数据<br>3.使用模板引擎（如 <code>java &gt; jsp、php &gt; smarty</code>）将这些数据渲染成 <code>html</code><br>4.将 <code>html</code> 文本返回给前端</li>
 <li>在这个过程中，前端的 <code>html</code> 代码需要嵌入到后端代码中（如 <code>java、php</code>），并且<strong>在很多情况下</strong>，<strong>前端源代码和后端源代码是在一个工程里的</strong>。</li>
 <li>所以，不难看出，这种方式的有这样的几个不足：<br>1.前后端杂揉在一起，不方便本地开发、本地模拟调试，也不方便自动化测试。<br>2.前端被约束在后端开发的模式中，不能充分使用前端的构建生态，开发效率低下。<br>3.项目难以管理和维护，也可能会有前后端职责不清的问题。</li>
 <li>尽管如此，但因为这种方式是最早出现的方式，并且这种渲染方式有一个<strong>好处</strong>，就是<strong>前端能够快速呈现服务器端渲染好的页面</strong>，而不用等客户端渲染，这<strong>能够提供很好的用户体验与 SEO 友好</strong>，所以当下很多比较早的网站或者需要快速响应的展示性网站仍然是使用这种方式。</li>
 </ul>
+<h4 id="客户端渲染"><a href="#客户端渲染" class="headerlink" title="客户端渲染"></a>客户端渲染</h4><ul>
+<li>随着<strong>前端工程化</strong>与<strong>前后端分离</strong>的发展，以及<strong>前端组件化技术</strong>的出现，如 <code>react</code>、<code>vue</code> 等，<strong>客户端渲染</strong>已经慢慢变成了主要的开发方式了。</li>
+<li>与后端模板渲染刚好相反，<strong>客户端渲染</strong>的<strong>页面渲染都是在客户端进行，后端不负责任何的渲染，只管数据交互</strong>。</li>
+<li>这个过程大致分成以下几个步骤：<br><img src="/images/developmentOfFEandBErenderingMethods2.png" alt="客户端渲染过程" width="600" style="border:none"><br>1.前端请求一个地址 <code>url</code><br>2.后端接收到这个请求，然后把相应的 <code>html</code> 文件直接返回给前端<br>3.前端解析 <code>js</code> 后，然后通过 <code>ajax</code> 向后台获取相应的数据<br>4.然后由 <code>js</code> 将这些数据渲染成页面</li>
+<li>这样一来，前端与后端将完全解耦，数据使用全 <code>ajax</code> 的方式进行交互，如此便可<strong>前后端分离</strong>了。</li>
+<li>其实，不难看出，<strong>客户端渲染</strong>与<strong>前后端分离</strong>有很大的好处：<br>1.前端独立出来，可以充分使用前端生态的强大功能。<br>2.更好的管理代码，更有效率的开发、调试、测试。<br>3.前后端代码解耦之后，能更好的扩展、重构。</li>
+<li>所以，客户端渲染与前后端分离现在已经是主流的开发方式了。但这种方式也有一些不足：<br>1.<strong>首屏加载缓慢</strong>，因为要等 js 加载完毕后，才能进行渲染。<br>2.<strong>SEO 不友好</strong>，因为 html 中几乎没有可用的信息。</li>
+</ul>
+<p>#### </p>
 
       
     </div>
@@ -599,7 +609,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#后端模板渲染"><span class="nav-number">1.</span> <span class="nav-text">后端模板渲染</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#后端模板渲染"><span class="nav-number">1.</span> <span class="nav-text">后端模板渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端渲染"><span class="nav-number">2.</span> <span class="nav-text">客户端渲染</span></a></li></ol></div>
             
 
           </div>
