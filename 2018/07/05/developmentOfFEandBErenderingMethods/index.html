@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods1.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods2.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods3.png">
-<meta property="og:updated_time" content="2018-10-18T04:39:00.566Z">
+<meta property="og:updated_time" content="2018-10-18T04:51:16.567Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="细说后端模板渲染、客户端渲染、node 中间层、服务器端渲染（ssr）">
 <meta name="twitter:description" content="前端与后端渲染方式的发展大致经历了这样几个阶段：后端模板渲染、客户端渲染、node 中间层、服务器端渲染（ssr）。">
@@ -408,7 +408,22 @@
 <li>这个过程中，node 层由前端开发人员掌控，页面中哪些页面在服务器上就渲染好，哪些页面在客户端渲染，由前端开发人员决定。这样做，达到了以下的目的：<br>1.保留<strong>后端模板渲染</strong>、<strong>首屏快速响应</strong>、<strong>SEO 友好</strong><br>2.保留<strong>前端后分离</strong>、<strong>客户端渲染</strong>的功能（首屏服务器端渲染、其他客户端渲染）</li>
 <li>但这种方式也有一些不足：<br>1.增加了一个中间层，应用性能有所降低<br>2.增加了架构的复杂度、不稳定性，降低应用的安全性<br>3.对开发人员要求高了很多</li>
 </ul>
-<h4 id="服务器端渲染（ssr）"><a href="#服务器端渲染（ssr）" class="headerlink" title="服务器端渲染（ssr）"></a>服务器端渲染（ssr）</h4>
+<h4 id="服务器端渲染（ssr）"><a href="#服务器端渲染（ssr）" class="headerlink" title="服务器端渲染（ssr）"></a>服务器端渲染（ssr）</h4><ul>
+<li><strong>大部分情况下</strong>，服务器端渲染（ssr）与 node 中间层是同一个概念。</li>
+<li>服务器端渲染（ssr）一般特指，<strong>在 node 中间层基础上，加上前端组件化技术在服务器上的渲染</strong>，特别是 react 和 vue。</li>
+<li>react、vue、angular 等框架的出现，让前端组件化技术深入人心，但<strong>在一些需要首屏快速加载与 SEO 友好的页面</strong>就陷入了两难的境地了。</li>
+<li>因为<strong>前端组件化技术天生就是给客户端渲染用的</strong>，而在服务器端需要被渲染成<code>html</code> 文本，这确实不是一件很容易的事，所以<strong>服务器端渲染（ssr）</strong>就是为了解决这个问题。</li>
+<li>好在社区一直在不断的探索中，<strong>让前端组件化能够在服务器端渲染</strong>，比如 next.js、nuxt.js、razzle、react-server、beidou 等。</li>
+<li>一般这些框架都会有一些目录结构、书写方式、组件集成、项目构建的要求，自定义属性可能不是很强。</li>
+<li>以 next.js 为例，整个应用中是没有 <code>html</code> 文件的，所有的响应 <code>html</code> 都是 node 动态渲染的，包括里面的元信息、<code>css</code>, <code>js</code> 路径等。<strong>渲染过程中</strong>，next.js 会<strong>根据路由，将首页所有的组件渲染成 <code>html</code>，余下的页面保留原生组件的格式，在客户端渲染</strong>。</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>不需要首屏快速加载、SEO 友好的（后端模板渲染的优势），用全客户端渲染。</li>
+<li>需要首屏快速加载、SEO 友好的，如果用了如 react、vue 等组件化技术，将不得不用 <strong>node 中间层与服务器端渲染</strong>。</li>
+<li>如果技术团队不支持，<strong>不建议</strong>在需要首屏快速加载、SEO 友好的地方使用如 react、vue 等组件化技术。</li>
+<li><strong>前后端分离之后也可以做后端模板渲染</strong>，这样前端的调试可以搭配 handlebars、ejs 等模板引擎进行本地调试，而后端的调试则需要到测试机了。</li>
+</ul>
+
       
     </div>
     
@@ -618,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#后端模板渲染"><span class="nav-number">1.</span> <span class="nav-text">后端模板渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端渲染"><span class="nav-number">2.</span> <span class="nav-text">客户端渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node-中间层"><span class="nav-number">3.</span> <span class="nav-text">node 中间层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器端渲染（ssr）"><span class="nav-number">4.</span> <span class="nav-text">服务器端渲染（ssr）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#后端模板渲染"><span class="nav-number">1.</span> <span class="nav-text">后端模板渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端渲染"><span class="nav-number">2.</span> <span class="nav-text">客户端渲染</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node-中间层"><span class="nav-number">3.</span> <span class="nav-text">node 中间层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器端渲染（ssr）"><span class="nav-number">4.</span> <span class="nav-text">服务器端渲染（ssr）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
