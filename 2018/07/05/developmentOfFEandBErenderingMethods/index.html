@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods1.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods2.png">
 <meta property="og:image" content="https://chongtianhong.github.io/images/developmentOfFEandBErenderingMethods3.png">
-<meta property="og:updated_time" content="2018-10-18T04:51:16.567Z">
+<meta property="og:updated_time" content="2018-10-18T04:55:16.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="细说后端模板渲染、客户端渲染、node 中间层、服务器端渲染（ssr）">
 <meta name="twitter:description" content="前端与后端渲染方式的发展大致经历了这样几个阶段：后端模板渲染、客户端渲染、node 中间层、服务器端渲染（ssr）。">
@@ -418,8 +418,8 @@
 <li>以 next.js 为例，整个应用中是没有 <code>html</code> 文件的，所有的响应 <code>html</code> 都是 node 动态渲染的，包括里面的元信息、<code>css</code>, <code>js</code> 路径等。<strong>渲染过程中</strong>，next.js 会<strong>根据路由，将首页所有的组件渲染成 <code>html</code>，余下的页面保留原生组件的格式，在客户端渲染</strong>。</li>
 </ul>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>不需要首屏快速加载、SEO 友好的（后端模板渲染的优势），用全客户端渲染。</li>
-<li>需要首屏快速加载、SEO 友好的，如果用了如 react、vue 等组件化技术，将不得不用 <strong>node 中间层与服务器端渲染</strong>。</li>
+<li><strong>不需要</strong>首屏快速加载、SEO 友好的（后端模板渲染的优势），用<strong>全客户端渲染</strong>。</li>
+<li><strong>需要</strong>首屏快速加载、SEO 友好的，如果用了如 react、vue 等组件化技术，将不得不用 <strong>node 中间层与服务器端渲染</strong>。</li>
 <li>如果技术团队不支持，<strong>不建议</strong>在需要首屏快速加载、SEO 友好的地方使用如 react、vue 等组件化技术。</li>
 <li><strong>前后端分离之后也可以做后端模板渲染</strong>，这样前端的调试可以搭配 handlebars、ejs 等模板引擎进行本地调试，而后端的调试则需要到测试机了。</li>
 </ul>
