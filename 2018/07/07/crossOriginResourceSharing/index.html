@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Microsoft YaHei:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Web,JavaScript,开发,交互,AJAX,跨域," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言 跨域是因为浏览器有同源策略的限制，一段脚本只能读取来自同一来源的窗口和文档的属性，只要来源的协议、域名、端口有任何一个不同，都被当作是不同的域，网站间的数据请求与传输便构成了跨域调用，因此便会受到同源策略的限制。">
+<meta name="keywords" content="Web,JavaScript,开发,交互,AJAX,跨域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单跨域请求和复杂跨域请求的区别">
+<meta property="og:url" content="https://chongtianhong.github.io/2018/07/07/crossOriginResourceSharing/index.html">
+<meta property="og:site_name" content="Ice&#39;s Blog">
+<meta property="og:description" content="前言 跨域是因为浏览器有同源策略的限制，一段脚本只能读取来自同一来源的窗口和文档的属性，只要来源的协议、域名、端口有任何一个不同，都被当作是不同的域，网站间的数据请求与传输便构成了跨域调用，因此便会受到同源策略的限制。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-27T13:04:58.997Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单跨域请求和复杂跨域请求的区别">
+<meta name="twitter:description" content="前言 跨域是因为浏览器有同源策略的限制，一段脚本只能读取来自同一来源的窗口和文档的属性，只要来源的协议、域名、端口有任何一个不同，都被当作是不同的域，网站间的数据请求与传输便构成了跨域调用，因此便会受到同源策略的限制。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://chongtianhong.github.io/2018/07/07/crossOriginResourceSharing/"/>
+
+
+
+
+
+  <title>简单跨域请求和复杂跨域请求的区别 | Ice's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/chongtianHong">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+    </a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ice's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">知耻而后勇</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://chongtianhong.github.io/2018/07/07/crossOriginResourceSharing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiaobing Hong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ice's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">简单跨域请求和复杂跨域请求的区别</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-07T16:21:27+08:00">
+                2018-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><ul>
+<li><strong>跨域</strong>是因为浏览器有<strong>同源策略</strong>的限制，一段脚本只能读取来自<strong>同一来源</strong>的窗口和文档的属性，只要来源的<strong>协议</strong>、<strong>域名</strong>、<strong>端口</strong>有任何一个不同，都被当作是不同的域，网站间的数据请求与传输便构成了<strong>跨域调用</strong>，因此便会受到<strong>同源策略</strong>的限制。 <a id="more"></a>
+</li>
+</ul>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><ul>
+<li>一个域是由<strong>协议（schema）</strong>、<strong>域名（host）</strong>、<strong>端口（port）</strong>三者共同组成，<strong>与路径无关</strong>。</li>
+<li><strong>跨域资源共享</strong>(Cross-Origin Resource Sharing, CORS)是为解决<strong>Ajax技术难实现跨域问题</strong>而提出的一个规范，这个规范试着<strong>从根本上解决安全的跨域资源共享问题</strong>。在此之前，解决此类问题的途径往往是<strong>服务器代理</strong>、<strong>JSONP</strong>等，治标不治本。目前基本所有浏览器都已经支持该规范。</li>
+<li>CORS是通过<strong>客户端 + 服务端协作声明</strong>的方式来确保请求安全的。</li>
+<li>CORS约定<strong>服务器端</strong>和<strong>浏览器</strong>在HTTP协议之上，通过一些<strong>额外HTTP头部信息</strong>，进行<strong>跨域资源共享</strong>的协商。服务器端和浏览器都必需遵循规范中的要求。<ul>
+<li>服务端会在<strong>HTTP请求头</strong>中增加一系列HTTP请求参数(例如<code>Access-Control-Allow-Origin</code>等)，来限制哪些域的请求和声明哪些请求类型可以接受。</li>
+<li>客户端<strong>在发起请求时</strong>必须<strong>声明自己的源(Orgin)</strong>，否则服务器将不予处理，如果客户端不作声明，请求甚至会被浏览器直接拦截都到不了服务端。(<strong>对于支持CORS的浏览器，请求头会自动添加Origin，值为当前host</strong>)</li>
+<li>服务端收到HTTP请求后会<strong>进行域的比较</strong>，只有<strong>同域的请求</strong>才会处理。</li>
+</ul>
+</li>
+</ul>
+<h4 id="CORS中HTTP请求的分类"><a href="#CORS中HTTP请求的分类" class="headerlink" title="CORS中HTTP请求的分类"></a>CORS中HTTP请求的分类</h4><ul>
+<li>最近在使用CORS的时候，由于需要<strong>使用<code>PUT</code>和<code>DELETE</code>等请求方法</strong>，发现原来<strong>CORS的规范定义远不止这些</strong>。</li>
+<li>CORS把HTTP请求分成<strong>两类</strong>，不同类别按不同的策略进行<strong>跨域资源共享</strong>协商，这两类请求分别是：<ul>
+<li>简单跨域请求</li>
+<li>复杂跨域请求，即带预检(Preflighted)的跨域请求</li>
+</ul>
+</li>
+</ul>
+<h5 id="简单跨域请求"><a href="#简单跨域请求" class="headerlink" title="简单跨域请求"></a>简单跨域请求</h5><ul>
+<li>当HTTP请求出现以下两种情况时，浏览器认为是<strong>简单跨域请求</strong>：<br>1). 请求方法是<code>GET</code>、<code>HEAD</code>或者<code>POST</code>，并且当请求方法是<code>POST</code>时，Content-Type必须是<code>application/x-www-form-urlencoded</code>, <code>multipart/form-data</code>或着<code>text/plain</code>中的一个值。<br>2). 请求中<strong>没有自定义HTTP头部</strong>。</li>
+<li>对于简单跨域请求，浏览器要做的就是<strong>在HTTP请求中添加Origin Header</strong>，将JavaScript脚本所在域填充进去，向其他域的服务器请求资源。服务器端收到一个简单跨域请求后，根据资源权限配置，在响应头中添加<code>Access-Control-Allow-Origin Header</code>。浏览器收到响应后，查看<code>Access-Control-Allow-Origin Header</code>，如果<strong>当前域已经得到授权</strong>，则<strong>将结果返回给JavaScript</strong>。<strong>否则浏览器忽略此次响应</strong>。</li>
+</ul>
+<h5 id="带预检-Preflighted-的跨域请求"><a href="#带预检-Preflighted-的跨域请求" class="headerlink" title="带预检(Preflighted)的跨域请求"></a>带预检(Preflighted)的跨域请求</h5><ul>
+<li>当HTTP请求出现以下两种情况时，浏览器认为是<strong>带预检(Preflighted)的跨域请求</strong>：<br>1). 除<code>GET</code>、<code>HEAD</code>和<code>POST</code>(only with application/x-www-form-urlencoded, multipart/form-data, text/plain Content-Type)以外的<strong>其他HTTP方法</strong>。<br>2). 请求中<strong>出现自定义HTTP头部</strong>。</li>
+<li>“预检”其实相当于做检查，检查如果通过则允许传输数据，检查不通过则不再发送真正想要发送的消息。</li>
+</ul>
+<blockquote>浏览器端</blockquote>
+
+<ul>
+<li><strong>带预检(Preflighted)的跨域</strong>请求需要<strong>浏览器</strong>在<strong>发送真实HTTP请求之前先发送一个OPTIONS的预检请求</strong>，检测<strong>服务器端</strong>是否支持真实请求进行跨域资源访问。</li>
+<li>真实请求的信息在<code>OPTIONS</code>请求中通过<code>Access-Control-Request-Method Header</code>和<code>Access-Control-Request-Headers Header</code>描述。</li>
+<li>此外，与简单跨域请求一样，<strong>浏览器</strong>也会<strong>添加Origin Header</strong>。</li>
+<li><strong>注</strong>：<strong>带预检(Preflighted)的跨域请求</strong>的<strong>第一次请求</strong>，header中不会带自定义的header头信息。表示<strong>真实请求的自定义Header列表</strong>的是<code>Access-Control-Request-Headers</code>HTTP<strong>请求头</strong>。</li>
+</ul>
+<blockquote>服务器端</blockquote>
+
+<ul>
+<li><strong>服务器端</strong>接到<strong>预检请求</strong>后，根据资源权限配置，在<strong>响应头</strong>中放入<code>Access-Control-Allow-Origin Header</code>、<code>Access-Control-Allow-Methods</code>和<code>Access-Control-Allow-Headers Header</code>，分别表示允许跨域资源请求的<strong>域</strong>、<strong>请求方法</strong>和<strong>请求头</strong>。</li>
+<li>此外，服务器端还可以加入<code>Access-Control-Max-Age Header</code>，允许浏览器<strong>在指定时间内，无需再发送预检请求进行协商</strong>，直接用本次协商结果即可。</li>
+</ul>
+<blockquote>浏览器端</blockquote>
+
+<ul>
+<li>浏览器根据<code>OPTIONS</code>请求返回的结果来<strong>决定是否继续发送真实的请求</strong>进行跨域资源访问。这个过程对<strong>真实请求的调用者</strong>来说是<strong>透明</strong>的。</li>
+</ul>
+<h4 id="CORS协议规定的HTTP头"><a href="#CORS协议规定的HTTP头" class="headerlink" title="CORS协议规定的HTTP头"></a>CORS协议规定的HTTP头</h4><ul>
+<li><code>XMLHttpRequest</code>支持通过<code>withCredentials</code>属性实现<strong>在跨域请求携带身份信息</strong>(Credential，例如Cookie或者HTTP认证信息)。</li>
+<li><p>跨域请求<strong>默认不会携带Cookie信息</strong>，如果需要携带，请配置下述参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 服务端</span><br><span class="line"><span class="string">"Access-Control-Allow-Credentials"</span>: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">// 客户端需要设置withCredentials</span><br><span class="line">// Ajax设置</span><br><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>浏览器将携带Cookie Header的请求发送到服务器端后，如果服务器没有响应<code>Access-Control-Allow-Credentials Header</code>，那么浏览器会忽略掉这次响应。</p>
+</li>
+<li>这里讨论的HTTP请求是指由<code>Ajax XMLHttpRequest</code>对象发起的，所有的CORS HTTP请求头都<strong>可由浏览器填充，无需在XMLHttpRequest对象中设置</strong>。</li>
+<li>以下是CORS协议规定的HTTP头，用来进行浏览器发起跨域资源请求时进行协商：<ol>
+<li><code>Origin</code>。HTTP<strong>请求头</strong>，任何涉及CORS的请求都必需携带。</li>
+<li><code>Access-Control-Request-Method</code>。HTTP<strong>请求头</strong>，在带预检(Preflighted)的跨域请求中用来表示<strong>真实请求的方法</strong>。</li>
+<li><code>Access-Control-Request-Headers</code>。HTTP<strong>请求头</strong>，在带预检(Preflighted)的跨域请求中用来表示<strong>真实请求的自定义Header列表</strong>。</li>
+<li><code>Access-Control-Allow-Origin</code>。HTTP<strong>响应头</strong>，指定服务器端允许进行跨域资源访问的来源域。可以用通配符*表示允许任何域的JavaScript访问资源，但是<strong>在响应一个携带身份信息(Credential)的HTTP请求时</strong>，<code>Access-Control-Allow-Origin</code><strong>必须指定具体的域，不能用通配符</strong>。</li>
+<li><code>Access-Control-Allow-Methods</code>。HTTP<strong>响应头</strong>，指定服务器允许进行跨域资源访问的<strong>请求方法</strong>列表，一般用在<strong>响应预检请求</strong>上。</li>
+<li><code>Access-Control-Allow-Headers</code>。HTTP<strong>响应头</strong>，指定服务器允许进行跨域资源访问的<strong>请求头</strong>列表，一般用在<strong>响应预检请求</strong>上。</li>
+<li><code>Access-Control-Max-Age</code>。HTTP<strong>响应头</strong>，用在<strong>响应预检请求</strong>上，表示<strong>本次预检响应的有效时间</strong>。<strong>在此时间内</strong>，浏览器都可以根据此次协商结果决定是否有必要直接发送真实请求，而<strong>无需再次发送预检请求</strong>。</li>
+<li><code>Access-Control-Allow-Credentials</code>。HTTP<strong>响应头</strong>，凡是<strong>浏览器请求中携带了身份信息</strong>，而<strong>响应头中没有返回</strong><code>Access-Control-Allow-Credentials: true</code>的，<strong>浏览器都会忽略此次响应</strong>。</li>
+</ol>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><p>同时满足以下两个条件时，则是简单请求，否则为复杂请求：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1、请求方式：HEAD、GET、POST</span><br><span class="line">2、请求头信息不超出以下几种字段：</span><br><span class="line">    Accept</span><br><span class="line">    Accept-Language</span><br><span class="line">    Content-Language</span><br><span class="line">    Last-Event-ID</span><br><span class="line">    Content-Type 对应的值是以下三个中的任意一个:</span><br><span class="line">        application/x-www-form-urlencoded</span><br><span class="line">        multipart/form-data</span><br><span class="line">        text/plain</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>简单请求和复杂请求（<strong>带预检(Preflighted)的跨域</strong>请求）的区别：</p>
+<ul>
+<li>简单请求：一次请求。</li>
+<li>复杂请求：两次请求，它是<strong>对服务器有特殊要求</strong>的请求，比如请求方法是<code>PUT</code>或<code>DELETE</code>，或者<code>Content-Type</code>字段的类型是<code>application/json</code>。复杂请求在发送数据之前会先发一次请求用于做“预检”，只有“预检”通过后才再发送第二次请求。</li>
+</ul>
+</li>
+<li>预检请求为<code>OPTIONS</code>请求，用于向服务器请求权限信息的。预检请求被成功响应后，才会发出真实请求，携带真实数据。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+  <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #666;font-size:14px;">
+            ------ 本文结束 ------
+        </div>
+    
+</div>
+    
+  </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/开发/" rel="tag"><i class="fa fa-tag"></i> 开发</a>
+          
+            <a href="/tags/交互/" rel="tag"><i class="fa fa-tag"></i> 交互</a>
+          
+            <a href="/tags/AJAX/" rel="tag"><i class="fa fa-tag"></i> AJAX</a>
+          
+            <a href="/tags/跨域/" rel="tag"><i class="fa fa-tag"></i> 跨域</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/06/encapsulationOfAxiosInVue/" rel="next" title="Vue项目中axios的封装">
+                <i class="fa fa-chevron-left"></i> Vue项目中axios的封装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Xiaobing Hong" />
+            
+              <p class="site-author-name" itemprop="name">Xiaobing Hong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">123</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/chongtianHong/" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:hongxb@mail2.sysu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CORS"><span class="nav-number">2.</span> <span class="nav-text">CORS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CORS中HTTP请求的分类"><span class="nav-number">2.1.</span> <span class="nav-text">CORS中HTTP请求的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简单跨域请求"><span class="nav-number">2.1.1.</span> <span class="nav-text">简单跨域请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#带预检-Preflighted-的跨域请求"><span class="nav-number">2.1.2.</span> <span class="nav-text">带预检(Preflighted)的跨域请求</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CORS协议规定的HTTP头"><span class="nav-number">2.2.</span> <span class="nav-text">CORS协议规定的HTTP头</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaobing Hong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+&nbsp本站访客数&nbsp<span id="busuanzi_value_site_uv"></span>&nbsp人&nbsp
+</span>
+<span>&nbsp|&nbsp</span>
+<i class="fa fa-eye"></i><span id="busuanzi_container_site_pv">
+&nbsp本站总访问量&nbsp<span id="busuanzi_value_site_pv"></span>&nbsp次
+</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
